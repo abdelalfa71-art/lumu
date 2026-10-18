@@ -1,0 +1,66 @@
+{
+  "name": "Lumu",
+  "short_name": "Lumu",
+  "description": "Apprendre, partager et publier : vidéos, audios, livres et cours.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "lang": "fr",
+  "background_color": "#06201b",
+  "theme_color": "#0f7b6c",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "id": "/",
+  "orientation": "portrait-primary",
+  "categories": [
+    "education",
+    "books",
+    "lifestyle"
+  ],
+  "display_override": [
+    "standalone",
+    "minimal-ui"
+  ],
+  "shortcuts": [
+    {
+      "name": "Reels",
+      "short_name": "Reels",
+      "url": "/#r=reels",
+      "icons": [
+        {
+          "src": "/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Rechercher",
+      "short_name": "Recherche",
+      "url": "/#r=recherche",
+      "icons": [
+        {
+          "src": "/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}

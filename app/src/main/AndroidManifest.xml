@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- Lecture des audios / vidéos du téléphone (sélecteur Lumu) -->
+    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
+
+    <!-- Nécessaire (Android 11+) pour voir les applications "Fichiers" installées -->
+    <queries>
+        <package android:name="com.google.android.apps.nbu.files" />
+        <package android:name="com.google.android.documentsui" />
+        <package android:name="com.android.documentsui" />
+        <package android:name="com.transsion.filemanager" />
+        <package android:name="com.coloros.filemanager" />
+        <package android:name="com.oppo.filemanager" />
+        <package android:name="com.mi.android.globalFileexplorer" />
+        <package android:name="com.sec.android.app.myfiles" />
+        <intent><action android:name="android.intent.action.GET_CONTENT" /><data android:mimeType="*/*" /></intent>
+        <intent><action android:name="android.intent.action.OPEN_DOCUMENT" /><data android:mimeType="*/*" /></intent>
+    </queries>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:usesCleartextTraffic="false"
+        android:theme="@style/Theme.Lumu">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".AudioPickerActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Lumu" />
+    </application>
+</manifest>

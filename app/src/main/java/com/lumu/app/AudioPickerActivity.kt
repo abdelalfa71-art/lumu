@@ -1,0 +1,230 @@
+package com.lumu.app
+
+import android.Manifest
+import android.content.ClipData
+import android.content.ContentUris
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
+import android.os.Build
+import android.os.Bundle
+import android.provider.MediaStore
+import android.provider.Settings
+import android.text.Editable
+import android.text.TextWatcher
+import android.view.Gravity
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.CheckedTextView
+import android.widget.EditText
+import android.widget.LinearLayout
+import android.widget.ListView
+import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import java.text.DateFormat
+import java.util.Date
+
+/**
+ * Sélecteur d'audios / vidéos propre à Lumu (comme dans WhatsApp ou Telegram).
+ * Il lit directement la bibliothèque média du téléphone : il ne dépend pas de l'application « Fichiers ».
+ * Entrée : extra "mode" = "audio" | "video" | "tous".  Sortie : une ou plusieurs Uri (ClipData).
+ */
+class AudioPickerActivity : AppCompatActivity() {
+
+    private data class Item(val uri: Uri, val nom: String, val taille: Long, val date: Long, val video: Boolean)
+
+    private val tous = mutableListOf<Item>()
+    private var affiches: List<Item> = emptyList()
+    private val choisis = LinkedHashSet<Uri>()
+
+    private var filtre = "audio"          // audio | video | tous
+    private var texte = ""
+    private var multiple = true
+
+    private lateinit var liste: ListView
+    private lateinit var info: TextView
+    private lateinit var valider: Button
+    private lateinit var adaptateur: ArrayAdapter<Item>
+    private val btns = mutableMapOf<String, Button>()
+
+    private val demandePermissions =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { charger() }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        filtre = intent.getStringExtra("mode") ?: "audio"
+        if (filtre !in listOf("audio", "video", "tous")) filtre = "audio"
+        multiple = intent.getBooleanExtra("multiple", true)
+
+        val racine = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            setPadding(dp(14), dp(14), dp(14), dp(10))
+        }
+        racine.addView(TextView(this).apply {
+            text = "Choisir mes fichiers"; textSize = 22f; setTypeface(typeface, android.graphics.Typeface.BOLD)
+        })
+
+        val recherche = EditText(this).apply {
+            hint = "🔍 Chercher par nom"; textSize = 18f; setSingleLine(true)
+            addTextChangedListener(object : TextWatcher {
+                override fun afterTextChanged(s: Editable?) { texte = s?.toString()?.trim().orEmpty(); appliquer() }
+                override fun beforeTextChanged(s: CharSequence?, a: Int, b: Int, c: Int) {}
+                override fun onTextChanged(s: CharSequence?, a: Int, b: Int, c: Int) {}
+            })
+        }
+        racine.addView(recherche, lp(top = 8))
+
+        val rangee = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL }
+        listOf("audio" to "🎵 Audios", "video" to "🎬 Vidéos", "tous" to "Tout").forEach { (k, l) ->
+            val b = Button(this).apply { text = l; textSize = 15f; isAllCaps = false; setOnClickListener { filtre = k; appliquer() } }
+            btns[k] = b
+            rangee.addView(b, LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f))
+        }
+        racine.addView(rangee)
+
+        info = TextView(this).apply { textSize = 14f; setPadding(0, dp(4), 0, dp(4)) }
+        racine.addView(info)
+
+        liste = ListView(this).apply { divider = null }
+        adaptateur = object : ArrayAdapter<Item>(this, android.R.layout.simple_list_item_multiple_choice, mutableListOf()) {
+            override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+                val v = super.getView(position, convertView, parent) as CheckedTextView
+                val it = getItem(position)!!
+                v.text = (if (it.video) "🎬 " else "🎵 ") + it.nom + "\n" + taille(it.taille) + " · " +
+                        DateFormat.getDateInstance(DateFormat.MEDIUM).format(Date(it.date * 1000))
+                v.textSize = 16f
+                v.minimumHeight = dp(64)
+                v.isChecked = it.uri in choisis
+                return v
+            }
+        }
+        liste.adapter = adaptateur
+        liste.setOnItemClickListener { _, _, pos, _ ->
+            val it = adaptateur.getItem(pos) ?: return@setOnItemClickListener
+            if (it.uri in choisis) choisis.remove(it.uri)
+            else { if (!multiple) choisis.clear(); choisis.add(it.uri) }
+            adaptateur.notifyDataSetChanged(); majBouton()
+        }
+        racine.addView(liste, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 1f))
+
+        valider = Button(this).apply {
+            textSize = 18f; isAllCaps = false
+            setOnClickListener { terminer() }
+        }
+        racine.addView(valider, lp(top = 6))
+
+        racine.addView(Button(this).apply {
+            text = "Autres fichiers (PDF, images…)"; textSize = 14f; isAllCaps = false
+            setOnClickListener { setResult(RESULT_CANCELED, Intent().putExtra("systeme", true)); finish() }
+        })
+        racine.addView(Button(this).apply {
+            text = "Annuler"; textSize = 14f; isAllCaps = false
+            setOnClickListener { setResult(RESULT_CANCELED); finish() }
+        })
+
+        setContentView(racine)
+        majBouton()
+        charger()
+    }
+
+    private fun permissionsNecessaires(): Array<String> =
+        if (Build.VERSION.SDK_INT >= 33) arrayOf(Manifest.permission.READ_MEDIA_AUDIO, Manifest.permission.READ_MEDIA_VIDEO)
+        else arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
+
+    private fun charger() {
+        val manque = permissionsNecessaires().filter {
+            ContextCompat.checkSelfPermission(this, it) != PackageManager.PERMISSION_GRANTED
+        }
+        if (manque.isNotEmpty()) {
+            if (!demande) { demande = true; demandePermissions.launch(manque.toTypedArray()); return }
+            info.text = "Lumu a besoin d'accéder à vos audios et vidéos."
+            valider.text = "Autoriser dans les réglages"
+            valider.setOnClickListener {
+                startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:$packageName")))
+            }
+            return
+        }
+        valider.setOnClickListener { terminer() }
+        info.text = "Chargement…"
+        Thread {
+            val res = lire()
+            runOnUiThread { tous.clear(); tous.addAll(res); appliquer() }
+        }.start()
+    }
+    private var demande = false
+
+    private fun lire(): List<Item> {
+        val out = mutableListOf<Item>()
+        try {
+            val base = MediaStore.Files.getContentUri("external")
+            val proj = arrayOf(
+                MediaStore.Files.FileColumns._ID, MediaStore.Files.FileColumns.DISPLAY_NAME,
+                MediaStore.Files.FileColumns.SIZE, MediaStore.Files.FileColumns.DATE_ADDED,
+                MediaStore.Files.FileColumns.MIME_TYPE
+            )
+            val sel = "${MediaStore.Files.FileColumns.MIME_TYPE} LIKE 'audio/%' OR ${MediaStore.Files.FileColumns.MIME_TYPE} LIKE 'video/%' " +
+                    "OR ${MediaStore.Files.FileColumns.MEDIA_TYPE} IN (${MediaStore.Files.FileColumns.MEDIA_TYPE_AUDIO}, ${MediaStore.Files.FileColumns.MEDIA_TYPE_VIDEO})"
+            contentResolver.query(base, proj, sel, null, "${MediaStore.Files.FileColumns.DATE_ADDED} DESC")?.use { c ->
+                val iId = c.getColumnIndexOrThrow(MediaStore.Files.FileColumns._ID)
+                val iNom = c.getColumnIndexOrThrow(MediaStore.Files.FileColumns.DISPLAY_NAME)
+                val iTaille = c.getColumnIndexOrThrow(MediaStore.Files.FileColumns.SIZE)
+                val iDate = c.getColumnIndexOrThrow(MediaStore.Files.FileColumns.DATE_ADDED)
+                val iMime = c.getColumnIndexOrThrow(MediaStore.Files.FileColumns.MIME_TYPE)
+                while (c.moveToNext()) {
+                    val taille = c.getLong(iTaille)
+                    if (taille <= 0) continue
+                    val mime = c.getString(iMime).orEmpty()
+                    out += Item(
+                        ContentUris.withAppendedId(base, c.getLong(iId)),
+                        c.getString(iNom) ?: "fichier",
+                        taille, c.getLong(iDate), mime.startsWith("video/")
+                    )
+                }
+            }
+        } catch (e: Exception) { /* liste vide */ }
+        return out
+    }
+
+    private fun appliquer() {
+        affiches = tous.filter {
+            (filtre == "tous" || (filtre == "video") == it.video) &&
+                    (texte.isEmpty() || it.nom.contains(texte, ignoreCase = true))
+        }
+        adaptateur.clear(); adaptateur.addAll(affiches); adaptateur.notifyDataSetChanged()
+        btns.forEach { (k, b) -> b.alpha = if (k == filtre) 1f else 0.55f }
+        info.text = if (affiches.isEmpty()) "Aucun fichier trouvé." else "${affiches.size} fichier(s) — touchez pour choisir"
+        majBouton()
+    }
+
+    private fun majBouton() {
+        val n = choisis.size
+        valider.text = if (n == 0) "Choisissez au moins un fichier" else "✅ Utiliser $n fichier" + if (n > 1) "s" else ""
+        valider.isEnabled = n > 0
+        valider.gravity = Gravity.CENTER
+    }
+
+    private fun terminer() {
+        if (choisis.isEmpty()) return
+        val uris = choisis.toList()
+        val data = Intent().apply {
+            val cd = ClipData.newRawUri(null, uris[0])
+            uris.drop(1).forEach { cd.addItem(ClipData.Item(it)) }
+            clipData = cd
+            if (uris.size == 1) setData(uris[0])
+            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        }
+        setResult(RESULT_OK, data); finish()
+    }
+
+    private fun taille(o: Long): String =
+        if (o >= 1_048_576) "${o / 1_048_576} Mo" else "${maxOf(1, o / 1024)} Ko"
+
+    private fun dp(v: Int) = (v * resources.displayMetrics.density).toInt()
+    private fun lp(top: Int = 0) = LinearLayout.LayoutParams(
+        ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT
+    ).apply { topMargin = dp(top) }
+}

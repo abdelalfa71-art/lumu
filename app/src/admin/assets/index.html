@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#1f3a5f">
+<title>Lumu Admin</title>
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<style>
+:root{--bg:#f4f6fa;--card:#fff;--tx:#1b2430;--mut:#6b7686;--bd:#e1e6ee;--pri:#1f3a5f;--ok:#1d8a4e;--warn:#c27a00;--bad:#c0392b}
+@media(prefers-color-scheme:dark){:root{--bg:#10151c;--card:#19212b;--tx:#e8edf3;--mut:#8d99a8;--bd:#2a3441;--pri:#5b8fd6}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.4 system-ui,sans-serif}
+header{position:sticky;top:0;z-index:5;background:var(--pri);color:#fff;padding:10px 14px;display:flex;justify-content:space-between;align-items:center}
+header b{font-size:17px}
+header button{background:transparent;border:1px solid #fff8;color:#fff;border-radius:8px;padding:5px 10px}
+nav{display:flex;gap:6px;overflow-x:auto;padding:10px 12px;background:var(--card);border-bottom:1px solid var(--bd);position:sticky;top:46px;z-index:4}
+nav button{flex:none;border:1px solid var(--bd);background:var(--bg);color:var(--tx);border-radius:20px;padding:7px 13px;font-size:14px}
+nav button.on{background:var(--pri);color:#fff;border-color:var(--pri)}
+main{padding:12px;max-width:900px;margin:auto}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:12px;margin-bottom:10px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.stat b{display:block;font-size:26px}
+.stat span{color:var(--mut);font-size:13px}
+.row{display:flex;justify-content:space-between;gap:8px;align-items:flex-start;flex-wrap:wrap}
+.mut{color:var(--mut);font-size:13px}
+.tag{display:inline-block;border-radius:10px;padding:1px 8px;font-size:12px;border:1px solid var(--bd)}
+.ok{color:var(--ok)}.warn{color:var(--warn)}.bad{color:var(--bad)}
+.btns{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.btns button,.login button{border:0;border-radius:8px;padding:8px 12px;color:#fff;background:var(--pri);font-size:14px}
+.btns .b-ok{background:var(--ok)}.btns .b-warn{background:var(--warn)}.btns .b-bad{background:var(--bad)}.btns .b-gr{background:#6b7686}
+input,select{width:100%;padding:10px;border:1px solid var(--bd);border-radius:8px;background:var(--card);color:var(--tx);font-size:15px;margin-bottom:10px}
+.login{max-width:380px;margin:12vh auto;padding:0 16px}
+.login h1{font-size:22px}
+#toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:#111;color:#fff;padding:10px 16px;border-radius:10px;display:none;z-index:9;max-width:90%}
+.empty{text-align:center;color:var(--mut);padding:30px 0}
+textarea{width:100%;padding:10px;border:1px solid var(--bd);border-radius:8px;background:var(--card);color:var(--tx);font:inherit;margin-bottom:10px;min-height:70px}
+.bar{height:8px;background:var(--bd);border-radius:6px;overflow:hidden;margin:8px 0}.bar i{display:block;height:100%;width:0;background:var(--ok);transition:width .2s}
+#pub-ok{width:100%;border:0;border-radius:10px;padding:12px;background:var(--pri);color:#fff;font-size:16px}#pub-ok:disabled{opacity:.5}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div id="toast"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SB_URL='https://edzzikmtxeslhvowbnix.supabase.co';
+const SB_KEY='sb_publishable_MbfFbNBC_dUVdmGqH5LzvA_2H26ELPS';
+const sb=supabase.createClient(SB_URL,SB_KEY);
+const app=document.getElementById('app');
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmt=d=>d?new Date(d).toLocaleString('fr-FR',{dateStyle:'short',timeStyle:'short'}):'';
+const slug=n=>n.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'');
+let tab='dash';
+if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('/sw.js').catch(()=>{}));
+window.__partage=null;
+(async()=>{try{if(!/[?&]partage=\d/.test(location.search))return;const c=await caches.open('partage'),ks=await c.keys(),fs=[];
+  for(const k of ks){const r=await c.match(k),b=await r.blob();fs.push(new File([b],decodeURIComponent(r.headers.get('x-nom')||'fichier'),{type:b.type}))}
+  for(const k of ks)await c.delete(k);if(fs.length){window.__partage=fs;tab='pub';if(me)show()}history.replaceState(null,'','/')}catch(e){}})();
+let me=null;
+
+function toast(m){const t=document.getElementById('toast');t.textContent=m;t.style.display='block';clearTimeout(toast.t);toast.t=setTimeout(()=>t.style.display='none',3000)}
+
+function loginView(err=''){
+  app.innerHTML=`<div class="login"><h1>Lumu Admin</h1>
+  <p class="mut">Accès réservé aux administrateurs.</p>
+  <input id="id" placeholder="Votre nom (ou e-mail)" autocomplete="username">
+  <input id="pw" type="password" placeholder="Code / mot de passe" autocomplete="current-password">
+  <button id="go" style="width:100%">Se connecter</button>
+  <p class="bad" id="err">${esc(err)}</p></div>`;
+  const go=async()=>{
+    const id=document.getElementById('id').value.trim(),pw=document.getElementById('pw').value;
+    if(!id||!pw)return;
+    const email=id.includes('@')?id:slug(id)+'@tobi.invalid';
+    const {error}=await sb.auth.signInWithPassword({email,password:pw});
+    if(error)return loginView('Identifiants incorrects.');
+    start();
+  };
+  document.getElementById('go').onclick=go;
+  document.getElementById('pw').onkeydown=e=>{if(e.key==='Enter')go()};
+}
+
+async function start(){
+  const {data:{session}}=await sb.auth.getSession();
+  if(!session)return loginView();
+  const {data,error}=await sb.from('yt_users').select('id,role,full_name').eq('id',session.user.id).maybeSingle();
+  if(error||!data||data.role!=='admin'){await sb.auth.signOut();return loginView('Ce compte n\'est pas administrateur.')}
+  me=data;shell();show();
+}
+
+function shell(){
+  const tabs=[['dash','Tableau de bord'],['demandes','Demandes'],['users','Utilisateurs'],['pub','Publier'],['notif','🌅 Notifications'],['contenus','Contenus'],['sig','Signalements'],['audit','Journal']];
+  app.innerHTML=`<header><b style="display:flex;align-items:center;gap:8px"><img src="favicon-32.png" width="24" height="24" alt="">Lumu Admin</b><button id="out">Quitter</button></header>
+  <nav>${tabs.map(([k,l])=>`<button data-t="${k}">${l}</button>`).join('')}</nav><main id="main"></main>`;
+  document.getElementById('out').onclick=async()=>{await sb.auth.signOut();me=null;loginView()};
+  document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{tab=b.dataset.t;show()});
+}
+
+async function show(){
+  document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.t===tab));
+  const m=document.getElementById('main');m.innerHTML='<div class="empty">Chargement…</div>';
+  try{await views[tab](m)}catch(e){m.innerHTML=`<div class="card bad">Erreur : ${esc(e.message||e)}</div>`}
+}
+
+async function act(fn,msg){
+  try{const {error}=await fn();if(error)throw error;toast(msg);show()}catch(e){toast('Erreur : '+(e.message||e))}
+}
+
+
+const MO=1048576;
+const MIMES={mp4:'video/mp4',mov:'video/quicktime',webm:'video/webm',m4v:'video/mp4','3gp':'video/3gpp',mkv:'video/x-matroska',mp3:'audio/mpeg',m4a:'audio/mp4',aac:'audio/aac',wav:'audio/wav',ogg:'audio/ogg',oga:'audio/ogg',opus:'audio/ogg',amr:'audio/amr',flac:'audio/flac',wma:'audio/x-ms-wma',jpg:'image/jpeg',jpeg:'image/jpeg',png:'image/png',webp:'image/webp',pdf:'application/pdf'};
+const uid=()=>crypto.randomUUID?crypto.randomUUID():'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,c=>{const r=Math.random()*16|0;return(c==='x'?r:(r&3|8)).toString(16)});
+function mimeDe(f){const e=(f.name.split('.').pop()||'').toLowerCase();let m=(f.type||'').toLowerCase();if(!m||m==='application/octet-stream')m=MIMES[e]||'application/octet-stream';return m}
+function metaFichier(f,type){
+  return new Promise(res=>{
+    if(!(type==='video'||type==='reel'||type==='audio'))return res({});
+    const url=URL.createObjectURL(f),el=document.createElement(type==='audio'?'audio':'video');
+    el.preload='metadata';el.muted=true;el.playsInline=true;
+    const fin=o=>{clearTimeout(t);try{URL.revokeObjectURL(url)}catch(e){}res(o||{})};
+    const t=setTimeout(()=>fin({}),9000);
+    el.onerror=()=>fin({});
+    el.onloadedmetadata=()=>{
+      const duree=isFinite(el.duration)?Math.round(el.duration):null;
+      if(type==='audio')return fin({duree});
+      el.onseeked=()=>{try{const w=640,h=Math.max(1,Math.round(w*(el.videoHeight||9)/(el.videoWidth||16))),c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d').drawImage(el,0,0,w,h);c.toBlob(b=>fin({duree,cover:b}),'image/jpeg',0.8)}catch(e){fin({duree})}};
+      try{el.currentTime=Math.min(1,(el.duration||2)/2)}catch(e){fin({duree})}
+    };
+    el.src=url;
+  });
+}
+async function envoyerFichier(file,path,mime,onP){
+  const std=async()=>{
+    let derniere=null;
+    for(let essai=0;essai<4;essai++){
+      try{
+        if(essai)await new Promise(r=>setTimeout(r,2000*essai));
+        let corps=file;
+        if(file.size<=60*MO){try{corps=new Blob([await file.arrayBuffer()],{type:mime})}catch(e){corps=file}}
+        const {error}=await sb.storage.from('yt-media').upload(path,corps,{contentType:mime,upsert:essai>0});
+        if(error)throw error;onP(file.size,file.size);return;
+      }catch(e){derniere=e;const t=String((e&&e.message)||e);if(/exceeded|maximum allowed size|413|row-level|policy|unauthor/i.test(t))break}
+    }
+    const t=String((derniere&&derniere.message)||derniere);
+    throw new Error(/failed to fetch|network|load failed/i.test(t)?'Connexion coupée ou trop faible. Réessayez avec un meilleur réseau.':t);
+  };
+  if(file.size<=6*MO)return std();
+  if(!window.tus)await new Promise(r=>{const sc=document.createElement('script');sc.src='https://cdn.jsdelivr.net/npm/tus-js-client@4.3.1/dist/tus.min.js';sc.onload=sc.onerror=()=>r();document.head.appendChild(sc)});
+  if(!window.tus){if(file.size>50*MO)throw new Error("Outil d'envoi indisponible : rechargez la page.");return std()}
+  const {data:{session}}=await sb.auth.getSession();if(!session)throw new Error('Session expirée : reconnectez-vous.');
+  return new Promise((ok,ko)=>{
+    const u=new tus.Upload(file,{endpoint:SB_URL+'/storage/v1/upload/resumable',retryDelays:[0,3000,5000,10000,20000],
+      headers:{authorization:'Bearer '+session.access_token,apikey:SB_KEY},uploadDataDuringCreation:true,removeFingerprintOnSuccess:true,
+      metadata:{bucketName:'yt-media',objectName:path,contentType:mime,cacheControl:'31536000'},chunkSize:6*MO,
+      onError:async e=>{if(file.size<=50*MO){try{await std();return ok()}catch(e2){return ko(e2)}}ko(e)},
+      onProgress:onP,onSuccess:()=>ok()});
+    u.start();
+  });
+}
+function idYoutube(u){const m=/(?:youtu\.be\/|youtube\.com\/(?:watch\?(?:.*&)?v=|shorts\/|embed\/|live\/))([A-Za-z0-9_-]{11})/.exec(u||'');return m?m[1]:null}
+
+const views={
+  async pub(m){
+    const {data:chs,error}=await sb.from('yt_channels').select('id,name').order('name');if(error)throw error;
+    if(!chs.length){m.innerHTML='<div class="empty">Aucune chaîne.</div>';return}
+    const dernier=localStorage.getItem('adm_chan')||'';
+    const CATS=['Cours','Rappel','Coran','Conférence','Éducation','Enfants','Autre'];
+    m.innerHTML=`<div class="card"><b>Publier un contenu</b><p class="mut">Publié tout de suite, au nom de la chaîne choisie.</p>
+      <select id="p-ch">${chs.map(c=>`<option value="${esc(c.id)}" ${c.id===dernier?'selected':''}>${esc(c.name)}</option>`).join('')}</select>
+      <select id="p-mode"><option value="fichier">Envoyer un fichier</option><option value="yt">Ajouter un lien YouTube</option></select>
+      <div id="p-fichier"><select id="p-type"><option value="video">Vidéo</option><option value="reel">Reel (vidéo verticale)</option><option value="audio">Audio</option><option value="image">Image</option><option value="fichier">Document (PDF…)</option></select>
+        <input id="p-file" type="file" multiple hidden><input id="p-fa" type="file" multiple accept="audio/*,.mp3,.m4a,.aac,.ogg,.oga,.opus,.wav,.amr,.3gp,.wma,.flac" hidden><input id="p-fv" type="file" multiple accept="video/*,.mp4,.mov,.mkv,.webm,.3gp" hidden><input id="p-file2" type="file" multiple hidden>
+        <button type="button" id="p-ba" style="width:100%;margin-bottom:8px;font-size:17px;padding:14px">🎵 Choisir des AUDIOS</button>
+        <button type="button" id="p-bv" style="width:100%;margin-bottom:8px;font-size:17px;padding:14px">🎬 Choisir des VIDÉOS</button>
+        <button type="button" id="p-br" style="width:100%;margin-bottom:8px;font-size:17px;padding:14px;background:#c0392b">🎙️ Enregistrer un audio maintenant</button>
+        <button type="button" id="p-b2" style="width:100%;margin-bottom:8px;background:#6b7686">Autres fichiers (PDF, images…)</button>
+        <p class="mut" id="p-nom" style="margin:0 0 8px">Aucun fichier choisi.</p></div>
+      <div id="p-yt" hidden><input id="p-url" placeholder="Collez le lien YouTube" inputmode="url"></div>
+      <input id="p-titre" maxlength="150" placeholder="Titre">
+      <textarea id="p-desc" maxlength="5000" placeholder="Description (facultatif)"></textarea>
+      <select id="p-cat">${CATS.map(c=>`<option>${esc(c)}</option>`).join('')}</select>
+      <div class="bar" id="p-bar" hidden><i></i></div><p class="mut" id="p-msg"></p>
+      <button id="pub-ok">Publier</button></div>`;
+    const $=i=>document.getElementById(i);
+    $('p-ch').onchange=()=>localStorage.setItem('adm_chan',$('p-ch').value);
+    $('p-mode').onchange=()=>{const y=$('p-mode').value==='yt';$('p-yt').hidden=!y;$('p-fichier').hidden=y};
+    const ACC={audio:'audio/*,.mp3,.m4a,.aac,.ogg,.oga,.opus,.wav,.amr,.3gp,.wma,.flac,.mp4',video:'video/*,.mp4,.mov,.mkv,.webm,.3gp',reel:'video/*,.mp4,.mov,.webm,.3gp',image:'image/*',fichier:'.pdf,.doc,.docx,.txt,application/pdf'};
+    const accepte=()=>{$('p-file').setAttribute('accept',ACC[$('p-type').value]||'')};
+    $('p-type').addEventListener('change',()=>{$('p-file').value='';accepte()});accepte();
+    let FICHIERS=[];
+    const typeDe=f=>{const mm=mimeDe(f);return mm.startsWith('audio/')?'audio':mm.startsWith('image/')?'image':mm.startsWith('video/')?($('p-type').value==='reel'?'reel':'video'):'fichier'};
+    const prendre=fs=>{FICHIERS=[...(fs||[])];const n=FICHIERS.length;
+      $('p-nom').innerHTML=n?('✅ <b>'+n+' fichier'+(n>1?'s':'')+'</b><br>'+FICHIERS.slice(0,12).map(f=>esc(f.name)+' ('+Math.max(1,Math.round(f.size/MO))+' Mo)').join('<br>')+(n>12?'<br>…':'')):'Aucun fichier choisi.';
+      $('p-titre').hidden=n>1;$('p-titre').placeholder=n>1?'':'Titre';
+      if(n===1){if(!$('p-titre').value)$('p-titre').value=FICHIERS[0].name.replace(/\.[^.]+$/,'');$('p-type').value=typeDe(FICHIERS[0]);accepte()}
+      if(n>1)$('p-nom').innerHTML+='<br><span class="mut">Le titre de chaque contenu sera le nom de son fichier.</span>'};
+    $('p-ba').onclick=()=>{$('p-fa').value='';$('p-fa').click()};
+    $('p-bv').onclick=()=>{$('p-fv').value='';$('p-fv').click()};
+    $('p-fa').onchange=()=>prendre($('p-fa').files);
+    $('p-fv').onchange=()=>prendre($('p-fv').files);
+    let REC=null;
+    $('p-br').onclick=async()=>{
+      const b=$('p-br');
+      if(REC){REC.stop();return}
+      try{
+        const flux=await navigator.mediaDevices.getUserMedia({audio:true});
+        const types=['audio/mp4','audio/webm;codecs=opus','audio/webm','audio/ogg;codecs=opus'];
+        const mt=(window.MediaRecorder&&types.find(t=>MediaRecorder.isTypeSupported(t)))||'';
+        const mr=new MediaRecorder(flux,mt?{mimeType:mt}:undefined),morceaux=[];let sec=0;
+        const tic=setInterval(()=>{sec++;b.textContent='⏹️ Arrêter ('+Math.floor(sec/60)+':'+String(sec%60).padStart(2,'0')+')'},1000);
+        b.textContent='⏹️ Arrêter (0:00)';
+        mr.ondataavailable=e=>{if(e.data&&e.data.size)morceaux.push(e.data)};
+        mr.onstop=()=>{clearInterval(tic);flux.getTracks().forEach(t=>t.stop());REC=null;b.textContent='🎙️ Enregistrer un audio maintenant';
+          const type=(mr.mimeType||mt||'audio/webm').split(';')[0],ext=type.includes('mp4')?'m4a':type.includes('ogg')?'ogg':'webm';
+          const d=new Date(),nom='enregistrement-'+d.getFullYear()+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0')+'-'+String(d.getHours()).padStart(2,'0')+String(d.getMinutes()).padStart(2,'0')+'.'+ext;
+          if(morceaux.length)prendre([new File(morceaux,nom,{type})])};
+        REC=mr;mr.start(1000);
+      }catch(e){toast('Micro refusé ou indisponible : autorisez le micro dans Chrome.')}
+    };
+
+    $('p-b2').onclick=()=>{$('p-file2').value='';$('p-file2').click()};
+    $('p-file').onchange=()=>prendre($('p-file').files);
+    $('p-file2').onchange=()=>prendre($('p-file2').files);
+    $('p-type').addEventListener('change',()=>{FICHIERS=[];$('p-titre').hidden=false;$('p-nom').textContent='Aucun fichier choisi.'});
+    window.__prendre=prendre;if(window.__partage){const fs=window.__partage;window.__partage=null;prendre(fs)}
+    const msg=t=>{$('p-msg').textContent=t};
+    $('pub-ok').onclick=async()=>{
+      const btn=$('pub-ok'),channel_id=$('p-ch').value,titre=$('p-titre').value.trim(),description=$('p-desc').value.trim()||null,category=$('p-cat').value;
+      try{
+        btn.disabled=true;msg('');
+        if($('p-mode').value==='yt'){
+          const url=$('p-url').value.trim(),id=idYoutube(url);if(!id)throw new Error('Lien YouTube non reconnu.');
+          let info=null;try{const r=await fetch('https://www.youtube.com/oembed?format=json&url='+encodeURIComponent('https://www.youtube.com/watch?v='+id));if(r.ok)info=await r.json()}catch(e){}
+          const title=titre||(info&&info.title)||'';if(!title)throw new Error('Donnez un titre.');
+          const ligne={channel_id,title,description,category,type:'video',embed_source:'youtube',embed_id:id,source_nom:(info&&info.author_name)||null,source_url:'https://www.youtube.com/watch?v='+id,
+            cover_path:'https://i.ytimg.com/vi/'+id+'/mqdefault.jpg',status:'published',published_at:new Date().toISOString()};
+          if(/\/shorts\//.test(url))ligne.ratio='9:16';
+          const {error}=await sb.from('yt_contenus').insert(ligne);if(error)throw error;
+        }else{
+          if(!FICHIERS.length)throw new Error('Choisissez au moins un fichier.');
+          if(FICHIERS.length===1&&!titre)throw new Error('Donnez un titre.');
+          $('p-bar').hidden=false;const bar=$('p-bar').firstElementChild;
+          const total=FICHIERS.length,echecs=[];let faits=0;
+          for(let k=0;k<total;k++){
+            const f=FICHIERS[k],pre=total>1?('Fichier '+(k+1)+' / '+total+' — '):'';
+            try{
+              const type=total>1?typeDe(f):$('p-type').value,mime=mimeDe(f),ext=((f.name.split('.').pop()||'bin').toLowerCase().replace(/[^a-z0-9]/g,'')||'bin').slice(0,8),id=uid();
+              const chemin=me.id+'/'+id+'.'+ext,titreF=total>1?f.name.replace(/\.[^.]+$/,'').slice(0,150):titre;
+              bar.style.width='0%';msg(pre+'Lecture du fichier…');const meta=await metaFichier(f,type);
+              await envoyerFichier(f,chemin,mime,(x,y)=>{const pc=y?Math.floor(x*100/y):0;bar.style.width=pc+'%';msg(pre+'Envoi : '+pc+' % ('+Math.round(x/MO)+' / '+Math.max(1,Math.round(y/MO))+' Mo) — ne fermez pas cette page.')});
+              let cover=null;
+              if(meta.cover){const cp=me.id+'/'+id+'-cover.jpg',r=await sb.storage.from('yt-media').upload(cp,meta.cover,{contentType:'image/jpeg',upsert:false});if(!r.error)cover=cp}
+              const ligne={channel_id,title:titreF,description,category,type,fichier_path:chemin,cover_path:cover,duration_seconds:meta.duree||null,taille_octets:f.size,mime,status:'published',published_at:new Date().toISOString()};
+              const {error}=await sb.from('yt_contenus').insert(ligne);
+              if(error){await sb.storage.from('yt-media').remove([chemin,...(cover?[me.id+'/'+id+'-cover.jpg']:[])]).catch(()=>{});throw error}
+              faits++;
+            }catch(e){
+              const t=String((e&&(e.message||e.error))||e);
+              if(total===1)throw e;
+              echecs.push(f.name+' : '+(/exceeded|maximum allowed size|413/i.test(t)?'fichier trop gros':t));
+            }
+          }
+          if(echecs.length){msg('✅ '+faits+' publié(s). ❌ Échecs : '+echecs.join(' | '));btn.disabled=false;return}
+        }
+        toast('Publié ✓');show();
+      }catch(e){
+        const t=String((e&&(e.message||e.error))||e);
+        msg('Échec : '+(/exceeded|maximum allowed size|413/i.test(t)?"fichier trop gros pour l'espace de stockage (limite Supabase de 50 Mo sur l'offre gratuite).":t));
+        btn.disabled=false;
+      }
+    };
+  },
+
+  async notif(m){
+    const {data:R,error}=await sb.rpc('push_reglages_lire');if(error)throw error;
+    const cats=(R.categories||[]).slice().sort();
+    m.innerHTML=`<div class="card"><b>🌅 Lumière du matin</b>
+      <p class="mut"><b>${+R.abonnes_jour}</b> appareils reçoivent la Lumière du matin · <b>${+R.abonnes_nouveau}</b> reçoivent les nouveaux prêches (envoyés automatiquement à chaque publication).</p>
+      <label style="display:flex;gap:10px;align-items:center;margin:10px 0"><input type="checkbox" id="n-a" style="width:24px;height:24px;margin:0" ${R.actif?'checked':''}> <b>Envoi automatique chaque jour</b></label>
+      <label>Heure d'envoi (heure du Cameroun)<input type="time" id="n-h" value="${esc(R.heure)}"></label>
+      <label>Quoi envoyer<select id="n-c"><option value="invocation">Hadith / invocation du jour</option><option value="pretche">Le dernier prêche publié</option><option value="message">Mon propre message</option></select></label>
+      <div id="n-cat-w"><label>Thème des invocations<select id="n-cat"><option value="">Tous les thèmes</option>${cats.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join('')}</select></label></div>
+      <div id="n-msg-w"><input id="n-t" maxlength="60" placeholder="Titre" value="${esc(R.titre||'')}"><textarea id="n-m" maxlength="180" placeholder="Message">${esc(R.message||'')}</textarea></div>
+      <div class="btns"><button id="n-s" class="b-ok">Enregistrer</button><button id="n-n" class="b-warn">Envoyer maintenant à tous</button></div>
+      <p class="mut" id="n-r"></p></div>`;
+    const $=i=>document.getElementById(i);
+    $('n-c').value=R.contenu;$('n-cat').value=R.categorie||'';
+    const maj=()=>{$('n-cat-w').hidden=$('n-c').value!=='invocation';$('n-msg-w').hidden=$('n-c').value!=='message'};
+    $('n-c').onchange=maj;maj();
+    $('n-s').onclick=async()=>{const r=await sb.rpc('push_reglages_ecrire',{p_actif:$('n-a').checked,p_heure:$('n-h').value||'05:00',p_contenu:$('n-c').value,p_categorie:$('n-cat').value,p_titre:$('n-t').value,p_message:$('n-m').value});
+      if(r.error)toast('Erreur : '+r.error.message);else toast('Enregistré ✓')};
+    $('n-n').onclick=async()=>{if(!confirm('Envoyer la notification maintenant à tous les abonnés ?'))return;const r=await sb.rpc('push_envoyer_maintenant');
+      if(r.error)toast('Erreur : '+r.error.message);else toast('Envoi lancé ✓')};
+  },
+  async dash(m){
+    const {data,error}=await sb.rpc('yt_admin_stats');if(error)throw error;
+    const L={utilisateurs:'Utilisateurs',createurs:'Créateurs vérifiés',suspendus_ou_bannis:'Suspendus / bannis',contenus_publies:'Contenus publiés',vues_totales:'Vues totales',abonnements:'Abonnements',signalements_ouverts:'Signalements ouverts',demandes_createur:'Demandes créateur'};
+    m.innerHTML='<div class="grid">'+Object.keys(L).map(k=>`<div class="card stat"><b>${esc(data[k])}</b><span>${L[k]}</span></div>`).join('')+'</div>';
+  },
+  async demandes(m){
+    const {data,error}=await sb.rpc('yt_demandes_en_attente');if(error)throw error;
+    if(!data.length){m.innerHTML='<div class="empty">Aucune demande en attente.</div>';return}
+    m.innerHTML=data.map(d=>`<div class="card"><b>${esc(d.nom||'Sans nom')}</b> <span class="mut">· chaîne « ${esc(d.nom_chaine)} »</span>
+      <div class="mut">${fmt(d.cree_le)}</div><p>${esc(d.message||'')}</p>
+      <div class="btns"><button class="b-ok" data-a="1" data-u="${esc(d.user_id)}">Accepter</button><button class="b-bad" data-a="0" data-u="${esc(d.user_id)}">Refuser</button></div></div>`).join('');
+    m.querySelectorAll('button').forEach(b=>b.onclick=()=>{
+      const ok=b.dataset.a==='1';if(!confirm(ok?'Accepter ce créateur ?':'Refuser cette demande ?'))return;
+      act(()=>sb.rpc('yt_decider_createur',{p_user:b.dataset.u,p_accepter:ok}),ok?'Créateur accepté':'Demande refusée');
+    });
+  },
+  async users(m){
+    const {data,error}=await sb.from('yt_users').select('id,full_name,role,statut,created_at').order('created_at',{ascending:false}).limit(500);if(error)throw error;
+    m.innerHTML='<input id="q" placeholder="Rechercher un nom…"><div id="list"></div>';
+    const draw=()=>{
+      const q=slug(document.getElementById('q').value);
+      const rows=data.filter(u=>!q||slug(u.full_name||'').includes(q));
+      document.getElementById('list').innerHTML=rows.length?rows.map(u=>{
+        const cls=u.statut==='actif'?'ok':u.statut==='suspendu'?'warn':'bad';
+        const btns=u.role==='admin'?'':[
+          u.statut!=='actif'?`<button class="b-ok" data-s="actif" data-u="${esc(u.id)}">Réactiver</button>`:'',
+          u.statut!=='suspendu'?`<button class="b-warn" data-s="suspendu" data-u="${esc(u.id)}">Suspendre</button>`:'',
+          u.statut!=='banni'?`<button class="b-bad" data-s="banni" data-u="${esc(u.id)}">Bannir</button>`:''].join('');
+        return `<div class="card"><div class="row"><b>${esc(u.full_name||'Sans nom')}</b><span class="tag ${cls}">${esc(u.statut)}</span></div>
+        <div class="mut">${esc(u.role)} · inscrit ${fmt(u.created_at)}</div><div class="btns">${btns}</div></div>`}).join(''):'<div class="empty">Aucun résultat.</div>';
+      document.querySelectorAll('#list button').forEach(b=>b.onclick=()=>{
+        if(!confirm('Confirmer : '+b.textContent+' ?'))return;
+        act(()=>sb.rpc('yt_admin_statut_user',{p_user:b.dataset.u,p_statut:b.dataset.s}),'Statut mis à jour');
+      });
+    };
+    document.getElementById('q').oninput=draw;draw();
+  },
+  async contenus(m){
+    const f=views._cf||'';
+    let q=sb.from('yt_contenus').select('id,title,type,status,views_count,created_at,yt_channels(name)').order('created_at',{ascending:false}).limit(200);
+    if(f)q=q.eq('status',f);
+    const {data,error}=await q;if(error)throw error;
+    m.innerHTML=`<select id="f"><option value="">Tous les statuts</option><option value="published">Publiés</option><option value="processing">En traitement</option><option value="hidden">Masqués</option></select><div id="list"></div>`;
+    const sel=document.getElementById('f');sel.value=f;sel.onchange=()=>{views._cf=sel.value;show()};
+    document.getElementById('list').innerHTML=data.length?data.map(c=>`<div class="card"><div class="row"><b>${esc(c.title)}</b><span class="tag">${esc(c.status)}</span></div>
+      <div class="mut">${esc(c.type)} · ${esc(c.yt_channels?.name||'—')} · ${esc(c.views_count)} vues · ${fmt(c.created_at)}</div>
+      <div class="btns">${c.status!=='published'?`<button class="b-ok" data-s="published" data-i="${esc(c.id)}">Publier</button>`:''}${c.status!=='hidden'?`<button class="b-bad" data-s="hidden" data-i="${esc(c.id)}">Masquer</button>`:''}</div></div>`).join(''):'<div class="empty">Aucun contenu.</div>';
+    document.querySelectorAll('#list button').forEach(b=>b.onclick=()=>{
+      if(!confirm('Confirmer : '+b.textContent+' ?'))return;
+      act(()=>sb.rpc('yt_admin_moderer_contenu',{p_id:b.dataset.i,p_status:b.dataset.s}),'Contenu mis à jour');
+    });
+  },
+  async sig(m){
+    const {data,error}=await sb.from('yt_signalements').select('id,motif,statut,created_at,yt_contenus(title),yt_comments(content)').eq('statut','ouvert').order('created_at').limit(200);if(error)throw error;
+    if(!data.length){m.innerHTML='<div class="empty">Aucun signalement ouvert.</div>';return}
+    m.innerHTML=data.map(s=>`<div class="card"><div class="mut">${fmt(s.created_at)}</div>
+      <div><b>${s.yt_contenus?'Contenu :':'Commentaire :'}</b> ${esc(s.yt_contenus?.title||s.yt_comments?.content||'(supprimé)')}</div>
+      <div>Motif : ${esc(s.motif)}</div>
+      <div class="btns"><button class="b-bad" data-a="masquer" data-i="${esc(s.id)}">${s.yt_contenus?'Masquer le contenu':'Supprimer le commentaire'}</button><button class="b-gr" data-a="rejeter" data-i="${esc(s.id)}">Rejeter</button></div></div>`).join('');
+    m.querySelectorAll('button').forEach(b=>b.onclick=()=>{
+      if(!confirm('Confirmer : '+b.textContent+' ?'))return;
+      act(()=>sb.rpc('yt_admin_traiter_signalement',{p_id:b.dataset.i,p_action:b.dataset.a}),'Signalement traité');
+    });
+  },
+  async audit(m){
+    const {data,error}=await sb.from('yt_audit_logs').select('id,action,cible_type,cible_id,details,created_at,yt_users(full_name)').order('created_at',{ascending:false}).limit(100);if(error)throw error;
+    m.innerHTML=data.length?data.map(a=>`<div class="card"><b>${esc(a.action)}</b> <span class="mut">par ${esc(a.yt_users?.full_name||'?')}</span>
+      <div class="mut">${esc(a.cible_type)} · ${fmt(a.created_at)}</div><div class="mut">${esc(JSON.stringify(a.details||{}))}</div></div>`).join(''):'<div class="empty">Journal vide.</div>';
+  }
+};
+
+sb.auth.onAuthStateChange(()=>{});
+start();
+</script>
+</body>
+</html>

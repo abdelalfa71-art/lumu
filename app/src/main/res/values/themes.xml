@@ -1,0 +1,6 @@
+<resources>
+    <style name="Theme.Lumu" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="android:statusBarColor">#0F8A5F</item>
+        <item name="android:navigationBarColor">#0F8A5F</item>
+    </style>
+</resources>
