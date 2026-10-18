@@ -2603,10 +2603,11 @@ function diagSession() {
   } catch (e) { return "jeton illisible"; }
 }
 function messageEnvoi(e) {
-  const m = String((e && (e.message || e.error)) || e || "");
+  let m = String((e && (e.message || e.error)) || e || "");
+  try { if (e && e.originalResponse) { m = "HTTP " + e.originalResponse.getStatus() + " " + String(e.originalResponse.getBody() || "").slice(0, 160) + " | " + m.replace(/\(method:.*$/, ""); } } catch (x) {}
   if (/annulé/i.test(m)) return "Envoi annulé.";
   if (/413|maximum allowed size|exceeded|too large|Payload/i.test(m)) return "Fichier trop gros pour l'espace de stockage actuel. Sur l'offre gratuite de Supabase la limite est de 50 Mo : passez à l'offre Pro et augmentez « Global file size limit » dans les réglages de stockage.";
-  if (/403|401|unauthor|row-level|policy|violates/i.test(m)) return "Vous n'avez pas le droit de publier. Votre compte créateur est-il bien validé ? (détail : " + m.replace(/\s+/g, " ").slice(0, 160) + " | " + diagSession() + ")";
+  if (/403|401|unauthor|row-level|policy|violates/i.test(m)) return "Vous n'avez pas le droit de publier. Votre compte créateur est-il bien validé ? (détail : " + m.replace(/\s+/g, " ").slice(0, 300) + " | " + diagSession() + ")";
   if (/415|mime|not supported|invalid_mime/i.test(m)) return "Format de fichier non accepté.";
   if (erreurReseau(e) || (e && e.originalRequest && !e.originalResponse)) return "Impossible de joindre le serveur de stockage depuis votre connexion. Essayez en Wi-Fi ou avec un autre réseau mobile, puis réessayez.";
   return "L'envoi a échoué. Réessayez.";
