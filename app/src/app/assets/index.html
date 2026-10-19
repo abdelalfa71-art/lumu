@@ -377,6 +377,51 @@ html.contraste .ec-chip.actif { background: #006B3C; border-color: #000; }
 .ec-simple .ec-radio { flex-direction: column; text-align: center; min-height: 220px; justify-content: center; font-size: 26px; }
 .ec-simple .ec-rp { width: 96px; height: 96px; }
 .ec-simple .ec-radio b { font-size: 28px; }
+
+/* ===== Style WhatsApp : accueil Écouter (à plat, sans cartes) ===== */
+html:root .ec-haut { position: relative; background: #0F7B6C; border-radius: 0; box-shadow: none; padding: 12px 6px 12px 16px; }
+html:root .ec-haut b { font-size: 22px; letter-spacing: 0; }
+html:root .ec-haut .ec-logo { display: none; }
+html:root .ec-haut button { width: 44px; height: 44px; }
+html:root .ec-haut .menu-plus { top: 100%; right: 8px; }
+html:root .ec-haut .menu-plus button { color: var(--texte); width: 100%; height: auto; border-radius: 10px; }
+html:root .ec-corps { margin-top: 0; gap: 0; padding: 0 0 12px; }
+html:root .ec-gros { margin: 12px 16px; }
+html:root .ec-chips { padding: 10px 16px 6px; gap: 8px; }
+html:root #ec-chips .ec-chip:last-child { display: none !important; }
+html:root #ec-themes { display: none; }
+html:root .ec-chip { height: 36px; padding: 0 16px; font-size: 15px; font-weight: 600; border: 0; background: color-mix(in srgb, var(--texte) 8%, var(--surface)); color: var(--texte); box-shadow: none; }
+html:root .ec-chip.actif { background: color-mix(in srgb, #0F7B6C 22%, var(--surface)); color: #0A564B; box-shadow: none; }
+html.nuit:root .ec-chip.actif, html:root[data-theme="dark"] .ec-chip.actif { color: #7FD6C2; }
+html:root .ec-tit { margin: 10px 16px 0; font-size: 14px; font-weight: 700; color: #0F7B6C; }
+html:root .ec-tit::before { display: none; }
+html:root .ec-imams { padding: 8px 16px 4px; gap: 12px; }
+html:root .ec-im { width: 64px; font-size: 12px; font-weight: 600; }
+html:root .ec-av, html:root .ec-add { width: 56px; height: 56px; border: 0; box-shadow: none; }
+html:root .ec-add { background: color-mix(in srgb, var(--texte) 8%, var(--surface)); border: 0; }
+/* lignes plates, façon liste de discussions */
+html:root .ec-radio, html:root .ec-reprise, html:root .ec-row { background: transparent; border: 0; border-radius: 0; box-shadow: none; padding: 10px 16px; position: relative; animation: none; }
+html:root .ec-radio { margin: 0; width: 100%; color: var(--texte); gap: 14px; }
+html:root .ec-radio::after { display: none; }
+html:root .ec-radio b, html:root .ec-reprise b { color: var(--texte); font-size: 17px; font-weight: 700; }
+html:root .ec-radio small { color: var(--texte-doux); font-size: 14px; opacity: 1; }
+html:root .ec-rp { width: 52px; height: 52px; background: #0F7B6C; color: #fff; box-shadow: none; }
+html:root .ec-rp svg { width: 26px; height: 26px; }
+html:root .ec-reprise .ec-tx small { color: #0F7B6C; }
+html:root #ec-liste { gap: 0; }
+html:root .ec-row:active, html:root .ec-radio:active, html:root .ec-reprise:active { background: color-mix(in srgb, var(--texte) 7%, transparent); transform: none; }
+html:root .ec-row.lit { background: color-mix(in srgb, #0F7B6C 10%, transparent); }
+html:root .ec-row::after, html:root .ec-radio::before { content: ""; position: absolute; left: 82px; right: 0; bottom: 0; height: 1px; background: var(--bordure); }
+html:root .ec-radio::before { display: block; }
+html:root .ec-row .ec-cv, html:root .ec-reprise .ec-cv { width: 52px; height: 52px; border-radius: 50% !important; box-shadow: none; }
+html:root .ec-tx b { font-size: 17px; font-weight: 700; }
+html:root .ec-tx small { font-size: 14px; color: var(--texte-doux); font-weight: 500; }
+html:root .ec-dl { width: 40px; height: 40px; border: 0; background: transparent; color: var(--texte-doux); }
+html:root .ec-dl.fait { background: transparent; color: #0F7B6C; }
+html:root .ec-pl { width: 44px; height: 44px; background: transparent; color: #0F7B6C; box-shadow: none; }
+html:root .ec-pl svg { width: 30px; height: 30px; }
+html:root .ec-bar { height: 3px; }
+.ec-simple .ec-radio { min-height: 0; text-align: left; flex-direction: row; font-size: inherit; }
 .actions .btn-outline.on { border-color: var(--vert); color: var(--vert); }
 .actions .source-credit { flex: 1 0 100%; }
 .ct-com { margin-top: 14px; border-top: 1px solid var(--bordure); padding-top: 10px; }
@@ -5025,7 +5070,7 @@ async function vueEcouter() {
   const w = document.createElement("div");
   w.className = "ecran ec";
   w.innerHTML = `<div class="ec-haut"><span class="ec-logo">${lumuSVG(36)}</span><b>Lumu</b>
-      <button id="ec-mic" aria-label="Parler pour chercher">${ico("mic", 24)}</button><button id="ec-q" aria-label="Rechercher">${ico("search", 24)}</button></div>
+      <button id="ec-mic" aria-label="Parler pour chercher">${ico("mic", 24)}</button><button id="ec-q" aria-label="Rechercher">${ico("search", 24)}</button><button id="ec-plus" aria-label="Plus d'options" style="font-size:26px;font-weight:800">⋮</button><div class="menu-plus" id="ec-menu" hidden><button id="em-dormir">🌙 Avant de dormir</button><button id="em-trajet">🚗 Pour le trajet</button><button id="em-hors">⬇ Mes téléchargements</button><button id="em-prof">👤 Mon profil</button></div></div>
     <div class="ec-corps">
       <div id="ec-rep"></div>
       <button class="ec-radio" id="ec-radio"><span class="ec-rp">${ico("play", 30, true)}</span><span><b>Lumu Radio</b><small>Rappels, Coran, invocations</small></span></button>
@@ -5040,9 +5085,13 @@ async function vueEcouter() {
   if (ACCES.simple()) w.classList.add("ec-simple");
   w.querySelector("#eg-hors").onclick = () => router("hors"); w.querySelector("#eg-disc").onclick = () => router("discussions"); w.querySelector("#eg-imams").onclick = () => router("preches"); w.querySelector("#eg-q").onclick = () => router("recherche");
   try { const cn = navigator.connection; if (cn && /2g/.test(cn.effectiveType || "")) w.querySelector("#ec-radio").insertAdjacentHTML("beforebegin", `<button class="ec-lent" id="ec-lent">📶 Connexion lente. Touchez pour télécharger vos audios et écouter sans coupure.</button>`); const bl = w.querySelector("#ec-lent"); if (bl) bl.onclick = () => router("hors"); } catch (e) {}
+  { const bp = w.querySelector("#ec-plus"), mn = w.querySelector("#ec-menu"); bp.onclick = ev => { ev.stopPropagation(); mn.hidden = !mn.hidden; }; mn.onclick = () => { setTimeout(() => { mn.hidden = true; }, 120); };
+    const fer = () => { if (!w.isConnected) { document.removeEventListener("click", fer); return; } mn.hidden = true; }; document.addEventListener("click", fer);
+    w.querySelector("#em-hors").onclick = () => router("hors"); w.querySelector("#em-prof").onclick = () => router("profil"); }
   const lanceFile = (l, minut) => { if (!l.length) { alert("Aucun audio disponible."); return; } AUD.file = l.slice(1, 15); lireDirect(l[0]); if (minut) sommeilMinutes(minut); };
   w.querySelector("#th-dormir").onclick = () => { const re = CH[3][2]; const l = tous.filter(c => re.test(c.category || "") || re.test(c.title || "")); lanceFile((l.length ? l : tous).slice().sort((a, b) => (a.duration_seconds || 9999) - (b.duration_seconds || 9999)), 30); };
   w.querySelector("#th-trajet").onclick = () => lanceFile(tous.slice(), 0);
+  w.querySelector("#em-dormir").onclick = () => w.querySelector("#th-dormir").onclick(); w.querySelector("#em-trajet").onclick = () => w.querySelector("#th-trajet").onclick();
   w.querySelector("#ec-mic").onclick = () => { try { MICRO.ouvrir(); } catch (e) {} };
   w.querySelector("#ec-radio").onclick = () => { router("radio"); setTimeout(() => { try { RADIO.demarrer(); } catch (e) {} }, 700); };
   const CH = [["", "Tout", null], ["coran", "Coran", /coran|quran|r[ée]citation/i], ["cours", "Cours", /cours|conf[ée]rence|[ée]ducation|pr[eê]che/i], ["rappels", "Rappels", /rappel|invocation|dou?a|dhikr/i]];
