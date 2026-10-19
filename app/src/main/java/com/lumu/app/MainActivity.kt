@@ -55,6 +55,20 @@ class MainActivity : AppCompatActivity() {
     inner class PontNatif {
         @JavascriptInterface fun site(): String = BuildConfig.SITE_URL
 
+        /** Ouvre le menu de partage du téléphone (WhatsApp, Facebook, SMS…). */
+        @JavascriptInterface fun partager(titre: String?, texte: String?) {
+            runOnUiThread {
+                try {
+                    val i = Intent(Intent.ACTION_SEND).apply {
+                        type = "text/plain"
+                        putExtra(Intent.EXTRA_SUBJECT, titre ?: "Lumu")
+                        putExtra(Intent.EXTRA_TEXT, texte ?: "")
+                    }
+                    startActivity(Intent.createChooser(i, titre ?: "Partager"))
+                } catch (e: Exception) { }
+            }
+        }
+
         /** Appelé par la page quand le titre ou l'état de lecture change (notification en haut de l'écran). */
         @JavascriptInterface fun media(titre: String?, artiste: String?, jouant: Boolean) {
             lectureEnCours = jouant && !titre.isNullOrEmpty()
