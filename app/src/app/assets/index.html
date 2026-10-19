@@ -354,6 +354,15 @@ html.nuit .lecteur-audio .au-art { border-color: #F2C43D; }
 .ec-row:nth-child(2) { animation-delay: .04s; } .ec-row:nth-child(3) { animation-delay: .08s; } .ec-row:nth-child(4) { animation-delay: .12s; } .ec-row:nth-child(n+5) { animation-delay: .16s; }
 @keyframes monte { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .ec-row, .menu-plus, #jaime .ia-i svg { animation: none !important; } }
+
+/* Thème Oasis */
+html.oasis:root[data-theme="light"] { --fond: #FBF6E9; --surface: #FFFFFF; --texte: #1B2B24; --texte-doux: #5E6B63; --bordure: #E7DFC8; --vert-clair: #E3F1E8; }
+/* Thème Grand contraste */
+html.contraste:root[data-theme="light"] { --fond: #FFFFFF; --surface: #FFFFFF; --texte: #000000; --texte-doux: #222222; --bordure: #000000; --vert: #006B3C; --vert-clair: #D6F5E3; --jaune: #FFD400; }
+html.contraste .ec-haut { background: #006B3C; }
+html.contraste .ec-row, html.contraste .ec-chip, html.contraste .pf-box, html.contraste .carte { border: 2px solid #000; box-shadow: none; }
+html.contraste .ec-tx b, html.contraste .pf-t b { font-size: 19px; }
+html.contraste .ec-chip.actif { background: #006B3C; border-color: #000; }
 .actions .btn-outline.on { border-color: var(--vert); color: var(--vert); }
 .actions .source-credit { flex: 1 0 100%; }
 .ct-com { margin-top: 14px; border-top: 1px solid var(--bordure); padding-top: 10px; }
@@ -5788,8 +5797,10 @@ document.addEventListener("keydown", ev => {
 const ACCES = {
   grand() { try { return localStorage.getItem("lumu_zoom") === "1"; } catch (e) { return false; } },
   regler(v) { try { localStorage.setItem("lumu_zoom", v ? "1" : "0"); } catch (e) {} document.documentElement.style.zoom = v ? "1.2" : ""; },
-  theme(t) { try { localStorage.setItem("lumu_theme", t); } catch (e) {} const d = document.documentElement; d.classList.toggle("nuit", t === "nuit"); d.setAttribute("data-theme", t === "nuit" ? "dark" : t); try { const m = document.querySelector('meta[name="theme-color"]'); if (m) m.content = t === "nuit" ? "#0A1226" : "#0f7b6c"; } catch (e) {} },
-  suivant() { const d = document.documentElement; const cur = d.classList.contains("nuit") ? "nuit" : (d.getAttribute("data-theme") === "dark" || (!d.getAttribute("data-theme") && matchMedia("(prefers-color-scheme: dark)").matches)) ? "dark" : "light"; this.theme(cur === "light" ? "dark" : cur === "dark" ? "nuit" : "light"); }
+  theme(t) { try { localStorage.setItem("lumu_theme", t); } catch (e) {} const d = document.documentElement; ["nuit", "oasis", "contraste"].forEach(k => d.classList.toggle(k, t === k)); d.setAttribute("data-theme", t === "nuit" ? "dark" : (t === "oasis" || t === "contraste") ? "light" : t); try { const m = document.querySelector('meta[name="theme-color"]'); if (m) m.content = t === "nuit" ? "#0A1226" : t === "contraste" ? "#006B3C" : "#0f7b6c"; } catch (e) {} },
+  actuel() { const d = document.documentElement; for (const k of ["nuit", "oasis", "contraste"]) if (d.classList.contains(k)) return k; return (d.getAttribute("data-theme") === "dark" || (!d.getAttribute("data-theme") && matchMedia("(prefers-color-scheme: dark)").matches)) ? "dark" : "light"; },
+  nom() { return { light: "Clair", dark: "Sombre", nuit: "Nuit étoilée", oasis: "Oasis", contraste: "Grand contraste" }[this.actuel()]; },
+  suivant() { const l = ["light", "dark", "nuit", "oasis", "contraste"]; this.theme(l[(l.indexOf(this.actuel()) + 1) % l.length]); }
 };
 try { if (ACCES.grand()) document.documentElement.style.zoom = "1.2"; const th = localStorage.getItem("lumu_theme"); if (th) ACCES.theme(th); } catch (e) {}
 
@@ -5887,7 +5898,7 @@ function vueProfil() {
     PUSH.dispo() ? ["🌅", "Lumière du matin", "Hadith ou invocation à 5 h", async () => { if (!(await PUSH.regler("jour", !PUSH.pref("jour")))) alert("Notifications refusées. Autorisez-les dans les réglages du téléphone."); router("profil"); }, PUSH.pref("jour")] : null,
     PUSH.dispo() ? ["🎧", "Nouveaux prêches", "Quand un audio ou une vidéo est publié", async () => { if (!(await PUSH.regler("nouveau", !PUSH.pref("nouveau")))) alert("Notifications refusées. Autorisez-les dans les réglages du téléphone."); router("profil"); }, PUSH.pref("nouveau")] : null,
     ["🔠", "Grand texte", "Tout plus gros", () => { ACCES.regler(!ACCES.grand()); router("profil"); }, ACCES.grand()],
-    ["☀️", "Thème : clair › sombre › nuit étoilée", "Touchez pour changer", () => { ACCES.suivant(); router("profil"); }],
+    ["☀️", "Thème", ACCES.nom(), () => { ACCES.suivant(); router("profil"); }],
     ["📶", "Économie de données", "", () => { ECO.regler(!ECO.actif()); router("profil"); }, ECO.actif()],
     co && PIN.dispo ? ["🔒", etat.compteNom ? "Changer mon code" : "Code de verrouillage", "", () => router("pin-creation", { changer: true, retour: "profil" })] : null,
     co && !etat.compteNom ? ["🔑", "Mot de passe", "", () => router("changer-mot-de-passe")] : null
