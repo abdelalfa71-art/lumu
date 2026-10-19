@@ -2,6 +2,11 @@ package com.lumu.app
 
 import android.Manifest
 import android.app.Activity
+import android.app.DownloadManager
+import android.content.Context
+import android.os.Environment
+import android.widget.Toast
+import androidx.core.content.FileProvider
 import android.content.ComponentName
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -69,6 +74,61 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        /** Enregistre l'audio dans Musique/Lumu du téléphone (notification de téléchargement). */
+        @JavascriptInterface fun enregistrerAudio(url: String?, nom: String?) {
+            runOnUiThread {
+                try {
+                    if (url.isNullOrEmpty() || !url.startsWith("https://")) return@runOnUiThread
+                    val n = (nom ?: "audio.mp3").replace(Regex("[\\\\/:*?\"<>|]"), " ")
+                    if (android.os.Build.VERSION.SDK_INT < 29 &&
+                        ContextCompat.checkSelfPermission(this@MainActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                        demandeStockage.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        Toast.makeText(this@MainActivity, "Autorisez le stockage, puis touchez à nouveau.", Toast.LENGTH_LONG).show()
+                        return@runOnUiThread
+                    }
+                    val dm = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+                    dm.enqueue(
+                        DownloadManager.Request(Uri.parse(url)).setTitle(n).setDescription("Lumu")
+                            .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+                            .setDestinationInExternalPublicDir(Environment.DIRECTORY_MUSIC, "Lumu/$n")
+                    )
+                    Toast.makeText(this@MainActivity, "Téléchargement dans Musique › Lumu", Toast.LENGTH_LONG).show()
+                } catch (e: Exception) {
+                    Toast.makeText(this@MainActivity, "Enregistrement impossible.", Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+
+        /** Envoie le fichier audio lui-même (WhatsApp, Bluetooth, Telegram…). */
+        @JavascriptInterface fun partagerFichier(url: String?, nom: String?, mime: String?, titre: String?) {
+            if (url.isNullOrEmpty() || !url.startsWith("https://")) return
+            runOnUiThread { Toast.makeText(this@MainActivity, "Préparation de l'audio…", Toast.LENGTH_SHORT).show() }
+            Thread {
+                try {
+                    val dossier = File(cacheDir, "partage"); dossier.mkdirs()
+                    dossier.listFiles()?.forEach { it.delete() }
+                    val n = (nom ?: "audio.mp3").replace(Regex("[\\\\/:*?\"<>|]"), " ")
+                    val f = File(dossier, n)
+                    val c = URL(url).openConnection() as HttpURLConnection
+                    c.connectTimeout = 15000; c.readTimeout = 30000
+                    if (c.responseCode !in 200..299) throw Exception("http")
+                    c.inputStream.use { i -> f.outputStream().use { o -> i.copyTo(o) } }
+                    val uri = FileProvider.getUriForFile(this@MainActivity, "$packageName.fp", f)
+                    runOnUiThread {
+                        val i = Intent(Intent.ACTION_SEND).apply {
+                            type = mime ?: "audio/*"
+                            putExtra(Intent.EXTRA_STREAM, uri)
+                            putExtra(Intent.EXTRA_SUBJECT, titre ?: "")
+                            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                        }
+                        startActivity(Intent.createChooser(i, titre ?: "Envoyer"))
+                    }
+                } catch (e: Exception) {
+                    runOnUiThread { Toast.makeText(this@MainActivity, "Envoi impossible. Vérifiez la connexion.", Toast.LENGTH_LONG).show() }
+                }
+            }.start()
+        }
+
         /** Appelé par la page quand le titre ou l'état de lecture change (notification en haut de l'écran). */
         @JavascriptInterface fun media(titre: String?, artiste: String?, jouant: Boolean) {
             lectureEnCours = jouant && !titre.isNullOrEmpty()
@@ -86,6 +146,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private var lectureEnCours = false
+    private val demandeStockage =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { }
     private val demandeNotif =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { }
 
