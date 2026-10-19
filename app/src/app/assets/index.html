@@ -275,9 +275,11 @@ button, [role="button"], a, input, select, textarea { touch-action: manipulation
 .ct-meta { font-size: 13px; opacity: .7; margin: 2px 0 10px; }
 .actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 6px; }
 .actions .btn-outline { width: auto; min-height: 40px; padding: 0 14px; font-size: 14px; font-weight: 600; border-width: 1px; border-color: var(--bordure); color: inherit; border-radius: 99px; background: var(--surface); }
-.menu-plus { display: flex; flex-direction: column; gap: 8px; margin: 6px 0 14px; padding: 10px; border: 1px solid var(--bordure); border-radius: 16px; background: var(--carte, #fff); }
+.menu-plus { position: absolute; top: 100%; left: 0; z-index: 50; min-width: 250px; max-width: 88vw; display: flex; flex-direction: column; padding: 6px; border: 1px solid var(--bordure); border-radius: 14px; background: var(--carte, #fff); box-shadow: 0 12px 32px rgba(0,0,0,.22); }
 .menu-plus[hidden] { display: none; }
-.menu-plus .btn-outline { width: 100%; justify-content: flex-start; text-align: left; min-height: 46px; padding: 0 14px; font-size: 15px; font-weight: 600; border-width: 1px; }
+.menu-plus button, .menu-plus button.btn-outline { width: 100%; background: none; border: 0 !important; box-shadow: none; justify-content: flex-start; border-radius: 10px; text-align: left; min-height: 50px; padding: 0 14px; font-size: 16px; font-weight: 600; color: var(--texte); display: flex; align-items: center; gap: 8px; }
+.menu-plus button:active { background: var(--bordure); }
+.menu-plus button + button, .menu-plus button.btn-outline + button { border-top: 1px solid var(--bordure) !important; border-radius: 0; }
 .actions .btn-outline.on { border-color: var(--vert); color: var(--vert); }
 .actions .source-credit { flex: 1 0 100%; }
 .ct-com { margin-top: 14px; border-top: 1px solid var(--bordure); padding-top: 10px; }
@@ -2078,7 +2080,15 @@ async function vueContenu() {
   const t = TYPES[c.type] || TYPES.video;
   const chaine = c.yt_channels && c.yt_channels.name ? esc(c.yt_channels.name) : "";
   wrap.innerHTML = `
-    <div class="entete" style="padding:0"><button class="btn-text" id="retour" style="padding:4px" aria-label="Retour">←</button></div>
+    <div class="entete" style="padding:0;position:relative;justify-content:flex-start"><button class="btn-text" id="retour" style="padding:4px" aria-label="Retour">←</button>
+      <button class="btn-text" id="plus" aria-label="Plus d'options" aria-expanded="false" style="font-size:34px;font-weight:800;padding:0 16px;min-height:48px;line-height:.6;text-decoration:none;color:var(--texte)">⋯</button>
+    <div class="menu-plus" id="menu-plus" hidden>
+      <button class="btn-outline" id="favori">🤍 Favori</button>
+      ${c.type === "audio" && !c.embed_id ? `<button class="btn-outline" id="au-dl">⬇ Hors-ligne</button>` : `<button class="btn-outline" id="telecharger">💾 Enregistrer</button>`}
+      ${c.type === "audio" && !c.embed_id && c.fichier_path ? `<button class="btn-outline" id="au-env">📤 Envoyer l'audio</button><button class="btn-outline" id="au-tel">💾 Dans mon téléphone</button>` : ""}
+      ${c.type === "audio" ? `<button class="btn-outline" id="au-som">😴 Minuterie : arrêt</button>` : ""}
+      <button class="btn-outline" id="signaler">🚩 Signaler</button>
+    </div></div>
     ${lecteurHTML(c)}
     <h1 dir="auto" style="margin-top:6px">${esc(c.title)}</h1>
     ${(c.views_count || 0) >= 20 ? `<p class="preuve">👂 <b>${esc(fmtNb(c.views_count))}</b> personnes ${c.type === "audio" ? "ont écouté" : "ont regardé"} ce ${c.type === "audio" ? "prêche" : "contenu"}</p>` : ""}
@@ -2087,16 +2097,9 @@ async function vueContenu() {
     ${c.description ? `<div class="desc" dir="auto">${esc(c.description)}</div>` : ""}
     <div class="actions">
       <button class="btn-outline" id="partager">🔗 Partager</button>
-      <button class="btn-outline" id="plus" aria-label="Plus d'options" aria-expanded="false" style="font-size:22px;font-weight:800;letter-spacing:1px">⋯</button>
     </div>
-    <div class="menu-plus" id="menu-plus" hidden>
-      <button class="btn-outline" id="favori">🤍 Favori</button>
-      ${c.type === "audio" && !c.embed_id ? `<button class="btn-outline" id="au-dl">⬇ Hors-ligne</button>` : `<button class="btn-outline" id="telecharger">💾 Enregistrer</button>`}
-      ${c.type === "audio" && !c.embed_id && c.fichier_path ? `<button class="btn-outline" id="au-env">📤 Envoyer l'audio</button><button class="btn-outline" id="au-tel">💾 Dans mon téléphone</button>` : ""}
-      ${c.type === "audio" ? `<button class="btn-outline" id="au-som">😴 Minuterie : arrêt</button>` : ""}
-      <button class="btn-outline" id="signaler">🚩 Signaler</button>
-    </div>`;
-  { const bp = wrap.querySelector("#plus"), mp = wrap.querySelector("#menu-plus"); bp.onclick = () => { mp.hidden = !mp.hidden; bp.setAttribute("aria-expanded", mp.hidden ? "false" : "true"); if (!mp.hidden) mp.scrollIntoView({ block: "nearest", behavior: "smooth" }); }; }
+`;
+  { const bp = wrap.querySelector("#plus"), mp = wrap.querySelector("#menu-plus"); bp.onclick = ev => { ev.stopPropagation(); mp.hidden = !mp.hidden; bp.setAttribute("aria-expanded", mp.hidden ? "false" : "true"); }; mp.onclick = () => { setTimeout(() => { mp.hidden = true; }, 150); }; document.addEventListener("click", function f() { if (!wrap.isConnected) { document.removeEventListener("click", f); return; } mp.hidden = true; }); }
   wrap.querySelector("#signaler").onclick = () => ouvrirSignalement(c.id);
   (function favoris() {
     const bf = wrap.querySelector("#favori");
