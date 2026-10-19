@@ -2559,7 +2559,7 @@ function envoyerFichier(fichier, chemin, mime, surProgres) {
         upload = new tus.Upload(fichier, {
           endpoint: points[idx],
           retryDelays: [0, 3000, 5000, 10000, 20000, 30000, 60000],
-          headers: { authorization: `Bearer ${session.access_token}`, apikey: SUPABASE_ANON_KEY },
+          headers: { apikey: SUPABASE_ANON_KEY },
           uploadDataDuringCreation: true,
           removeFingerprintOnSuccess: true,
           storeFingerprintForResuming: false,
@@ -2570,7 +2570,7 @@ function envoyerFichier(fichier, chemin, mime, surProgres) {
             const st = err.originalResponse.getStatus();
             return !(st >= 400 && st < 500 && st !== 409 && st !== 423);
           },
-          onBeforeRequest: async req => { const s = await sessionFraiche().catch(() => null); if (s) req.setHeader("authorization", `Bearer ${s.access_token}`); },
+          onBeforeRequest: async req => { const s = await sessionFraiche().catch(() => session); req.setHeader("authorization", `Bearer ${(s || session).access_token}`); },
           onError: async e => {
             if (!e.originalResponse && avance === 0 && idx < points.length - 1) { idx++; lancer(); return; }
             const st4 = e.originalResponse ? e.originalResponse.getStatus() : 0;
