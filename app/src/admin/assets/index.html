@@ -246,6 +246,7 @@ const views={
           for(let k=0;k<total;k++){
             const f=FICHIERS[k],pre=total>1?('Fichier '+(k+1)+' / '+total+' — '):'';
             try{
+              if(/\.amr$/i.test(f.name)||/amr/i.test(f.type||''))throw new Error('Ce format (AMR, enregistreur vocal) ne peut pas être lu dans Lumu. Utilisez le bouton « Enregistrer » de Lumu, ou un fichier MP3 / M4A.');
               const type=total>1?typeDe(f):$('p-type').value,mime=mimeDe(f),ext=((f.name.split('.').pop()||'bin').toLowerCase().replace(/[^a-z0-9]/g,'')||'bin').slice(0,8),id=uid();
               const chemin=me.id+'/'+id+'.'+ext,titreF=total>1?f.name.replace(/\.[^.]+$/,'').slice(0,150):titre;
               bar.style.width='0%';msg(pre+'Lecture du fichier…');const meta=await metaFichier(f,type);

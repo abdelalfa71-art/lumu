@@ -2646,6 +2646,7 @@ function vueJePublie() {
       : m0 === "application/pdf" || ext === "pdf" ? "pdf"
       : m0.startsWith("image/") ? "image" : "";
     if (!t) { erreur = "Choisissez un audio, une vidéo ou un PDF."; return e1(); }
+    if (/\.amr$/i.test(f.name) || /amr/i.test(f.type || "")) { erreur = "Ce format (AMR, enregistreur vocal) ne peut pas être lu dans Lumu. Utilisez le bouton « Enregistrer » de Lumu, ou un fichier MP3 / M4A."; return e1(); }
     const m = mimeDe(f, t);
     if (!mimeCoherent(m, t)) { erreur = "Ce format n'est pas accepté."; return e1(); }
     if (f.size < 2048 && t !== "image") { erreur = "Le fichier est vide ou incomplet. S'il vient de Google Photos, téléchargez-le d'abord sur le téléphone."; return e1(); }
@@ -2813,6 +2814,7 @@ function vuePublier() {
   async function choisir(f) {
     lire();
     erreur = ""; info = "";
+    if (/\.amr$/i.test(f.name) || /amr/i.test(f.type || "")) { fichier = null; meta = null; erreur = "Ce format (AMR, enregistreur vocal) ne peut pas être lu dans Lumu. Utilisez le bouton « Enregistrer » de Lumu, ou un fichier MP3 / M4A."; dessiner(); return; }
     const m = mimeDe(f, type);
     if (type === "fichier" && EXT_BLOQUEES.includes((f.name.split(".").pop() || "").toLowerCase())) { fichier = null; meta = null; erreur = "Ce type de fichier n'est pas autorisé (sécurité)."; dessiner(); return; }
     if (!mimeCoherent(m, type)) { fichier = null; meta = null; erreur = `Ce fichier n'est pas ${type === "image" ? "une" : "un"} ${TYPES[type].nom.toLowerCase()} accepté${type === "image" ? "e" : ""}.`; dessiner(); return; }
