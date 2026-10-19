@@ -275,6 +275,9 @@ button, [role="button"], a, input, select, textarea { touch-action: manipulation
 .ct-meta { font-size: 13px; opacity: .7; margin: 2px 0 10px; }
 .actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 6px; }
 .actions .btn-outline { width: auto; min-height: 40px; padding: 0 14px; font-size: 14px; font-weight: 600; border-width: 1px; border-color: var(--bordure); color: inherit; border-radius: 99px; background: var(--surface); }
+.menu-plus { display: flex; flex-direction: column; gap: 8px; margin: 6px 0 14px; padding: 10px; border: 1px solid var(--bordure); border-radius: 16px; background: var(--carte, #fff); }
+.menu-plus[hidden] { display: none; }
+.menu-plus .btn-outline { width: 100%; justify-content: flex-start; text-align: left; min-height: 46px; padding: 0 14px; font-size: 15px; font-weight: 600; border-width: 1px; }
 .actions .btn-outline.on { border-color: var(--vert); color: var(--vert); }
 .actions .source-credit { flex: 1 0 100%; }
 .ct-com { margin-top: 14px; border-top: 1px solid var(--bordure); padding-top: 10px; }
@@ -2045,7 +2048,7 @@ function lecteurHTML(c) {
   const url = urlMedia(c.fichier_path), cover = c.cover_path ? urlMedia(c.cover_path) : "";
   const t = TYPES[c.type] || TYPES.video;
   if (c.type === "video" || c.type === "reel") return `<video id="media" class="lecteur-video" controls playsinline preload="${ECO.actif() ? "none" : "metadata"}" ${cover ? `poster="${esc(cover)}"` : ""} src="${esc(url)}"></video>`;
-  if (c.type === "audio") { const nomC = (c.yt_channels && c.yt_channels.name) || c.title || "L"; return `<div class="lecteur-audio" id="aud-ui">${cover ? `<img class="au-art" src="${esc(cover)}" alt="">` : `<img class="au-art au-logo" src="icon-512.png" alt="Lumu">`}<div class="au-t"><span id="au-cur">0:00</span><span id="au-dur">${c.duration_seconds ? fmtDuree(c.duration_seconds) : ""}</span></div><input type="range" class="au-seek" id="au-seek" min="0" max="1000" value="0" aria-label="Position"><div class="au-btns"><button id="au-m10" aria-label="Reculer de 10 secondes">⟲ 10</button><button class="au-pp" id="au-pp" aria-label="Lecture"></button><button id="au-p10" aria-label="Avancer de 10 secondes">10 ⟳</button></div><div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap"><button class="btn-text" id="au-vit" style="font-size:13px">Vitesse 1×</button><button class="btn-text" id="au-som" style="font-size:13px">😴 Minuterie : arrêt</button></div></div>`; }
+  if (c.type === "audio") { const nomC = (c.yt_channels && c.yt_channels.name) || c.title || "L"; return `<div class="lecteur-audio" id="aud-ui">${cover ? `<img class="au-art" src="${esc(cover)}" alt="">` : `<img class="au-art au-logo" src="icon-512.png" alt="Lumu">`}<div class="au-t"><span id="au-cur">0:00</span><span id="au-dur">${c.duration_seconds ? fmtDuree(c.duration_seconds) : ""}</span></div><input type="range" class="au-seek" id="au-seek" min="0" max="1000" value="0" aria-label="Position"><div class="au-btns"><button id="au-m10" aria-label="Reculer de 10 secondes">⟲ 10</button><button class="au-pp" id="au-pp" aria-label="Lecture"></button><button id="au-p10" aria-label="Avancer de 10 secondes">10 ⟳</button></div><div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap"><button class="btn-text" id="au-vit" style="font-size:13px">Vitesse 1×</button></div></div>`; }
   if (c.type === "fichier") return `<div class="lecteur-doc"><span class="vig-ic" style="font-size:64px">📎</span><b dir="auto">${esc(c.title)}</b>${c.taille_octets ? `<small>${fmtTaille(c.taille_octets)}</small>` : ""}<a class="btn" style="text-align:center;text-decoration:none;display:block" href="${esc(url)}" target="_blank" rel="noopener noreferrer">Ouvrir</a></div>`;
   if (c.type === "image") return `<a href="${esc(url)}" target="_blank" rel="noopener"><img class="lecteur-image" src="${esc(url)}" alt="${esc(c.title)}"></a>`;
   return `<div class="lecteur-doc">${cover ? `<img src="${esc(cover)}" alt="">` : `<span class="vig-ic" style="font-size:64px">${t.ic}</span>`}
@@ -2084,11 +2087,16 @@ async function vueContenu() {
     ${c.description ? `<div class="desc" dir="auto">${esc(c.description)}</div>` : ""}
     <div class="actions">
       <button class="btn-outline" id="partager">🔗 Partager</button>
+      <button class="btn-outline" id="plus" aria-label="Plus d'options" aria-expanded="false" style="font-size:22px;font-weight:800;letter-spacing:1px">⋯</button>
+    </div>
+    <div class="menu-plus" id="menu-plus" hidden>
       <button class="btn-outline" id="favori">🤍 Favori</button>
       ${c.type === "audio" && !c.embed_id ? `<button class="btn-outline" id="au-dl">⬇ Hors-ligne</button>` : `<button class="btn-outline" id="telecharger">💾 Enregistrer</button>`}
-    </div>
-    ${c.type === "audio" && !c.embed_id && c.fichier_path ? `<div class="actions"><button class="btn-outline" id="au-env">📤 Envoyer l'audio</button><button class="btn-outline" id="au-tel">💾 Dans mon téléphone</button></div>` : ""}
-    <button class="btn-text" id="signaler" style="font-size:12px;opacity:.7">🚩 Signaler</button>`;
+      ${c.type === "audio" && !c.embed_id && c.fichier_path ? `<button class="btn-outline" id="au-env">📤 Envoyer l'audio</button><button class="btn-outline" id="au-tel">💾 Dans mon téléphone</button>` : ""}
+      ${c.type === "audio" ? `<button class="btn-outline" id="au-som">😴 Minuterie : arrêt</button>` : ""}
+      <button class="btn-outline" id="signaler">🚩 Signaler</button>
+    </div>`;
+  { const bp = wrap.querySelector("#plus"), mp = wrap.querySelector("#menu-plus"); bp.onclick = () => { mp.hidden = !mp.hidden; bp.setAttribute("aria-expanded", mp.hidden ? "false" : "true"); if (!mp.hidden) mp.scrollIntoView({ block: "nearest", behavior: "smooth" }); }; }
   wrap.querySelector("#signaler").onclick = () => ouvrirSignalement(c.id);
   (function favoris() {
     const bf = wrap.querySelector("#favori");
@@ -3626,7 +3634,7 @@ const AUD = {
     const vits = [1, 1.25, 1.5, 2, 0.75], bv = root.querySelector("#au-vit");
     bv.textContent = "Vitesse " + this.vit + "×";
     bv.onclick = () => { this.vit = vits[(vits.indexOf(this.vit) + 1) % vits.length]; this.a.playbackRate = this.vit; bv.textContent = "Vitesse " + this.vit + "×"; };
-    const bs = root.querySelector("#au-som");
+    const bs = (wrap && wrap.querySelector("#au-som")) || document.querySelector("#au-som");
     if (bs) { const ms = [0, 15, 30, 60]; let im = 0; const lib = () => { bs.textContent = "😴 " + trad("Minuterie") + " : " + (ms[im] ? ms[im] + " min" : trad("arrêt")); };
       if (SOMMEIL.t) { const r = Math.round((SOMMEIL.fin - Date.now()) / 60000); im = r > 30 ? 3 : r > 15 ? 2 : 1; } lib();
       bs.onclick = () => { im = (im + 1) % ms.length; sommeilMinutes(ms[im], bs); lib(); }; }
@@ -3827,7 +3835,7 @@ function contenuExtras(wrap, c) {
   if (etat.params.auto && m0) { const p = m0.play(); if (p && p.catch) p.catch(() => {}); }
   // Boutons additionnels
   const zoneBtn = wrap.querySelector("#partager");
-  wrap.querySelector("#favori").insertAdjacentHTML("beforebegin", `<button class="btn-outline" id="jaime">${ico("heart", 20)} <span>J'aime · ${fmtNb(c.likes_count)}</span></button>`);
+  wrap.querySelector("#partager").insertAdjacentHTML("afterend", `<button class="btn-outline" id="jaime">${ico("heart", 20)} <span>J'aime · ${fmtNb(c.likes_count)}</span></button>`);
   (function likes() {
     const bl = wrap.querySelector("#jaime");
     let aime = false;
