@@ -422,6 +422,34 @@ html:root .ec-pl { width: 44px; height: 44px; background: transparent; color: #0
 html:root .ec-pl svg { width: 30px; height: 30px; }
 html:root .ec-bar { height: 3px; }
 .ec-simple .ec-radio { min-height: 0; text-align: left; flex-direction: row; font-size: inherit; }
+
+/* ===== Style WhatsApp : page imam, profil, listes ===== */
+html:root .ch-banniere { display: none; }
+html:root .ch-tete { margin-top: 8px; gap: 4px; }
+html:root .ch-tete h1 { font-size: 22px; font-weight: 700; }
+html:root .ch-stats { font-size: 14px; }
+html:root .ch-actions { gap: 8px; margin-top: 8px; flex-wrap: wrap; justify-content: center; }
+html:root .ch-actions .btn-outline, html:root .ch-actions button { box-shadow: none; }
+html:root .chaine-page #onglets { padding: 8px 0 4px; }
+html:root .chaine-page #liste .ec-row { margin: 0 -16px; }
+html:root .ch-actions > * { width: auto !important; flex: none; }
+/* profil à plat */
+html:root .pf-box { background: transparent; border: 0; border-radius: 0; box-shadow: none; margin: 0 -16px; }
+html:root .pf-row { padding: 12px 16px; min-height: 60px; border-bottom: 0; position: relative; }
+html:root .pf-row::after { content: ""; position: absolute; left: 76px; right: 0; bottom: 0; height: 1px; background: var(--bordure); }
+html:root .pf-row:last-child::after { display: none; }
+html:root .pf-ic { width: 44px !important; height: 44px; border-radius: 50%; background: transparent; color: #0F7B6C; font-size: 24px !important; }
+html:root .pf-t b { font-size: 17px; font-weight: 600; }
+html:root .pf-t small { font-size: 14px; }
+html:root .pf-h { margin: 18px 16px 4px; font-size: 14px; font-weight: 700; letter-spacing: 0; text-transform: none; color: #0F7B6C; }
+html:root .pf-h::before { display: none; }
+html:root .pf-row:active { background: color-mix(in srgb, var(--texte) 7%, transparent); transform: none; }
+/* lecteur plus sobre */
+html:root .lecteur-audio { background: transparent !important; border-radius: 0 !important; padding: 8px 0 !important; }
+html:root .lecteur-audio::after { display: none; }
+html:root .lecteur-audio .au-art { border-width: 0; box-shadow: 0 8px 24px rgba(0,0,0,.25); }
+html:root .au-btns .au-pp { box-shadow: none; }
+html:root .ia-i { box-shadow: none; background: color-mix(in srgb, var(--texte) 8%, var(--surface)); }
 .actions .btn-outline.on { border-color: var(--vert); color: var(--vert); }
 .actions .source-credit { flex: 1 0 100%; }
 .ct-com { margin-top: 14px; border-top: 1px solid var(--bordure); padding-top: 10px; }
@@ -1352,6 +1380,16 @@ function ouvrirCommentaires(c, apres) {
 }
 
 /* Carte « grande » façon YouTube, avec aperçu animé au toucher long */
+function ligneAudio(c) {
+  const el = document.createElement("div");
+  el.className = "ec-row"; el.tabIndex = 0; el.setAttribute("role", "button");
+  const cover = c.cover_path ? urlMedia(c.cover_path) : "";
+  const nom = c.source_nom || (c.yt_channels && c.yt_channels.name) || c.auteur || "";
+  el.innerHTML = `<span class="ec-cv">${cover ? `<img src="${esc(cover)}" alt="" loading="lazy">` : `<img class="ec-logo-ph" src="icon-192.png" alt="" loading="lazy">`}</span><div class="ec-tx"><b dir="auto" data-notrad>${esc(c.title)}</b><small dir="auto" data-notrad>${esc(nom)}${c.duration_seconds ? " · " + esc(fmtDuree(c.duration_seconds)) : ""}${chargerLocal("fini_" + c.id, 0) ? " · ✔" : ""}</small></div><button class="ec-pl" aria-label="Lecture">${ico("play", 26, true)}</button>`;
+  el.onclick = () => router("contenu", { id: c.id, c });
+  el.querySelector(".ec-pl").onclick = ev => { ev.stopPropagation(); lireDirect(c); };
+  return el;
+}
 function carteGrande(c, surClic) {
   const tp = TYPES[c.type] || TYPES.video;
   const el = document.createElement("article");
@@ -5463,7 +5501,7 @@ async function vueChaine() {
       zone.innerHTML = "";
       if (onglet === "recents" || onglet === "populaires") {
         const liste = onglet === "recents" ? contenus : [...contenus].sort((a, b) => (b.views_count || 0) - (a.views_count || 0));
-        liste.forEach(c => zone.appendChild(carteGrande(c)));
+        liste.forEach(c => zone.appendChild(c.type === "audio" && !c.embed_id ? ligneAudio(c) : carteGrande(c)));
         if (!liste.length) zone.innerHTML = `<p>Rien de publié pour l'instant.</p>`;
       } else if (onglet === "playlists") {
         zone.innerHTML = `<div class="centre"><div class="spinner"></div></div>`;
