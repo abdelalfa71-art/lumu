@@ -280,6 +280,25 @@ button, [role="button"], a, input, select, textarea { touch-action: manipulation
 .menu-plus button, .menu-plus button.btn-outline { width: 100%; background: none; border: 0 !important; box-shadow: none; justify-content: flex-start; border-radius: 10px; text-align: left; min-height: 50px; padding: 0 14px; font-size: 16px; font-weight: 600; color: var(--texte); display: flex; align-items: center; gap: 8px; }
 .menu-plus button:active { background: var(--bordure); }
 .menu-plus button + button, .menu-plus button.btn-outline + button { border-top: 1px solid var(--bordure) !important; border-radius: 0; }
+
+/* Icônes d'action façon TikTok */
+.actions { justify-content: center; gap: 26px; margin: 16px 0 8px; }
+.ia { background: none; border: 0; padding: 0; display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--texte); min-width: 64px; }
+.ia-i { width: 54px; height: 54px; border-radius: 50%; display: grid; place-items: center; background: var(--surface); box-shadow: 0 2px 10px rgba(0,0,0,.12); font-size: 24px; line-height: 1; transition: transform .15s; }
+.ia:active .ia-i { transform: scale(.9); }
+.ia-l { font-size: 12px; font-weight: 700; opacity: .8; }
+.ia.on .ia-i { color: #e0245e; background: #fde8ef; }
+.ia.on .ia-i svg { fill: #e0245e; }
+/* Lecteur : disque qui tourne */
+.lecteur-audio { position: relative; overflow: hidden; background: radial-gradient(120% 90% at 50% 0%, rgba(15,123,108,.22), transparent 70%) !important; border-radius: 24px !important; padding: 18px 0 8px !important; }
+.lecteur-audio .au-art { width: min(64vw, 250px); border-radius: 50% !important; object-fit: cover; border: 6px solid #0b2f2a; box-shadow: 0 0 0 3px rgba(242,196,61,.65), 0 18px 44px rgba(0,0,0,.4), inset 0 0 0 2px rgba(255,255,255,.15); animation: disque 14s linear infinite; animation-play-state: paused; }
+.lecteur-audio.joue .au-art { animation-play-state: running; }
+.lecteur-audio::after { content: ""; position: absolute; left: 50%; top: calc(18px + min(32vw, 125px)); width: 36px; height: 36px; transform: translate(-50%, -50%); border-radius: 50%; background: radial-gradient(circle, var(--fond, #f6f4ee) 0 38%, #0b2f2a 40% 100%); box-shadow: 0 0 0 3px rgba(255,255,255,.25); pointer-events: none; }
+@keyframes disque { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .lecteur-audio .au-art { animation: none; } }
+.lecteur-audio .au-pp, .au-btns .au-pp { width: 72px !important; height: 72px !important; box-shadow: 0 8px 22px rgba(15,123,108,.45); }
+.lecteur-audio .au-seek { height: 6px; border-radius: 3px; }
+.lecteur-audio .au-t { width: 88%; font-size: 13px; font-weight: 700; opacity: .75; }
 .actions .btn-outline.on { border-color: var(--vert); color: var(--vert); }
 .actions .source-credit { flex: 1 0 100%; }
 .ct-com { margin-top: 14px; border-top: 1px solid var(--bordure); padding-top: 10px; }
@@ -2084,7 +2103,6 @@ async function vueContenu() {
       <button class="btn-text" id="plus" aria-label="Plus d'options" aria-expanded="false" style="font-size:34px;font-weight:800;padding:0 16px;min-height:48px;line-height:.6;text-decoration:none;color:var(--texte)">⋯</button>
     <div class="menu-plus" id="menu-plus" hidden>
       ${CLIP.peut(c) ? `<button class="btn-outline" id="clip-go">✂️ Créer un Clip Lumu</button>` : ""}
-      <button class="btn-outline" id="favori">🤍 Favori</button>
       ${c.type === "audio" && !c.embed_id ? `<button class="btn-outline" id="au-dl">⬇ Hors-ligne</button>` : `<button class="btn-outline" id="telecharger">💾 Enregistrer</button>`}
       ${c.type === "audio" && !c.embed_id && c.fichier_path ? `<button class="btn-outline" id="au-env">📤 Envoyer l'audio</button><button class="btn-outline" id="au-tel">💾 Dans mon téléphone</button>` : ""}
       ${c.type === "audio" ? `<button class="btn-outline" id="au-som">😴 Minuterie : arrêt</button>` : ""}
@@ -2096,7 +2114,8 @@ async function vueContenu() {
     <p class="ct-meta">${c.category && c.category !== "Autre" ? esc(c.category) + " · " : ""}${c.duration_seconds ? fmtDuree(c.duration_seconds) + " · " : ""}${c.views_count || 0} vue${(c.views_count || 0) > 1 ? "s" : ""}${c.auteur ? " · " + esc(c.auteur) : ""}</p>
     ${c.description ? `<div class="desc" dir="auto">${esc(c.description)}</div>` : ""}
     <div class="actions">
-      <button class="btn-outline" id="partager">🔗 Partager</button>
+      <button class="ia" id="partager" aria-label="Partager"><span class="ia-i">↗</span><span class="ia-l">Partager</span></button>
+      <button class="ia" id="favori" aria-label="Favori"><span class="ia-i">🤍</span><span class="ia-l">Favori</span></button>
     </div>
 `;
   { const bp = wrap.querySelector("#plus"), mp = wrap.querySelector("#menu-plus"); bp.onclick = ev => { ev.stopPropagation(); mp.hidden = !mp.hidden; bp.setAttribute("aria-expanded", mp.hidden ? "false" : "true"); }; mp.onclick = () => { setTimeout(() => { mp.hidden = true; }, 150); }; document.addEventListener("click", function f() { if (!wrap.isConnected) { document.removeEventListener("click", f); return; } mp.hidden = true; }); }
@@ -2104,7 +2123,7 @@ async function vueContenu() {
   (function favoris() {
     const bf = wrap.querySelector("#favori");
     let fav = false;
-    const maj = () => { bf.textContent = fav ? "❤️ Favori" : "🤍 Favori"; };
+    const maj = () => { bf.querySelector(".ia-i").textContent = fav ? "❤️" : "🤍"; };
     if (etat.parentId) sb.from("yt_favoris").select("contenu_id").eq("contenu_id", c.id).maybeSingle().then(r => { fav = !!(r && r.data); maj(); }, () => {});
     bf.onclick = async () => {
       if (!etat.parentId) { router("connexion", { message: "Connectez-vous pour utiliser les favoris." }); return; }
@@ -3618,7 +3637,7 @@ const AUD = {
     const u = this.ui;
     if (u && u.root.isConnected) {
       const mien = c && c.id === u.id;
-      const pp = u.root.querySelector("#au-pp"); if (pp) pp.innerHTML = mien && jouant ? PE_IC.pause : PE_IC.play;
+      const pp = u.root.querySelector("#au-pp"); if (pp) pp.innerHTML = mien && jouant ? PE_IC.pause : PE_IC.play; u.root.classList.toggle("joue", !!(mien && jouant));
       this.progres();
     }
   },
@@ -3838,11 +3857,11 @@ function contenuExtras(wrap, c) {
   if (etat.params.auto && m0) { const p = m0.play(); if (p && p.catch) p.catch(() => {}); }
   // Boutons additionnels
   const zoneBtn = wrap.querySelector("#partager");
-  wrap.querySelector("#partager").insertAdjacentHTML("afterend", `<button class="btn-outline" id="jaime">${ico("heart", 20)} <span>J'aime · ${fmtNb(c.likes_count)}</span></button>`);
+  wrap.querySelector("#partager").insertAdjacentHTML("afterend", `<button class="ia" id="jaime" aria-label="J'aime"><span class="ia-i">${ico("heart", 26)}</span><span class="ia-l">${fmtNb(c.likes_count)}</span></button>`);
   (function likes() {
     const bl = wrap.querySelector("#jaime");
     let aime = false;
-    const maj = () => { bl.classList.toggle("on", aime); bl.querySelector("span").textContent = (aime ? "Vous aimez · " : "J'aime · ") + fmtNb(c.likes_count); };
+    const maj = () => { bl.classList.toggle("on", aime); bl.querySelector(".ia-l").textContent = fmtNb(c.likes_count); };
     mesLikesDe([c.id]).then(st => { aime = st.has(c.id); maj(); });
     enDirect("ct", "yt_contenus", "id=eq." + c.id, bl, pl => { const n = pl.new && pl.new.likes_count; if (typeof n === "number" && n !== c.likes_count) { c.likes_count = n; maj(); } });
     bl.onclick = async () => { bl.disabled = true; const r = await basculerLike(c, aime); bl.disabled = false; if (r !== null) { aime = r; maj(); } };
