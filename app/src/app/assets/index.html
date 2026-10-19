@@ -329,6 +329,18 @@ button, [role="button"], a, input, select, textarea { touch-action: manipulation
 .ch-banniere { border-radius: 0 0 24px 24px; }
 .ch-tete h1 { font-weight: 800; }
 .btn-abo { box-shadow: 0 4px 12px rgba(15,123,108,.3); }
+
+/* Thème Nuit étoilée */
+html.nuit:root[data-theme="dark"] { --fond: #0E1A33; --surface: #16264A; --texte: #F6EFD9; --texte-doux: #A9B4D0; --vert: #F2C43D; --vert-clair: #1E3260; --bordure: #2A3C6B; --jaune: #F2C43D; --lien: #F2C43D; }
+html.nuit .ec-haut { background: #0A1226; box-shadow: 0 6px 18px rgba(0,0,0,.4); }
+html.nuit .ec-radio { background: linear-gradient(135deg, #16264A, #2A3C6B); }
+html.nuit .ec-chip.actif { background: #F2C43D; color: #0E1A33; border-color: #F2C43D; }
+html.nuit .ec-pl, html.nuit .au-btns .au-pp { background: #F2C43D !important; color: #0E1A33 !important; }
+html.nuit .ec-rp { color: #0E1A33; }
+html.nuit .nav-bas { background: #16264A; }
+html.nuit .pf-ic { background: #1E3260; }
+html.nuit .btn, html.nuit .btn-abo { background: #F2C43D; color: #0E1A33; }
+html.nuit .lecteur-audio .au-art { border-color: #F2C43D; }
 .actions .btn-outline.on { border-color: var(--vert); color: var(--vert); }
 .actions .source-credit { flex: 1 0 100%; }
 .ct-com { margin-top: 14px; border-top: 1px solid var(--bordure); padding-top: 10px; }
@@ -5702,7 +5714,7 @@ function ouvrirPalette() {
     ["🔔", "Abonnements", () => router("abos")], ["⭐", "Favoris", () => router("favoris")], ["🕘", "Historique", () => router("historique")],
     ["🔎", "Recherche avancée", () => router("recherche")], ["💎", "Tarifs", () => router("tarifs")], ["✨", "Présentation de Lumu", () => router("presentation")],
     ["👤", "Mon profil", () => router("profil")],
-    ["🌓", "Changer de thème", () => { const d = document.documentElement; const sombre = d.getAttribute("data-theme") === "dark" || (!d.getAttribute("data-theme") && matchMedia("(prefers-color-scheme: dark)").matches); ACCES.theme(sombre ? "light" : "dark"); }],
+    ["🌓", "Changer de thème", () => { ACCES.suivant(); }],
     ["🔠", "Grand texte", () => { ACCES.regler(!ACCES.grand()); }]
   ];
   function dessiner(groupes) {
@@ -5763,9 +5775,10 @@ document.addEventListener("keydown", ev => {
 const ACCES = {
   grand() { try { return localStorage.getItem("lumu_zoom") === "1"; } catch (e) { return false; } },
   regler(v) { try { localStorage.setItem("lumu_zoom", v ? "1" : "0"); } catch (e) {} document.documentElement.style.zoom = v ? "1.2" : ""; },
-  theme(t) { try { localStorage.setItem("lumu_theme", t); } catch (e) {} document.documentElement.setAttribute("data-theme", t); }
+  theme(t) { try { localStorage.setItem("lumu_theme", t); } catch (e) {} const d = document.documentElement; d.classList.toggle("nuit", t === "nuit"); d.setAttribute("data-theme", t === "nuit" ? "dark" : t); try { const m = document.querySelector('meta[name="theme-color"]'); if (m) m.content = t === "nuit" ? "#0A1226" : "#0f7b6c"; } catch (e) {} },
+  suivant() { const d = document.documentElement; const cur = d.classList.contains("nuit") ? "nuit" : (d.getAttribute("data-theme") === "dark" || (!d.getAttribute("data-theme") && matchMedia("(prefers-color-scheme: dark)").matches)) ? "dark" : "light"; this.theme(cur === "light" ? "dark" : cur === "dark" ? "nuit" : "light"); }
 };
-try { if (ACCES.grand()) document.documentElement.style.zoom = "1.2"; const th = localStorage.getItem("lumu_theme"); if (th) document.documentElement.setAttribute("data-theme", th); } catch (e) {}
+try { if (ACCES.grand()) document.documentElement.style.zoom = "1.2"; const th = localStorage.getItem("lumu_theme"); if (th) ACCES.theme(th); } catch (e) {}
 
 /* ---------- Notifications quotidiennes (Web Push) ---------- */
 const PUSH = (() => {
@@ -5861,7 +5874,7 @@ function vueProfil() {
     PUSH.dispo() ? ["🌅", "Lumière du matin", "Hadith ou invocation à 5 h", async () => { if (!(await PUSH.regler("jour", !PUSH.pref("jour")))) alert("Notifications refusées. Autorisez-les dans les réglages du téléphone."); router("profil"); }, PUSH.pref("jour")] : null,
     PUSH.dispo() ? ["🎧", "Nouveaux prêches", "Quand un audio ou une vidéo est publié", async () => { if (!(await PUSH.regler("nouveau", !PUSH.pref("nouveau")))) alert("Notifications refusées. Autorisez-les dans les réglages du téléphone."); router("profil"); }, PUSH.pref("nouveau")] : null,
     ["🔠", "Grand texte", "Tout plus gros", () => { ACCES.regler(!ACCES.grand()); router("profil"); }, ACCES.grand()],
-    ["☀️", "Mode clair / sombre", "Changer les couleurs", () => { const d = document.documentElement; const sombre = d.getAttribute("data-theme") === "dark" || (!d.getAttribute("data-theme") && matchMedia("(prefers-color-scheme: dark)").matches); ACCES.theme(sombre ? "light" : "dark"); router("profil"); }],
+    ["☀️", "Thème : clair › sombre › nuit étoilée", "Touchez pour changer", () => { ACCES.suivant(); router("profil"); }],
     ["📶", "Économie de données", "", () => { ECO.regler(!ECO.actif()); router("profil"); }, ECO.actif()],
     co && PIN.dispo ? ["🔒", etat.compteNom ? "Changer mon code" : "Code de verrouillage", "", () => router("pin-creation", { changer: true, retour: "profil" })] : null,
     co && !etat.compteNom ? ["🔑", "Mot de passe", "", () => router("changer-mot-de-passe")] : null
