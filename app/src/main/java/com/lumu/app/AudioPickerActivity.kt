@@ -210,6 +210,36 @@ class AudioPickerActivity : AppCompatActivity() {
     private fun terminer() {
         if (choisis.isEmpty()) return
         val uris = choisis.toList()
+        val noms = uris.map { u -> tous.firstOrNull { it.uri == u }?.nom ?: "" }
+        val besoin = noms.any { Convertisseur.estAmr(it) }
+        if (!besoin) { rendre(uris); return }
+        valider.isEnabled = false
+        valider.text = "⏳ Conversion en MP3/M4A… patientez"
+        Thread {
+            val finaux = mutableListOf<Uri>()
+            var echecs = 0
+            uris.forEachIndexed { k, u ->
+                if (Convertisseur.estAmr(noms[k])) {
+                    val base = noms[k].substringBeforeLast('.').replace(Regex("[^A-Za-z0-9._-]"), "_").ifEmpty { "audio" }
+                    val f = java.io.File(cacheDir, "conv/${base}_${System.currentTimeMillis()}.m4a")
+                    if (Convertisseur.amrVersM4a(this, u, f)) {
+                        finaux += androidx.core.content.FileProvider.getUriForFile(this, "$packageName.fp", f)
+                    } else echecs++
+                } else finaux += u
+            }
+            runOnUiThread {
+                if (finaux.isEmpty()) {
+                    valider.text = "❌ Conversion impossible — choisissez un MP3 ou M4A"
+                    valider.isEnabled = true
+                } else {
+                    if (echecs > 0) android.widget.Toast.makeText(this, "$echecs fichier(s) AMR non convertis", android.widget.Toast.LENGTH_LONG).show()
+                    rendre(finaux)
+                }
+            }
+        }.start()
+    }
+
+    private fun rendre(uris: List<Uri>) {
         val data = Intent().apply {
             val cd = ClipData.newRawUri(null, uris[0])
             uris.drop(1).forEach { cd.addItem(ClipData.Item(it)) }
