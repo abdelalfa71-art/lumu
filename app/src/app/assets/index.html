@@ -123,7 +123,7 @@ p { margin: 0; color: var(--texte-doux); font-size: 14px; }
 .vignette img { width: 100%; height: 100%; object-fit: cover; }
 .vig-ic { font-size: 32px; }
 .logo-ph, .vignette img.logo-ph, .vignette-g img.logo-ph, .lm-media img.logo-ph { position: static !important; opacity: 1 !important; width: 44% !important; max-width: 96px; height: auto !important; aspect-ratio: 1; border-radius: 22%; object-fit: contain !important; margin: auto; }
-.lecteur-audio .au-logo { object-fit: contain; background: #0b2f2a; padding: 14%; }
+.lecteur-audio .au-logo { object-fit: cover; background: none; padding: 0; }
 .vig-dur { position: absolute; right: 4px; bottom: 4px; background: rgba(0,0,0,.75); color: #fff; font-size: 11px; padding: 1px 5px; border-radius: 6px; }
 .carte-txt { display: flex; flex-direction: column; gap: 3px; min-width: 0; font-size: 12px; color: var(--texte-doux); }
 .carte-txt b { font-size: 15px; color: var(--texte); overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
@@ -275,7 +275,7 @@ button, [role="button"], a, input, select, textarea { touch-action: manipulation
 .ct-meta { font-size: 13px; opacity: .7; margin: 2px 0 10px; }
 .actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 6px; }
 .actions .btn-outline { width: auto; min-height: 40px; padding: 0 14px; font-size: 14px; font-weight: 600; border-width: 1px; border-color: var(--bordure); color: inherit; border-radius: 99px; background: var(--surface); }
-.menu-plus { position: absolute; top: 100%; left: 0; z-index: 50; min-width: 250px; max-width: 88vw; display: flex; flex-direction: column; padding: 6px; border: 1px solid var(--bordure); border-radius: 14px; background: var(--carte, #fff); box-shadow: 0 12px 32px rgba(0,0,0,.22); }
+.menu-plus { position: absolute; top: 100%; right: 0; z-index: 50; min-width: 250px; max-width: 88vw; display: flex; flex-direction: column; padding: 6px; border: 1px solid var(--bordure); border-radius: 14px; background: var(--carte, #fff); box-shadow: 0 12px 32px rgba(0,0,0,.22); }
 .menu-plus[hidden] { display: none; }
 .menu-plus button, .menu-plus button.btn-outline { width: 100%; background: none; border: 0 !important; box-shadow: none; justify-content: flex-start; border-radius: 10px; text-align: left; min-height: 50px; padding: 0 14px; font-size: 16px; font-weight: 600; color: var(--texte); display: flex; align-items: center; gap: 8px; }
 .menu-plus button:active { background: var(--bordure); }
@@ -2050,7 +2050,7 @@ function lecteurHTML(c) {
   const url = urlMedia(c.fichier_path), cover = c.cover_path ? urlMedia(c.cover_path) : "";
   const t = TYPES[c.type] || TYPES.video;
   if (c.type === "video" || c.type === "reel") return `<video id="media" class="lecteur-video" controls playsinline preload="${ECO.actif() ? "none" : "metadata"}" ${cover ? `poster="${esc(cover)}"` : ""} src="${esc(url)}"></video>`;
-  if (c.type === "audio") { const nomC = (c.yt_channels && c.yt_channels.name) || c.title || "L"; return `<div class="lecteur-audio" id="aud-ui">${cover ? `<img class="au-art" src="${esc(cover)}" alt="">` : `<img class="au-art au-logo" src="icon-512.png" alt="Lumu">`}<div class="au-t"><span id="au-cur">0:00</span><span id="au-dur">${c.duration_seconds ? fmtDuree(c.duration_seconds) : ""}</span></div><input type="range" class="au-seek" id="au-seek" min="0" max="1000" value="0" aria-label="Position"><div class="au-btns"><button id="au-m10" aria-label="Reculer de 10 secondes">⟲ 10</button><button class="au-pp" id="au-pp" aria-label="Lecture"></button><button id="au-p10" aria-label="Avancer de 10 secondes">10 ⟳</button></div><div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap"><button class="btn-text" id="au-vit" style="font-size:13px">Vitesse 1×</button></div></div>`; }
+  if (c.type === "audio") { const nomC = (c.yt_channels && c.yt_channels.name) || c.title || "L"; return `<div class="lecteur-audio" id="aud-ui">${cover ? `<img class="au-art" src="${esc(cover)}" alt="">` : `<img class="au-art au-logo" src="icon-maskable-512.png" alt="Lumu">`}<div class="au-t"><span id="au-cur">0:00</span><span id="au-dur">${c.duration_seconds ? fmtDuree(c.duration_seconds) : ""}</span></div><input type="range" class="au-seek" id="au-seek" min="0" max="1000" value="0" aria-label="Position"><div class="au-btns"><button id="au-m10" aria-label="Reculer de 10 secondes">⟲ 10</button><button class="au-pp" id="au-pp" aria-label="Lecture"></button><button id="au-p10" aria-label="Avancer de 10 secondes">10 ⟳</button></div><div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap"><button class="btn-text" id="au-vit" style="font-size:13px">Vitesse 1×</button></div></div>`; }
   if (c.type === "fichier") return `<div class="lecteur-doc"><span class="vig-ic" style="font-size:64px">📎</span><b dir="auto">${esc(c.title)}</b>${c.taille_octets ? `<small>${fmtTaille(c.taille_octets)}</small>` : ""}<a class="btn" style="text-align:center;text-decoration:none;display:block" href="${esc(url)}" target="_blank" rel="noopener noreferrer">Ouvrir</a></div>`;
   if (c.type === "image") return `<a href="${esc(url)}" target="_blank" rel="noopener"><img class="lecteur-image" src="${esc(url)}" alt="${esc(c.title)}"></a>`;
   return `<div class="lecteur-doc">${cover ? `<img src="${esc(cover)}" alt="">` : `<span class="vig-ic" style="font-size:64px">${t.ic}</span>`}
@@ -2080,9 +2080,10 @@ async function vueContenu() {
   const t = TYPES[c.type] || TYPES.video;
   const chaine = c.yt_channels && c.yt_channels.name ? esc(c.yt_channels.name) : "";
   wrap.innerHTML = `
-    <div class="entete" style="padding:0;position:relative;justify-content:flex-start"><button class="btn-text" id="retour" style="padding:4px" aria-label="Retour">←</button>
+    <div class="entete" style="padding:0;position:relative;justify-content:space-between"><button class="btn-text" id="retour" style="padding:4px" aria-label="Retour">←</button>
       <button class="btn-text" id="plus" aria-label="Plus d'options" aria-expanded="false" style="font-size:34px;font-weight:800;padding:0 16px;min-height:48px;line-height:.6;text-decoration:none;color:var(--texte)">⋯</button>
     <div class="menu-plus" id="menu-plus" hidden>
+      ${CLIP.peut(c) ? `<button class="btn-outline" id="clip-go">✂️ Créer un Clip Lumu</button>` : ""}
       <button class="btn-outline" id="favori">🤍 Favori</button>
       ${c.type === "audio" && !c.embed_id ? `<button class="btn-outline" id="au-dl">⬇ Hors-ligne</button>` : `<button class="btn-outline" id="telecharger">💾 Enregistrer</button>`}
       ${c.type === "audio" && !c.embed_id && c.fichier_path ? `<button class="btn-outline" id="au-env">📤 Envoyer l'audio</button><button class="btn-outline" id="au-tel">💾 Dans mon téléphone</button>` : ""}
@@ -2092,7 +2093,6 @@ async function vueContenu() {
     ${lecteurHTML(c)}
     <h1 dir="auto" style="margin-top:6px">${esc(c.title)}</h1>
     ${(c.views_count || 0) >= 20 ? `<p class="preuve">👂 <b>${esc(fmtNb(c.views_count))}</b> personnes ${c.type === "audio" ? "ont écouté" : "ont regardé"} ce ${c.type === "audio" ? "prêche" : "contenu"}</p>` : ""}
-    ${CLIP.peut(c) ? `<button class="btn clip-btn" id="clip-go">✂️ Créer un Clip Lumu</button>` : ""}
     <p class="ct-meta">${c.category && c.category !== "Autre" ? esc(c.category) + " · " : ""}${c.duration_seconds ? fmtDuree(c.duration_seconds) + " · " : ""}${c.views_count || 0} vue${(c.views_count || 0) > 1 ? "s" : ""}${c.auteur ? " · " + esc(c.auteur) : ""}</p>
     ${c.description ? `<div class="desc" dir="auto">${esc(c.description)}</div>` : ""}
     <div class="actions">
