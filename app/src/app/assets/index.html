@@ -299,6 +299,36 @@ button, [role="button"], a, input, select, textarea { touch-action: manipulation
 .lecteur-audio .au-pp, .au-btns .au-pp { width: 72px !important; height: 72px !important; box-shadow: 0 8px 22px rgba(15,123,108,.45); }
 .lecteur-audio .au-seek { height: 6px; border-radius: 3px; }
 .lecteur-audio .au-t { width: 88%; font-size: 13px; font-weight: 700; opacity: .75; }
+
+/* Embellissement : accueil Écouter */
+.ec-haut { background: linear-gradient(135deg, #0b2f2a 0%, #0F7B6C 100%); border-radius: 0 0 26px 26px; padding-bottom: 22px; box-shadow: 0 6px 18px rgba(11,47,42,.28); }
+.ec-corps { margin-top: -10px; }
+.ec-radio { position: relative; overflow: hidden; box-shadow: 0 10px 26px rgba(11,47,42,.32); border: 1px solid rgba(242,196,61,.35); }
+.ec-radio::after { content: ""; position: absolute; right: -28px; top: -28px; width: 120px; height: 120px; border-radius: 50%; background: radial-gradient(circle, rgba(242,196,61,.55), transparent 68%); pointer-events: none; }
+.ec-rp { box-shadow: 0 0 0 6px rgba(255,255,255,.18), 0 6px 14px rgba(0,0,0,.25); }
+.ec-tit { display: flex; align-items: center; gap: 8px; color: var(--texte); }
+.ec-tit::before { content: ""; width: 5px; height: 18px; border-radius: 3px; background: var(--jaune, #F2C43D); }
+.ec-av { box-shadow: 0 4px 12px rgba(0,0,0,.18); }
+.ec-chip { border-width: 1px; box-shadow: 0 1px 4px rgba(0,0,0,.06); }
+.ec-chip.actif { background: linear-gradient(135deg, #0b2f2a, #0F7B6C); border-color: #0F7B6C; box-shadow: 0 4px 12px rgba(15,123,108,.35); }
+.ec-row { border: 1px solid var(--bordure); box-shadow: 0 3px 12px rgba(0,0,0,.07); transition: transform .12s; }
+.ec-row:active { transform: scale(.98); }
+.ec-row .ec-cv { border-radius: 50% !important; box-shadow: 0 0 0 3px var(--jaune, #F2C43D), 0 4px 10px rgba(0,0,0,.2); }
+.ec-pl { box-shadow: 0 6px 16px rgba(15,123,108,.4); }
+.ec-row.lit { outline: 0; border-color: var(--vert); background: color-mix(in srgb, var(--vert) 10%, var(--surface)); }
+
+/* Embellissement : profil, listes, retour */
+.pf-box { border: 1px solid var(--bordure); box-shadow: 0 6px 18px rgba(0,0,0,.07); }
+.pf-ic { width: 46px !important; height: 46px; border-radius: 14px; display: grid; place-items: center; font-size: 24px !important; background: color-mix(in srgb, var(--vert) 12%, var(--surface)); flex: none; }
+.pf-h { color: var(--vert); display: flex; align-items: center; gap: 8px; }
+.pf-h::before { content: ""; width: 5px; height: 14px; border-radius: 3px; background: var(--jaune, #F2C43D); }
+.pf-row:active { transform: scale(.99); }
+#retour { width: 46px; height: 46px; min-height: 46px; border-radius: 50%; background: var(--surface); border: 1px solid var(--bordure); box-shadow: 0 2px 8px rgba(0,0,0,.1); display: inline-grid; place-items: center; font-size: 22px; padding: 0 !important; color: var(--texte); text-decoration: none; }
+.entete { margin-bottom: 6px; }
+.carte, .carte-contenu { border-radius: 18px; }
+.ch-banniere { border-radius: 0 0 24px 24px; }
+.ch-tete h1 { font-weight: 800; }
+.btn-abo { box-shadow: 0 4px 12px rgba(15,123,108,.3); }
 .actions .btn-outline.on { border-color: var(--vert); color: var(--vert); }
 .actions .source-credit { flex: 1 0 100%; }
 .ct-com { margin-top: 14px; border-top: 1px solid var(--bordure); padding-top: 10px; }
