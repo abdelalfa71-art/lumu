@@ -54,7 +54,26 @@ class MainActivity : AppCompatActivity() {
     /** Exposé à la page : adresse publique du site pour les liens de partage. */
     inner class PontNatif {
         @JavascriptInterface fun site(): String = BuildConfig.SITE_URL
+
+        /** Appelé par la page quand le titre ou l'état de lecture change (notification en haut de l'écran). */
+        @JavascriptInterface fun media(titre: String?, artiste: String?, jouant: Boolean) {
+            lectureEnCours = jouant && !titre.isNullOrEmpty()
+            try {
+                if (titre.isNullOrEmpty()) {
+                    stopService(Intent(this@MainActivity, LectureService::class.java))
+                } else {
+                    val i = Intent(this@MainActivity, LectureService::class.java)
+                        .putExtra("titre", titre).putExtra("artiste", artiste ?: "").putExtra("jouant", jouant)
+                    if (jouant) ContextCompat.startForegroundService(this@MainActivity, i)
+                    else startService(i)
+                }
+            } catch (e: Exception) { }
+        }
     }
+
+    private var lectureEnCours = false
+    private val demandeNotif =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { }
 
     // ------------------------------------------------------------------ sélection de fichiers
 
@@ -166,6 +185,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        instance = this
+        if (android.os.Build.VERSION.SDK_INT >= 33 &&
+            ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED
+        ) demandeNotif.launch(Manifest.permission.POST_NOTIFICATIONS)
         webView = findViewById(R.id.webView)
         barre = findViewById(R.id.chargement)
 
@@ -256,11 +279,24 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onSaveInstanceState(out: Bundle) { super.onSaveInstanceState(out); webView.saveState(out) }
-    override fun onPause() { super.onPause(); webView.onPause() }
+    override fun onPause() { super.onPause(); if (!lectureEnCours) webView.onPause() }
     override fun onResume() { super.onResume(); webView.onResume() }
-    override fun onDestroy() { fileCallback?.onReceiveValue(null); webView.destroy(); super.onDestroy() }
+    override fun onDestroy() {
+        fileCallback?.onReceiveValue(null)
+        if (instance === this) instance = null
+        stopService(Intent(this, LectureService::class.java))
+        webView.destroy(); super.onDestroy()
+    }
 
     companion object {
+        @Volatile var instance: MainActivity? = null
+
+        /** Renvoie à la page une action venue de la notification : pp, next, prev, stop. */
+        fun action(a: String) {
+            val m = instance ?: return
+            m.runOnUiThread { m.webView.evaluateJavascript("window.__lumuMedia&&window.__lumuMedia('$a')", null) }
+        }
+
         private const val DEPART = "https://appassets.androidplatform.net/index.html"
         private val AUDIO_EXT = setOf(".mp3", ".m4a", ".aac", ".ogg", ".oga", ".opus", ".wav", ".amr", ".wma", ".flac")
         private val VIDEO_EXT = setOf(".mp4", ".mov", ".mkv", ".webm", ".3gp")
