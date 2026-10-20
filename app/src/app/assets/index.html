@@ -484,6 +484,62 @@ html:root .ec-pl svg { width: 26px; height: 26px; }
 html:root #ec-chips { display: none !important; }
 .em-n { margin-left: auto; min-width: 22px; height: 22px; border-radius: 11px; background: #0F7B6C; color: #fff; font-size: 12px; font-weight: 800; display: inline-grid; place-items: center; padding: 0 6px; } .em-n:empty { display: none; }
 .imp-prog { margin: 8px 0; } .imp-prog b { display: block; margin-bottom: 4px; } .imp-prog progress { width: 100%; height: 12px; accent-color: #0F7B6C; }
+/* ---- Statuts, réactions, épinglés, sondages, QR ---- */
+.feuille { position: fixed; inset: 0; z-index: 9000; display: flex; align-items: flex-end; }
+.feuille-fond { position: absolute; inset: 0; background: rgba(0,0,0,.5); }
+.feuille-c { position: relative; width: 100%; max-height: 88vh; overflow: auto; background: var(--carte, #fff); color: var(--texte); border-radius: 18px 18px 0 0; padding: 14px 16px 24px; animation: apparait .2s ease-out; }
+.feuille-t { display: flex; justify-content: space-between; align-items: center; font-size: 18px; margin-bottom: 10px; }
+.qr-b { display: flex; justify-content: center; margin: 6px 0; }
+.qr-b svg { border-radius: 12px; border: 1px solid var(--bordure); max-width: 100%; height: auto; }
+.qr-l { font-size: 12px; word-break: break-all; text-align: center; opacity: .7; margin: 8px 0; }
+.cv-re { display: flex; flex-wrap: wrap; gap: 4px; margin: 3px 0; }
+.cv-re button { border: 1px solid var(--bordure); background: rgba(255,255,255,.55); border-radius: 12px; padding: 1px 7px; font-size: 14px; color: inherit; }
+.cv-re button.moi { border-color: var(--vert); background: rgba(15,123,108,.18); }
+.cv-rb, .cv-pin { background: none; border: 0; font-size: 15px; opacity: .65; padding: 0 5px; color: inherit; }
+.cv-pick { display: flex; gap: 2px; justify-content: space-around; background: var(--carte, #fff); border: 1px solid var(--bordure); border-radius: 22px; padding: 4px 6px; margin: 4px 0; }
+.cv-pick button { background: none; border: 0; font-size: 24px; padding: 2px 6px; }
+.cv-epi { display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-bottom: 1px solid var(--bordure); background: var(--carte, #fff); font-size: 14px; cursor: pointer; }
+.cv-epi[hidden] { display: none; }
+.cv-epi span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cv-m.epingle { outline: 2px solid rgba(15,123,108,.5); }
+.cv-m.flash { animation: apparait .6s ease-out 2; outline: 3px solid var(--vert); }
+.cv-sd { display: flex; flex-direction: column; gap: 6px; min-width: 220px; }
+.cv-so { position: relative; overflow: hidden; display: flex; justify-content: space-between; gap: 8px; text-align: left; border: 1px solid var(--bordure); border-radius: 10px; padding: 9px 10px; background: rgba(255,255,255,.55); font-size: 15px; color: inherit; }
+.cv-so .cv-sb { position: absolute; left: 0; top: 0; bottom: 0; width: 0; background: rgba(15,123,108,.22); transition: width .3s; }
+.cv-so > span { position: relative; }
+.cv-so.moi { border-color: var(--vert); font-weight: 700; }
+.cv-ss { opacity: .65; }
+.cv-rch { padding: 6px 10px; }
+.cv-rch input { width: 100%; border: 1px solid var(--bordure); border-radius: 20px; padding: 9px 14px; font-size: 16px; background: var(--surface); color: var(--texte); }
+.cv-open { margin-top: 4px; border: 1px solid var(--vert); color: var(--vert); background: none; border-radius: 16px; padding: 6px 12px; font-size: 14px; }
+.cv-sec { font-size: 13px; opacity: .6; margin: 8px 4px 2px; }
+.st-row { display: flex; gap: 12px; overflow-x: auto; padding: 10px 16px 4px; scrollbar-width: none; }
+.st-row::-webkit-scrollbar { display: none; }
+.st-row[hidden] { display: none; }
+.st-b { flex: none; width: 68px; background: none; border: 0; padding: 0; color: var(--texte); font-size: 12px; text-align: center; position: relative; box-shadow: none; }
+.st-av { display: flex; align-items: center; justify-content: center; width: 62px; height: 62px; border-radius: 50%; border: 3px solid #0F7B6C; margin: 0 auto 4px; padding: 2px; overflow: hidden; }
+.st-av.vu { border-color: #9aa5a0; }
+.st-av.vide { border: 2px dashed #9aa5a0; }
+.st-av > span, .st-av > img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; display: flex; align-items: center; justify-content: center; background: #0F7B6C; color: #fff; font-weight: 700; font-size: 20px; }
+.st-b small { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.st-plus { position: absolute; right: 2px; top: 40px; width: 22px; height: 22px; border-radius: 50%; background: #25A06B; color: #fff; font-size: 16px; line-height: 20px; border: 2px solid var(--fond, #fff); }
+.st-vue { position: fixed; inset: 0; z-index: 9500; background: #000; color: #fff; display: flex; flex-direction: column; }
+.st-barres { display: flex; gap: 3px; padding: 10px 10px 4px; }
+.st-barres i { flex: 1; height: 3px; background: rgba(255,255,255,.35); border-radius: 2px; overflow: hidden; }
+.st-barres i b { display: block; height: 100%; width: 0; background: #fff; }
+.st-tete { display: flex; align-items: center; gap: 10px; padding: 6px 12px; }
+.st-tete b { flex: 1; font-size: 16px; }
+.st-tete button { background: none; border: 0; color: #fff; font-size: 22px; padding: 6px 10px; }
+.st-corps { flex: 1; position: relative; display: flex; align-items: center; justify-content: center; padding: 20px; text-align: center; font-size: 26px; font-weight: 700; overflow: hidden; }
+.st-corps img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.st-zone { position: absolute; top: 0; bottom: 0; width: 35%; background: none; border: 0; box-shadow: none; }
+.st-zone.g { left: 0; } .st-zone.d { right: 0; width: 65%; }
+.st-leg { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; background: linear-gradient(transparent, rgba(0,0,0,.7)); font-size: 16px; font-weight: 400; }
+.st-cols { display: flex; gap: 8px; margin: 8px 0; }
+.st-cols button { width: 36px; height: 36px; border-radius: 50%; border: 3px solid transparent; }
+.st-cols button.on { border-color: var(--texte); }
+.st-choix { display: flex; gap: 8px; margin-bottom: 10px; }
+.st-choix button { flex: 1; min-height: 48px; padding: 0 6px; }
 .actions .btn-outline.on { border-color: var(--vert); color: var(--vert); }
 .actions .source-credit { flex: 1 0 100%; }
 .ct-com { margin-top: 14px; border-top: 1px solid var(--bordure); padding-top: 10px; }
@@ -1273,7 +1329,7 @@ const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 const app = document.getElementById("app");
 let etat = { route: "connexion", parentId: null, enfant: null, niveaux: [], matieres: [], params: {}, compteNom: false, profil: null, chaine: null, envoiEnCours: false, lienEnAttente: null, lienChaine: null, pile: [], racine: "flux", son: true };
 const LONG_CODE = 6;
-try { const m = /[#&]c=([0-9a-f-]{36})/i.exec(location.hash); if (m) etat.lienEnAttente = m[1]; const m2 = /[#&]ch=([0-9a-f-]{36})/i.exec(location.hash); if (m2) etat.lienChaine = m2[1]; const m3 = /[#&]r=(reels|recherche)/.exec(location.hash); if (m3) etat.lienRoute = m3[1]; const m4 = /[#&]t=(\d{1,6})/.exec(location.hash); if (m4) etat.lienT = +m4[1]; } catch(e) {}
+try { const m = /[#&]c=([0-9a-f-]{36})/i.exec(location.hash); if (m) etat.lienEnAttente = m[1]; const m2 = /[#&]ch=([0-9a-f-]{36})/i.exec(location.hash); if (m2) etat.lienChaine = m2[1]; const m3 = /[#&]r=(reels|recherche)/.exec(location.hash); if (m3) etat.lienRoute = m3[1]; const m4 = /[#&]t=(\d{1,6})/.exec(location.hash); if (m4) etat.lienT = +m4[1]; const m5 = /[#&]g=([0-9a-f-]{36})/i.exec(location.hash); if (m5) etat.lienGroupe = m5[1]; } catch(e) {}
 
 function lumuSVG(largeur) {
   const l = largeur || 96;
@@ -1747,6 +1803,11 @@ function router(route, params = {}, opts = {}) {
     try { history.replaceState(null, "", location.pathname + location.search); } catch(e) {}
     route = "chaine"; params = { id };
   }
+  if ((route === "flux" || route === "home") && etat.lienGroupe) {
+    const id = etat.lienGroupe; etat.lienGroupe = null;
+    try { history.replaceState(null, "", location.pathname + location.search); } catch(e) {}
+    route = "groupe"; params = { id };
+  }
   if ((route === "flux" || route === "home") && etat.lienRoute) {
     const r = etat.lienRoute; etat.lienRoute = null;
     try { history.replaceState(null, "", location.pathname + location.search); } catch(e) {}
@@ -1813,7 +1874,7 @@ async function init() {
     }
     router(PIN.dispo && PIN.existe(etat.parentId) ? "pin-verrou" : routeApresConnexion());
   } else {
-    if (!etat.lienEnAttente && !etat.lienChaine && !etat.lienRoute && !mesLangues()) router("langues-choix"); else router("flux");
+    if (!etat.lienEnAttente && !etat.lienChaine && !etat.lienGroupe && !etat.lienRoute && !mesLangues()) router("langues-choix"); else router("flux");
   }
 }
 
@@ -2320,6 +2381,7 @@ async function vueContenu() {
       ${c.type === "audio" && !c.embed_id && c.fichier_path ? `<button class="btn-outline" id="au-env">📤 Envoyer l'audio</button><button class="btn-outline" id="au-tel">💾 Dans mon téléphone</button>` : ""}
       ${c.type === "audio" && !c.embed_id ? `<button class="btn-outline" id="au-sig">🔖 Poser un signet</button>` : ""}
       ${c.type === "audio" ? `<button class="btn-outline" id="au-som">😴 Minuterie : arrêt</button>` : ""}
+      <button class="btn-outline" id="env-a">📨 Envoyer à…</button>
       <button class="btn-outline" id="signaler">🚩 Signaler</button>
     </div></div>
     ${lecteurHTML(c)}
@@ -2359,6 +2421,7 @@ async function vueContenu() {
     dessiner();
   }
   const benv = wrap.querySelector("#au-env"); if (benv) benv.onclick = () => envoyerAudio(c, benv);
+  const bea = wrap.querySelector("#env-a"); if (bea) bea.onclick = () => envoyerA(c);
   const bt2 = wrap.querySelector("#au-tel"); if (bt2) bt2.onclick = () => enregistrerAudio(c);
   wrap.querySelector("#retour").onclick = () => router("flux");
   const lien = lienPartage(c.id);
@@ -5198,6 +5261,7 @@ async function vueEcouter() {
       <button id="ec-mic" aria-label="Parler pour chercher">${ico("mic", 24)}</button><button id="ec-q" aria-label="Rechercher">${ico("search", 24)}</button><button id="ec-plus" aria-label="Plus d'options" style="font-size:26px;font-weight:800">⋮</button><div class="menu-plus" id="ec-menu" hidden><button id="em-disc">💬 Discussions<span class="em-n" id="em-n"></span></button><button id="em-dormir">🌙 Avant de dormir</button><button id="em-trajet">🚗 Pour le trajet</button><button id="em-imams">👥 Imams</button><button id="em-hors">⬇ Mes téléchargements</button><button id="em-prof">👤 Mon profil</button></div></div>
     <div class="ec-rech" id="ec-rech" hidden><input id="ec-rin" type="search" enterkeyhint="search" autocomplete="off" placeholder="Rechercher un imam, un titre…"></div>
     <div class="ec-corps">
+      <div class="st-row" id="st-row" hidden></div>
       <div id="ec-rep"></div>
       <div class="ec-ligne"><button class="ec-radio" id="ec-radio"><span class="ec-rp">${ico("play", 30, true)}</span><span><b>Lumu Radio</b><small>Rappels, Coran, invocations</small></span></button><select id="ec-cat" aria-label="Catégorie"><option value="">Tout</option><option value="coran">Coran</option><option value="cours">Cours</option><option value="rappels">Rappels</option></select></div>
       <div class="ec-gros"><button id="eg-hors"><span>⬇</span>Mes audios</button><button id="eg-disc"><span>💬</span>Discuter</button><button id="eg-imams"><span>👥</span>Imams</button><button id="eg-q"><span>🔍</span>Chercher</button></div>
@@ -5209,6 +5273,7 @@ async function vueEcouter() {
     </div>`;
   app.appendChild(w);
   if (ACCES.simple()) w.classList.add("ec-simple");
+  try { STAT.monter(w.querySelector("#st-row")); } catch (e) {}
   w.querySelector("#eg-hors").onclick = () => router("hors"); w.querySelector("#eg-disc").onclick = () => router("discussions"); w.querySelector("#eg-imams").onclick = () => router("preches"); w.querySelector("#eg-q").onclick = () => router("recherche");
   try { const cn = navigator.connection; if (cn && /2g/.test(cn.effectiveType || "")) w.querySelector("#ec-radio").insertAdjacentHTML("beforebegin", `<button class="ec-lent" id="ec-lent">📶 Connexion lente. Touchez pour télécharger vos audios et écouter sans coupure.</button>`); const bl = w.querySelector("#ec-lent"); if (bl) bl.onclick = () => router("hors"); } catch (e) {}
   { const bp = w.querySelector("#ec-plus"), mn = w.querySelector("#ec-menu"); bp.onclick = ev => { ev.stopPropagation(); mn.hidden = !mn.hidden; }; mn.onclick = () => { setTimeout(() => { mn.hidden = true; }, 120); };
@@ -5595,6 +5660,8 @@ async function vueChaine() {
       const r = await partagerLien(ch.name, "🕌 " + ch.name + " sur Lumu", lien);
       if (r === "copie") w.querySelector("#part-ch").textContent = "Lien copié ✓";
     };
+    w.querySelector("#part-ch").insertAdjacentHTML("afterend", `<button class="btn-outline" id="ch-qr" style="min-height:40px;padding:0 14px">▦ Code QR</button>`);
+    w.querySelector("#ch-qr").onclick = () => ouvrirQR(ch.name, SITE + (NATIF ? "/" : location.pathname) + "#ch=" + ch.id, "🕌 " + ch.name + " sur Lumu");
     const zone = w.querySelector("#liste");
     let onglet = "recents";
     const dessinerOnglets = () => {
@@ -6424,6 +6491,328 @@ function vueNouveauGroupe() {
 
 /* ====================== DISCUSSIONS (façon WhatsApp, sans coordonnées) ====================== */
 /* Seuls les NOMS sont visibles : ni e-mail ni téléphone ne sortent de la base. */
+/* Générateur de code QR minimal (mode octets, niveau M, versions 1 à 10) */
+function lumuQR(texte) {
+  const data = Array.from(unescape(encodeURIComponent(texte)), c => c.charCodeAt(0));
+  const BL = { 1: [10, [[1, 16]]], 2: [16, [[1, 28]]], 3: [26, [[1, 44]]], 4: [18, [[2, 32]]], 5: [24, [[2, 43]]], 6: [16, [[4, 27]]], 7: [18, [[4, 31]]], 8: [22, [[2, 38], [2, 39]]], 9: [22, [[3, 36], [2, 37]]], 10: [26, [[4, 43], [1, 44]]] };
+  const AL = { 1: [], 2: [6, 18], 3: [6, 22], 4: [6, 26], 5: [6, 30], 6: [6, 34], 7: [6, 22, 38], 8: [6, 24, 42], 9: [6, 26, 46], 10: [6, 28, 50] };
+  const cap = v => BL[v][1].reduce((a, [n, d]) => a + n * d, 0);
+  let ver = 1;
+  for (; ver <= 10; ver++) { const bits = 4 + (ver < 10 ? 8 : 16) + 8 * data.length; if (bits <= cap(ver) * 8) break; }
+  if (ver > 10) return null;
+  // --- bits de données
+  const bits = [];
+  const put = (v, n) => { for (let i = n - 1; i >= 0; i--) bits.push((v >> i) & 1); };
+  put(4, 4); put(data.length, ver < 10 ? 8 : 16); data.forEach(b => put(b, 8));
+  const total = cap(ver) * 8;
+  for (let i = 0; i < 4 && bits.length < total; i++) bits.push(0);
+  while (bits.length % 8) bits.push(0);
+  const cw = []; for (let i = 0; i < bits.length; i += 8) { let b = 0; for (let j = 0; j < 8; j++) b = (b << 1) | bits[i + j]; cw.push(b); }
+  for (let p = 0; cw.length < cap(ver); p++) cw.push(p % 2 ? 0x11 : 0xEC);
+  // --- Reed-Solomon
+  const exp = new Array(512), log = new Array(256);
+  for (let i = 0, x = 1; i < 255; i++) { exp[i] = x; log[x] = i; x <<= 1; if (x & 256) x ^= 0x11D; }
+  for (let i = 255; i < 512; i++) exp[i] = exp[i - 255];
+  const mul = (a, b) => (a && b) ? exp[log[a] + log[b]] : 0;
+  const ecLen = BL[ver][0];
+  let gen = [1];
+  for (let i = 0; i < ecLen; i++) { const n = new Array(gen.length + 1).fill(0); gen.forEach((g, j) => { n[j] ^= g; n[j + 1] ^= mul(g, exp[i]); }); gen = n; }
+  const rs = d => { const r = new Array(ecLen).fill(0); d.forEach(b => { const f = b ^ r.shift(); r.push(0); if (f) gen.slice(1).forEach((g, j) => { r[j] ^= mul(g, f); }); }); return r; };
+  const blocs = []; let pos = 0;
+  BL[ver][1].forEach(([n, d]) => { for (let i = 0; i < n; i++) { const dd = cw.slice(pos, pos + d); pos += d; blocs.push({ d: dd, e: rs(dd) }); } });
+  const fin = [];
+  const maxD = Math.max(...blocs.map(b => b.d.length));
+  for (let i = 0; i < maxD; i++) blocs.forEach(b => { if (i < b.d.length) fin.push(b.d[i]); });
+  for (let i = 0; i < ecLen; i++) blocs.forEach(b => fin.push(b.e[i]));
+  const fb = []; fin.forEach(b => { for (let i = 7; i >= 0; i--) fb.push((b >> i) & 1); });
+  // --- matrice
+  const N = 17 + 4 * ver;
+  const M = Array.from({ length: N }, () => new Array(N).fill(null));
+  const set = (r, c, v) => { if (r >= 0 && c >= 0 && r < N && c < N) M[r][c] = v; };
+  const finder = (r, c) => { for (let i = -1; i <= 7; i++) for (let j = -1; j <= 7; j++) { const on = i >= 0 && i <= 6 && j >= 0 && j <= 6 && (i === 0 || i === 6 || j === 0 || j === 6 || (i >= 2 && i <= 4 && j >= 2 && j <= 4)); set(r + i, c + j, on ? 1 : 0); } };
+  finder(0, 0); finder(0, N - 7); finder(N - 7, 0);
+  const al = AL[ver];
+  al.forEach(r => al.forEach(c => {
+    if ((r === 6 && c === 6) || (r === 6 && c === al[al.length - 1]) || (r === al[al.length - 1] && c === 6)) return;
+    for (let i = -2; i <= 2; i++) for (let j = -2; j <= 2; j++) set(r + i, c + j, Math.max(Math.abs(i), Math.abs(j)) !== 1 ? 1 : 0);
+  }));
+  for (let i = 8; i < N - 8; i++) { if (M[6][i] === null) M[6][i] = i % 2 ? 0 : 1; if (M[i][6] === null) M[i][6] = i % 2 ? 0 : 1; }
+  set(N - 8, 8, 1);
+  const reserve = [];
+  for (let i = 0; i < 9; i++) { reserve.push([8, i], [i, 8]); }
+  for (let i = 0; i < 8; i++) { reserve.push([8, N - 1 - i], [N - 1 - i, 8]); }
+  reserve.forEach(([r, c]) => { if (M[r][c] === null) M[r][c] = 0; });
+  const reserveV = [];
+  if (ver >= 7) for (let i = 0; i < 6; i++) for (let j = 0; j < 3; j++) { reserveV.push([i, N - 11 + j], [N - 11 + j, i]); }
+  reserveV.forEach(([r, c]) => { M[r][c] = 0; });
+  const libre = M.map(l => l.map(x => x === null));
+  // --- remplissage en zigzag
+  const place = mask => {
+    const T = M.map(l => l.slice());
+    let k = 0, haut = true;
+    for (let c = N - 1; c > 0; c -= 2) {
+      if (c === 6) c--;
+      for (let n = 0; n < N; n++) {
+        const r = haut ? N - 1 - n : n;
+        for (let d = 0; d < 2; d++) {
+          const cc = c - d;
+          if (!libre[r][cc]) continue;
+          let v = k < fb.length ? fb[k] : 0; k++;
+          const m = [(r + cc) % 2 === 0, r % 2 === 0, cc % 3 === 0, (r + cc) % 3 === 0, (Math.floor(r / 2) + Math.floor(cc / 3)) % 2 === 0, (r * cc) % 2 + (r * cc) % 3 === 0, ((r * cc) % 2 + (r * cc) % 3) % 2 === 0, ((r + cc) % 2 + (r * cc) % 3) % 2 === 0][mask];
+          T[r][cc] = m ? v ^ 1 : v;
+        }
+      }
+      haut = !haut;
+    }
+    // format (niveau M = 00)
+    let f = (0 << 3) | mask, r = f << 10;
+    for (let i = 14; i >= 10; i--) if ((r >> i) & 1) r ^= 0x537 << (i - 10);
+    const fmt = ((f << 10) | r) ^ 0x5412;
+    for (let i = 0; i < 15; i++) {
+      const b = (fmt >> i) & 1;
+      if (i < 6) T[i][8] = b; else if (i < 8) T[i + 1][8] = b; else T[N - 15 + i][8] = b;
+      if (i < 8) T[8][N - 1 - i] = b; else if (i < 9) T[8][15 - i] = b; else T[8][14 - i] = b;
+    }
+    T[N - 8][8] = 1;
+    if (ver >= 7) {
+      let rv = ver << 12;
+      for (let i = 17; i >= 12; i--) if ((rv >> i) & 1) rv ^= 0x1F25 << (i - 12);
+      const vi = (ver << 12) | rv;
+      for (let i = 0; i < 18; i++) { const b = (vi >> i) & 1, a = Math.floor(i / 3), c2 = N - 11 + (i % 3); T[a][c2] = b; T[c2][a] = b; }
+    }
+    return T;
+  };
+  const penal = T => {
+    let p = 0;
+    for (let a = 0; a < 2; a++) for (let i = 0; i < N; i++) {
+      let run = 1;
+      for (let j = 1; j < N; j++) {
+        const x = a ? T[j][i] : T[i][j], y = a ? T[j - 1][i] : T[i][j - 1];
+        if (x === y) { run++; if (run === 5) p += 3; else if (run > 5) p++; } else run = 1;
+      }
+    }
+    for (let i = 0; i < N - 1; i++) for (let j = 0; j < N - 1; j++) { const v = T[i][j]; if (v === T[i][j + 1] && v === T[i + 1][j] && v === T[i + 1][j + 1]) p += 3; }
+    const pat = [1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0];
+    for (let a = 0; a < 2; a++) for (let i = 0; i < N; i++) for (let j = 0; j <= N - 11; j++) {
+      let o1 = true, o2 = true;
+      for (let k = 0; k < 11; k++) { const x = a ? T[j + k][i] : T[i][j + k]; if (x !== pat[k]) o1 = false; if (x !== pat[10 - k]) o2 = false; }
+      if (o1) p += 40; if (o2) p += 40;
+    }
+    let noir = 0; T.forEach(l => l.forEach(x => { if (x) noir++; }));
+    p += Math.floor(Math.abs(noir * 100 / (N * N) - 50) / 5) * 10;
+    return p;
+  };
+  let best = null, bp = 1e9;
+  for (let m = 0; m < 8; m++) { const T = place(m), p = penal(T); if (p < bp) { bp = p; best = T; } }
+  return best;
+}
+function lumuQRsvg(texte, px) {
+  const T = lumuQR(texte); if (!T) return "";
+  const N = T.length, q = 4; let d = "";
+  T.forEach((l, r) => l.forEach((v, c) => { if (v) d += `M${c + q} ${r + q}h1v1h-1z`; }));
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${N + 2 * q} ${N + 2 * q}" width="${px || 240}" height="${px || 240}" shape-rendering="crispEdges"><rect width="100%" height="100%" fill="#fff"/><path d="${d}" fill="#000"/></svg>`;
+}
+
+function ouvrirFeuille(titre, html, lier) {
+  const f = document.createElement("div"); f.className = "feuille";
+  f.innerHTML = `<div class="feuille-fond"></div><div class="feuille-c" role="dialog"><div class="feuille-t"><b>${esc(titre)}</b><button class="btn-text" aria-label="Fermer">✕</button></div><div class="feuille-corps">${html}</div></div>`;
+  document.body.appendChild(f);
+  const fermer = () => f.remove();
+  f.querySelector(".feuille-fond").onclick = fermer; f.querySelector(".feuille-t button").onclick = fermer;
+  if (lier) lier(f.querySelector(".feuille-corps"), fermer);
+  return fermer;
+}
+function ouvrirQR(titre, url, texte) {
+  ouvrirFeuille(titre, `<div class="qr-b">${lumuQRsvg(url, 240)}</div><p class="qr-l" dir="ltr" data-notrad>${esc(url)}</p><button class="btn" id="qr-p">Partager le lien</button><button class="btn-outline" id="qr-c" style="margin-top:8px">Copier le lien</button>`, c => {
+    c.querySelector("#qr-p").onclick = () => partagerLien(titre, texte || "", url);
+    c.querySelector("#qr-c").onclick = async () => { try { await navigator.clipboard.writeText(url); c.querySelector("#qr-c").textContent = "Copié ✓"; } catch (e) { c.querySelector("#qr-c").textContent = "Copie impossible"; } };
+  });
+}
+function lienGroupe(id) { return SITE + (NATIF ? "/" : location.pathname) + "#g=" + id; }
+function ilYa(iso) { const m = Math.max(0, Math.round((Date.now() - new Date(iso)) / 60000)); return m < 60 ? m + " min" : Math.floor(m / 60) + " h"; }
+
+/* ---------- Envoyer une publication à une discussion ou un groupe ---------- */
+function envoyerA(c) {
+  if (!etat.parentId) return exigerConnexion();
+  ouvrirFeuille("Envoyer à…", `<div class="centre"><div class="spinner"></div></div>`, async (corps, fermer) => {
+    try {
+      const [cv, gr] = await Promise.all([sb.rpc("yt_mes_conversations"), sb.from("yt_groupe_membres").select("groupe_id,yt_groupes(id,nom)").eq("user_id", etat.parentId)]);
+      corps.innerHTML = ""; let n = 0;
+      const ajout = (nom, sous, fn) => {
+        n++;
+        const l = CHAT.ligne(nom, sous, "", 0, async () => {
+          l.style.opacity = ".5";
+          try { await fn(); l.style.opacity = ""; l.querySelector("small").textContent = "Envoyé ✓"; setTimeout(fermer, 800); }
+          catch (e) { l.style.opacity = ""; l.querySelector("small").textContent = txtErr(e, "Envoi impossible."); }
+        });
+        corps.appendChild(l);
+      };
+      (gr.data || []).filter(x => x.yt_groupes).forEach(x => ajout(x.yt_groupes.nom, "Groupe", async () => { const r = await sb.from("yt_groupe_posts").insert({ groupe_id: x.yt_groupes.id, contenu_id: c.id }); if (r.error) throw r.error; }));
+      (cv.data || []).forEach(x => ajout(x.nom, "Discussion privée", async () => { const r = await sb.from("yt_dm").insert({ vers: x.pair, body: "📎 " + c.title + "\n" + lienPartage(c.id) }); if (r.error) throw r.error; }));
+      if (!n) corps.innerHTML = `<p class="cv-vide">Aucune discussion pour l'instant. Ouvrez « Discussions » pour en commencer une.</p>`;
+    } catch (e) { corps.innerHTML = `<p class="erreur">${esc(txtErr(e, "Chargement impossible."))}</p>`; }
+  });
+}
+
+/* ---------- Statuts de 24 h ---------- */
+const STAT = {
+  COUL: ["#0F7B6C", "#1F4D8C", "#8C3A1F", "#6A2C91", "#2F2F2F", "#B8860B"],
+  vu(id) { try { return localStorage.getItem("stv_" + id) === "1"; } catch (e) { return false; } },
+  marquer(id) { try { localStorage.setItem("stv_" + id, "1"); } catch (e) {} },
+  nonVus(l) { return l.some(s => !STAT.vu(s.id)) ? 1 : 0; },
+  avatar(ch, taille) {
+    const u = ch.avatar_url ? urlMedia(ch.avatar_url) : "";
+    return u ? `<img src="${esc(u)}" alt="" loading="lazy">` : `<span data-notrad>${esc(String(ch.name || "?").trim().charAt(0).toUpperCase())}</span>`;
+  },
+  async monter(row) {
+    if (!row) return;
+    let items = [], abos = new Set();
+    try {
+      const r = await sb.from("yt_statuts").select("id,channel_id,auteur_id,type,texte,fichier_path,couleur,created_at,yt_channels(id,name,avatar_url)").gt("expire_le", new Date().toISOString()).order("created_at", { ascending: true }).limit(200);
+      items = r.data || [];
+      if (etat.parentId) { const a = await sb.from("yt_abonnements").select("channel_id").eq("user_id", etat.parentId); (a.data || []).forEach(x => abos.add(x.channel_id)); }
+    } catch (e) {}
+    if (!row.isConnected) return;
+    const gr = new Map();
+    items.forEach(s => { if (!s.yt_channels) return; if (!gr.has(s.channel_id)) gr.set(s.channel_id, { ch: s.yt_channels, l: [] }); gr.get(s.channel_id).l.push(s); });
+    const moi = estCreateur() && etat.chaine ? etat.chaine.id : null;
+    const liste = [...gr.values()].filter(g => g.ch.id !== moi).sort((a, b) => (abos.has(b.ch.id) - abos.has(a.ch.id)) || (STAT.nonVus(b.l) - STAT.nonVus(a.l)));
+    row.innerHTML = "";
+    const rafraichir = () => STAT.monter(row);
+    if (moi) {
+      const mien = gr.get(moi), ch = mien ? mien.ch : { id: moi, name: etat.chaine.name, avatar_url: etat.chaine.avatar_url };
+      const b = document.createElement("button"); b.className = "st-b";
+      b.innerHTML = `<div class="st-av ${mien ? (mien.l.every(x => STAT.vu(x.id)) ? "vu" : "") : "vide"}">${STAT.avatar(ch)}</div><small>Mon statut</small><span class="st-plus" role="button" aria-label="Ajouter un statut">+</span>`;
+      b.onclick = () => mien ? STAT.ouvrir(ch, mien.l, true, rafraichir) : STAT.creer(rafraichir);
+      b.querySelector(".st-plus").onclick = ev => { ev.stopPropagation(); STAT.creer(rafraichir); };
+      row.appendChild(b);
+    }
+    liste.forEach(g => {
+      const b = document.createElement("button"); b.className = "st-b";
+      b.innerHTML = `<div class="st-av ${g.l.every(x => STAT.vu(x.id)) ? "vu" : ""}">${STAT.avatar(g.ch)}</div><small dir="auto" data-notrad>${esc(g.ch.name)}</small>`;
+      b.onclick = () => STAT.ouvrir(g.ch, g.l, false, rafraichir);
+      row.appendChild(b);
+    });
+    row.hidden = !(moi || liste.length);
+  },
+  ouvrir(ch, l, propre, apres) {
+    try { if (AUD && AUD.a && !AUD.a.paused) AUD.a.pause(); } catch (e) {}
+    let i = Math.max(0, l.findIndex(s => !STAT.vu(s.id))), t = null, au = null;
+    const v = document.createElement("div"); v.className = "st-vue";
+    v.innerHTML = `<div class="st-barres">${l.map(() => "<i><b></b></i>").join("")}</div><div class="st-tete"><span class="st-av" style="width:38px;height:38px;border:0;margin:0;padding:0">${STAT.avatar(ch)}</span><b dir="auto" data-notrad>${esc(ch.name)}</b><small class="st-q"></small>${propre ? '<button id="st-sup" aria-label="Supprimer">🗑</button>' : ""}<button id="st-x" aria-label="Fermer">✕</button></div><div class="st-corps"></div>`;
+    document.body.appendChild(v);
+    const corps = v.querySelector(".st-corps"), barres = [...v.querySelectorAll(".st-barres i b")];
+    const arreter = () => { clearInterval(t); if (au) { try { au.pause(); } catch (e) {} au = null; } };
+    const fermer = () => { arreter(); v.remove(); if (apres) apres(); };
+    const montrer = () => {
+      arreter();
+      if (i >= l.length) return fermer();
+      if (i < 0) i = 0;
+      const s = l[i]; STAT.marquer(s.id);
+      barres.forEach((b, k) => { b.style.width = k < i ? "100%" : "0"; });
+      v.querySelector(".st-q").textContent = ilYa(s.created_at);
+      corps.style.background = s.type === "texte" ? (s.couleur || "#0F7B6C") : "#000";
+      if (s.type === "texte") corps.innerHTML = `<div dir="auto" data-notrad>${esc(s.texte || "")}</div>`;
+      else if (s.type === "image") corps.innerHTML = `<img src="${esc(urlMedia(s.fichier_path))}" alt="">${s.texte ? `<div class="st-leg" dir="auto" data-notrad>${esc(s.texte)}</div>` : ""}`;
+      else { corps.innerHTML = `<div>🎧<br><small>Message vocal</small></div>`; au = new Audio(urlMedia(s.fichier_path)); au.onended = () => { i++; montrer(); }; au.onerror = () => { i++; montrer(); }; au.play().catch(() => {}); }
+      corps.insertAdjacentHTML("beforeend", `<button class="st-zone g" aria-label="Précédent"></button><button class="st-zone d" aria-label="Suivant"></button>`);
+      corps.querySelector(".st-zone.g").onclick = () => { i--; montrer(); };
+      corps.querySelector(".st-zone.d").onclick = () => { i++; montrer(); };
+      const t0 = Date.now(), cur = au;
+      t = setInterval(() => {
+        const p = cur ? (cur.duration ? cur.currentTime / cur.duration : 0) : Math.min(1, (Date.now() - t0) / 7000);
+        if (barres[i]) barres[i].style.width = Math.round(p * 100) + "%";
+        if (!cur && p >= 1) { i++; montrer(); }
+      }, 100);
+    };
+    v.querySelector("#st-x").onclick = fermer;
+    const sup = v.querySelector("#st-sup");
+    if (sup) sup.onclick = async () => {
+      if (!confirm("Supprimer ce statut ?")) return;
+      const s = l[i]; arreter();
+      const r = await sb.from("yt_statuts").delete().eq("id", s.id);
+      if (r.error) { montrer(); return; }
+      if (s.fichier_path) sb.storage.from("yt-media").remove([s.fichier_path]).catch(() => {});
+      l.splice(i, 1); if (!l.length) return fermer();
+      barres.pop().parentElement.remove(); if (i >= l.length) i = l.length - 1;
+      montrer();
+    };
+    montrer();
+  },
+  creer(apres) {
+    if (!estCreateur() || !etat.chaine) return;
+    ouvrirFeuille("Nouveau statut", `<div class="st-choix"><button class="btn" data-k="t">✍️ Texte</button><button class="btn" data-k="p">📷 Photo</button><button class="btn" data-k="v">🎤 Voix</button></div><div id="st-zone"></div><p class="erreur" id="st-err" hidden></p><p style="font-size:13px;opacity:.7;margin-top:10px">Visible pendant 24 heures.</p>`, (c, fermer) => {
+      const zone = c.querySelector("#st-zone"), err = c.querySelector("#st-err");
+      const erreur = m => { err.textContent = m || ""; err.hidden = !m; };
+      const publier = async champs => {
+        erreur("");
+        const r = await sb.from("yt_statuts").insert({ channel_id: etat.chaine.id, ...champs });
+        if (r.error) throw r.error;
+        fermer(); if (apres) apres();
+      };
+      const envoyer = async (blob, ext, mime) => {
+        const chemin = `${etat.parentId}/statut-${uuid()}.${ext}`;
+        const r = await sb.storage.from("yt-media").upload(chemin, blob, { contentType: mime, cacheControl: "86400" });
+        if (r.error) throw r.error;
+        return chemin;
+      };
+      const occupe = (b, oui, txt) => { b.disabled = oui; if (txt) b.textContent = txt; };
+      c.querySelector('[data-k="t"]').onclick = () => {
+        zone.innerHTML = `<textarea class="champ" id="st-t" rows="4" maxlength="400" placeholder="Écrivez votre message…" dir="auto"></textarea><div class="st-cols">${STAT.COUL.map((x, k) => `<button data-c="${x}" style="background:${x}" class="${k ? "" : "on"}" aria-label="Couleur"></button>`).join("")}</div><button class="btn" id="st-ok">Publier</button>`;
+        let coul = STAT.COUL[0];
+        zone.querySelectorAll(".st-cols button").forEach(b => b.onclick = () => { coul = b.dataset.c; zone.querySelectorAll(".st-cols button").forEach(x => x.classList.toggle("on", x === b)); });
+        const ok = zone.querySelector("#st-ok");
+        ok.onclick = async () => {
+          const val = zone.querySelector("#st-t").value.trim();
+          if (!val) return erreur("Écrivez quelque chose.");
+          occupe(ok, true);
+          try { await publier({ type: "texte", texte: val, couleur: coul }); } catch (e) { occupe(ok, false); erreur(txtErr(e, "Publication impossible.")); }
+        };
+      };
+      c.querySelector('[data-k="p"]').onclick = () => {
+        zone.innerHTML = `<input id="st-f" type="file" accept="image/*" style="margin:6px 0"><input class="champ" id="st-l" maxlength="200" placeholder="Légende (facultatif)" dir="auto"><button class="btn" id="st-ok">Publier</button>`;
+        const ok = zone.querySelector("#st-ok");
+        ok.onclick = async () => {
+          const f = zone.querySelector("#st-f").files[0];
+          if (!f) return erreur("Choisissez une photo.");
+          occupe(ok, true, "Envoi…");
+          try { const b = await reduireImage(f, 1080); const chemin = await envoyer(b, "jpg", "image/jpeg"); await publier({ type: "image", fichier_path: chemin, texte: zone.querySelector("#st-l").value.trim() || null }); }
+          catch (e) { occupe(ok, false, "Publier"); erreur(txtErr(e, "Publication impossible.")); }
+        };
+      };
+      c.querySelector('[data-k="v"]').onclick = () => {
+        zone.innerHTML = `<button class="btn" id="st-r">🎤 Toucher pour enregistrer</button><div id="st-ap"></div>`;
+        let rec = null, flux = null, morc = [], tim = null, t0 = 0;
+        const bt = zone.querySelector("#st-r"), ap = zone.querySelector("#st-ap");
+        const fin = () => { if (rec && rec.state === "recording") rec.stop(); };
+        bt.onclick = async () => {
+          if (rec && rec.state === "recording") return fin();
+          if (!window.MediaRecorder || !navigator.mediaDevices) return erreur("Enregistrement non disponible sur cet appareil.");
+          try { flux = await navigator.mediaDevices.getUserMedia({ audio: true }); } catch (e) { return erreur("Autorisez le micro pour enregistrer."); }
+          erreur(""); ap.innerHTML = ""; morc = [];
+          const mime = ["audio/webm;codecs=opus", "audio/mp4", "audio/webm", "audio/ogg;codecs=opus"].find(x => { try { return MediaRecorder.isTypeSupported(x); } catch (e) { return false; } }) || "";
+          try { rec = new MediaRecorder(flux, mime ? { mimeType: mime } : undefined); } catch (e) { flux.getTracks().forEach(x => x.stop()); return erreur("Enregistrement non disponible sur cet appareil."); }
+          rec.ondataavailable = e => { if (e.data && e.data.size) morc.push(e.data); };
+          rec.onstop = () => {
+            flux.getTracks().forEach(x => x.stop()); clearInterval(tim); bt.textContent = "🎤 Recommencer";
+            if (!morc.length) return;
+            const type = String(rec.mimeType || mime || "audio/webm").split(";")[0], blob = new Blob(morc, { type });
+            ap.innerHTML = `<audio controls src="${URL.createObjectURL(blob)}" style="width:100%;margin:8px 0"></audio><button class="btn" id="st-ok">Publier</button>`;
+            const ok = ap.querySelector("#st-ok");
+            ok.onclick = async () => {
+              occupe(ok, true, "Envoi…");
+              try { const ext = /mp4|aac/.test(type) ? "m4a" : /ogg/.test(type) ? "ogg" : "webm"; const chemin = await envoyer(blob, ext, type); await publier({ type: "audio", fichier_path: chemin }); }
+              catch (e) { occupe(ok, false, "Publier"); erreur(txtErr(e, "Publication impossible.")); }
+            };
+          };
+          rec.start(); t0 = Date.now();
+          tim = setInterval(() => { const sec = Math.round((Date.now() - t0) / 1000); bt.textContent = "⏹ Arrêter · " + CHAT.mm(sec); if (sec >= 60) fin(); }, 400);
+        };
+      };
+    });
+  }
+};
+
 const CHAT = {
   cur: null,
   heure(iso) { try { return new Date(iso).toLocaleTimeString(langue, { hour: "2-digit", minute: "2-digit" }); } catch (e) { return ""; } },
@@ -6459,6 +6848,8 @@ const CHAT = {
       ${m.body ? `<div class="cv-txt" dir="auto" data-notrad>${esc(m.body)}</div>` : ""}
       <div class="cv-cc"></div><div class="cv-h"><span>${esc(CHAT.heure(m.created_at))}</span></div>`;
     if (m.contenu) { try { el.querySelector(".cv-cc").appendChild(carteContenu(m.contenu)); } catch (e) {} }
+    const lm = m.body && /(?:#c=|\/c\/)([0-9a-f-]{36})/i.exec(m.body);
+    if (lm) { const ob = document.createElement("button"); ob.className = "cv-open"; ob.textContent = "▶ Ouvrir"; ob.onclick = () => router("contenu", { id: lm[1] }); el.querySelector(".cv-cc").appendChild(ob); }
     const b = el.querySelector(".cv-play");
     if (b) {
       const barre = el.querySelector(".cv-bar i");
@@ -6483,6 +6874,60 @@ const CHAT = {
     }
     return el;
   },
+  EMO: ["🤲", "👍", "❤️", "🌙", "😂", "✅"],
+  brancherReactions(el, id, basculer) {
+    const re = document.createElement("div"); re.className = "cv-re";
+    el.querySelector(".cv-h").before(re);
+    const b = document.createElement("button"); b.className = "cv-rb"; b.textContent = "☺"; b.setAttribute("aria-label", "Réagir");
+    b.onclick = () => {
+      const ex = el.querySelector(".cv-pick"); if (ex) return ex.remove();
+      const pk = document.createElement("div"); pk.className = "cv-pick";
+      CHAT.EMO.forEach(e => { const x = document.createElement("button"); x.textContent = e; x.onclick = () => { pk.remove(); basculer(id, e); }; pk.appendChild(x); });
+      el.querySelector(".cv-h").before(pk);
+    };
+    el.querySelector(".cv-h").prepend(b);
+  },
+  rendreReacs(el, rows, basculer) {
+    const re = el.querySelector(".cv-re"); if (!re) return;
+    const g = new Map(); rows.forEach(x => { if (!g.has(x.emoji)) g.set(x.emoji, { n: 0, moi: false }); const o = g.get(x.emoji); o.n++; if (x.user_id === etat.parentId) o.moi = true; });
+    re.innerHTML = "";
+    g.forEach((o, e) => { const b = document.createElement("button"); b.className = o.moi ? "moi" : ""; b.textContent = e + (o.n > 1 ? " " + o.n : ""); b.onclick = () => basculer(e); re.appendChild(b); });
+  },
+  rendreSondage(zone, id, sd) {
+    const d = document.createElement("div"); d.className = "cv-sd"; d.dataset.sd = id;
+    d.innerHTML = `<b dir="auto" data-notrad>📊 ${esc(sd.question)}</b>` + (sd.options || []).map((t, i) => `<button class="cv-so" data-i="${i}"><span class="cv-sb"></span><span class="cv-st" dir="auto" data-notrad>${esc(t)}</span><span class="cv-sn"></span></button>`).join("") + `<small class="cv-ss">Touchez pour voter</small>`;
+    d.querySelectorAll(".cv-so").forEach(b => b.onclick = async () => {
+      if (!etat.parentId) return exigerConnexion();
+      try {
+        const r = await sb.rpc("yt_voter", { s: id, c: +b.dataset.i }); if (r.error) throw r.error;
+        CHAT.majSondages(d.closest(".cv-fil") || document, [id]);
+      } catch (e) { d.querySelector(".cv-ss").textContent = "Rejoignez le groupe pour voter."; }
+    });
+    zone.appendChild(d);
+  },
+  async majSondages(racine, ids) {
+    const r = await sb.rpc("yt_sondage_resultats", { ids });
+    if (r.error) return;
+    ids.forEach(id => {
+      const d = racine.querySelector(`[data-sd="${id}"]`); if (!d) return;
+      const rows = (r.data || []).filter(x => x.sondage_id === id), tot = rows.reduce((a, x) => a + Number(x.n), 0);
+      d.querySelectorAll(".cv-so").forEach(b => {
+        const i = +b.dataset.i, x = rows.find(y => y.choix === i), n = x ? Number(x.n) : 0;
+        b.querySelector(".cv-sb").style.width = tot ? Math.round(100 * n / tot) + "%" : "0";
+        b.querySelector(".cv-sn").textContent = n ? String(n) : "";
+        b.classList.toggle("moi", !!(x && x.moi));
+      });
+      d.querySelector(".cv-ss").textContent = tot ? tot + " vote" + (tot > 1 ? "s" : "") : "Touchez pour voter";
+    });
+  },
+  chercherDans(w) {
+    let b = w.querySelector(".cv-rch");
+    if (b) { b.remove(); w.querySelectorAll(".cv-m").forEach(x => { x.style.display = ""; }); return; }
+    b = document.createElement("div"); b.className = "cv-rch"; b.innerHTML = `<input type="search" placeholder="Chercher un mot…" aria-label="Chercher dans la discussion">`;
+    w.querySelector(".cv-fil").before(b);
+    const i = b.querySelector("input"); i.focus();
+    i.oninput = () => { const m = i.value.trim().toLowerCase(); w.querySelectorAll(".cv-m").forEach(x => { x.style.display = !m || x.textContent.toLowerCase().includes(m) ? "" : "none"; }); };
+  },
   ecran(retour) {
     const w = document.createElement("div");
     w.className = "ecran cv-ecran";
@@ -6502,6 +6947,31 @@ const CHAT = {
   session(o) {
     const fil = o.fil, vus = new Set();
     let dernier = null, jourAff = "", ferme = false, canal = null, iv = null;
+    const reac = new Map(); let enChg = false;
+    const majReacs = () => fil.querySelectorAll(".cv-m[data-id]").forEach(el => CHAT.rendreReacs(el, reac.get(el.dataset.id) || [], e => basculer(el.dataset.id, e)));
+    const basculer = async (id, emoji) => {
+      const moi = etat.parentId; if (!moi) return exigerConnexion();
+      const mien = (reac.get(id) || []).find(x => x.user_id === moi), autres = (reac.get(id) || []).filter(x => x.user_id !== moi), retirer = !!(mien && mien.emoji === emoji);
+      if (!retirer) autres.push({ user_id: moi, emoji });
+      reac.set(id, autres); majReacs();
+      try {
+        const r = retirer ? await sb.from("yt_reactions").delete().eq("cible", o.cible).eq("cible_id", id).eq("user_id", moi) : await sb.from("yt_reactions").upsert({ cible: o.cible, cible_id: id, user_id: moi, emoji }, { onConflict: "cible,cible_id,user_id" });
+        if (r.error) throw r.error;
+      } catch (e) { chargerReacs(); }
+    };
+    async function chargerReacs() {
+      if (!o.cible || enChg || !fil.isConnected) return; enChg = true;
+      try {
+        const ids = [...vus].slice(-150);
+        if (ids.length) {
+          const r = await sb.from("yt_reactions").select("cible_id,emoji,user_id").eq("cible", o.cible).in("cible_id", ids);
+          if (!r.error) { reac.clear(); (r.data || []).forEach(x => { if (!reac.has(x.cible_id)) reac.set(x.cible_id, []); reac.get(x.cible_id).push(x); }); majReacs(); }
+        }
+        const sd = [...fil.querySelectorAll("[data-sd]")].map(x => x.dataset.sd);
+        if (sd.length) await CHAT.majSondages(fil, sd);
+      } catch (e) {}
+      enChg = false;
+    }
     function ajouter(rows) {
       if (!rows || !rows.length) return;
       const vide = fil.querySelector(".cv-vide, .centre"); if (vide) vide.remove();
@@ -6522,17 +6992,20 @@ const CHAT = {
           };
           el.querySelector(".cv-h").prepend(d);
         }
+        if (o.cible) CHAT.brancherReactions(el, m.id, basculer);
+        if (o.decorer) { try { o.decorer(el, r, m); } catch (e) {} }
         fil.appendChild(el);
         if (!dernier || m.created_at > dernier) dernier = m.created_at;
       });
       if (collerBas) fil.scrollTop = fil.scrollHeight;
+      if (o.cible) setTimeout(chargerReacs, 0);
     }
     async function rafraichir() {
       if (ferme) return;
       if (!fil.isConnected) return stop();
       try {
         const rows = await o.lire(dernier);
-        if (rows && rows.length) { ajouter(rows); if (o.onRecu) o.onRecu(rows); }
+        if (rows && rows.length) { ajouter(rows); if (o.onRecu) o.onRecu(rows); } else chargerReacs();
       } catch (e) {}
     }
     function stop() {
@@ -6547,7 +7020,7 @@ const CHAT = {
       canal = sb.channel(o.canal).on("postgres_changes", cfg, () => rafraichir()).subscribe();
     } catch (e) {}
     return {
-      ajouter, stop,
+      ajouter, stop, rafraichir,
       async demarrer() {
         try { const rows = await o.lire(null); fil.innerHTML = ""; ajouter(rows); if (!rows.length) fil.innerHTML = `<p class="cv-vide">Aucun message pour l'instant. Écrivez le premier !</p>`; if (o.onRecu) o.onRecu(rows); }
         catch (e) { fil.innerHTML = `<p class="cv-vide erreur">${esc(txtErr(e, "Chargement impossible."))}</p>`; }
@@ -6557,7 +7030,7 @@ const CHAT = {
   compositeur(pied, o) {
     let rec = null, flux = null, morceaux = [], t0 = 0, tim = null, envoi = false, annule = false;
     function normal() {
-      pied.innerHTML = `<div class="cv-comp">${o.extra ? `<button class="cv-att" id="cv-att" aria-label="Joindre une publication">📎</button>` : ""}
+      pied.innerHTML = `<div class="cv-comp">${o.extra ? `<button class="cv-att" id="cv-att" aria-label="Joindre une publication">📎</button>` : ""}${o.sondage ? `<button class="cv-att" id="cv-sd" aria-label="Créer un sondage">📊</button>` : ""}
         <textarea id="cv-t" rows="1" maxlength="2000" placeholder="Message" dir="auto" aria-label="Message"></textarea>
         <button class="cv-btn" id="cv-go" aria-label="Enregistrer un message vocal">🎤</button></div><p class="erreur" id="cv-err" hidden></p>`;
       const t = pied.querySelector("#cv-t"), go = pied.querySelector("#cv-go"), err = pied.querySelector("#cv-err");
@@ -6573,6 +7046,7 @@ const CHAT = {
         envoi = false; go.disabled = false;
       };
       if (o.extra) pied.querySelector("#cv-att").onclick = o.extra;
+      if (o.sondage) pied.querySelector("#cv-sd").onclick = o.sondage;
     }
     async function demarrer(montrer) {
       if (!window.MediaRecorder || !navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) return montrer("Enregistrement non disponible sur cet appareil.");
@@ -6618,12 +7092,13 @@ const CHAT = {
 async function vueDiscussions() {
   if (!etat.parentId) return exigerConnexion();
   let onglet = (etat.params && etat.params.onglet) || "p";
-  const w = ecran("Discussions", ["flux"], `<input class="champ" id="q" type="search" placeholder="Chercher une personne par son nom" style="margin:0" aria-label="Chercher une personne par son nom">
+  const w = ecran("Discussions", ["flux"], `<input class="champ" id="q" type="search" placeholder="Chercher une discussion ou une personne" style="margin:0" aria-label="Chercher une discussion ou une personne">
     <div id="res"></div>
     <div class="cv-onglets" id="ong"><button data-t="p">Privés</button><button data-t="g">Groupes</button></div>
     <div id="liste" class="liste-contenus"><div class="centre"><div class="spinner"></div></div></div>`);
   const liste = w.querySelector("#liste"), res = w.querySelector("#res"), q = w.querySelector("#q");
   let seq = 0, minuteur = null;
+  function filtrerLocal() { const m = q.value.trim().toLowerCase(); liste.querySelectorAll(".cv-ligne").forEach(l => { l.style.display = !m || l.textContent.toLowerCase().includes(m) ? "" : "none"; }); }
   const vide = t => `<p class="cv-vide">${esc(t)}</p>`;
   async function privees() {
     const mon = ++seq;
@@ -6636,6 +7111,7 @@ async function vueDiscussions() {
         const auj = new Date(c.dernier_le).toDateString() === new Date().toDateString();
         liste.appendChild(CHAT.ligne(c.nom, c.a_audio && !c.dernier ? "🎤 Message vocal" : (c.dernier || "🎤"), auj ? CHAT.heure(c.dernier_le) : CHAT.jour(c.dernier_le), Number(c.non_lus) || 0, () => router("conv", { id: c.pair, nom: c.nom })));
       });
+      filtrerLocal();
     } catch (e) { if (mon === seq && w.isConnected) liste.innerHTML = `<p class="erreur">${esc(txtErr(e, "Chargement impossible."))}</p>`; }
   }
   async function groupes() {
@@ -6650,6 +7126,7 @@ async function vueDiscussions() {
       const mg = liste.querySelector("#mg"), l = (r.data || []).filter(x => x.yt_groupes);
       mg.innerHTML = l.length ? "" : vide("Vous n'êtes dans aucun groupe.");
       l.forEach(x => mg.appendChild(CHAT.ligne(x.yt_groupes.nom, "", "", 0, () => router("groupe", { id: x.yt_groupes.id }))));
+      filtrerLocal();
     } catch (e) { if (mon === seq && w.isConnected) liste.querySelector("#mg").innerHTML = `<p class="erreur">${esc(txtErr(e, "Chargement impossible."))}</p>`; }
   }
   function afficher() {
@@ -6659,18 +7136,18 @@ async function vueDiscussions() {
   w.querySelectorAll("#ong button").forEach(b => b.onclick = () => { onglet = b.dataset.t; afficher(); });
   async function chercher() {
     const mot = q.value.trim();
-    if (mot.length < 2) { res.innerHTML = ""; w.querySelector("#ong").hidden = false; liste.hidden = false; return; }
-    w.querySelector("#ong").hidden = true; liste.hidden = true;
+    filtrerLocal();
+    if (mot.length < 2) { res.innerHTML = ""; return; }
     const mon = ++seq;
     try {
       const r = await sb.rpc("yt_chercher_personnes", { q: mot });
       if (r.error) throw r.error;
       if (mon !== seq || !w.isConnected) return;
-      res.innerHTML = (r.data || []).length ? "" : vide("Personne introuvable.");
+      res.innerHTML = (r.data || []).length ? `<p class="cv-sec">Autres personnes</p>` : "";
       (r.data || []).forEach(p => res.appendChild(CHAT.ligne(p.nom, "", "", 0, () => router("conv", { id: p.id, nom: p.nom }))));
     } catch (e) { if (mon === seq && w.isConnected) res.innerHTML = `<p class="erreur">${esc(txtErr(e, "Chargement impossible."))}</p>`; }
   }
-  q.oninput = () => { clearTimeout(minuteur); minuteur = setTimeout(chercher, 350); };
+  q.oninput = () => { filtrerLocal(); clearTimeout(minuteur); minuteur = setTimeout(chercher, 350); };
   afficher();
 }
 
@@ -6704,7 +7181,8 @@ async function vueConv() {
     });
   }
   bas();
-  w.querySelector("#cv-men").onclick = () => CHAT.panneau(w, "menu", `<button class="btn-text" id="blq" style="color:var(--rouge)">${bloque ? "Débloquer" : "Bloquer cette personne"}</button>`, p => {
+  w.querySelector("#cv-men").onclick = () => CHAT.panneau(w, "menu", `<button class="btn-text" id="rch">🔎 Chercher dans la discussion</button><button class="btn-text" id="blq" style="color:var(--rouge)">${bloque ? "Débloquer" : "Bloquer cette personne"}</button>`, p => {
+    p.querySelector("#rch").onclick = () => { p.hidden = true; CHAT.chercherDans(w); };
     p.querySelector("#blq").onclick = async () => {
       if (!bloque && !confirm("Bloquer cette personne ?")) return;
       const r = bloque ? await sb.from("yt_blocages").delete().eq("bloque", pair) : await sb.from("yt_blocages").insert({ bloque: pair });
@@ -6715,7 +7193,7 @@ async function vueConv() {
   const filtre = `de=eq.${me},vers=eq.${pair}`;
   const reqBase = () => sb.from("yt_dm").select("*").or(`and(de.eq.${me},vers.eq.${pair}),and(de.eq.${pair},vers.eq.${me})`);
   ses = CHAT.session({
-    fil, groupe: false, table: "yt_dm", filtre: `vers=eq.${me}`, canal: "dm-" + pair + "-" + Date.now(),
+    fil, groupe: false, cible: "dm", table: "yt_dm", filtre: `vers=eq.${me}`, canal: "dm-" + pair + "-" + Date.now(),
     lire: async depuis => {
       if (depuis) { const r = await reqBase().gte("created_at", depuis).order("created_at", { ascending: true }).limit(100); if (r.error) throw r.error; return r.data || []; }
       const r = await reqBase().order("created_at", { ascending: false }).limit(100); if (r.error) throw r.error; return (r.data || []).reverse();
@@ -6756,7 +7234,9 @@ async function vueGroupe() {
     } catch (e) { p.querySelector(".cv-mem").innerHTML = `<p class="erreur">${esc(txtErr(e, "Chargement impossible."))}</p>`; }
   });
   ent.onkeydown = ev => { if (ev.key === "Enter") ent.onclick(); };
-  w.querySelector("#cv-men").onclick = () => CHAT.panneau(w, "menu", `${proprietaire() ? `<button class="btn-text" id="sup" style="color:var(--rouge)">Supprimer le groupe</button>` : membre ? `<button class="btn-text" id="qui" style="color:var(--rouge)">Quitter le groupe</button>` : `<p>Rejoignez le groupe pour écrire.</p>`}`, p => {
+  w.querySelector("#cv-men").onclick = () => CHAT.panneau(w, "menu", `<button class="btn-text" id="rch">🔎 Chercher dans la discussion</button><button class="btn-text" id="inv">🔗 Inviter (lien et code QR)</button>${proprietaire() ? `<button class="btn-text" id="sup" style="color:var(--rouge)">Supprimer le groupe</button>` : membre ? `<button class="btn-text" id="qui" style="color:var(--rouge)">Quitter le groupe</button>` : `<p>Rejoignez le groupe pour écrire.</p>`}`, p => {
+    p.querySelector("#rch").onclick = () => { p.hidden = true; CHAT.chercherDans(w); };
+    p.querySelector("#inv").onclick = () => { p.hidden = true; ouvrirQR("Inviter dans « " + g.nom + " »", lienGroupe(id), "Rejoignez le groupe « " + g.nom + " » sur Lumu :"); };
     const sup = p.querySelector("#sup"), qui = p.querySelector("#qui");
     if (sup) sup.onclick = async () => {
       if (!confirm("Supprimer ce groupe et toutes ses publications ?")) return;
@@ -6770,12 +7250,22 @@ async function vueGroupe() {
       router("groupe", { id });
     };
   });
-  const SEL = `id,auteur_id,auteur_nom,body,audio_path,audio_duree,created_at,contenu_id,yt_contenus(${CHAMPS_CONTENU})`;
+  const SEL = `id,auteur_id,auteur_nom,body,audio_path,audio_duree,created_at,contenu_id,epingle,sondage_id,yt_sondages(question,options),yt_contenus(${CHAMPS_CONTENU})`;
   const ajouterPost = async champs => { const r = await sb.from("yt_groupe_posts").insert({ groupe_id: id, ...champs }).select(SEL).single(); if (r.error) throw r.error; ses.ajouter([r.data]); };
   if (membre) {
     CHAT.compositeur(pied, {
       texte: v => ajouterPost({ body: v }),
       vocal: async (blob, duree) => ajouterPost({ audio_path: await CHAT.televerser(blob), audio_duree: duree }),
+      sondage: () => CHAT.panneau(w, "sondage", `<input class="champ" id="sq" maxlength="200" placeholder="Question du sondage" dir="auto" style="margin:0 0 6px"><input class="champ so" maxlength="60" placeholder="Choix 1" dir="auto" style="margin:0 0 6px"><input class="champ so" maxlength="60" placeholder="Choix 2" dir="auto" style="margin:0 0 6px"><input class="champ so" maxlength="60" placeholder="Choix 3 (facultatif)" dir="auto" style="margin:0 0 6px"><input class="champ so" maxlength="60" placeholder="Choix 4 (facultatif)" dir="auto" style="margin:0 0 8px"><button class="btn" id="sok">Publier le sondage</button><p class="erreur" id="ser" hidden></p>`, pn => {
+        pn.querySelector("#sok").onclick = async () => {
+          const q = pn.querySelector("#sq").value.trim(), opts = [...pn.querySelectorAll(".so")].map(x => x.value.trim()).filter(Boolean), er = pn.querySelector("#ser");
+          if (!q || opts.length < 2) { er.textContent = "Écrivez la question et au moins 2 choix."; er.hidden = false; return; }
+          pn.querySelector("#sok").disabled = true;
+          const r = await sb.rpc("yt_creer_sondage", { g: id, q, opts });
+          if (r.error) { er.textContent = txtErr(r.error, "Sondage non publié."); er.hidden = false; pn.querySelector("#sok").disabled = false; return; }
+          pn.hidden = true; ses.rafraichir();
+        };
+      }),
       extra: proprietaire() ? async () => {
         const { data, error } = etat.chaine ? await sb.from("yt_contenus").select("id,title").eq("channel_id", etat.chaine.id).eq("status", "published").order("published_at", { ascending: false }).limit(50) : { data: [] };
         if (error) return alert(txtErr(error));
@@ -6794,8 +7284,38 @@ async function vueGroupe() {
       router("groupe", { id });
     };
   }
+  const barreEpi = document.createElement("div"); barreEpi.className = "cv-epi"; barreEpi.hidden = true; fil.before(barreEpi);
+  async function majEpingle() {
+    try {
+      const r = await sb.from("yt_groupe_posts").select("id,body,audio_path,sondage_id,yt_sondages(question)").eq("groupe_id", id).eq("epingle", true).limit(1).maybeSingle();
+      const x = r.data;
+      if (!x) { barreEpi.hidden = true; return; }
+      barreEpi.innerHTML = `<b>📌</b><span dir="auto" data-notrad>${esc(x.body || (x.yt_sondages ? "📊 " + x.yt_sondages.question : x.audio_path ? "🎤 Message vocal" : "📎 Publication"))}</span>`;
+      barreEpi.hidden = false;
+      barreEpi.onclick = () => { const e = fil.querySelector(`.cv-m[data-id="${x.id}"]`); if (e) { e.scrollIntoView({ block: "center" }); e.classList.add("flash"); setTimeout(() => e.classList.remove("flash"), 1500); } };
+    } catch (e) {}
+  }
+  majEpingle();
+  const tEpi = setInterval(() => { if (!fil.isConnected) clearInterval(tEpi); else majEpingle(); }, 20000);
   ses = CHAT.session({
-    fil, groupe: true, table: "yt_groupe_posts", filtre: `groupe_id=eq.${id}`, canal: "gr-" + id + "-" + Date.now(),
+    fil, groupe: true, cible: "post", table: "yt_groupe_posts",
+    decorer: (el, r) => {
+      if (r.epingle) el.classList.add("epingle");
+      if (proprietaire()) {
+        const b = document.createElement("button"); b.className = "cv-pin"; b.textContent = "📌"; b.setAttribute("aria-label", "Épingler");
+        b.onclick = async () => {
+          const on = !el.classList.contains("epingle");
+          const x = await sb.rpc("yt_epingler", { p: r.id, v: on });
+          if (x.error) return alert(txtErr(x.error));
+          fil.querySelectorAll(".cv-m.epingle").forEach(e => e.classList.remove("epingle"));
+          if (on) el.classList.add("epingle");
+          majEpingle();
+        };
+        el.querySelector(".cv-h").prepend(b);
+      }
+      if (r.sondage_id && r.yt_sondages) CHAT.rendreSondage(el.querySelector(".cv-cc"), r.sondage_id, r.yt_sondages);
+    },
+  filtre: `groupe_id=eq.${id}`, canal: "gr-" + id + "-" + Date.now(),
     lire: async depuis => {
       const base = () => sb.from("yt_groupe_posts").select(SEL).eq("groupe_id", id);
       if (depuis) { const r = await base().gte("created_at", depuis).order("created_at", { ascending: true }).limit(100); if (r.error) throw r.error; return r.data || []; }
