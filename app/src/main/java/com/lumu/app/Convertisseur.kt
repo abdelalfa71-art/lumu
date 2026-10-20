@@ -12,13 +12,14 @@ import java.nio.ByteBuffer
 
 /** Convertit un audio AMR (enregistreur vocal) en M4A (AAC), lisible partout. Utilise uniquement Android. */
 object Convertisseur {
+    @Volatile var derniereErreur: String = ""
 
     fun estAmr(nom: String): Boolean {
         val n = nom.lowercase()
         return n.endsWith(".amr") || n.endsWith(".awb")
     }
 
-    fun amrVersM4a(ctx: Context, src: Uri, dest: File): Boolean {
+    fun amrVersM4a(ctx: Context, src: Uri, dest: File, progres: (Int) -> Unit = {}, annule: () -> Boolean = { false }): Boolean {
         val ex = MediaExtractor()
         var dec: MediaCodec? = null
         var enc: MediaCodec? = null
@@ -35,6 +36,8 @@ object Convertisseur {
             if (idx < 0 || fmt == null) return false
             ex.selectTrack(idx)
 
+            val dureeUs = if (fmt.containsKey(MediaFormat.KEY_DURATION)) fmt.getLong(MediaFormat.KEY_DURATION) else 0L
+            var dernierPct = -1
             val rate = if (fmt.containsKey(MediaFormat.KEY_SAMPLE_RATE)) fmt.getInteger(MediaFormat.KEY_SAMPLE_RATE) else 8000
             val canaux = if (fmt.containsKey(MediaFormat.KEY_CHANNEL_COUNT)) fmt.getInteger(MediaFormat.KEY_CHANNEL_COUNT) else 1
 
@@ -83,55 +86,71 @@ object Convertisseur {
                 }
             }
 
-            fun nourrir(pcm: ByteBuffer, taille: Int, pts: Long, fin: Boolean) {
-                val arr = ByteArray(taille)
-                if (taille > 0) pcm.get(arr)
+            var echantillons = 0L
+            fun nourrir(arr: ByteArray, taille: Int, fin: Boolean) {
                 var off = 0
                 while (true) {
-                    val i = e.dequeueInputBuffer(10000)
+                    if (annule()) throw InterruptedException("annule")
+                    val i = e.dequeueInputBuffer(2000)
                     if (i < 0) { vider(0); continue }
                     val ib = e.getInputBuffer(i)!!
                     ib.clear()
                     val n = minOf(taille - off, ib.capacity())
                     if (n > 0) ib.put(arr, off, n)
                     val dernier = off + n >= taille
-                    val t = pts + (off.toLong() / 2 / canaux) * 1_000_000L / rate
+                    val t = (echantillons + (off.toLong() / 2 / canaux)) * 1_000_000L / rate
                     e.queueInputBuffer(i, 0, n, t, if (fin && dernier) MediaCodec.BUFFER_FLAG_END_OF_STREAM else 0)
                     off += n
                     vider(0)
                     if (dernier) break
                 }
+                echantillons += taille.toLong() / 2 / canaux
             }
 
             val d = dec
             val info = MediaCodec.BufferInfo()
             var entreeFinie = false
             var decFini = false
+            val tampon = ByteArray(16384)
+            var nT = 0
             while (!decFini) {
+                if (annule()) throw InterruptedException("annule")
                 if (!entreeFinie) {
-                    val i = d.dequeueInputBuffer(10000)
+                    val i = d.dequeueInputBuffer(2000)
                     if (i >= 0) {
                         val b = d.getInputBuffer(i)!!
                         val n = ex.readSampleData(b, 0)
                         if (n < 0) { d.queueInputBuffer(i, 0, 0, 0, MediaCodec.BUFFER_FLAG_END_OF_STREAM); entreeFinie = true }
-                        else { d.queueInputBuffer(i, 0, n, ex.sampleTime, 0); ex.advance() }
+                        else {
+                            val st = ex.sampleTime
+                            d.queueInputBuffer(i, 0, n, st, 0); ex.advance()
+                            if (dureeUs > 0) { val pc = (st * 100 / dureeUs).toInt().coerceIn(0, 99); if (pc != dernierPct) { dernierPct = pc; progres(pc) } }
+                        }
                     }
                 }
-                val o = d.dequeueOutputBuffer(info, 10000)
+                val o = d.dequeueOutputBuffer(info, 2000)
                 if (o >= 0) {
                     val ob = d.getOutputBuffer(o)!!
                     ob.position(info.offset); ob.limit(info.offset + info.size)
                     val fin = info.flags and MediaCodec.BUFFER_FLAG_END_OF_STREAM != 0
-                    nourrir(ob, info.size, info.presentationTimeUs, fin)
+                    var restant = info.size
+                    while (restant > 0) {
+                        val n = minOf(restant, tampon.size - nT)
+                        ob.get(tampon, nT, n); nT += n; restant -= n
+                        if (nT == tampon.size) { nourrir(tampon, nT, false); nT = 0 }
+                    }
+                    if (fin) { nourrir(tampon, nT, true); nT = 0; decFini = true }
                     d.releaseOutputBuffer(o, false)
-                    if (fin) decFini = true
                 }
             }
             var garde = 0
-            while (!encFini && garde++ < 500) vider(10000)
+            while (!encFini && garde++ < 200) { if (annule()) throw InterruptedException("annule"); vider(10000) }
+            progres(100)
             return encFini && demarre
+        } catch (x: InterruptedException) {
+            derniereErreur = "annule"; return false
         } catch (x: Exception) {
-            return false
+            derniereErreur = x.toString(); return false
         } finally {
             try { dec?.stop() } catch (x: Exception) {}
             try { dec?.release() } catch (x: Exception) {}

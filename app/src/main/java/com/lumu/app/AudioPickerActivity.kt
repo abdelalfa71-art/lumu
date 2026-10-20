@@ -48,6 +48,9 @@ class AudioPickerActivity : AppCompatActivity() {
     private lateinit var liste: ListView
     private lateinit var info: TextView
     private lateinit var valider: Button
+    private lateinit var barre: android.widget.ProgressBar
+    @Volatile private var conversion = false
+    @Volatile private var annuleConv = false
     private lateinit var adaptateur: ArrayAdapter<Item>
     private val btns = mutableMapOf<String, Button>()
 
@@ -115,6 +118,8 @@ class AudioPickerActivity : AppCompatActivity() {
             textSize = 18f; isAllCaps = false
             setOnClickListener { terminer() }
         }
+        barre = android.widget.ProgressBar(this, null, android.R.attr.progressBarStyleHorizontal).apply { max = 100; visibility = View.GONE }
+        racine.addView(barre, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp(10)))
         racine.addView(valider, lp(top = 6))
 
         racine.addView(Button(this).apply {
@@ -123,7 +128,7 @@ class AudioPickerActivity : AppCompatActivity() {
         })
         racine.addView(Button(this).apply {
             text = "Annuler"; textSize = 14f; isAllCaps = false
-            setOnClickListener { setResult(RESULT_CANCELED); finish() }
+            setOnClickListener { if (conversion) { annuleConv = true } else { setResult(RESULT_CANCELED); finish() } }
         })
 
         setContentView(racine)
@@ -214,23 +219,41 @@ class AudioPickerActivity : AppCompatActivity() {
         val besoin = noms.any { Convertisseur.estAmr(it) }
         if (!besoin) { rendre(uris); return }
         valider.isEnabled = false
-        valider.text = "⏳ Conversion en MP3/M4A… patientez"
+        valider.text = "⏳ Conversion… 0 %"
+        barre.progress = 0; barre.visibility = View.VISIBLE
+        conversion = true; annuleConv = false
+        val total = noms.count { Convertisseur.estAmr(it) }
         Thread {
             val finaux = mutableListOf<Uri>()
             var echecs = 0
+            var rang = 0
+            var raison = ""
             uris.forEachIndexed { k, u ->
+                if (annuleConv) return@forEachIndexed
                 if (Convertisseur.estAmr(noms[k])) {
+                    rang++
+                    val r = rang
                     val base = noms[k].substringBeforeLast('.').replace(Regex("[^A-Za-z0-9._-]"), "_").ifEmpty { "audio" }
                     val f = java.io.File(cacheDir, "conv/${base}_${System.currentTimeMillis()}.m4a")
-                    if (Convertisseur.amrVersM4a(this, u, f)) {
-                        finaux += androidx.core.content.FileProvider.getUriForFile(this, "$packageName.fp", f)
-                    } else echecs++
+                    val ok = Convertisseur.amrVersM4a(this, u, f, { pc ->
+                        runOnUiThread {
+                            barre.progress = pc
+                            valider.text = "⏳ Conversion " + (if (total > 1) "$r/$total · " else "") + "$pc %  (patientez)"
+                        }
+                    }, { annuleConv })
+                    if (ok) finaux += androidx.core.content.FileProvider.getUriForFile(this, "$packageName.fp", f)
+                    else { echecs++; if (raison.isEmpty()) raison = Convertisseur.derniereErreur }
                 } else finaux += u
             }
             runOnUiThread {
-                if (finaux.isEmpty()) {
+                conversion = false; barre.visibility = View.GONE
+                if (annuleConv) {
+                    valider.isEnabled = true; majBouton()
+                    android.widget.Toast.makeText(this, "Conversion annulée", android.widget.Toast.LENGTH_SHORT).show()
+                } else if (finaux.isEmpty()) {
                     valider.text = "❌ Conversion impossible — choisissez un MP3 ou M4A"
                     valider.isEnabled = true
+                    if (raison.isNotEmpty()) android.widget.Toast.makeText(this, "Détail : $raison", android.widget.Toast.LENGTH_LONG).show()
                 } else {
                     if (echecs > 0) android.widget.Toast.makeText(this, "$echecs fichier(s) AMR non convertis", android.widget.Toast.LENGTH_LONG).show()
                     rendre(finaux)
