@@ -52,6 +52,7 @@ class MainActivity : AppCompatActivity() {
 
     private val assetLoader by lazy {
         WebViewAssetLoader.Builder()
+            .addPathHandler("/recu/", WebViewAssetLoader.InternalStoragePathHandler(this, File(cacheDir, "recu").apply { mkdirs() }))
             .addPathHandler("/", WebViewAssetLoader.AssetsPathHandler(this))
             .build()
     }
@@ -59,6 +60,9 @@ class MainActivity : AppCompatActivity() {
     /** Exposé à la page : adresse publique du site pour les liens de partage. */
     inner class PontNatif {
         @JavascriptInterface fun site(): String = BuildConfig.SITE_URL
+
+        /** Fichiers reçus via « Partager » (JSON : [{n,t}]) ; vidé après lecture. */
+        @JavascriptInterface fun recus(): String { val r = recusJson; recusJson = ""; return r }
 
         /** Ouvre le menu de partage du téléphone (WhatsApp, Facebook, SMS…). */
         @JavascriptInterface fun partager(titre: String?, texte: String?) {
@@ -146,6 +150,59 @@ class MainActivity : AppCompatActivity() {
     }
 
     private var lectureEnCours = false
+    @Volatile private var recusJson = ""
+
+    // ------------------------------------------------------------------ réception du partage (Partager › Lumu)
+
+    private fun recevoirPartage(i: Intent?) {
+        if (i == null) return
+        val a = i.action
+        if (a != Intent.ACTION_SEND && a != Intent.ACTION_SEND_MULTIPLE) return
+        val uris = mutableListOf<Uri>()
+        @Suppress("DEPRECATION")
+        if (a == Intent.ACTION_SEND) (i.getParcelableExtra<Uri>(Intent.EXTRA_STREAM))?.let { uris += it }
+        else i.getParcelableArrayListExtra<Uri>(Intent.EXTRA_STREAM)?.let { uris += it }
+        i.clipData?.let { cd -> for (k in 0 until cd.itemCount) cd.getItemAt(k).uri?.let { if (it !in uris) uris += it } }
+        i.action = null
+        if (uris.isEmpty()) return
+        Toast.makeText(this, "Préparation des fichiers…", Toast.LENGTH_SHORT).show()
+        Thread {
+            val dossier = File(cacheDir, "recu"); dossier.mkdirs()
+            dossier.listFiles()?.forEach { it.delete() }
+            val arr = org.json.JSONArray()
+            uris.forEachIndexed { k, u ->
+                try {
+                    var nom = ""
+                    try {
+                        contentResolver.query(u, arrayOf(android.provider.OpenableColumns.DISPLAY_NAME), null, null, null)?.use { c ->
+                            if (c.moveToFirst()) nom = c.getString(0).orEmpty()
+                        }
+                    } catch (e: Exception) { }
+                    val mime = contentResolver.getType(u) ?: ""
+                    if (nom.isEmpty()) nom = (u.lastPathSegment ?: "partage").substringAfterLast('/')
+                    nom = nom.replace(Regex("[^A-Za-z0-9._-]"), "_")
+                    if (!nom.contains('.')) {
+                        val ext = android.webkit.MimeTypeMap.getSingleton().getExtensionFromMimeType(mime)
+                        if (ext != null) nom += ".$ext"
+                    }
+                    val f = File(dossier, "${k}_$nom")
+                    contentResolver.openInputStream(u)?.use { ins -> f.outputStream().use { o -> ins.copyTo(o, 65536) } }
+                    if (f.length() > 0) arr.put(org.json.JSONObject().put("n", f.name).put("t", mime).put("nom", nom))
+                } catch (e: Exception) { }
+            }
+            recusJson = if (arr.length() > 0) arr.toString() else ""
+            runOnUiThread {
+                if (arr.length() == 0) Toast.makeText(this, "Fichiers illisibles.", Toast.LENGTH_LONG).show()
+                else webView.evaluateJavascript("window.__lumuRecu&&window.__lumuRecu()", null)
+            }
+        }.start()
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+        recevoirPartage(intent)
+    }
     private val demandeStockage =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { }
     private val demandeNotif =
@@ -352,6 +409,7 @@ class MainActivity : AppCompatActivity() {
 
         if (savedInstanceState != null) webView.restoreState(savedInstanceState)
         else webView.loadUrl(DEPART)
+        recevoirPartage(intent)
     }
 
     override fun onSaveInstanceState(out: Bundle) { super.onSaveInstanceState(out); webView.saveState(out) }
