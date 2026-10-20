@@ -384,7 +384,7 @@ html:root .ec-haut b { font-size: 22px; letter-spacing: 0; }
 html:root .ec-haut .ec-logo { display: none; }
 html:root .ec-haut button { width: 44px; height: 44px; }
 html:root .ec-haut .menu-plus { top: 100%; right: 8px; }
-html:root .ec-haut .menu-plus button { color: var(--texte); width: 100%; height: auto; border-radius: 10px; }
+html:root .ec-haut .menu-plus button { color: var(--texte); width: 100%; height: auto; min-height: 50px; border-radius: 10px; display: flex; align-items: center; justify-content: flex-start; }
 html:root .ec-corps { margin-top: 0; gap: 0; padding: 0 0 12px; }
 html:root .ec-gros { margin: 12px 16px; }
 html:root .ec-chips { padding: 10px 16px 6px; gap: 8px; }
@@ -459,6 +459,30 @@ html.nuit .ec-imam, html:root[data-theme="dark"] .ec-imam { color: #7FD6C2; }
 .ec-rech input { width: 100%; box-sizing: border-box; min-height: 46px; border-radius: 999px; border: 0; padding: 0 18px; font-size: 17px; background: color-mix(in srgb, var(--texte) 8%, var(--surface)); color: var(--texte); }
 .ec-rech[hidden] { display: none; }
 .ec-cherche .ec-radio, .ec-cherche .ec-reprise, .ec-cherche #ec-chips, .ec-cherche #ec-rep { display: none; }
+
+/* ===== Tailles façon WhatsApp ===== */
+html:root .ec-haut b { font-size: 20px; }
+html:root .ec-radio b, html:root .ec-reprise b { font-size: 16px; }
+html:root .ec-radio small { font-size: 13px; }
+html:root .ec-tx b { font-size: 16px; font-weight: 600; }
+html:root .ec-tx small { font-size: 13px; }
+.ec-imam { font-size: 13px; }
+html:root .ec-row, html:root .ec-radio, html:root .ec-reprise { padding: 8px 16px; }
+html:root .ec-row .ec-cv, html:root .ec-reprise .ec-cv { width: 48px; height: 48px; }
+html:root .ec-rp { width: 48px; height: 48px; }
+html:root .ec-row::after, html:root .ec-radio::before { left: 78px; }
+html:root .ec-dl { width: 36px; height: 36px; } html:root .ec-pl { width: 40px; height: 40px; }
+html:root .ec-pl svg { width: 26px; height: 26px; }
+.nav-btn { font-size: 12px; } .nav-btn .ic { font-size: 22px; }
+.ec-rech input { font-size: 16px; min-height: 42px; }
+/* ligne Radio + liste déroulante */
+.ec-ligne { display: flex; align-items: center; position: relative; }
+.ec-ligne .ec-radio { flex: 1; min-width: 0; }
+.ec-ligne .ec-radio > span:last-child { min-width: 0; }
+.ec-ligne .ec-radio small { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#ec-cat { flex: none; margin-right: 12px; height: 36px; border-radius: 999px; border: 0; padding: 0 28px 0 14px; font-size: 14px; font-weight: 600; color: var(--texte); background: color-mix(in srgb, var(--texte) 8%, var(--surface)) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23888' stroke-width='2'/%3E%3C/svg%3E") no-repeat right 10px center; -webkit-appearance: none; appearance: none; }
+html:root #ec-chips { display: none !important; }
+.em-n { margin-left: auto; min-width: 22px; height: 22px; border-radius: 11px; background: #0F7B6C; color: #fff; font-size: 12px; font-weight: 800; display: inline-grid; place-items: center; padding: 0 6px; } .em-n:empty { display: none; }
 .actions .btn-outline.on { border-color: var(--vert); color: var(--vert); }
 .actions .source-credit { flex: 1 0 100%; }
 .ct-com { margin-top: 14px; border-top: 1px solid var(--bordure); padding-top: 10px; }
@@ -1456,9 +1480,13 @@ function vueFlux() {
       z.appendChild(b);
     });
   }
+  function poserSrc(v, c) {
+    v.src = v.dataset.src;
+    try { if (c && HORS.ids.has(c.id)) HORS.lire(c.id).then(r => { if (r && r.blob && v.getAttribute("src") === v.dataset.src) { const t = v.currentTime, jouait = !v.paused; v.src = URL.createObjectURL(r.blob); if (t) v.currentTime = t; if (jouait) v.play().catch(() => {}); } }); } catch (e) {}
+  }
   const obsProche = new IntersectionObserver(es => es.forEach(en => {
     const v = en.target.querySelector("video"); if (!v) return;
-    if (en.isIntersecting) { if (!v.getAttribute("src")) { v.src = v.dataset.src; v.preload = ECO.actif() ? "none" : "metadata"; } }
+    if (en.isIntersecting) { if (!v.getAttribute("src")) { poserSrc(v, en.target._c); v.preload = ECO.actif() ? "none" : "metadata"; } }
     else if (v.getAttribute("src")) { v.pause(); v.removeAttribute("src"); v.load(); }
   }), { root: defil, rootMargin: "150% 0px" });
   const obsActif = new IntersectionObserver(es => es.forEach(en => {
@@ -1477,7 +1505,7 @@ function vueFlux() {
     actif = el;
     const v = el.querySelector("video");
     if (v) {
-      if (!v.getAttribute("src")) v.src = v.dataset.src;
+      if (!v.getAttribute("src")) poserSrc(v, el._c);
       v.muted = !etat.son;
       const p = v.play();
       if (p && p.catch) p.catch(() => { v.muted = true; etat.son = false; majSons(); v.play().catch(() => {}); });
@@ -1514,6 +1542,7 @@ function vueFlux() {
         <button class="d-act" data-a="com" aria-label="Commentaires">${ico("comment", 30)}<span>${fmtNb(c.comments_count)}</span></button>
         <button class="d-act" data-a="fav" aria-label="Enregistrer">${ico("bookmark", 30)}<span>Sauvegarder</span></button>
         <button class="d-act" data-a="part" aria-label="Partager">${ico("share", 30)}<span>Partager</span></button>
+        ${estVid ? `<button class="d-act" data-a="dl" aria-label="Télécharger">${ico("telecharger", 30)}<span>${HORS.ids.has(c.id) ? "✓ Hors-ligne" : "Télécharger"}</span></button>` : ""}
         ${estVid ? `<button class="d-act" data-a="son" aria-label="Son">${ico(etat.son ? "sound" : "mute", 30)}<span></span></button>` : ""}
       </div><div class="d-prog"><i></i></div>`;
     const b = a => el.querySelector(`[data-a="${a}"]`);
@@ -1536,6 +1565,14 @@ function vueFlux() {
     b("com").onclick = () => ouvrirCommentaires(c, async () => { try { const r = await sb.from("yt_contenus").select("comments_count").eq("id", c.id).maybeSingle(); if (r.data) { c.comments_count = r.data.comments_count; b("com").querySelector("span").textContent = fmtNb(c.comments_count); } } catch (e) {} });
     b("fav").onclick = async () => { const r = await basculerFavori(c, mesFavs.has(c.id)); if (r === null) return; if (r) mesFavs.add(c.id); else mesFavs.delete(c.id); majFav(); };
     b("part").onclick = () => partagerContenu(c, b("part"));
+    if (b("dl")) b("dl").onclick = async () => {
+      const k = b("dl"), sp = k.querySelector("span");
+      if (HORS.ids.has(c.id)) { if (confirm("Supprimer ce téléchargement ?")) { await HORS.retirer(c.id); sp.textContent = "Télécharger"; } return; }
+      if (navigator.onLine === false) { alert("Pas de connexion internet."); return; }
+      k.disabled = true; sp.textContent = "… 0 %";
+      const ok = await HORS.sauver(c, true, (n, t) => { sp.textContent = "… " + Math.round(n * 100 / t) + " %"; });
+      k.disabled = false; sp.textContent = ok ? "✓ Hors-ligne" : "Échec";
+    };
     if (b("son")) b("son").onclick = () => { etat.son = !etat.son; majSons(); };
     if (b("abo")) b("abo").onclick = async ev => {
       ev.stopPropagation();
@@ -1697,7 +1734,7 @@ function creerReconnaisseur() {
 }
 
 const PROTEGEES = ["chaine-edit", "notifications", "je-publie", "importer", "espace", "groupe-nouveau", "mes-livres", "livre-edition", "live-nouveau", "publier", "devenir-createur", "admin", "push-admin", "mes-contenus", "choix-enfant", "inscription", "accueil", "lecons", "dialogue", "parametres", "changer-mot-de-passe", "pin-creation", "favoris", "historique", "lien", "playlists", "stats", "abonnements"];
-const ROOTS = ["flux", "discussions", "home", "espace", "abos", "profil", "preches", "biblio", "direct"];
+const ROOTS = ["flux", "reels", "discussions", "home", "espace", "abos", "profil", "preches", "biblio", "direct"];
 function router(route, params = {}, opts = {}) {
   if (!etat.parentId && PROTEGEES.includes(route)) { route = "connexion"; params = { message: "Connectez-vous pour continuer." }; }
   if (etat.envoiEnCours && (etat.route === "publier" || etat.route === "je-publie" || etat.route === "importer") && route !== etat.route) {
@@ -2157,6 +2194,7 @@ const IC = {
   close: '<path d="M6 6l12 12M18 6 6 18"/>',
   back: '<path d="m15 5-7 7 7 7"/>',
   telecharger: '<path d="M12 4v11M7 10.500l5 5 5-5M5 20h14"/>',
+  reel: '<rect x="3" y="4" width="18" height="16" rx="3"/><path d="M10 9l5 3-5 3z"/>',
   ecouter: '<path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="3" y="14" width="4" height="6" rx="1.5"/><rect x="17" y="14" width="4" height="6" rx="1.5"/>',
   play: '<path d="M8 5v14l11-7z"/>',
   verif: '<path d="m5 12 5 5 9-10"/>'
@@ -2165,8 +2203,8 @@ function ico(n, taille, plein) {
   const z = taille || 24;
   return `<svg class="ico" width="${z}" height="${z}" viewBox="0 0 24 24" fill="${plein ? "currentColor" : "none"}" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${IC[n]}</svg>`;
 }
-const NAV = [{ r: "flux", i: "ecouter", t: "Écouter" }, { r: "discussions", i: "chat", t: "Discuter" }, { r: "profil", i: "user", t: "Moi" }];
-const ONGLET_DE = { "priere": "flux", "savants": "flux", "chaine-edit": "", "notifications": "", "tarifs": "", "flux": "flux", "fil": "flux", "reels": "flux", "recherche": "flux", "home": "flux", "contenu": "*", "chaine": "*", "playlist": "*", "groupes": "flux", "discussions": "discussions", "livres": "flux", "livre": "flux", "lives": "flux", "live": "flux", "arabe": "flux", "espace": "", "publier": "", "je-publie": "", "groupe-nouveau": "", "mes-livres": "", "livre-edition": "", "live-nouveau": "", "importer": "", "lien": "", "mes-contenus": "", "devenir-createur": "", "playlists": "", "stats": "", "abos": "flux", "profil": "profil", "admin": "", "push-admin": "", "langue": "", "abonnements": "", "legal": "", "favoris": "", "historique": "", "hors": "", "preches": "flux", "biblio": "flux", "dossier": "flux", "direct": "flux" , "radio": "flux" };
+const NAV = [{ r: "flux", i: "ecouter", t: "Écouter" }, { r: "reels", i: "reel", t: "Reels" }, { r: "profil", i: "user", t: "Moi" }];
+const ONGLET_DE = { "priere": "flux", "savants": "flux", "chaine-edit": "", "notifications": "", "tarifs": "", "flux": "flux", "fil": "flux", "reels": "reels", "recherche": "flux", "home": "flux", "contenu": "*", "chaine": "*", "playlist": "*", "groupes": "flux", "discussions": "discussions", "livres": "flux", "livre": "flux", "lives": "flux", "live": "flux", "arabe": "flux", "espace": "", "publier": "", "je-publie": "", "groupe-nouveau": "", "mes-livres": "", "livre-edition": "", "live-nouveau": "", "importer": "", "lien": "", "mes-contenus": "", "devenir-createur": "", "playlists": "", "stats": "", "abos": "flux", "profil": "profil", "admin": "", "push-admin": "", "langue": "", "abonnements": "", "legal": "", "favoris": "", "historique": "", "hors": "", "preches": "flux", "biblio": "flux", "dossier": "flux", "direct": "flux" , "radio": "flux" };
 function creerNav() {
   const nav = document.createElement("nav");
   nav.className = "nav-bas" + (etat.route === "radio" || etat.route === "reels" || etat.route === "fil" ? " nav-sombre" : "");
@@ -2277,7 +2315,7 @@ async function vueContenu() {
       <button class="btn-text" id="plus" aria-label="Plus d'options" aria-expanded="false" style="font-size:34px;font-weight:800;padding:0 16px;min-height:48px;line-height:.6;text-decoration:none;color:var(--texte)">⋯</button>
     <div class="menu-plus" id="menu-plus" hidden>
       ${CLIP.peut(c) ? `<button class="btn-outline" id="clip-go">✂️ Créer un Clip Lumu</button>` : ""}
-      ${c.type === "audio" && !c.embed_id ? `<button class="btn-outline" id="au-dl">⬇ Hors-ligne</button>` : `<button class="btn-outline" id="telecharger">💾 Enregistrer</button>`}
+      ${(c.type === "audio" || c.type === "video" || c.type === "reel") && !c.embed_id && c.fichier_path ? `<button class="btn-outline" id="au-dl">⬇ Hors-ligne</button>` : `<button class="btn-outline" id="telecharger">💾 Enregistrer</button>`}
       ${c.type === "audio" && !c.embed_id && c.fichier_path ? `<button class="btn-outline" id="au-env">📤 Envoyer l'audio</button><button class="btn-outline" id="au-tel">💾 Dans mon téléphone</button>` : ""}
       ${c.type === "audio" && !c.embed_id ? `<button class="btn-outline" id="au-sig">🔖 Poser un signet</button>` : ""}
       ${c.type === "audio" ? `<button class="btn-outline" id="au-som">😴 Minuterie : arrêt</button>` : ""}
@@ -3546,7 +3584,7 @@ const HORS = {
     window.addEventListener("offline", () => this.bandeau());
   },
   meta(c) {
-    return { id: c.id, title: c.title, type: "audio", fichier_path: c.fichier_path, cover_path: c.cover_path || null, duration_seconds: c.duration_seconds || 0,
+    return { id: c.id, title: c.title, type: c.type || "audio", mime: c.mime || null, fichier_path: c.fichier_path, cover_path: c.cover_path || null, duration_seconds: c.duration_seconds || 0,
       auteur: c.auteur || null, channel_id: c.channel_id || null, status: "published", views_count: c.views_count || 0, yt_channels: c.yt_channels ? { name: c.yt_channels.name } : null };
   },
   /** Mémorise une écoute (20 dernières) */
@@ -3671,7 +3709,8 @@ async function vueHors() {
     liste.forEach(({ m, r }) => {
       const dispo = !!r;
       const carte = carteContenu(m, () => {
-        if (!dispo && !enLigne) { alert("Cet audio n'est pas enregistré. Reconnectez-vous pour l'écouter."); return; }
+        if (!dispo && !enLigne) { alert("Ce contenu n'est pas enregistré. Reconnectez-vous pour le lire."); return; }
+        if (m.type && m.type !== "audio") { router("contenu", { id: m.id, c: m }); return; }
         const suite = liste.filter(x => x.r || enLigne).map(x => x.m), i = suite.findIndex(x => x.id === m.id);
         AUD.jouer(m, i + 1 < suite.length ? () => AUD.jouer(suite[i + 1], null, null) : null, null);
       });
@@ -4035,6 +4074,23 @@ function contenuExtras(wrap, c) {
     if (allerSuivant) m.addEventListener("ended", () => { if (vivant()) allerSuivant(); });
   }
   const m0 = wrap.querySelector("#media");
+  if (m0 && (c.type === "video" || c.type === "reel") && HORS.ids.has(c.id)) { try { HORS.lire(c.id).then(r => { if (r && r.blob) { const t = m0.currentTime, j = !m0.paused; m0.src = URL.createObjectURL(r.blob); if (t) m0.currentTime = t; if (j || etat.params.auto) m0.play().catch(() => {}); } }); } catch (e) {} }
+  if (c.type !== "audio") {
+    const dl = wrap.querySelector("#au-dl");
+    if (dl) {
+      const maj = () => { const ok = HORS.ids.has(c.id); dl.dataset.ok = ok ? "1" : ""; dl.textContent = ok ? "✓ Hors-ligne" : "⬇ Hors-ligne"; };
+      maj();
+      dl.onclick = async () => {
+        dl.disabled = true;
+        if (dl.dataset.ok) { await HORS.retirer(c.id); maj(); dl.disabled = false; return; }
+        dl.textContent = "… 0 %";
+        const ok = await HORS.sauver(c, true, (n, t) => { dl.textContent = "… " + Math.round(n * 100 / t) + " %"; });
+        dl.disabled = false;
+        if (!ok) { dl.textContent = "Échec, réessayez"; return; }
+        maj();
+      };
+    }
+  }
   brancher(m0);
   if (c.type === "audio" && wrap.querySelector("#aud-ui")) AUD.lier(wrap, c, allerSuivant, allerPrecedent, !!etat.params.auto);
   if (etat.params.auto && m0) { const p = m0.play(); if (p && p.catch) p.catch(() => {}); }
@@ -5121,11 +5177,11 @@ async function vueEcouter() {
   const w = document.createElement("div");
   w.className = "ecran ec";
   w.innerHTML = `<div class="ec-haut"><span class="ec-logo">${lumuSVG(36)}</span><b>Lumu</b>
-      <button id="ec-mic" aria-label="Parler pour chercher">${ico("mic", 24)}</button><button id="ec-q" aria-label="Rechercher">${ico("search", 24)}</button><button id="ec-plus" aria-label="Plus d'options" style="font-size:26px;font-weight:800">⋮</button><div class="menu-plus" id="ec-menu" hidden><button id="em-dormir">🌙 Avant de dormir</button><button id="em-trajet">🚗 Pour le trajet</button><button id="em-imams">👥 Imams</button><button id="em-hors">⬇ Mes téléchargements</button><button id="em-prof">👤 Mon profil</button></div></div>
+      <button id="ec-mic" aria-label="Parler pour chercher">${ico("mic", 24)}</button><button id="ec-q" aria-label="Rechercher">${ico("search", 24)}</button><button id="ec-plus" aria-label="Plus d'options" style="font-size:26px;font-weight:800">⋮</button><div class="menu-plus" id="ec-menu" hidden><button id="em-disc">💬 Discussions<span class="em-n" id="em-n"></span></button><button id="em-dormir">🌙 Avant de dormir</button><button id="em-trajet">🚗 Pour le trajet</button><button id="em-imams">👥 Imams</button><button id="em-hors">⬇ Mes téléchargements</button><button id="em-prof">👤 Mon profil</button></div></div>
     <div class="ec-rech" id="ec-rech" hidden><input id="ec-rin" type="search" enterkeyhint="search" autocomplete="off" placeholder="Rechercher un imam, un titre…"></div>
     <div class="ec-corps">
       <div id="ec-rep"></div>
-      <button class="ec-radio" id="ec-radio"><span class="ec-rp">${ico("play", 30, true)}</span><span><b>Lumu Radio</b><small>Rappels, Coran, invocations</small></span></button>
+      <div class="ec-ligne"><button class="ec-radio" id="ec-radio"><span class="ec-rp">${ico("play", 30, true)}</span><span><b>Lumu Radio</b><small>Rappels, Coran, invocations</small></span></button><select id="ec-cat" aria-label="Catégorie"><option value="">Tout</option><option value="coran">Coran</option><option value="cours">Cours</option><option value="rappels">Rappels</option></select></div>
       <div class="ec-gros"><button id="eg-hors"><span>⬇</span>Mes audios</button><button id="eg-disc"><span>💬</span>Discuter</button><button id="eg-imams"><span>👥</span>Imams</button><button id="eg-q"><span>🔍</span>Chercher</button></div>
       <div class="ec-tit" id="ec-tit">Mes imams</div>
       <div class="ec-imams" id="ec-imams"></div>
@@ -5139,7 +5195,9 @@ async function vueEcouter() {
   try { const cn = navigator.connection; if (cn && /2g/.test(cn.effectiveType || "")) w.querySelector("#ec-radio").insertAdjacentHTML("beforebegin", `<button class="ec-lent" id="ec-lent">📶 Connexion lente. Touchez pour télécharger vos audios et écouter sans coupure.</button>`); const bl = w.querySelector("#ec-lent"); if (bl) bl.onclick = () => router("hors"); } catch (e) {}
   { const bp = w.querySelector("#ec-plus"), mn = w.querySelector("#ec-menu"); bp.onclick = ev => { ev.stopPropagation(); mn.hidden = !mn.hidden; }; mn.onclick = () => { setTimeout(() => { mn.hidden = true; }, 120); };
     const fer = () => { if (!w.isConnected) { document.removeEventListener("click", fer); return; } mn.hidden = true; }; document.addEventListener("click", fer);
-    w.querySelector("#em-imams").onclick = () => router("preches"); w.querySelector("#em-hors").onclick = () => router("hors"); w.querySelector("#em-prof").onclick = () => router("profil"); }
+    w.querySelector("#em-disc").onclick = () => router("discussions"); try { if (NBNL.v > 0) w.querySelector("#em-n").textContent = NBNL.v; else if (etat.parentId) sb.rpc("yt_mes_conversations").then(r => { const n = (r && !r.error ? (r.data || []) : []).reduce((a, x) => a + (Number(x.non_lus) || 0), 0); NBNL.v = n; NBNL.t = Date.now(); const e = w.querySelector("#em-n"); if (e && n) e.textContent = n; }, () => {}); } catch (e) {}
+  w.querySelector("#em-imams").onclick = () => router("preches"); w.querySelector("#em-hors").onclick = () => router("hors"); w.querySelector("#em-prof").onclick = () => router("profil"); }
+  w.querySelector("#ec-cat").onchange = ev => { filtre = ev.target.value; chips(); lignes(); };
   const lanceFile = (l, minut) => { if (!l.length) { alert("Aucun audio disponible."); return; } AUD.file = l.slice(1, 15); lireDirect(l[0]); if (minut) sommeilMinutes(minut); };
   w.querySelector("#th-dormir").onclick = () => { const re = CH[3][2]; const l = tous.filter(c => re.test(c.category || "") || re.test(c.title || "")); lanceFile((l.length ? l : tous).slice().sort((a, b) => (a.duration_seconds || 9999) - (b.duration_seconds || 9999)), 30); };
   w.querySelector("#th-trajet").onclick = () => lanceFile(tous.slice(), 0);
