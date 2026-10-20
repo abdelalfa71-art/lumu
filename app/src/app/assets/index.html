@@ -1271,7 +1271,7 @@ const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 const app = document.getElementById("app");
-let etat = { route: "connexion", parentId: null, enfant: null, niveaux: [], matieres: [], params: {}, compteNom: false, profil: null, chaine: null, envoiEnCours: false, lienEnAttente: null, lienChaine: null, pile: [], racine: "flux", son: false };
+let etat = { route: "connexion", parentId: null, enfant: null, niveaux: [], matieres: [], params: {}, compteNom: false, profil: null, chaine: null, envoiEnCours: false, lienEnAttente: null, lienChaine: null, pile: [], racine: "flux", son: true };
 const LONG_CODE = 6;
 try { const m = /[#&]c=([0-9a-f-]{36})/i.exec(location.hash); if (m) etat.lienEnAttente = m[1]; const m2 = /[#&]ch=([0-9a-f-]{36})/i.exec(location.hash); if (m2) etat.lienChaine = m2[1]; const m3 = /[#&]r=(reels|recherche)/.exec(location.hash); if (m3) etat.lienRoute = m3[1]; const m4 = /[#&]t=(\d{1,6})/.exec(location.hash); if (m4) etat.lienT = +m4[1]; } catch(e) {}
 
