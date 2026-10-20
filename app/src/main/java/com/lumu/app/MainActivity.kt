@@ -178,16 +178,28 @@ class MainActivity : AppCompatActivity() {
                             if (c.moveToFirst()) nom = c.getString(0).orEmpty()
                         }
                     } catch (e: Exception) { }
-                    val mime = contentResolver.getType(u) ?: ""
+                    var mime = contentResolver.getType(u) ?: ""
                     if (nom.isEmpty()) nom = (u.lastPathSegment ?: "partage").substringAfterLast('/')
-                    nom = nom.replace(Regex("[^A-Za-z0-9._-]"), "_")
-                    if (!nom.contains('.')) {
-                        val ext = android.webkit.MimeTypeMap.getSingleton().getExtensionFromMimeType(mime)
-                        if (ext != null) nom += ".$ext"
-                    }
-                    val f = File(dossier, "${k}_$nom")
+                    val brut = nom
+                    val extBrute = brut.substringAfterLast('.', "")
+                    var ext = if (Regex("[A-Za-z0-9]{1,5}").matches(extBrute)) extBrute.lowercase()
+                              else android.webkit.MimeTypeMap.getSingleton().getExtensionFromMimeType(mime) ?: "bin"
+                    var titre = brut.replace(Regex("^(?i)amr\\."), "")
+                    titre = titre.replace(Regex("\\.(amr|awb|mp3|m4a|aac|ogg|oga|opus|wav|wma|flac|mp4|3gp|mkv|webm|mov|pdf|jpe?g|png)$", RegexOption.IGNORE_CASE), "").ifBlank { "Audio" }
+                    val sur = "${k}_" + titre.replace(Regex("[^A-Za-z0-9._-]"), "_").take(60)
+                    var f = File(dossier, "$sur.$ext")
                     contentResolver.openInputStream(u)?.use { ins -> f.outputStream().use { o -> ins.copyTo(o, 65536) } }
-                    if (f.length() > 0) arr.put(org.json.JSONObject().put("n", f.name).put("t", mime).put("nom", nom))
+                    if (f.length() <= 0) return@forEachIndexed
+                    // AMR (enregistreur vocal) : illisible dans la page → conversion en M4A
+                    val entete = try { f.inputStream().use { i -> ByteArray(6).also { i.read(it) } } } catch (e: Exception) { ByteArray(6) }
+                    val amr = String(entete, Charsets.ISO_8859_1).startsWith("#!AMR") || ext == "amr" || ext == "awb" || mime.contains("amr", true) || mime.contains("3gpp", true) && !mime.startsWith("video")
+                    if (amr) {
+                        runOnUiThread { Toast.makeText(this, "Conversion de l'audio…", Toast.LENGTH_SHORT).show() }
+                        val conv = File(dossier, "${sur}_c.m4a")
+                        if (Convertisseur.amrVersM4a(this, Uri.fromFile(f), conv) && conv.length() > 0) { f.delete(); f = conv; ext = "m4a"; mime = "audio/mp4" }
+                        else { conv.delete(); return@forEachIndexed }
+                    }
+                    arr.put(org.json.JSONObject().put("n", f.name).put("t", mime).put("nom", "$titre.$ext"))
                 } catch (e: Exception) { }
             }
             recusJson = if (arr.length() > 0) arr.toString() else ""
