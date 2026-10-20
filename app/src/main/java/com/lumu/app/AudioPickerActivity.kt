@@ -92,17 +92,37 @@ class AudioPickerActivity : AppCompatActivity() {
         info = TextView(this).apply { textSize = 14f; setPadding(0, dp(4), 0, dp(4)) }
         racine.addView(info)
 
-        liste = ListView(this).apply { divider = null }
-        adaptateur = object : ArrayAdapter<Item>(this, android.R.layout.simple_list_item_multiple_choice, mutableListOf()) {
+        liste = ListView(this).apply { divider = null; selector = android.graphics.drawable.ColorDrawable(0x1125A06B); setPadding(0, dp(4), 0, dp(4)); clipToPadding = false }
+        adaptateur = object : ArrayAdapter<Item>(this, 0, mutableListOf()) {
             override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-                val v = super.getView(position, convertView, parent) as CheckedTextView
                 val it = getItem(position)!!
-                v.text = (if (it.video) "🎬 " else "🎵 ") + it.nom + "\n" + taille(it.taille) + " · " +
-                        DateFormat.getDateInstance(DateFormat.MEDIUM).format(Date(it.date * 1000))
-                v.textSize = 16f
-                v.minimumHeight = dp(64)
-                v.isChecked = it.uri in choisis
-                return v
+                val ligne = (convertView as? LinearLayout) ?: LinearLayout(context).apply {
+                    orientation = LinearLayout.HORIZONTAL; gravity = Gravity.CENTER_VERTICAL
+                    setPadding(dp(8), dp(8), dp(8), dp(8))
+                    val pastille = TextView(context).apply { id = 1001; gravity = Gravity.CENTER; textSize = 22f }
+                    addView(pastille, LinearLayout.LayoutParams(dp(48), dp(48)))
+                    val col = LinearLayout(context).apply { orientation = LinearLayout.VERTICAL }
+                    col.addView(TextView(context).apply {
+                        id = 1002; textSize = 16f; maxLines = 2; ellipsize = android.text.TextUtils.TruncateAt.MIDDLE
+                        textDirection = View.TEXT_DIRECTION_FIRST_STRONG_LTR
+                    })
+                    col.addView(TextView(context).apply { id = 1003; textSize = 13f; alpha = 0.65f })
+                    addView(col, LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f).apply { leftMargin = dp(12); rightMargin = dp(8) })
+                    addView(android.widget.CheckBox(context).apply { id = 1004; isClickable = false; isFocusable = false }, LinearLayout.LayoutParams(dp(40), dp(40)))
+                }
+                val choisi = it.uri in choisis
+                val past = ligne.findViewById<TextView>(1001)
+                past.text = if (it.video) "🎬" else "🎵"
+                past.background = android.graphics.drawable.GradientDrawable().apply {
+                    shape = android.graphics.drawable.GradientDrawable.OVAL
+                    setColor(if (it.video) 0x33E57373 else 0x3325A06B.toInt())
+                }
+                ligne.findViewById<TextView>(1002).text = it.nom.substringBeforeLast('.', it.nom)
+                ligne.findViewById<TextView>(1003).text = it.nom.substringAfterLast('.', "").uppercase().let { e -> if (e.isEmpty() || e.length > 5) "" else "$e · " } +
+                        taille(it.taille) + " · " + DateFormat.getDateInstance(DateFormat.MEDIUM).format(Date(it.date * 1000))
+                ligne.findViewById<android.widget.CheckBox>(1004).isChecked = choisi
+                ligne.setBackgroundColor(if (choisi) 0x2225A06B else 0)
+                return ligne
             }
         }
         liste.adapter = adaptateur
@@ -200,8 +220,8 @@ class AudioPickerActivity : AppCompatActivity() {
                     (texte.isEmpty() || it.nom.contains(texte, ignoreCase = true))
         }
         adaptateur.clear(); adaptateur.addAll(affiches); adaptateur.notifyDataSetChanged()
-        btns.forEach { (k, b) -> b.alpha = if (k == filtre) 1f else 0.55f }
-        info.text = if (affiches.isEmpty()) "Aucun fichier trouvé." else "${affiches.size} fichier(s) — touchez pour choisir"
+        btns.forEach { (k, b) -> b.alpha = if (k == filtre) 1f else 0.5f; b.setTypeface(null, if (k == filtre) android.graphics.Typeface.BOLD else android.graphics.Typeface.NORMAL) }
+        info.text = if (affiches.isEmpty()) "Aucun fichier trouvé." else "${affiches.size} fichier(s) · touchez pour choisir"
         majBouton()
     }
 
