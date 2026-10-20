@@ -2915,7 +2915,7 @@ function envoyerFichier(fichier, chemin, mime, surProgres) {
       const lancer = () => {
         upload = new tus.Upload(fichier, {
           endpoint: points[idx],
-          retryDelays: [0, 3000, 5000, 10000, 20000, 30000, 60000],
+          retryDelays: [0, 1000, 3000, 5000, 10000, 20000, 40000, 60000],
           headers: { apikey: SUPABASE_ANON_KEY },
           uploadDataDuringCreation: true,
           removeFingerprintOnSuccess: true,
@@ -3612,16 +3612,33 @@ const HORS = {
     if (!c || !c.fichier_path || this.enCours.has(c.id)) return false;
     this.enCours.add(c.id);
     try {
-      const rep = await fetch(urlMedia(c.fichier_path), { mode: "cors" });
+      const url = urlMedia(c.fichier_path);
+      let rep = await fetch(url, { mode: "cors" });
       if (!rep.ok) throw new Error("http");
       const len = +rep.headers.get("content-length") || 0;
       if (!manuel && len > this.TAILLE_MAX) throw new Error("gros");
-      let blob;
-      if (surProgres && rep.body && len) {
-        const rd = rep.body.getReader(), morceaux = []; let n = 0;
-        for (;;) { if (this.annul.has(c.id)) { try { rd.cancel(); } catch (e) {} throw new Error("annule"); } const { done, value } = await rd.read(); if (done) break; morceaux.push(value); n += value.length; surProgres(n, len); }
-        blob = new Blob(morceaux, { type: rep.headers.get("content-type") || c.mime || "audio/mpeg" });
-      } else blob = await rep.blob();
+      const type = rep.headers.get("content-type") || c.mime || "audio/mpeg";
+      const morceaux = []; let n = 0, essais = 0;
+      if (!rep.body || !rep.body.getReader) { const b0 = await rep.blob(); morceaux.push(b0); n = b0.size; }
+      else for (;;) {
+        const rd = rep.body.getReader();
+        try {
+          for (;;) {
+            if (this.annul.has(c.id)) { try { rd.cancel(); } catch (e) {} throw new Error("annule"); }
+            const { done, value } = await rd.read(); if (done) break;
+            morceaux.push(value); n += value.length; if (surProgres) surProgres(n, len);
+          }
+          break;
+        } catch (e) {
+          if (/annule/.test(String(e && e.message))) throw e;
+          if (!len || ++essais > 8) throw e;
+          await new Promise(r => setTimeout(r, Math.min(1000 * essais, 8000)));
+          rep = await fetch(url, { mode: "cors", headers: { Range: "bytes=" + n + "-" } });
+          if (rep.status !== 206) { if (!rep.ok) throw e; morceaux.length = 0; n = 0; }
+        }
+      }
+      if (len && n < len) throw new Error("incomplet");
+      const blob = new Blob(morceaux, { type });
       const ancien = await this.lire(c.id);
       await this.op("readwrite", st => st.put({ id: c.id, meta: this.meta(c), blob, taille: blob.size, ts: Date.now(), manuel: !!(manuel || (ancien && ancien.manuel)) }));
       this.ids.add(c.id);
@@ -5614,8 +5631,12 @@ async function vueChaine() {
       maj();
       b.onclick = async () => {
         if (enCours) { stop = true; return; }
-        enCours = true; stop = false; const liste = auds.filter(c => !HORS.ids.has(c.id)); let i = 0;
-        for (const c of liste) { if (stop || !w.isConnected) break; i++; b.textContent = "⏳ " + i + "/" + liste.length + " · " + trad("toucher pour arrêter"); try { await HORS.sauver(c, true); } catch (e) { break; } }
+        enCours = true; stop = false; const liste = auds.filter(c => !HORS.ids.has(c.id));
+        let fait = 0;
+        const lent = (() => { try { const k = navigator.connection || {}; return !!k.saveData || /(^|-)2g$/.test(k.effectiveType || ""); } catch (e) { return false; } })();
+        const ouv = async () => { for (;;) { if (stop || !w.isConnected) return; const c = liste.shift(); if (!c) return; try { await HORS.sauver(c, true); } catch (e) {} fait++; b.textContent = "⏳ " + fait + "/" + total + " · " + trad("toucher pour arrêter"); } };
+        const total = liste.length; b.textContent = "⏳ 0/" + total + " · " + trad("toucher pour arrêter");
+        await Promise.all(Array.from({ length: lent ? 1 : 2 }, ouv));
         enCours = false; maj();
       };
     })();
@@ -6214,19 +6235,25 @@ async function importerUn(it, commun, maj) {
   const mime = it.mime || mimeDe(f, type);
   if (!mimeCoherent(mime, type)) throw new Error("Format non accepté" + (ext ? " (." + ext + ")" : "") + ". Essayez MP3, M4A, MP4 ou PDF.");
   if (f.size > TAILLE_MAX[type]) throw new Error(`Trop gros (maximum ${fmtTaille(TAILLE_MAX[type])}).`);
-  maj("Lecture…");
-  let meta;
-  try { meta = await lireMeta(f, type); } catch (e) { if (type === "video" || type === "audio") meta = { duree: null, vignette: null }; else throw e; }
-  if (meta.duree && meta.duree > DUREE_MAX) throw new Error("Dure plus de 2 h.");
+  maj("0 %");
   const uid = etat.parentId, idc = uuid();
   const extNom = ((ext).match(/^[a-z0-9]{1,8}$/) || [""])[0];
   const chemin = `${uid}/${idc}.${extFichier(mime, extNom)}`;
   const cheminCover = `${uid}/${idc}-cover.jpg`;
   const envoi = envoyerFichier(f, chemin, mime, (a, b) => maj(`${b ? Math.min(100, Math.floor(a * 100 / b)) : 0} %`));
   it.envoi = envoi;
+  envoi.promesse.catch(() => {});
+  const metaP = lireMeta(f, type).then(m => {
+    if (m.duree && m.duree > DUREE_MAX) throw new Error("Dure plus de 2 h.");
+    return m;
+  }, e => { if (type === "video" || type === "audio") return { duree: null, vignette: null }; throw e; });
+  const coverP = metaP.then(m => m.vignette ? sb.storage.from("yt-media").upload(cheminCover, m.vignette, { contentType: "image/jpeg", upsert: false }).then(r => !r.error, () => false) : false, () => false);
+  let meta, coverOk = false;
+  try {
+    meta = await metaP;
+  } catch (e) { envoi.annuler(); await envoi.promesse.catch(() => {}); throw e; }
   await envoi.promesse;
-  let coverOk = false;
-  if (meta.vignette) { const r = await sb.storage.from("yt-media").upload(cheminCover, meta.vignette, { contentType: "image/jpeg", upsert: false }); coverOk = !r.error; }
+  coverOk = await coverP;
   const titre = f.name.replace(/\.[^.]+$/, "").replace(/[_-]+/g, " ").trim().slice(0, 150) || "Sans titre";
   const { data, error } = await sb.from("yt_contenus").insert({
     channel_id: etat.chaine.id, title: titre, category: commun.cat || "Autre", type, fichier_path: chemin, cover_path: coverOk ? cheminCover : null,
@@ -6274,23 +6301,28 @@ function vueImport() {
       Promise.all(neufs.map(affinerItem)).then(() => { if (w.isConnected && !enCours) dessiner(); }, () => {});
     };
     const go = w.querySelector("#go"); if (go) go.onclick = lancer;
-    const st = w.querySelector("#stop"); if (st) st.onclick = () => { stop = true; const it = items.find(i => i.statut === "cours"); if (it && it.envoi) it.envoi.annuler(); };
+    const st = w.querySelector("#stop"); if (st) st.onclick = () => { stop = true; items.filter(i => i.statut === "cours").forEach(it => { if (it.envoi) it.envoi.annuler(); }); };
   }
   async function lancer() {
     const commun = { cat: w.querySelector("#cat").value, groupe: (w.querySelector("#groupe") || {}).value || "" };
     enCours = true; stop = false;
     etat.envoiEnCours = true; window.onbeforeunload = () => true; garderEveille(true);
-    etat.annulerEnvoi = () => { stop = true; const it = items.find(i => i.statut === "cours"); if (it && it.envoi) it.envoi.annuler(); };
+    etat.annulerEnvoi = () => { stop = true; items.filter(i => i.statut === "cours").forEach(it => { if (it.envoi) it.envoi.annuler(); }); };
     dessiner();
-    for (const it of items) {
-      if (stop) break;
-      if (it.statut === "ok") continue;
-      it.statut = "cours"; it.msg = "…";
-      const maj = m => { it.msg = m; const s = it.el && it.el.querySelector(".st"); if (s) s.textContent = m; };
-      try { await importerUn(it, commun, maj); it.statut = "ok"; }
-      catch (e) { it.statut = "erreur"; it.msg = /annulé/i.test(String(e && e.message)) ? "Annulé" : messageEnvoi(e) === "L'envoi a échoué. Réessayez." && e && e.message ? e.message : messageEnvoi(e); }
-      if (w.isConnected) dessiner();
-    }
+    const lent = (() => { try { const c = navigator.connection || {}; return !!c.saveData || /(^|-)2g$/.test(c.effectiveType || ""); } catch (e) { return false; } })();
+    const file = items.filter(i => i.statut !== "ok");
+    const ouvrier = async () => {
+      for (;;) {
+        if (stop) return;
+        const it = file.shift(); if (!it) return;
+        it.statut = "cours"; it.msg = "…";
+        const maj = m => { it.msg = m; const s = it.el && it.el.querySelector(".st"); if (s) s.textContent = m; };
+        try { await importerUn(it, commun, maj); it.statut = "ok"; }
+        catch (e) { it.statut = "erreur"; it.msg = /annulé/i.test(String(e && e.message)) ? "Annulé" : messageEnvoi(e) === "L'envoi a échoué. Réessayez." && e && e.message ? e.message : messageEnvoi(e); }
+        if (w.isConnected) dessiner();
+      }
+    };
+    await Promise.all(Array.from({ length: lent ? 1 : Math.min(2, file.length) }, ouvrier));
     enCours = false; etat.envoiEnCours = false; etat.annulerEnvoi = null; window.onbeforeunload = null; garderEveille(false);
     items.forEach(i => { if (i.statut === "cours") i.statut = "attente"; });
     if (w.isConnected) dessiner();
