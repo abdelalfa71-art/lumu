@@ -19,6 +19,7 @@ jobs:
       - run: npm install --no-save @supabase/supabase-js@2
       - name: Convertir
         run: |
+          set +e
           node recompress/run.mjs > sortie.txt 2>&1; code=$?
           echo "::error::sortie: $(tail -c 700 sortie.txt | tr '\n' '|')"
           exit $code
