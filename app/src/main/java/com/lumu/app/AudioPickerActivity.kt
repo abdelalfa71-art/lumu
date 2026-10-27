@@ -235,41 +235,45 @@ class AudioPickerActivity : AppCompatActivity() {
     private fun terminer() {
         if (choisis.isEmpty()) return
         val uris = choisis.toList()
-        val noms = uris.map { u -> tous.firstOrNull { it.uri == u }?.nom ?: "" }
-        val besoin = noms.any { Convertisseur.estAmr(it) }
-        if (!besoin) { rendre(uris); return }
+        val items = uris.map { u -> tous.firstOrNull { it.uri == u } }
+        val noms = items.map { it?.nom ?: "" }
+        val peutAlleger = items.any { it != null && !it.video }
+        if (!peutAlleger && noms.none { Convertisseur.estAmr(it) }) { rendre(uris); return }
         valider.isEnabled = false
-        valider.text = "⏳ Conversion… 0 %"
+        valider.text = "⏳ Préparation…"
         barre.progress = 0; barre.visibility = View.VISIBLE
         conversion = true; annuleConv = false
-        val total = noms.count { Convertisseur.estAmr(it) }
         Thread {
+            val aFaire = uris.indices.map { k -> Convertisseur.estAmr(noms[k]) || (items[k] != null && !items[k]!!.video && Convertisseur.aAlleger(this, uris[k], items[k]!!.taille)) }
+            val total = aFaire.count { it }
             val finaux = mutableListOf<Uri>()
             var echecs = 0
             var rang = 0
             var raison = ""
             uris.forEachIndexed { k, u ->
                 if (annuleConv) return@forEachIndexed
-                if (Convertisseur.estAmr(noms[k])) {
+                if (aFaire[k]) {
                     rang++
                     val r = rang
-                    val base = noms[k].substringBeforeLast('.').replace(Regex("[^A-Za-z0-9._-]"), "_").ifEmpty { "audio" }
-                    val f = java.io.File(cacheDir, "conv/${base}_${System.currentTimeMillis()}.m4a")
-                    val ok = Convertisseur.amrVersM4a(this, u, f, { pc ->
+                    val amr = Convertisseur.estAmr(noms[k])
+                    val base = noms[k].substringBeforeLast('.').replace(Regex("[\\\\/:*?\"<>|]"), " ").trim().ifEmpty { "audio" }
+                    val f = java.io.File(cacheDir, "conv/${System.currentTimeMillis()}/$base.m4a")
+                    val ok = Convertisseur.versM4a(this, u, f, { pc ->
                         runOnUiThread {
                             barre.progress = pc
-                            valider.text = "⏳ Conversion " + (if (total > 1) "$r/$total · " else "") + "$pc %  (patientez)"
+                            valider.text = "⏳ Compression " + (if (total > 1) "$r/$total · " else "") + "$pc %  (patientez)"
                         }
                     }, { annuleConv })
-                    if (ok) finaux += androidx.core.content.FileProvider.getUriForFile(this, "$packageName.fp", f)
-                    else { echecs++; if (raison.isEmpty()) raison = Convertisseur.derniereErreur }
+                    if (ok && f.length() > 0) finaux += androidx.core.content.FileProvider.getUriForFile(this, "$packageName.fp", f)
+                    else if (amr) { echecs++; if (raison.isEmpty()) raison = Convertisseur.derniereErreur }
+                    else finaux += u   // échec de l'allègement : on garde l'original
                 } else finaux += u
             }
             runOnUiThread {
                 conversion = false; barre.visibility = View.GONE
                 if (annuleConv) {
                     valider.isEnabled = true; majBouton()
-                    android.widget.Toast.makeText(this, "Conversion annulée", android.widget.Toast.LENGTH_SHORT).show()
+                    android.widget.Toast.makeText(this, "Compression annulée", android.widget.Toast.LENGTH_SHORT).show()
                 } else if (finaux.isEmpty()) {
                     valider.text = "❌ Conversion impossible — choisissez un MP3 ou M4A"
                     valider.isEnabled = true

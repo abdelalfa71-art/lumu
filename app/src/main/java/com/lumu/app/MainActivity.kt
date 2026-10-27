@@ -193,11 +193,12 @@ class MainActivity : AppCompatActivity() {
                     // AMR (enregistreur vocal) : illisible dans la page → conversion en M4A
                     val entete = try { f.inputStream().use { i -> ByteArray(6).also { i.read(it) } } } catch (e: Exception) { ByteArray(6) }
                     val amr = String(entete, Charsets.ISO_8859_1).startsWith("#!AMR") || ext == "amr" || ext == "awb" || mime.contains("amr", true) || mime.contains("3gpp", true) && !mime.startsWith("video")
-                    if (amr) {
-                        runOnUiThread { Toast.makeText(this, "Conversion de l'audio…", Toast.LENGTH_SHORT).show() }
+                    val estAudio = mime.startsWith("audio") || ext in setOf("mp3", "m4a", "aac", "ogg", "oga", "opus", "wav", "wma", "flac")
+                    if (amr || (estAudio && Convertisseur.aAlleger(this, Uri.fromFile(f), f.length()))) {
+                        runOnUiThread { Toast.makeText(this, "Compression de l'audio…", Toast.LENGTH_SHORT).show() }
                         val conv = File(dossier, "${sur}_c.m4a")
-                        if (Convertisseur.amrVersM4a(this, Uri.fromFile(f), conv) && conv.length() > 0) { f.delete(); f = conv; ext = "m4a"; mime = "audio/mp4" }
-                        else { conv.delete(); return@forEachIndexed }
+                        if (Convertisseur.versM4a(this, Uri.fromFile(f), conv) && conv.length() > 0) { f.delete(); f = conv; ext = "m4a"; mime = "audio/mp4" }
+                        else { conv.delete(); if (amr) return@forEachIndexed }
                     }
                     arr.put(org.json.JSONObject().put("n", f.name).put("t", mime).put("nom", "$titre.$ext"))
                 } catch (e: Exception) { }

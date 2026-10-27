@@ -19,7 +19,23 @@ object Convertisseur {
         return n.endsWith(".amr") || n.endsWith(".awb")
     }
 
-    fun amrVersM4a(ctx: Context, src: Uri, dest: File, progres: (Int) -> Unit = {}, annule: () -> Boolean = { false }): Boolean {
+    /** Faut-il alléger cet audio ? (débit élevé : on le recompresse en parole légère avant l'envoi) */
+    fun aAlleger(ctx: Context, src: Uri, taille: Long): Boolean {
+        if (taille < 1_500_000L) return false
+        return try {
+            val r = android.media.MediaMetadataRetriever()
+            r.setDataSource(ctx, src)
+            val ms = r.extractMetadata(android.media.MediaMetadataRetriever.METADATA_KEY_DURATION)?.toLongOrNull() ?: 0L
+            r.release()
+            if (ms <= 0) taille > 5_000_000L else taille * 8.0 / (ms / 1000.0) > 56_000.0
+        } catch (e: Exception) { taille > 5_000_000L }
+    }
+
+    fun amrVersM4a(ctx: Context, src: Uri, dest: File, progres: (Int) -> Unit = {}, annule: () -> Boolean = { false }): Boolean =
+        versM4a(ctx, src, dest, progres, annule)
+
+    /** Tout audio → M4A (AAC) mono 32 kbit/s : voix claire, fichier 4 à 5 fois plus léger. */
+    fun versM4a(ctx: Context, src: Uri, dest: File, progres: (Int) -> Unit = {}, annule: () -> Boolean = { false }): Boolean {
         val ex = MediaExtractor()
         var dec: MediaCodec? = null
         var enc: MediaCodec? = null
@@ -40,12 +56,14 @@ object Convertisseur {
             var dernierPct = -1
             val rate = if (fmt.containsKey(MediaFormat.KEY_SAMPLE_RATE)) fmt.getInteger(MediaFormat.KEY_SAMPLE_RATE) else 8000
             val canaux = if (fmt.containsKey(MediaFormat.KEY_CHANNEL_COUNT)) fmt.getInteger(MediaFormat.KEY_CHANNEL_COUNT) else 1
+            if (canaux > 2) { derniereErreur = "canaux"; return false }
+            val can = 1 // sortie mono
 
             dec = MediaCodec.createDecoderByType(fmt.getString(MediaFormat.KEY_MIME)!!)
             dec.configure(fmt, null, null, 0)
             dec.start()
 
-            val ef = MediaFormat.createAudioFormat(MediaFormat.MIMETYPE_AUDIO_AAC, rate, canaux).apply {
+            val ef = MediaFormat.createAudioFormat(MediaFormat.MIMETYPE_AUDIO_AAC, rate, can).apply {
                 setInteger(MediaFormat.KEY_AAC_PROFILE, MediaCodecInfo.CodecProfileLevel.AACObjectLC)
                 setInteger(MediaFormat.KEY_BIT_RATE, 32000)
                 setInteger(MediaFormat.KEY_MAX_INPUT_SIZE, 65536)
@@ -98,13 +116,13 @@ object Convertisseur {
                     val n = minOf(taille - off, ib.capacity())
                     if (n > 0) ib.put(arr, off, n)
                     val dernier = off + n >= taille
-                    val t = (echantillons + (off.toLong() / 2 / canaux)) * 1_000_000L / rate
+                    val t = (echantillons + (off.toLong() / 2 / can)) * 1_000_000L / rate
                     e.queueInputBuffer(i, 0, n, t, if (fin && dernier) MediaCodec.BUFFER_FLAG_END_OF_STREAM else 0)
                     off += n
                     vider(0)
                     if (dernier) break
                 }
-                echantillons += taille.toLong() / 2 / canaux
+                echantillons += taille.toLong() / 2 / can
             }
 
             val d = dec
@@ -133,10 +151,25 @@ object Convertisseur {
                     val ob = d.getOutputBuffer(o)!!
                     ob.position(info.offset); ob.limit(info.offset + info.size)
                     val fin = info.flags and MediaCodec.BUFFER_FLAG_END_OF_STREAM != 0
-                    var restant = info.size
+                    val brut = ByteArray(info.size)
+                    ob.get(brut)
+                    val pcm = if (canaux == 2) {
+                        val m = ByteArray(brut.size / 2)
+                        var a = 0; var b = 0
+                        while (a + 3 < brut.size) {
+                            val l = ((brut[a].toInt() and 0xFF) or (brut[a + 1].toInt() shl 8)).toShort().toInt()
+                            val r = ((brut[a + 2].toInt() and 0xFF) or (brut[a + 3].toInt() shl 8)).toShort().toInt()
+                            val v = (l + r) / 2
+                            m[b] = (v and 0xFF).toByte(); m[b + 1] = (v shr 8).toByte()
+                            a += 4; b += 2
+                        }
+                        m
+                    } else brut
+                    var restant = pcm.size
+                    var pos = 0
                     while (restant > 0) {
                         val n = minOf(restant, tampon.size - nT)
-                        ob.get(tampon, nT, n); nT += n; restant -= n
+                        System.arraycopy(pcm, pos, tampon, nT, n); nT += n; restant -= n; pos += n
                         if (nT == tampon.size) { nourrir(tampon, nT, false); nT = 0 }
                     }
                     if (fin) { nourrir(tampon, nT, true); nT = 0; decFini = true }
