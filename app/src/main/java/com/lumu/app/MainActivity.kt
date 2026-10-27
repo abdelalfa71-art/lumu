@@ -104,6 +104,26 @@ class MainActivity : AppCompatActivity() {
         }
 
         /** Envoie le fichier audio lui-même (WhatsApp, Bluetooth, Telegram…). */
+        @JavascriptInterface fun partagerImage(b64: String?, nom: String?, titre: String?) {
+            if (b64.isNullOrEmpty()) return
+            try {
+                val dossier = File(cacheDir, "partage"); dossier.mkdirs()
+                dossier.listFiles()?.forEach { it.delete() }
+                val n = (nom ?: "lumu.png").replace(Regex("[\\\\/:*?\"<>|]"), " ")
+                val f = File(dossier, n)
+                f.writeBytes(android.util.Base64.decode(b64, android.util.Base64.DEFAULT))
+                val uri = FileProvider.getUriForFile(this@MainActivity, "$packageName.fp", f)
+                runOnUiThread {
+                    val i = Intent(Intent.ACTION_SEND).apply {
+                        type = "image/png"
+                        putExtra(Intent.EXTRA_STREAM, uri)
+                        putExtra(Intent.EXTRA_SUBJECT, titre ?: "")
+                        addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                    }
+                    startActivity(Intent.createChooser(i, titre ?: "Partager"))
+                }
+            } catch (e: Exception) {}
+        }
         @JavascriptInterface fun partagerFichier(url: String?, nom: String?, mime: String?, titre: String?) {
             if (url.isNullOrEmpty() || !url.startsWith("https://")) return
             runOnUiThread { Toast.makeText(this@MainActivity, "Préparation de l'audio…", Toast.LENGTH_SHORT).show() }

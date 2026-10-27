@@ -1035,6 +1035,9 @@ body:not(.branche-tobi) #mini-audio.sans-nav { bottom: calc(12px + env(safe-area
 @keyframes lumu-pop { 0% { transform: scale(1); } 40% { transform: scale(1.35); } 100% { transform: scale(1); } }
 .d-act.on svg { animation: lumu-pop .4s ease; }
 .d-act:active { transform: scale(.88); }
+.aff-cv { background: #ddd; border-radius: 14px; overflow: hidden; max-width: 360px; margin: 8px auto 12px; }
+.aff-cv canvas { display: block; width: 100%; height: auto; max-height: 62vh; object-fit: contain; margin: 0 auto; }
+.ecran .champ + .champ, .ecran .chips + .chips { margin-top: 8px; }
 .d-act[data-a="fav"] span, .d-act[data-a="part"] span, .d-act[data-a="dl"] span { display: none; }
 .d-act[data-a="dl"].hors { color: var(--jaune); }
 .d-desc { display: none; }
@@ -1924,7 +1927,7 @@ function render() {
     "mot-de-passe-oublie": vueMotDePasseOublie, "nouveau-mot-de-passe": vueNouveauMotDePasse,
     "changer-mot-de-passe": vueChangerMotDePasse,
     "pin-verrou": vuePinVerrou, "pin-creation": vuePinCreation, "arabe": vueArabe,
-    "presentation": vuePresentation, "tarifs": vueTarifs, "videos": vueFlux, "home": vueDecouvrir, "savants": vueSavants, "preches": vuePreches, "priere": vuePriere, "langues-choix": vueLanguesChoix, "biblio": vueBiblio, "dossier": vueDossier, "direct": vueDirect, "chaine-edit": vueChaineEdit, "notifications": vueNotifications, "publier": vuePublier, "je-publie": vueJePublie, "profil": vueProfil, "contenu": vueContenu,
+    "presentation": vuePresentation, "tarifs": vueTarifs, "videos": vueFlux, "affiches": vueAffiches, "home": vueDecouvrir, "savants": vueSavants, "preches": vuePreches, "priere": vuePriere, "langues-choix": vueLanguesChoix, "biblio": vueBiblio, "dossier": vueDossier, "direct": vueDirect, "chaine-edit": vueChaineEdit, "notifications": vueNotifications, "publier": vuePublier, "je-publie": vueJePublie, "profil": vueProfil, "contenu": vueContenu,
     "langue": vueLangue, "fil": vueFlux, "flux": vueEcouter, "radio": vueFlux, "recherche": vueRecherche, "abos": vueAbos, "espace": vueEspace, "importer": vueImport, "reels": vueFlux, "groupes": vueGroupes, "groupe": vueGroupe, "discussions": vueDiscussions, "conv": vueConv, "groupe-nouveau": vueNouveauGroupe, "livres": vueLivres, "livre": vueLivre, "mes-livres": vueMesLivres, "livre-edition": vueEditeurLivre, "lives": vueLives, "live": vueLive, "live-nouveau": vueNouveauLive, "devenir-createur": vueDevenirCreateur, "admin": vueAdmin, "push-admin": vuePushAdmin, "mes-contenus": vueMesContenus, "legal": vueLegal, "lien": vueLien, "chaine": vueChaine, "playlist": vuePlaylist, "playlists": vuePlaylists, "stats": vueStats, "abonnements": vueAbonnements, "favoris": vueListeUtilisateur, "historique": vueListeUtilisateur, "hors": vueHors
   };
   document.body.classList.toggle("branche-tobi", TOBI_ROUTES.includes(etat.route));
@@ -3070,6 +3073,7 @@ function vueJePublie() {
       <input type="file" id="f-pdf" accept="application/pdf,.pdf" hidden>
       <input type="file" id="f-image" accept="image/*" hidden>
       ${erreur ? `<p class="erreur">${esc(erreur)}</p>` : ""}
+      <button class="btn-outline" id="aff">🖼️ Créer une affiche</button>
       <button class="btn-text" id="av">Options avancées (livre, reel, description…)</button>`;
     const apres = ev => {
       const fs = [...ev.target.files];
@@ -3083,7 +3087,7 @@ function vueJePublie() {
       else if (k === "multi") router("importer");
       else wrap.querySelector("#f-" + k).click();
     });
-    wrap.querySelector("#av").onclick = () => router("publier");
+    wrap.querySelector("#av").onclick = () => router("publier"); wrap.querySelector("#aff").onclick = () => router("affiches");
   }
   async function choisir(f) {
     erreur = "";
@@ -4619,6 +4623,13 @@ function avatarChaine(ch, taille) {
 /* ---------- LUMU CLIP : passage de 15/30/60 s → vidéo verticale 9:16 sous-titrée ---------- */
 const CLIP = {
   W: 720, H: 1280, LONGUEURS: [15, 30, 60],
+  THEMES: [
+    { n: "Lumu", f0: "#0B3B2B", f1: "#06140F", ac: "#34D399", pill: "#fff", pillT: "#0F8A5F", cadre: null },
+    { n: "Nuit dorée", f0: "#13264F", f1: "#060B1A", ac: "#F6D56A", pill: "#F6D56A", pillT: "#13264F", cadre: "#F6D56A" },
+    { n: "Vert royal", f0: "#0F7B6C", f1: "#052E28", ac: "#FFFFFF", pill: "#fff", pillT: "#0F7B6C", cadre: "#FFFFFF" },
+    { n: "Sobre", f0: "#222", f1: "#000", ac: "#E5E7EB", pill: "#fff", pillT: "#111", cadre: null }
+  ],
+  th() { return this.THEMES[Math.min(Math.max(+chargerLocal("clip_th", 0) || 0, 0), this.THEMES.length - 1)]; },
   CDN: "https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.0.2",
   MODELE: "onnx-community/whisper-base_timestamped",
   CODES: { ha: "hausa", fr: "french", ar: "arabic", en: "english" },
@@ -4659,6 +4670,7 @@ const CLIP = {
     E.ov.innerHTML = `<div class="clip-bt"><div class="clip-haut"><button class="clip-x" id="cx" aria-label="Fermer">✕</button><b>Créer un Clip Lumu</b><span></span></div>
       <div class="clip-vue"><canvas id="cv" width="${this.W}" height="${this.H}"></canvas></div>
       <div class="chips clip-lg" id="lg"></div>
+      <div class="chips clip-lg" id="thm"></div>
       <div class="clip-tl" id="tl" aria-label="Choisir le passage"><div class="clip-bars" id="bars"></div><div class="clip-win" id="win"><i></i><i></i></div></div>
       <div class="clip-tps"><span id="t1"></span><span id="t2"></span></div>
       <div class="clip-ctl"><button class="btn-outline" id="m5">⏪ 5 s</button><button class="btn-outline" id="pl">▶ Écouter</button><button class="btn-outline" id="p5">5 s ⏩</button></div>
@@ -4668,6 +4680,8 @@ const CLIP = {
     const barres = q("#bars"); let h = 0; for (let i = 0; i < c.id.length; i++) h = (h * 31 + c.id.charCodeAt(i)) >>> 0;
     for (let i = 0; i < 56; i++) { h = (h * 1103515245 + 12345) >>> 0; const b = document.createElement("i"); b.style.height = (22 + (h >> 8) % 70) + "%"; barres.appendChild(b); }
     const lg = q("#lg"); this.LONGUEURS.filter(n => n <= E.dur + 1 || n === 15).forEach(n => { const b = document.createElement("button"); b.className = "chip" + (n === E.len ? " actif" : ""); b.textContent = n + " s"; b.onclick = () => { E.len = Math.min(n, Math.floor(E.dur)); E.debut = Math.max(0, Math.min(E.debut, E.dur - E.len)); lg.querySelectorAll(".chip").forEach(x => x.classList.toggle("actif", x === b)); this.arret(); maj(); }; lg.appendChild(b); });
+    const thm = q("#thm"), cur = () => Math.min(Math.max(+chargerLocal("clip_th", 0) || 0, 0), this.THEMES.length - 1);
+    this.THEMES.forEach((m, i) => { const b = document.createElement("button"); b.className = "chip" + (i === cur() ? " actif" : ""); b.textContent = m.n; b.onclick = () => { sauverLocal("clip_th", i); thm.querySelectorAll(".chip").forEach((x, j) => x.classList.toggle("actif", j === i)); this.dessiner(0, true); }; thm.appendChild(b); });
     const win = q("#win"), tl = q("#tl");
     const maj = () => {
       win.style.width = (E.len / E.dur * 100) + "%"; win.style.insetInlineStart = (E.debut / E.dur * 100) + "%";
@@ -4698,7 +4712,7 @@ const CLIP = {
   fond(ctx) {
     const E = this.etat, W = this.W, H = this.H;
     const src = E.estVid && E.el.videoWidth ? E.el : (E.img && E.img.complete && E.img.naturalWidth ? E.img : null);
-    const g0 = ctx.createLinearGradient(0, 0, 0, H); g0.addColorStop(0, "#0B3B2B"); g0.addColorStop(1, "#06140F"); ctx.fillStyle = g0; ctx.fillRect(0, 0, W, H);
+    const g0 = ctx.createLinearGradient(0, 0, 0, H); const th = this.th(); g0.addColorStop(0, th.f0); g0.addColorStop(1, th.f1); ctx.fillStyle = g0; ctx.fillRect(0, 0, W, H);
     if (!src) return null;
     const sw = src.videoWidth || src.naturalWidth, sh = src.videoHeight || src.naturalHeight;
     if (!E.mini) { E.mini = document.createElement("canvas"); E.mini.width = 24; E.mini.height = 42; }
@@ -4712,7 +4726,7 @@ const CLIP = {
     this.rendre(cv.getContext("2d"), t, apercu);
   },
   rendre(ctx, t, apercu) {
-    const E = this.etat, W = this.W, H = this.H, vert = "#34D399";
+    const E = this.etat, W = this.W, H = this.H, th = this.th(), vert = th.ac;
     const f = this.fond(ctx);
     // haut : image / vidéo nette de l'imam
     const cx = W / 2, cy = 330;
@@ -4745,11 +4759,12 @@ const CLIP = {
     ctx.direction = "ltr"; ctx.textAlign = "left";
     const gb = ctx.createLinearGradient(0, H - 440, 0, H); gb.addColorStop(0, "rgba(0,0,0,0)"); gb.addColorStop(1, "rgba(0,0,0,.85)"); ctx.fillStyle = gb; ctx.fillRect(0, H - 440, W, 440);
     { const px = 40, py = H - 372, pw = 400, ph = 138;
-      ctx.save(); ctx.shadowColor = "rgba(0,0,0,.45)"; ctx.shadowBlur = 24; ctx.fillStyle = "#fff"; this.rr(ctx, px, py, pw, ph, 69); ctx.fill(); ctx.restore();
+      ctx.save(); ctx.shadowColor = "rgba(0,0,0,.45)"; ctx.shadowBlur = 24; ctx.fillStyle = th.pill; this.rr(ctx, px, py, pw, ph, 69); ctx.fill(); ctx.restore();
       if (E.logo && E.logo.complete && E.logo.naturalWidth) { ctx.save(); this.rr(ctx, px + 16, py + 17, 104, 104, 26); ctx.clip(); ctx.drawImage(E.logo, px + 16, py + 17, 104, 104); ctx.restore(); }
-      ctx.textBaseline = "middle"; ctx.fillStyle = "#0F8A5F"; ctx.font = "900 78px system-ui,sans-serif"; ctx.fillText("LUMU", px + 138, py + ph / 2 + 4); }
+      ctx.textBaseline = "middle"; ctx.fillStyle = th.pillT; ctx.font = "900 78px system-ui,sans-serif"; ctx.fillText("LUMU", px + 138, py + ph / 2 + 4); }
     ctx.textBaseline = "alphabetic"; ctx.fillStyle = "#fff"; ctx.font = "800 46px system-ui,sans-serif"; let nm = E.nomImam; while (ctx.measureText(nm).width > W - 96 && nm.length > 3) nm = nm.slice(0, -2); ctx.fillText(nm === E.nomImam ? nm : nm + "…", 48, H - 168);
     ctx.fillStyle = vert; ctx.font = "800 38px system-ui,sans-serif"; ctx.fillText("▶ Écoute le prêche complet sur Lumu", 48, H - 80, W - 96);
+    if (th.cadre) { ctx.strokeStyle = th.cadre; ctx.lineWidth = 8; this.rr(ctx, 18, 18, W - 36, H - 36, 40); ctx.stroke(); ctx.lineWidth = 2; ctx.globalAlpha = .5; this.rr(ctx, 34, 34, W - 68, H - 68, 28); ctx.stroke(); ctx.globalAlpha = 1; }
     // progression
     ctx.fillStyle = "rgba(255,255,255,.25)"; ctx.fillRect(0, H - 10, W, 10); ctx.fillStyle = vert; ctx.fillRect(0, H - 10, W * Math.min(1, t / E.len), 10);
     ctx.textBaseline = "middle";
@@ -6232,6 +6247,106 @@ function nomTelechargement(c) {
   const base = String(c.title || "fichier").replace(/[\\/:*?"<>|\u0000-\u001f]+/g, " ").replace(/\s+/g, " ").trim().slice(0, 100) || "fichier";
   return ext && !base.toLowerCase().endsWith("." + ext) ? base + "." + ext : base;
 }
+/* ---------- Affiches : modèles d'annonces (Direct, cours, rappel, publicité) ---------- */
+const AFF = {
+  TYPES: [
+    { k: "direct", ic: "🔴", fr: "EN DIRECT", ar: "بث مباشر", ex: "Cours en direct" },
+    { k: "cours", ic: "📖", fr: "COURS", ar: "درس", ex: "Tafsir de la sourate…" },
+    { k: "rappel", ic: "🌙", fr: "RAPPEL", ar: "تذكير", ex: "Rappel du vendredi" },
+    { k: "annonce", ic: "📣", fr: "ANNONCE", ar: "إعلان", ex: "Nouveau sur Lumu" }
+  ],
+  STYLES: [
+    { n: "Lumu", b0: "#0F8A5F", b1: "#053D2B", t: "#fff", a: "#F6D56A", pill: "#fff", pillT: "#0F7B6C", cadre: null },
+    { n: "Nuit", b0: "#1B3B7A", b1: "#070D22", t: "#fff", a: "#F6D56A", pill: "#F6D56A", pillT: "#13264F", cadre: "#F6D56A" },
+    { n: "Ivoire", b0: "#FBF4E6", b1: "#EADFC2", t: "#0B3B2B", a: "#0F7B6C", pill: "#0F7B6C", pillT: "#fff", cadre: "#C9A227" },
+    { n: "Éclat", b0: "#FFD24C", b1: "#F08A24", t: "#1B1405", a: "#7A2E00", pill: "#1B1405", pillT: "#FFD24C", cadre: null }
+  ],
+  FORMATS: [{ n: "Carré", w: 1080, h: 1080 }, { n: "Statut", w: 1080, h: 1920 }],
+  rr(ctx, x, y, w, h, r) { ctx.beginPath(); ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r); ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath(); },
+  lignes(ctx, txt, maxW) {
+    const mots = String(txt || "").split(/\s+/).filter(Boolean), out = []; let cur = "";
+    mots.forEach(m => { const e = cur ? cur + " " + m : m; if (cur && ctx.measureText(e).width > maxW) { out.push(cur); cur = m; } else cur = e; });
+    if (cur) out.push(cur); return out;
+  },
+  dessiner(cv, d) {
+    const F = this.FORMATS[d.fmt], S = this.STYLES[d.style], T = this.TYPES[d.type], W = F.w, H = F.h;
+    cv.width = W; cv.height = H; const ctx = cv.getContext("2d"), cx = W / 2, hist = H > W;
+    const g = ctx.createLinearGradient(0, 0, W * .4, H); g.addColorStop(0, S.b0); g.addColorStop(1, S.b1); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    const r = ctx.createRadialGradient(W * .86, H * .1, 10, W * .86, H * .1, W * .55); r.addColorStop(0, S.a + "88"); r.addColorStop(1, S.a + "00"); ctx.fillStyle = r; ctx.fillRect(0, 0, W, H);
+    ctx.fillStyle = S.a; ctx.globalAlpha = .9; ctx.beginPath(); ctx.arc(W * .86, H * .1, 46, 0, 7); ctx.fill(); ctx.globalAlpha = 1;
+    if (S.cadre) { ctx.strokeStyle = S.cadre; ctx.lineWidth = 10; this.rr(ctx, 30, 30, W - 60, H - 60, 44); ctx.stroke(); ctx.lineWidth = 3; ctx.globalAlpha = .5; this.rr(ctx, 54, 54, W - 108, H - 108, 30); ctx.stroke(); ctx.globalAlpha = 1; }
+    ctx.textBaseline = "middle"; ctx.textAlign = "center";
+    let y = hist ? 230 : 150;
+    // badge du type
+    const lib = `${T.ic} ${T.fr} · ${T.ar}`; ctx.direction = "ltr"; ctx.font = "800 46px system-ui,'Segoe UI',Arial,sans-serif";
+    const bw = ctx.measureText(lib).width + 90; ctx.fillStyle = S.pill; this.rr(ctx, cx - bw / 2, y - 46, bw, 92, 46); ctx.fill();
+    ctx.fillStyle = S.pillT; ctx.fillText(lib, cx, y + 3);
+    // photo ronde facultative
+    y += hist ? 80 : 60;
+    if (d.photo) { const R = hist ? 190 : 120, py = y + R + 10; ctx.save(); ctx.beginPath(); ctx.arc(cx, py, R, 0, 7); ctx.clip(); const k = Math.max(2 * R / d.photo.naturalWidth, 2 * R / d.photo.naturalHeight); ctx.drawImage(d.photo, cx - d.photo.naturalWidth * k / 2, py - d.photo.naturalHeight * k / 2, d.photo.naturalWidth * k, d.photo.naturalHeight * k); ctx.restore(); ctx.strokeStyle = S.a; ctx.lineWidth = 10; ctx.beginPath(); ctx.arc(cx, py, R, 0, 7); ctx.stroke(); y = py + R + 20; }
+    // titre
+    const titre = (d.titre || T.ex).trim(), rtl = /[؀-ۿ]/.test(titre); ctx.direction = rtl ? "rtl" : "ltr";
+    const zoneH = H - y - (hist ? 560 : 470); let fs = hist ? 118 : 100, L = [];
+    for (; fs >= 46; fs -= 6) { ctx.font = `900 ${fs}px system-ui,'Segoe UI',Arial,sans-serif`; L = this.lignes(ctx, titre, W - 190); if (L.length * fs * 1.2 <= zoneH) break; }
+    const hl = fs * 1.2, ty = y + 30 + Math.max(0, (zoneH - L.length * hl) / 2);
+    ctx.fillStyle = S.t; L.forEach((ln, i) => ctx.fillText(ln, cx, ty + hl * (i + .5)));
+    y = ty + L.length * hl + 20;
+    if (d.ligne) { const rt = /[؀-ۿ]/.test(d.ligne); ctx.direction = rt ? "rtl" : "ltr"; ctx.font = "600 50px system-ui,'Segoe UI',Arial,sans-serif"; ctx.fillStyle = S.t; ctx.globalAlpha = .85; this.lignes(ctx, d.ligne, W - 200).slice(0, 2).forEach((ln, i) => ctx.fillText(ln, cx, y + 36 + i * 62)); ctx.globalAlpha = 1; }
+    // imam + date
+    const bas = H - (hist ? 300 : 330);
+    ctx.direction = /[؀-ۿ]/.test(d.imam || "") ? "rtl" : "ltr";
+    if (d.imam) { ctx.font = "800 58px system-ui,'Segoe UI',Arial,sans-serif"; ctx.fillStyle = S.a; let n = d.imam; while (ctx.measureText(n).width > W - 160 && n.length > 3) n = n.slice(0, -2); ctx.fillText(n, cx, bas - (d.quand ? 70 : 0)); }
+    if (d.quand) { ctx.direction = "ltr"; ctx.font = "800 50px system-ui,'Segoe UI',Arial,sans-serif"; const q = "🗓 " + d.quand, qw = Math.min(ctx.measureText(q).width + 80, W - 120); ctx.fillStyle = S.pill; this.rr(ctx, cx - qw / 2, bas - 8, qw, 90, 45); ctx.fill(); ctx.fillStyle = S.pillT; ctx.fillText(q, cx, bas + 38, W - 160); }
+    // pied : logo + nom arabe
+    const fy = H - 120, lg = d.logo;
+    ctx.direction = "ltr"; ctx.textAlign = "left";
+    if (lg && lg.complete && lg.naturalWidth) { ctx.save(); this.rr(ctx, cx - 255, fy - 52, 104, 104, 26); ctx.clip(); ctx.drawImage(lg, cx - 255, fy - 52, 104, 104); ctx.restore(); }
+    ctx.font = "900 70px system-ui,sans-serif"; ctx.fillStyle = S.t; ctx.fillText("LUMU", cx - 130, fy - 8);
+    ctx.font = '700 62px "LumuAr","Amiri",serif'; ctx.fillStyle = S.a; ctx.direction = "rtl"; ctx.textAlign = "left"; ctx.fillText("لومو", cx + 105, fy + 4);
+    ctx.textAlign = "center"; ctx.direction = "ltr";
+  },
+  nom(d) { return "lumu-" + this.TYPES[d.type].k + ".png"; },
+  blob(cv) { return new Promise(ok => cv.toBlob(ok, "image/png")); },
+  async partager(cv, d, note) {
+    const b = await this.blob(cv), nom = this.nom(d), txt = (d.titre || "") + "\n" + SITE_PUBLIC;
+    if (window.LumuNative && LumuNative.partagerImage) {
+      const rd = new FileReader(); rd.onload = () => LumuNative.partagerImage(String(rd.result).split(",")[1], nom, d.titre || "Lumu"); rd.readAsDataURL(b); return;
+    }
+    const f = new File([b], nom, { type: "image/png" });
+    try { if (navigator.canShare && navigator.canShare({ files: [f] })) { await navigator.share({ files: [f], title: d.titre || "Lumu", text: txt }); return; } } catch (e) { if (e && e.name === "AbortError") return; }
+    const u = URL.createObjectURL(b), a = document.createElement("a"); a.href = u; a.download = nom; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(u), 30000);
+    if (note) note.textContent = "Image enregistrée ✓";
+  }
+};
+function vueAffiches() {
+  const wrap = document.createElement("div"); wrap.className = "ecran"; app.appendChild(wrap);
+  const mem = chargerLocal("aff_dernier", {});
+  const d = { type: mem.type || 0, style: mem.style || 0, fmt: mem.fmt || 0, titre: "", ligne: "", imam: (etat.chaine && etat.chaine.name) || mem.imam || "", quand: "", photo: null, logo: new Image() };
+  d.logo.src = "icon-192.png";
+  wrap.innerHTML = `<h1>Affiche</h1>
+    <div class="aff-cv"><canvas id="aff-cv"></canvas></div>
+    <div class="chips" id="a-t"></div><div class="chips" id="a-s"></div><div class="chips" id="a-f"></div>
+    <input class="champ" id="a-ti" dir="auto" maxlength="80" placeholder="Titre">
+    <input class="champ" id="a-li" dir="auto" maxlength="90" placeholder="Sous-titre (facultatif)">
+    <input class="champ" id="a-im" dir="auto" maxlength="50" placeholder="Imam">
+    <input class="champ" id="a-qu" maxlength="40" placeholder="Date et heure">
+    <input type="file" id="a-ph" accept="image/*" hidden>
+    <button class="btn-outline" id="a-pb">📷 Photo</button>
+    <button class="btn" id="a-ok">Partager</button><p class="pf-ast" id="a-note" style="text-align:center"></p>`;
+  const q = s => wrap.querySelector(s), cv = q("#aff-cv");
+  const dessin = () => { AFF.dessiner(cv, d); sauverLocal("aff_dernier", { type: d.type, style: d.style, fmt: d.fmt, imam: d.imam }); };
+  const chips = (id, liste, cle, lib) => { const z = q(id); liste.forEach((x, i) => { const b = document.createElement("button"); b.className = "chip" + (i === d[cle] ? " actif" : ""); b.textContent = lib(x); b.onclick = () => { d[cle] = i; z.querySelectorAll(".chip").forEach((c, j) => c.classList.toggle("actif", j === i)); dessin(); }; z.appendChild(b); }); };
+  chips("#a-t", AFF.TYPES, "type", x => x.ic + " " + x.fr.charAt(0) + x.fr.slice(1).toLowerCase());
+  chips("#a-s", AFF.STYLES, "style", x => x.n);
+  chips("#a-f", AFF.FORMATS, "fmt", x => x.n);
+  q("#a-im").value = d.imam;
+  [["#a-ti", "titre"], ["#a-li", "ligne"], ["#a-im", "imam"], ["#a-qu", "quand"]].forEach(([s, k]) => { q(s).oninput = () => { d[k] = q(s).value; dessin(); }; });
+  q("#a-pb").onclick = () => q("#a-ph").click();
+  q("#a-ph").onchange = ev => { const f = ev.target.files[0]; if (!f) return; const im = new Image(); im.onload = () => { d.photo = im; dessin(); }; im.src = URL.createObjectURL(f); };
+  q("#a-ok").onclick = () => AFF.partager(cv, d, q("#a-note"));
+  d.logo.onload = dessin; dessin(); try { document.fonts && document.fonts.load('700 62px "LumuAr"', "لومو").then(dessin); } catch (e) {}
+}
+
 /* ---------- Envoyer / enregistrer l'audio, tout télécharger, minuterie ---------- */
 function nomFichierAudio(c) { const ext = ((c.fichier_path || "").split("?")[0].split(".").pop() || "mp3").toLowerCase().slice(0, 4); return (c.title || "audio").replace(/[\\/:*?"<>|]/g, " ").trim().slice(0, 60) + "." + ext; }
 function mimeAudio(c) { if (c.mime) return c.mime; const e = (c.fichier_path || "").split(".").pop().toLowerCase(); return e === "m4a" ? "audio/mp4" : e === "ogg" ? "audio/ogg" : e === "wav" ? "audio/wav" : "audio/mpeg"; }
@@ -6458,7 +6573,7 @@ function vueEspace() {
     cd.querySelector("#ib-t").textContent = n === 1 ? "écoute de vos prêches · " + ab + " abonné" + (ab > 1 ? "s" : "") : "écoutes de vos prêches cette semaine · " + ab + " abonné" + (ab > 1 ? "s" : "");
   }, () => { cd.querySelector("#ib-n").textContent = "—"; });
     cd.querySelector("#ib-p").onclick = async () => { const r = await partagerLien("Lumu", "🕌 Retrouvez mes prêches sur Lumu, la lumière de poche :", SITE + "/"); if (r === "copie") cd.querySelector("#ib-p").textContent = "Lien copié ✓"; };
-  const P = [["🎙️", "Je publie", "Audio, vidéo ou PDF", () => router("je-publie")], ["👤", "Mon profil", "Photo et présentation", () => router("chaine-edit")], ["📤", "Mes publications", "Masquer ou supprimer", () => router("mes-contenus")], ["📊", "Statistiques", "Écoutes et horaires", () => router("stats")], ["🔴", "Programmer un live", "Cours en direct", () => router("live-nouveau")]];
+  const P = [["🎙️", "Je publie", "Audio, vidéo ou PDF", () => router("je-publie")], ["🖼️", "Affiches", "Direct, cours, publicité", () => router("affiches")], ["👤", "Mon profil", "Photo et présentation", () => router("chaine-edit")], ["📤", "Mes publications", "Masquer ou supprimer", () => router("mes-contenus")], ["📊", "Statistiques", "Écoutes et horaires", () => router("stats")], ["🔴", "Programmer un live", "Cours en direct", () => router("live-nouveau")]];
   const M = [["📥", "Importer plusieurs fichiers", () => router("importer")], ["🔗", "Ajouter un lien YouTube", () => router("lien")], ["📎", "Publication avancée", () => router("publier")], ["📱", "Créer un reel", () => router("publier", { type: "reel" })], ["📚", "Écrire un livre", () => router("mes-livres")], ["🎞️", "Playlists et séries", () => router("playlists")], ["👥", "Créer un groupe", () => router("groupe-nouveau")]];
   const t0 = w.querySelector("#t");
   P.forEach(([ic, nom, sous, f], i) => { const b = document.createElement("button"); b.className = "tuile" + (i === 0 ? " tuile-main" : ""); b.innerHTML = `<span class="tuile-ic">${ic}</span><b>${esc(nom)}</b><small>${esc(sous)}</small>`; b.onclick = f; t0.appendChild(b); });
