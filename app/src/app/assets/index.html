@@ -4627,8 +4627,12 @@ const CLIP = {
     { n: "Lumu", f0: "#0B3B2B", f1: "#06140F", ac: "#34D399", pill: "#fff", pillT: "#0F8A5F", cadre: null },
     { n: "Nuit dorée", f0: "#13264F", f1: "#060B1A", ac: "#F6D56A", pill: "#F6D56A", pillT: "#13264F", cadre: "#F6D56A" },
     { n: "Vert royal", f0: "#0F7B6C", f1: "#052E28", ac: "#FFFFFF", pill: "#fff", pillT: "#0F7B6C", cadre: "#FFFFFF" },
-    { n: "Sobre", f0: "#222", f1: "#000", ac: "#E5E7EB", pill: "#fff", pillT: "#111", cadre: null }
+    { n: "Sobre", f0: "#222", f1: "#000", ac: "#E5E7EB", pill: "#fff", pillT: "#111", cadre: null },
+    { n: "Aurore", f0: "#0B1026", f1: "#05060F", ac: "#7CF3C8", pill: "#fff", pillT: "#312E81", cadre: null, aurore: ["#34D399", "#6366F1", "#F472B6"] },
+    { n: "Verre", f0: "#0F2A3F", f1: "#050B14", ac: "#FDE68A", pill: "rgba(255,255,255,.9)", pillT: "#0F2A3F", cadre: "rgba(255,255,255,.55)", aurore: ["#38BDF8", "#A78BFA", "#34D399"], verre: true }
   ],
+  STYLES_ST: ["Karaoké", "Pop", "Néon", "Cinéma"],
+  st() { return Math.min(Math.max(+chargerLocal("clip_st", 0) || 0, 0), this.STYLES_ST.length - 1); },
   th() { return this.THEMES[Math.min(Math.max(+chargerLocal("clip_th", 0) || 0, 0), this.THEMES.length - 1)]; },
   CDN: "https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.0.2",
   MODELE: "onnx-community/whisper-base_timestamped",
@@ -4671,6 +4675,7 @@ const CLIP = {
       <div class="clip-vue"><canvas id="cv" width="${this.W}" height="${this.H}"></canvas></div>
       <div class="chips clip-lg" id="lg"></div>
       <div class="chips clip-lg" id="thm"></div>
+      <div class="chips clip-lg" id="stm"></div>
       <div class="clip-tl" id="tl" aria-label="Choisir le passage"><div class="clip-bars" id="bars"></div><div class="clip-win" id="win"><i></i><i></i></div></div>
       <div class="clip-tps"><span id="t1"></span><span id="t2"></span></div>
       <div class="clip-ctl"><button class="btn-outline" id="m5">⏪ 5 s</button><button class="btn-outline" id="pl">▶ Écouter</button><button class="btn-outline" id="p5">5 s ⏩</button></div>
@@ -4682,6 +4687,7 @@ const CLIP = {
     const lg = q("#lg"); this.LONGUEURS.filter(n => n <= E.dur + 1 || n === 15).forEach(n => { const b = document.createElement("button"); b.className = "chip" + (n === E.len ? " actif" : ""); b.textContent = n + " s"; b.onclick = () => { E.len = Math.min(n, Math.floor(E.dur)); E.debut = Math.max(0, Math.min(E.debut, E.dur - E.len)); lg.querySelectorAll(".chip").forEach(x => x.classList.toggle("actif", x === b)); this.arret(); maj(); }; lg.appendChild(b); });
     const thm = q("#thm"), cur = () => Math.min(Math.max(+chargerLocal("clip_th", 0) || 0, 0), this.THEMES.length - 1);
     this.THEMES.forEach((m, i) => { const b = document.createElement("button"); b.className = "chip" + (i === cur() ? " actif" : ""); b.textContent = m.n; b.onclick = () => { sauverLocal("clip_th", i); thm.querySelectorAll(".chip").forEach((x, j) => x.classList.toggle("actif", j === i)); this.dessiner(0, true); }; thm.appendChild(b); });
+    const stm = q("#stm"); this.STYLES_ST.forEach((n, i) => { const b = document.createElement("button"); b.className = "chip" + (i === this.st() ? " actif" : ""); b.textContent = "Aa " + n; b.onclick = () => { sauverLocal("clip_st", i); stm.querySelectorAll(".chip").forEach((x, j) => x.classList.toggle("actif", j === i)); this.dessiner(0, true); }; stm.appendChild(b); });
     const win = q("#win"), tl = q("#tl");
     const maj = () => {
       win.style.width = (E.len / E.dur * 100) + "%"; win.style.insetInlineStart = (E.debut / E.dur * 100) + "%";
@@ -4713,12 +4719,13 @@ const CLIP = {
     const E = this.etat, W = this.W, H = this.H;
     const src = E.estVid && E.el.videoWidth ? E.el : (E.img && E.img.complete && E.img.naturalWidth ? E.img : null);
     const g0 = ctx.createLinearGradient(0, 0, 0, H); const th = this.th(); g0.addColorStop(0, th.f0); g0.addColorStop(1, th.f1); ctx.fillStyle = g0; ctx.fillRect(0, 0, W, H);
+    if (th.aurore) { const tt = (this.etat && this.etat.tAnim) || 0; th.aurore.forEach((col, k) => { const bx = W * (.5 + .38 * Math.sin(tt * .6 + k * 2.1)), by = H * (.25 + .22 * k + .06 * Math.cos(tt * .5 + k)), R = 520; const rg = ctx.createRadialGradient(bx, by, 10, bx, by, R); rg.addColorStop(0, col + "99"); rg.addColorStop(1, col + "00"); ctx.fillStyle = rg; ctx.fillRect(0, 0, W, H); }); }
     if (!src) return null;
     const sw = src.videoWidth || src.naturalWidth, sh = src.videoHeight || src.naturalHeight;
     if (!E.mini) { E.mini = document.createElement("canvas"); E.mini.width = 24; E.mini.height = 42; }
     const mc = E.mini.getContext("2d"), k = Math.max(24 / sw, 42 / sh); mc.drawImage(src, (24 - sw * k) / 2, (42 - sh * k) / 2, sw * k, sh * k);
     ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = "high"; ctx.drawImage(E.mini, 0, 0, W, H);
-    ctx.fillStyle = "rgba(0,0,0,.45)"; ctx.fillRect(0, 0, W, H);
+    ctx.fillStyle = th.aurore ? "rgba(0,0,0,.18)" : "rgba(0,0,0,.45)"; ctx.fillRect(0, 0, W, H);
     return { src, sw, sh };
   },
   dessiner(t, apercu) {
@@ -4727,7 +4734,7 @@ const CLIP = {
   },
   rendre(ctx, t, apercu) {
     const E = this.etat, W = this.W, H = this.H, th = this.th(), vert = th.ac;
-    const f = this.fond(ctx);
+    E.tAnim = t; const f = this.fond(ctx);
     // haut : image / vidéo nette de l'imam
     const cx = W / 2, cy = 330;
     if (f) {
@@ -4736,6 +4743,7 @@ const CLIP = {
       else { ctx.beginPath(); ctx.arc(cx, cy, 170, 0, 7); ctx.clip(); const k = Math.max(340 / f.sw, 340 / f.sh); ctx.drawImage(f.src, cx - f.sw * k / 2, cy - f.sh * k / 2, f.sw * k, f.sh * k); }
       ctx.restore();
     } else { ctx.fillStyle = "#0F8A5F"; ctx.beginPath(); ctx.arc(cx, cy, 150, 0, 7); ctx.fill(); ctx.fillStyle = "#fff"; ctx.font = "800 150px system-ui,sans-serif"; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText((E.nomImam[0] || "L").toUpperCase(), cx, cy + 6); }
+    { const pu = .5 + .5 * Math.sin(t * 3); ctx.save(); ctx.strokeStyle = vert; ctx.globalAlpha = .25 + .35 * pu; ctx.lineWidth = 6 + 6 * pu; if (E.estVid && f) { const w = 560, h = Math.min(420, w * f.sh / f.sw); this.rr(ctx, cx - w / 2 - 14, cy - h / 2 - 14, w + 28, h + 28, 46); } else { ctx.beginPath(); ctx.arc(cx, cy, 186 + 8 * pu, 0, 7); } ctx.stroke(); ctx.restore(); }
     // sous-titres (mot par mot)
     const mots = E.mots, rtl = mots.length && /[؀-ۿ]/.test(mots[0].w);
     ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.direction = rtl ? "rtl" : "ltr";
@@ -4746,11 +4754,20 @@ const CLIP = {
       const lignes = []; let cur = [];
       grp.forEach((m, j) => { const essai = [...cur, m]; if (cur.length && ctx.measureText(essai.map(x => x.w).join(" ")).width > W - 90) { lignes.push(cur); cur = [m]; } else cur = essai; }); if (cur.length) lignes.push(cur);
       const hL = 104, y0 = 760 - (lignes.length - 1) * hL / 2;
+      if (th.verre && this.st() !== 3) { ctx.save(); ctx.fillStyle = "rgba(255,255,255,.13)"; this.rr(ctx, 30, y0 - 70, W - 60, lignes.length * hL + 36, 44); ctx.fill(); ctx.strokeStyle = "rgba(255,255,255,.35)"; ctx.lineWidth = 3; ctx.stroke(); ctx.restore(); }
       lignes.forEach((ln, r) => {
         const txt = ln.map(x => x.w).join(" "), tw = ctx.measureText(txt).width; let x = cx - tw / 2; const y = y0 + r * hL;
         ctx.textAlign = "left"; const sp = ctx.measureText(" ").width;
         const ordre = rtl ? [...ln].reverse() : ln; x = cx - tw / 2;
-        ordre.forEach(m => { const w = ctx.measureText(m.w).width, act = grp.indexOf(m) + g === i; ctx.lineWidth = 14; ctx.strokeStyle = "rgba(0,0,0,.85)"; ctx.lineJoin = "round"; ctx.strokeText(m.w, x, y); ctx.fillStyle = act ? vert : "#fff"; ctx.fillText(m.w, x, y); x += w + sp; });
+        ordre.forEach(m => {
+          const w = ctx.measureText(m.w).width, act = grp.indexOf(m) + g === i, sty = this.st();
+          if (sty === 3) { ctx.save(); ctx.shadowColor = "rgba(0,0,0,.8)"; ctx.shadowBlur = 14; ctx.fillStyle = "#fff"; ctx.fillText(m.w, x, y); ctx.restore(); x += w + sp; return; }
+          ctx.save(); ctx.lineJoin = "round";
+          if (sty === 1 && act) { const k = 1 + .1 * Math.min(1, Math.max(0, (t - m.s) / .12)) ; ctx.translate(x + w / 2, y); ctx.scale(k, k); ctx.translate(-(x + w / 2), -y); }
+          if (sty === 2) { ctx.shadowColor = act ? vert : "rgba(255,255,255,.7)"; ctx.shadowBlur = act ? 42 : 16; ctx.fillStyle = act ? vert : "#fff"; ctx.fillText(m.w, x, y); ctx.fillText(m.w, x, y); }
+          else { ctx.lineWidth = 14; ctx.strokeStyle = "rgba(0,0,0,.85)"; ctx.strokeText(m.w, x, y); ctx.fillStyle = act ? vert : "#fff"; ctx.fillText(m.w, x, y); }
+          ctx.restore(); x += w + sp;
+        });
       });
     } else if (apercu) {
       ctx.font = "800 60px system-ui,sans-serif"; ctx.fillStyle = "rgba(255,255,255,.55)"; ctx.textAlign = "center"; ctx.fillText("Les sous-titres", cx, 740); ctx.fillText("apparaîtront ici", cx, 815);
