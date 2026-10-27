@@ -20,6 +20,8 @@ async function appel(corps) {
   return JSON.parse(t);
 }
 
+const fatal = e => { console.log("::error::" + String(e && (e.stack || e.message) || e).replace(/\n/g, " | ").slice(0, 500)); process.exit(1); };
+process.on("uncaughtException", fatal);
 process.on("unhandledRejection", e => { console.log("::error::" + String(e && e.message || e).replace(/\n/g, " ").slice(0, 400)); process.exit(1); });
 const mode = fs.readFileSync("recompress/mode.txt", "utf8").trim();
 if (mode.startsWith("purger")) {
