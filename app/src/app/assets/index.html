@@ -1035,6 +1035,15 @@ body:not(.branche-tobi) #mini-audio.sans-nav { bottom: calc(12px + env(safe-area
 @keyframes lumu-pop { 0% { transform: scale(1); } 40% { transform: scale(1.35); } 100% { transform: scale(1); } }
 .d-act.on svg { animation: lumu-pop .4s ease; }
 .d-act:active { transform: scale(.88); }
+.par-carte { display: flex; align-items: center; gap: 12px; width: 100%; text-align: start; padding: 14px; margin: 6px 0; border: 1.5px solid var(--bordure); border-radius: 16px; background: var(--surface, #fff); color: var(--texte); font-size: 17px; }
+.par-carte small { display: block; color: var(--texte-doux); font-size: 14px; font-weight: 500; margin-top: 2px; }
+.par-ic { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: color-mix(in srgb, var(--vert) 14%, transparent); font-size: 20px; font-weight: 800; flex: none; }
+.par-barre { height: 10px; border-radius: 6px; background: var(--bordure); overflow: hidden; } .par-barre u { display: block; height: 100%; background: var(--vert); }
+.par-pas { display: flex; gap: 6px; margin: 8px 0 14px; } .par-pas i { flex: 1; height: 8px; border-radius: 5px; background: var(--bordure); } .par-pas i.on { background: var(--vert); } .par-pas i.ok { background: color-mix(in srgb, var(--vert) 45%, transparent); }
+.par-ar { font-size: 30px; line-height: 2.1; text-align: center; margin: 14px 0; padding: 14px; border-radius: 16px; background: color-mix(in srgb, var(--vert) 8%, transparent); font-family: "Amiri", "Noto Naskh Arabic", "Traditional Arabic", serif; direction: rtl; }
+.par-txt { font-size: 21px; line-height: 1.6; margin: 14px 0; }
+.par-nav { display: flex; gap: 10px; margin: 16px 0 24px; } .par-nav .btn { flex: 1; } .par-nav .btn-outline { width: auto; flex: none; min-width: 64px; } .par-nav .btn { width: auto; }
+.par-stop { background: #E53935; }
 .aff-cv { background: #ddd; border-radius: 14px; overflow: hidden; max-width: 360px; margin: 8px auto 12px; }
 .aff-cv canvas { display: block; width: 100%; height: auto; max-height: 62vh; object-fit: contain; margin: 0 auto; }
 .ecran .champ + .champ, .ecran .chips + .chips { margin-top: 8px; }
@@ -1801,7 +1810,7 @@ function creerReconnaisseur() {
   return r;
 }
 
-const PROTEGEES = ["chaine-edit", "notifications", "je-publie", "importer", "espace", "groupe-nouveau", "mes-livres", "livre-edition", "live-nouveau", "publier", "devenir-createur", "admin", "push-admin", "mes-contenus", "choix-enfant", "inscription", "accueil", "lecons", "dialogue", "parametres", "changer-mot-de-passe", "pin-creation", "favoris", "historique", "lien", "playlists", "stats", "abonnements"];
+const PROTEGEES = ["mes-parcours", "parcours-edit", "passage-edit", "chaine-edit", "notifications", "je-publie", "importer", "espace", "groupe-nouveau", "mes-livres", "livre-edition", "live-nouveau", "publier", "devenir-createur", "admin", "push-admin", "mes-contenus", "choix-enfant", "inscription", "accueil", "lecons", "dialogue", "parametres", "changer-mot-de-passe", "pin-creation", "favoris", "historique", "lien", "playlists", "stats", "abonnements"];
 const ROOTS = ["flux", "reels", "videos", "je-publie", "discussions", "home", "espace", "abos", "profil", "preches", "biblio", "direct"];
 function router(route, params = {}, opts = {}) {
   if (!etat.parentId && PROTEGEES.includes(route)) { route = "connexion"; params = { message: "Connectez-vous pour continuer." }; }
@@ -1927,7 +1936,7 @@ function render() {
     "mot-de-passe-oublie": vueMotDePasseOublie, "nouveau-mot-de-passe": vueNouveauMotDePasse,
     "changer-mot-de-passe": vueChangerMotDePasse,
     "pin-verrou": vuePinVerrou, "pin-creation": vuePinCreation, "arabe": vueArabe,
-    "presentation": vuePresentation, "tarifs": vueTarifs, "videos": vueFlux, "affiches": vueAffiches, "home": vueDecouvrir, "savants": vueSavants, "preches": vuePreches, "priere": vuePriere, "langues-choix": vueLanguesChoix, "biblio": vueBiblio, "dossier": vueDossier, "direct": vueDirect, "chaine-edit": vueChaineEdit, "notifications": vueNotifications, "publier": vuePublier, "je-publie": vueJePublie, "profil": vueProfil, "contenu": vueContenu,
+    "presentation": vuePresentation, "tarifs": vueTarifs, "videos": vueFlux, "affiches": vueAffiches, "parcours": vueParcours, "parcours-voir": vueParcoursVoir, "passage": vuePassage, "parcours-revoir": vueRevoir, "mes-parcours": vueMesParcours, "parcours-edit": vueParcoursEdit, "passage-edit": vuePassageEdit, "home": vueDecouvrir, "savants": vueSavants, "preches": vuePreches, "priere": vuePriere, "langues-choix": vueLanguesChoix, "biblio": vueBiblio, "dossier": vueDossier, "direct": vueDirect, "chaine-edit": vueChaineEdit, "notifications": vueNotifications, "publier": vuePublier, "je-publie": vueJePublie, "profil": vueProfil, "contenu": vueContenu,
     "langue": vueLangue, "fil": vueFlux, "flux": vueEcouter, "radio": vueFlux, "recherche": vueRecherche, "abos": vueAbos, "espace": vueEspace, "importer": vueImport, "reels": vueFlux, "groupes": vueGroupes, "groupe": vueGroupe, "discussions": vueDiscussions, "conv": vueConv, "groupe-nouveau": vueNouveauGroupe, "livres": vueLivres, "livre": vueLivre, "mes-livres": vueMesLivres, "livre-edition": vueEditeurLivre, "lives": vueLives, "live": vueLive, "live-nouveau": vueNouveauLive, "devenir-createur": vueDevenirCreateur, "admin": vueAdmin, "push-admin": vuePushAdmin, "mes-contenus": vueMesContenus, "legal": vueLegal, "lien": vueLien, "chaine": vueChaine, "playlist": vuePlaylist, "playlists": vuePlaylists, "stats": vueStats, "abonnements": vueAbonnements, "favoris": vueListeUtilisateur, "historique": vueListeUtilisateur, "hors": vueHors
   };
   document.body.classList.toggle("branche-tobi", TOBI_ROUTES.includes(etat.route));
@@ -1936,7 +1945,7 @@ function render() {
   window.scrollTo(0, 0);
   if (AUD.mini) AUD.maj();
   try { majBandeauIslam(); } catch (e) {}
-  try { monterMicroFlottant(); const f = document.getElementById("micro-fab"); f.hidden = ["flux", "radio", "fil", "reels", "videos", "langues-choix", "connexion", "pin-verrou", "presentation", "espace", "je-publie", "publier", "importer", "profil", "chaine-edit", "priere", "groupe", "conv", "discussions"].includes(etat.route); } catch (e) {}
+  try { monterMicroFlottant(); const f = document.getElementById("micro-fab"); f.hidden = ["passage", "parcours-revoir", "parcours-edit", "passage-edit", "affiches", "flux", "radio", "fil", "reels", "videos", "langues-choix", "connexion", "pin-verrou", "presentation", "espace", "je-publie", "publier", "importer", "profil", "chaine-edit", "priere", "groupe", "conv", "discussions"].includes(etat.route); } catch (e) {}
 }
 
 function vueConnexion() {
@@ -2280,7 +2289,7 @@ function ico(n, taille, plein) {
 }
 const NAV_BASE = [{ r: "flux", i: "ecouter", t: "Écouter" }, { r: "reels", i: "reel", t: "Reels" }, { r: "videos", i: "video", t: "Vidéos" }];
 function navActuelle() { return NAV_BASE.concat(typeof estCreateur === "function" && estCreateur() ? [{ r: "je-publie", i: "publier", t: "Publier" }] : [{ r: "profil", i: "user", t: "Moi" }]); }
-const ONGLET_DE = { "priere": "flux", "savants": "flux", "chaine-edit": "", "notifications": "", "tarifs": "", "flux": "flux", "fil": "flux", "reels": "reels", "recherche": "flux", "home": "flux", "contenu": "*", "chaine": "*", "playlist": "*", "groupes": "flux", "discussions": "discussions", "livres": "flux", "livre": "flux", "lives": "flux", "live": "flux", "arabe": "flux", "espace": "", "publier": "", "je-publie": "je-publie", "groupe-nouveau": "", "mes-livres": "", "livre-edition": "", "live-nouveau": "", "importer": "", "lien": "", "mes-contenus": "", "devenir-createur": "", "playlists": "", "stats": "", "abos": "flux", "profil": "profil", "videos": "videos", "admin": "", "push-admin": "", "langue": "", "abonnements": "", "legal": "", "favoris": "", "historique": "", "hors": "", "preches": "flux", "biblio": "flux", "dossier": "flux", "direct": "flux" , "radio": "flux" };
+const ONGLET_DE = { "priere": "flux", "parcours": "flux", "parcours-voir": "flux", "passage": "flux", "parcours-revoir": "flux", "mes-parcours": "", "parcours-edit": "", "passage-edit": "", "savants": "flux", "chaine-edit": "", "notifications": "", "tarifs": "", "flux": "flux", "fil": "flux", "reels": "reels", "recherche": "flux", "home": "flux", "contenu": "*", "chaine": "*", "playlist": "*", "groupes": "flux", "discussions": "discussions", "livres": "flux", "livre": "flux", "lives": "flux", "live": "flux", "arabe": "flux", "espace": "", "publier": "", "je-publie": "je-publie", "groupe-nouveau": "", "mes-livres": "", "livre-edition": "", "live-nouveau": "", "importer": "", "lien": "", "mes-contenus": "", "devenir-createur": "", "playlists": "", "stats": "", "abos": "flux", "profil": "profil", "videos": "videos", "admin": "", "push-admin": "", "langue": "", "abonnements": "", "legal": "", "favoris": "", "historique": "", "hors": "", "preches": "flux", "biblio": "flux", "dossier": "flux", "direct": "flux" , "radio": "flux" };
 function creerNav() {
   const nav = document.createElement("nav");
   nav.className = "nav-bas" + (etat.route === "radio" || etat.route === "reels" || etat.route === "videos" || etat.route === "fil" ? " nav-sombre" : "");
@@ -5498,7 +5507,7 @@ function vueBiblio() {
   const w = document.createElement("div");
   w.className = "ecran biblio";
   let ram = false; try { const r = infoRamadan(); ram = r.actif || r.avant <= 45; } catch (e) {}
-  const T = [["📚", "Livres", () => router("livres")], ["🤲", "Invocations", () => router("arabe")], ["📖", "Coran", () => router("dossier", { cat: "Coran", titre: "Coran" })],
+  const T = [["🪜", "Parcours", () => router("parcours")], ["📚", "Livres", () => router("livres")], ["🤲", "Invocations", () => router("arabe")], ["📖", "Coran", () => router("dossier", { cat: "Coran", titre: "Coran" })],
     ["🎓", "Cours", () => router("dossier", { cat: "Cours", titre: "Cours" })], ["🎤", "Conférences", () => router("dossier", { cat: "Conférence", titre: "Conférences" })],
     ["💬", "Rappels", () => router("dossier", { cat: "Rappel", titre: "Rappels" })]];
   if (ram) T.push(["🌙", "Ramadan", () => router("dossier", { cat: "Ramadan", titre: "Ramadan" })]);
@@ -6264,6 +6273,240 @@ function nomTelechargement(c) {
   const base = String(c.title || "fichier").replace(/[\\/:*?"<>|\u0000-\u001f]+/g, " ").replace(/\s+/g, " ").trim().slice(0, 100) || "fichier";
   return ext && !base.toLowerCase().endsWith("." + ext) ? base + "." + ext : base;
 }
+/* ---------- Parcours d'étude : écouter · traduire · expliquer · répéter · réviser ---------- */
+const PAR = {
+  JOURS: [1, 3, 7, 14, 30],
+  ETAPES: [["🎧", "Écouter", "audio_lecture", "texte_ar"], ["🌍", "Traduire", "audio_trad", "texte_trad"], ["💡", "Expliquer", "audio_expl", "texte_expl"]],
+  jour(n) { const d = new Date(); d.setDate(d.getDate() + n); return d.toISOString().slice(0, 10); },
+  aujourdhui() { return new Date().toISOString().slice(0, 10); },
+  /* progression : en ligne si connecté, sinon sur le téléphone */
+  async lire(parcoursId) {
+    const m = new Map();
+    if (etat.parentId) { try { const r = await sb.from("yt_progression").select("passage_id,niveau,fini_le,rappel_le").eq("parcours_id", parcoursId); (r.data || []).forEach(x => m.set(x.passage_id, x)); } catch (e) {} }
+    else { const l = chargerLocal("par_prog", {}); Object.keys(l).forEach(k => { if (l[k].parcours_id === parcoursId) m.set(k, l[k]); }); }
+    return m;
+  },
+  async ecrire(passage, niveau, rappel) {
+    const o = { passage_id: passage.id, parcours_id: passage.parcours_id, niveau, fini_le: new Date().toISOString(), rappel_le: rappel, updated_at: new Date().toISOString() };
+    if (etat.parentId) { try { await sb.from("yt_progression").upsert(o, { onConflict: "user_id,passage_id" }); } catch (e) {} }
+    else { const l = chargerLocal("par_prog", {}); l[passage.id] = o; sauverLocal("par_prog", l); }
+  },
+  async dues() {
+    const auj = this.aujourdhui(); let l = [];
+    if (etat.parentId) { try { const r = await sb.from("yt_progression").select("passage_id,niveau,rappel_le").lte("rappel_le", auj).order("rappel_le").limit(30); l = r.data || []; } catch (e) {} }
+    else { const p = chargerLocal("par_prog", {}); l = Object.keys(p).filter(k => p[k].rappel_le && p[k].rappel_le <= auj).map(k => p[k]); }
+    return l;
+  },
+  async voix() {
+    if (!window.MediaRecorder || !navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) throw new Error("indispo");
+    const flux = await navigator.mediaDevices.getUserMedia({ audio: true });
+    const mime = ["audio/webm;codecs=opus", "audio/mp4", "audio/webm", "audio/ogg;codecs=opus"].find(x => { try { return MediaRecorder.isTypeSupported(x); } catch (e) { return false; } }) || "";
+    const rec = new MediaRecorder(flux, mime ? { mimeType: mime, audioBitsPerSecond: 32000 } : { audioBitsPerSecond: 32000 }), blocs = [];
+    rec.ondataavailable = e => { if (e.data && e.data.size) blocs.push(e.data); };
+    const fin = new Promise(ok => { rec.onstop = () => { flux.getTracks().forEach(t => t.stop()); ok(new Blob(blocs, { type: rec.mimeType || mime || "audio/webm" })); }; });
+    rec.start();
+    return { arreter() { try { rec.stop(); } catch (e) {} return fin; } };
+  },
+  ext(b) { return /mp4|aac|m4a/.test(b.type) ? "m4a" : /ogg/.test(b.type) ? "ogg" : "webm"; },
+  /* widget d'enregistrement vocal : renvoie { blob(), chemin(), vide() } */
+  widget(zone, chemin0) {
+    const S = { blob: null, url: null, chemin: chemin0 || null, rec: null, tm: null };
+    const rendre = () => {
+      const src = S.url || (S.chemin ? urlMedia(S.chemin) : null);
+      zone.innerHTML = S.rec ? `<button class="btn par-stop" type="button">⏹ <span class="par-t">0:00</span></button>`
+        : src ? `<audio controls preload="none" src="${esc(src)}" style="width:100%"></audio><button class="btn-text par-ref" type="button">🔁 Refaire</button>`
+        : `<button class="btn-outline par-mic" type="button">🎤 Enregistrer ma voix</button>`;
+      const m = zone.querySelector(".par-mic"), st = zone.querySelector(".par-stop"), rf = zone.querySelector(".par-ref");
+      const lancer = async () => {
+        try { S.rec = await PAR.voix(); } catch (e) { zone.innerHTML = `<p class="erreur">Micro non disponible.</p>`; return; }
+        let sec = 0; rendre(); S.tm = setInterval(() => { sec++; const t = zone.querySelector(".par-t"); if (t) t.textContent = Math.floor(sec / 60) + ":" + String(sec % 60).padStart(2, "0"); if (sec >= 300) st2(); }, 1000);
+      };
+      const st2 = async () => { clearInterval(S.tm); const b = await S.rec.arreter(); S.rec = null; S.blob = b; if (S.url) URL.revokeObjectURL(S.url); S.url = URL.createObjectURL(b); rendre(); };
+      if (m) m.onclick = lancer; if (st) st.onclick = st2; if (rf) rf.onclick = () => { S.blob = null; S.url = null; S.chemin = null; rendre(); };
+    };
+    rendre();
+    return { blob: () => S.blob, chemin: () => S.chemin, vide: () => !S.blob && !S.chemin, arreter: () => { clearInterval(S.tm); try { S.rec && S.rec.arreter(); } catch (e) {} } };
+  }
+};
+
+/* ----- Élève : liste des parcours ----- */
+async function vueParcours() {
+  const w = ecran("Parcours", ["biblio"], `<div id="rev"></div><div id="liste" class="liste-grande">${squelettes(2)}</div>`);
+  try {
+    const [r, dues] = await Promise.all([sb.from("yt_parcours").select("id,titre,description,yt_channels(name),yt_passages(count)").eq("statut", "publie").order("created_at", { ascending: false }), PAR.dues()]);
+    if (r.error) throw r.error; if (!w.isConnected) return;
+    if (dues.length) { const b = document.createElement("button"); b.className = "btn"; b.textContent = "🔁 Réviser · " + dues.length; b.onclick = () => router("parcours-revoir"); w.querySelector("#rev").appendChild(b); }
+    const z = w.querySelector("#liste"); z.innerHTML = (r.data || []).length ? "" : `<p>Bientôt : les premiers parcours.</p>`;
+    (r.data || []).forEach(p => {
+      const n = (p.yt_passages && p.yt_passages[0] && p.yt_passages[0].count) || 0;
+      const b = document.createElement("button"); b.className = "par-carte"; b.innerHTML = `<span class="par-ic">🎓</span><span><b dir="auto">${esc(p.titre)}</b><small dir="auto">${esc((p.yt_channels && p.yt_channels.name) || "")} · ${n} passage${n > 1 ? "s" : ""}</small></span>`;
+      b.onclick = () => router("parcours-voir", { id: p.id }); z.appendChild(b);
+    });
+  } catch (e) { if (w.isConnected) w.querySelector("#liste").innerHTML = `<p class="erreur">${esc(txtErr(e, "Chargement impossible."))}</p>`; }
+}
+
+async function vueParcoursVoir() {
+  const id = etat.params.id;
+  const w = ecran("Parcours", ["parcours"], `<div id="liste" class="liste-grande">${squelettes(2)}</div>`);
+  try {
+    const [p, ps, pr] = await Promise.all([sb.from("yt_parcours").select("titre,description,yt_channels(name)").eq("id", id).maybeSingle(), sb.from("yt_passages").select("id,parcours_id,position,titre").eq("parcours_id", id).order("position"), PAR.lire(id)]);
+    if (!w.isConnected) return; if (p.error || !p.data) throw p.error || 0;
+    const L = ps.data || [], auj = PAR.aujourdhui(), faits = L.filter(x => pr.get(x.id)).length;
+    w.querySelector("h1").textContent = p.data.titre;
+    const z = w.querySelector("#liste");
+    z.innerHTML = `<p dir="auto">${esc((p.data.yt_channels && p.data.yt_channels.name) || "")}${p.data.description ? " · " + esc(p.data.description) : ""}</p><div class="par-barre"><u style="width:${L.length ? Math.round(faits / L.length * 100) : 0}%"></u></div><p class="pf-ast">${faits} / ${L.length}</p>`;
+    const suiv = L.find(x => !pr.get(x.id));
+    if (suiv) { const b = document.createElement("button"); b.className = "btn"; b.textContent = faits ? "▶ Continuer" : "▶ Commencer"; b.onclick = () => router("passage", { id: suiv.id, parcoursId: id }); z.appendChild(b); }
+    L.forEach((x, i) => {
+      const g = pr.get(x.id), du = g && g.rappel_le && g.rappel_le <= auj;
+      const b = document.createElement("button"); b.className = "par-carte"; b.innerHTML = `<span class="par-ic">${g ? (du ? "🔁" : "✅") : i + 1}</span><span><b dir="auto">${esc(x.titre || "Passage " + (i + 1))}</b></span>`;
+      b.onclick = () => router("passage", { id: x.id, parcoursId: id }); z.appendChild(b);
+    });
+  } catch (e) { if (w.isConnected) w.querySelector("#liste").innerHTML = `<p class="erreur">${esc(txtErr(e, "Chargement impossible."))}</p>`; }
+}
+
+/* ----- Élève : un passage en étapes ----- */
+async function vuePassage() {
+  const pid = etat.params.id, parcoursId = etat.params.parcoursId;
+  const w = ecran("", ["parcours-voir", { id: parcoursId }], `<div class="centre"><div class="spinner"></div></div>`);
+  let L = [], p = null, etape = 0, etapes = [], perso = null;
+  try {
+    const r = await sb.from("yt_passages").select("*").eq("parcours_id", parcoursId).order("position"); if (r.error) throw r.error;
+    L = r.data || []; p = L.find(x => x.id === pid); if (!p) throw 0;
+  } catch (e) { w.innerHTML += `<p class="erreur">${esc(txtErr(e, "Passage introuvable."))}</p>`; return; }
+  etapes = PAR.ETAPES.filter(e => p[e[2]] || p[e[3]]);
+  const total = etapes.length + 1;
+  const stop = () => { try { w.querySelectorAll("audio").forEach(a => a.pause()); } catch (e) {} if (perso) { try { perso.arreter(); } catch (e) {} perso = null; } };
+  const finir = async () => {
+    stop(); const pr = await PAR.lire(parcoursId), g = pr.get(p.id);
+    await PAR.ecrire(p, g ? g.niveau : 0, PAR.jour(1));
+    const i = L.findIndex(x => x.id === p.id), n = L[i + 1];
+    w.innerHTML = `<div class="centre"><div style="font-size:64px">✅</div><h1 dir="auto">${esc(p.titre || "")}</h1><p>Bravo. Rendez-vous demain pour réviser ce passage.</p></div>${n ? `<button class="btn" id="nx">Passage suivant ▶</button>` : ""}<button class="btn-outline" id="ok">Retour</button>${etat.parentId ? "" : `<p class="pf-ast" style="text-align:center">Connectez-vous pour garder votre progression sur tous vos appareils.</p>`}`;
+    const nx = w.querySelector("#nx"); if (nx) nx.onclick = () => router("passage", { id: n.id, parcoursId });
+    w.querySelector("#ok").onclick = () => router("parcours-voir", { id: parcoursId });
+  };
+  const rendre = () => {
+    stop();
+    const pts = Array.from({ length: total }, (_, i) => `<i class="${i === etape ? "on" : i < etape ? "ok" : ""}"></i>`).join("");
+    let corps = "";
+    if (etape < etapes.length) {
+      const [ic, nom, ca, ct] = etapes[etape];
+      corps = `<h2>${ic} ${nom}</h2>${p[ca] ? `<audio controls preload="metadata" src="${esc(urlMedia(p[ca]))}" style="width:100%"></audio>` : ""}${p[ct] ? `<div class="${ct === "texte_ar" ? "par-ar" : "par-txt"}" dir="auto">${esc(p[ct])}</div>` : ""}`;
+    } else {
+      corps = `<h2>🔁 Répéter</h2><p>Écoutez, puis répétez à voix haute.</p>${p.audio_lecture ? `<audio controls preload="none" src="${esc(urlMedia(p.audio_lecture))}" style="width:100%"></audio>` : ""}${p.texte_ar ? `<div class="par-ar" dir="auto">${esc(p.texte_ar)}</div>` : ""}<div id="moi"></div>`;
+    }
+    w.innerHTML = `<div class="entete" style="padding:0"><button class="btn-text" id="retour" style="padding:4px" aria-label="Retour">←</button><h1 dir="auto">${esc(p.titre || "")}</h1></div><div class="par-pas">${pts}</div>${corps}
+      <div class="par-nav">${etape ? `<button class="btn-outline" id="pr">◀</button>` : ""}<button class="btn" id="sv">${etape === total - 1 ? "✓ J'ai terminé" : "Suivant ▶"}</button></div>`;
+    w.querySelector("#retour").onclick = () => { stop(); router("parcours-voir", { id: parcoursId }); };
+    const pr = w.querySelector("#pr"); if (pr) pr.onclick = () => { etape--; rendre(); };
+    w.querySelector("#sv").onclick = () => { if (etape === total - 1) finir(); else { etape++; rendre(); } };
+    const moi = w.querySelector("#moi"); if (moi) perso = PAR.widget(moi, null);
+  };
+  rendre();
+}
+
+/* ----- Élève : réviser ----- */
+async function vueRevoir() {
+  const w = ecran("Réviser", ["parcours"], `<div class="centre"><div class="spinner"></div></div>`);
+  let dues = [], i = 0, P = new Map();
+  try {
+    dues = await PAR.dues(); if (!dues.length) { w.innerHTML = `<div class="entete" style="padding:0"><button class="btn-text" id="retour">←</button></div><div class="centre"><div style="font-size:64px">🌙</div><p>Rien à réviser aujourd'hui.</p></div>`; w.querySelector("#retour").onclick = () => router("parcours"); return; }
+    const r = await sb.from("yt_passages").select("*").in("id", dues.map(x => x.passage_id)); (r.data || []).forEach(x => P.set(x.id, x));
+  } catch (e) { w.innerHTML = `<p class="erreur">${esc(txtErr(e, "Chargement impossible."))}</p>`; return; }
+  dues = dues.filter(x => P.has(x.passage_id));
+  const rendre = () => {
+    if (i >= dues.length) { w.innerHTML = `<div class="centre"><div style="font-size:64px">🌟</div><h1>Révision terminée</h1></div><button class="btn" id="ok">Retour</button>`; w.querySelector("#ok").onclick = () => router("parcours"); return; }
+    const d = dues[i], p = P.get(d.passage_id);
+    w.innerHTML = `<div class="entete" style="padding:0"><button class="btn-text" id="retour">←</button><h1 dir="auto">${esc(p.titre || "")}</h1></div><p class="pf-ast">${i + 1} / ${dues.length}</p>
+      <p>Récitez ce passage de mémoire, puis vérifiez.</p>${p.audio_lecture ? `<audio controls preload="none" src="${esc(urlMedia(p.audio_lecture))}" style="width:100%"></audio>` : ""}
+      <button class="btn-outline" id="vt">👁 Voir le texte</button><div id="tx" hidden class="par-ar" dir="auto">${esc(p.texte_ar || "")}</div>
+      <div class="par-nav"><button class="btn-outline" id="non">🔁 Pas encore</button><button class="btn" id="oui">😊 Je me souviens</button></div>`;
+    w.querySelector("#retour").onclick = () => router("parcours");
+    w.querySelector("#vt").onclick = () => { w.querySelector("#tx").hidden = false; };
+    const suite = async ok => { const niv = ok ? Math.min((d.niveau || 0) + 1, PAR.JOURS.length - 1) : 0; await PAR.ecrire(p, niv, PAR.jour(ok ? PAR.JOURS[niv] : 1)); i++; rendre(); };
+    w.querySelector("#oui").onclick = () => suite(true); w.querySelector("#non").onclick = () => suite(false);
+  };
+  rendre();
+}
+
+/* ----- Imam : mes parcours ----- */
+async function vueMesParcours() {
+  if (!estCreateur()) return vueDevenirCreateur();
+  const w = ecran("Mes parcours", ["espace"], `<button class="btn" id="nv">+ Nouveau parcours</button><div id="liste" class="liste-grande">${squelettes(1)}</div>`);
+  w.querySelector("#nv").onclick = () => router("parcours-edit", {});
+  try {
+    const r = await sb.from("yt_parcours").select("id,titre,statut,yt_passages(count)").eq("channel_id", etat.chaine.id).order("created_at", { ascending: false }); if (r.error) throw r.error;
+    const z = w.querySelector("#liste"); z.innerHTML = (r.data || []).length ? "" : `<p>Créez votre premier parcours.</p>`;
+    (r.data || []).forEach(p => { const n = (p.yt_passages && p.yt_passages[0] && p.yt_passages[0].count) || 0; const b = document.createElement("button"); b.className = "par-carte"; b.innerHTML = `<span class="par-ic">${p.statut === "publie" ? "🟢" : "✏️"}</span><span><b dir="auto">${esc(p.titre)}</b><small>${n} passage${n > 1 ? "s" : ""} · ${p.statut === "publie" ? "publié" : "brouillon"}</small></span>`; b.onclick = () => router("parcours-edit", { id: p.id }); z.appendChild(b); });
+  } catch (e) { if (w.isConnected) w.querySelector("#liste").innerHTML = `<p class="erreur">${esc(txtErr(e, "Chargement impossible."))}</p>`; }
+}
+
+async function vueParcoursEdit() {
+  if (!estCreateur() || !etat.chaine) return vueDevenirCreateur();
+  let id = etat.params.id || null, p = { titre: "", description: "", statut: "brouillon" }, L = [];
+  const w = ecran(id ? "Modifier le parcours" : "Nouveau parcours", ["mes-parcours"], `<div class="centre"><div class="spinner"></div></div>`);
+  if (id) { try { const [a, b] = await Promise.all([sb.from("yt_parcours").select("*").eq("id", id).maybeSingle(), sb.from("yt_passages").select("id,position,titre").eq("parcours_id", id).order("position")]); if (a.error || !a.data) throw a.error || 0; p = a.data; L = b.data || []; } catch (e) { w.innerHTML = `<p class="erreur">${esc(txtErr(e, "Introuvable."))}</p>`; return; } }
+  const rendre = (msg) => {
+    w.innerHTML = `<div class="entete" style="padding:0"><button class="btn-text" id="retour">←</button><h1>${id ? "Modifier le parcours" : "Nouveau parcours"}</h1></div>
+      <input class="champ" id="ti" dir="auto" maxlength="90" placeholder="Titre (ex. Al-Akhdari)" value="${esc(p.titre)}">
+      <input class="champ" id="de" dir="auto" maxlength="160" placeholder="Description (facultatif)" value="${esc(p.description || "")}" style="margin-top:8px">
+      ${msg ? `<p class="erreur">${esc(msg)}</p>` : ""}<button class="btn" id="sv" style="margin-top:10px">Enregistrer</button>
+      ${id ? `<h2>Passages</h2><div id="ps"></div><button class="btn-outline" id="ap">+ Ajouter un passage</button>
+      <button class="btn-outline" id="pu" style="margin-top:14px">${p.statut === "publie" ? "Retirer de la publication" : "🟢 Publier le parcours"}</button><button class="btn-text" id="su">Supprimer ce parcours</button>` : ""}`;
+    w.querySelector("#retour").onclick = () => router("mes-parcours");
+    w.querySelector("#sv").onclick = async () => {
+      const titre = w.querySelector("#ti").value.trim(); if (!titre) return rendre("Écrivez un titre.");
+      const o = { titre, description: w.querySelector("#de").value.trim() || null, updated_at: new Date().toISOString() };
+      if (id) { const r = await sb.from("yt_parcours").update(o).eq("id", id); if (r.error) return rendre("Enregistrement impossible."); p = { ...p, ...o }; rendre(); }
+      else { const r = await sb.from("yt_parcours").insert({ ...o, channel_id: etat.chaine.id }).select("id").single(); if (r.error) return rendre("Enregistrement impossible."); router("parcours-edit", { id: r.data.id }); }
+    };
+    if (!id) return;
+    const z = w.querySelector("#ps");
+    L.forEach((x, i) => {
+      const d = document.createElement("div"); d.className = "par-carte"; d.innerHTML = `<span class="par-ic">${i + 1}</span><span style="flex:1"><b dir="auto">${esc(x.titre || "Passage " + (i + 1))}</b></span><button class="btn-text" data-a="h" aria-label="Monter">↑</button><button class="btn-text" data-a="b" aria-label="Descendre">↓</button><button class="btn-text" data-a="e">✏️</button><button class="btn-text" data-a="x">🗑</button>`;
+      d.querySelector('[data-a="e"]').onclick = () => router("passage-edit", { parcoursId: id, id: x.id });
+      const echange = async j => { const y = L[j]; if (!y) return; await Promise.all([sb.from("yt_passages").update({ position: y.position }).eq("id", x.id), sb.from("yt_passages").update({ position: x.position }).eq("id", y.id)]); const t = x.position; x.position = y.position; y.position = t; L.sort((a, b) => a.position - b.position); rendre(); };
+      d.querySelector('[data-a="h"]').onclick = () => echange(i - 1); d.querySelector('[data-a="b"]').onclick = () => echange(i + 1);
+      d.querySelector('[data-a="x"]').onclick = async () => { if (!confirm("Supprimer ce passage ?")) return; await sb.from("yt_passages").delete().eq("id", x.id); L = L.filter(y => y.id !== x.id); rendre(); };
+      z.appendChild(d);
+    });
+    w.querySelector("#ap").onclick = () => router("passage-edit", { parcoursId: id });
+    w.querySelector("#pu").onclick = async () => { const s = p.statut === "publie" ? "brouillon" : "publie"; if (s === "publie" && !L.length) return rendre("Ajoutez au moins un passage."); const r = await sb.from("yt_parcours").update({ statut: s }).eq("id", id); if (r.error) return rendre("Impossible."); p.statut = s; rendre(); };
+    w.querySelector("#su").onclick = async () => { if (!confirm("Supprimer ce parcours et tous ses passages ?")) return; await sb.from("yt_parcours").delete().eq("id", id); router("mes-parcours"); };
+  };
+  rendre();
+}
+
+async function vuePassageEdit() {
+  if (!estCreateur() || !etat.chaine) return vueDevenirCreateur();
+  const parcoursId = etat.params.parcoursId; let id = etat.params.id || null, p = { titre: "", texte_ar: "", texte_trad: "", texte_expl: "" };
+  const w = ecran(id ? "Modifier le passage" : "Nouveau passage", ["parcours-edit", { id: parcoursId }], `<div class="centre"><div class="spinner"></div></div>`);
+  if (id) { try { const r = await sb.from("yt_passages").select("*").eq("id", id).maybeSingle(); if (r.error || !r.data) throw r.error || 0; p = r.data; } catch (e) { w.innerHTML = `<p class="erreur">${esc(txtErr(e, "Introuvable."))}</p>`; return; } }
+  w.innerHTML = `<div class="entete" style="padding:0"><button class="btn-text" id="retour">←</button><h1>${id ? "Modifier le passage" : "Nouveau passage"}</h1></div>
+    <input class="champ" id="ti" dir="auto" maxlength="90" placeholder="Titre du passage" value="${esc(p.titre || "")}">
+    <h2>🎧 1 · Lire (arabe)</h2><textarea class="champ" id="t1" dir="rtl" rows="3" placeholder="Texte arabe (2 à 4 lignes)">${esc(p.texte_ar || "")}</textarea><div id="v1"></div>
+    <h2>🌍 2 · Traduire</h2><textarea class="champ" id="t2" dir="auto" rows="2" placeholder="Traduction (facultatif)">${esc(p.texte_trad || "")}</textarea><div id="v2"></div>
+    <h2>💡 3 · Expliquer</h2><textarea class="champ" id="t3" dir="auto" rows="2" placeholder="Explication (facultatif)">${esc(p.texte_expl || "")}</textarea><div id="v3"></div>
+    <p class="erreur" id="er"></p><button class="btn" id="sv">Enregistrer</button>`;
+  w.querySelector("#retour").onclick = () => router("parcours-edit", { id: parcoursId });
+  const V = [PAR.widget(w.querySelector("#v1"), p.audio_lecture), PAR.widget(w.querySelector("#v2"), p.audio_trad), PAR.widget(w.querySelector("#v3"), p.audio_expl)];
+  w.querySelector("#sv").onclick = async ev => {
+    const bt = ev.currentTarget, er = w.querySelector("#er"); er.textContent = ""; bt.disabled = true; bt.textContent = "⏳";
+    try {
+      const pid = id || (crypto.randomUUID ? crypto.randomUUID() : null); const cles = ["lecture", "trad", "expl"], champs = ["audio_lecture", "audio_trad", "audio_expl"], o = {};
+      for (let k = 0; k < 3; k++) {
+        const b = V[k].blob();
+        if (b) { const ch = `${etat.parentId}/parcours/${pid}-${cles[k]}-${Date.now()}.${PAR.ext(b)}`; const u = await sb.storage.from("yt-media").upload(ch, b, { contentType: b.type, upsert: false }); if (u.error) throw u.error; o[champs[k]] = ch; }
+        else o[champs[k]] = V[k].chemin() || null;
+      }
+      o.titre = w.querySelector("#ti").value.trim() || null; o.texte_ar = w.querySelector("#t1").value.trim() || null; o.texte_trad = w.querySelector("#t2").value.trim() || null; o.texte_expl = w.querySelector("#t3").value.trim() || null;
+      if (id) { const r = await sb.from("yt_passages").update(o).eq("id", id); if (r.error) throw r.error; }
+      else { const m = await sb.from("yt_passages").select("position").eq("parcours_id", parcoursId).order("position", { ascending: false }).limit(1); const r = await sb.from("yt_passages").insert({ ...o, id: pid, parcours_id: parcoursId, position: ((m.data && m.data[0] && m.data[0].position) || 0) + 1 }); if (r.error) throw r.error; }
+      V.forEach(v => v.arreter()); router("parcours-edit", { id: parcoursId });
+    } catch (e) { er.textContent = txtErr(e, "Enregistrement impossible."); bt.disabled = false; bt.textContent = "Enregistrer"; }
+  };
+}
+
 /* ---------- Affiches : modèles d'annonces (Direct, cours, rappel, publicité) ---------- */
 const AFF = {
   TYPES: [
@@ -6590,7 +6833,7 @@ function vueEspace() {
     cd.querySelector("#ib-t").textContent = n === 1 ? "écoute de vos prêches · " + ab + " abonné" + (ab > 1 ? "s" : "") : "écoutes de vos prêches cette semaine · " + ab + " abonné" + (ab > 1 ? "s" : "");
   }, () => { cd.querySelector("#ib-n").textContent = "—"; });
     cd.querySelector("#ib-p").onclick = async () => { const r = await partagerLien("Lumu", "🕌 Retrouvez mes prêches sur Lumu, la lumière de poche :", SITE + "/"); if (r === "copie") cd.querySelector("#ib-p").textContent = "Lien copié ✓"; };
-  const P = [["🎙️", "Je publie", "Audio, vidéo ou PDF", () => router("je-publie")], ["🖼️", "Affiches", "Direct, cours, publicité", () => router("affiches")], ["👤", "Mon profil", "Photo et présentation", () => router("chaine-edit")], ["📤", "Mes publications", "Masquer ou supprimer", () => router("mes-contenus")], ["📊", "Statistiques", "Écoutes et horaires", () => router("stats")], ["🔴", "Programmer un live", "Cours en direct", () => router("live-nouveau")]];
+  const P = [["🎙️", "Je publie", "Audio, vidéo ou PDF", () => router("je-publie")], ["🖼️", "Affiches", "Direct, cours, publicité", () => router("affiches")], ["🪜", "Mes parcours", "Cours par étapes", () => router("mes-parcours")], ["👤", "Mon profil", "Photo et présentation", () => router("chaine-edit")], ["📤", "Mes publications", "Masquer ou supprimer", () => router("mes-contenus")], ["📊", "Statistiques", "Écoutes et horaires", () => router("stats")], ["🔴", "Programmer un live", "Cours en direct", () => router("live-nouveau")]];
   const M = [["📥", "Importer plusieurs fichiers", () => router("importer")], ["🔗", "Ajouter un lien YouTube", () => router("lien")], ["📎", "Publication avancée", () => router("publier")], ["📱", "Créer un reel", () => router("publier", { type: "reel" })], ["📚", "Écrire un livre", () => router("mes-livres")], ["🎞️", "Playlists et séries", () => router("playlists")], ["👥", "Créer un groupe", () => router("groupe-nouveau")]];
   const t0 = w.querySelector("#t");
   P.forEach(([ic, nom, sous, f], i) => { const b = document.createElement("button"); b.className = "tuile" + (i === 0 ? " tuile-main" : ""); b.innerHTML = `<span class="tuile-ic">${ic}</span><b>${esc(nom)}</b><small>${esc(sous)}</small>`; b.onclick = f; t0.appendChild(b); });
