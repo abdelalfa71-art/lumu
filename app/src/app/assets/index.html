@@ -1035,6 +1035,9 @@ body:not(.branche-tobi) #mini-audio.sans-nav { bottom: calc(12px + env(safe-area
 @keyframes lumu-pop { 0% { transform: scale(1); } 40% { transform: scale(1.35); } 100% { transform: scale(1); } }
 .d-act.on svg { animation: lumu-pop .4s ease; }
 .d-act:active { transform: scale(.88); }
+.d-act[data-a="fav"] span, .d-act[data-a="part"] span, .d-act[data-a="dl"] span { display: none; }
+.d-act[data-a="dl"].hors { color: var(--jaune); }
+.d-desc { display: none; }
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
 .flux, .flux-defil, .diapo { background: #060908; }
 .flux-haut .mode, .flux-haut button { white-space: nowrap; }
@@ -1597,7 +1600,7 @@ function vueFlux() {
       : `<img class="d-media image" alt="${esc(c.title)}" src="${esc(urlMedia(c.fichier_path))}" loading="lazy">`;
     const moi = ch.id && etat.chaine && ch.id === etat.chaine.id;
     el.innerHTML = `${media}<div class="d-pause" aria-hidden="true">${ico("play", 60, true)}</div><div class="d-coeur" aria-hidden="true">${ico("heart", 110, true)}</div>
-      <div class="d-bas"><button class="d-chaine" data-a="chaine" dir="auto">@${esc(nom)}</button><p class="d-titre" dir="auto">${esc(c.title)}</p>${c.description ? `<p class="d-desc" dir="auto">${esc(c.description.slice(0, 120))}</p>` : ""}${(c.duration_seconds || 0) > 600 ? `<button class="d-long" data-a="ouvrir">▶ Regarder en entier · ${fmtDuree(c.duration_seconds)}</button>` : ""}</div>
+      <div class="d-bas"><button class="d-chaine" data-a="chaine" dir="auto">@${esc(nom)}</button><p class="d-titre" dir="auto">${esc(c.title)}</p>${c.description ? `<p class="d-desc" dir="auto">${esc(c.description.slice(0, 120))}</p>` : ""}${(c.duration_seconds || 0) > 600 ? `<button class="d-long" data-a="ouvrir">▶ ${fmtDuree(c.duration_seconds)}</button>` : ""}</div>
       <div class="d-actions">
         <div class="d-av"><button class="d-avatar" data-a="chaine" aria-label="${esc(nom)}" style="background:hsl(${teinte(nom)} 55% 38%)">${avatarLettre(nom)}</button>${ch.id && !moi && !mesAbos.has(ch.id) ? `<button class="d-plus" data-a="abo" data-ch="${ch.id}" aria-label="S'abonner">+</button>` : ""}</div>
         <button class="d-act" data-a="like" aria-label="J'aime">${ico("heart", 30)}<span>${fmtNb(c.likes_count)}</span></button>
@@ -1693,7 +1696,7 @@ function vueFlux() {
         const a = vide.querySelector("#vide-act"); if (a) a.onclick = () => router(mode === "abonnements" && !reelsSeuls ? (etat.parentId ? "abos" : "connexion") : "espace");
       } else if (!l.size && !localStorage.getItem("lumu_astuce")) {
         try { localStorage.setItem("lumu_astuce", "1"); } catch (e) {}
-        const h = document.createElement("div"); h.className = "astuce"; h.innerHTML = `${ico("back", 18)}<span>Balayez vers le haut · double-touchez pour aimer</span>`;
+        const h = document.createElement("div"); h.className = "astuce"; h.innerHTML = `${ico("back", 18)}`;
         wrap.appendChild(h); setTimeout(() => h.remove(), 4200);
       }
     } catch (e) {
