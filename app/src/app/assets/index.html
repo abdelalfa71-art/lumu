@@ -1359,9 +1359,8 @@ const ECO = {
     try {
       const v = localStorage.getItem("lumu_eco");
       if (v !== null) return v === "1";
-      const k = navigator.connection;
-      return !!(k && (k.saveData || /(^|-)(2g|3g)$/.test(k.effectiveType || "")));
-    } catch (e) { return false; }
+      return true; /* économie de données par défaut : chacun peut la couper dans Moi */
+    } catch (e) { return true; }
   },
   regler(v) { try { localStorage.setItem("lumu_eco", v ? "1" : "0"); } catch (e) {} }
 };
@@ -6209,7 +6208,7 @@ function vueProfil() {
     ["🎁", "Donner Lumu à un proche", "Envoyer le lien", () => partagerLien("Lumu", "Écoute des rappels et des cours en audio, même avec peu de connexion.", SITE_PUBLIC)],
     ["🟢", "Mode un seul bouton", "Écran très simple", () => { ACCES.reglerSimple(!ACCES.simple()); router("profil"); }, ACCES.simple()],
     ["☀️", "Thème", ACCES.nom(), () => { ACCES.suivant(); router("profil"); }],
-    ["📶", "Économie de données", "", () => { ECO.regler(!ECO.actif()); router("profil"); }, ECO.actif()],
+    ["📶", "Économie de données", "Pas de chargement à l'avance", () => { ECO.regler(!ECO.actif()); router("profil"); }, ECO.actif()],
     co && PIN.dispo ? ["🔒", etat.compteNom ? "Changer mon code" : "Code de verrouillage", "", () => router("pin-creation", { changer: true, retour: "profil" })] : null,
     co && !etat.compteNom ? ["🔑", "Mot de passe", "", () => router("changer-mot-de-passe")] : null
   ]);
@@ -7045,7 +7044,7 @@ const CHAT = {
     }
     const vis = () => { if (!document.hidden) rafraichir(); };
     document.addEventListener("visibilitychange", vis);
-    iv = setInterval(() => { if (!document.hidden) rafraichir(); }, 7000);
+    iv = setInterval(() => { if (!document.hidden) rafraichir(); }, 20000);
     try {
       const cfg = { event: "INSERT", schema: "public", table: o.table }; if (o.filtre) cfg.filter = o.filtre;
       canal = sb.channel(o.canal).on("postgres_changes", cfg, () => rafraichir()).subscribe();
