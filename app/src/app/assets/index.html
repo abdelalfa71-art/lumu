@@ -1791,7 +1791,7 @@ function creerReconnaisseur() {
 }
 
 const PROTEGEES = ["chaine-edit", "notifications", "je-publie", "importer", "espace", "groupe-nouveau", "mes-livres", "livre-edition", "live-nouveau", "publier", "devenir-createur", "admin", "push-admin", "mes-contenus", "choix-enfant", "inscription", "accueil", "lecons", "dialogue", "parametres", "changer-mot-de-passe", "pin-creation", "favoris", "historique", "lien", "playlists", "stats", "abonnements"];
-const ROOTS = ["flux", "reels", "discussions", "home", "espace", "abos", "profil", "preches", "biblio", "direct"];
+const ROOTS = ["flux", "reels", "videos", "je-publie", "discussions", "home", "espace", "abos", "profil", "preches", "biblio", "direct"];
 function router(route, params = {}, opts = {}) {
   if (!etat.parentId && PROTEGEES.includes(route)) { route = "connexion"; params = { message: "Connectez-vous pour continuer." }; }
   if (etat.envoiEnCours && (etat.route === "publier" || etat.route === "je-publie" || etat.route === "importer") && route !== etat.route) {
@@ -1916,7 +1916,7 @@ function render() {
     "mot-de-passe-oublie": vueMotDePasseOublie, "nouveau-mot-de-passe": vueNouveauMotDePasse,
     "changer-mot-de-passe": vueChangerMotDePasse,
     "pin-verrou": vuePinVerrou, "pin-creation": vuePinCreation, "arabe": vueArabe,
-    "presentation": vuePresentation, "tarifs": vueTarifs, "home": vueDecouvrir, "savants": vueSavants, "preches": vuePreches, "priere": vuePriere, "langues-choix": vueLanguesChoix, "biblio": vueBiblio, "dossier": vueDossier, "direct": vueDirect, "chaine-edit": vueChaineEdit, "notifications": vueNotifications, "publier": vuePublier, "je-publie": vueJePublie, "profil": vueProfil, "contenu": vueContenu,
+    "presentation": vuePresentation, "tarifs": vueTarifs, "videos": () => { etat.params = { type: "video", titre: "Vidéos", racine: true }; return vueDossier(); }, "home": vueDecouvrir, "savants": vueSavants, "preches": vuePreches, "priere": vuePriere, "langues-choix": vueLanguesChoix, "biblio": vueBiblio, "dossier": vueDossier, "direct": vueDirect, "chaine-edit": vueChaineEdit, "notifications": vueNotifications, "publier": vuePublier, "je-publie": vueJePublie, "profil": vueProfil, "contenu": vueContenu,
     "langue": vueLangue, "fil": vueFlux, "flux": vueEcouter, "radio": vueFlux, "recherche": vueRecherche, "abos": vueAbos, "espace": vueEspace, "importer": vueImport, "reels": vueFlux, "groupes": vueGroupes, "groupe": vueGroupe, "discussions": vueDiscussions, "conv": vueConv, "groupe-nouveau": vueNouveauGroupe, "livres": vueLivres, "livre": vueLivre, "mes-livres": vueMesLivres, "livre-edition": vueEditeurLivre, "lives": vueLives, "live": vueLive, "live-nouveau": vueNouveauLive, "devenir-createur": vueDevenirCreateur, "admin": vueAdmin, "push-admin": vuePushAdmin, "mes-contenus": vueMesContenus, "legal": vueLegal, "lien": vueLien, "chaine": vueChaine, "playlist": vuePlaylist, "playlists": vuePlaylists, "stats": vueStats, "abonnements": vueAbonnements, "favoris": vueListeUtilisateur, "historique": vueListeUtilisateur, "hors": vueHors
   };
   document.body.classList.toggle("branche-tobi", TOBI_ROUTES.includes(etat.route));
@@ -2259,27 +2259,31 @@ const IC = {
   reel: '<rect x="3" y="4" width="18" height="16" rx="3"/><path d="M10 9l5 3-5 3z"/>',
   ecouter: '<path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="3" y="14" width="4" height="6" rx="1.5"/><rect x="17" y="14" width="4" height="6" rx="1.5"/>',
   play: '<path d="M8 5v14l11-7z"/>',
+  video: '<rect x="3" y="6" width="13" height="12" rx="2.500"/><path d="m16 10.500 5-3v9l-5-3z"/>',
+  publier: '<rect x="3" y="3" width="18" height="18" rx="5"/><path d="M12 8v8M8 12h8"/>',
   verif: '<path d="m5 12 5 5 9-10"/>'
 };
 function ico(n, taille, plein) {
   const z = taille || 24;
   return `<svg class="ico" width="${z}" height="${z}" viewBox="0 0 24 24" fill="${plein ? "currentColor" : "none"}" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${IC[n]}</svg>`;
 }
-const NAV = [{ r: "flux", i: "ecouter", t: "Écouter" }, { r: "reels", i: "reel", t: "Reels" }, { r: "profil", i: "user", t: "Moi" }];
-const ONGLET_DE = { "priere": "flux", "savants": "flux", "chaine-edit": "", "notifications": "", "tarifs": "", "flux": "flux", "fil": "flux", "reels": "reels", "recherche": "flux", "home": "flux", "contenu": "*", "chaine": "*", "playlist": "*", "groupes": "flux", "discussions": "discussions", "livres": "flux", "livre": "flux", "lives": "flux", "live": "flux", "arabe": "flux", "espace": "", "publier": "", "je-publie": "", "groupe-nouveau": "", "mes-livres": "", "livre-edition": "", "live-nouveau": "", "importer": "", "lien": "", "mes-contenus": "", "devenir-createur": "", "playlists": "", "stats": "", "abos": "flux", "profil": "profil", "admin": "", "push-admin": "", "langue": "", "abonnements": "", "legal": "", "favoris": "", "historique": "", "hors": "", "preches": "flux", "biblio": "flux", "dossier": "flux", "direct": "flux" , "radio": "flux" };
+const NAV_BASE = [{ r: "flux", i: "ecouter", t: "Écouter" }, { r: "reels", i: "reel", t: "Reels" }, { r: "videos", i: "video", t: "Vidéos" }];
+function navActuelle() { return NAV_BASE.concat(typeof estCreateur === "function" && estCreateur() ? [{ r: "je-publie", i: "publier", t: "Publier" }] : [{ r: "profil", i: "user", t: "Moi" }]); }
+const ONGLET_DE = { "priere": "flux", "savants": "flux", "chaine-edit": "", "notifications": "", "tarifs": "", "flux": "flux", "fil": "flux", "reels": "reels", "recherche": "flux", "home": "flux", "contenu": "*", "chaine": "*", "playlist": "*", "groupes": "flux", "discussions": "discussions", "livres": "flux", "livre": "flux", "lives": "flux", "live": "flux", "arabe": "flux", "espace": "", "publier": "", "je-publie": "je-publie", "groupe-nouveau": "", "mes-livres": "", "livre-edition": "", "live-nouveau": "", "importer": "", "lien": "", "mes-contenus": "", "devenir-createur": "", "playlists": "", "stats": "", "abos": "flux", "profil": "profil", "videos": "videos", "admin": "", "push-admin": "", "langue": "", "abonnements": "", "legal": "", "favoris": "", "historique": "", "hors": "", "preches": "flux", "biblio": "flux", "dossier": "flux", "direct": "flux" , "radio": "flux" };
 function creerNav() {
   const nav = document.createElement("nav");
   nav.className = "nav-bas" + (etat.route === "radio" || etat.route === "reels" || etat.route === "fil" ? " nav-sombre" : "");
   nav.setAttribute("aria-label", "Navigation");
   let actif = ONGLET_DE[etat.route];
   if (actif === "*") actif = etat.racine;
+  const NAV = navActuelle();
   if (actif && !NAV.some(n => n.r === actif)) actif = "flux";
   NAV.forEach(n => {
     const b = document.createElement("button");
     b.className = "nav-btn" + (n.centre ? " nav-centre" : "") + (n.r === actif ? " actif" : "");
     b.innerHTML = n.centre ? `<span class="ic-plus">${ico(n.i, 24)}</span><span class="sr">${esc(t(n.t))}</span>` : `<span class="ic">${ico(n.i, 24)}</span><span>${esc(t(n.t))}</span>`;
     if (n.r === actif) b.setAttribute("aria-current", "page");
-    b.onclick = () => router(n.centre && typeof estCreateur === "function" && estCreateur() ? "je-publie" : n.r);
+    b.onclick = () => router(n.r);
     nav.appendChild(b);
     if (n.r === "discussions" && etat.parentId) { try { badgeDiscuter(b); } catch (e) {} }
   });
@@ -5472,7 +5476,7 @@ function vueBiblio() {
 }
 async function vueDossier() {
   const p = etat.params || {};
-  const w = ecran(p.titre || "Dossier", ["biblio"], `<div id="liste" class="liste-grande">${squelettes(2)}</div><button class="btn-outline" id="plus" hidden>Voir plus</button>`);
+  const w = ecran(p.titre || "Dossier", p.racine ? null : ["biblio"], `<div id="liste" class="liste-grande">${squelettes(2)}</div><button class="btn-outline" id="plus" hidden>Voir plus</button>`);
   const z = w.querySelector("#liste"), plus = w.querySelector("#plus");
   let depuis = 0; const nb = 12; let premier = true;
   async function charger() {
@@ -6296,6 +6300,26 @@ async function affinerItem(it) {
   if (!m) return;
   it.mime = m; it.type = m.startsWith("video/") ? "video" : m.startsWith("audio/") ? "audio" : m.startsWith("image/") ? "image" : m === "application/pdf" ? "pdf" : it.type;
 }
+function titreParDefaut(f) { return f.name.replace(/\.[^.]+$/, "").replace(/[_-]+/g, " ").trim().slice(0, 150) || "Sans titre"; }
+/* Pour chaque audio ou vidéo : garder le titre du fichier ou le modifier */
+async function demanderTitres(items) {
+  const liste = items.filter(i => i.statut !== "ok" && ["audio", "video", "reel"].includes(i.type) && i.titre === undefined);
+  let tous = false;
+  for (let k = 0; k < liste.length; k++) {
+    const it = liste[k];
+    if (tous) { it.titre = ""; continue; }
+    const defaut = titreParDefaut(it.f);
+    const rep = await new Promise(ok => {
+      ouvrirFeuille(liste.length > 1 ? `Titre ${k + 1}/${liste.length}` : "Titre", `<p style="opacity:.7;font-size:13px;word-break:break-all;margin:0 0 8px" dir="auto" data-notrad>${esc(it.f.name)}</p><input class="champ" id="ti-t" maxlength="150" dir="auto" value="${esc(defaut)}" aria-label="Titre"><button class="btn" id="ti-k">✓ Garder ce titre</button><button class="btn-outline" id="ti-m" style="margin-top:8px">✏️ Utiliser le titre modifié</button>${liste.length - k > 1 ? `<button class="btn-text" id="ti-a" style="margin-top:4px">Garder tous les titres</button>` : ""}`, (c, fermer) => {
+        const t = c.querySelector("#ti-t"); setTimeout(() => { try { t.focus(); t.select(); } catch (e) {} }, 150);
+        c.querySelector("#ti-k").onclick = () => { ok({ v: "" }); fermer(); };
+        c.querySelector("#ti-m").onclick = () => { ok({ v: t.value.trim() }); fermer(); };
+        const a = c.querySelector("#ti-a"); if (a) a.onclick = () => { ok({ v: "", tous: true }); fermer(); };
+      }, () => ok({ v: "" }));
+    });
+    it.titre = rep.v; if (rep.tous) tous = true;
+  }
+}
 async function importerUn(it, commun, maj) {
   const f = it.f, type = it.type, ext = (f.name.split(".").pop() || "").toLowerCase();
   if (type === "fichier" && EXT_BLOQUEES.includes(ext)) throw new Error("Type de fichier non autorisé (sécurité).");
@@ -6321,7 +6345,7 @@ async function importerUn(it, commun, maj) {
   } catch (e) { envoi.annuler(); await envoi.promesse.catch(() => {}); throw e; }
   await envoi.promesse;
   coverOk = await coverP;
-  const titre = f.name.replace(/\.[^.]+$/, "").replace(/[_-]+/g, " ").trim().slice(0, 150) || "Sans titre";
+  const titre = (it.titre && it.titre.trim().slice(0, 150)) || titreParDefaut(f);
   const { data, error } = await sb.from("yt_contenus").insert({
     channel_id: etat.chaine.id, title: titre, category: commun.cat || "Autre", type, fichier_path: chemin, cover_path: coverOk ? cheminCover : null,
     duration_seconds: meta.duree ? Math.round(meta.duree) : null, taille_octets: f.size, mime, status: "published", published_at: new Date().toISOString()
@@ -6374,6 +6398,7 @@ function vueImport() {
     const commun = { cat: w.querySelector("#cat").value, groupe: (w.querySelector("#groupe") || {}).value || "" };
     enCours = true; stop = false;
     etat.envoiEnCours = true; window.onbeforeunload = () => true; garderEveille(true);
+    await demanderTitres(items);
     etat.annulerEnvoi = () => { stop = true; items.filter(i => i.statut === "cours").forEach(it => { if (it.envoi) it.envoi.annuler(); }); };
     dessiner();
     const lent = (() => { try { const c = navigator.connection || {}; return !!c.saveData || /(^|-)2g$/.test(c.effectiveType || ""); } catch (e) { return false; } })();
@@ -6613,11 +6638,11 @@ function lumuQRsvg(texte, px) {
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${N + 2 * q} ${N + 2 * q}" width="${px || 240}" height="${px || 240}" shape-rendering="crispEdges"><rect width="100%" height="100%" fill="#fff"/><path d="${d}" fill="#000"/></svg>`;
 }
 
-function ouvrirFeuille(titre, html, lier) {
+function ouvrirFeuille(titre, html, lier, surFermer) {
   const f = document.createElement("div"); f.className = "feuille";
   f.innerHTML = `<div class="feuille-fond"></div><div class="feuille-c" role="dialog"><div class="feuille-t"><b>${esc(titre)}</b><button class="btn-text" aria-label="Fermer">✕</button></div><div class="feuille-corps">${html}</div></div>`;
   document.body.appendChild(f);
-  const fermer = () => f.remove();
+  const fermer = () => { f.remove(); if (surFermer) surFermer(); };
   f.querySelector(".feuille-fond").onclick = fermer; f.querySelector(".feuille-t button").onclick = fermer;
   if (lier) lier(f.querySelector(".feuille-corps"), fermer);
   return fermer;
