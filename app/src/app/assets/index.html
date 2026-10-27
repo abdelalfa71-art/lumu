@@ -1041,6 +1041,9 @@ body:not(.branche-tobi) #mini-audio.sans-nav { bottom: calc(12px + env(safe-area
 .par-barre { height: 10px; border-radius: 6px; background: var(--bordure); overflow: hidden; } .par-barre u { display: block; height: 100%; background: var(--vert); }
 .par-pas { display: flex; gap: 6px; margin: 8px 0 14px; } .par-pas i { flex: 1; height: 8px; border-radius: 5px; background: var(--bordure); } .par-pas i.on { background: var(--vert); } .par-pas i.ok { background: color-mix(in srgb, var(--vert) 45%, transparent); }
 .par-ar { font-size: 30px; line-height: 2.1; text-align: center; margin: 14px 0; padding: 14px; border-radius: 16px; background: color-mix(in srgb, var(--vert) 8%, transparent); font-family: "Amiri", "Noto Naskh Arabic", "Traditional Arabic", serif; direction: rtl; }
+.mot { display: inline-block; position: relative; padding: 0 6px; margin: 2px 1px; border-radius: 10px; cursor: pointer; transition: background .12s; }
+.mot.on { background: #F6D56A; color: #1B1405; } .mot.on::after { content: "👆"; position: absolute; left: 50%; bottom: -.75em; transform: translateX(-50%); font-size: .5em; }
+.par-lent.on { color: var(--vert); font-weight: 800; }
 .par-txt { font-size: 21px; line-height: 1.6; margin: 14px 0; }
 .par-nav { display: flex; gap: 10px; margin: 16px 0 24px; } .par-nav .btn { flex: 1; } .par-nav .btn-outline { width: auto; flex: none; min-width: 64px; } .par-nav .btn { width: auto; }
 .par-stop { background: #E53935; }
@@ -6307,6 +6310,18 @@ const PAR = {
     rec.start();
     return { arreter() { try { rec.stop(); } catch (e) {} return fin; } };
   },
+  mots(t) { return String(t || "").split(/\s+/).filter(Boolean); },
+  /* Ardoise : le doigt de l'imam suit les mots pendant la lecture ; toucher un mot le fait répéter */
+  html(texte, marques) { const M = this.mots(texte); return M.map((m, i) => `<span class="mot" data-i="${i}">${esc(m)}</span>`).join(" "); },
+  suivre(zone, audio, marques) {
+    const mots = [...zone.querySelectorAll(".mot")]; if (!audio || !marques || marques.length !== mots.length) return;
+    let raf = 0, arret = null, cur = -1;
+    const poser = t => { let k = -1; for (let i = 0; i < marques.length; i++) if (marques[i] <= t + .05) k = i; if (k !== cur) { if (mots[cur]) mots[cur].classList.remove("on"); cur = k; if (mots[k]) mots[k].classList.add("on"); } };
+    const boucle = () => { const t = audio.currentTime; if (arret !== null && t >= arret) { audio.pause(); arret = null; } poser(t); if (!audio.paused) raf = requestAnimationFrame(boucle); };
+    audio.addEventListener("play", () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(boucle); });
+    audio.addEventListener("pause", () => cancelAnimationFrame(raf)); audio.addEventListener("seeked", () => poser(audio.currentTime)); audio.addEventListener("ended", () => { cancelAnimationFrame(raf); arret = null; });
+    mots.forEach((el, i) => { el.onclick = () => { audio.currentTime = marques[i]; arret = marques[i + 1] != null ? marques[i + 1] : null; poser(marques[i]); audio.play().catch(() => {}); }; });
+  },
   ext(b) { return /mp4|aac|m4a/.test(b.type) ? "m4a" : /ogg/.test(b.type) ? "ogg" : "webm"; },
   /* widget d'enregistrement vocal : renvoie { blob(), chemin(), vide() } */
   widget(zone, chemin0) {
@@ -6325,7 +6340,7 @@ const PAR = {
       if (m) m.onclick = lancer; if (st) st.onclick = st2; if (rf) rf.onclick = () => { S.blob = null; S.url = null; S.chemin = null; rendre(); };
     };
     rendre();
-    return { blob: () => S.blob, chemin: () => S.chemin, vide: () => !S.blob && !S.chemin, arreter: () => { clearInterval(S.tm); try { S.rec && S.rec.arreter(); } catch (e) {} } };
+    return { blob: () => S.blob, chemin: () => S.chemin, vide: () => !S.blob && !S.chemin, src: () => S.url || (S.chemin ? urlMedia(S.chemin) : null), cle: () => S.blob || S.chemin, arreter: () => { clearInterval(S.tm); try { S.rec && S.rec.arreter(); } catch (e) {} } };
   }
 };
 
@@ -6390,10 +6405,11 @@ async function vuePassage() {
     const pts = Array.from({ length: total }, (_, i) => `<i class="${i === etape ? "on" : i < etape ? "ok" : ""}"></i>`).join("");
     let corps = "";
     if (etape < etapes.length) {
-      const [ic, nom, ca, ct] = etapes[etape];
-      corps = `<h2>${ic} ${nom}</h2>${p[ca] ? `<audio controls preload="metadata" src="${esc(urlMedia(p[ca]))}" style="width:100%"></audio>` : ""}${p[ct] ? `<div class="${ct === "texte_ar" ? "par-ar" : "par-txt"}" dir="auto">${esc(p[ct])}</div>` : ""}`;
+      const [ic, nom, ca, ct] = etapes[etape], ma = ct === "texte_ar" && p.audio_lecture && Array.isArray(p.marques_ar) && p.marques_ar.length === PAR.mots(p.texte_ar).length;
+      corps = `<h2>${ic} ${nom}</h2>${p[ca] ? `<audio controls preload="metadata" src="${esc(urlMedia(p[ca]))}" style="width:100%"></audio>` : ""}${p[ct] ? `<div class="${ct === "texte_ar" ? "par-ar" : "par-txt"}" dir="auto">${ct === "texte_ar" && ma ? PAR.html(p[ct]) : esc(p[ct])}</div>` : ""}<button class="btn-text par-lent" type="button">🐢 Lent</button>`;
     } else {
-      corps = `<h2>🔁 Répéter</h2><p>Écoutez, puis répétez à voix haute.</p>${p.audio_lecture ? `<audio controls preload="none" src="${esc(urlMedia(p.audio_lecture))}" style="width:100%"></audio>` : ""}${p.texte_ar ? `<div class="par-ar" dir="auto">${esc(p.texte_ar)}</div>` : ""}<div id="moi"></div>`;
+      const repMa = p.audio_lecture && Array.isArray(p.marques_ar) && p.marques_ar.length === PAR.mots(p.texte_ar).length;
+      corps = `<h2>🔁 Répéter</h2><p>Écoutez, puis répétez à voix haute.</p>${p.audio_lecture ? `<audio controls preload="none" src="${esc(urlMedia(p.audio_lecture))}" style="width:100%"></audio>` : ""}${p.texte_ar ? `<div class="par-ar" dir="auto">${repMa ? PAR.html(p.texte_ar) : esc(p.texte_ar)}</div>` : ""}<button class="btn-text par-lent" type="button">🐢 Lent</button><div id="moi"></div>`;
     }
     w.innerHTML = `<div class="entete" style="padding:0"><button class="btn-text" id="retour" style="padding:4px" aria-label="Retour">←</button><h1 dir="auto">${esc(p.titre || "")}</h1></div><div class="par-pas">${pts}</div>${corps}
       <div class="par-nav">${etape ? `<button class="btn-outline" id="pr">◀</button>` : ""}<button class="btn" id="sv">${etape === total - 1 ? "✓ J'ai terminé" : "Suivant ▶"}</button></div>`;
@@ -6401,6 +6417,9 @@ async function vuePassage() {
     const pr = w.querySelector("#pr"); if (pr) pr.onclick = () => { etape--; rendre(); };
     w.querySelector("#sv").onclick = () => { if (etape === total - 1) finir(); else { etape++; rendre(); } };
     const moi = w.querySelector("#moi"); if (moi) perso = PAR.widget(moi, null);
+    const zA = w.querySelector(".par-ar"), aA = w.querySelector("audio"), okM = Array.isArray(p.marques_ar) && p.marques_ar.length === PAR.mots(p.texte_ar).length;
+    if (zA && aA && okM && zA.querySelector(".mot")) PAR.suivre(zA, aA, p.marques_ar);
+    const ln = w.querySelector(".par-lent"); if (ln) ln.onclick = () => { const v = ln.classList.toggle("on") ? .7 : 1; w.querySelectorAll("audio").forEach(a => { a.playbackRate = v; }); ln.textContent = v < 1 ? "🐢 Lent ✓" : "🐢 Lent"; };
   };
   rendre();
 }
@@ -6484,12 +6503,31 @@ async function vuePassageEdit() {
   if (id) { try { const r = await sb.from("yt_passages").select("*").eq("id", id).maybeSingle(); if (r.error || !r.data) throw r.error || 0; p = r.data; } catch (e) { w.innerHTML = `<p class="erreur">${esc(txtErr(e, "Introuvable."))}</p>`; return; } }
   w.innerHTML = `<div class="entete" style="padding:0"><button class="btn-text" id="retour">←</button><h1>${id ? "Modifier le passage" : "Nouveau passage"}</h1></div>
     <input class="champ" id="ti" dir="auto" maxlength="90" placeholder="Titre du passage" value="${esc(p.titre || "")}">
-    <h2>🎧 1 · Lire (arabe)</h2><textarea class="champ" id="t1" dir="rtl" rows="3" placeholder="Texte arabe (2 à 4 lignes)">${esc(p.texte_ar || "")}</textarea><div id="v1"></div>
+    <h2>🎧 1 · Lire (arabe)</h2><textarea class="champ" id="t1" dir="rtl" rows="3" placeholder="Texte arabe (2 à 4 lignes)">${esc(p.texte_ar || "")}</textarea><div id="v1"></div><div id="pt"></div>
     <h2>🌍 2 · Traduire</h2><textarea class="champ" id="t2" dir="auto" rows="2" placeholder="Traduction (facultatif)">${esc(p.texte_trad || "")}</textarea><div id="v2"></div>
     <h2>💡 3 · Expliquer</h2><textarea class="champ" id="t3" dir="auto" rows="2" placeholder="Explication (facultatif)">${esc(p.texte_expl || "")}</textarea><div id="v3"></div>
     <p class="erreur" id="er"></p><button class="btn" id="sv">Enregistrer</button>`;
   w.querySelector("#retour").onclick = () => router("parcours-edit", { id: parcoursId });
   const V = [PAR.widget(w.querySelector("#v1"), p.audio_lecture), PAR.widget(w.querySelector("#v2"), p.audio_trad), PAR.widget(w.querySelector("#v3"), p.audio_expl)];
+  /* Ardoise : l'imam touche chaque mot pendant qu'il s'écoute lire */
+  let marques = Array.isArray(p.marques_ar) ? p.marques_ar : null, pour = V[0].cle(), motsPour = p.texte_ar || "";
+  const zonePt = w.querySelector("#pt"), t1 = w.querySelector("#t1");
+  const majPt = () => {
+    const M = PAR.mots(t1.value), src = V[0].src(), bon = marques && marques.length === M.length && pour === V[0].cle();
+    if (!M.length || !src || V[0].vide()) { zonePt.innerHTML = ""; return; }
+    zonePt.innerHTML = `<button class="btn-outline" id="pt-go" type="button">👆 ${bon ? "Refaire le pointage des mots ✓" : "Pointer les mots"}</button>`;
+    zonePt.querySelector("#pt-go").onclick = () => {
+      const tmp = []; zonePt.innerHTML = `<p class="pf-ast">Touchez chaque mot au moment où vous le lisez.</p><div class="par-ar" id="pt-z" dir="rtl">${PAR.html(t1.value)}</div><audio controls preload="auto" src="${esc(src)}" style="width:100%"></audio><button class="btn-outline" id="pt-ok" type="button" disabled>✓ Valider</button><button class="btn-text" id="pt-re" type="button">↺ Recommencer</button>`;
+      const a = zonePt.querySelector("audio"), mots = [...zonePt.querySelectorAll(".mot")], ok = zonePt.querySelector("#pt-ok");
+      const maj = () => { mots.forEach((m, i) => m.classList.toggle("on", i === tmp.length - 1)); ok.disabled = tmp.length !== mots.length; };
+      mots.forEach((m, i) => { m.onclick = () => { if (a.paused && !tmp.length) a.play().catch(() => {}); if (i === tmp.length) { tmp.push(Math.round(a.currentTime * 100) / 100); maj(); } }; });
+      zonePt.querySelector("#pt-re").onclick = () => { tmp.length = 0; a.pause(); a.currentTime = 0; maj(); };
+      ok.onclick = () => { marques = tmp.slice(); pour = V[0].cle(); motsPour = t1.value; a.pause(); majPt(); };
+    };
+  };
+  t1.addEventListener("input", () => { if (marques && PAR.mots(t1.value).length !== marques.length) marques = null; });
+  const ivPt = setInterval(() => { if (!w.isConnected) { clearInterval(ivPt); return; } const k = V[0].cle(); if (zonePt.querySelector("#pt-z")) return; if (zonePt.dataset.k !== String(!!k) + PAR.mots(t1.value).length + (marques ? 1 : 0) + (pour === k ? 1 : 0)) { zonePt.dataset.k = String(!!k) + PAR.mots(t1.value).length + (marques ? 1 : 0) + (pour === k ? 1 : 0); majPt(); } }, 700);
+  majPt();
   w.querySelector("#sv").onclick = async ev => {
     const bt = ev.currentTarget, er = w.querySelector("#er"); er.textContent = ""; bt.disabled = true; bt.textContent = "⏳";
     try {
@@ -6499,6 +6537,7 @@ async function vuePassageEdit() {
         if (b) { const ch = `${etat.parentId}/parcours/${pid}-${cles[k]}-${Date.now()}.${PAR.ext(b)}`; const u = await sb.storage.from("yt-media").upload(ch, b, { contentType: b.type, upsert: false }); if (u.error) throw u.error; o[champs[k]] = ch; }
         else o[champs[k]] = V[k].chemin() || null;
       }
+      o.marques_ar = marques && pour === V[0].cle() && marques.length === PAR.mots(t1.value).length ? marques : null;
       o.titre = w.querySelector("#ti").value.trim() || null; o.texte_ar = w.querySelector("#t1").value.trim() || null; o.texte_trad = w.querySelector("#t2").value.trim() || null; o.texte_expl = w.querySelector("#t3").value.trim() || null;
       if (id) { const r = await sb.from("yt_passages").update(o).eq("id", id); if (r.error) throw r.error; }
       else { const m = await sb.from("yt_passages").select("position").eq("parcours_id", parcoursId).order("position", { ascending: false }).limit(1); const r = await sb.from("yt_passages").insert({ ...o, id: pid, parcours_id: parcoursId, position: ((m.data && m.data[0] && m.data[0].position) || 0) + 1 }); if (r.error) throw r.error; }

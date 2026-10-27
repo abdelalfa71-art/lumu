@@ -1,5 +1,5 @@
 /* Lumu — service worker : démarrage hors ligne + cache des images */
-const V = "lumu-v89";
+const V = "lumu-v90";
 const IMG = "lumu-img-v1";
 const AUDIO = "lumu-audio-v1";
 const SHELL = ["/", "/manifest.json", "/icon-192.png", "/favicon-32.png"];
