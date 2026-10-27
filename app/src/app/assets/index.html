@@ -1518,10 +1518,10 @@ function carteGrande(c, surClic) {
 }
 /* ---------- Accueil : flux immersif ---------- */
 function vueFlux() {
-  const reelsSeuls = etat.route === "reels";
+  const reelsSeuls = etat.route === "reels" || etat.route === "videos";
   const wrap = document.createElement("div");
   wrap.className = "flux";
-  wrap.innerHTML = `<div class="flux-haut">${reelsSeuls ? `<button class="flux-ic" id="retour" aria-label="Retour">${ico("back", 26)}</button><span class="flux-titre">Reels</span>` : `<div class="flux-modes" id="modes" role="tablist"></div>`}<span class="flux-droite"><button class="flux-ic" id="micro-haut" aria-label="Recherche vocale">${ico("mic", 26)}</button><button class="flux-ic" id="son-haut" aria-label="Son">${ico("mute", 26)}</button><button class="flux-ic" id="chercher" aria-label="Rechercher">${ico("search", 26)}</button><button class="flux-ic" id="h-profil" aria-label="Mon profil">${ico("user", 26)}</button></span></div><div class="flux-defil" id="defil" tabindex="-1"></div>`;
+  wrap.innerHTML = `<div class="flux-haut">${reelsSeuls ? `<button class="flux-ic" id="retour" aria-label="Retour">${ico("back", 26)}</button><span class="flux-titre">${etat.route === "videos" ? "Vidéos" : "Reels"}</span>` : `<div class="flux-modes" id="modes" role="tablist"></div>`}<span class="flux-droite"><button class="flux-ic" id="micro-haut" aria-label="Recherche vocale">${ico("mic", 26)}</button><button class="flux-ic" id="son-haut" aria-label="Son">${ico("mute", 26)}</button><button class="flux-ic" id="chercher" aria-label="Rechercher">${ico("search", 26)}</button><button class="flux-ic" id="h-profil" aria-label="Mon profil">${ico("user", 26)}</button></span></div><div class="flux-defil" id="defil" tabindex="-1"></div>`;
   app.appendChild(wrap);
   const defil = wrap.querySelector("#defil");
   let mode = "pour-vous", total = 0, enCours = false, fini = false, generation = 0, actif = null;
@@ -1673,7 +1673,7 @@ function vueFlux() {
     if (!total && !reelsSeuls && mode === "pour-vous" && !defil.querySelector(".radio")) defil.appendChild(radioSlide());
     if (!total && !defil.querySelector(".sk-diapo") && !defil.querySelector(".diapo:not(.radio)")) defil.insertAdjacentHTML("beforeend", `<section class="diapo sk-diapo"><div class="spinner"></div></section>`);
     try {
-      const data = await lotFil(reelsSeuls ? "reels" : mode, total, 6);
+      const data = await lotFil(reelsSeuls ? (etat.route === "videos" ? "videos" : "reels") : mode, total, 6);
       if (!wrap.isConnected || g !== generation) return;
       const ids = data.map(c => c.id);
       const [l, f] = await Promise.all([mesLikesDe(ids), mesFavorisDe(ids)]);
@@ -1921,7 +1921,7 @@ function render() {
     "mot-de-passe-oublie": vueMotDePasseOublie, "nouveau-mot-de-passe": vueNouveauMotDePasse,
     "changer-mot-de-passe": vueChangerMotDePasse,
     "pin-verrou": vuePinVerrou, "pin-creation": vuePinCreation, "arabe": vueArabe,
-    "presentation": vuePresentation, "tarifs": vueTarifs, "videos": () => { etat.params = { type: "video", titre: "Vidéos", racine: true }; return vueDossier(); }, "home": vueDecouvrir, "savants": vueSavants, "preches": vuePreches, "priere": vuePriere, "langues-choix": vueLanguesChoix, "biblio": vueBiblio, "dossier": vueDossier, "direct": vueDirect, "chaine-edit": vueChaineEdit, "notifications": vueNotifications, "publier": vuePublier, "je-publie": vueJePublie, "profil": vueProfil, "contenu": vueContenu,
+    "presentation": vuePresentation, "tarifs": vueTarifs, "videos": vueFlux, "home": vueDecouvrir, "savants": vueSavants, "preches": vuePreches, "priere": vuePriere, "langues-choix": vueLanguesChoix, "biblio": vueBiblio, "dossier": vueDossier, "direct": vueDirect, "chaine-edit": vueChaineEdit, "notifications": vueNotifications, "publier": vuePublier, "je-publie": vueJePublie, "profil": vueProfil, "contenu": vueContenu,
     "langue": vueLangue, "fil": vueFlux, "flux": vueEcouter, "radio": vueFlux, "recherche": vueRecherche, "abos": vueAbos, "espace": vueEspace, "importer": vueImport, "reels": vueFlux, "groupes": vueGroupes, "groupe": vueGroupe, "discussions": vueDiscussions, "conv": vueConv, "groupe-nouveau": vueNouveauGroupe, "livres": vueLivres, "livre": vueLivre, "mes-livres": vueMesLivres, "livre-edition": vueEditeurLivre, "lives": vueLives, "live": vueLive, "live-nouveau": vueNouveauLive, "devenir-createur": vueDevenirCreateur, "admin": vueAdmin, "push-admin": vuePushAdmin, "mes-contenus": vueMesContenus, "legal": vueLegal, "lien": vueLien, "chaine": vueChaine, "playlist": vuePlaylist, "playlists": vuePlaylists, "stats": vueStats, "abonnements": vueAbonnements, "favoris": vueListeUtilisateur, "historique": vueListeUtilisateur, "hors": vueHors
   };
   document.body.classList.toggle("branche-tobi", TOBI_ROUTES.includes(etat.route));
@@ -1930,7 +1930,7 @@ function render() {
   window.scrollTo(0, 0);
   if (AUD.mini) AUD.maj();
   try { majBandeauIslam(); } catch (e) {}
-  try { monterMicroFlottant(); const f = document.getElementById("micro-fab"); f.hidden = ["flux", "radio", "fil", "reels", "langues-choix", "connexion", "pin-verrou", "presentation", "espace", "je-publie", "publier", "importer", "profil", "chaine-edit", "priere", "groupe", "conv", "discussions"].includes(etat.route); } catch (e) {}
+  try { monterMicroFlottant(); const f = document.getElementById("micro-fab"); f.hidden = ["flux", "radio", "fil", "reels", "videos", "langues-choix", "connexion", "pin-verrou", "presentation", "espace", "je-publie", "publier", "importer", "profil", "chaine-edit", "priere", "groupe", "conv", "discussions"].includes(etat.route); } catch (e) {}
 }
 
 function vueConnexion() {
@@ -2277,7 +2277,7 @@ function navActuelle() { return NAV_BASE.concat(typeof estCreateur === "function
 const ONGLET_DE = { "priere": "flux", "savants": "flux", "chaine-edit": "", "notifications": "", "tarifs": "", "flux": "flux", "fil": "flux", "reels": "reels", "recherche": "flux", "home": "flux", "contenu": "*", "chaine": "*", "playlist": "*", "groupes": "flux", "discussions": "discussions", "livres": "flux", "livre": "flux", "lives": "flux", "live": "flux", "arabe": "flux", "espace": "", "publier": "", "je-publie": "je-publie", "groupe-nouveau": "", "mes-livres": "", "livre-edition": "", "live-nouveau": "", "importer": "", "lien": "", "mes-contenus": "", "devenir-createur": "", "playlists": "", "stats": "", "abos": "flux", "profil": "profil", "videos": "videos", "admin": "", "push-admin": "", "langue": "", "abonnements": "", "legal": "", "favoris": "", "historique": "", "hors": "", "preches": "flux", "biblio": "flux", "dossier": "flux", "direct": "flux" , "radio": "flux" };
 function creerNav() {
   const nav = document.createElement("nav");
-  nav.className = "nav-bas" + (etat.route === "radio" || etat.route === "reels" || etat.route === "fil" ? " nav-sombre" : "");
+  nav.className = "nav-bas" + (etat.route === "radio" || etat.route === "reels" || etat.route === "videos" || etat.route === "fil" ? " nav-sombre" : "");
   nav.setAttribute("aria-label", "Navigation");
   let actif = ONGLET_DE[etat.route];
   if (actif === "*") actif = etat.racine;
@@ -5073,7 +5073,7 @@ function dateHijri(court) {
 }
 function majBandeauIslam() {
   let b = document.getElementById("bandeau-islam");
-  const cache = !["flux", "radio", "fil", "reels", "langues-choix", "connexion", "pin-verrou", "presentation", "priere"].includes(etat.route);
+  const cache = !["flux", "radio", "fil", "reels", "videos", "langues-choix", "connexion", "pin-verrou", "presentation", "priere"].includes(etat.route);
   if (!b) { b = document.createElement("button"); b.id = "bandeau-islam"; b.onclick = () => router("priere"); document.body.appendChild(b); }
   b.hidden = !cache; document.body.classList.toggle("bandeau-on", cache);
   if (!cache) return;
@@ -5972,6 +5972,7 @@ async function lotFil(mode, depuis, nb) {
   }
   let req = sb.from("yt_contenus").select(CHAMPS_CONTENU).eq("status", "published").order("published_at", { ascending: false }).range(depuis, depuis + nb - 1);
   if (mode === "reels") req = req.eq("type", "reel");
+  else if (mode === "videos") req = req.eq("type", "video");
   else req = req.in("type", TYPES_FLUX);
   if (mode === "abonnements") {
     if (!etat.parentId) return [];
