@@ -20,6 +20,7 @@ async function appel(corps) {
   return JSON.parse(t);
 }
 
+process.on("unhandledRejection", e => { console.log("::error::" + String(e && e.message || e).replace(/\n/g, " ").slice(0, 400)); process.exit(1); });
 const mode = fs.readFileSync("recompress/mode.txt", "utf8").trim();
 if (mode.startsWith("purger")) {
   console.log("Purge :", await appel({ a: "purger" }));
@@ -47,7 +48,9 @@ for (const [i, c] of liste.entries()) {
     gain += c.taille_octets - taille; ok++;
     console.log(`[${i + 1}/${liste.length}] ok ${c.id} ${(c.taille_octets / 1048576).toFixed(1)} Mo -> ${(taille / 1048576).toFixed(1)} Mo`);
   } catch (e) {
-    echecs++; console.log(`[${i + 1}/${liste.length}] ÉCHEC ${c.id}: ${String(e && e.message || e)}`);
+    echecs++; if (echecs <= 5) console.log(`::error::ÉCHEC ${c.id}: ${String(e && e.message || e).replace(/\n/g, " ").slice(0, 300)}`);
+    console.log(`[${i + 1}/${liste.length}] ÉCHEC ${c.id}: ${String(e && e.message || e)}`);
   }
 }
+console.log(`::notice::Terminé : ${ok} convertis, ${ignores} ignorés, ${echecs} échecs, gain ${(gain / 1048576).toFixed(0)} Mo`);
 console.log(`Terminé : ${ok} convertis, ${ignores} ignorés, ${echecs} échecs, gain ${(gain / 1048576).toFixed(0)} Mo`);
