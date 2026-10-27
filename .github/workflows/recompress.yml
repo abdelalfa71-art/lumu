@@ -1,0 +1,21 @@
+name: Alléger les audios
+on:
+  push:
+    paths:
+      - "recompress/mode.txt"
+permissions:
+  id-token: write
+  contents: read
+jobs:
+  alleger:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: ffmpeg -version | head -1
+      - run: npm install --no-save @supabase/supabase-js@2
+      - name: Convertir
+        run: node recompress/run.mjs
