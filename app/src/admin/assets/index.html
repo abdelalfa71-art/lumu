@@ -40,6 +40,7 @@ input,select{width:100%;padding:10px;border:1px solid var(--bd);border-radius:8p
 textarea{width:100%;padding:10px;border:1px solid var(--bd);border-radius:8px;background:var(--card);color:var(--tx);font:inherit;margin-bottom:10px;min-height:70px}
 .bar{height:8px;background:var(--bd);border-radius:6px;overflow:hidden;margin:8px 0}.bar i{display:block;height:100%;width:0;background:var(--ok);transition:width .2s}
 #pub-ok{width:100%;border:0;border-radius:10px;padding:12px;background:var(--pri);color:#fff;font-size:16px}#pub-ok:disabled{opacity:.5}
+#main .card select{width:auto;flex:1 1 44%;min-width:0}#bar .btns{gap:6px}
 </style>
 </head>
 <body>
@@ -333,19 +334,50 @@ const views={
     document.getElementById('q').oninput=draw;draw();
   },
   async contenus(m){
-    const f=views._cf||'';
-    let q=sb.from('yt_contenus').select('id,title,type,status,views_count,created_at,yt_channels(name)').order('created_at',{ascending:false}).limit(200);
-    if(f)q=q.eq('status',f);
+    const F=views._F=views._F||{q:'',st:'',ty:'',cat:'',ch:''}, SEL=views._sel=views._sel||new Set();
+    const [chs,pls]=await Promise.all([sb.from('yt_channels').select('id,name').order('name').limit(500),sb.from('yt_playlists').select('id,titre,yt_channels(name)').order('created_at',{ascending:false}).limit(300)]);
+    const CH=chs.data||[],PL=pls.data||[],CATS=['Rappel','Coran','Invocation','Patrimoine','Cours','Conférence','Éducation','Enfants','Ramadan','Autre'];
+    let q=sb.from('yt_contenus').select('id,title,type,status,category,views_count,created_at,channel_id,yt_channels(name)').order('created_at',{ascending:false}).limit(300);
+    if(F.st)q=q.eq('status',F.st);if(F.ty)q=q.eq('type',F.ty);if(F.cat)q=q.eq('category',F.cat);if(F.ch)q=q.eq('channel_id',F.ch);
+    if(F.q.trim())q=q.ilike('title','%'+F.q.trim().replace(/[%,]/g,' ')+'%');
     const {data,error}=await q;if(error)throw error;
-    m.innerHTML=`<select id="f"><option value="">Tous les statuts</option><option value="published">Publiés</option><option value="processing">En traitement</option><option value="hidden">Masqués</option></select><div id="list"></div>`;
-    const sel=document.getElementById('f');sel.value=f;sel.onchange=()=>{views._cf=sel.value;show()};
-    document.getElementById('list').innerHTML=data.length?data.map(c=>`<div class="card"><div class="row"><b>${esc(c.title)}</b><span class="tag">${esc(c.status)}</span></div>
-      <div class="mut">${esc(c.type)} · ${esc(c.yt_channels?.name||'—')} · ${esc(c.views_count)} vues · ${fmt(c.created_at)}</div>
-      <div class="btns">${c.status!=='published'?`<button class="b-ok" data-s="published" data-i="${esc(c.id)}">Publier</button>`:''}${c.status!=='hidden'?`<button class="b-bad" data-s="hidden" data-i="${esc(c.id)}">Masquer</button>`:''}</div></div>`).join(''):'<div class="empty">Aucun contenu.</div>';
-    document.querySelectorAll('#list button').forEach(b=>b.onclick=()=>{
-      if(!confirm('Confirmer : '+b.textContent+' ?'))return;
-      act(()=>sb.rpc('yt_admin_moderer_contenu',{p_id:b.dataset.i,p_status:b.dataset.s}),'Contenu mis à jour');
-    });
+    const opt=(a,v)=>a.map(x=>`<option value="${esc(x[0])}"${x[0]===v?' selected':''}>${esc(x[1])}</option>`).join('');
+    m.innerHTML=`<div class="card"><input id="cq" placeholder="Rechercher un titre…" value="${esc(F.q)}" style="width:100%;margin-bottom:8px">
+      <div style="display:flex;gap:6px;flex-wrap:wrap">
+      <select id="fs"><option value="">Statut</option>${opt([['published','Publiés'],['processing','En traitement'],['hidden','Masqués']],F.st)}</select>
+      <select id="ft"><option value="">Type</option>${opt([['audio','Audio'],['video','Vidéo'],['reel','Reel'],['pdf','Document'],['image','Image']],F.ty)}</select>
+      <select id="fc"><option value="">Catégorie</option>${opt(CATS.map(c=>[c,c]),F.cat)}</select>
+      <select id="fh"><option value="">Chaîne</option>${opt(CH.map(c=>[c.id,c.name]),F.ch)}</select></div></div>
+      <div class="card" id="bar" style="position:sticky;top:0;z-index:5"></div><div id="list"></div>`;
+    const bind=(id,k)=>{const e=document.getElementById(id);e.onchange=()=>{F[k]=e.value;show()}};
+    bind('fs','st');bind('ft','ty');bind('fc','cat');bind('fh','ch');
+    let tm;document.getElementById('cq').oninput=e=>{clearTimeout(tm);tm=setTimeout(()=>{F.q=e.target.value;show()},500)};
+    const ids=()=>[...SEL];
+    const bar=()=>{
+      const n=SEL.size,b=document.getElementById('bar');
+      if(!n){b.innerHTML='<span class="mut">Cochez des contenus pour les renommer, classer, déplacer ou regrouper.</span> <button class="b-gr" id="all">Tout cocher ('+data.length+')</button>';document.getElementById('all').onclick=()=>{data.forEach(c=>SEL.add(c.id));draw()};return}
+      b.innerHTML=`<div class="row"><b>${n} sélectionné${n>1?'s':''}</b><button class="b-gr" id="no">Tout décocher</button></div>
+      <div class="btns" style="flex-wrap:wrap">${n===1?'<button class="b-ok" id="ren">✏️ Renommer</button>':''}
+      <select id="bc"><option value="">📂 Classer dans…</option>${CATS.map(c=>`<option>${esc(c)}</option>`).join('')}</select>
+      <select id="bh"><option value="">➡️ Déplacer vers la chaîne…</option>${opt(CH.map(c=>[c.id,c.name]),'')}</select>
+      <select id="bp"><option value="">🗂 Regrouper dans la liste…</option><option value="__new">➕ Nouvelle liste…</option>${opt(PL.map(p=>[p.id,p.titre+' · '+(p.yt_channels?.name||'')]),'')}</select>
+      <button class="b-ok" data-s="published">Publier</button><button class="b-bad" data-s="hidden">Masquer</button></div>`;
+      document.getElementById('no').onclick=()=>{SEL.clear();draw()};
+      const r=document.getElementById('ren');
+      if(r)r.onclick=()=>{const c=data.find(x=>x.id===ids()[0]);const t=prompt('Nouveau titre :',c?c.title:'');if(t&&t.trim())act(()=>sb.rpc('yt_admin_modifier_contenus',{p_ids:ids(),p_titre:t.trim()}),'Titre modifié')};
+      document.getElementById('bc').onchange=e=>{const v=e.target.value;if(v&&confirm('Classer '+n+' contenu(s) dans « '+v+' » ?'))act(()=>sb.rpc('yt_admin_modifier_contenus',{p_ids:ids(),p_category:v}),'Classement mis à jour');else e.target.value=''};
+      document.getElementById('bh').onchange=e=>{const v=e.target.value,nom=e.target.selectedOptions[0]?.textContent;if(v&&confirm('Déplacer '+n+' contenu(s) vers « '+nom+' » ?'))act(()=>sb.rpc('yt_admin_modifier_contenus',{p_ids:ids(),p_channel:v}),'Contenus déplacés');else e.target.value=''};
+      document.getElementById('bp').onchange=e=>{const v=e.target.value;if(!v)return;
+        if(v==='__new'){const t=prompt('Nom de la nouvelle liste :');if(!t||!t.trim()){e.target.value='';return}act(()=>sb.rpc('yt_admin_regrouper',{p_ids:ids(),p_titre:t.trim()}),'Liste créée')}
+        else act(()=>sb.rpc('yt_admin_regrouper',{p_ids:ids(),p_playlist:v}),'Ajouté à la liste')};
+      b.querySelectorAll('[data-s]').forEach(x=>x.onclick=()=>{if(confirm('Confirmer : '+x.textContent+' ('+n+') ?'))Promise.all(ids().map(i=>sb.rpc('yt_admin_moderer_contenu',{p_id:i,p_status:x.dataset.s}))).then(()=>{toast('Contenus mis à jour');show()})});
+    };
+    const draw=()=>{
+      document.getElementById('list').innerHTML=data.length?data.map(c=>`<div class="card"><label class="row" style="gap:10px;align-items:flex-start;cursor:pointer"><input type="checkbox" data-i="${esc(c.id)}" ${SEL.has(c.id)?'checked':''} style="width:22px;height:22px;flex:none"><span style="flex:1"><b>${esc(c.title)}</b><div class="mut">${esc(c.type)} · ${esc(c.category||'—')} · ${esc(c.yt_channels?.name||'—')} · ${esc(c.views_count)} vues · ${fmt(c.created_at)}</div></span><span class="tag">${esc(c.status)}</span></label></div>`).join(''):'<div class="empty">Aucun contenu.</div>';
+      document.querySelectorAll('#list input[type=checkbox]').forEach(x=>x.onchange=()=>{x.checked?SEL.add(x.dataset.i):SEL.delete(x.dataset.i);bar()});
+      bar();
+    };
+    draw();
   },
   async sig(m){
     const {data,error}=await sb.from('yt_signalements').select('id,motif,statut,created_at,yt_contenus(title),yt_comments(content)').eq('statut','ouvert').order('created_at').limit(200);if(error)throw error;
