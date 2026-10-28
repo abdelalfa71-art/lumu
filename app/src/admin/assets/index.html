@@ -337,7 +337,7 @@ const views={
     const F=views._F=views._F||{q:'',st:'',ty:'',cat:'',ch:''}, SEL=views._sel=views._sel||new Set();
     const [chs,pls]=await Promise.all([sb.from('yt_channels').select('id,name').order('name').limit(500),sb.from('yt_playlists').select('id,titre,yt_channels(name)').order('created_at',{ascending:false}).limit(300)]);
     const CH=chs.data||[],PL=pls.data||[],CATS=['Rappel','Coran','Invocation','Patrimoine','Cours','Conférence','Éducation','Enfants','Ramadan','Autre'];
-    let q=sb.from('yt_contenus').select('id,title,type,status,category,views_count,created_at,channel_id,yt_channels(name)').order('created_at',{ascending:false}).limit(300);
+    let q=sb.from('yt_contenus').select('id,title,type,status,category,mots_cles,views_count,created_at,channel_id,yt_channels(name)').order('created_at',{ascending:false}).limit(300);
     if(F.st)q=q.eq('status',F.st);if(F.ty)q=q.eq('type',F.ty);if(F.cat)q=q.eq('category',F.cat);if(F.ch)q=q.eq('channel_id',F.ch);
     if(F.q.trim())q=q.ilike('title','%'+F.q.trim().replace(/[%,]/g,' ')+'%');
     const {data,error}=await q;if(error)throw error;
@@ -361,10 +361,11 @@ const views={
       <select id="bc"><option value="">📂 Classer dans…</option>${CATS.map(c=>`<option>${esc(c)}</option>`).join('')}</select>
       <select id="bh"><option value="">➡️ Déplacer vers la chaîne…</option>${opt(CH.map(c=>[c.id,c.name]),'')}</select>
       <select id="bp"><option value="">🗂 Regrouper dans la liste…</option><option value="__new">➕ Nouvelle liste…</option>${opt(PL.map(p=>[p.id,p.titre+' · '+(p.yt_channels?.name||'')]),'')}</select>
-      <button class="b-ok" data-s="published">Publier</button><button class="b-bad" data-s="hidden">Masquer</button></div>`;
+      <button class="b-gr" id="tg">🏷 Mots-clés</button><button class="b-ok" data-s="published">Publier</button><button class="b-bad" data-s="hidden">Masquer</button></div>`;
       document.getElementById('no').onclick=()=>{SEL.clear();draw()};
       const r=document.getElementById('ren');
       if(r)r.onclick=()=>{const c=data.find(x=>x.id===ids()[0]);const t=prompt('Nouveau titre :',c?c.title:'');if(t&&t.trim())act(()=>sb.rpc('yt_admin_modifier_contenus',{p_ids:ids(),p_titre:t.trim()}),'Titre modifié')};
+      document.getElementById('tg').onclick=()=>{const t=prompt('Mots-clés à ajouter (séparés par des virgules) :');const L=(t||'').split(/[,;،]/).map(x=>x.trim()).filter(Boolean);if(L.length)act(()=>sb.rpc('yt_admin_etiqueter_contenus',{p_ids:ids(),p_tags:L}),'Mots-clés ajoutés')};
       document.getElementById('bc').onchange=e=>{const v=e.target.value;if(v&&confirm('Classer '+n+' contenu(s) dans « '+v+' » ?'))act(()=>sb.rpc('yt_admin_modifier_contenus',{p_ids:ids(),p_category:v}),'Classement mis à jour');else e.target.value=''};
       document.getElementById('bh').onchange=e=>{const v=e.target.value,nom=e.target.selectedOptions[0]?.textContent;if(v&&confirm('Déplacer '+n+' contenu(s) vers « '+nom+' » ?'))act(()=>sb.rpc('yt_admin_modifier_contenus',{p_ids:ids(),p_channel:v}),'Contenus déplacés');else e.target.value=''};
       document.getElementById('bp').onchange=e=>{const v=e.target.value;if(!v)return;
@@ -373,7 +374,7 @@ const views={
       b.querySelectorAll('[data-s]').forEach(x=>x.onclick=()=>{if(confirm('Confirmer : '+x.textContent+' ('+n+') ?'))Promise.all(ids().map(i=>sb.rpc('yt_admin_moderer_contenu',{p_id:i,p_status:x.dataset.s}))).then(()=>{toast('Contenus mis à jour');show()})});
     };
     const draw=()=>{
-      document.getElementById('list').innerHTML=data.length?data.map(c=>`<div class="card"><label class="row" style="gap:10px;align-items:flex-start;cursor:pointer"><input type="checkbox" data-i="${esc(c.id)}" ${SEL.has(c.id)?'checked':''} style="width:22px;height:22px;flex:none"><span style="flex:1"><b>${esc(c.title)}</b><div class="mut">${esc(c.type)} · ${esc(c.category||'—')} · ${esc(c.yt_channels?.name||'—')} · ${esc(c.views_count)} vues · ${fmt(c.created_at)}</div></span><span class="tag">${esc(c.status)}</span></label></div>`).join(''):'<div class="empty">Aucun contenu.</div>';
+      document.getElementById('list').innerHTML=data.length?data.map(c=>`<div class="card"><label class="row" style="gap:10px;align-items:flex-start;cursor:pointer"><input type="checkbox" data-i="${esc(c.id)}" ${SEL.has(c.id)?'checked':''} style="width:22px;height:22px;flex:none"><span style="flex:1"><b>${esc(c.title)}</b><div class="mut">${esc(c.type)} · ${esc(c.category||'—')} · ${esc(c.yt_channels?.name||'—')} · ${esc(c.views_count)} vues · ${fmt(c.created_at)}</div>${(c.mots_cles||[]).length?`<div class="mut">🏷 ${esc(c.mots_cles.join(', '))}</div>`:''}</span><span class="tag">${esc(c.status)}</span></label></div>`).join(''):'<div class="empty">Aucun contenu.</div>';
       document.querySelectorAll('#list input[type=checkbox]').forEach(x=>x.onchange=()=>{x.checked?SEL.add(x.dataset.i):SEL.delete(x.dataset.i);bar()});
       bar();
     };

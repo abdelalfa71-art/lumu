@@ -1035,6 +1035,9 @@ body:not(.branche-tobi) #mini-audio.sans-nav { bottom: calc(12px + env(safe-area
 @keyframes lumu-pop { 0% { transform: scale(1); } 40% { transform: scale(1.35); } 100% { transform: scale(1); } }
 .d-act.on svg { animation: lumu-pop .4s ease; }
 .d-act:active { transform: scale(.88); }
+.carte small { display: block; margin-top: 4px; }
+.chap-hint { display: block; width: 100%; text-align: start; margin: -4px 0 10px; padding: 8px 12px; border: 0; border-radius: 12px; background: color-mix(in srgb, var(--vert) 12%, transparent); color: var(--vert); font-weight: 700; font-size: 15px; }
+.ct-chap { margin: 10px 0; } .ct-chap-l { display: flex; gap: 10px; align-items: center; width: 100%; padding: 10px 12px; margin: 4px 0; border: 1px solid var(--bordure); border-radius: 12px; background: none; color: var(--texte); text-align: start; font-size: 16px; } .ct-chap-l span { color: var(--vert); font-weight: 800; flex: none; }
 .par-carte { display: flex; align-items: center; gap: 12px; width: 100%; text-align: start; padding: 14px; margin: 6px 0; border: 1.5px solid var(--bordure); border-radius: 16px; background: var(--surface, #fff); color: var(--texte); font-size: 17px; }
 .par-carte small { display: block; color: var(--texte-doux); font-size: 14px; font-weight: 500; margin-top: 2px; }
 .par-ic { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: color-mix(in srgb, var(--vert) 14%, transparent); font-size: 20px; font-weight: 800; flex: none; }
@@ -1813,7 +1816,7 @@ function creerReconnaisseur() {
   return r;
 }
 
-const PROTEGEES = ["mes-parcours", "parcours-edit", "passage-edit", "chaine-edit", "notifications", "je-publie", "importer", "espace", "groupe-nouveau", "mes-livres", "livre-edition", "live-nouveau", "publier", "devenir-createur", "admin", "push-admin", "mes-contenus", "choix-enfant", "inscription", "accueil", "lecons", "dialogue", "parametres", "changer-mot-de-passe", "pin-creation", "favoris", "historique", "lien", "playlists", "stats", "abonnements"];
+const PROTEGEES = ["questions-imam", "mes-parcours", "parcours-edit", "passage-edit", "chaine-edit", "notifications", "je-publie", "importer", "espace", "groupe-nouveau", "mes-livres", "livre-edition", "live-nouveau", "publier", "devenir-createur", "admin", "push-admin", "mes-contenus", "choix-enfant", "inscription", "accueil", "lecons", "dialogue", "parametres", "changer-mot-de-passe", "pin-creation", "favoris", "historique", "lien", "playlists", "stats", "abonnements"];
 const ROOTS = ["flux", "reels", "videos", "je-publie", "discussions", "home", "espace", "abos", "profil", "preches", "biblio", "direct"];
 function router(route, params = {}, opts = {}) {
   if (!etat.parentId && PROTEGEES.includes(route)) { route = "connexion"; params = { message: "Connectez-vous pour continuer." }; }
@@ -1939,7 +1942,7 @@ function render() {
     "mot-de-passe-oublie": vueMotDePasseOublie, "nouveau-mot-de-passe": vueNouveauMotDePasse,
     "changer-mot-de-passe": vueChangerMotDePasse,
     "pin-verrou": vuePinVerrou, "pin-creation": vuePinCreation, "arabe": vueArabe,
-    "presentation": vuePresentation, "tarifs": vueTarifs, "videos": vueFlux, "affiches": vueAffiches, "parcours": vueParcours, "parcours-voir": vueParcoursVoir, "passage": vuePassage, "parcours-revoir": vueRevoir, "mes-parcours": vueMesParcours, "parcours-edit": vueParcoursEdit, "passage-edit": vuePassageEdit, "home": vueDecouvrir, "savants": vueSavants, "preches": vuePreches, "priere": vuePriere, "langues-choix": vueLanguesChoix, "biblio": vueBiblio, "dossier": vueDossier, "direct": vueDirect, "chaine-edit": vueChaineEdit, "notifications": vueNotifications, "publier": vuePublier, "je-publie": vueJePublie, "profil": vueProfil, "contenu": vueContenu,
+    "presentation": vuePresentation, "tarifs": vueTarifs, "videos": vueFlux, "affiches": vueAffiches, "questions": vueQuestions, "questions-imam": vueQuestionsImam, "parcours": vueParcours, "parcours-voir": vueParcoursVoir, "passage": vuePassage, "parcours-revoir": vueRevoir, "mes-parcours": vueMesParcours, "parcours-edit": vueParcoursEdit, "passage-edit": vuePassageEdit, "home": vueDecouvrir, "savants": vueSavants, "preches": vuePreches, "priere": vuePriere, "langues-choix": vueLanguesChoix, "biblio": vueBiblio, "dossier": vueDossier, "direct": vueDirect, "chaine-edit": vueChaineEdit, "notifications": vueNotifications, "publier": vuePublier, "je-publie": vueJePublie, "profil": vueProfil, "contenu": vueContenu,
     "langue": vueLangue, "fil": vueFlux, "flux": vueEcouter, "radio": vueFlux, "recherche": vueRecherche, "abos": vueAbos, "espace": vueEspace, "importer": vueImport, "reels": vueFlux, "groupes": vueGroupes, "groupe": vueGroupe, "discussions": vueDiscussions, "conv": vueConv, "groupe-nouveau": vueNouveauGroupe, "livres": vueLivres, "livre": vueLivre, "mes-livres": vueMesLivres, "livre-edition": vueEditeurLivre, "lives": vueLives, "live": vueLive, "live-nouveau": vueNouveauLive, "devenir-createur": vueDevenirCreateur, "admin": vueAdmin, "push-admin": vuePushAdmin, "mes-contenus": vueMesContenus, "legal": vueLegal, "lien": vueLien, "chaine": vueChaine, "playlist": vuePlaylist, "playlists": vuePlaylists, "stats": vueStats, "abonnements": vueAbonnements, "favoris": vueListeUtilisateur, "historique": vueListeUtilisateur, "hors": vueHors
   };
   document.body.classList.toggle("branche-tobi", TOBI_ROUTES.includes(etat.route));
@@ -1948,7 +1951,7 @@ function render() {
   window.scrollTo(0, 0);
   if (AUD.mini) AUD.maj();
   try { majBandeauIslam(); } catch (e) {}
-  try { monterMicroFlottant(); const f = document.getElementById("micro-fab"); f.hidden = ["passage", "parcours-revoir", "parcours-edit", "passage-edit", "affiches", "flux", "radio", "fil", "reels", "videos", "langues-choix", "connexion", "pin-verrou", "presentation", "espace", "je-publie", "publier", "importer", "profil", "chaine-edit", "priere", "groupe", "conv", "discussions"].includes(etat.route); } catch (e) {}
+  try { monterMicroFlottant(); const f = document.getElementById("micro-fab"); f.hidden = ["questions-imam", "passage", "parcours-revoir", "parcours-edit", "passage-edit", "affiches", "flux", "radio", "fil", "reels", "videos", "langues-choix", "connexion", "pin-verrou", "presentation", "espace", "je-publie", "publier", "importer", "profil", "chaine-edit", "priere", "groupe", "conv", "discussions"].includes(etat.route); } catch (e) {}
 }
 
 function vueConnexion() {
@@ -2211,7 +2214,7 @@ const EXT_DE_MIME = { "video/x-matroska": "mkv", "video/mpeg": "mpg", "audio/fla
   "audio/mpeg": "mp3", "audio/mp4": "m4a", "audio/x-m4a": "m4a", "audio/aac": "aac", "audio/ogg": "ogg", "audio/opus": "opus",
   "audio/webm": "weba", "audio/wav": "wav", "audio/x-wav": "wav", "audio/3gpp": "3gp", "audio/amr": "amr",
   "image/jpeg": "jpg", "image/png": "png", "image/webp": "webp", "image/gif": "gif", "application/pdf": "pdf", "application/epub+zip": "epub" };
-const CHAMPS_CONTENU = "id,title,description,category,langue_contenu,type,fichier_path,cover_path,duration_seconds,views_count,likes_count,comments_count,published_at,status,auteur,taille_octets,mime,channel_id,embed_source,embed_id,source_nom,source_url,ratio,yt_channels(id,name)";
+const CHAMPS_CONTENU = "id,title,description,category,langue_contenu,type,fichier_path,cover_path,duration_seconds,views_count,likes_count,comments_count,published_at,status,auteur,taille_octets,mime,channel_id,embed_source,embed_id,source_nom,source_url,ratio,mots_cles,chapitres,yt_channels(id,name)";
 const LIBELLE_ROLE = { viewer: "Lecteur", creator_pending: "Demande de créateur en cours", creator_verified: "Créateur vérifié", admin: "Administrateur" };
 
 function uuid() {
@@ -2292,7 +2295,7 @@ function ico(n, taille, plein) {
 }
 const NAV_BASE = [{ r: "flux", i: "ecouter", t: "Écouter" }, { r: "reels", i: "reel", t: "Reels" }, { r: "videos", i: "video", t: "Vidéos" }];
 function navActuelle() { return NAV_BASE.concat(typeof estCreateur === "function" && estCreateur() ? [{ r: "je-publie", i: "publier", t: "Publier" }] : [{ r: "profil", i: "user", t: "Moi" }]); }
-const ONGLET_DE = { "priere": "flux", "parcours": "flux", "parcours-voir": "flux", "passage": "flux", "parcours-revoir": "flux", "mes-parcours": "", "parcours-edit": "", "passage-edit": "", "savants": "flux", "chaine-edit": "", "notifications": "", "tarifs": "", "flux": "flux", "fil": "flux", "reels": "reels", "recherche": "flux", "home": "flux", "contenu": "*", "chaine": "*", "playlist": "*", "groupes": "flux", "discussions": "discussions", "livres": "flux", "livre": "flux", "lives": "flux", "live": "flux", "arabe": "flux", "espace": "", "publier": "", "je-publie": "je-publie", "groupe-nouveau": "", "mes-livres": "", "livre-edition": "", "live-nouveau": "", "importer": "", "lien": "", "mes-contenus": "", "devenir-createur": "", "playlists": "", "stats": "", "abos": "flux", "profil": "profil", "videos": "videos", "admin": "", "push-admin": "", "langue": "", "abonnements": "", "legal": "", "favoris": "", "historique": "", "hors": "", "preches": "flux", "biblio": "flux", "dossier": "flux", "direct": "flux" , "radio": "flux" };
+const ONGLET_DE = { "questions": "flux", "questions-imam": "", "priere": "flux", "parcours": "flux", "parcours-voir": "flux", "passage": "flux", "parcours-revoir": "flux", "mes-parcours": "", "parcours-edit": "", "passage-edit": "", "savants": "flux", "chaine-edit": "", "notifications": "", "tarifs": "", "flux": "flux", "fil": "flux", "reels": "reels", "recherche": "flux", "home": "flux", "contenu": "*", "chaine": "*", "playlist": "*", "groupes": "flux", "discussions": "discussions", "livres": "flux", "livre": "flux", "lives": "flux", "live": "flux", "arabe": "flux", "espace": "", "publier": "", "je-publie": "je-publie", "groupe-nouveau": "", "mes-livres": "", "livre-edition": "", "live-nouveau": "", "importer": "", "lien": "", "mes-contenus": "", "devenir-createur": "", "playlists": "", "stats": "", "abos": "flux", "profil": "profil", "videos": "videos", "admin": "", "push-admin": "", "langue": "", "abonnements": "", "legal": "", "favoris": "", "historique": "", "hors": "", "preches": "flux", "biblio": "flux", "dossier": "flux", "direct": "flux" , "radio": "flux" };
 function creerNav() {
   const nav = document.createElement("nav");
   nav.className = "nav-bas" + (etat.route === "radio" || etat.route === "reels" || etat.route === "videos" || etat.route === "fil" ? " nav-sombre" : "");
@@ -2416,6 +2419,7 @@ async function vueContenu() {
     ${(c.views_count || 0) >= 20 ? `<p class="preuve">👂 <b>${esc(fmtNb(c.views_count))}</b> personnes ${c.type === "audio" ? "ont écouté" : "ont regardé"} ce ${c.type === "audio" ? "prêche" : "contenu"}</p>` : ""}
     <p class="ct-meta">${c.category && c.category !== "Autre" ? esc(c.category) + " · " : ""}${c.duration_seconds ? fmtDuree(c.duration_seconds) + " · " : ""}${c.views_count || 0} vue${(c.views_count || 0) > 1 ? "s" : ""}${c.auteur ? " · " + esc(c.auteur) : ""}</p>
     ${c.description ? `<div class="desc" dir="auto">${esc(c.description)}</div>` : ""}
+    <div id="ct-plus"></div>
     <div class="actions">
       <button class="ia" id="partager" aria-label="Partager"><span class="ia-i">↗</span><span class="ia-l">Partager</span></button>
       <button class="ia" id="favori" aria-label="Favori"><span class="ia-i">🤍</span><span class="ia-l">Favori</span></button>
@@ -2423,6 +2427,7 @@ async function vueContenu() {
 `;
   { const bp = wrap.querySelector("#plus"), mp = wrap.querySelector("#menu-plus"); bp.onclick = ev => { ev.stopPropagation(); mp.hidden = !mp.hidden; bp.setAttribute("aria-expanded", mp.hidden ? "false" : "true"); }; mp.onclick = () => { setTimeout(() => { mp.hidden = true; }, 150); }; document.addEventListener("click", function f() { if (!wrap.isConnected) { document.removeEventListener("click", f); return; } mp.hidden = true; }); }
   wrap.querySelector("#signaler").onclick = () => ouvrirSignalement(c.id);
+  try { contenuPlus(wrap, c); } catch (e) {}
   (function favoris() {
     const bf = wrap.querySelector("#favori");
     let fav = false;
@@ -3224,7 +3229,7 @@ function vuePublier() {
     return;
   }
   let type = (etat.params && TYPES[etat.params.type]) ? etat.params.type : "video", groupes = [], fichier = null, mime = "", meta = null, cover = null, lecture = false, erreur = "", info = "";
-  const champs = { titre: "", desc: "", cat: "Cours", auteur: "", groupe: "" };
+  const champs = { titre: "", desc: "", cat: "Cours", auteur: "", groupe: "", mc: "" };
   const wrap = document.createElement("div");
   wrap.className = "ecran";
   app.appendChild(wrap);
@@ -3244,6 +3249,7 @@ function vuePublier() {
       ${fichier && !lecture ? `<div class="carte" style="font-size:13px"><b dir="auto">${esc(fichier.name)}</b><br>${fmtTaille(fichier.size)}${meta && meta.duree ? " · " + fmtDuree(meta.duree) : ""}${meta && meta.vignette ? " · aperçu prêt" : ""}</div>` : ""}
       <input class="champ" id="titre" maxlength="150" placeholder="Titre" style="margin:0" dir="auto">
       <textarea class="champ" id="desc" maxlength="5000" placeholder="Description (facultatif)" style="margin:0" dir="auto"></textarea>
+      <input class="champ" id="mc" maxlength="300" placeholder="Mots-clés : jeûne, ramadan… (facultatif)" style="margin:0" dir="auto">
       <select class="champ" id="cat" style="margin:0" aria-label="Catégorie">${CATEGORIES.map(c => `<option ${c === champs.cat ? "selected" : ""}>${esc(c)}</option>`).join("")}</select>
       ${groupes.length ? `<select class="champ" id="groupe" style="margin:0" aria-label="Groupe"><option value="">Publier aussi dans un groupe (facultatif)</option>${groupes.map(g => `<option value="${esc(g.id)}" ${g.id === champs.groupe ? "selected" : ""}>${esc(g.nom)}</option>`).join("")}</select>` : ""}
       ${type === "livre" ? `<input class="champ" id="auteur" maxlength="120" placeholder="Auteur du livre" style="margin:0" dir="auto">` : ""}
@@ -3252,7 +3258,7 @@ function vuePublier() {
       ${erreur ? `<p class="erreur">${esc(erreur)}</p>` : ""}
       <button class="btn" id="go" ${!fichier || lecture ? "disabled" : ""}>Publier</button>
       <p style="font-size:12px">Durée maximale : 2 h pour une vidéo ou un audio. Gardez l'écran allumé pendant l'envoi.</p>`;
-    ["titre", "desc", "auteur"].forEach(k => { const el = wrap.querySelector("#" + k); if (el) el.value = champs[k === "titre" ? "titre" : k]; });
+    ["titre", "desc", "auteur", "mc"].forEach(k => { const el = wrap.querySelector("#" + k); if (el) el.value = champs[k === "titre" ? "titre" : k]; });
     const zt = wrap.querySelector("#types");
     Object.entries(TYPES).forEach(([k, v]) => {
       const b = document.createElement("button");
@@ -3337,7 +3343,7 @@ function vuePublier() {
         coverEnvoyee = !r.error;
       }
       const ligne = {
-        channel_id: etat.chaine.id, title: titre, description: champs.desc.trim() || null, category: champs.cat || "Autre", type,
+        channel_id: etat.chaine.id, title: titre, description: champs.desc.trim() || null, category: champs.cat || "Autre", type, mots_cles: motsCles(champs.mc),
         fichier_path: chemin, cover_path: coverEnvoyee ? cheminCover : null,
         duration_seconds: meta && meta.duree ? Math.round(meta.duree) : null,
         auteur: type === "livre" ? (champs.auteur.trim() || null) : null,
@@ -4508,11 +4514,11 @@ function vueDecouvrir() {
 
 /* ---------- Recherche ---------- */
 function vueRecherche() {
-  let q = etat.params.q || "", categorie = etat.params.categorie || "", type = "", total = 0, seq = 0, minuteur = null, enCours = false;
+  let q = etat.params.q || "", categorie = etat.params.categorie || "", type = "", langue = "", duree = "", total = 0, seq = 0, minuteur = null, enCours = false, tmSug = null;
   const wrap = document.createElement("div");
   wrap.className = "ecran recherche";
   wrap.innerHTML = `<form class="rech-haut" id="f"><button type="button" class="flux-ic clair" id="retour" aria-label="Retour">${ico("back", 24)}</button><input class="champ" id="q" type="search" enterkeyhint="search" autocomplete="off" placeholder="${esc(t("Rechercher un titre, un auteur…"))}" value="${esc(q)}"></form>
-    <div id="hist"></div><div id="chaines" class="defil-h"></div><div class="chips defil" id="filtres"></div>
+    <div class="chips" id="sugg"></div><div id="hist"></div><div id="chaines" class="defil-h"></div><div class="chips defil" id="filtres"></div><div class="chips defil" id="filtres2"></div><div id="autres"></div>
     <div id="liste" class="liste-grande"></div><p class="erreur" id="msg" hidden></p><button class="btn-outline" id="plus" hidden>${esc(t("Voir plus"))}</button>`;
   app.appendChild(wrap);
   const champ = wrap.querySelector("#q");
@@ -4524,6 +4530,9 @@ function vueRecherche() {
     if (!q && !categorie) return;
     [["", "Tout"], ...Object.entries(TYPES).map(([k, v]) => [k, `${v.ic} ${v.pl}`])].forEach(([k, n]) => { const b = document.createElement("button"); b.className = "chip" + (k === type ? " actif" : ""); b.textContent = n; b.onclick = () => { type = k; filtres(); lancer(); }; z.appendChild(b); });
     if (categorie) { const b = document.createElement("button"); b.className = "chip actif"; b.textContent = categorie + "  ✕"; b.onclick = () => { categorie = ""; filtres(); lancer(); }; z.prepend(b); }
+    const z2 = wrap.querySelector("#filtres2"); z2.innerHTML = "";
+    [["c", "⏱ Court"], ["m", "⏱ Moyen"], ["l", "⏱ Long"]].forEach(([k, n]) => { const b = document.createElement("button"); b.className = "chip" + (k === duree ? " actif" : ""); b.textContent = n; b.onclick = () => { duree = duree === k ? "" : k; filtres(); lancer(); }; z2.appendChild(b); });
+    LANGS5.forEach(l => { const b = document.createElement("button"); b.className = "chip" + (l[0] === langue ? " actif" : ""); b.textContent = l[2] + " " + l[1]; b.onclick = () => { langue = langue === l[0] ? "" : l[0]; filtres(); lancer(); }; z2.appendChild(b); });
   }
   function accueilRecherche() {
     const h = wrap.querySelector("#hist"); h.innerHTML = "";
@@ -4544,7 +4553,7 @@ function vueRecherche() {
     const mon = ++seq; enCours = true;
     const zone = wrap.querySelector("#liste"), msg = wrap.querySelector("#msg"), plus = wrap.querySelector("#plus"), zc = wrap.querySelector("#chaines");
     msg.hidden = true;
-    if (!suite) { total = 0; zone.innerHTML = squelettes(3); plus.hidden = true; zc.innerHTML = ""; }
+    if (!suite) { total = 0; zone.innerHTML = squelettes(3); plus.hidden = true; zc.innerHTML = ""; wrap.querySelector("#autres").innerHTML = ""; }
     let fini = false;
     try {
       if (!suite && q) {
@@ -4555,10 +4564,13 @@ function vueRecherche() {
           r.data.forEach(ch => { const b = document.createElement("button"); b.className = "chaine-carte"; b.innerHTML = `${pastilleChaine(ch.name, 56)}<b dir="auto">${esc(ch.name)}</b><small>${esc(nbAbonnes(ch.subscriber_count))}</small>`; b.onclick = () => router("chaine", { id: ch.id }); zc.appendChild(b); });
         }, () => {});
       }
-      const lot = await chargerContenus({ type, categorie, q, depuis: total, nb: 12 });
+      let lot, chap = null;
+      if (q.trim() && !categorie) { const rs = await rechercherServeur({ q, type, langue, duree, depuis: total, nb: 12 }); lot = rs.lot; chap = rs.chap; }
+      else lot = await chargerContenus({ type, categorie, q, depuis: total, nb: 12, langue });
       if (mon !== seq || !wrap.isConnected) return;
       if (!suite) zone.innerHTML = "";
-      lot.forEach(c => zone.appendChild(carteGrande(c)));
+      if (!suite && q.trim()) autresResultats(q).then(L => { if (mon !== seq || !wrap.isConnected || !L.length) return; const za = wrap.querySelector("#autres"); za.innerHTML = ""; L.forEach(x => { const b = document.createElement("button"); b.className = "par-carte"; b.innerHTML = `<span class="par-ic">${x.ic}</span><span><b dir="auto">${esc(x.t)}</b><small dir="auto">${esc(x.s)}</small></span>`; b.onclick = x.f; za.appendChild(b); }); }, () => {});
+      lot.forEach(c => { zone.appendChild(carteGrande(c)); const h = chap && chap.get(c.id); if (h) { const b = document.createElement("button"); b.className = "chap-hint"; b.textContent = "▶ " + fmtDuree(h.chapitre_t) + " · " + h.chapitre_titre; b.onclick = () => { sauverLocal("pos_" + c.id, h.chapitre_t); router("contenu", { id: c.id, c }); }; zone.appendChild(b); } });
       total += lot.length; fini = lot.length < 12;
       if (!total) zone.innerHTML = `<div class="centre">${lumuSVG(64)}<p style="margin-top:8px">Aucun résultat pour « ${esc(q || categorie)} ».</p></div>`;
     } catch (e) {
@@ -4568,8 +4580,12 @@ function vueRecherche() {
     }
     plus.hidden = fini || !total; enCours = false;
   }
-  champ.oninput = () => { q = champ.value; clearTimeout(minuteur); minuteur = setTimeout(() => { filtres(); lancer(); }, 350); };
-  wrap.querySelector("#f").onsubmit = ev => { ev.preventDefault(); clearTimeout(minuteur); q = champ.value; retenir(q); champ.blur(); filtres(); lancer(); };
+  champ.oninput = () => {
+    q = champ.value; clearTimeout(minuteur); minuteur = setTimeout(() => { filtres(); lancer(); }, 350);
+    clearTimeout(tmSug); const zs = wrap.querySelector("#sugg"); if (q.trim().length < 2) { zs.innerHTML = ""; return; }
+    tmSug = setTimeout(async () => { try { const r = await sb.rpc("yt_suggestions", { p_q: q }); if (!wrap.isConnected || champ.value !== q) return; zs.innerHTML = ""; (r.data || []).slice(0, 6).forEach(x => { const b = document.createElement("button"); b.className = "chip"; b.textContent = "🔎 " + x; b.onclick = () => { champ.value = q = x; retenir(x); zs.innerHTML = ""; filtres(); lancer(); }; zs.appendChild(b); }); } catch (e) {} }, 220);
+  };
+  wrap.querySelector("#f").onsubmit = ev => { ev.preventDefault(); wrap.querySelector("#sugg").innerHTML = ""; clearTimeout(minuteur); q = champ.value; retenir(q); champ.blur(); filtres(); lancer(); };
   wrap.querySelector("#plus").onclick = () => lancer(true);
   filtres(); lancer();
 }
@@ -5510,7 +5526,7 @@ function vueBiblio() {
   const w = document.createElement("div");
   w.className = "ecran biblio";
   let ram = false; try { const r = infoRamadan(); ram = r.actif || r.avant <= 45; } catch (e) {}
-  const T = [["🪜", "Parcours", () => router("parcours")], ["📚", "Livres", () => router("livres")], ["🤲", "Invocations", () => router("arabe")], ["📖", "Coran", () => router("dossier", { cat: "Coran", titre: "Coran" })],
+  const T = [["❓", "Questions", () => router("questions")], ["🪜", "Parcours", () => router("parcours")], ["📚", "Livres", () => router("livres")], ["🤲", "Invocations", () => router("arabe")], ["📖", "Coran", () => router("dossier", { cat: "Coran", titre: "Coran" })],
     ["🎓", "Cours", () => router("dossier", { cat: "Cours", titre: "Cours" })], ["🎤", "Conférences", () => router("dossier", { cat: "Conférence", titre: "Conférences" })],
     ["💬", "Rappels", () => router("dossier", { cat: "Rappel", titre: "Rappels" })]];
   if (ram) T.push(["🌙", "Ramadan", () => router("dossier", { cat: "Ramadan", titre: "Ramadan" })]);
@@ -6546,6 +6562,154 @@ async function vuePassageEdit() {
   };
 }
 
+/* ---------- Recherche avancée, mots-clés, chapitres, questions ---------- */
+function motsCles(s) { return [...new Set(String(s || "").split(/[,;\n،]/).map(x => x.trim()).filter(x => x.length > 1 && x.length <= 40))].slice(0, 15); }
+function parseChapitres(txt) {
+  const out = [];
+  String(txt || "").split("\n").forEach(l => {
+    const m = /^\s*(?:(\d{1,2}):)?(\d{1,2}):(\d{2})\s+(.+?)\s*$/.exec(l); if (!m) return;
+    out.push({ t: (+m[1] || 0) * 3600 + (+m[2]) * 60 + (+m[3]), titre: m[4].slice(0, 90) });
+  });
+  return out.sort((a, b) => a.t - b.t).slice(0, 60);
+}
+function chapitresTexte(ch) { return (Array.isArray(ch) ? ch : []).map(x => fmtDuree(x.t) + " " + x.titre).join("\n"); }
+function peutEditerContenu(c) { return !!(etat.parentId && ((etat.chaine && c.channel_id === etat.chaine.id) || (etat.profil && etat.profil.role === "admin"))); }
+
+/* page contenu : mots-clés, chapitres, édition */
+function contenuPlus(wrap, c) {
+  const z = wrap.querySelector("#ct-plus"); if (!z) return;
+  const chap = Array.isArray(c.chapitres) ? c.chapitres : [], tags = Array.isArray(c.mots_cles) ? c.mots_cles : [];
+  const aller = t => {
+    const m = wrap.querySelector("#media");
+    if (c.type === "audio" && !c.embed_id) { const go = () => { try { AUD.a.currentTime = t; AUD.a.play(); } catch (e) {} }; if (AUD.c && AUD.c.id === c.id && AUD.a) go(); else { AUD.jouer(c); setTimeout(go, 800); } }
+    else if (m) { try { m.currentTime = t; m.play(); } catch (e) {} }
+  };
+  z.innerHTML = `${tags.length ? `<div class="chips" id="ct-tags"></div>` : ""}${chap.length ? `<div class="ct-chap"><b>Chapitres</b><div id="ct-ch"></div></div>` : ""}${peutEditerContenu(c) ? `<button class="btn-outline" id="ct-ed">🏷 Mots-clés et chapitres</button>` : ""}`;
+  const zt = z.querySelector("#ct-tags"); tags.forEach(x => { const b = document.createElement("button"); b.className = "chip"; b.textContent = "#" + x; b.onclick = () => router("recherche", { q: x }); zt.appendChild(b); });
+  const zc = z.querySelector("#ct-ch"); chap.forEach(x => { const b = document.createElement("button"); b.className = "ct-chap-l"; b.innerHTML = `<span>▶ ${esc(fmtDuree(x.t))}</span><b dir="auto">${esc(x.titre)}</b>`; b.onclick = () => aller(x.t); zc.appendChild(b); });
+  const ed = z.querySelector("#ct-ed"); if (ed) ed.onclick = () => editerMotsChapitres(c, nouveau => { Object.assign(c, nouveau); contenuPlus(wrap, c); });
+}
+async function editerMotsChapitres(c, apres) {
+  let transcription = "";
+  try { const r = await sb.from("yt_contenus").select("transcription").eq("id", c.id).maybeSingle(); transcription = (r.data && r.data.transcription) || ""; } catch (e) {}
+  ouvrirFeuille("Mots-clés et chapitres", `<label>Mots-clés <small>(séparés par des virgules)</small></label><input class="champ" id="mk-t" dir="auto" maxlength="400" placeholder="jeûne, ramadan, Al-Kahf" value="${esc((c.mots_cles || []).join(", "))}">
+    <label>Chapitres <small>(une ligne : 12:40 Titre)</small></label><textarea class="champ" id="mk-c" rows="5" dir="auto" placeholder="00:00 Introduction&#10;12:40 L'héritage">${esc(chapitresTexte(c.chapitres))}</textarea>
+    <button class="btn-text" id="mk-ici" type="button">＋ Ajouter la minute actuelle</button>
+    <label>Texte du cours <small>(facultatif, améliore la recherche)</small></label><textarea class="champ" id="mk-x" rows="4" dir="auto" maxlength="20000">${esc(transcription)}</textarea>
+    <p class="erreur" id="mk-e"></p><button class="btn" id="mk-ok">Enregistrer</button>`, (corps, fermer) => {
+    corps.querySelector("#mk-ici").onclick = () => { let t = 0; try { t = Math.floor(AUD.c && AUD.c.id === c.id && AUD.a ? AUD.a.currentTime : (document.querySelector("#media") || {}).currentTime || 0); } catch (e) {} const a = corps.querySelector("#mk-c"); a.value = (a.value.trim() ? a.value.trim() + "\n" : "") + fmtDuree(t) + " "; a.focus(); };
+    corps.querySelector("#mk-ok").onclick = async ev => {
+      const b = ev.currentTarget; b.disabled = true; const er = corps.querySelector("#mk-e"); er.textContent = "";
+      const mots = motsCles(corps.querySelector("#mk-t").value), chap = parseChapitres(corps.querySelector("#mk-c").value), tx = corps.querySelector("#mk-x").value.trim();
+      const r = await sb.from("yt_contenus").update({ mots_cles: mots, chapitres: chap.length ? chap : null, transcription: tx || null }).eq("id", c.id);
+      if (r.error) { er.textContent = "Enregistrement impossible."; b.disabled = false; return; }
+      fermer(); apres({ mots_cles: mots, chapitres: chap.length ? chap : null });
+    };
+  });
+}
+
+/* recherche : appel serveur + contenus classés */
+async function rechercherServeur({ q, type, langue, duree, depuis, nb }) {
+  const dMin = duree === "m" ? 600 : duree === "l" ? 1800 : null, dMax = duree === "c" ? 600 : duree === "m" ? 1800 : null;
+  const r = await sb.rpc("yt_rechercher", { p_q: q, p_type: type || null, p_langue: langue || null, p_categorie: null, p_min: dMin, p_max: dMax, p_limit: nb, p_offset: depuis });
+  if (r.error) throw r.error;
+  const L = r.data || [], chap = new Map(); L.forEach(x => { if (x.chapitre_titre) chap.set(x.id, x); });
+  if (!L.length) return { lot: [], chap, n: 0 };
+  const d = await sb.from("yt_contenus").select(CHAMPS_CONTENU).in("id", L.map(x => x.id));
+  if (d.error) throw d.error;
+  const ordre = new Map(L.map((x, i) => [x.id, i]));
+  return { lot: (d.data || []).sort((a, b) => ordre.get(a.id) - ordre.get(b.id)), chap, n: L.length };
+}
+async function autresResultats(q) {
+  const mot = String(q || "").replace(/[%,()*\\]/g, " ").trim(); if (!mot) return [];
+  const [lv, pc, qs] = await Promise.all([
+    sb.from("yt_livres_ecrits").select("id,titre,yt_channels(name)").eq("statut", "publie").ilike("titre", `%${mot}%`).limit(4).then(r => r.data || [], () => []),
+    sb.from("yt_parcours").select("id,titre,yt_channels(name)").eq("statut", "publie").ilike("titre", `%${mot}%`).limit(4).then(r => r.data || [], () => []),
+    sb.rpc("yt_rechercher_questions", { p_q: mot, p_limit: 4 }).then(async r => { const ids = (r.data || []).map(x => x.id); if (!ids.length) return []; const d = await sb.from("yt_questions").select("id,question").in("id", ids); return d.data || []; }, () => [])
+  ]);
+  const out = [];
+  lv.forEach(x => out.push({ ic: "📚", t: x.titre, s: "Livre" + (x.yt_channels ? " · " + x.yt_channels.name : ""), f: () => router("livre", { id: x.id }) }));
+  pc.forEach(x => out.push({ ic: "🪜", t: x.titre, s: "Parcours" + (x.yt_channels ? " · " + x.yt_channels.name : ""), f: () => router("parcours-voir", { id: x.id }) }));
+  qs.forEach(x => out.push({ ic: "❓", t: x.question, s: "Question", f: () => router("questions", { q: mot }) }));
+  return out;
+}
+
+/* ----- Questions-réponses ----- */
+async function vueQuestions() {
+  let q = (etat.params && etat.params.q) || "", mes = false;
+  const w = ecran("Questions", ["biblio"], `<div class="centre" style="padding:0 0 6px"><button class="btn" id="qp">❓ Poser une question</button></div>
+    <div class="chips"><button class="chip actif" id="c-tous">Réponses</button><button class="chip" id="c-mes">Mes questions</button></div>
+    <input class="champ" id="qr" type="search" dir="auto" placeholder="Chercher une question…" value="${esc(q)}" style="margin-top:8px">
+    <div id="liste" class="liste-grande">${squelettes(2)}</div>`);
+  const carte = x => {
+    const imam = (x.yt_channels && x.yt_channels.name) || "";
+    const d = document.createElement("div"); d.className = "carte";
+    d.innerHTML = `<b dir="auto">❓ ${esc(x.question)}</b>${x.statut === "repondue" ? `${x.reponse_audio ? `<audio controls preload="none" src="${esc(urlMedia(x.reponse_audio))}" style="width:100%;margin-top:8px"></audio>` : ""}${x.reponse_texte ? `<div class="desc" dir="auto" style="margin-top:6px">${esc(x.reponse_texte)}</div>` : ""}<small>${imam ? "Réponse de " + esc(imam) : ""}</small>` : `<small>${x.statut === "masquee" ? "Non publiée" : "⏳ En attente de réponse"}</small>`}`;
+    return d;
+  };
+  const SEL = "id,question,statut,reponse_texte,reponse_audio,created_at,yt_channels!yt_questions_repondu_par_fkey(name)";
+  async function charger() {
+    const z = w.querySelector("#liste"); z.innerHTML = squelettes(2);
+    try {
+      let L = [];
+      if (mes) { if (!etat.parentId) { z.innerHTML = `<p>Connectez-vous pour voir vos questions.</p><button class="btn" id="co">Se connecter</button>`; z.querySelector("#co").onclick = () => router("connexion"); return; } const r = await sb.from("yt_questions").select(SEL).eq("user_id", etat.parentId).order("created_at", { ascending: false }).limit(50); if (r.error) throw r.error; L = r.data || []; }
+      else if (q.trim()) { const r = await sb.rpc("yt_rechercher_questions", { p_q: q, p_limit: 30 }); if (r.error) throw r.error; const ids = (r.data || []).map(x => x.id); if (ids.length) { const d = await sb.from("yt_questions").select(SEL).in("id", ids); L = d.data || []; const o = new Map(ids.map((i, k) => [i, k])); L.sort((a, b) => o.get(a.id) - o.get(b.id)); } }
+      else { const r = await sb.from("yt_questions").select(SEL).eq("statut", "repondue").order("repondu_le", { ascending: false }).limit(30); if (r.error) throw r.error; L = r.data || []; }
+      if (!w.isConnected) return;
+      z.innerHTML = L.length ? "" : `<p>${mes ? "Vous n'avez pas encore posé de question." : "Aucune réponse pour le moment."}</p>`; L.forEach(x => z.appendChild(carte(x)));
+    } catch (e) { if (w.isConnected) z.innerHTML = `<p class="erreur">${esc(txtErr(e, "Chargement impossible."))}</p>`; }
+  }
+  let tm; w.querySelector("#qr").oninput = e => { q = e.target.value; clearTimeout(tm); tm = setTimeout(() => { mes = false; w.querySelector("#c-mes").classList.remove("actif"); w.querySelector("#c-tous").classList.add("actif"); charger(); }, 400); };
+  w.querySelector("#c-tous").onclick = () => { mes = false; w.querySelector("#c-tous").classList.add("actif"); w.querySelector("#c-mes").classList.remove("actif"); charger(); };
+  w.querySelector("#c-mes").onclick = () => { mes = true; w.querySelector("#c-mes").classList.add("actif"); w.querySelector("#c-tous").classList.remove("actif"); charger(); };
+  w.querySelector("#qp").onclick = async () => {
+    if (!etat.parentId) { exigerConnexion(); return; }
+    let imams = []; try { const r = await sb.from("yt_channels").select("id,name").order("subscriber_count", { ascending: false }).limit(50); imams = r.data || []; } catch (e) {}
+    ouvrirFeuille("Poser une question", `<textarea class="champ" id="qt" rows="4" maxlength="600" dir="auto" placeholder="Votre question"></textarea>
+      <select class="champ" id="qi"><option value="">À n'importe quel imam</option>${imams.map(i => `<option value="${esc(i.id)}">${esc(i.name)}</option>`).join("")}</select>
+      <select class="champ" id="ql">${LANGS5.map(l => `<option value="${esc(l[0])}">${esc(l[1])}</option>`).join("")}</select>
+      <p class="erreur" id="qe"></p><button class="btn" id="qok">Envoyer</button>`, (corps, fermer) => {
+      corps.querySelector("#qok").onclick = async ev => {
+        const b = ev.currentTarget, t = corps.querySelector("#qt").value.trim(), er = corps.querySelector("#qe");
+        if (t.length < 5) { er.textContent = "Écrivez votre question."; return; }
+        b.disabled = true;
+        const r = await sb.from("yt_questions").insert({ question: t, channel_id: corps.querySelector("#qi").value || null, langue: corps.querySelector("#ql").value || null });
+        if (r.error) { er.textContent = txtErr(r.error, "Envoi impossible."); b.disabled = false; return; }
+        fermer(); mes = true; w.querySelector("#c-mes").classList.add("actif"); w.querySelector("#c-tous").classList.remove("actif"); charger();
+      };
+    });
+  };
+  charger();
+}
+async function vueQuestionsImam() {
+  if (!estCreateur() || !etat.chaine) return vueDevenirCreateur();
+  const w = ecran("Questions à répondre", ["espace"], `<div id="liste" class="liste-grande">${squelettes(2)}</div>`);
+  try {
+    const r = await sb.from("yt_questions").select("id,question,channel_id,created_at").eq("statut", "ouverte").order("created_at").limit(50); if (r.error) throw r.error;
+    const z = w.querySelector("#liste"); z.innerHTML = (r.data || []).length ? "" : `<p>Aucune question en attente.</p>`;
+    (r.data || []).forEach(x => {
+      const d = document.createElement("div"); d.className = "carte";
+      d.innerHTML = `<b dir="auto">❓ ${esc(x.question)}</b><small>${x.channel_id ? "Adressée à vous" : "Ouverte à tous les imams"}</small><div class="qv"></div>
+        <textarea class="champ" rows="3" dir="auto" maxlength="3000" placeholder="Votre réponse (texte, facultatif)" style="margin-top:8px"></textarea><p class="erreur"></p>
+        <div class="par-nav"><button class="btn-outline" data-a="m">Ne pas répondre</button><button class="btn" data-a="r">Répondre</button></div>`;
+      const wd = PAR.widget(d.querySelector(".qv"), null);
+      d.querySelector('[data-a="m"]').onclick = async () => { if (!confirm("Retirer cette question ?")) return; await sb.rpc("yt_masquer_question", { p_id: x.id }); d.remove(); };
+      d.querySelector('[data-a="r"]').onclick = async ev => {
+        const b = ev.currentTarget, er = d.querySelector(".erreur"), t = d.querySelector("textarea").value.trim(); er.textContent = "";
+        if (!t && wd.vide()) { er.textContent = "Enregistrez votre voix ou écrivez la réponse."; return; }
+        b.disabled = true;
+        try {
+          let chemin = null; const blob = wd.blob();
+          if (blob) { chemin = `${etat.parentId}/questions/${x.id}-${Date.now()}.${PAR.ext(blob)}`; const u = await sb.storage.from("yt-media").upload(chemin, blob, { contentType: blob.type, upsert: false }); if (u.error) throw u.error; }
+          const r2 = await sb.rpc("yt_repondre_question", { p_id: x.id, p_channel: etat.chaine.id, p_texte: t || null, p_audio: chemin }); if (r2.error) throw r2.error;
+          wd.arreter(); d.innerHTML = `<b>✅ Réponse publiée</b>`;
+        } catch (e) { er.textContent = txtErr(e, "Envoi impossible."); b.disabled = false; }
+      };
+      z.appendChild(d);
+    });
+  } catch (e) { if (w.isConnected) w.querySelector("#liste").innerHTML = `<p class="erreur">${esc(txtErr(e, "Chargement impossible."))}</p>`; }
+}
+
 /* ---------- Affiches : modèles d'annonces (Direct, cours, rappel, publicité) ---------- */
 const AFF = {
   TYPES: [
@@ -6872,7 +7036,7 @@ function vueEspace() {
     cd.querySelector("#ib-t").textContent = n === 1 ? "écoute de vos prêches · " + ab + " abonné" + (ab > 1 ? "s" : "") : "écoutes de vos prêches cette semaine · " + ab + " abonné" + (ab > 1 ? "s" : "");
   }, () => { cd.querySelector("#ib-n").textContent = "—"; });
     cd.querySelector("#ib-p").onclick = async () => { const r = await partagerLien("Lumu", "🕌 Retrouvez mes prêches sur Lumu, la lumière de poche :", SITE + "/"); if (r === "copie") cd.querySelector("#ib-p").textContent = "Lien copié ✓"; };
-  const P = [["🎙️", "Je publie", "Audio, vidéo ou PDF", () => router("je-publie")], ["🖼️", "Affiches", "Direct, cours, publicité", () => router("affiches")], ["🪜", "Mes parcours", "Cours par étapes", () => router("mes-parcours")], ["👤", "Mon profil", "Photo et présentation", () => router("chaine-edit")], ["📤", "Mes publications", "Masquer ou supprimer", () => router("mes-contenus")], ["📊", "Statistiques", "Écoutes et horaires", () => router("stats")], ["🔴", "Programmer un live", "Cours en direct", () => router("live-nouveau")]];
+  const P = [["🎙️", "Je publie", "Audio, vidéo ou PDF", () => router("je-publie")], ["🖼️", "Affiches", "Direct, cours, publicité", () => router("affiches")], ["🪜", "Mes parcours", "Cours par étapes", () => router("mes-parcours")], ["❓", "Questions à répondre", "Réponses à la voix", () => router("questions-imam")], ["👤", "Mon profil", "Photo et présentation", () => router("chaine-edit")], ["📤", "Mes publications", "Masquer ou supprimer", () => router("mes-contenus")], ["📊", "Statistiques", "Écoutes et horaires", () => router("stats")], ["🔴", "Programmer un live", "Cours en direct", () => router("live-nouveau")]];
   const M = [["📥", "Importer plusieurs fichiers", () => router("importer")], ["🔗", "Ajouter un lien YouTube", () => router("lien")], ["📎", "Publication avancée", () => router("publier")], ["📱", "Créer un reel", () => router("publier", { type: "reel" })], ["📚", "Écrire un livre", () => router("mes-livres")], ["🎞️", "Playlists et séries", () => router("playlists")], ["👥", "Créer un groupe", () => router("groupe-nouveau")]];
   const t0 = w.querySelector("#t");
   P.forEach(([ic, nom, sous, f], i) => { const b = document.createElement("button"); b.className = "tuile" + (i === 0 ? " tuile-main" : ""); b.innerHTML = `<span class="tuile-ic">${ic}</span><b>${esc(nom)}</b><small>${esc(sous)}</small>`; b.onclick = f; t0.appendChild(b); });
