@@ -4345,8 +4345,9 @@ async function carteRappelDuJour(zone) {
     if (!liste.length || !zone) return;
     const c = liste[Math.floor(Date.now() / 864e5) % liste.length];
     const source = (c.yt_channels && c.yt_channels.name) || "Lumu";
-    zone.innerHTML = `<section class="carte" style="padding:14px;display:grid;gap:6px"><small style="color:var(--vert);font-weight:800;text-transform:uppercase;letter-spacing:.06em">Le rappel du jour</small><b dir="auto" style="font-size:17px">${esc(c.title || "Rappel")}</b><span style="color:var(--muted,#5b6b62);font-size:14px">${esc(source)}</span><button class="btn" id="rj-ecouter" style="margin-top:6px;min-height:52px">▶ Écouter</button></section>`;
+    zone.innerHTML = `<section class="carte" style="padding:14px;display:grid;gap:6px"><small style="color:var(--vert);font-weight:800;text-transform:uppercase;letter-spacing:.06em">Le rappel du jour</small><b dir="auto" style="font-size:17px">${esc(c.title || "Rappel")}</b><span style="color:var(--muted,#5b6b62);font-size:14px">${esc(source)}</span><div style="display:flex;gap:10px;margin-top:6px"><button class="btn" id="rj-ecouter" style="flex:1;min-height:52px">▶ Écouter</button><button class="btn-outline" id="rj-partager" aria-label="Partager ce rappel" style="min-height:52px;min-width:52px">Partager</button></div></section>`;
     zone.querySelector("#rj-ecouter").onclick = () => router("contenu", { id: c.id, c });
+    zone.querySelector("#rj-partager").onclick = ev => partagerContenu(c, ev.currentTarget);
   } catch (e) {}
 }
 function cartePriere(zone) {
