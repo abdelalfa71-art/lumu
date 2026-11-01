@@ -32,6 +32,8 @@ html { scroll-padding-top: env(safe-area-inset-top, 0px); height: 100%; font-fam
 body { height: 100%; margin: 0; background: var(--fond); color: var(--texte); }
 #app { min-height: 100%; display: flex; flex-direction: column; max-width: 480px; margin: 0 auto; position: relative; }
 button { font-family: inherit; cursor: pointer; border: none; }
+#maj-bandeau { position: fixed; left: max(12px, env(safe-area-inset-left, 0px)); right: max(12px, env(safe-area-inset-right, 0px)); bottom: calc(74px + env(safe-area-inset-bottom, 0px)); z-index: 50; display: flex; align-items: center; justify-content: space-between; gap: 10px; background: #123C2B; color: #F6F5EF; border-radius: 16px; padding: 12px 14px; font-size: 15px; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2); }
+#maj-bandeau button { background: #D7B66D; color: #123C2B; font-weight: 700; border-radius: 12px; padding: 10px 14px; min-height: 48px; font-size: 15px; }
 input, textarea { font-family: inherit; }
 .btn { background: var(--rouge); color: #fff; padding: 14px; border-radius: 14px; font-size: 16px; font-weight: 600; width: 100%; }
 .btn:disabled { opacity: .5; }
@@ -1391,7 +1393,19 @@ const SITE_PUBLIC = "https://lumuapk.netlify.app";
 const SITE = (NATIF ? (window.LumuNative.site() || SITE_PUBLIC) : location.origin).replace(/\/$/, "");
 let OG_DISPO = false;
 if ("serviceWorker" in navigator) {
+  /* Une nouvelle version n'est signalée que si une ancienne version contrôlait déjà la page */
+  const avecVersion = !!navigator.serviceWorker.controller;
+  navigator.serviceWorker.addEventListener("message", e => { if (e.data && e.data.type === "maj" && avecVersion) montrerMaj(); });
   window.addEventListener("load", () => { navigator.serviceWorker.register("/sw.js").catch(() => {}); });
+}
+function montrerMaj() {
+  if (document.getElementById("maj-bandeau")) return;
+  const b = document.createElement("div");
+  b.id = "maj-bandeau";
+  b.setAttribute("role", "status");
+  b.innerHTML = `<span>Nouvelle version disponible</span><button type="button">Actualiser</button>`;
+  b.querySelector("button").onclick = () => location.reload();
+  document.body.appendChild(b);
 }
 fetch(SITE + "/.netlify/functions/og?ping=1").then(r => { OG_DISPO = r.ok && r.headers.get("x-lumu-og") === "1"; }).catch(() => {});
 /** Menu de partage du téléphone (WhatsApp, Facebook, SMS…) ; sinon copie du lien. Retourne "copie" si copié. */

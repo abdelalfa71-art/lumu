@@ -11,6 +11,8 @@ self.addEventListener("activate", e => {
   e.waitUntil(
     caches.keys().then(ks => Promise.all(ks.filter(k => k !== V && k !== IMG && k !== AUDIO).map(k => caches.delete(k))))
       .then(() => self.clients.claim())
+      .then(() => self.clients.matchAll({ type: "window" }))
+      .then(l => l.forEach(c => c.postMessage({ type: "maj", v: V })))
   );
 });
 
