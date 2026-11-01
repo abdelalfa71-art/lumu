@@ -1078,6 +1078,8 @@ body:not(.branche-tobi) .nav-sombre { padding-bottom: max(8px, env(safe-area-ins
 .lc-em { font-size: 40px; line-height: 1; } .lc-tuile b { font-size: 22px; }
 .lc-ck { position: absolute; top: 10px; inset-inline-end: 12px; width: 26px; height: 26px; border-radius: 50%; background: #0F8A5F; color: #fff; display: none; align-items: center; justify-content: center; font-style: normal; font-weight: 800; }
 .lc-tuile.on .lc-ck { display: flex; }
+.tuto-icones { display: grid; gap: 14px; } .tuto-icones > div { background: var(--surface); border: 1px solid var(--bordure); border-radius: 18px; padding: 16px; text-align: center; display: grid; gap: 4px; } .tuto-ico { font-size: 40px; line-height: 1.1; } .tuto-icones small { color: var(--muted, #5b6b62); font-size: 15px; }
+.tuto-pieds { display: flex; gap: 10px; margin-top: auto; padding-top: 16px; } .tuto-pieds button { flex: 1; min-height: 52px; font-size: 18px; font-weight: 700; border-radius: 16px; }
 .lc-go { min-height: 64px; font-size: 20px; } .lc-go:disabled { opacity: .35; }
 .btn-ecouter { display: block; width: 100%; min-height: 64px; font-size: 22px; font-weight: 800; letter-spacing: .02em; background: #0F8A5F; color: #fff; margin: 12px 0; border-radius: 32px; }
 #micro-fab { position: fixed; z-index: 40; inset-inline-end: 16px; bottom: calc(96px + env(safe-area-inset-bottom, 0px)); width: 60px; height: 60px; border-radius: 50%; border: 0; background: #0F8A5F; color: #fff; display: grid; place-items: center; box-shadow: 0 8px 24px rgba(15,138,95,.45); }
@@ -1958,7 +1960,7 @@ function render() {
     "mot-de-passe-oublie": vueMotDePasseOublie, "nouveau-mot-de-passe": vueNouveauMotDePasse,
     "changer-mot-de-passe": vueChangerMotDePasse,
     "pin-verrou": vuePinVerrou, "pin-creation": vuePinCreation, "arabe": vueArabe,
-    "presentation": vuePresentation, "tarifs": vueTarifs, "videos": vueFlux, "affiches": vueAffiches, "questions": vueQuestions, "questions-imam": vueQuestionsImam, "parcours": vueParcours, "parcours-voir": vueParcoursVoir, "passage": vuePassage, "parcours-revoir": vueRevoir, "mes-parcours": vueMesParcours, "parcours-edit": vueParcoursEdit, "passage-edit": vuePassageEdit, "home": vueDecouvrir, "savants": vueSavants, "preches": vuePreches, "priere": vuePriere, "langues-choix": vueLanguesChoix, "biblio": vueBiblio, "dossier": vueDossier, "direct": vueDirect, "chaine-edit": vueChaineEdit, "notifications": vueNotifications, "publier": vuePublier, "je-publie": vueJePublie, "profil": vueProfil, "contenu": vueContenu,
+    "presentation": vuePresentation, "tarifs": vueTarifs, "videos": vueFlux, "affiches": vueAffiches, "questions": vueQuestions, "questions-imam": vueQuestionsImam, "parcours": vueParcours, "parcours-voir": vueParcoursVoir, "passage": vuePassage, "parcours-revoir": vueRevoir, "mes-parcours": vueMesParcours, "parcours-edit": vueParcoursEdit, "passage-edit": vuePassageEdit, "home": vueDecouvrir, "savants": vueSavants, "preches": vuePreches, "priere": vuePriere, "langues-choix": vueLanguesChoix, "tutoriel": vueTutoriel, "biblio": vueBiblio, "dossier": vueDossier, "direct": vueDirect, "chaine-edit": vueChaineEdit, "notifications": vueNotifications, "publier": vuePublier, "je-publie": vueJePublie, "profil": vueProfil, "contenu": vueContenu,
     "langue": vueLangue, "fil": vueFlux, "flux": vueEcouter, "radio": vueFlux, "recherche": vueRecherche, "abos": vueAbos, "espace": vueEspace, "importer": vueImport, "reels": vueFlux, "groupes": vueGroupes, "groupe": vueGroupe, "discussions": vueDiscussions, "conv": vueConv, "groupe-nouveau": vueNouveauGroupe, "livres": vueLivres, "livre": vueLivre, "mes-livres": vueMesLivres, "livre-edition": vueEditeurLivre, "lives": vueLives, "live": vueLive, "live-nouveau": vueNouveauLive, "devenir-createur": vueDevenirCreateur, "admin": vueAdmin, "push-admin": vuePushAdmin, "mes-contenus": vueMesContenus, "legal": vueLegal, "lien": vueLien, "chaine": vueChaine, "playlist": vuePlaylist, "playlists": vuePlaylists, "stats": vueStats, "abonnements": vueAbonnements, "favoris": vueListeUtilisateur, "historique": vueListeUtilisateur, "hors": vueHors
   };
   document.body.classList.toggle("branche-tobi", TOBI_ROUTES.includes(etat.route));
@@ -5003,7 +5005,29 @@ function vueLanguesChoix() {
     zone.appendChild(b);
   });
   go.disabled = !choix.size;
-  go.onclick = () => { sauverLocal("mes_langues", [...choix]); router(etat.params && etat.params.retour ? etat.params.retour : "flux"); };
+  go.onclick = () => { sauverLocal("mes_langues", [...choix]); router(etat.params && etat.params.retour ? etat.params.retour : (chargerLocal("tuto_vu", false) ? "flux" : "tutoriel")); };
+}
+
+/* Tutoriel du premier lancement : 2 écrans simples, affiché une seule fois */
+function vueTutoriel() {
+  const w = document.createElement("div");
+  w.className = "ecran lc";
+  app.appendChild(w);
+  let etape = 0;
+  const fin = () => { sauverLocal("tuto_vu", true); router("flux"); };
+  const pages = [
+    `<div class="lc-tete">${lumuSVG(96)}<h1>Apprends à ton rythme</h1><p>Lumu t'accompagne, à ta vitesse.</p></div>`,
+    `<div class="lc-tete"><h1>Comment utiliser Lumu</h1></div><div class="tuto-icones">
+      <div><span class="tuto-ico" aria-hidden="true">🎧</span><b>Écouter</b><small>Enseignements audio</small></div>
+      <div><span class="tuto-ico" aria-hidden="true">🎬</span><b>Voir</b><small>Vidéos et prêches</small></div>
+      <div><span class="tuto-ico" aria-hidden="true">📖</span><b>Apprendre</b><small>Coran et livres</small></div></div>`
+  ];
+  const dessine = () => {
+    w.innerHTML = `${pages[etape]}<div class="tuto-pieds"><button class="btn-outline" id="passer">Passer</button><button class="btn" id="suite">${etape < pages.length - 1 ? "Suivant" : "Commencer"}</button></div>`;
+    w.querySelector("#passer").onclick = fin;
+    w.querySelector("#suite").onclick = () => { if (etape < pages.length - 1) { etape++; dessine(); } else fin(); };
+  };
+  dessine();
 }
 
 const HL = { set: new Set(), async charger() { try { const ca = await caches.open("lumu-audio-v1"); this.set = new Set((await ca.keys()).map(r => r.url)); } catch (e) {} }, a(c) { return !!(c && c.fichier_path && this.set.has(urlMedia(c.fichier_path))); } };
