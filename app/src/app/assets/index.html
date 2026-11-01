@@ -1497,7 +1497,44 @@ async function basculerFavori(c, actuel) {
   const r = actuel ? await sb.from("yt_favoris").delete().eq("contenu_id", c.id) : await sb.from("yt_favoris").insert({ contenu_id: c.id });
   return r.error ? null : !actuel;
 }
+/* Carte image pour le partage : titre, imam, logo LUMU et lien. Une seule image légère (720 × 900), dessinée sur Canvas. */
+function dessinerCarteContenu(c) {
+  const cv = document.createElement("canvas"); cv.width = 720; cv.height = 900;
+  const ctx = cv.getContext("2d");
+  ctx.fillStyle = "#123C2B"; ctx.fillRect(0, 0, 720, 900);
+  ctx.fillStyle = "#D7B66D"; ctx.fillRect(0, 0, 720, 10);
+  ctx.textAlign = "center"; ctx.textBaseline = "alphabetic"; ctx.direction = "ltr";
+  ctx.fillStyle = "#F6F5EF"; ctx.font = "900 56px system-ui, sans-serif"; ctx.fillText("LUMU", 360, 120);
+  ctx.fillStyle = "#D7B66D"; ctx.font = '700 52px "LumuAr", "Amiri", serif'; ctx.direction = "rtl"; ctx.fillText("لومو", 360, 180); ctx.direction = "ltr";
+  ctx.fillStyle = "#F6F5EF"; ctx.font = '800 44px "LumuAr", "Amiri", system-ui, sans-serif';
+  const mots = String(c.title || "Rappel").split(/\s+/), lignes = []; let l = "";
+  for (const m of mots) { const t = l ? l + " " + m : m; if (ctx.measureText(t).width > 600 && l) { lignes.push(l); l = m; } else l = t; }
+  if (l) lignes.push(l);
+  const titres = lignes.slice(0, 5);
+  titres.forEach((t, i) => ctx.fillText(t, 360, 380 + i * 60));
+  const source = (c.yt_channels && c.yt_channels.name) || c.auteur || "";
+  if (source) { ctx.fillStyle = "#D7B66D"; ctx.font = "600 32px system-ui, sans-serif"; ctx.fillText(source, 360, 380 + titres.length * 60 + 30); }
+  ctx.fillStyle = "#F6F5EF"; ctx.font = "600 30px system-ui, sans-serif"; ctx.fillText("Écouter sur Lumu", 360, 820);
+  ctx.font = "500 24px system-ui, sans-serif"; ctx.fillText(SITE_PUBLIC.replace("https://", ""), 360, 862);
+  return cv;
+}
+/* Partage d'abord en image (WhatsApp, etc.), puis repli sur le lien seul */
 async function partagerContenu(c, bouton) {
+  const lien = lienPartage(c.id);
+  try {
+    const b = await new Promise(ok => dessinerCarteContenu(c).toBlob(ok, "image/png"));
+    if (b) {
+      const nom = "lumu-" + String(c.id).slice(0, 8) + ".png";
+      if (window.LumuNative && LumuNative.partagerImage) {
+        const rd = new FileReader(); rd.onload = () => LumuNative.partagerImage(String(rd.result).split(",")[1], nom, c.title || "Lumu"); rd.readAsDataURL(b); return;
+      }
+      const f = new File([b], nom, { type: "image/png" });
+      if (navigator.canShare && navigator.canShare({ files: [f] })) { await navigator.share({ files: [f], title: c.title || "Lumu", text: "🕌 " + (c.title || "") + "\n" + lien }); return; }
+    }
+  } catch (e) { if (e && e.name === "AbortError") return; }
+  return partagerContenuLien(c, bouton);
+}
+async function partagerContenuLien(c, bouton) {
   const lien = lienPartage(c.id);
   const r = await partagerLien(c.title, "🕌 " + c.title + " — à écouter sur Lumu", lien);
   if (r === "copie" && bouton) { const sp = bouton.querySelector("span"); if (sp) { const v = sp.textContent; sp.textContent = "Copié ✓"; setTimeout(() => { sp.textContent = v; }, 1500); } }
