@@ -5019,10 +5019,13 @@ async function prechargerAudios() {
     const { data } = await req;
     const liste = (data || []).filter(c => c.fichier_path && !c.embed_id && langOk(c) && (c.taille_octets || 0) <= 40e6).slice(0, 10);
     const ca = await caches.open("lumu-audio-v1"); let total = 0;
+    /* Plafond : le téléchargement automatique s'arrête au-delà de 400 Mo déjà stockés (rien n'est supprimé) */
+    let dejaOctets = 0;
+    for (const rq of await ca.keys()) { const rp = await ca.match(rq); dejaOctets += (rp && +rp.headers.get("content-length")) || 0; }
     for (const c of liste) {
       const u = urlMedia(c.fichier_path);
       if (await ca.match(u)) continue;
-      if (total > 150e6 || !navigator.onLine || (navigator.connection && navigator.connection.type !== "wifi")) break;
+      if (total > 150e6 || dejaOctets + total > 400e6 || !navigator.onLine || (navigator.connection && navigator.connection.type !== "wifi")) break;
       const r = await fetch(u, { mode: "cors" }); if (!r.ok) continue;
       await ca.put(u, r); total += c.taille_octets || 5e6;
     }
