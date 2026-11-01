@@ -2391,7 +2391,7 @@ function carteContenu(c, surClic) {
     <div class="carte-txt">
       <b dir="auto">${esc(c.title)}</b>
       <span>${t.ic} ${t.nom}${chaine}</span>
-      <span>${c.views_count || 0} vue${(c.views_count || 0) > 1 ? "s" : ""}${c.auteur ? " · " + esc(c.auteur) : ""}${c.status === "hidden" ? " · masqué" : ""}</span>
+      ${c.auteur || c.status === "hidden" ? `<span>${c.auteur ? esc(c.auteur) : ""}${c.status === "hidden" ? (c.auteur ? " · " : "") + "masqué" : ""}</span>` : ""}
     </div>`;
   const ouvrir = surClic || (() => router("contenu", { id: c.id, c }));
   el.onclick = ouvrir;
