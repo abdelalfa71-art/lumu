@@ -1079,6 +1079,7 @@ body:not(.branche-tobi) .nav-sombre { padding-bottom: max(8px, env(safe-area-ins
 .lc-ck { position: absolute; top: 10px; inset-inline-end: 12px; width: 26px; height: 26px; border-radius: 50%; background: #0F8A5F; color: #fff; display: none; align-items: center; justify-content: center; font-style: normal; font-weight: 800; }
 .lc-tuile.on .lc-ck { display: flex; }
 .tuto-icones { display: grid; gap: 14px; } .tuto-icones > div { background: var(--surface); border: 1px solid var(--bordure); border-radius: 18px; padding: 16px; text-align: center; display: grid; gap: 4px; } .tuto-ico { font-size: 40px; line-height: 1.1; } .tuto-icones small { color: var(--muted, #5b6b62); font-size: 15px; }
+.ec-plus { margin: 4px 16px 10px; border: 1px solid var(--bordure); border-radius: 16px; background: var(--surface); } .ec-plus > summary { list-style: none; min-height: 48px; display: flex; align-items: center; padding: 0 16px; font-weight: 700; cursor: pointer; } .ec-plus > summary::-webkit-details-marker { display: none; } .ec-plus > *:not(summary) { margin-inline: 8px; }
 .tuto-pieds { display: flex; gap: 10px; margin-top: auto; padding-top: 16px; } .tuto-pieds button { flex: 1; min-height: 52px; font-size: 18px; font-weight: 700; border-radius: 16px; }
 .lc-go { min-height: 64px; font-size: 20px; } .lc-go:disabled { opacity: .35; }
 .btn-ecouter { display: block; width: 100%; min-height: 64px; font-size: 22px; font-weight: 800; letter-spacing: .02em; background: #0F8A5F; color: #fff; margin: 12px 0; border-radius: 32px; }
@@ -5432,11 +5433,12 @@ async function vueEcouter() {
       <div id="ec-rappel" style="padding:0 16px 8px"></div>
       <div id="ec-rep"></div>
       <div class="ec-ligne"><button class="ec-radio" id="ec-radio"><span class="ec-rp">${ico("play", 30, true)}</span><span><b>Lumu Radio</b><small>Rappels, Coran, invocations</small></span></button><select id="ec-cat" aria-label="Catégorie"><option value="">Tout</option><option value="coran">Coran</option><option value="cours">Cours</option><option value="rappels">Rappels</option></select></div>
-      <div class="ec-gros"><button id="eg-hors"><span>⬇</span>Mes audios</button><button id="eg-disc"><span>💬</span>Discuter</button><button id="eg-imams"><span>👥</span>Imams</button><button id="eg-q"><span>🔍</span>Chercher</button></div>
+      <details class="ec-plus"><summary>Plus de choix ▾</summary><div class="ec-gros"><button id="eg-hors"><span>⬇</span>Mes audios</button><button id="eg-disc"><span>💬</span>Discuter</button><button id="eg-imams"><span>👥</span>Imams</button><button id="eg-q"><span>🔍</span>Chercher</button></div>
       <div class="ec-tit" id="ec-tit">Mes imams</div>
       <div class="ec-imams" id="ec-imams"></div>
       <div class="ec-chips" id="ec-chips" role="tablist"></div>
       <div class="ec-chips" id="ec-themes"><button class="ec-chip" id="th-dormir">🌙 Avant de dormir</button><button class="ec-chip" id="th-trajet">🚗 Pour le trajet</button></div>
+</details>
       <div id="ec-liste">${squelettes(3)}</div>
     </div>`;
   app.appendChild(w);
