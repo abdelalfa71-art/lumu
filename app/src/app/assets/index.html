@@ -4337,6 +4337,18 @@ function carteRamadan(zone, wrap) {
 }
 
 /* ---------- Heures de prière ---------- */
+/* Rappel du jour : un vrai rappel audio déjà publié, choisi chaque jour parmi les plus récents (jamais de texte inventé) */
+async function carteRappelDuJour(zone) {
+  try {
+    const { data } = await sb.from("yt_contenus").select(CHAMPS_CONTENU).eq("status", "published").eq("category", "Rappel").eq("type", "audio").order("published_at", { ascending: false }).limit(10);
+    const liste = (data || []).filter(c => !c.embed_id);
+    if (!liste.length || !zone) return;
+    const c = liste[Math.floor(Date.now() / 864e5) % liste.length];
+    const source = (c.yt_channels && c.yt_channels.name) || "Lumu";
+    zone.innerHTML = `<section class="carte" style="padding:14px;display:grid;gap:6px"><small style="color:var(--vert);font-weight:800;text-transform:uppercase;letter-spacing:.06em">Le rappel du jour</small><b dir="auto" style="font-size:17px">${esc(c.title || "Rappel")}</b><span style="color:var(--muted,#5b6b62);font-size:14px">${esc(source)}</span><button class="btn" id="rj-ecouter" style="margin-top:6px;min-height:52px">▶ Écouter</button></section>`;
+    zone.querySelector("#rj-ecouter").onclick = () => router("contenu", { id: c.id, c });
+  } catch (e) {}
+}
 function cartePriere(zone) {
   const NOMS = [["Fajr", "Sobh"], ["Dhuhr", "Dhohr"], ["Asr", "Asr"], ["Maghrib", "Maghrib"], ["Isha", "Isha"]];
   const loc = chargerLocal("priere_v", null);
@@ -4381,6 +4393,7 @@ function vueDecouvrir() {
       <button class="lm-recherche" id="lm-rech2" aria-label="Rechercher">${ico("search", 18)}<span>Rechercher un cours, un savant…</span><kbd>⌘K</kbd></button><div id="lm-suite"></div></section>
     <div id="ramadan" style="margin-top:12px"></div>
     <div id="priere" style="margin-top:12px"></div>
+    <div id="rappel-jour" style="margin-top:12px"></div>
     <div class="raccourcis" id="explorer" style="margin-top:12px"></div>
     <div id="lm-rangs"></div>
     <button class="carte-tobi" id="tobi-entree" style="margin-top:18px"><span class="pastille">${lumuSVG(56)}</span><b>${esc(t("Tobi, le répétiteur des enfants"))}</b><span class="fleche" aria-hidden="true">›</span></button>
@@ -4390,6 +4403,7 @@ function vueDecouvrir() {
   app.appendChild(wrap);
   wrap.querySelector("#rech").onclick = () => router("recherche");
   cartePriere(wrap.querySelector("#priere"));
+  carteRappelDuJour(wrap.querySelector("#rappel-jour"));
   carteRamadan(wrap.querySelector("#ramadan"), wrap);
   wrap.querySelector("#cloche").onclick = () => router(etat.parentId ? "notifications" : "connexion", etat.parentId ? {} : { message: "Connectez-vous pour voir vos notifications." });
   nbNotifs().then(n => { const d = wrap.querySelector("#cloche-n"); if (d && n > 0) d.hidden = false; });
