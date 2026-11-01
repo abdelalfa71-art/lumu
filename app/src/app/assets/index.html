@@ -4387,7 +4387,7 @@ function vueDecouvrir() {
   wrap.className = "ecran decouvrir lm";
   wrap.innerHTML = `
     <header class="lm-header">
-      <div class="lm-top"><div class="lm-logo"><i></i><span class="nom-lumu"><span>Lumu</span><em class="ar-lumu" lang="ar">لومو</em></span></div><span style="display:flex;gap:6px"><button class="lm-ibtn" id="cloche" aria-label="Notifications" style="position:relative">🔔<i id="cloche-n" hidden style="position:absolute;top:4px;right:4px;width:9px;height:9px;border-radius:50%;background:var(--rouge)"></i></button><button class="lm-ibtn" id="rech" aria-label="Rechercher">${ico("search", 20)}</button></span></div>
+      <div class="lm-top"><div class="lm-logo"><i></i><span class="nom-lumu"><span>Lumu</span><em class="ar-lumu" lang="ar">لومو</em></span></div><span style="display:flex;gap:6px"><button class="lm-ibtn" id="cloche" aria-label="Notifications" style="position:relative">🔔<i id="cloche-n" hidden style="position:absolute;top:4px;right:4px;width:9px;height:9px;border-radius:50%;background:var(--rouge)"></i></button></span></div>
       <div class="lm-chips" id="lm-chips" role="tablist"></div>
     </header>
     <section class="lm-accueil" id="lm-accueil"><div class="lm-salut"><h1 dir="auto" id="lm-salut"></h1><div id="lm-flamme" class="lm-flamme" hidden></div></div>
@@ -4402,7 +4402,6 @@ function vueDecouvrir() {
     <div id="liste" class="liste-grande"></div><p class="erreur" id="msg" hidden></p>
     <button class="btn-outline" id="plus" hidden>${esc(t("Voir plus"))}</button></section>`;
   app.appendChild(wrap);
-  wrap.querySelector("#rech").onclick = () => router("recherche");
   cartePriere(wrap.querySelector("#priere"));
   carteRappelDuJour(wrap.querySelector("#rappel-jour"));
   carteRamadan(wrap.querySelector("#ramadan"), wrap);
