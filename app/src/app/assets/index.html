@@ -1080,6 +1080,18 @@ body:not(.branche-tobi) .nav-sombre { padding-bottom: max(8px, env(safe-area-ins
 .lc-tuile.on .lc-ck { display: flex; }
 .tuto-icones { display: grid; gap: 14px; } .tuto-icones > div { background: var(--surface); border: 1px solid var(--bordure); border-radius: 18px; padding: 16px; text-align: center; display: grid; gap: 4px; } .tuto-ico { font-size: 40px; line-height: 1.1; } .tuto-icones small { color: var(--muted, #5b6b62); font-size: 15px; }
 .ec-plus { margin: 4px 16px 10px; border: 1px solid var(--bordure); border-radius: 16px; background: var(--surface); } .ec-plus > summary { list-style: none; min-height: 48px; display: flex; align-items: center; padding: 0 16px; font-weight: 700; cursor: pointer; } .ec-plus > summary::-webkit-details-marker { display: none; } .ec-plus > *:not(summary) { margin-inline: 8px; }
+/* Style Écouter v2 : en-tête vert profond uni, cartes blanches, rappel avec liseré or (mode clair seulement) */
+html:root:not(.nuit) .ec-haut { background: #123C2B; box-shadow: 0 3px 12px rgba(18,60,43,.15); }
+html:root:not(.nuit) .ec-radio { background: #123C2B; color: #F6F5EF; border: 0; border-radius: 18px; box-shadow: 0 3px 12px rgba(18,60,43,.12); }
+html:root:not(.nuit) .ec-radio b { color: #F6F5EF; }
+html:root:not(.nuit) .ec-radio small { color: #DCE8E0; }
+html:root:not(.nuit) .ec-row { background: #FFFFFF; border: 1px solid #E6E9E4; border-radius: 18px; padding: 12px; margin: 0 16px 10px; box-shadow: 0 3px 12px rgba(18,60,43,.07); }
+html:root:not(.nuit) .ec-row b { font-size: 17px; }
+html:root:not(.nuit) .ec-radio { margin: 12px 16px 8px; }
+html:root:not(.nuit) #ec-rappel { padding: 12px 16px 8px !important; }
+html:root:not(.nuit) #ec-rappel .btn { flex: 1 1 auto; white-space: nowrap; min-height: 52px; }
+html:root:not(.nuit) #ec-rappel .btn-outline { flex: 0 0 auto; width: auto; white-space: nowrap; padding: 0 18px; min-height: 52px; }
+html:root:not(.nuit) #ec-rappel .carte { border-left: 4px solid #D7B66D; border-radius: 18px; box-shadow: 0 3px 12px rgba(18,60,43,.07); }
 .tuto-pieds { display: flex; gap: 10px; margin-top: auto; padding-top: 16px; } .tuto-pieds button { flex: 1; min-height: 52px; font-size: 18px; font-weight: 700; border-radius: 16px; }
 .lc-go { min-height: 64px; font-size: 20px; } .lc-go:disabled { opacity: .35; }
 .btn-ecouter { display: block; width: 100%; min-height: 64px; font-size: 22px; font-weight: 800; letter-spacing: .02em; background: #0F8A5F; color: #fff; margin: 12px 0; border-radius: 32px; }
