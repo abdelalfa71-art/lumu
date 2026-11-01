@@ -33,6 +33,8 @@ body { height: 100%; margin: 0; background: var(--fond); color: var(--texte); }
 #app { min-height: 100%; display: flex; flex-direction: column; max-width: 480px; margin: 0 auto; position: relative; }
 button { font-family: inherit; cursor: pointer; border: none; }
 #maj-bandeau { position: fixed; left: max(12px, env(safe-area-inset-left, 0px)); right: max(12px, env(safe-area-inset-right, 0px)); bottom: calc(74px + env(safe-area-inset-bottom, 0px)); z-index: 50; display: flex; align-items: center; justify-content: space-between; gap: 10px; background: #123C2B; color: #F6F5EF; border-radius: 16px; padding: 12px 14px; font-size: 15px; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2); }
+/* Accessibilité : zones tactiles d'au moins 48 px (copie de test, non publiée) */
+.lm-chip, #ec-cat, .btn-abo, .ma-pp, .ma-x, .actions .btn-outline, .ec-chip, .lm-ibtn, .app-ib, .flux-ic, .pe-b, .cv-play, .lm-link, .clip-lg .chip, .ic-plus { min-height: 48px; }
 #maj-bandeau button { background: #D7B66D; color: #123C2B; font-weight: 700; border-radius: 12px; padding: 10px 14px; min-height: 48px; font-size: 15px; }
 input, textarea { font-family: inherit; }
 .btn { background: var(--rouge); color: #fff; padding: 14px; border-radius: 14px; font-size: 16px; font-weight: 600; width: 100%; }
