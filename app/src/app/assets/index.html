@@ -1164,7 +1164,7 @@ body:not(.branche-tobi) .flux { height: calc(100dvh - 76px - env(safe-area-inset
 .pf-ast { color: var(--texte-doux); text-align: center; margin: 6px 0 0; font-size: 15px; }
 .pf-h { margin: 22px 4px 8px; font-size: 14px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--texte-doux); }
 .pf-box { background: var(--surface); border-radius: 24px; box-shadow: 0 1px 2px var(--ombre); overflow: hidden; }
-#hors-bandeau { position: fixed; top: 0; left: 0; right: 0; z-index: 9999; border: 0; background: #0F8A5F; color: #fff; font-weight: 700; font-size: 15px; padding: 12px 16px; text-align: center; cursor: pointer; }
+#hors-bandeau { position: fixed; bottom: calc(80px + env(safe-area-inset-bottom, 0px)); left: max(12px, env(safe-area-inset-left, 0px)); right: max(12px, env(safe-area-inset-right, 0px)); z-index: 9999; border: 0; border-radius: 14px; background: #0F8A5F; color: #fff; font-weight: 700; font-size: 15px; padding: 12px 16px; min-height: 48px; text-align: center; cursor: pointer; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2); }
 .hr-badge { display: inline-block; margin-top: 4px; font-size: 12px; font-weight: 700; color: var(--vert, #0F8A5F); }
 .hr-x { padding: 4px 0; font-size: 13px; }
 .at-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px 8px; margin: 22px 0 14px; }
@@ -4390,7 +4390,9 @@ function carteRamadan(zone, wrap) {
 /* Rappel du jour : un vrai rappel audio déjà publié, choisi chaque jour parmi les plus récents (jamais de texte inventé) */
 async function carteRappelDuJour(zone) {
   try {
-    const { data } = await sb.from("yt_contenus").select(CHAMPS_CONTENU).eq("status", "published").eq("category", "Rappel").eq("type", "audio").order("published_at", { ascending: false }).limit(10);
+    let data = null;
+    try { ({ data } = await sb.from("yt_contenus").select(CHAMPS_CONTENU).eq("status", "published").eq("category", "Rappel").eq("type", "audio").order("published_at", { ascending: false }).limit(10)); if (data && data.length) cacheLocal("cache_rappel", data); } catch (e) { data = null; }
+    if (!data || !data.length) { const x = lireCacheLocal("cache_rappel"); data = x ? x.d : null; }
     const liste = (data || []).filter(c => !c.embed_id);
     if (!liste.length || !zone) return;
     const c = liste[Math.floor(Date.now() / 864e5) % liste.length];
@@ -5573,6 +5575,8 @@ async function vueEcouter() {
     const r = await sb.from("yt_contenus").select(CHAMPS_CONTENU).eq("status", "published").eq("type", "audio").order("published_at", { ascending: false }).limit(60);
     if (r.error) throw r.error;
     tous = (r.data || []).filter(c => c.fichier_path && !c.embed_id && langOk(c));
+    if (r.data && r.data.length) cacheLocal("cache_ecoute", r.data);
+    ec_notice(w, "");
     if (!w.isConnected) return;
     if (!abos) {
       const vus = new Map(); tous.forEach(c => { const ch = c.yt_channels; if (ch && ch.id && !vus.has(ch.id)) vus.set(ch.id, ch); });
@@ -5580,10 +5584,28 @@ async function vueEcouter() {
     }
     dessinerImams(); lignes();
   } catch (e) {
+    /* Hors connexion : on affiche la dernière liste enregistrée, comme WhatsApp */
+    const cache = lireCacheLocal("cache_ecoute");
+    if (cache && w.isConnected) {
+      tous = cache.d.filter(c => c.fichier_path && !c.embed_id && langOk(c));
+      if (!abos) { const vus = new Map(); tous.forEach(c => { const ch = c.yt_channels; if (ch && ch.id && !vus.has(ch.id)) vus.set(ch.id, ch); }); imams = [...vus.values()]; }
+      ec_notice(w, "Hors connexion : dernière liste enregistrée le " + new Date(cache.t).toLocaleDateString("fr-FR", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }) + ".");
+      dessinerImams(); lignes();
+      return;
+    }
     if (w.isConnected) liste.innerHTML = `<p class="erreur">${erreurReseau(e) ? "Pas de connexion internet." : "Chargement impossible."}</p>`;
     dessinerImams();
   }
 }
+
+/* Cache local léger (dernière liste reçue), pour l'usage hors connexion */
+function cacheLocal(cle, donnees) { try { sauverLocal(cle, { t: Date.now(), d: donnees.slice(0, 60) }); } catch (e) {} }
+function lireCacheLocal(cle) { try { const x = chargerLocal(cle, null); return x && Array.isArray(x.d) && x.d.length ? x : null; } catch (e) { return null; } }
+function ec_notice(w, texte) {
+  if (!w) return;
+  let z = w.querySelector("#ec-hn");
+  if (!z) { const ref = w.querySelector("#ec-rep"); if (!ref) return; z = document.createElement("div"); z.id = "ec-hn"; ref.parentNode.insertBefore(z, ref); }
+  z.innerHTML = texte ?`<p class="pf-ast" style="margin:0 16px 8px;font-size:14px;color:var(--muted,#5b6b62)">${esc(texte)}</p>` : ""; }
 
 /* pastille « messages non lus » sur l'onglet Discuter */
 const NBNL = { t: 0, v: 0 };
