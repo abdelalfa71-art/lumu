@@ -8125,7 +8125,7 @@ async function vueLivres() {
     rech.oninput = () => dessine();
     z.appendChild(rech);
     const zPub = document.createElement("div"); zPub.id = "lv-pub"; z.appendChild(zPub);
-    let mode = "tous";
+    let mode = "tous", serieChoisie = "";
     const ouvre = l => router("livre", { id: l.id });
     const cleDe = (m, l) => m === "auteur" ? ((l.yt_channels && l.yt_channels.name) || "Sans auteur") : (/^[0-9]/.test((l.titre || "").trim()) ? "0-9" : ((l.titre || "?").trim().charAt(0).toUpperCase() || "?"));
     /* Mode Audios : on n'affiche que les audios (pas de titres de livres, ni PDF, ni boutons livre) */
@@ -8146,7 +8146,7 @@ async function vueLivres() {
       }
       if (mode === "audios") {
         /* Détection automatique : même titre de base + numéro (« Izia 1 », « Izia 2 ») → une série.
-           Les audios restent aussi dans la liste Écouter. Séries dépliables, recherche sur séries et audios. */
+           Les audios restent aussi dans la liste Écouter. Choix d'une série dans une liste déroulante, recherche sur séries et audios. */
         const baseDe = t => (t || "").replace(/\s*[-–:|(]?\s*(?:n[°o]\.?\s*|partie\s*|cours\s*|épisode\s*|ep\.?\s*)?\d+\)?\s*$/i, "").trim() || (t || "").trim();
         const numDe = t => { const m = /(\d+)\)?\s*$/.exec(t || ""); return m ? +m[1] : 0; };
         const vus = new Set();
@@ -8157,28 +8157,34 @@ async function vueLivres() {
         const tuiles = [], seuls = [];
         series.forEach(s => { if (s.ls.length >= 2) { s.ls.sort((x, y) => numDe(x.title) - numDe(y.title)); tuiles.push(s); } else seuls.push(...s.ls); });
         tuiles.sort((x, y) => x.nom.localeCompare(y.nom, "fr"));
+        if (serieChoisie && !tuiles.some(s => normeTitre(s.nom) === serieChoisie)) serieChoisie = "";
         const q = normeTitre(rech.value);
         const ok = a => !q || normeTitre(a.title).includes(q);
         zPub.innerHTML = "";
+        const sel = document.createElement("select"); sel.id = "lv-serie-sel"; sel.setAttribute("aria-label", "Choisir une série");
+        sel.style.cssText = "width:100%;min-height:46px;margin:0 0 12px;padding:10px 14px;border-radius:999px;border:1px solid #cfdcd4;font:inherit;background:#fff;color:inherit;box-sizing:border-box";
+        sel.innerHTML = `<option value="">Toutes les séries (${tuiles.length})</option>` + tuiles.map(s => `<option value="${esc(normeTitre(s.nom))}">${esc(s.nom)} (${s.ls.length})</option>`).join("");
+        sel.value = serieChoisie;
+        sel.onchange = () => { serieChoisie = sel.value; dessine(); };
+        zPub.appendChild(sel);
         let vu = 0;
         tuiles.forEach(s => {
-          const visibles = !q || normeTitre(s.nom).includes(q) ? s.ls : s.ls.filter(ok);
+          if (serieChoisie && normeTitre(s.nom) !== serieChoisie) return;
+          const visibles = s.ls.filter(ok);
           if (!visibles.length) return;
-          vu++;
-          const d = document.createElement("details"); d.className = "lv-serie"; d.open = !!q; d.style.marginBottom = "8px";
-          d.innerHTML = `<summary class="carte ligne-menu" style="list-style:none;cursor:pointer;display:flex;align-items:center;gap:12px"><span style="font-size:30px" aria-hidden="true">🎧</span><div style="min-width:0;flex:1"><b dir="auto">${esc(s.nom)}</b><br><small>${visibles.length} audio${visibles.length > 1 ? "s" : ""}</small></div><span class="chev" aria-hidden="true" style="font-size:22px;color:var(--vert,#0f5a3d)">${d.open ? "⌄" : "›"}</span></summary><div class="lv-serie-corps" style="padding:6px 0 0 8px"></div>`;
-          const corps = d.querySelector(".lv-serie-corps");
-          visibles.forEach(a => corps.appendChild(carteContenu(a)));
-          d.addEventListener("toggle", () => { d.querySelector(".chev").textContent = d.open ? "⌄" : "›"; });
-          zPub.appendChild(d);
+          vu += visibles.length;
+          if (!serieChoisie) { const h = document.createElement("h2"); h.className = "pf-h"; h.textContent = s.nom + " (" + visibles.length + ")"; zPub.appendChild(h); }
+          visibles.forEach(a => zPub.appendChild(carteContenu(a)));
         });
-        const sv = seuls.filter(ok);
-        if (sv.length) {
-          const nh = document.createElement("h2"); nh.className = "pf-h"; nh.textContent = "Nouveautés"; zPub.appendChild(nh);
-          sv.slice(0, 30).forEach(a => zPub.appendChild(carteContenu(a)));
-          vu += sv.length;
+        if (!serieChoisie) {
+          const sv = seuls.filter(ok);
+          if (sv.length) {
+            const nh = document.createElement("h2"); nh.className = "pf-h"; nh.textContent = "Nouveautés"; zPub.appendChild(nh);
+            sv.slice(0, 30).forEach(a => zPub.appendChild(carteContenu(a)));
+            vu += sv.length;
+          }
         }
-        if (!vu) zPub.innerHTML = `<p>Aucun résultat pour « ${esc(rech.value)} ».</p>`;
+        if (!vu) { const p = document.createElement("p"); p.textContent = "Aucun résultat."; zPub.appendChild(p); }
         return;
       }
       const liste = mode === "titre" ? [...data].sort((a, b) => (a.titre || "").localeCompare(b.titre || "", "fr")) : data;
