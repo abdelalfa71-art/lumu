@@ -8120,12 +8120,16 @@ async function vueLivres() {
     const z = w.querySelector("#liste");
     /* Regroupements automatiques : tous, par auteur (imam), ou par livre de A à Z */
     z.querySelectorAll(":scope > .centre").forEach(x => x.remove());
+    const rech = document.createElement("input"); rech.id = "lv-rech"; rech.type = "search"; rech.placeholder = "Rechercher un audio ou une série…"; rech.setAttribute("aria-label", "Rechercher un audio ou une série");
+    rech.style.cssText = "width:100%;min-height:46px;margin:0 0 10px;padding:10px 16px;border-radius:999px;border:1px solid #cfdcd4;font:inherit;display:none;box-sizing:border-box";
+    rech.oninput = () => dessine();
+    z.appendChild(rech);
     const zPub = document.createElement("div"); zPub.id = "lv-pub"; z.appendChild(zPub);
     let mode = "tous";
     const ouvre = l => router("livre", { id: l.id });
     const cleDe = (m, l) => m === "auteur" ? ((l.yt_channels && l.yt_channels.name) || "Sans auteur") : (/^[0-9]/.test((l.titre || "").trim()) ? "0-9" : ((l.titre || "?").trim().charAt(0).toUpperCase() || "?"));
     /* Mode Audios : on n'affiche que les audios (pas de titres de livres, ni PDF, ni boutons livre) */
-    const majVueAudio = () => { const a = mode === "audios"; Array.from(z.children).forEach(el => { if (el !== zPub) el.style.display = a ? "none" : ""; }); ["#nv", "#nv-groupe"].forEach(s => { const el = w.querySelector(s); if (el) el.style.display = a ? "none" : ""; }); };
+    const majVueAudio = () => { const a = mode === "audios"; rech.style.display = a ? "" : "none"; Array.from(z.children).forEach(el => { if (el !== zPub && el !== rech) el.style.display = a ? "none" : ""; }); ["#nv", "#nv-groupe"].forEach(s => { const el = w.querySelector(s); if (el) el.style.display = a ? "none" : ""; }); };
     const dessine = () => {
       majVueAudio();
       zPub.innerHTML = "";
@@ -8141,8 +8145,8 @@ async function vueLivres() {
         return;
       }
       if (mode === "audios") {
-        /* Détection automatique : même titre de base + numéro (« Izia 1 », « Izia 2 », « Fiqh - cours 3 ») → une série.
-           Les audios restent aussi dans la liste Écouter. */
+        /* Détection automatique : même titre de base + numéro (« Izia 1 », « Izia 2 ») → une série.
+           Les audios restent aussi dans la liste Écouter. Séries dépliables, recherche sur séries et audios. */
         const baseDe = t => (t || "").replace(/\s*[-–:|(]?\s*(?:n[°o]\.?\s*|partie\s*|cours\s*|épisode\s*|ep\.?\s*)?\d+\)?\s*$/i, "").trim() || (t || "").trim();
         const numDe = t => { const m = /(\d+)\)?\s*$/.exec(t || ""); return m ? +m[1] : 0; };
         const vus = new Set();
@@ -8152,24 +8156,29 @@ async function vueLivres() {
         tous.forEach(a => { const nom = baseDe(a.title), k = normeTitre(nom); if (!series.has(k)) series.set(k, { nom, ls: [] }); series.get(k).ls.push(a); });
         const tuiles = [], seuls = [];
         series.forEach(s => { if (s.ls.length >= 2) { s.ls.sort((x, y) => numDe(x.title) - numDe(y.title)); tuiles.push(s); } else seuls.push(...s.ls); });
-        const afficheSerie = s => {
-          zPub.innerHTML = "";
-          const b = document.createElement("button"); b.type = "button"; b.className = "btn-outline"; b.style.marginBottom = "10px"; b.textContent = "← Toutes les séries"; b.onclick = () => dessine(); zPub.appendChild(b);
-          const h = document.createElement("h2"); h.className = "pf-h"; h.textContent = s.nom + " (" + s.ls.length + ")"; zPub.appendChild(h);
-          s.ls.forEach(a => zPub.appendChild(carteContenu(a)));
-        };
-        if (tuiles.length) {
-          tuiles.forEach(s => {
-            const t = document.createElement("div"); t.className = "carte ligne-menu"; t.tabIndex = 0; t.setAttribute("role", "button"); t.setAttribute("aria-label", s.nom + ", " + s.ls.length + " audios");
-            t.innerHTML = `<span style="font-size:30px" aria-hidden="true">🎧</span><div style="min-width:0;flex:1"><b dir="auto">${esc(s.nom)}</b><br><small>${s.ls.length} audios</small></div><span aria-hidden="true" style="font-size:22px;color:var(--vert,#0f5a3d)">›</span>`;
-            t.onclick = () => afficheSerie(s); t.onkeydown = ev => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); afficheSerie(s); } };
-            zPub.appendChild(t);
-          });
-        }
-        if (seuls.length) {
+        tuiles.sort((x, y) => x.nom.localeCompare(y.nom, "fr"));
+        const q = normeTitre(rech.value);
+        const ok = a => !q || normeTitre(a.title).includes(q);
+        zPub.innerHTML = "";
+        let vu = 0;
+        tuiles.forEach(s => {
+          const visibles = !q || normeTitre(s.nom).includes(q) ? s.ls : s.ls.filter(ok);
+          if (!visibles.length) return;
+          vu++;
+          const d = document.createElement("details"); d.className = "lv-serie"; d.open = !!q; d.style.marginBottom = "8px";
+          d.innerHTML = `<summary class="carte ligne-menu" style="list-style:none;cursor:pointer;display:flex;align-items:center;gap:12px"><span style="font-size:30px" aria-hidden="true">🎧</span><div style="min-width:0;flex:1"><b dir="auto">${esc(s.nom)}</b><br><small>${visibles.length} audio${visibles.length > 1 ? "s" : ""}</small></div><span class="chev" aria-hidden="true" style="font-size:22px;color:var(--vert,#0f5a3d)">${d.open ? "⌄" : "›"}</span></summary><div class="lv-serie-corps" style="padding:6px 0 0 8px"></div>`;
+          const corps = d.querySelector(".lv-serie-corps");
+          visibles.forEach(a => corps.appendChild(carteContenu(a)));
+          d.addEventListener("toggle", () => { d.querySelector(".chev").textContent = d.open ? "⌄" : "›"; });
+          zPub.appendChild(d);
+        });
+        const sv = seuls.filter(ok);
+        if (sv.length) {
           const nh = document.createElement("h2"); nh.className = "pf-h"; nh.textContent = "Nouveautés"; zPub.appendChild(nh);
-          seuls.slice(0, 20).forEach(a => zPub.appendChild(carteContenu(a)));
+          sv.slice(0, 30).forEach(a => zPub.appendChild(carteContenu(a)));
+          vu += sv.length;
         }
+        if (!vu) zPub.innerHTML = `<p>Aucun résultat pour « ${esc(rech.value)} ».</p>`;
         return;
       }
       const liste = mode === "titre" ? [...data].sort((a, b) => (a.titre || "").localeCompare(b.titre || "", "fr")) : data;
@@ -8212,7 +8221,7 @@ async function vueLivres() {
     if (!data.length && !(cl && cl.length)) z.innerHTML = `<p>Aucun livre publié.</p>`;
     z.insertAdjacentHTML("beforeend", `<button class="btn-outline" id="docs" style="margin-top:14px">📄 Documents PDF</button>`);
     z.querySelector("#docs").onclick = () => router("dossier", { type: "pdf", titre: "Documents" });
-    Array.from(z.children).forEach(el => { if (el !== zPub) el.style.display = mode === "audios" ? "none" : ""; });
+    Array.from(z.children).forEach(el => { if (el !== zPub && el !== rech) el.style.display = mode === "audios" ? "none" : ""; });
   } catch (e) { if (w.isConnected) w.querySelector("#liste").innerHTML = `<p class="erreur">${esc(txtErr(e, "Chargement impossible."))}</p>`; }
 }
 /* Création d'un regroupement de livres par l'imam (ses propres livres publiés) */
