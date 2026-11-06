@@ -8159,14 +8159,12 @@ async function vueLivres() {
           s.ls.forEach(a => zPub.appendChild(carteContenu(a)));
         };
         if (tuiles.length) {
-          const grille = document.createElement("div"); grille.style.cssText = "display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:6px";
           tuiles.forEach(s => {
-            const t = document.createElement("button"); t.type = "button"; t.className = "carte"; t.setAttribute("aria-label", s.nom + ", " + s.ls.length + " audios");
-            t.style.cssText = "cursor:pointer;width:100%;font:inherit;text-align:left;min-height:120px;display:flex;flex-direction:column;justify-content:space-between;gap:8px;border-radius:22px;border:0;padding:16px;background:#e3f3ea;color:#0f5a3d";
-            t.innerHTML = `<span style="font-size:26px" aria-hidden="true">🎧</span><b dir="auto" style="font-size:17px;line-height:1.2">${esc(s.nom)}</b><small>${s.ls.length} audios · Voir ›</small>`;
-            t.onclick = () => afficheSerie(s); grille.appendChild(t);
+            const t = document.createElement("div"); t.className = "carte ligne-menu"; t.tabIndex = 0; t.setAttribute("role", "button"); t.setAttribute("aria-label", s.nom + ", " + s.ls.length + " audios");
+            t.innerHTML = `<span style="font-size:30px" aria-hidden="true">🎧</span><div style="min-width:0;flex:1"><b dir="auto">${esc(s.nom)}</b><br><small>${s.ls.length} audios</small></div><span aria-hidden="true" style="font-size:22px;color:var(--vert,#0f5a3d)">›</span>`;
+            t.onclick = () => afficheSerie(s); t.onkeydown = ev => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); afficheSerie(s); } };
+            zPub.appendChild(t);
           });
-          zPub.appendChild(grille);
         }
         if (seuls.length) {
           const nh = document.createElement("h2"); nh.className = "pf-h"; nh.textContent = "Nouveautés"; zPub.appendChild(nh);
