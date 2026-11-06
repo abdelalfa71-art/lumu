@@ -8119,11 +8119,15 @@ async function vueLivres() {
     if (!w.isConnected) return;
     const z = w.querySelector("#liste");
     /* Regroupements automatiques : tous, par auteur (imam), ou par livre de A à Z */
+    z.querySelectorAll(":scope > .centre").forEach(x => x.remove());
     const zPub = document.createElement("div"); zPub.id = "lv-pub"; z.appendChild(zPub);
     let mode = "tous";
     const ouvre = l => router("livre", { id: l.id });
     const cleDe = (m, l) => m === "auteur" ? ((l.yt_channels && l.yt_channels.name) || "Sans auteur") : (/^[0-9]/.test((l.titre || "").trim()) ? "0-9" : ((l.titre || "?").trim().charAt(0).toUpperCase() || "?"));
+    /* Mode Audios : on n'affiche que les audios (pas de titres de livres, ni PDF, ni boutons livre) */
+    const majVueAudio = () => { const a = mode === "audios"; Array.from(z.children).forEach(el => { if (el !== zPub) el.style.display = a ? "none" : ""; }); ["#nv", "#nv-groupe"].forEach(s => { const el = w.querySelector(s); if (el) el.style.display = a ? "none" : ""; }); };
     const dessine = () => {
+      majVueAudio();
       zPub.innerHTML = "";
       if (!data.length) { zPub.innerHTML = `<p>Aucun livre publié.</p>`; return; }
       if (mode === "groupes") {
@@ -8187,7 +8191,7 @@ async function vueLivres() {
     let regroupements = [];
     try { const g = await sb.from("yt_groupes_livres").select("id,nom,description,channel_id,yt_groupes_livres_items(livre_id)").order("created_at", { ascending: true }); regroupements = (g && g.data) || []; } catch (e) {}
     if (estCreateur() && etat.chaine) {
-      const b = document.createElement("button"); b.className = "btn-outline"; b.style.marginBottom = "10px"; b.textContent = "➕ Nouveau regroupement";
+      const b = document.createElement("button"); b.id = "nv-groupe"; b.className = "btn-outline"; b.style.marginBottom = "10px"; b.textContent = "➕ Nouveau regroupement";
       b.onclick = () => nouveauRegroupement(data.filter(l => l.channel_id === etat.chaine.id));
       z.insertAdjacentElement("beforebegin", b);
     }
@@ -8208,6 +8212,7 @@ async function vueLivres() {
     if (!data.length && !(cl && cl.length)) z.innerHTML = `<p>Aucun livre publié.</p>`;
     z.insertAdjacentHTML("beforeend", `<button class="btn-outline" id="docs" style="margin-top:14px">📄 Documents PDF</button>`);
     z.querySelector("#docs").onclick = () => router("dossier", { type: "pdf", titre: "Documents" });
+    Array.from(z.children).forEach(el => { if (el !== zPub) el.style.display = mode === "audios" ? "none" : ""; });
   } catch (e) { if (w.isConnected) w.querySelector("#liste").innerHTML = `<p class="erreur">${esc(txtErr(e, "Chargement impossible."))}</p>`; }
 }
 /* Création d'un regroupement de livres par l'imam (ses propres livres publiés) */
