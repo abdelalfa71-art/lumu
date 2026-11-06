@@ -8141,35 +8141,37 @@ async function vueLivres() {
         return;
       }
       if (mode === "audios") {
+        /* Détection automatique : même titre de base + numéro (« Izia 1 », « Izia 2 », « Fiqh - cours 3 ») → une série.
+           Les audios restent aussi dans la liste Écouter. */
+        const baseDe = t => (t || "").replace(/\s*[-–:|(]?\s*(?:n[°o]\.?\s*|partie\s*|cours\s*|épisode\s*|ep\.?\s*)?\d+\)?\s*$/i, "").trim() || (t || "").trim();
+        const numDe = t => { const m = /(\d+)\)?\s*$/.exec(t || ""); return m ? +m[1] : 0; };
         const vus = new Set();
-        const ads = audiosLivres.filter(a => {
-          const ta = normeTitre(a.title);
-          const ok = data.some(l => { const t = normeTitre(l.titre); return t.length >= 4 && ta.includes(t); });
-          if (!ok || vus.has(a.id)) return false; vus.add(a.id); return true;
-        });
-        if (!ads.length) { zPub.innerHTML = `<p>Aucun audio de livre traduit pour l'instant.</p>`; return; }
-        /* Série = début du titre avant le numéro ou un tiret (« Izia 1 », « Izia - cours 2 » → « Izia ») */
-        const serieDe = t => ((t || "").split(/\s*[-–:|(]\s*|\s+\d/)[0].trim()) || (t || "");
+        const tous = audiosLivres.filter(a => { if (vus.has(a.id)) return false; vus.add(a.id); return true; });
+        if (!tous.length) { zPub.innerHTML = `<p>Aucun audio publié pour l'instant.</p>`; return; }
         const series = new Map();
-        ads.forEach(a => { const nom = serieDe(a.title), k = normeTitre(nom); if (!series.has(k)) series.set(k, { nom, ls: [] }); series.get(k).ls.push(a); });
-        const retour = () => dessine();
+        tous.forEach(a => { const nom = baseDe(a.title), k = normeTitre(nom); if (!series.has(k)) series.set(k, { nom, ls: [] }); series.get(k).ls.push(a); });
+        const tuiles = [], seuls = [];
+        series.forEach(s => { if (s.ls.length >= 2) { s.ls.sort((x, y) => numDe(x.title) - numDe(y.title)); tuiles.push(s); } else seuls.push(...s.ls); });
         const afficheSerie = s => {
           zPub.innerHTML = "";
-          const b = document.createElement("button"); b.type = "button"; b.className = "btn-outline"; b.style.marginBottom = "10px"; b.textContent = "← Toutes les séries"; b.onclick = retour; zPub.appendChild(b);
+          const b = document.createElement("button"); b.type = "button"; b.className = "btn-outline"; b.style.marginBottom = "10px"; b.textContent = "← Toutes les séries"; b.onclick = () => dessine(); zPub.appendChild(b);
           const h = document.createElement("h2"); h.className = "pf-h"; h.textContent = s.nom + " (" + s.ls.length + ")"; zPub.appendChild(h);
           s.ls.forEach(a => zPub.appendChild(carteContenu(a)));
         };
-        const grille = document.createElement("div"); grille.style.cssText = "display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:6px";
-        series.forEach(s => {
-          const t = document.createElement("button"); t.type = "button"; t.className = "carte"; t.setAttribute("aria-label", s.nom + ", " + s.ls.length + " audios");
-          t.style.cssText = "text-align:left;min-height:120px;display:flex;flex-direction:column;justify-content:space-between;gap:8px;border-radius:22px;border:0;padding:16px;background:#e3f3ea;color:#0f5a3d";
-          t.style.cursor = "pointer"; t.style.width = "100%"; t.style.font = "inherit";
-          t.innerHTML = `<span style="font-size:26px" aria-hidden="true">🎧</span><b dir="auto" style="font-size:17px;line-height:1.2">${esc(s.nom)}</b><small>${s.ls.length} audio${s.ls.length > 1 ? "s" : ""} · Voir ›</small>`;
-          t.onclick = () => afficheSerie(s); grille.appendChild(t);
-        });
-        zPub.appendChild(grille);
-        const nh = document.createElement("h2"); nh.className = "pf-h"; nh.textContent = "Nouveautés"; zPub.appendChild(nh);
-        ads.slice(0, 10).forEach(a => zPub.appendChild(carteContenu(a)));
+        if (tuiles.length) {
+          const grille = document.createElement("div"); grille.style.cssText = "display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:6px";
+          tuiles.forEach(s => {
+            const t = document.createElement("button"); t.type = "button"; t.className = "carte"; t.setAttribute("aria-label", s.nom + ", " + s.ls.length + " audios");
+            t.style.cssText = "cursor:pointer;width:100%;font:inherit;text-align:left;min-height:120px;display:flex;flex-direction:column;justify-content:space-between;gap:8px;border-radius:22px;border:0;padding:16px;background:#e3f3ea;color:#0f5a3d";
+            t.innerHTML = `<span style="font-size:26px" aria-hidden="true">🎧</span><b dir="auto" style="font-size:17px;line-height:1.2">${esc(s.nom)}</b><small>${s.ls.length} audios · Voir ›</small>`;
+            t.onclick = () => afficheSerie(s); grille.appendChild(t);
+          });
+          zPub.appendChild(grille);
+        }
+        if (seuls.length) {
+          const nh = document.createElement("h2"); nh.className = "pf-h"; nh.textContent = "Nouveautés"; zPub.appendChild(nh);
+          seuls.slice(0, 20).forEach(a => zPub.appendChild(carteContenu(a)));
+        }
         return;
       }
       const liste = mode === "titre" ? [...data].sort((a, b) => (a.titre || "").localeCompare(b.titre || "", "fr")) : data;
