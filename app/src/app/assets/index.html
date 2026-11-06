@@ -8144,7 +8144,27 @@ async function vueLivres() {
           if (!ok || vus.has(a.id)) return false; vus.add(a.id); return true;
         });
         if (!ads.length) { zPub.innerHTML = `<p>Aucun audio de livre traduit pour l'instant.</p>`; return; }
-        ads.forEach(a => zPub.appendChild(carteContenu(a)));
+        /* Série = début du titre avant le numéro ou un tiret (« Izia 1 », « Izia - cours 2 » → « Izia ») */
+        const serieDe = t => ((t || "").split(/\s*[-–:|(]\s*|\s+\d/)[0].trim()) || (t || "");
+        const series = new Map();
+        ads.forEach(a => { const nom = serieDe(a.title), k = normeTitre(nom); if (!series.has(k)) series.set(k, { nom, ls: [] }); series.get(k).ls.push(a); });
+        const retour = () => dessine();
+        const afficheSerie = s => {
+          zPub.innerHTML = "";
+          const b = document.createElement("button"); b.type = "button"; b.className = "btn-outline"; b.style.marginBottom = "10px"; b.textContent = "← Toutes les séries"; b.onclick = retour; zPub.appendChild(b);
+          const h = document.createElement("h2"); h.className = "pf-h"; h.textContent = s.nom + " (" + s.ls.length + ")"; zPub.appendChild(h);
+          s.ls.forEach(a => zPub.appendChild(carteContenu(a)));
+        };
+        const grille = document.createElement("div"); grille.style.cssText = "display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:6px";
+        series.forEach(s => {
+          const t = document.createElement("button"); t.type = "button"; t.className = "carte"; t.setAttribute("aria-label", s.nom + ", " + s.ls.length + " audios");
+          t.style.cssText = "text-align:left;min-height:120px;display:flex;flex-direction:column;justify-content:space-between;gap:8px;border-radius:22px;border:0;padding:16px;background:#e3f3ea;color:#0f5a3d";
+          t.innerHTML = `<span style="font-size:26px" aria-hidden="true">🎧</span><b dir="auto" style="font-size:17px;line-height:1.2">${esc(s.nom)}</b><small>${s.ls.length} audio${s.ls.length > 1 ? "s" : ""}</small>`;
+          t.onclick = () => afficheSerie(s); grille.appendChild(t);
+        });
+        zPub.appendChild(grille);
+        const nh = document.createElement("h2"); nh.className = "pf-h"; nh.textContent = "Nouveautés"; zPub.appendChild(nh);
+        ads.slice(0, 10).forEach(a => zPub.appendChild(carteContenu(a)));
         return;
       }
       const liste = mode === "titre" ? [...data].sort((a, b) => (a.titre || "").localeCompare(b.titre || "", "fr")) : data;
