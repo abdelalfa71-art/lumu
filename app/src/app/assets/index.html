@@ -4267,7 +4267,11 @@ function contenuExtras(wrap, c) {
   function brancher(m) {
     if (!m) return;
     sessionMedia(c, m, allerSuivant, allerPrecedent);
-    m.addEventListener("play", () => sessionMedia(c, m, allerSuivant, allerPrecedent));
+    /* Application Android : la notification + le service de premier plan gardent l'audio actif écran verrouillé */
+    const natif = jouant => { try { if (window.LumuNative && LumuNative.media) LumuNative.media(c.title || "", (c.yt_channels && c.yt_channels.name) || APP_NOM, jouant); } catch (e) {} };
+    m.addEventListener("play", () => { natif(true); sessionMedia(c, m, allerSuivant, allerPrecedent); });
+    m.addEventListener("pause", () => natif(false));
+    m.addEventListener("ended", () => natif(false));
     suivreTemps(m, c.id, vivant);
     if (allerSuivant) m.addEventListener("ended", () => { if (vivant()) allerSuivant(); });
   }
