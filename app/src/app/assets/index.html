@@ -4688,6 +4688,7 @@ function vueRecherche() {
     clearTimeout(tmSug); const zs = wrap.querySelector("#sugg"); if (q.trim().length < 2) { zs.innerHTML = ""; return; }
     tmSug = setTimeout(async () => { try { const r = await sb.rpc("yt_suggestions", { p_q: q }); if (!wrap.isConnected || champ.value !== q) return; zs.innerHTML = ""; (r.data || []).slice(0, 6).forEach(x => { const b = document.createElement("button"); b.className = "chip"; b.textContent = "🔎 " + x; b.onclick = () => { champ.value = q = x; retenir(x); zs.innerHTML = ""; filtres(); lancer(); }; zs.appendChild(b); }); } catch (e) {} }, 220);
   };
+  microChamp(wrap.querySelector("#q"), () => wrap.querySelector("#f").requestSubmit());
   wrap.querySelector("#f").onsubmit = ev => { ev.preventDefault(); wrap.querySelector("#sugg").innerHTML = ""; clearTimeout(minuteur); q = champ.value; retenir(q); champ.blur(); filtres(); lancer(); };
   wrap.querySelector("#plus").onclick = () => lancer(true);
   filtres(); lancer();
@@ -5194,9 +5195,78 @@ const MICRO = {
     lancer();
   }
 };
+
+/* Question vocale : enregistrer, écouter, envoyer à un imam (yt_questions.question_audio) */
+const QVOC = {
+  async ouvrir() {
+    if (!etat.parentId) { exigerConnexion(); return; }
+    const ov = document.createElement("div"); ov.className = "micro-ov"; ov.setAttribute("role", "dialog");
+    ov.innerHTML = `<div class="micro-bt"><button class="micro-x" aria-label="Fermer">✕</button><div class="micro-pulse">${ico("mic", 44)}</div><b id="qv-t">Question vocale</b><small id="qv-s">Touchez pour enregistrer votre question</small><button class="btn" id="qv-go" style="margin-top:8px">⏺ Enregistrer</button></div>`;
+    document.body.appendChild(ov);
+    let rec = null, blob = null, url = null;
+    const fin = () => { try { if (rec) rec.arreter(); } catch (e) {} if (url) URL.revokeObjectURL(url); ov.remove(); };
+    const bt = ov.querySelector(".micro-bt"), dire = (t, s2) => { ov.querySelector("#qv-t").textContent = t; ov.querySelector("#qv-s").textContent = s2 || ""; };
+    ov.querySelector(".micro-x").onclick = fin; ov.onclick = e => { if (e.target === ov) fin(); };
+    const enregistrer = async () => {
+      try { rec = await PAR.voix(); } catch (e) { dire("Micro non disponible", "Autorisez le micro dans les réglages."); return; }
+      dire("Enregistrement…", "Touchez pour arrêter"); bt.querySelector("#qv-go").textContent = "⏹ Arrêter";
+      bt.querySelector("#qv-go").onclick = arreter;
+    };
+    const arreter = async () => {
+      blob = await rec.arreter(); rec = null; url = URL.createObjectURL(blob);
+      dire("Écoutez avant d'envoyer", "");
+      bt.insertAdjacentHTML("beforeend", `<audio controls src="${url}" style="width:100%;margin-top:8px"></audio><button class="btn" id="qv-ok" style="margin-top:8px">✓ Envoyer à un imam</button><button class="btn-text" id="qv-re">↺ Recommencer</button><small id="qv-e" class="erreur"></small>`);
+      bt.querySelector("#qv-go").remove();
+      bt.querySelector("#qv-re").onclick = () => { fin(); QVOC.ouvrir(); };
+      bt.querySelector("#qv-ok").onclick = envoyer;
+    };
+    const envoyer = async () => {
+      const ok = bt.querySelector("#qv-ok"), er = bt.querySelector("#qv-e");
+      ok.disabled = true; er.textContent = "";
+      const chemin = `${etat.parentId}/questions/vocal-${Date.now()}.${PAR.ext(blob)}`;
+      const u = await sb.storage.from("yt-media").upload(chemin, blob, { contentType: blob.type, upsert: false });
+      if (u.error) { er.textContent = "Envoi impossible. Réessayez."; ok.disabled = false; return; }
+      const r = await sb.from("yt_questions").insert({ question: "Question vocale", question_audio: chemin, langue: (mesLangues() || [])[0] || null });
+      if (r.error) { er.textContent = txtErr(r.error, "Envoi impossible."); ok.disabled = false; return; }
+      dire("Question envoyée ✓", "L'imam pourra y répondre.");
+      bt.querySelector("audio") && bt.querySelector("audio").remove(); ok.remove(); bt.querySelector("#qv-re").remove();
+      setTimeout(() => { fin(); router("questions"); }, 1200);
+    };
+    bt.querySelector("#qv-go").onclick = enregistrer;
+  }
+};
+/* Petit micro dans une barre de recherche (comme Google) : dicte le texte dans le champ */
+function microChamp(champ, apres) {
+  const R = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!champ || champ.dataset.micro || !R) return;
+  champ.dataset.micro = "1";
+  const box = champ.parentElement;
+  if (box && getComputedStyle(box).position === "static") box.style.position = "relative";
+  champ.style.paddingRight = "48px";
+  const b = document.createElement("button"); b.type = "button"; b.className = "micro-champ"; b.setAttribute("aria-label", "Chercher par la voix"); b.innerHTML = ico("mic", 20);
+  b.style.cssText = "position:absolute;right:8px;top:50%;transform:translateY(-50%);width:36px;height:36px;border:0;border-radius:50%;background:transparent;color:var(--vert,#0f5a3d);display:grid;place-items:center;padding:0;cursor:pointer";
+  let rec = null;
+  b.onclick = () => {
+    if (rec) { try { rec.stop(); } catch (e) {} return; }
+    rec = new R();
+    const mes = mesLangues() || ["fr"], cod = { ff: "fr-FR", ha: "ha-NG", fr: "fr-FR", ar: "ar-SA", en: "en-US" };
+    rec.lang = cod[mes[0]] || "fr-FR"; rec.interimResults = true; rec.maxAlternatives = 1;
+    b.style.background = "#e3f3ea";
+    rec.onresult = e => {
+      const r = e.results[e.results.length - 1], t = r[0].transcript;
+      champ.value = t;
+      champ.dispatchEvent(new Event("input", { bubbles: true }));
+      if (r.isFinal && apres) apres(t.trim());
+    };
+    rec.onend = () => { rec = null; b.style.background = "transparent"; };
+    rec.onerror = () => { rec = null; b.style.background = "transparent"; };
+    try { rec.start(); } catch (e) { rec = null; b.style.background = "transparent"; }
+  };
+  box.appendChild(b);
+}
 function monterMicroFlottant() {
   if (document.getElementById("micro-fab")) return;
-  const b = document.createElement("button"); b.id = "micro-fab"; b.setAttribute("aria-label", "Recherche vocale"); b.innerHTML = ico("mic", 28); b.onclick = () => MICRO.ouvrir(); b.hidden = true; { const nb = chargerLocal("mic_hint", 0); if (nb < 6) { sauverLocal("mic_hint", nb + 1); b.classList.add("indice"); setTimeout(() => b.classList.remove("indice"), 9000); } }
+  const b = document.createElement("button"); b.id = "micro-fab"; b.setAttribute("aria-label", "Envoyer une question vocale"); b.innerHTML = ico("mic", 28); b.onclick = () => QVOC.ouvrir(); b.hidden = true; { const nb = chargerLocal("mic_hint", 0); if (nb < 6) { sauverLocal("mic_hint", nb + 1); b.classList.add("indice"); setTimeout(() => b.classList.remove("indice"), 9000); } }
   document.body.appendChild(b);
   setInterval(() => { try { document.body.classList.toggle("audio-on", !!(AUD.mini && !AUD.mini.hidden)); } catch (e) {} }, 800);
 }
@@ -5518,6 +5588,7 @@ async function vueEcouter() {
     tmSugE = setTimeout(suggereEcoute, 180);
     minRech = setTimeout(chercheEcoute, 300);
   };
+  microChamp(w.querySelector("#ec-rin"));
   w.querySelector("#ec-radio").onclick = () => { router("radio"); setTimeout(() => { try { RADIO.demarrer(); } catch (e) {} }, 700); };
   const CH = [["", "Tout", null], ["coran", "Coran", /coran|quran|r[ée]citation/i], ["cours", "Cours", /cours|conf[ée]rence|[ée]ducation|pr[eê]che/i], ["rappels", "Rappels", /rappel|invocation|dou?a|dhikr/i]];
   const DLP = {};
@@ -6817,10 +6888,10 @@ async function vueQuestions() {
   const carte = x => {
     const imam = (x.yt_channels && x.yt_channels.name) || "";
     const d = document.createElement("div"); d.className = "carte";
-    d.innerHTML = `<b dir="auto">❓ ${esc(x.question)}</b>${x.statut === "repondue" ? `${x.reponse_audio ? `<audio controls preload="none" src="${esc(urlMedia(x.reponse_audio))}" style="width:100%;margin-top:8px"></audio>` : ""}${x.reponse_texte ? `<div class="desc" dir="auto" style="margin-top:6px">${esc(x.reponse_texte)}</div>` : ""}<small>${imam ? "Réponse de " + esc(imam) : ""}</small>` : `<small>${x.statut === "masquee" ? "Non publiée" : "⏳ En attente de réponse"}</small>`}`;
+    d.innerHTML = `<b dir="auto">❓ ${esc(x.question)}</b>${x.question_audio ? `<audio controls preload="none" src="${esc(urlMedia(x.question_audio))}" style="width:100%;margin-top:8px"></audio>` : ""}${x.statut === "repondue" ? `${x.reponse_audio ? `<audio controls preload="none" src="${esc(urlMedia(x.reponse_audio))}" style="width:100%;margin-top:8px"></audio>` : ""}${x.reponse_texte ? `<div class="desc" dir="auto" style="margin-top:6px">${esc(x.reponse_texte)}</div>` : ""}<small>${imam ? "Réponse de " + esc(imam) : ""}</small>` : `<small>${x.statut === "masquee" ? "Non publiée" : "⏳ En attente de réponse"}</small>`}`;
     return d;
   };
-  const SEL = "id,question,statut,reponse_texte,reponse_audio,created_at,yt_channels!yt_questions_repondu_par_fkey(name)";
+  const SEL = "id,question,question_audio,statut,reponse_texte,reponse_audio,created_at,yt_channels!yt_questions_repondu_par_fkey(name)";
   async function charger() {
     const z = w.querySelector("#liste"); z.innerHTML = squelettes(2);
     try {
