@@ -8136,6 +8136,20 @@ async function vueLivres() {
         });
         return;
       }
+      if (mode === "audios") {
+        let vu = 0;
+        data.forEach(l => {
+          const t = normeTitre(l.titre);
+          if (t.length < 4) return;
+          const ads = audiosLivres.filter(a => normeTitre(a.title).includes(t));
+          if (!ads.length) return;
+          vu += ads.length;
+          const h = document.createElement("h2"); h.className = "pf-h"; h.textContent = l.titre; zPub.appendChild(h);
+          ads.forEach(a => zPub.appendChild(carteContenu(a)));
+        });
+        if (!vu) zPub.innerHTML = `<p>Aucun audio de livre traduit pour l'instant.</p>`;
+        return;
+      }
       const liste = mode === "titre" ? [...data].sort((a, b) => (a.titre || "").localeCompare(b.titre || "", "fr")) : data;
       if (mode === "tous") { liste.forEach(l => zPub.appendChild(carteLivre(l, () => ouvre(l)))); return; }
       const groupes = new Map();
@@ -8146,8 +8160,12 @@ async function vueLivres() {
       }
     };
     const barre = w.querySelector("#lv-modes");
-    const modes = [["tous", "Tous"], ["auteur", "Par auteur"], ["titre", "Par livre (A-Z)"], ["groupes", "Regroupements"]];
+    const modes = [["tous", "Tous"], ["auteur", "Par auteur"], ["titre", "Par livre (A-Z)"], ["groupes", "Regroupements"], ["audios", "Audios des livres"]];
     const majBarre = () => { barre.innerHTML = modes.map(([k, n]) => `<button type="button" class="chip${k === mode ? " actif" : ""}" data-m="${k}" aria-pressed="${k === mode}">${n}</button>`).join(""); barre.querySelectorAll("button").forEach(b => b.onclick = () => { mode = b.dataset.m; majBarre(); dessine(); }); };
+    /* Audios des livres traduits : le rattachement se fait par le titre de l'audio (il contient le titre du livre) */
+    let audiosLivres = [];
+    try { const a = await sb.from("yt_contenus").select(CHAMPS_CONTENU).eq("status", "published").eq("type", "audio").order("published_at", { ascending: false }).limit(300); audiosLivres = ((a && a.data) || []).filter(c => c.fichier_path && !c.embed_id && langOk(c)); } catch (e) {}
+    const normeTitre = s => (s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9؀-ۿ]+/g, " ").trim();
     let regroupements = [];
     try { const g = await sb.from("yt_groupes_livres").select("id,nom,description,channel_id,yt_groupes_livres_items(livre_id)").order("created_at", { ascending: true }); regroupements = (g && g.data) || []; } catch (e) {}
     if (estCreateur() && etat.chaine) {
