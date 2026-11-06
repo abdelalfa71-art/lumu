@@ -648,6 +648,7 @@ html:root #ec-chips { display: none !important; }
 /* ===== Cartes grandes (YouTube-like) ===== */
 .liste-grande { display: flex; flex-direction: column; gap: 18px; }
 .carte-grande { display: flex; flex-direction: column; gap: 10px; cursor: pointer; content-visibility: auto; contain-intrinsic-size: auto 280px; -webkit-touch-callout: none; user-select: none; }
+.carte-contenu, .carte-contenu * { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
 .vignette-g { position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: 16px; overflow: hidden; background: var(--bordure); display: flex; align-items: center; justify-content: center; }
 .vignette-g img, .vignette-g .apercu { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .vignette-g img { opacity: 0; transition: opacity .35s; }
@@ -2404,6 +2405,38 @@ function creerNav() {
 function phType(c, t, cls) {
   return c && c.type === "audio" ? `<img class="logo-ph" src="icon-192.png" alt="" loading="lazy">` : `<span class="${cls}">${t.ic}</span>`;
 }
+/* Appui long (environ 0,5 s) : ouvre un menu, sans le menu natif du téléphone ni le clic qui suit */
+function appuiLong(el, action) {
+  let t = null, fait = false, sx = 0, sy = 0;
+  el.addEventListener("pointerdown", e => { fait = false; sx = e.clientX; sy = e.clientY; clearTimeout(t); t = setTimeout(() => { fait = true; try { navigator.vibrate && navigator.vibrate(25); } catch (x) {} action(); }, 500); });
+  ["pointerup", "pointerleave", "pointercancel"].forEach(ev => el.addEventListener(ev, () => clearTimeout(t)));
+  el.addEventListener("pointermove", e => { if (Math.abs(e.clientX - sx) + Math.abs(e.clientY - sy) > 10) clearTimeout(t); });
+  el.addEventListener("contextmenu", e => e.preventDefault());
+  el.addEventListener("click", e => { if (fait) { e.preventDefault(); e.stopImmediatePropagation(); fait = false; } }, true);
+}
+/* Menu de la carte : partager, hors-ligne, favoris */
+async function ouvrirMenuContenu(c, el) {
+  const audioOuVideo = !!(c.fichier_path && !c.embed_id);
+  let fav = false; try { fav = (await mesFavorisDe([c.id])).has(c.id); } catch (e) {}
+  const hors = audioOuVideo && HORS.ids.has(c.id);
+  const html = `<div style="display:grid;gap:10px">
+    <button class="btn-outline" data-a="partager" type="button">↗ Partager</button>
+    ${audioOuVideo ? `<button class="btn-outline" data-a="hors" type="button">${hors ? "✓ Retirer du hors-ligne" : "⬇ Sauvegarder hors-ligne"}</button>` : ""}
+    <button class="btn-outline" data-a="fav" type="button">${fav ? "❤ Retirer des favoris" : "🤍 Ajouter aux favoris"}</button>
+  </div>`;
+  ouvrirFeuille(c.title || "Lumu", html, (corps, fermer) => {
+    const bt = a => corps.querySelector(`[data-a="${a}"]`);
+    bt("partager").onclick = () => { fermer(); partagerContenu(c, el); };
+    if (bt("hors")) bt("hors").onclick = async () => {
+      const b = bt("hors"); b.disabled = true;
+      if (hors) { await HORS.retirer(c.id); fermer(); return; }
+      b.textContent = "… 0 %";
+      const ok = await HORS.sauver(c, true, (n, t) => { b.textContent = "… " + Math.round(n * 100 / t) + " %"; });
+      if (ok) fermer(); else { b.disabled = false; b.textContent = "Échec, réessayez"; }
+    };
+    bt("fav").onclick = async () => { const r = await basculerFavori(c, fav); if (r !== null) fermer(); };
+  });
+}
 function carteContenu(c, surClic) {
   const t = TYPES[c.type] || TYPES.video;
   const el = document.createElement("div");
@@ -2422,6 +2455,7 @@ function carteContenu(c, surClic) {
     </div>`;
   const ouvrir = surClic || (() => router("contenu", { id: c.id, c }));
   el.onclick = ouvrir;
+  appuiLong(el, () => ouvrirMenuContenu(c, el));
   el.onkeydown = ev => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); ouvrir(); } };
   return el;
 }
