@@ -8137,17 +8137,14 @@ async function vueLivres() {
         return;
       }
       if (mode === "audios") {
-        let vu = 0;
-        data.forEach(l => {
-          const t = normeTitre(l.titre);
-          if (t.length < 4) return;
-          const ads = audiosLivres.filter(a => normeTitre(a.title).includes(t));
-          if (!ads.length) return;
-          vu += ads.length;
-          const h = document.createElement("h2"); h.className = "pf-h"; h.textContent = l.titre; zPub.appendChild(h);
-          ads.forEach(a => zPub.appendChild(carteContenu(a)));
+        const vus = new Set();
+        const ads = audiosLivres.filter(a => {
+          const ta = normeTitre(a.title);
+          const ok = data.some(l => { const t = normeTitre(l.titre); return t.length >= 4 && ta.includes(t); });
+          if (!ok || vus.has(a.id)) return false; vus.add(a.id); return true;
         });
-        if (!vu) zPub.innerHTML = `<p>Aucun audio de livre traduit pour l'instant.</p>`;
+        if (!ads.length) { zPub.innerHTML = `<p>Aucun audio de livre traduit pour l'instant.</p>`; return; }
+        ads.forEach(a => zPub.appendChild(carteContenu(a)));
         return;
       }
       const liste = mode === "titre" ? [...data].sort((a, b) => (a.titre || "").localeCompare(b.titre || "", "fr")) : data;
