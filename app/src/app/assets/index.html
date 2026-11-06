@@ -5458,7 +5458,6 @@ async function vueEcouter() {
     <div class="ec-rech" id="ec-rech" hidden><input id="ec-rin" type="search" enterkeyhint="search" autocomplete="off" placeholder="Rechercher un imam, un titre…"><div id="ec-sugg" class="ec-sugg"></div></div>
     <div class="ec-corps">
       <div class="st-row" id="st-row" hidden></div>
-      <div id="ec-rappel" style="padding:0 16px 8px"></div>
       <div id="ec-rep"></div>
       <div class="ec-ligne"><button class="ec-radio" id="ec-radio"><span class="ec-rp">${ico("play", 30, true)}</span><span><b>Lumu Radio</b><small>Rappels, Coran, invocations</small></span></button><select id="ec-cat" aria-label="Catégorie"><option value="">Tout</option><option value="coran">Coran</option><option value="cours">Cours</option><option value="rappels">Rappels</option></select></div>
       <details class="ec-plus"><summary>Plus de choix ▾</summary><div class="ec-gros"><button id="eg-hors"><span>⬇</span>Mes audios</button><button id="eg-disc"><span>💬</span>Discuter</button><button id="eg-imams"><span>👥</span>Imams</button><button id="eg-q"><span>🔍</span>Chercher</button></div>
@@ -5472,7 +5471,6 @@ async function vueEcouter() {
   app.appendChild(w);
   if (ACCES.simple()) w.classList.add("ec-simple");
   try { STAT.monter(w.querySelector("#st-row")); } catch (e) {}
-  carteRappelDuJour(w.querySelector("#ec-rappel"));
   w.querySelector("#eg-hors").onclick = () => router("hors"); w.querySelector("#eg-disc").onclick = () => router("discussions"); w.querySelector("#eg-imams").onclick = () => router("preches"); w.querySelector("#eg-q").onclick = () => router("recherche");
   try { const cn = navigator.connection; if (cn && /2g/.test(cn.effectiveType || "")) w.querySelector("#ec-radio").insertAdjacentHTML("beforebegin", `<button class="ec-lent" id="ec-lent">📶 Connexion lente. Touchez pour télécharger vos audios et écouter sans coupure.</button>`); const bl = w.querySelector("#ec-lent"); if (bl) bl.onclick = () => router("hors"); } catch (e) {}
   { const bp = w.querySelector("#ec-plus"), mn = w.querySelector("#ec-menu"); bp.onclick = ev => { ev.stopPropagation(); mn.hidden = !mn.hidden; }; mn.onclick = () => { setTimeout(() => { mn.hidden = true; }, 120); };
