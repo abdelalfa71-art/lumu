@@ -8111,14 +8111,34 @@ async function vueGroupe() {
 
 /* ---------- Livres écrits : lecture ---------- */
 async function vueLivres() {
-  const w = ecran("Livres", ["biblio"], `${estCreateur() ? `<button class="btn" id="nv">✍️ Écrire un livre</button>` : ""}<div id="liste" class="liste-contenus"><div class="centre"><div class="spinner"></div></div></div>`);
+  const w = ecran("Livres", ["biblio"], `${estCreateur() ? `<button class="btn" id="nv">✍️ Écrire un livre</button>` : ""}<div class="ec-sugg-bar" id="lv-modes" style="display:flex;gap:8px;flex-wrap:wrap;margin:0 0 10px"></div><div id="liste" class="liste-contenus"><div class="centre"><div class="spinner"></div></div></div>`);
   const nv = w.querySelector("#nv"); if (nv) nv.onclick = () => router("mes-livres");
   try {
     const { data, error } = await sb.from("yt_livres_ecrits").select("id,titre,description,cover_path,updated_at,yt_channels(name)").eq("statut", "publie").order("updated_at", { ascending: false }).limit(60);
     if (error) throw error;
     if (!w.isConnected) return;
-    const z = w.querySelector("#liste"); z.innerHTML = data.length ? "" : `<p>Aucun livre publié.</p>`;
-    data.forEach(l => z.appendChild(carteLivre(l, () => router("livre", { id: l.id }))));
+    const z = w.querySelector("#liste");
+    /* Regroupements automatiques : tous, par auteur (imam), ou par livre de A à Z */
+    const zPub = document.createElement("div"); zPub.id = "lv-pub"; z.appendChild(zPub);
+    let mode = "tous";
+    const ouvre = l => router("livre", { id: l.id });
+    const cleDe = (m, l) => m === "auteur" ? ((l.yt_channels && l.yt_channels.name) || "Sans auteur") : (/^[0-9]/.test((l.titre || "").trim()) ? "0-9" : ((l.titre || "?").trim().charAt(0).toUpperCase() || "?"));
+    const dessine = () => {
+      zPub.innerHTML = "";
+      if (!data.length) { zPub.innerHTML = `<p>Aucun livre publié.</p>`; return; }
+      const liste = mode === "titre" ? [...data].sort((a, b) => (a.titre || "").localeCompare(b.titre || "", "fr")) : data;
+      if (mode === "tous") { liste.forEach(l => zPub.appendChild(carteLivre(l, () => ouvre(l)))); return; }
+      const groupes = new Map();
+      liste.forEach(l => { const k = cleDe(mode, l); if (!groupes.has(k)) groupes.set(k, []); groupes.get(k).push(l); });
+      for (const [k, ls] of groupes) {
+        const h = document.createElement("h2"); h.className = "pf-h"; h.textContent = k + " (" + ls.length + ")"; zPub.appendChild(h);
+        ls.forEach(l => zPub.appendChild(carteLivre(l, () => ouvre(l))));
+      }
+    };
+    const barre = w.querySelector("#lv-modes");
+    const modes = [["tous", "Tous"], ["auteur", "Par auteur"], ["titre", "Par livre (A-Z)"]];
+    const majBarre = () => { barre.innerHTML = modes.map(([k, n]) => `<button type="button" class="chip${k === mode ? " actif" : ""}" data-m="${k}" aria-pressed="${k === mode}">${n}</button>`).join(""); barre.querySelectorAll("button").forEach(b => b.onclick = () => { mode = b.dataset.m; majBarre(); dessine(); }); };
+    majBarre(); dessine();
     const cl = await donneesArabe("cache_livres", "livres_islamiques", "id,categorie,titre_ar,titre_fr,auteur_fr,deces_hijri,fichier_url", ["categorie", "id"]).catch(() => []);
     if (!w.isConnected) return;
     if (data.length) { z.firstChild && z.insertAdjacentHTML("afterbegin", `<h2 class="pf-h" style="margin-top:0">Livres des imams</h2>`); }
