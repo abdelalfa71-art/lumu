@@ -462,7 +462,7 @@ html.nuit .ec-imam, html:root[data-theme="dark"] .ec-imam { color: #7FD6C2; }
 .ec-rech { padding: 8px 12px; background: var(--fond); border-bottom: 1px solid var(--bordure); }
 .ec-rech input { width: 100%; box-sizing: border-box; min-height: 46px; border-radius: 999px; border: 0; padding: 0 18px; font-size: 17px; background: color-mix(in srgb, var(--texte) 8%, var(--surface)); color: var(--texte); }
 .ec-rech[hidden] { display: none; }
-.ec-cherche .ec-radio, .ec-cherche .ec-reprise, .ec-cherche #ec-chips, .ec-cherche #ec-rep { display: none; }
+.ec-cherche .ec-radio, .ec-cherche .ec-reprise, .ec-cherche #ec-chips, .ec-cherche #ec-rep, .ec-cherche #ec-rappel { display: none; }
 
 /* ===== Tailles façon WhatsApp ===== */
 html:root .ec-haut b { font-size: 20px; }
@@ -1092,6 +1092,7 @@ html:root:not(.nuit) #ec-rappel { padding: 12px 16px 8px !important; }
 html:root:not(.nuit) #ec-rappel .btn { flex: 1 1 auto; white-space: nowrap; min-height: 52px; }
 html:root:not(.nuit) #ec-rappel .btn-outline { flex: 0 0 auto; width: auto; white-space: nowrap; padding: 0 18px; min-height: 52px; }
 html:root:not(.nuit) #ec-rappel .carte { border-left: 4px solid #D7B66D; border-radius: 18px; box-shadow: 0 3px 12px rgba(18,60,43,.07); }
+.ec-sugg { display: flex; flex-wrap: wrap; gap: 8px; padding-top: 8px; } .ec-sugg:empty { display: none; } .ec-sugg .chip { min-height: 44px; padding: 0 14px; font-size: 15px; }
 .tuto-pieds { display: flex; gap: 10px; margin-top: auto; padding-top: 16px; } .tuto-pieds button { flex: 1; min-height: 52px; font-size: 18px; font-weight: 700; border-radius: 16px; }
 .lc-go { min-height: 64px; font-size: 20px; } .lc-go:disabled { opacity: .35; }
 .btn-ecouter { display: block; width: 100%; min-height: 64px; font-size: 22px; font-weight: 800; letter-spacing: .02em; background: #0F8A5F; color: #fff; margin: 12px 0; border-radius: 32px; }
@@ -5441,7 +5442,7 @@ async function vueEcouter() {
   w.className = "ecran ec";
   w.innerHTML = `<div class="ec-haut"><span class="ec-logo">${lumuSVG(36)}</span><span class="nom-lumu"><b>Lumu</b><em class="ar-lumu" lang="ar">لومو</em></span>
       <button id="ec-mic" aria-label="Parler pour chercher">${ico("mic", 24)}</button><button id="ec-q" aria-label="Rechercher">${ico("search", 24)}</button><button id="ec-plus" aria-label="Plus d'options" style="font-size:26px;font-weight:800">⋮</button><div class="menu-plus" id="ec-menu" hidden><button id="em-disc">💬 Discussions<span class="em-n" id="em-n"></span></button><button id="em-dormir">🌙 Avant de dormir</button><button id="em-trajet">🚗 Pour le trajet</button><button id="em-imams">👥 Imams</button><button id="em-hors">⬇ Mes téléchargements</button><button id="em-prof">👤 Mon profil</button></div></div>
-    <div class="ec-rech" id="ec-rech" hidden><input id="ec-rin" type="search" enterkeyhint="search" autocomplete="off" placeholder="Rechercher un imam, un titre…"></div>
+    <div class="ec-rech" id="ec-rech" hidden><input id="ec-rin" type="search" enterkeyhint="search" autocomplete="off" placeholder="Rechercher un imam, un titre…"><div id="ec-sugg" class="ec-sugg"></div></div>
     <div class="ec-corps">
       <div class="st-row" id="st-row" hidden></div>
       <div id="ec-rappel" style="padding:0 16px 8px"></div>
@@ -5472,11 +5473,29 @@ async function vueEcouter() {
   w.querySelector("#em-dormir").onclick = () => w.querySelector("#th-dormir").onclick(); w.querySelector("#em-trajet").onclick = () => w.querySelector("#th-trajet").onclick();
   w.querySelector("#ec-mic").onclick = () => { try { MICRO.ouvrir(); } catch (e) {} };
   let rech = "", serveur = [], minRech = null;
-  w.querySelector("#ec-q").onclick = () => { const z = w.querySelector("#ec-rech"); z.hidden = !z.hidden; if (!z.hidden) setTimeout(() => w.querySelector("#ec-rin").focus(), 30); else { rech = ""; serveur = []; w.querySelector("#ec-rin").value = ""; lignes(); } };
+  w.querySelector("#ec-q").onclick = () => { const z = w.querySelector("#ec-rech"); z.hidden = !z.hidden; if (!z.hidden) setTimeout(() => w.querySelector("#ec-rin").focus(), 30); else { rech = ""; serveur = []; w.querySelector("#ec-rin").value = ""; w.querySelector("#ec-sugg").innerHTML = ""; lignes(); } };
+  /* Suggestions pendant la frappe : mots et expressions cliquables, avant la fin de la saisie */
+  const zSug = w.querySelector("#ec-sugg");
+  let tmSugE = null;
+  const chercheEcoute = async () => { const mon = rech; try { const r = await chargerContenus({ q: mon, depuis: 0, nb: 40 }); if (mon !== rech || !w.isConnected) return; serveur = r.filter(c => c.type === "audio" && c.fichier_path && !c.embed_id); lignes(); } catch (e) {} };
+  const suggereEcoute = async () => {
+    const mon = rech;
+    try {
+      const r = await sb.rpc("yt_suggestions", { p_q: mon });
+      if (mon !== rech || !w.isConnected) return;
+      zSug.innerHTML = "";
+      (r.data || []).slice(0, 6).forEach(x => {
+        const b = document.createElement("button"); b.className = "chip"; b.textContent = "🔎 " + x;
+        b.onclick = () => { rech = x; w.querySelector("#ec-rin").value = x; zSug.innerHTML = ""; clearTimeout(minRech); lignes(); chercheEcoute(); };
+        zSug.appendChild(b);
+      });
+    } catch (e) {}
+  };
   w.querySelector("#ec-rin").oninput = ev => {
-    rech = ev.target.value.trim(); clearTimeout(minRech); lignes();
-    if (rech.length < 2) { serveur = []; return; }
-    minRech = setTimeout(async () => { const mon = rech; try { const r = await chargerContenus({ q: mon, depuis: 0, nb: 40 }); if (mon !== rech || !w.isConnected) return; serveur = r.filter(c => c.type === "audio" && c.fichier_path && !c.embed_id); lignes(); } catch (e) {} }, 300);
+    rech = ev.target.value.trim(); clearTimeout(minRech); clearTimeout(tmSugE); lignes();
+    if (rech.length < 2) { serveur = []; zSug.innerHTML = ""; return; }
+    tmSugE = setTimeout(suggereEcoute, 180);
+    minRech = setTimeout(chercheEcoute, 300);
   };
   w.querySelector("#ec-radio").onclick = () => { router("radio"); setTimeout(() => { try { RADIO.demarrer(); } catch (e) {} }, 700); };
   const CH = [["", "Tout", null], ["coran", "Coran", /coran|quran|r[ée]citation/i], ["cours", "Cours", /cours|conf[ée]rence|[ée]ducation|pr[eê]che/i], ["rappels", "Rappels", /rappel|invocation|dou?a|dhikr/i]];
