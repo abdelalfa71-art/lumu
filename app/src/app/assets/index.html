@@ -2276,7 +2276,7 @@ const MO = 1024 ** 2, GO = 1024 ** 3;
 const TAILLE_MAX = { video: 4 * GO, audio: GO, image: 25 * MO, pdf: 300 * MO, livre: 300 * MO, reel: 300 * MO, fichier: 2 * GO };
 const REEL_MAX = 336;
 const IMG_OK = ["image/jpeg", "image/png", "image/webp", "image/gif", "image/avif", "image/bmp"];
-const EXT_BLOQUEES = ["exe", "apk", "bat", "cmd", "com", "msi", "scr", "js", "mjs", "jar", "sh", "ps1", "vbs", "html", "htm", "xhtml", "svg", "php", "dll", "lnk"];
+const EXT_BLOQUEES = ["js", "mjs", "html", "htm", "xhtml", "svg", "php", "vbs"];
 const TYPES = {
   video: { nom: "Vidéo", pl: "Vidéos", ic: "🎬", accept: "video/*" },
   audio: { nom: "Audio", pl: "Audios", ic: "🎧", accept: "audio/*,.mp3,.m4a,.aac,.ogg,.opus,.wav,.amr" },
@@ -3092,7 +3092,7 @@ function extFichier(m, extNom) {
 }
 function mimeCoherent(m, type) {
   if (!m) return false;
-  if (type === "fichier") return !!EXT_DE_MIME[m];
+  if (type === "fichier") return true;
   if (type === "reel") return m.startsWith("video/");
   if (type === "video") return m.startsWith("video/");
   if (type === "audio") return m.startsWith("audio/");
@@ -3360,7 +3360,7 @@ function vuePublier() {
       <p>Chaîne : <b dir="auto">${esc(etat.chaine.name)}</b></p>
       <div class="chips defil" id="types"></div>
       <button class="btn-outline" id="choisir">${fichier ? "Changer le fichier" : `Choisir ${type === "image" ? "une" : "un"} ${t.nom.toLowerCase()}`}</button>
-      <input type="file" id="fichier" accept="${esc(t.accept)}" hidden>
+      <input type="file" id="fichier" accept="*/*" hidden>
       ${type !== "fichier" ? `<button class="btn-text" id="choisir-fichiers" type="button" style="align-self:center">Ou depuis les fichiers du téléphone</button><input type="file" id="fichier2" accept="*/*" hidden>` : ""}
       ${lecture ? `<p><span class="spinner" style="display:inline-block;vertical-align:middle"></span> Lecture du fichier…</p>` : ""}
       ${fichier && !lecture ? `<div class="carte" style="font-size:13px"><b dir="auto">${esc(fichier.name)}</b><br>${fmtTaille(fichier.size)}${meta && meta.duree ? " · " + fmtDuree(meta.duree) : ""}${meta && meta.vignette ? " · aperçu prêt" : ""}</div>` : ""}
@@ -3402,7 +3402,8 @@ function vuePublier() {
     lire();
     erreur = ""; info = "";
     if (/\.amr$/i.test(f.name) || /amr/i.test(f.type || "")) { fichier = null; meta = null; erreur = "Ce format (AMR, enregistreur vocal) ne peut pas être lu dans Lumu. Utilisez le bouton « Enregistrer » de Lumu, ou un fichier MP3 / M4A."; dessiner(); return; }
-    const m = mimeDe(f, type);
+    let m = mimeDe(f, type);
+    if (type !== "fichier" && !mimeCoherent(m, type)) { const auto = typeAuto(f); if (auto !== type) { type = auto; info = "Type détecté automatiquement : " + TYPES[auto].nom + "."; m = mimeDe(f, type); } }
     if (type === "fichier" && EXT_BLOQUEES.includes((f.name.split(".").pop() || "").toLowerCase())) { fichier = null; meta = null; erreur = "Ce type de fichier n'est pas autorisé (sécurité)."; dessiner(); return; }
     if (!mimeCoherent(m, type)) { fichier = null; meta = null; erreur = `Ce fichier n'est pas ${type === "image" ? "une" : "un"} ${TYPES[type].nom.toLowerCase()} accepté${type === "image" ? "e" : ""}.`; dessiner(); return; }
     if (["video", "reel", "audio"].includes(type) && f.size < 2048) { fichier = null; meta = null; erreur = "Le fichier est vide ou incomplet. S'il vient de Google Photos, téléchargez-le d'abord sur le téléphone."; dessiner(); return; }
