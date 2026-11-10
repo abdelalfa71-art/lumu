@@ -227,14 +227,9 @@ class MainActivity : AppCompatActivity() {
                     var f = File(dossier, "$sur.$ext")
                     contentResolver.openInputStream(u)?.use { ins -> f.outputStream().use { o -> ins.copyTo(o, 65536) } }
                     if (f.length() <= 0) return@forEachIndexed
-                    // AMR (enregistreur vocal) : illisible dans la page → conversion en M4A
-                    val entete = try { f.inputStream().use { i -> ByteArray(6).also { i.read(it) } } } catch (e: Exception) { ByteArray(6) }
-                    val amr = String(entete, Charsets.ISO_8859_1).startsWith("#!AMR") || ext == "amr" || ext == "awb" || mime.contains("amr", true) || mime.contains("3gpp", true) && !mime.startsWith("video")
-                    val estAudio = mime.startsWith("audio") || ext in setOf("mp3", "m4a", "aac", "ogg", "oga", "opus", "wav", "wma", "flac")
-                    if (amr || (estAudio && Convertisseur.aAlleger(this, Uri.fromFile(f), f.length()))) {
-                        val conv = File(dossier, "${sur}_c.m4a")
-                        if (Convertisseur.versM4a(this, Uri.fromFile(f), conv) && conv.length() > 0) { f.delete(); f = conv; ext = "m4a"; mime = "audio/mp4" }
-                        else { conv.delete() } // conversion impossible : on envoie le fichier d'origine plutôt que de le perdre
+                    // Envoi tel quel, sans conversion (comme WhatsApp) : on garde le fichier d'origine
+                    if (mime.isEmpty() || mime == "application/octet-stream") {
+                        mime = android.webkit.MimeTypeMap.getSingleton().getMimeTypeFromExtension(ext) ?: when (ext) { "amr" -> "audio/amr"; "awb" -> "audio/amr-wb"; else -> "application/octet-stream" }
                     }
                     arr.put(org.json.JSONObject().put("n", f.name).put("t", mime).put("nom", "$titre.$ext"))
                 } catch (e: Exception) { }
