@@ -53,6 +53,7 @@ class MainActivity : AppCompatActivity() {
     private val assetLoader by lazy {
         WebViewAssetLoader.Builder()
             .addPathHandler("/recu/", WebViewAssetLoader.InternalStoragePathHandler(this, File(cacheDir, "recu").apply { mkdirs() }))
+            .addPathHandler("/conv/", WebViewAssetLoader.InternalStoragePathHandler(this, File(cacheDir, "conv").apply { mkdirs() }))
             .addPathHandler("/", WebViewAssetLoader.AssetsPathHandler(this))
             .build()
     }
@@ -149,6 +150,25 @@ class MainActivity : AppCompatActivity() {
                     }
                 } catch (e: Exception) {
                     runOnUiThread { Toast.makeText(this@MainActivity, "Envoi impossible. Vérifiez la connexion.", Toast.LENGTH_LONG).show() }
+                }
+            }.start()
+        }
+
+        /** Lecture de tout format : télécharge l'audio, le convertit en M4A puis renvoie le chemin à la page. */
+        @JavascriptInterface fun convertir(source: String, id: String) {
+            Thread {
+                val dossier = File(cacheDir, "conv").apply { mkdirs() }
+                val src = File(dossier, "$id.src"); val dest = File(dossier, "$id.m4a")
+                var ok = false; var erreur = "Lecture impossible : format non pris en charge."
+                try {
+                    java.net.URL(source).openStream().use { ins -> src.outputStream().use { o -> ins.copyTo(o, 65536) } }
+                    ok = Convertisseur.versM4a(this@MainActivity, Uri.fromFile(src), dest) && dest.length() > 0
+                } catch (e: Exception) { erreur = "Téléchargement impossible." }
+                finally { src.delete() }
+                runOnUiThread {
+                    val js = if (ok) "window.__lumuConverti&&window.__lumuConverti('$id','/conv/$id.m4a',null)"
+                             else "window.__lumuConverti&&window.__lumuConverti('$id',null,'$erreur')"
+                    webView.evaluateJavascript(js, null)
                 }
             }.start()
         }

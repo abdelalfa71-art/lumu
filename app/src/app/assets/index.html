@@ -4063,6 +4063,17 @@ window.__lumuMedia = a => {
     else if (a === "stop") AUD.arreter();
   } catch (e) {}
 };
+/* Lecture de tout format audio : si le téléphone ne lit pas le fichier, Lumu le convertit (dans l'application) */
+const CONV = { n: 0, att: {} };
+function convertirAudio(url) {
+  return new Promise((ok, ko) => {
+    const id = "c" + (++CONV.n) + Date.now().toString(36);
+    CONV.att[id] = { ok, ko };
+    try { LumuNative.convertir(url, id); } catch (e) { delete CONV.att[id]; ko(new Error("Conversion non disponible.")); return; }
+    setTimeout(() => { if (CONV.att[id]) { delete CONV.att[id]; ko(new Error("Conversion trop longue.")); } }, 240000);
+  });
+}
+window.__lumuConverti = (id, chemin, erreurTxt) => { const a = CONV.att[id]; if (!a) return; delete CONV.att[id]; if (erreurTxt) a.ko(new Error(erreurTxt)); else a.ok(chemin); };
 const AUD = {
   a: null, c: null, mini: null, ui: null, suiv: null, prec: null, acc: 0, dernier: null, sauve: 0, vit: 1,
   init() {
@@ -4096,7 +4107,15 @@ const AUD = {
     });
     a.addEventListener("seeking", () => { this.dernier = null; });
     a.addEventListener("loadedmetadata", () => this.progres());
-    a.addEventListener("error", () => { const e = this.ui && this.ui.root.querySelector(".au-t span:last-child"); if (e) e.textContent = "Lecture impossible"; });
+    a.addEventListener("error", () => {
+      if (this.srcOrig && !this.converti && !/^blob:/.test(this.srcOrig) && !(this.c && this.c.type === "video")) {
+        this.converti = true;
+        convertirAudio(this.srcOrig).then(u => { a.src = u; a.play().catch(() => {}); }).catch(() => afficherErreurAudio());
+        return;
+      }
+      afficherErreurAudio();
+    });
+    const afficherErreurAudio = () => { const e = this.ui && this.ui.root.querySelector(".au-t span:last-child"); if (e) e.textContent = "Lecture impossible"; };
     document.addEventListener("play", ev => { if (ev.target !== a && ev.target.tagName === "VIDEO" && !a.paused && !(RADIO.actif && ev.target.muted)) a.pause(); }, true);
     document.addEventListener("visibilitychange", () => { if (document.hidden) this.envoyer(); });
   },
@@ -4115,7 +4134,7 @@ const AUD = {
       if (this.c !== c) return;
       if (this.blobUrl) { try { URL.revokeObjectURL(this.blobUrl); } catch (e) {} this.blobUrl = null; }
       if (/^blob:/.test(src)) this.blobUrl = src;
-      a.src = src;
+      a.src = src; this.srcOrig = src; this.converti = false;
       a.playbackRate = this.vit;
       const reprendre = () => { a.removeEventListener("loadedmetadata", reprendre); if (p > 10 && a.duration && p < a.duration - 15) { try { a.currentTime = p; } catch (e) {} } };
       a.addEventListener("loadedmetadata", reprendre);
@@ -4403,6 +4422,7 @@ function contenuExtras(wrap, c) {
     if (allerSuivant) m.addEventListener("ended", () => { if (vivant()) allerSuivant(); });
   }
   const m0 = wrap.querySelector("#media");
+  if (m0 && c.type === "audio" && c.fichier_path && !c.embed_id) m0.addEventListener("error", async () => { if (m0.dataset.conv) return; m0.dataset.conv = "1"; try { m0.src = await convertirAudio(urlMedia(c.fichier_path)); m0.play().catch(() => {}); } catch (e) {} });
   if (m0 && c.fichier_path && !c.embed_id) { try { HORS.lire(c.id).then(r => { if (r && r.blob) { const t = m0.currentTime, j = !m0.paused; m0.src = URL.createObjectURL(r.blob); if (t) m0.currentTime = t; if (j || etat.params.auto) m0.play().catch(() => {}); } }); } catch (e) {} }
   if (c.type !== "audio") {
     const dl = wrap.querySelector("#au-dl");
