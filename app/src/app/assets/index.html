@@ -3769,7 +3769,7 @@ function boutonAbonnement(btn, channelId, creatorId, surChangement) {
 
 /* ---------- Écoute hors connexion : audios enregistrés + 20 dernières écoutes ---------- */
 const HORS = {
-  _db: null, ids: new Set(), MAX: 20, TAILLE_MAX: 120 * 1024 * 1024, enCours: new Set(), annul: new Set(),
+  pret: null, _db: null, ids: new Set(), MAX: 20, TAILLE_MAX: 120 * 1024 * 1024, enCours: new Set(), annul: new Set(),
   ouvrir() {
     if (this._db) return this._db;
     return (this._db = new Promise((ok, ko) => {
@@ -3793,7 +3793,8 @@ const HORS = {
   async lire(id) { try { return await this.op("readonly", st => st.get(id)); } catch (e) { return null; } },
   async tous() { try { return (await this.op("readonly", st => st.getAll())) || []; } catch (e) { return []; } },
   async init() {
-    try { const r = await this.tous(); this.ids = new Set(r.filter(x => x.blob).map(x => x.id)); } catch (e) {}
+    this.pret = (async () => { try { const r = await this.tous(); this.ids = new Set(r.filter(x => x.blob).map(x => x.id)); } catch (e) {} })();
+    await this.pret;
     try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist(); } catch (e) {}
     this.bandeau();
     window.addEventListener("online", () => this.bandeau());
@@ -4032,7 +4033,7 @@ const AUD = {
       this.maj();
       this.memoriser(c);
     };
-    if (c.fichier_path && !c.embed_id && HORS.ids.has(c.id)) {
+    if (c.fichier_path && !c.embed_id) {
       try { a.pause(); } catch (e) {}
       HORS.lire(c.id).then(r => lancer(r && r.blob ? URL.createObjectURL(r.blob) : urlMedia(c.fichier_path)), () => lancer(urlMedia(c.fichier_path)));
       this.maj();
@@ -4118,7 +4119,7 @@ const AUD = {
     const dl = wrap.querySelector("#au-dl");
     if (dl) {
       const maj = () => { const ok = HORS.ids.has(c.id); dl.dataset.ok = ok ? "1" : ""; dl.textContent = ok ? "✓ Hors-ligne" : "⬇ Hors-ligne"; };
-      maj();
+      maj(); if (HORS.pret) HORS.pret.then(maj);
       dl.onclick = async () => {
         dl.disabled = true;
         if (dl.dataset.ok) { await HORS.nettoyerManuel(c.id); maj(); dl.disabled = false; return; }
@@ -4311,12 +4312,12 @@ function contenuExtras(wrap, c) {
     if (allerSuivant) m.addEventListener("ended", () => { if (vivant()) allerSuivant(); });
   }
   const m0 = wrap.querySelector("#media");
-  if (m0 && (c.type === "video" || c.type === "reel") && HORS.ids.has(c.id)) { try { HORS.lire(c.id).then(r => { if (r && r.blob) { const t = m0.currentTime, j = !m0.paused; m0.src = URL.createObjectURL(r.blob); if (t) m0.currentTime = t; if (j || etat.params.auto) m0.play().catch(() => {}); } }); } catch (e) {} }
+  if (m0 && c.fichier_path && !c.embed_id) { try { HORS.lire(c.id).then(r => { if (r && r.blob) { const t = m0.currentTime, j = !m0.paused; m0.src = URL.createObjectURL(r.blob); if (t) m0.currentTime = t; if (j || etat.params.auto) m0.play().catch(() => {}); } }); } catch (e) {} }
   if (c.type !== "audio") {
     const dl = wrap.querySelector("#au-dl");
     if (dl) {
       const maj = () => { const ok = HORS.ids.has(c.id); dl.dataset.ok = ok ? "1" : ""; dl.textContent = ok ? "✓ Hors-ligne" : "⬇ Hors-ligne"; };
-      maj();
+      maj(); if (HORS.pret) HORS.pret.then(maj);
       dl.onclick = async () => {
         dl.disabled = true;
         if (dl.dataset.ok) { await HORS.retirer(c.id); maj(); dl.disabled = false; return; }
