@@ -8695,25 +8695,36 @@ appliquerLangue();
     d.style.cssText = "position:fixed;left:12px;right:12px;bottom:84px;z-index:99999;background:#1f2937;color:#fff;padding:14px;border-radius:12px;font-size:15px;text-align:center";
     d.textContent = t; document.body.appendChild(d); setTimeout(() => d.remove(), 6000);
   }
-  let attente = null;
+  let attente = null, traitement = false;
+  const CLE_PARTAGE = "partage_attente";
+  /* Les fichiers partagés restent en attente (même si l'app se ferme ou si la connexion demande un code) */
   async function traiter() {
     let liste = []; try { liste = JSON.parse(LumuNative.recus() || "[]"); } catch (e) {}
-    if (liste.length) attente = liste;
-    if (!attente) return;
-    let essais = 0;
-    while (!(etat.profil && etat.chaine) && essais++ < 40) { if (essais === 8 && !etat.parentId) { bandeau("Connectez-vous pour publier vos fichiers."); } await new Promise(r => setTimeout(r, 1000)); }
-    if (!estCreateur() || !etat.chaine) { bandeau("Seuls les créateurs peuvent publier. Connectez-vous puis repartagez."); attente = null; return; }
-    const fichiers = [];
-    for (const x of attente) {
-      try {
-        const r = await fetch("/recu/" + encodeURIComponent(x.n)); if (!r.ok) continue;
-        const b = await r.blob();
-        fichiers.push(new File([b], x.nom || x.n, { type: x.t || b.type || "" }));
-      } catch (e) {}
-    }
-    attente = null;
-    if (!fichiers.length) { bandeau("Fichiers illisibles."); return; }
-    etat.importPre = fichiers; router("importer");
+    if (liste.length) { attente = liste; sauverLocal(CLE_PARTAGE, liste); }
+    if (!attente) attente = chargerLocal(CLE_PARTAGE, null);
+    if (!attente || !attente.length || traitement) return;
+    traitement = true;
+    try {
+      const pret = () => !!(etat.profil && etat.chaine && etat.parentId);
+      let essais = 0;
+      while (!pret() && essais++ < 900) {
+        if (essais === 5) bandeau("Connectez-vous à Lumu : vos fichiers partagés vous attendent.");
+        await new Promise(r => setTimeout(r, 1000));
+      }
+      if (!pret()) return;
+      if (!estCreateur() || !etat.chaine) { bandeau("Seuls les créateurs peuvent publier. Connectez-vous avec un compte créateur."); sauverLocal(CLE_PARTAGE, null); attente = null; return; }
+      const fichiers = [];
+      for (const x of attente) {
+        try {
+          const r = await fetch("/recu/" + encodeURIComponent(x.n)); if (!r.ok) continue;
+          const b = await r.blob();
+          fichiers.push(new File([b], x.nom || x.n, { type: x.t || b.type || "" }));
+        } catch (e) {}
+      }
+      sauverLocal(CLE_PARTAGE, null); attente = null;
+      if (!fichiers.length) { bandeau("Fichiers illisibles."); return; }
+      etat.importPre = fichiers; router("importer");
+    } finally { traitement = false; }
   }
   window.__lumuRecu = traiter;
   setTimeout(traiter, 1500);
