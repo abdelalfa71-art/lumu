@@ -2444,7 +2444,17 @@ function menuFlottant(x, y, items) {
 /* Épingles : mémorisées sur l'appareil ; les contenus épinglés remontent en tête de la liste Écouter */
 const EPING_CLE = "lumu_epingles";
 function estEpingle(id) { return chargerLocal(EPING_CLE, []).includes(id); }
-function basculerEpingle(id) { const l = chargerLocal(EPING_CLE, []); sauverLocal(EPING_CLE, l.includes(id) ? l.filter(x => x !== id) : [id, ...l]); document.dispatchEvent(new Event("epingles-maj")); }
+function basculerEpingle(id) {
+  const l = chargerLocal(EPING_CLE, []), ajout = !l.includes(id);
+  sauverLocal(EPING_CLE, ajout ? [id, ...l] : l.filter(x => x !== id));
+  document.dispatchEvent(new Event("epingles-maj"));
+  if (etat.parentId) { try { const q = ajout ? sb.from("yt_epingles").insert({ contenu_id: id }) : sb.from("yt_epingles").delete().eq("contenu_id", id); q.then(() => {}, () => {}); } catch (e) {} }
+}
+/* Recharge les épingles du compte (multi-appareils) ; la copie locale sert de secours */
+async function synchroEpingles() {
+  if (!etat.parentId) return;
+  try { const r = await sb.from("yt_epingles").select("contenu_id"); if (r.error || !r.data) return; sauverLocal(EPING_CLE, r.data.map(x => x.contenu_id)); document.dispatchEvent(new Event("epingles-maj")); } catch (e) {}
+}
 /* Menu d'une carte : copier le lien, hors-ligne, partager, favoris */
 async function ouvrirMenuContenu(c, el, x, y) {
   const audioOuVideo = !!(c.fichier_path && !c.embed_id);
@@ -5600,6 +5610,7 @@ async function vueEcouter() {
       <div id="ec-liste">${squelettes(3)}</div>
     </div>`;
   app.appendChild(w);
+  synchroEpingles();
   if (ACCES.simple()) w.classList.add("ec-simple");
   try { STAT.monter(w.querySelector("#st-row")); } catch (e) {}
   w.querySelector("#eg-hors").onclick = () => router("hors"); w.querySelector("#eg-disc").onclick = () => router("discussions"); w.querySelector("#eg-imams").onclick = () => router("preches"); w.querySelector("#eg-q").onclick = () => router("recherche");
@@ -5692,7 +5703,7 @@ async function vueEcouter() {
       el.className = "ec-row"; el._c = c; el.tabIndex = 0; el.setAttribute("role", "button");
       appuiLong(el, (x, y) => ouvrirMenuContenu(c, el, x, y));
       el.innerHTML = `<span class="ec-cv">${cover ? `<img src="${esc(cover)}" alt="" loading="lazy">` : `<img class="ec-logo-ph" src="icon-192.png" alt="" loading="lazy">`}</span>
-        <div class="ec-tx"><span class="ec-imam" data-notrad dir="auto">${estEpingle(c.id) ? "📌 " : ""}@${esc(nom || "Imam")}</span><b dir="auto" data-notrad>${esc(c.title)}</b><small dir="auto" data-notrad>${c.duration_seconds ? esc(fmtDuree(c.duration_seconds)) : ""}${HORS.ids && HORS.ids.has(c.id) ? " · ✓" : ""}${chargerLocal("fini_" + c.id, 0) ? " · ✔" : ""}</small>${(() => { const q = chargerLocal("pos_" + c.id, 0); return q > 10 && c.duration_seconds && q < c.duration_seconds - 15 ? `<i class="ec-bar"><u style="width:${Math.round(100 * q / c.duration_seconds)}%"></u></i>` : ""; })()}</div>
+        <div class="ec-tx"><span class="ec-imam" data-notrad dir="auto">${estEpingle(c.id) ? "📌 " : ""}${c.published_at && Date.now() - new Date(c.published_at) < 48 * 3600e3 ? '<em style="background:#c9a227;color:#fff;border-radius:6px;padding:0 6px;font-size:11px;font-style:normal;margin-right:4px">Nouveau</em>' : ""}@${esc(nom || "Imam")}</span><b dir="auto" data-notrad>${esc(c.title)}</b><small dir="auto" data-notrad>${c.duration_seconds ? esc(fmtDuree(c.duration_seconds)) : ""}${HORS.ids && HORS.ids.has(c.id) ? " · ✓" : ""}${chargerLocal("fini_" + c.id, 0) ? " · ✔" : ""}</small>${(() => { const q = chargerLocal("pos_" + c.id, 0); return q > 10 && c.duration_seconds && q < c.duration_seconds - 15 ? `<i class="ec-bar"><u style="width:${Math.round(100 * q / c.duration_seconds)}%"></u></i>` : ""; })()}</div>
         ${c.fichier_path ? `<button class="ec-dl" aria-label="Télécharger"></button>` : ""}<button class="ec-pl" aria-label="Lecture">${ico("play", 26, true)}</button>`;
       { const chId = c.channel_id || (c.yt_channels && c.yt_channels.id), im = el.querySelector(".ec-imam"); if (im && chId) im.onclick = ev => { ev.stopPropagation(); router("chaine", { id: chId }); }; }
       const dl = el.querySelector(".ec-dl");
