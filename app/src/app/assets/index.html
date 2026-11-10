@@ -1586,6 +1586,7 @@ function ligneAudio(c) {
   const nom = c.source_nom || (c.yt_channels && c.yt_channels.name) || c.auteur || "";
   el.innerHTML = `<span class="ec-cv">${cover ? `<img src="${esc(cover)}" alt="" loading="lazy">` : `<img class="ec-logo-ph" src="icon-192.png" alt="" loading="lazy">`}</span><div class="ec-tx"><b dir="auto" data-notrad>${esc(c.title)}</b><small dir="auto" data-notrad>${esc(nom)}${c.duration_seconds ? " · " + esc(fmtDuree(c.duration_seconds)) : ""}${chargerLocal("fini_" + c.id, 0) ? " · ✔" : ""}</small></div><button class="ec-pl" aria-label="Lecture">${ico("play", 26, true)}</button>`;
   el.onclick = () => router("contenu", { id: c.id, c });
+  appuiLong(el, (x, y) => ouvrirMenuContenu(c, el, x, y));
   el.querySelector(".ec-pl").onclick = ev => { ev.stopPropagation(); lireDirect(c); };
   return el;
 }
@@ -2405,37 +2406,51 @@ function creerNav() {
 function phType(c, t, cls) {
   return c && c.type === "audio" ? `<img class="logo-ph" src="icon-192.png" alt="" loading="lazy">` : `<span class="${cls}">${t.ic}</span>`;
 }
-/* Appui long (environ 0,5 s) : ouvre un menu, sans le menu natif du téléphone ni le clic qui suit */
+/* Appui long (environ 0,45 s) : menu flottant près du doigt, sans le menu natif du téléphone ni le clic qui suit */
 function appuiLong(el, action) {
   let t = null, fait = false, sx = 0, sy = 0;
-  el.addEventListener("pointerdown", e => { fait = false; sx = e.clientX; sy = e.clientY; clearTimeout(t); t = setTimeout(() => { fait = true; try { navigator.vibrate && navigator.vibrate(25); } catch (x) {} action(); }, 500); });
-  ["pointerup", "pointerleave", "pointercancel"].forEach(ev => el.addEventListener(ev, () => clearTimeout(t)));
-  el.addEventListener("pointermove", e => { if (Math.abs(e.clientX - sx) + Math.abs(e.clientY - sy) > 10) clearTimeout(t); });
+  const annule = () => { clearTimeout(t); t = null; };
+  const lance = (x, y) => { t = setTimeout(() => { t = null; fait = true; try { navigator.vibrate && navigator.vibrate(25); } catch (e) {} action(x, y); }, 450); };
+  el.addEventListener("touchstart", e => { const p = e.touches[0]; fait = false; sx = p.clientX; sy = p.clientY; annule(); lance(sx, sy); }, { passive: true });
+  el.addEventListener("touchmove", e => { const p = e.touches[0]; if (p && Math.abs(p.clientX - sx) + Math.abs(p.clientY - sy) > 12) annule(); }, { passive: true });
+  el.addEventListener("touchend", annule); el.addEventListener("touchcancel", annule);
+  el.addEventListener("pointerdown", e => { if (e.pointerType === "mouse" && e.button === 0) { fait = false; sx = e.clientX; sy = e.clientY; annule(); lance(sx, sy); } });
+  el.addEventListener("pointerup", e => { if (e.pointerType === "mouse") annule(); });
+  el.addEventListener("pointerleave", e => { if (e.pointerType === "mouse") annule(); });
   el.addEventListener("contextmenu", e => e.preventDefault());
   el.addEventListener("click", e => { if (fait) { e.preventDefault(); e.stopImmediatePropagation(); fait = false; } }, true);
 }
-/* Menu de la carte : partager, hors-ligne, favoris */
-async function ouvrirMenuContenu(c, el) {
+/* Menu flottant (style Telegram) : une liste d'actions près du point d'appui */
+function menuFlottant(x, y, items) {
+  document.querySelectorAll(".menu-flottant").forEach(n => n.remove());
+  const fond = document.createElement("div"); fond.className = "menu-flottant";
+  fond.style.cssText = "position:fixed;inset:0;z-index:99998;background:rgba(0,0,0,.12)";
+  const m = document.createElement("div"); m.setAttribute("role", "menu");
+  m.style.cssText = "position:fixed;left:0;top:0;min-width:240px;max-width:80vw;background:#243442;color:#fff;border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,.45);padding:6px 0;overflow:hidden;font-size:16px";
+  items.forEach(it => {
+    const b = document.createElement("button"); b.type = "button"; b.setAttribute("role", "menuitem");
+    b.style.cssText = "all:unset;display:flex;align-items:center;gap:20px;width:100%;box-sizing:border-box;padding:14px 22px;cursor:pointer;color:#fff;font-size:16px";
+    b.innerHTML = `<span aria-hidden="true" style="width:22px;text-align:center;font-size:18px">${it.ic}</span><span>${esc(it.t)}</span>`;
+    b.onclick = () => { fond.remove(); it.f(); };
+    m.appendChild(b);
+  });
+  fond.appendChild(m); document.body.appendChild(fond);
+  const r = m.getBoundingClientRect(), W = innerWidth, H = innerHeight;
+  const left = Math.min(Math.max(8, x - r.width / 2), W - r.width - 8);
+  const top = y + 12 + r.height > H - 8 ? Math.max(8, y - r.height - 12) : y + 12;
+  m.style.left = left + "px"; m.style.top = top + "px";
+  fond.onclick = ev => { if (ev.target === fond) fond.remove(); };
+}
+/* Menu d'une carte : copier le lien, hors-ligne, partager, favoris */
+async function ouvrirMenuContenu(c, el, x, y) {
   const audioOuVideo = !!(c.fichier_path && !c.embed_id);
   let fav = false; try { fav = (await mesFavorisDe([c.id])).has(c.id); } catch (e) {}
   const hors = audioOuVideo && HORS.ids.has(c.id);
-  const html = `<div style="display:grid;gap:10px">
-    <button class="btn-outline" data-a="partager" type="button">↗ Partager</button>
-    ${audioOuVideo ? `<button class="btn-outline" data-a="hors" type="button">${hors ? "✓ Retirer du hors-ligne" : "⬇ Sauvegarder hors-ligne"}</button>` : ""}
-    <button class="btn-outline" data-a="fav" type="button">${fav ? "❤ Retirer des favoris" : "🤍 Ajouter aux favoris"}</button>
-  </div>`;
-  ouvrirFeuille(c.title || "Lumu", html, (corps, fermer) => {
-    const bt = a => corps.querySelector(`[data-a="${a}"]`);
-    bt("partager").onclick = () => { fermer(); partagerContenu(c, el); };
-    if (bt("hors")) bt("hors").onclick = async () => {
-      const b = bt("hors"); b.disabled = true;
-      if (hors) { await HORS.retirer(c.id); fermer(); return; }
-      b.textContent = "… 0 %";
-      const ok = await HORS.sauver(c, true, (n, t) => { b.textContent = "… " + Math.round(n * 100 / t) + " %"; });
-      if (ok) fermer(); else { b.disabled = false; b.textContent = "Échec, réessayez"; }
-    };
-    bt("fav").onclick = async () => { const r = await basculerFavori(c, fav); if (r !== null) fermer(); };
-  });
+  const items = [{ ic: "🔗", t: "Copier le lien", f: () => { try { navigator.clipboard.writeText(lienPartage(c.id)); } catch (e) {} } }];
+  if (audioOuVideo) items.push({ ic: hors ? "✓" : "⬇", t: hors ? "Retirer du hors-ligne" : "Télécharger (hors-ligne)", f: async () => { if (hors) { await HORS.retirer(c.id); return; } await HORS.sauver(c, true); } });
+  items.push({ ic: "↗", t: "Partager", f: () => partagerContenu(c, el) });
+  items.push({ ic: fav ? "💔" : "❤", t: fav ? "Retirer des favoris" : "Ajouter aux favoris", f: () => basculerFavori(c, fav) });
+  menuFlottant(x, y, items);
 }
 function carteContenu(c, surClic) {
   const t = TYPES[c.type] || TYPES.video;
@@ -2455,7 +2470,7 @@ function carteContenu(c, surClic) {
     </div>`;
   const ouvrir = surClic || (() => router("contenu", { id: c.id, c }));
   el.onclick = ouvrir;
-  appuiLong(el, () => ouvrirMenuContenu(c, el));
+  appuiLong(el, (x, y) => ouvrirMenuContenu(c, el, x, y));
   el.onkeydown = ev => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); ouvrir(); } };
   return el;
 }
@@ -5667,6 +5682,7 @@ async function vueEcouter() {
       const cover = c.cover_path ? urlMedia(c.cover_path) : "";
       const el = document.createElement("div");
       el.className = "ec-row"; el._c = c; el.tabIndex = 0; el.setAttribute("role", "button");
+      appuiLong(el, (x, y) => ouvrirMenuContenu(c, el, x, y));
       el.innerHTML = `<span class="ec-cv">${cover ? `<img src="${esc(cover)}" alt="" loading="lazy">` : `<img class="ec-logo-ph" src="icon-192.png" alt="" loading="lazy">`}</span>
         <div class="ec-tx"><span class="ec-imam" data-notrad dir="auto">@${esc(nom || "Imam")}</span><b dir="auto" data-notrad>${esc(c.title)}</b><small dir="auto" data-notrad>${c.duration_seconds ? esc(fmtDuree(c.duration_seconds)) : ""}${HORS.ids && HORS.ids.has(c.id) ? " · ✓" : ""}${chargerLocal("fini_" + c.id, 0) ? " · ✔" : ""}</small>${(() => { const q = chargerLocal("pos_" + c.id, 0); return q > 10 && c.duration_seconds && q < c.duration_seconds - 15 ? `<i class="ec-bar"><u style="width:${Math.round(100 * q / c.duration_seconds)}%"></u></i>` : ""; })()}</div>
         ${c.fichier_path ? `<button class="ec-dl" aria-label="Télécharger"></button>` : ""}<button class="ec-pl" aria-label="Lecture">${ico("play", 26, true)}</button>`;
