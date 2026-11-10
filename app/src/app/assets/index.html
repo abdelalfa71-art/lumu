@@ -4063,6 +4063,18 @@ window.__lumuMedia = a => {
     else if (a === "stop") AUD.arreter();
   } catch (e) {}
 };
+/* Recopie une copie hors-ligne (bloc du navigateur) dans un fichier du téléphone, par morceaux */
+async function copierVersNatif(id, blob) {
+  const octets = new Uint8Array(await blob.arrayBuffer());
+  LumuNative.horsDebut(id);
+  const T = 512 * 1024;
+  for (let i = 0; i < octets.length; i += T) {
+    const sub = octets.subarray(i, i + T); let txt = "";
+    for (let k = 0; k < sub.length; k += 0x8000) txt += String.fromCharCode.apply(null, sub.subarray(k, k + 0x8000));
+    LumuNative.horsAjouter(id, btoa(txt));
+  }
+  LumuNative.horsFin(id);
+}
 /* Lecteur natif : pris en charge par l'application Android quand le navigateur ne lit pas un fichier */
 const NATIFS = { seq: 0, inst: {} };
 window.__natifEtat = (id, pos, dur, playing, fin) => { const o = NATIFS.inst[id]; if (o) o._etat(+pos, +dur, playing === true || playing === "true", fin === true || fin === "true"); };
@@ -4147,13 +4159,23 @@ const AUD = {
       afficherErreurAudio();
     });
   },
-  basculeNatif() {
-    const pos = this.a.currentTime || 0;
-    const src = /^blob:/.test(this.srcOrig) ? (this.c && this.c.fichier_path ? urlMedia(this.c.fichier_path) : "") : this.srcOrig;
-    if (!src) return;
-    const n = new NatifAudio();
-    this.a = n; this.attacher(n);
-    n.src = src; n.playbackRate = this.vit; n.currentTime = pos; n.play().catch(() => {});
+  async basculeNatif() {
+    try {
+      const pos = this.a.currentTime || 0, c = this.c;
+      let src = this.srcOrig;
+      if (/^blob:/.test(src)) {
+        // Copie hors-ligne : recopiée une fois sur le téléphone, lue par le lecteur natif (sans réseau)
+        const r = c && c.id ? await HORS.lire(c.id) : null;
+        if (r && r.blob) { if (!LumuNative.horsExiste(c.id)) await copierVersNatif(c.id, r.blob); src = "hors:" + c.id; }
+        else if (c && c.fichier_path) src = urlMedia(c.fichier_path);
+        else return;
+      }
+      const n = new NatifAudio();
+      this.a = n; this.attacher(n);
+      n.src = src; n.playbackRate = this.vit; n.currentTime = pos; n.play().catch(() => {});
+    } catch (e) {
+      const el = this.ui && this.ui.root.querySelector(".au-t span:last-child"); if (el) el.textContent = "Lecture impossible";
+    }
   },
   envoyer() {
     if (this.acc >= 5 && this.c) { const sec = Math.round(this.acc); this.acc = 0; sb.rpc("yt_temps_vu", { p_id: this.c.id, p_sec: sec }).then(() => {}, () => {}); }

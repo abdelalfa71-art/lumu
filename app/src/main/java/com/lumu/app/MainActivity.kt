@@ -155,7 +155,22 @@ class MainActivity : AppCompatActivity() {
         }
 
         /** Lecteur natif : utilisé quand le navigateur ne lit pas le fichier. */
-        @JavascriptInterface fun natifLire(url: String, id: String, debut: Double) { runOnUiThread { natif.lire(url, id, debut) } }
+        @JavascriptInterface fun natifLire(url: String, id: String, debut: Double) {
+            // "hors:<id>" = copie hors-ligne stockée sur le téléphone
+            val source = if (url.startsWith("hors:")) Uri.fromFile(horsFichier(url.removePrefix("hors:"))).toString() else url
+            runOnUiThread { natif.lire(source, id, debut) }
+        }
+        /** Copies hors-ligne sur le téléphone (lues par le lecteur natif). */
+        @JavascriptInterface fun horsExiste(id: String): Boolean { val f = horsFichier(id); return f.exists() && f.length() > 0 }
+        @JavascriptInterface fun horsDebut(id: String) { val f = File(horsFichier(id).path + ".part"); f.delete(); f.createNewFile() }
+        @JavascriptInterface fun horsAjouter(id: String, b64: String) {
+            val f = File(horsFichier(id).path + ".part")
+            java.io.FileOutputStream(f, true).use { it.write(android.util.Base64.decode(b64, android.util.Base64.DEFAULT)) }
+        }
+        @JavascriptInterface fun horsFin(id: String) {
+            val p = File(horsFichier(id).path + ".part"); val f = horsFichier(id)
+            f.delete(); p.renameTo(f)
+        }
         @JavascriptInterface fun natifPlay() { runOnUiThread { natif.play() } }
         @JavascriptInterface fun natifPause() { runOnUiThread { natif.pause() } }
         @JavascriptInterface fun natifAller(sec: Double) { runOnUiThread { natif.aller(sec) } }
@@ -214,6 +229,11 @@ class MainActivity : AppCompatActivity() {
 
     private var lectureEnCours = false
     private val natif by lazy { NatifLecteur(this) }
+
+    private fun horsFichier(id: String): File {
+        val dossier = File(filesDir, "hors").apply { mkdirs() }
+        return File(dossier, id.replace(Regex("[^A-Za-z0-9_-]"), "_"))
+    }
 
     /** Envoie du code JavaScript à la page (fil principal). */
     fun envoyerJs(js: String) { runOnUiThread { webView.evaluateJavascript(js, null) } }
