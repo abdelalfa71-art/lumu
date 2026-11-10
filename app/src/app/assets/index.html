@@ -3087,6 +3087,54 @@ function versJpeg(source, w, h, max) {
   ctx.drawImage(source, 0, 0, cw, ch);
   return new Promise((ok, ko) => cv.toBlob(b => b ? ok(b) : ko(new Error("Conversion impossible.")), "image/jpeg", 0.82));
 }
+/* Découpe une vidéo longue en parties de 3 minutes (lecture en temps réel, enregistrée à la volée) */
+const DECOUPE = { parts: null };
+async function decouperVideo(f, d, surProgres) {
+  const v = document.createElement("video");
+  v.playsInline = true; v.preload = "auto"; v.src = URL.createObjectURL(f);
+  v.style.cssText = "position:fixed;left:0;top:0;width:1px;height:1px;opacity:.01;pointer-events:none";
+  document.body.appendChild(v);
+  let iv = null, ac = null;
+  try {
+    await new Promise((ok, ko) => { v.onloadeddata = ok; v.onerror = () => ko(new Error("Vidéo illisible.")); });
+    if (!window.MediaRecorder) throw new Error("Découpage non disponible sur ce téléphone.");
+    // Image : on redessine chaque image de la vidéo sur un canevas (fonctionne sur tous les téléphones)
+    const sc = Math.min(1, 720 / Math.max(v.videoWidth || 720, v.videoHeight || 720));
+    const cv = document.createElement("canvas"); cv.width = Math.max(2, Math.round((v.videoWidth || 720) * sc)); cv.height = Math.max(2, Math.round((v.videoHeight || 720) * sc));
+    const g = cv.getContext("2d");
+    const flux = cv.captureStream(30);
+    // Son : pris directement dans la vidéo
+    try { ac = new (window.AudioContext || window.webkitAudioContext)(); const src = ac.createMediaElementSource(v), dst = ac.createMediaStreamDestination(); src.connect(dst); src.connect(ac.destination); dst.stream.getAudioTracks().forEach(t => flux.addTrack(t)); } catch (e) {}
+    const mime = ["video/webm;codecs=vp8,opus", "video/webm", "video/mp4"].find(x => { try { return MediaRecorder.isTypeSupported(x); } catch (e) { return false; } }) || "";
+    const n = Math.ceil(d / 180), parts = [];
+    for (let k = 0; k < n; k++) {
+      const debut = k * 180, fin = Math.min(d, debut + 180);
+      if (Math.abs(v.currentTime - debut) > 0.05) await new Promise(ok => { const on = () => { v.removeEventListener("seeked", on); ok(); }; v.addEventListener("seeked", on); v.currentTime = debut; });
+      if (ac && ac.state === "suspended") { try { await ac.resume(); } catch (e) {} }
+      const morc = [];
+      const rec = new MediaRecorder(flux, mime ? { mimeType: mime } : undefined);
+      rec.ondataavailable = e => { if (e.data && e.data.size) morc.push(e.data); };
+      const fini = new Promise(ok => { rec.onstop = ok; });
+      rec.start(1000);
+      iv = setInterval(() => { try { g.drawImage(v, 0, 0, cv.width, cv.height); } catch (e) {} }, 33);
+      await v.play().catch(() => {});
+      await new Promise(ok => {
+        const t = setInterval(() => {
+          if (surProgres) surProgres((k + Math.min(1, Math.max(0, v.currentTime - debut) / (fin - debut))) / n);
+          if (v.currentTime >= fin - 0.15 || v.ended) { clearInterval(t); ok(); }
+        }, 150);
+      });
+      v.pause(); clearInterval(iv); iv = null; rec.stop(); await fini;
+      const type = (rec.mimeType || mime || "video/webm").split(";")[0];
+      parts.push({ blob: new Blob(morc, { type }), mime: type, ext: type.includes("mp4") ? "mp4" : "webm", debut, fin, ok: false });
+    }
+    return parts;
+  } finally {
+    if (iv) clearInterval(iv);
+    v.pause(); URL.revokeObjectURL(v.src); v.removeAttribute("src"); v.load(); v.remove();
+    if (ac) { try { ac.close(); } catch (e) {} }
+  }
+}
 async function reduireImage(blob, max = 640) {
   const im = await chargerImage(blob);
   return versJpeg(im, im.naturalWidth, im.naturalHeight, max);
@@ -7740,32 +7788,59 @@ const STAT = {
         };
       };
       c.querySelector('[data-k="w"]').onclick = () => {
-        zone.innerHTML = `<input id="st-f" type="file" accept="video/*" style="margin:6px 0"><div id="st-apv"></div><input class="champ" id="st-l" maxlength="200" placeholder="Légende (facultatif)" dir="auto"><button class="btn" id="st-ok">Publier</button>`;
-        const ok = zone.querySelector("#st-ok"), ap = zone.querySelector("#st-apv");
-        let duree = null;
+        zone.innerHTML = `<input id="st-f" type="file" accept="video/*" style="margin:6px 0"><div id="st-apv"></div><input class="champ" id="st-l" maxlength="200" placeholder="Légende (facultatif)" dir="auto"><div id="st-parts"></div><button class="btn" id="st-ok">Publier</button>`;
+        const ok = zone.querySelector("#st-ok"), ap = zone.querySelector("#st-apv"), pa = zone.querySelector("#st-parts");
+        let fichier = null, duree = null;
+        const legende = () => zone.querySelector("#st-l").value.trim();
+        const extDe = f => (f.name.split(".").pop() || "mp4").toLowerCase().replace(/[^a-z0-9]/g, "") || "mp4";
+        const dessinerParties = () => {
+          const P = DECOUPE.parts; if (!P) return;
+          const restantes = P.filter(x => !x.ok).length;
+          pa.innerHTML = `<p style="margin:8px 0;font-size:14px"><b>${restantes ? restantes + " partie(s) à publier" : "Toutes les parties sont publiées"}</b></p>` + P.map((x, k) => `<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin:6px 0"><span>Partie ${k + 1} · ${fmtDuree(x.debut)} à ${fmtDuree(x.fin)}</span>${x.ok ? "<span>✓ publiée</span>" : `<button class="btn" data-p="${k}" style="min-height:44px">Publier</button>`}</div>`).join("");
+          ok.hidden = true;
+          pa.querySelectorAll("[data-p]").forEach(bt => bt.onclick = async () => {
+            const k = +bt.dataset.p, x = DECOUPE.parts[k]; bt.disabled = true; bt.textContent = "Envoi…"; erreur("");
+            try {
+              const chemin = await envoyer(x.blob, x.ext, x.mime);
+              const txt = (legende() ? legende() + " · " : "") + "Partie " + (k + 1) + "/" + DECOUPE.parts.length;
+              const r = await sb.from("yt_statuts").insert({ channel_id: etat.chaine.id, type: "image", fichier_path: chemin, texte: txt });
+              if (r.error) throw r.error;
+              x.ok = true; x.blob = null; if (apres) apres();
+              if (DECOUPE.parts.every(y => y.ok)) { DECOUPE.parts = null; fermer(); return; }
+              dessinerParties();
+            } catch (e) { bt.disabled = false; bt.textContent = "Publier"; erreur(txtErr(e, "Publication impossible." + (e && e.message ? " (" + e.message + ")" : ""))); }
+          });
+        };
+        if (DECOUPE.parts && DECOUPE.parts.some(x => !x.ok)) dessinerParties();
         zone.querySelector("#st-f").onchange = () => {
-          const f = zone.querySelector("#st-f").files[0]; erreur(""); duree = null; ap.innerHTML = "";
-          if (!f) return;
+          fichier = zone.querySelector("#st-f").files[0]; erreur(""); duree = null; ap.innerHTML = "";
+          if (!fichier) return;
           const v = document.createElement("video"); v.preload = "metadata"; v.muted = true;
           v.onloadedmetadata = () => {
             const d = v.duration; URL.revokeObjectURL(v.src);
             if (!isFinite(d) || d <= 0) return erreur("Vidéo illisible. Essayez un autre format (MP4 conseillé).");
-            if (d > 180.5) return erreur("La vidéo dure " + Math.round(d / 60) + " min. Le statut accepte 3 minutes maximum.");
-            duree = d; ap.innerHTML = `<small>Durée : ${Math.round(d)} s</small>`;
+            duree = d;
+            ap.innerHTML = `<small>Durée : ${fmtDuree(d)}${d > 180.5 ? " · sera découpée en parties de 3 minutes. Vous publiez une partie à la fois, le reste reste disponible." : ""}</small>`;
+            ok.textContent = d > 180.5 ? "Découper en parties de 3 min" : "Publier";
           };
           v.onerror = () => erreur("Vidéo illisible. Essayez un autre format (MP4 conseillé).");
-          v.src = URL.createObjectURL(f);
+          v.src = URL.createObjectURL(fichier);
         };
         ok.onclick = async () => {
-          const f = zone.querySelector("#st-f").files[0];
-          if (!f) return erreur("Choisissez une vidéo.");
+          if (!fichier) return erreur("Choisissez une vidéo.");
           if (duree === null) return;
-          occupe(ok, true, "Envoi…");
+          if (duree <= 180.5) {
+            occupe(ok, true, "Envoi…");
+            try { const chemin = await envoyer(fichier, extDe(fichier), fichier.type || "video/mp4"); await publier({ type: "image", fichier_path: chemin, texte: legende() || null }); }
+            catch (e) { occupe(ok, false, "Publier"); erreur(txtErr(e, "Publication impossible." + (e && e.message ? " (" + e.message + ")" : ""))); }
+            return;
+          }
+          occupe(ok, true, "Découpage… 0 %"); garderEveille(true);
           try {
-            const ext = (f.name.split(".").pop() || "mp4").toLowerCase().replace(/[^a-z0-9]/g, "") || "mp4";
-            const chemin = await envoyer(f, ext, f.type || "video/mp4");
-            await publier({ type: "image", fichier_path: chemin, texte: zone.querySelector("#st-l").value.trim() || null });
-          } catch (e) { occupe(ok, false, "Publier"); erreur(txtErr(e, "Publication impossible." + (e && e.message ? " (" + e.message + ")" : ""))); }
+            DECOUPE.parts = await decouperVideo(fichier, duree, p => { ok.textContent = "Découpage… " + Math.round(p * 100) + " %"; });
+            dessinerParties();
+          } catch (e) { DECOUPE.parts = null; occupe(ok, false, "Découper en parties de 3 min"); erreur(txtErr(e, "Découpage impossible." + (e && e.message ? " (" + e.message + ")" : ""))); }
+          finally { garderEveille(false); }
         };
       };
       c.querySelector('[data-k="v"]').onclick = () => {
