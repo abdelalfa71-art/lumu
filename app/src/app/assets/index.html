@@ -4108,10 +4108,14 @@ const AUD = {
     a.addEventListener("seeking", () => { this.dernier = null; });
     a.addEventListener("loadedmetadata", () => this.progres());
     a.addEventListener("error", () => {
-      if (this.srcOrig && !this.converti && !/^blob:/.test(this.srcOrig) && !(this.c && this.c.type === "video")) {
-        this.converti = true;
-        convertirAudio(this.srcOrig).then(u => { a.src = u; a.play().catch(() => {}); }).catch(() => afficherErreurAudio());
-        return;
+      if (this.srcOrig && !this.converti && !(this.c && this.c.type === "video")) {
+        // Copie hors-ligne illisible : on convertit à partir du fichier en ligne
+        const source = /^blob:/.test(this.srcOrig) ? (this.c && this.c.fichier_path ? urlMedia(this.c.fichier_path) : null) : this.srcOrig;
+        if (source) {
+          this.converti = true;
+          convertirAudio(source).then(u => { a.src = u; a.play().catch(() => {}); }).catch(() => afficherErreurAudio());
+          return;
+        }
       }
       afficherErreurAudio();
     });
