@@ -2441,6 +2441,10 @@ function menuFlottant(x, y, items) {
   m.style.left = left + "px"; m.style.top = top + "px";
   fond.onclick = ev => { if (ev.target === fond) fond.remove(); };
 }
+/* Épingles : mémorisées sur l'appareil ; les contenus épinglés remontent en tête de la liste Écouter */
+const EPING_CLE = "lumu_epingles";
+function estEpingle(id) { return chargerLocal(EPING_CLE, []).includes(id); }
+function basculerEpingle(id) { const l = chargerLocal(EPING_CLE, []); sauverLocal(EPING_CLE, l.includes(id) ? l.filter(x => x !== id) : [id, ...l]); document.dispatchEvent(new Event("epingles-maj")); }
 /* Menu d'une carte : copier le lien, hors-ligne, partager, favoris */
 async function ouvrirMenuContenu(c, el, x, y) {
   const audioOuVideo = !!(c.fichier_path && !c.embed_id);
@@ -2449,6 +2453,8 @@ async function ouvrirMenuContenu(c, el, x, y) {
   const items = [{ ic: "🔗", t: "Copier le lien", f: () => { try { navigator.clipboard.writeText(lienPartage(c.id)); } catch (e) {} } }];
   if (audioOuVideo) items.push({ ic: hors ? "✓" : "⬇", t: hors ? "Retirer du hors-ligne" : "Télécharger (hors-ligne)", f: async () => { if (hors) { await HORS.retirer(c.id); return; } await HORS.sauver(c, true); } });
   items.push({ ic: "↗", t: "Partager", f: () => partagerContenu(c, el) });
+  const ep = estEpingle(c.id);
+  items.push({ ic: "📌", t: ep ? "Désépingler" : "Épingler", f: () => basculerEpingle(c.id) });
   items.push({ ic: fav ? "💔" : "❤", t: fav ? "Retirer des favoris" : "Ajouter aux favoris", f: () => basculerFavori(c, fav) });
   menuFlottant(x, y, items);
 }
@@ -5667,6 +5673,7 @@ async function vueEcouter() {
     p.onclick = () => router("preches");
     z.appendChild(p);
   }
+  document.addEventListener("epingles-maj", function surEp() { if (!w.isConnected) { document.removeEventListener("epingles-maj", surEp); return; } lignes(); });
   function lignes() {
     const re = (CH.find(x => x[0] === filtre) || [])[2];
     w.classList.toggle("ec-cherche", !!rech);
@@ -5676,6 +5683,7 @@ async function vueEcouter() {
       const loc = tous.filter(c => (c.title || "").toLowerCase().includes(m) || (c.description || "").toLowerCase().includes(m) || nomDe(c).toLowerCase().includes(m));
       const vus = new Set(loc.map(c => c.id)); l = [...loc, ...serveur.filter(c => !vus.has(c.id))];
     } else l = tous.filter(c => !re || re.test(c.category || "") || re.test(c.title || ""));
+    { const ep = chargerLocal(EPING_CLE, []); l = [...l.filter(c => ep.includes(c.id)), ...l.filter(c => !ep.includes(c.id))]; }
     liste.innerHTML = l.length ? "" : `<p class="ec-vide">${rech ? "Aucun résultat." : "Aucun audio pour l'instant."}</p>`;
     l.forEach(c => {
       const nom = c.source_nom || (c.yt_channels && c.yt_channels.name) || c.auteur || "";
@@ -5684,7 +5692,7 @@ async function vueEcouter() {
       el.className = "ec-row"; el._c = c; el.tabIndex = 0; el.setAttribute("role", "button");
       appuiLong(el, (x, y) => ouvrirMenuContenu(c, el, x, y));
       el.innerHTML = `<span class="ec-cv">${cover ? `<img src="${esc(cover)}" alt="" loading="lazy">` : `<img class="ec-logo-ph" src="icon-192.png" alt="" loading="lazy">`}</span>
-        <div class="ec-tx"><span class="ec-imam" data-notrad dir="auto">@${esc(nom || "Imam")}</span><b dir="auto" data-notrad>${esc(c.title)}</b><small dir="auto" data-notrad>${c.duration_seconds ? esc(fmtDuree(c.duration_seconds)) : ""}${HORS.ids && HORS.ids.has(c.id) ? " · ✓" : ""}${chargerLocal("fini_" + c.id, 0) ? " · ✔" : ""}</small>${(() => { const q = chargerLocal("pos_" + c.id, 0); return q > 10 && c.duration_seconds && q < c.duration_seconds - 15 ? `<i class="ec-bar"><u style="width:${Math.round(100 * q / c.duration_seconds)}%"></u></i>` : ""; })()}</div>
+        <div class="ec-tx"><span class="ec-imam" data-notrad dir="auto">${estEpingle(c.id) ? "📌 " : ""}@${esc(nom || "Imam")}</span><b dir="auto" data-notrad>${esc(c.title)}</b><small dir="auto" data-notrad>${c.duration_seconds ? esc(fmtDuree(c.duration_seconds)) : ""}${HORS.ids && HORS.ids.has(c.id) ? " · ✓" : ""}${chargerLocal("fini_" + c.id, 0) ? " · ✔" : ""}</small>${(() => { const q = chargerLocal("pos_" + c.id, 0); return q > 10 && c.duration_seconds && q < c.duration_seconds - 15 ? `<i class="ec-bar"><u style="width:${Math.round(100 * q / c.duration_seconds)}%"></u></i>` : ""; })()}</div>
         ${c.fichier_path ? `<button class="ec-dl" aria-label="Télécharger"></button>` : ""}<button class="ec-pl" aria-label="Lecture">${ico("play", 26, true)}</button>`;
       { const chId = c.channel_id || (c.yt_channels && c.yt_channels.id), im = el.querySelector(".ec-imam"); if (im && chId) im.onclick = ev => { ev.stopPropagation(); router("chaine", { id: chId }); }; }
       const dl = el.querySelector(".ec-dl");
