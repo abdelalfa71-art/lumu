@@ -8723,6 +8723,17 @@ appliquerLangue();
       }
       sauverLocal(CLE_PARTAGE, null); attente = null;
       if (!fichiers.length) { bandeau("Fichiers illisibles."); return; }
+      /* Après la connexion : on laisse l'écran de connexion finir, puis on demande la validation du partage */
+      await new Promise(r => setTimeout(r, 1200));
+      const choix = await new Promise(ok => {
+        let decide = false; const d = v => { if (!decide) { decide = true; ok(v); } };
+        ouvrirFeuille("Partager dans Lumu", `<p>Voulez-vous publier ${fichiers.length > 1 ? "ces " + fichiers.length + " fichiers" : "ce fichier"} dans Lumu ?</p><p dir="auto" style="word-break:break-word"><b>${fichiers.map(f => esc(f.name)).join("<br>")}</b></p><button class="btn" id="ps-ok" type="button" style="width:100%">Oui, continuer</button><button class="btn-outline" id="ps-non" type="button" style="width:100%;margin-top:8px">Annuler</button>`,
+          (corps, fermer) => {
+            corps.querySelector("#ps-ok").onclick = () => { d(true); fermer(); };
+            corps.querySelector("#ps-non").onclick = () => { d(false); fermer(); };
+          }, () => d(false));
+      });
+      if (!choix) return;
       etat.importPre = fichiers; router("importer");
     } finally { traitement = false; }
   }
