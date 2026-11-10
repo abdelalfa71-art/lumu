@@ -154,6 +154,14 @@ class MainActivity : AppCompatActivity() {
             }.start()
         }
 
+        /** Lecteur natif : utilisé quand le navigateur ne lit pas le fichier. */
+        @JavascriptInterface fun natifLire(url: String, id: String, debut: Double) { runOnUiThread { natif.lire(url, id, debut) } }
+        @JavascriptInterface fun natifPlay() { runOnUiThread { natif.play() } }
+        @JavascriptInterface fun natifPause() { runOnUiThread { natif.pause() } }
+        @JavascriptInterface fun natifAller(sec: Double) { runOnUiThread { natif.aller(sec) } }
+        @JavascriptInterface fun natifVitesse(v: Double) { runOnUiThread { natif.vitesse(v) } }
+        @JavascriptInterface fun natifStop() { runOnUiThread { natif.arreter() } }
+
         /** Lecture de tout format : télécharge l'audio, le convertit en M4A puis renvoie le chemin à la page. */
         @JavascriptInterface fun convertir(source: String, id: String) {
             Thread {
@@ -205,6 +213,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private var lectureEnCours = false
+    private val natif by lazy { NatifLecteur(this) }
+
+    /** Envoie du code JavaScript à la page (fil principal). */
+    fun envoyerJs(js: String) { runOnUiThread { webView.evaluateJavascript(js, null) } }
     @Volatile private var envoiEnCours = false
     @Volatile private var recusJson = ""
 

@@ -4063,23 +4063,54 @@ window.__lumuMedia = a => {
     else if (a === "stop") AUD.arreter();
   } catch (e) {}
 };
-/* Lecture de tout format audio : si le téléphone ne lit pas le fichier, Lumu le convertit (dans l'application) */
-const CONV = { n: 0, att: {} };
-function convertirAudio(url) {
-  return new Promise((ok, ko) => {
-    const id = "c" + (++CONV.n) + Date.now().toString(36);
-    CONV.att[id] = { ok, ko };
-    try { LumuNative.convertir(url, id); } catch (e) { delete CONV.att[id]; ko(new Error("Conversion non disponible.")); return; }
-    setTimeout(() => { if (CONV.att[id]) { delete CONV.att[id]; ko(new Error("Conversion trop longue.")); } }, 240000);
-  });
+/* Lecteur natif : pris en charge par l'application Android quand le navigateur ne lit pas un fichier */
+const NATIFS = { seq: 0, inst: {} };
+window.__natifEtat = (id, pos, dur, playing, fin) => { const o = NATIFS.inst[id]; if (o) o._etat(+pos, +dur, playing === true || playing === "true", fin === true || fin === "true"); };
+window.__natifErreur = id => { const o = NATIFS.inst[id]; if (o) o._erreur(); };
+class NatifAudio extends EventTarget {
+  constructor() {
+    super();
+    this.id = "n" + (++NATIFS.seq) + Date.now().toString(36);
+    NATIFS.inst[this.id] = this;
+    this._src = ""; this._t = 0; this._vit = 1; this._lance = false; this._dur = NaN;
+    this.paused = true; this.ended = false; this.preload = "none"; this.readyState = 0; this.error = null;
+  }
+  get src() { return this._src; }
+  set src(v) { this.stop(); this._src = v; this._t = 0; this.ended = false; }
+  get currentTime() { return this._t; }
+  set currentTime(v) { this._t = +v || 0; if (this._lance) { try { LumuNative.natifAller(this._t); } catch (e) {} } }
+  get duration() { return this._dur; }
+  get playbackRate() { return this._vit; }
+  set playbackRate(v) { this._vit = +v || 1; if (this._lance) { try { LumuNative.natifVitesse(this._vit); } catch (e) {} } }
+  setAttribute() {} removeAttribute() {} load() {}
+  play() {
+    try {
+      if (!this._lance) { this._lance = true; LumuNative.natifLire(this._src, this.id, this._t); LumuNative.natifVitesse(this._vit); }
+      else LumuNative.natifPlay();
+    } catch (e) { this._lance = false; this.dispatchEvent(new Event("error")); return Promise.reject(e); }
+    this.paused = false; this.ended = false;
+    this.dispatchEvent(new Event("play"));
+    return Promise.resolve();
+  }
+  pause() { try { if (this._lance) LumuNative.natifPause(); } catch (e) {} this.paused = true; this.dispatchEvent(new Event("pause")); }
+  stop() { if (this._lance) { try { LumuNative.natifStop(); } catch (e) {} } this._lance = false; this.paused = true; }
+  _etat(pos, dur, playing, fin) {
+    const avant = this._dur;
+    this._t = pos; this._dur = dur < 0 ? NaN : dur;
+    if (!isNaN(this._dur) && this._dur !== avant) this.dispatchEvent(new Event("loadedmetadata"));
+    if (this.paused === playing) { this.paused = !playing; this.dispatchEvent(new Event(playing ? "play" : "pause")); }
+    this.dispatchEvent(new Event("timeupdate"));
+    if (fin && !this.ended) { this.ended = true; this.paused = true; this.dispatchEvent(new Event("ended")); }
+  }
+  _erreur() { this._lance = false; this.paused = true; this.dispatchEvent(new Event("error")); }
 }
-window.__lumuConverti = (id, chemin, erreurTxt) => { const a = CONV.att[id]; if (!a) return; delete CONV.att[id]; if (erreurTxt) a.ko(new Error(erreurTxt)); else a.ok(chemin); };
 const AUD = {
   a: null, c: null, mini: null, ui: null, suiv: null, prec: null, acc: 0, dernier: null, sauve: 0, vit: 1,
   init() {
     if (this.a) return;
     const a = this.a = new Audio();
     a.preload = "none"; a.setAttribute("playsinline", "");
+    this.attacher(a);
     const m = this.mini = document.createElement("div");
     m.id = "mini-audio"; m.hidden = true;
     m.innerHTML = `<button class="ma-info" aria-label="Ouvrir la lecture"><img alt=""><span><b dir="auto"></b><small></small></span></button><button class="ma-pp" aria-label="Lecture / pause"></button><button class="ma-x" aria-label="Fermer">✕</button><i class="ma-barre"><b></b></i>`;
@@ -4087,6 +4118,10 @@ const AUD = {
     m.querySelector(".ma-info").onclick = () => { if (this.c) router("contenu", { id: this.c.id, c: this.c }); };
     m.querySelector(".ma-pp").onclick = () => this.basculer();
     m.querySelector(".ma-x").onclick = () => this.arreter();
+    document.addEventListener("play", ev => { const a = this.a; if (ev.target !== a && ev.target.tagName === "VIDEO" && !a.paused && !(RADIO.actif && ev.target.muted)) a.pause(); }, true);
+    document.addEventListener("visibilitychange", () => { if (document.hidden) this.envoyer(); });
+  },
+  attacher(a) {
     a.addEventListener("play", () => { this.maj(); this.sessionEtat(); });
     a.addEventListener("playing", () => { try { SERIE.marquer(); } catch (e) {} });
     a.addEventListener("pause", () => { this.envoyer(); this.maj(); this.sessionEtat(); });
@@ -4108,20 +4143,17 @@ const AUD = {
     a.addEventListener("seeking", () => { this.dernier = null; });
     a.addEventListener("loadedmetadata", () => this.progres());
     a.addEventListener("error", () => {
-      if (this.srcOrig && !this.converti && !(this.c && this.c.type === "video")) {
-        // Copie hors-ligne illisible : on convertit à partir du fichier en ligne
-        const source = /^blob:/.test(this.srcOrig) ? (this.c && this.c.fichier_path ? urlMedia(this.c.fichier_path) : null) : this.srcOrig;
-        if (source) {
-          this.converti = true;
-          convertirAudio(source).then(u => { a.src = u; a.play().catch(() => {}); }).catch(() => afficherErreurAudio());
-          return;
-        }
-      }
+      if (!(a instanceof NatifAudio) && this.srcOrig && this.c && this.c.type !== "video") { this.basculeNatif(); return; }
       afficherErreurAudio();
     });
-    const afficherErreurAudio = () => { const e = this.ui && this.ui.root.querySelector(".au-t span:last-child"); if (e) e.textContent = "Lecture impossible"; };
-    document.addEventListener("play", ev => { if (ev.target !== a && ev.target.tagName === "VIDEO" && !a.paused && !(RADIO.actif && ev.target.muted)) a.pause(); }, true);
-    document.addEventListener("visibilitychange", () => { if (document.hidden) this.envoyer(); });
+  },
+  basculeNatif() {
+    const pos = this.a.currentTime || 0;
+    const src = /^blob:/.test(this.srcOrig) ? (this.c && this.c.fichier_path ? urlMedia(this.c.fichier_path) : "") : this.srcOrig;
+    if (!src) return;
+    const n = new NatifAudio();
+    this.a = n; this.attacher(n);
+    n.src = src; n.playbackRate = this.vit; n.currentTime = pos; n.play().catch(() => {});
   },
   envoyer() {
     if (this.acc >= 5 && this.c) { const sec = Math.round(this.acc); this.acc = 0; sb.rpc("yt_temps_vu", { p_id: this.c.id, p_sec: sec }).then(() => {}, () => {}); }
@@ -4426,7 +4458,7 @@ function contenuExtras(wrap, c) {
     if (allerSuivant) m.addEventListener("ended", () => { if (vivant()) allerSuivant(); });
   }
   const m0 = wrap.querySelector("#media");
-  if (m0 && c.type === "audio" && c.fichier_path && !c.embed_id) m0.addEventListener("error", async () => { if (m0.dataset.conv) return; m0.dataset.conv = "1"; try { m0.src = await convertirAudio(urlMedia(c.fichier_path)); m0.play().catch(() => {}); } catch (e) {} });
+  if (m0 && c.type === "audio" && c.fichier_path && !c.embed_id) m0.addEventListener("error", () => { if (m0.dataset.conv) return; m0.dataset.conv = "1"; try { AUD.jouer(c); } catch (e) {} });
   if (m0 && c.fichier_path && !c.embed_id) { try { HORS.lire(c.id).then(r => { if (r && r.blob) { const t = m0.currentTime, j = !m0.paused; m0.src = URL.createObjectURL(r.blob); if (t) m0.currentTime = t; if (j || etat.params.auto) m0.play().catch(() => {}); } }); } catch (e) {} }
   if (c.type !== "audio") {
     const dl = wrap.querySelector("#au-dl");
