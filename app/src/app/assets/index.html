@@ -1978,11 +1978,11 @@ async function init() {
     etat.parentId = session.user.id;
     etat.compteNom = estCompteNom(session.user);
     await apresConnexion();
-    if (etat.compteNom && PIN.dispo && !PIN.existe(etat.parentId)) {
+    if (CODE.actif() && etat.compteNom && PIN.dispo && !PIN.existe(etat.parentId)) {
       await deconnecter("Reconnectez-vous avec votre nom et votre code.");
       return;
     }
-    router(PIN.dispo && PIN.existe(etat.parentId) ? "pin-verrou" : routeApresConnexion());
+    router(CODE.actif() && PIN.dispo && PIN.existe(etat.parentId) ? "pin-verrou" : routeApresConnexion());
   } else {
     if (!etat.lienEnAttente && !etat.lienChaine && !etat.lienGroupe && !etat.lienRoute && !mesLangues()) router("langues-choix"); else router("flux");
   }
@@ -2118,6 +2118,7 @@ function vueConnexion() {
    Le compte (nom + code) vit côté Supabase ; le code sert aussi de verrou local. Le code à 6 chiffres ouvre
    l'app sur CET appareil ; il est stocké haché (PBKDF2 + sel), jamais en clair.
    5 erreurs => déconnexion complète. */
+const CODE = { actif() { try { return localStorage.getItem("lumu_code_actif") === "1"; } catch (e) { return false; } }, regler(v) { try { localStorage.setItem("lumu_code_actif", v ? "1" : "0"); } catch (e) {} } };
 const PIN = {
   dispo: !!(window.crypto && window.crypto.subtle),
   cle(id) { return "tobi_pin_" + id; },
@@ -2149,7 +2150,7 @@ function codeTropFacile(c) {
 }
 
 function routeApresConnexion() {
-  return PIN.dispo && !PIN.existe(etat.parentId) ? "pin-creation" : "flux";
+  return CODE.actif() && PIN.dispo && !PIN.existe(etat.parentId) ? "pin-creation" : "flux";
 }
 
 async function deconnecter(message) {
@@ -6608,7 +6609,8 @@ function vueProfil() {
     ["🟢", "Mode un seul bouton", "Écran très simple", () => { ACCES.reglerSimple(!ACCES.simple()); router("profil"); }, ACCES.simple()],
     ["☀️", "Thème", ACCES.nom(), () => { ACCES.suivant(); router("profil"); }],
     ["📶", "Économie de données", "Pas de chargement à l'avance", () => { ECO.regler(!ECO.actif()); router("profil"); }, ECO.actif()],
-    co && PIN.dispo ? ["🔒", etat.compteNom ? "Changer mon code" : "Code de verrouillage", "", () => router("pin-creation", { changer: true, retour: "profil" })] : null,
+    PIN.dispo ? ["🔒", "Accès par code", CODE.actif() ? "Activé : code demandé à l'ouverture" : "Désactivé", () => { if (CODE.actif()) { CODE.regler(false); router("profil"); return; } CODE.regler(true); if (co && !PIN.existe(etat.parentId)) router("pin-creation", { retour: "profil" }); else router("profil"); }, CODE.actif()] : null,
+    co && PIN.dispo && CODE.actif() ? ["🔑", "Changer mon code", "", () => router("pin-creation", { changer: true, retour: "profil" })] : null,
     co && !etat.compteNom ? ["🔑", "Mot de passe", "", () => router("changer-mot-de-passe")] : null
   ]);
   if (co) section("Imams et créateurs", [
@@ -7320,6 +7322,7 @@ function vueImport() {
     const commun = { cat: w.querySelector("#cat").value, groupe: (w.querySelector("#groupe") || {}).value || "" };
     enCours = true; stop = false;
     etat.envoiEnCours = true; window.onbeforeunload = () => true; garderEveille(true);
+    try { LumuNative.envoi(true, "Envoi de fichiers vers Lumu"); } catch (e) {}
     await demanderTitres(items);
     etat.annulerEnvoi = () => { stop = true; items.filter(i => i.statut === "cours").forEach(it => { if (it.envoi) it.envoi.annuler(); }); };
     dessiner();
@@ -7338,6 +7341,7 @@ function vueImport() {
     };
     await Promise.all(Array.from({ length: lent ? 1 : Math.min(2, file.length) }, ouvrier));
     enCours = false; etat.envoiEnCours = false; etat.annulerEnvoi = null; window.onbeforeunload = null; garderEveille(false);
+    try { LumuNative.envoi(false, ""); } catch (e) {}
     items.forEach(i => { if (i.statut === "cours") i.statut = "attente"; });
     if (w.isConnected) dessiner();
   }
@@ -7660,6 +7664,10 @@ const STAT = {
       v.querySelector(".st-q").textContent = ilYa(s.created_at);
       corps.style.background = s.type === "texte" ? (s.couleur || "#0F7B6C") : "#000";
       if (s.type === "texte") corps.innerHTML = `<div dir="auto" data-notrad>${esc(s.texte || "")}</div>`;
+      else if (s.type === "image" && /\.(mp4|webm|mov|m4v)$/i.test(s.fichier_path || "")) {
+        corps.innerHTML = `<video src="${esc(urlMedia(s.fichier_path))}" playsinline webkit-playsinline style="width:100%;height:100%;object-fit:contain"></video>${s.texte ? `<div class="st-leg" dir="auto" data-notrad>${esc(s.texte)}</div>` : ""}`;
+        au = corps.querySelector("video"); au.onended = () => { i++; montrer(); }; au.onerror = () => { i++; montrer(); }; au.play().catch(() => {});
+      }
       else if (s.type === "image") corps.innerHTML = `<img src="${esc(urlMedia(s.fichier_path))}" alt="">${s.texte ? `<div class="st-leg" dir="auto" data-notrad>${esc(s.texte)}</div>` : ""}`;
       else { corps.innerHTML = `<div>🎧<br><small>Message vocal</small></div>`; au = new Audio(urlMedia(s.fichier_path)); au.onended = () => { i++; montrer(); }; au.onerror = () => { i++; montrer(); }; au.play().catch(() => {}); }
       corps.insertAdjacentHTML("beforeend", `<button class="st-zone g" aria-label="Précédent"></button><button class="st-zone d" aria-label="Suivant"></button>`);
@@ -7688,7 +7696,7 @@ const STAT = {
   },
   creer(apres) {
     if (!estCreateur() || !etat.chaine) return;
-    ouvrirFeuille("Nouveau statut", `<div class="st-choix"><button class="btn" data-k="t">✍️ Texte</button><button class="btn" data-k="p">📷 Photo</button><button class="btn" data-k="v">🎤 Voix</button></div><div id="st-zone"></div><p class="erreur" id="st-err" hidden></p><p style="font-size:13px;opacity:.7;margin-top:10px">Visible pendant 24 heures.</p>`, (c, fermer) => {
+    ouvrirFeuille("Nouveau statut", `<div class="st-choix"><button class="btn" data-k="t">✍️ Texte</button><button class="btn" data-k="p">📷 Photo</button><button class="btn" data-k="v">🎤 Voix</button><button class="btn" data-k="w">🎬 Vidéo</button></div><div id="st-zone"></div><p class="erreur" id="st-err" hidden></p><p style="font-size:13px;opacity:.7;margin-top:10px">Visible pendant 24 heures.</p>`, (c, fermer) => {
       const zone = c.querySelector("#st-zone"), err = c.querySelector("#st-err");
       const erreur = m => { err.textContent = m || ""; err.hidden = !m; };
       const publier = async champs => {
@@ -7723,8 +7731,41 @@ const STAT = {
           const f = zone.querySelector("#st-f").files[0];
           if (!f) return erreur("Choisissez une photo.");
           occupe(ok, true, "Envoi…");
-          try { const b = await reduireImage(f, 1080); const chemin = await envoyer(b, "jpg", "image/jpeg"); await publier({ type: "image", fichier_path: chemin, texte: zone.querySelector("#st-l").value.trim() || null }); }
-          catch (e) { occupe(ok, false, "Publier"); erreur(txtErr(e, "Publication impossible.")); }
+          try {
+            let b, ext = "jpg", mime = "image/jpeg";
+            try { b = await reduireImage(f, 1080); } catch (e) { b = f; ext = (f.name.split(".").pop() || "jpg").toLowerCase().replace(/[^a-z0-9]/g, "") || "jpg"; mime = f.type || "image/jpeg"; }
+            const chemin = await envoyer(b, ext, mime); await publier({ type: "image", fichier_path: chemin, texte: zone.querySelector("#st-l").value.trim() || null });
+          }
+          catch (e) { occupe(ok, false, "Publier"); erreur(txtErr(e, "Publication impossible." + (e && e.message ? " (" + e.message + ")" : ""))); }
+        };
+      };
+      c.querySelector('[data-k="w"]').onclick = () => {
+        zone.innerHTML = `<input id="st-f" type="file" accept="video/*" style="margin:6px 0"><div id="st-apv"></div><input class="champ" id="st-l" maxlength="200" placeholder="Légende (facultatif)" dir="auto"><button class="btn" id="st-ok">Publier</button>`;
+        const ok = zone.querySelector("#st-ok"), ap = zone.querySelector("#st-apv");
+        let duree = null;
+        zone.querySelector("#st-f").onchange = () => {
+          const f = zone.querySelector("#st-f").files[0]; erreur(""); duree = null; ap.innerHTML = "";
+          if (!f) return;
+          const v = document.createElement("video"); v.preload = "metadata"; v.muted = true;
+          v.onloadedmetadata = () => {
+            const d = v.duration; URL.revokeObjectURL(v.src);
+            if (!isFinite(d) || d <= 0) return erreur("Vidéo illisible. Essayez un autre format (MP4 conseillé).");
+            if (d > 180.5) return erreur("La vidéo dure " + Math.round(d / 60) + " min. Le statut accepte 3 minutes maximum.");
+            duree = d; ap.innerHTML = `<small>Durée : ${Math.round(d)} s</small>`;
+          };
+          v.onerror = () => erreur("Vidéo illisible. Essayez un autre format (MP4 conseillé).");
+          v.src = URL.createObjectURL(f);
+        };
+        ok.onclick = async () => {
+          const f = zone.querySelector("#st-f").files[0];
+          if (!f) return erreur("Choisissez une vidéo.");
+          if (duree === null) return;
+          occupe(ok, true, "Envoi…");
+          try {
+            const ext = (f.name.split(".").pop() || "mp4").toLowerCase().replace(/[^a-z0-9]/g, "") || "mp4";
+            const chemin = await envoyer(f, ext, f.type || "video/mp4");
+            await publier({ type: "image", fichier_path: chemin, texte: zone.querySelector("#st-l").value.trim() || null });
+          } catch (e) { occupe(ok, false, "Publier"); erreur(txtErr(e, "Publication impossible." + (e && e.message ? " (" + e.message + ")" : ""))); }
         };
       };
       c.querySelector('[data-k="v"]').onclick = () => {

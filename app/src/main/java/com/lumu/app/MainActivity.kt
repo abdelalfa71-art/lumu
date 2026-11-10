@@ -153,6 +153,21 @@ class MainActivity : AppCompatActivity() {
             }.start()
         }
 
+        /** Appelé par la page pendant un envoi de fichiers : l'application reste active écran éteint. */
+        @JavascriptInterface fun envoi(actif: Boolean, texte: String?) {
+            envoiEnCours = actif
+            try {
+                if (actif) {
+                    val i = Intent(this@MainActivity, LectureService::class.java)
+                        .putExtra("titre", if (texte.isNullOrEmpty()) "Envoi en cours" else texte)
+                        .putExtra("artiste", "Lumu").putExtra("jouant", true)
+                    ContextCompat.startForegroundService(this@MainActivity, i)
+                } else if (!lectureEnCours) {
+                    stopService(Intent(this@MainActivity, LectureService::class.java))
+                }
+            } catch (e: Exception) { }
+        }
+
         /** Appelé par la page quand le titre ou l'état de lecture change (notification en haut de l'écran). */
         @JavascriptInterface fun media(titre: String?, artiste: String?, jouant: Boolean) {
             lectureEnCours = jouant && !titre.isNullOrEmpty()
@@ -170,6 +185,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private var lectureEnCours = false
+    @Volatile private var envoiEnCours = false
     @Volatile private var recusJson = ""
 
     // ------------------------------------------------------------------ réception du partage (Partager › Lumu)
@@ -445,7 +461,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onSaveInstanceState(out: Bundle) { super.onSaveInstanceState(out); webView.saveState(out) }
-    override fun onPause() { super.onPause(); if (!lectureEnCours) webView.onPause() }
+    override fun onPause() {
+        super.onPause()
+        // Lecture ou envoi en cours : la page garde ses minuteries et ses transferts (écran éteint)
+        if (lectureEnCours || envoiEnCours) webView.resumeTimers() else webView.onPause()
+    }
     override fun onResume() { super.onResume(); webView.onResume() }
     override fun onDestroy() {
         fileCallback?.onReceiveValue(null)
