@@ -5879,10 +5879,17 @@ async function vueEcouter() {
     }
   } catch (e) {}
   try {
-    const r = await sb.from("yt_contenus").select(CHAMPS_CONTENU).eq("status", "published").eq("type", "audio").order("published_at", { ascending: false }).limit(60);
-    if (r.error) throw r.error;
-    tous = (r.data || []).filter(c => c.fichier_path && !c.embed_id && langOk(c));
-    if (r.data && r.data.length) cacheLocal("cache_ecoute", r.data);
+    /* Tous les audios publiés, par pages de 200 (plus de limite à 60) */
+    const brut = [];
+    for (let debut = 0; debut < 5000; debut += 200) {
+      const pg = await sb.from("yt_contenus").select(CHAMPS_CONTENU).eq("status", "published").eq("type", "audio").order("published_at", { ascending: false }).range(debut, debut + 199);
+      if (pg.error) throw pg.error;
+      brut.push(...(pg.data || []));
+      if (!pg.data || pg.data.length < 200) break;
+    }
+    const r = { data: brut };
+    tous = brut.filter(c => c.fichier_path && !c.embed_id && langOk(c));
+    if (brut.length) cacheLocal("cache_ecoute", brut.slice(0, 60));
     ec_notice(w, "");
     if (!w.isConnected) return;
     if (!abos) {
