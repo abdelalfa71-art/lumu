@@ -207,6 +207,7 @@ class MainActivity : AppCompatActivity() {
             dossier.listFiles()?.forEach { it.delete() }
             val arr = org.json.JSONArray()
             uris.forEachIndexed { k, u ->
+                runOnUiThread { webView.evaluateJavascript("window.__lumuPrep&&window.__lumuPrep(${k + 1},${uris.size})", null) }
                 try {
                     var nom = ""
                     try {
@@ -233,7 +234,7 @@ class MainActivity : AppCompatActivity() {
                     if (amr || (estAudio && Convertisseur.aAlleger(this, Uri.fromFile(f), f.length()))) {
                         val conv = File(dossier, "${sur}_c.m4a")
                         if (Convertisseur.versM4a(this, Uri.fromFile(f), conv) && conv.length() > 0) { f.delete(); f = conv; ext = "m4a"; mime = "audio/mp4" }
-                        else { conv.delete(); if (amr) return@forEachIndexed }
+                        else { conv.delete() } // conversion impossible : on envoie le fichier d'origine plutôt que de le perdre
                     }
                     arr.put(org.json.JSONObject().put("n", f.name).put("t", mime).put("nom", "$titre.$ext"))
                 } catch (e: Exception) { }

@@ -8868,12 +8868,15 @@ appliquerLangue();
   }
   let attente = null, traitement = false;
   const CLE_PARTAGE = "partage_attente";
+  let relancer = false;
+  window.__lumuPrep = (k, n) => { try { bandeau("Préparation des fichiers : " + k + " / " + n); } catch (e) {} };
   /* Les fichiers partagés restent en attente (même si l'app se ferme ou si la connexion demande un code) */
   async function traiter() {
     let liste = []; try { liste = JSON.parse(LumuNative.recus() || "[]"); } catch (e) {}
     if (liste.length) { attente = liste; sauverLocal(CLE_PARTAGE, liste); }
     if (!attente) attente = chargerLocal(CLE_PARTAGE, null);
-    if (!attente || !attente.length || traitement) return;
+    if (!attente || !attente.length) return;
+    if (traitement) { relancer = true; return; }
     traitement = true;
     try {
       const pret = () => !!(etat.profil && etat.chaine && etat.parentId);
@@ -8884,15 +8887,16 @@ appliquerLangue();
       }
       if (!pret()) return;
       if (!estCreateur() || !etat.chaine) { bandeau("Seuls les créateurs peuvent publier. Connectez-vous avec un compte créateur."); sauverLocal(CLE_PARTAGE, null); attente = null; return; }
+      const liste = attente; attente = null;
+      if (chargerLocal(CLE_PARTAGE, null) === liste) sauverLocal(CLE_PARTAGE, null);
       const fichiers = [];
-      for (const x of attente) {
+      for (const x of liste) {
         try {
           const r = await fetch("/recu/" + encodeURIComponent(x.n)); if (!r.ok) continue;
           const b = await r.blob();
           fichiers.push(new File([b], x.nom || x.n, { type: x.t || b.type || "" }));
         } catch (e) {}
       }
-      sauverLocal(CLE_PARTAGE, null); attente = null;
       if (!fichiers.length) { bandeau("Fichiers illisibles."); return; }
       /* Après la connexion : on laisse l'écran de connexion finir, puis on demande la validation du partage */
       await new Promise(r => setTimeout(r, 1200));
@@ -8906,7 +8910,7 @@ appliquerLangue();
       });
       if (!choix) return;
       etat.importPre = fichiers; router("importer");
-    } finally { traitement = false; }
+    } finally { traitement = false; if (relancer) { relancer = false; setTimeout(traiter, 300); } }
   }
   window.__lumuRecu = traiter;
   setTimeout(traiter, 1500);
