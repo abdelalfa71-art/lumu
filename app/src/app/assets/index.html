@@ -2455,6 +2455,16 @@ async function synchroEpingles() {
   if (!etat.parentId) return;
   try { const r = await sb.from("yt_epingles").select("contenu_id"); if (r.error || !r.data) return; sauverLocal(EPING_CLE, r.data.map(x => x.contenu_id)); document.dispatchEvent(new Event("epingles-maj")); } catch (e) {}
 }
+/* File d'attente « À écouter plus tard » : audios enchaînés, mémorisés sur l'appareil */
+const FILE_CLE = "lumu_file";
+function fileAttente() { return chargerLocal(FILE_CLE, []); }
+function ajouterFile(c) {
+  const l = fileAttente().filter(x => x.id !== c.id);
+  l.push({ id: c.id, title: c.title, type: c.type, fichier_path: c.fichier_path, cover_path: c.cover_path || null, embed_id: c.embed_id || null, source_nom: c.source_nom || null, auteur: c.auteur || null, category: c.category || null, duration_seconds: c.duration_seconds || null, mime: c.mime || null, channel_id: c.channel_id || null, yt_channels: c.yt_channels || null });
+  sauverLocal(FILE_CLE, l);
+  document.dispatchEvent(new Event("file-maj"));
+  try { alert("Ajouté à la file d'attente."); } catch (e) {}
+}
 /* Menu d'une carte : copier le lien, hors-ligne, partager, favoris */
 async function ouvrirMenuContenu(c, el, x, y) {
   const audioOuVideo = !!(c.fichier_path && !c.embed_id);
@@ -2463,6 +2473,7 @@ async function ouvrirMenuContenu(c, el, x, y) {
   const items = [{ ic: "🔗", t: "Copier le lien", f: () => { try { navigator.clipboard.writeText(lienPartage(c.id)); } catch (e) {} } }];
   if (audioOuVideo) items.push({ ic: hors ? "✓" : "⬇", t: hors ? "Retirer du hors-ligne" : "Télécharger (hors-ligne)", f: async () => { if (hors) { await HORS.retirer(c.id); return; } await HORS.sauver(c, true); } });
   items.push({ ic: "↗", t: "Partager", f: () => partagerContenu(c, el) });
+  if (audioOuVideo && c.type === "audio") items.push({ ic: "➕", t: "Ajouter à la file d'attente", f: () => ajouterFile(c) });
   const ep = estEpingle(c.id);
   items.push({ ic: "📌", t: ep ? "Désépingler" : "Épingler", f: () => basculerEpingle(c.id) });
   items.push({ ic: fav ? "💔" : "❤", t: fav ? "Retirer des favoris" : "Ajouter aux favoris", f: () => basculerFavori(c, fav) });
@@ -5684,6 +5695,7 @@ async function vueEcouter() {
     p.onclick = () => router("preches");
     z.appendChild(p);
   }
+  document.addEventListener("file-maj", function surFile() { if (!w.isConnected) { document.removeEventListener("file-maj", surFile); return; } lignes(); });
   document.addEventListener("epingles-maj", function surEp() { if (!w.isConnected) { document.removeEventListener("epingles-maj", surEp); return; } lignes(); });
   function lignes() {
     const re = (CH.find(x => x[0] === filtre) || [])[2];
@@ -5696,6 +5708,14 @@ async function vueEcouter() {
     } else l = tous.filter(c => !re || re.test(c.category || "") || re.test(c.title || ""));
     { const ep = chargerLocal(EPING_CLE, []); l = [...l.filter(c => ep.includes(c.id)), ...l.filter(c => !ep.includes(c.id))]; }
     liste.innerHTML = l.length ? "" : `<p class="ec-vide">${rech ? "Aucun résultat." : "Aucun audio pour l'instant."}</p>`;
+    if (!rech && fileAttente().length) {
+      const n = fileAttente().length, d = document.createElement("div");
+      d.style.cssText = "display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 12px;padding:12px 14px;border-radius:14px;background:rgba(127,127,127,.12)";
+      d.innerHTML = `<b>File d'attente · ${n} audio${n > 1 ? "s" : ""}</b><span style="display:flex;gap:8px"><button type="button" class="ec-file-go" style="min-height:44px;padding:0 14px;border-radius:12px;border:0;font-weight:700;background:var(--vert,#1f7a4d);color:#fff">▶ Lire</button><button type="button" class="ec-file-vide" aria-label="Vider la file" style="min-height:44px;padding:0 12px;border-radius:12px;border:1px solid currentColor;background:none;color:inherit">Vider</button></span>`;
+      d.querySelector(".ec-file-go").onclick = () => lanceFile(fileAttente(), 0);
+      d.querySelector(".ec-file-vide").onclick = () => { sauverLocal(FILE_CLE, []); document.dispatchEvent(new Event("file-maj")); };
+      liste.appendChild(d);
+    }
     l.forEach(c => {
       const nom = c.source_nom || (c.yt_channels && c.yt_channels.name) || c.auteur || "";
       const cover = c.cover_path ? urlMedia(c.cover_path) : "";
