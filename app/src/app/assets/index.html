@@ -3207,7 +3207,7 @@ function envoyerFichier(fichier, chemin, mime, surProgres) {
       if (!window.tus) {
         if (fichier.size > 50 * MO) throw new Error("L'outil d'envoi n'a pas pu se charger. Vérifiez la connexion et rechargez la page.");
         await sessionFraiche();
-        const { error } = await sb.storage.from("yt-media").upload(chemin, fichier, { contentType: mime, upsert: false });
+        const { error } = await (await sessionFraiche().catch(() => {}), sb.storage.from("yt-media")).upload(chemin, fichier, { contentType: mime, upsert: false });
         if (error) throw error;
         surProgres(fichier.size, fichier.size);
         return ok();
@@ -3237,7 +3237,7 @@ function envoyerFichier(fichier, chemin, mime, surProgres) {
             if (((!e.originalResponse && fichier.size <= 200 * MO) || (st4 >= 400 && st4 < 500 && st4 !== 413 && fichier.size <= 50 * MO)) && avance === 0) {
               try {
                 surProgres(0, fichier.size);
-                const { error } = await sb.storage.from("yt-media").upload(chemin, fichier, { contentType: mime, upsert: false });
+                const { error } = await (await sessionFraiche().catch(() => {}), sb.storage.from("yt-media")).upload(chemin, fichier, { contentType: mime, upsert: false });
                 if (error) throw error;
                 surProgres(fichier.size, fichier.size);
                 return ok();
@@ -3255,6 +3255,8 @@ function envoyerFichier(fichier, chemin, mime, surProgres) {
   });
   return { promesse, annuler: () => { try { if (upload) upload.abort(true); } catch (e) {} if (rejeter) rejeter(new Error("Envoi annulé.")); } };
 }
+/* Au retour dans l'application, on renouvelle la session si le jeton a expiré */
+document.addEventListener("visibilitychange", () => { if (!document.hidden) { try { sb.auth.getSession(); } catch (e) {} } });
 function diagSession() {
   try {
     const k = Object.keys(localStorage).find(x => /^sb-.*-auth-token$/.test(x));
@@ -3266,7 +3268,8 @@ function messageEnvoi(e) {
   let m = String((e && (e.message || e.error)) || e || "");
   try { if (e && e.originalResponse) { m = "HTTP " + e.originalResponse.getStatus() + " " + String(e.originalResponse.getBody() || "").slice(0, 160) + " | " + m.replace(/\(method:.*$/, ""); } } catch (x) {}
   if (/annulé/i.test(m)) return "Envoi annulé.";
-  if (/413|maximum allowed size|exceeded|too large|Payload/i.test(m)) return "Fichier trop gros pour l'espace de stockage actuel. Sur l'offre gratuite de Supabase la limite est de 50 Mo : passez à l'offre Pro et augmentez « Global file size limit » dans les réglages de stockage.";
+  if (/413|maximum allowed size|exceeded|too large|Payload/i.test(m)) return "Fichier trop gros pour la limite de stockage du projet. Dans Supabase › Storage › Settings, augmentez « Global file size limit » (500 Mo ou plus), puis réessayez.";
+  if (/claim timestamp|expired|expir|JWT/i.test(m)) return "Session expirée : fermez l'application, rouvrez-la puis réessayez.";
   if (/403|401|unauthor|row-level|policy|violates/i.test(m)) return "Vous n'avez pas le droit de publier. Votre compte créateur est-il bien validé ? (détail : " + m.replace(/\s+/g, " ").slice(0, 300) + " | " + diagSession() + ")";
   if (/415|mime|not supported|invalid_mime/i.test(m)) return "Format de fichier non accepté.";
   if (erreurReseau(e) || (e && e.originalRequest && !e.originalResponse)) return "Impossible de joindre le serveur de stockage depuis votre connexion. Essayez en Wi-Fi ou avec un autre réseau mobile, puis réessayez.";
@@ -3398,7 +3401,7 @@ function vueJePublie() {
         if (barre.isConnected) { barre.style.width = p + "%"; pct.textContent = `${p} % · ${fmtTaille(a)} / ${fmtTaille(b)}`; }
       });
       await envoi.promesse;
-      if (meta && meta.vignette) { const r = await sb.storage.from("yt-media").upload(cheminCover, meta.vignette, { contentType: "image/jpeg", upsert: false }); coverEnvoyee = !r.error; }
+      if (meta && meta.vignette) { const r = await (await sessionFraiche().catch(() => {}), sb.storage.from("yt-media")).upload(cheminCover, meta.vignette, { contentType: "image/jpeg", upsert: false }); coverEnvoyee = !r.error; }
       const ligne = {
         channel_id: etat.chaine.id, title: t, category: cat, langue_contenu: lang || null, auteur: patri ? pat.imam.trim() : undefined, description: patri ? ("Sauvé par " + (pat.par.trim() || "un proche") + (pat.an.trim() ? " · enregistré en " + pat.an.trim() : "")) : undefined, type, fichier_path: chemin, cover_path: coverEnvoyee ? cheminCover : null,
         duration_seconds: meta && meta.duree ? Math.round(meta.duree) : null, taille_octets: fichier.size, mime, status: "published",
@@ -3548,7 +3551,7 @@ function vuePublier() {
       await envoi.promesse;
       const imageCover = cover ? await reduireImage(cover).catch(() => null) : (meta && meta.vignette);
       if (imageCover) {
-        const r = await sb.storage.from("yt-media").upload(cheminCover, imageCover, { contentType: "image/jpeg", upsert: false });
+        const r = await (await sessionFraiche().catch(() => {}), sb.storage.from("yt-media")).upload(cheminCover, imageCover, { contentType: "image/jpeg", upsert: false });
         coverEnvoyee = !r.error;
       }
       const ligne = {
@@ -5429,7 +5432,7 @@ const QVOC = {
       const ok = bt.querySelector("#qv-ok"), er = bt.querySelector("#qv-e");
       ok.disabled = true; er.textContent = "";
       const chemin = `${etat.parentId}/questions/vocal-${Date.now()}.${PAR.ext(blob)}`;
-      const u = await sb.storage.from("yt-media").upload(chemin, blob, { contentType: blob.type, upsert: false });
+      const u = await (await sessionFraiche().catch(() => {}), sb.storage.from("yt-media")).upload(chemin, blob, { contentType: blob.type, upsert: false });
       if (u.error) { er.textContent = "Envoi impossible. Réessayez."; ok.disabled = false; return; }
       const r = await sb.from("yt_questions").insert({ question: "Question vocale", question_audio: chemin, langue: (mesLangues() || [])[0] || null });
       if (r.error) { er.textContent = txtErr(r.error, "Envoi impossible."); ok.disabled = false; return; }
@@ -6125,7 +6128,7 @@ function vueChaineEdit() {
           const img = await reduireImage(photo, 400);
           const chemin = `${etat.parentId}/avatar-${Date.now()}.jpg`;
           await sessionFraiche();
-          const u = await sb.storage.from("yt-media").upload(chemin, img, { contentType: "image/jpeg", upsert: false });
+          const u = await (await sessionFraiche().catch(() => {}), sb.storage.from("yt-media")).upload(chemin, img, { contentType: "image/jpeg", upsert: false });
           if (u.error) throw u.error;
           maj.avatar_url = urlMedia(chemin);
         }
@@ -7020,7 +7023,7 @@ async function vuePassageEdit() {
       const pid = id || (crypto.randomUUID ? crypto.randomUUID() : null); const cles = ["lecture", "trad", "expl"], champs = ["audio_lecture", "audio_trad", "audio_expl"], o = {};
       for (let k = 0; k < 3; k++) {
         const b = V[k].blob();
-        if (b) { const ch = `${etat.parentId}/parcours/${pid}-${cles[k]}-${Date.now()}.${PAR.ext(b)}`; const u = await sb.storage.from("yt-media").upload(ch, b, { contentType: b.type, upsert: false }); if (u.error) throw u.error; o[champs[k]] = ch; }
+        if (b) { const ch = `${etat.parentId}/parcours/${pid}-${cles[k]}-${Date.now()}.${PAR.ext(b)}`; const u = await (await sessionFraiche().catch(() => {}), sb.storage.from("yt-media")).upload(ch, b, { contentType: b.type, upsert: false }); if (u.error) throw u.error; o[champs[k]] = ch; }
         else o[champs[k]] = V[k].chemin() || null;
       }
       o.marques_ar = marques && pour === V[0].cle() && marques.length === PAR.mots(t1.value).length ? marques : null;
@@ -7170,7 +7173,7 @@ async function vueQuestionsImam() {
         b.disabled = true;
         try {
           let chemin = null; const blob = wd.blob();
-          if (blob) { chemin = `${etat.parentId}/questions/${x.id}-${Date.now()}.${PAR.ext(blob)}`; const u = await sb.storage.from("yt-media").upload(chemin, blob, { contentType: blob.type, upsert: false }); if (u.error) throw u.error; }
+          if (blob) { chemin = `${etat.parentId}/questions/${x.id}-${Date.now()}.${PAR.ext(blob)}`; const u = await (await sessionFraiche().catch(() => {}), sb.storage.from("yt-media")).upload(chemin, blob, { contentType: blob.type, upsert: false }); if (u.error) throw u.error; }
           const r2 = await sb.rpc("yt_repondre_question", { p_id: x.id, p_channel: etat.chaine.id, p_texte: t || null, p_audio: chemin }); if (r2.error) throw r2.error;
           wd.arreter(); d.innerHTML = `<b>✅ Réponse publiée</b>`;
         } catch (e) { er.textContent = txtErr(e, "Envoi impossible."); b.disabled = false; }
@@ -7840,7 +7843,7 @@ const STAT = {
       };
       const envoyer = async (blob, ext, mime) => {
         const chemin = `${etat.parentId}/statut-${uuid()}.${ext}`;
-        const r = await sb.storage.from("yt-media").upload(chemin, blob, { contentType: mime, cacheControl: "86400" });
+        const r = await (await sessionFraiche().catch(() => {}), sb.storage.from("yt-media")).upload(chemin, blob, { contentType: mime, cacheControl: "86400" });
         if (r.error) throw r.error;
         return chemin;
       };
