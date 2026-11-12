@@ -1737,7 +1737,9 @@ function vueFlux() {
       if (HORS.ids.has(c.id)) { if (confirm("Supprimer ce téléchargement ?")) { await HORS.retirer(c.id); sp.textContent = "Télécharger"; } return; }
       if (navigator.onLine === false) { alert("Pas de connexion internet."); return; }
       k.disabled = true; sp.textContent = "… 0 %";
-      const ok = await HORS.sauver(c, true, (n, t) => { sp.textContent = "… " + Math.round(n * 100 / t) + " %"; });
+      const job = TR.debut(c.title || "Audio", "Téléchargement", () => HORS.annul.add(c.id));
+      const ok = await HORS.sauver(c, true, (n, t) => { TR.progres(job, n, t); sp.textContent = "… " + Math.round(n * 100 / t) + " %"; });
+      TR.fin(job, ok ? "ok" : "erreur", ok ? "" : "Téléchargement impossible.");
       k.disabled = false; sp.textContent = ok ? "✓ Hors-ligne" : "Échec";
     };
     if (b("son")) b("son").onclick = () => { etat.son = !etat.son; majSons(); };
@@ -1904,10 +1906,6 @@ const PROTEGEES = ["questions-imam", "mes-parcours", "parcours-edit", "passage-e
 const ROOTS = ["flux", "reels", "videos", "je-publie", "discussions", "home", "espace", "abos", "profil", "preches", "biblio", "direct"];
 function router(route, params = {}, opts = {}) {
   if (!etat.parentId && PROTEGEES.includes(route)) { route = "connexion"; params = { message: "Connectez-vous pour continuer." }; }
-  if (etat.envoiEnCours && (etat.route === "publier" || etat.route === "je-publie" || etat.route === "importer") && route !== etat.route) {
-    if (!confirm("Un envoi est en cours. Quitter l'annulera. Continuer ?")) return false;
-    if (etat.annulerEnvoi) etat.annulerEnvoi();
-  }
   if ((route === "flux" || route === "home") && etat.lienChaine) {
     const id = etat.lienChaine; etat.lienChaine = null;
     try { history.replaceState(null, "", location.pathname + location.search); } catch(e) {}
@@ -2472,7 +2470,7 @@ async function ouvrirMenuContenu(c, el, x, y) {
   let fav = false; try { fav = (await mesFavorisDe([c.id])).has(c.id); } catch (e) {}
   const hors = audioOuVideo && HORS.ids.has(c.id);
   const items = [{ ic: "🔗", t: "Copier le lien", f: () => { try { navigator.clipboard.writeText(lienPartage(c.id)); } catch (e) {} } }];
-  if (audioOuVideo) items.push({ ic: hors ? "✓" : "⬇", t: hors ? "Retirer du hors-ligne" : "Télécharger (hors-ligne)", f: async () => { if (hors) { await HORS.retirer(c.id); return; } await HORS.sauver(c, true); } });
+  if (audioOuVideo) items.push({ ic: hors ? "✓" : "⬇", t: hors ? "Retirer du hors-ligne" : "Télécharger (hors-ligne)", f: async () => { if (hors) { await HORS.retirer(c.id); return; } const job = TR.debut(c.title || "Audio", "Téléchargement", () => HORS.annul.add(c.id)); const ok = await HORS.sauver(c, true, (n, t) => TR.progres(job, n, t)); TR.fin(job, ok ? "ok" : "erreur", ok ? "" : "Téléchargement impossible."); } });
   items.push({ ic: "↗", t: "Partager", f: () => partagerContenu(c, el) });
   if (audioOuVideo && c.type === "audio") items.push({ ic: "➕", t: "Ajouter à la file d'attente", f: () => ajouterFile(c) });
   const ep = estEpingle(c.id);
@@ -3391,12 +3389,14 @@ function vueJePublie() {
       <p style="font-size:12px">Gardez cet écran ouvert. Si le réseau coupe, l'envoi reprend tout seul.</p>
       <button class="btn-outline" id="annuler">Annuler</button>`;
     const barre = wrap.querySelector("#barre"), pct = wrap.querySelector("#pct");
-    etat.envoiEnCours = true; window.onbeforeunload = () => true; garderEveille(true);
-    const arreter = () => { etat.envoiEnCours = false; etat.annulerEnvoi = null; window.onbeforeunload = null; garderEveille(false); };
+    garderEveille(true);
+    const job = TR.debut(t, "Envoi", () => { annule = true; if (envoi) envoi.annuler(); });
+    const arreter = (fin = "annule", msg = "") => { TR.fin(job, fin, msg); etat.annulerEnvoi = null; garderEveille(false); };
     etat.annulerEnvoi = () => { annule = true; if (envoi) envoi.annuler(); arreter(); };
     wrap.querySelector("#annuler").onclick = () => { etat.annulerEnvoi(); erreur = "Envoi annulé."; etape = 2; e2(); };
     try {
       envoi = envoyerFichier(fichier, chemin, mime, (a, b) => {
+        TR.progres(job, a, b);
         const p = b ? Math.min(100, Math.floor(a * 100 / b)) : 0;
         if (barre.isConnected) { barre.style.width = p + "%"; pct.textContent = `${p} % · ${fmtTaille(a)} / ${fmtTaille(b)}`; }
       });
@@ -3411,7 +3411,7 @@ function vueJePublie() {
       const prog = quand && new Date(quand) > new Date() ? new Date(quand) : null;
       const { data, error } = await sb.from("yt_contenus").insert(ligne).select(CHAMPS_CONTENU).single();
       if (error) { await sb.storage.from("yt-media").remove([chemin, ...(coverEnvoyee ? [cheminCover] : [])]).catch(() => {}); throw error; }
-      arreter();
+      arreter("ok");
       wrap.innerHTML = `${pas(3)}<div class="centre">${lumuSVG(96)}<h1>${prog ? "Programmé !" : "Publié !"}</h1><p style="margin-top:6px" dir="auto">${esc(t)} ${prog ? "sera en ligne le " + esc(prog.toLocaleString(langue, { dateStyle: "medium", timeStyle: "short" })) : "est en ligne"}.</p></div>
         <button class="btn" id="part">Partager le lien</button>
         <button class="btn-outline" id="voir">Voir la publication</button>
@@ -3420,7 +3420,7 @@ function vueJePublie() {
       wrap.querySelector("#voir").onclick = () => router("contenu", { id: data.id, c: data });
       wrap.querySelector("#autre").onclick = () => router("je-publie");
     } catch (e) {
-      arreter();
+      arreter(annule ? "annule" : "erreur", messageEnvoi(e));
       if (annule) return;
       sb.storage.from("yt-media").remove([chemin]).catch(() => {});
       erreur = messageEnvoi(e); etape = 2;
@@ -3537,14 +3537,14 @@ function vuePublier() {
       <p style="font-size:12px">Gardez cet écran ouvert et allumé. Si le réseau coupe, l'envoi reprend tout seul.</p>
       <button class="btn-outline" id="annuler">Annuler l'envoi</button>`;
     const barre = wrap.querySelector("#barre"), pct = wrap.querySelector("#pct");
-    etat.envoiEnCours = true;
-    window.onbeforeunload = () => true;
     garderEveille(true);
-    const arreter = () => { etat.envoiEnCours = false; etat.annulerEnvoi = null; window.onbeforeunload = null; garderEveille(false); };
+    const job = TR.debut(titre, "Envoi", () => { annule = true; if (envoi) envoi.annuler(); });
+    const arreter = (fin = "annule", msg = "") => { TR.fin(job, fin, msg); etat.annulerEnvoi = null; garderEveille(false); };
     etat.annulerEnvoi = () => { annule = true; if (envoi) envoi.annuler(); arreter(); };
     wrap.querySelector("#annuler").onclick = () => { etat.annulerEnvoi(); erreur = "Envoi annulé."; dessiner(); };
     try {
       envoi = envoyerFichier(fichier, chemin, mime, (a, b) => {
+        TR.progres(job, a, b);
         const p = b ? Math.min(100, Math.floor(a * 100 / b)) : 0;
         if (barre.isConnected) { barre.style.width = p + "%"; pct.textContent = `${p} % · ${fmtTaille(a)} / ${fmtTaille(b)}`; }
       });
@@ -3567,14 +3567,14 @@ function vuePublier() {
         throw error;
       }
       if (champs.groupe) { try { await sb.from("yt_groupe_posts").insert({ groupe_id: champs.groupe, contenu_id: data.id }); } catch (e) {} }
-      arreter();
+      arreter("ok");
       wrap.innerHTML = `<div class="centre">${lumuSVG(96)}<h1>Publié !</h1><p style="margin-top:6px" dir="auto">${esc(titre)} est en ligne.</p></div>
         <button class="btn" id="voir">Voir la publication</button>
         <button class="btn-outline" id="autre">Publier autre chose</button>`;
       wrap.querySelector("#voir").onclick = () => router("contenu", { id: data.id, c: data });
       wrap.querySelector("#autre").onclick = () => router("publier");
     } catch (e) {
-      arreter();
+      arreter(annule ? "annule" : "erreur", messageEnvoi(e));
       if (annule) return;
       sb.storage.from("yt-media").remove([chemin]).catch(() => {});
       erreur = messageEnvoi(e);
@@ -3862,6 +3862,47 @@ function boutonAbonnement(btn, channelId, creatorId, surChangement) {
 /* ---------- Lecteur audio permanent (mini-lecteur, arrière-plan) ---------- */
 
 /* ---------- Écoute hors connexion : audios enregistrés + 20 dernières écoutes ---------- */
+/* Centre des transferts : envois et téléchargements qui continuent quand on change d'écran ou que l'application passe en arrière-plan */
+const TR = {
+  liste: [],
+  debut(titre, sorte, annuler) {
+    const j = { id: String(Date.now()) + Math.random().toString(36).slice(2), titre: titre || "Fichier", sorte, pct: 0, etat: "cours", annuler: annuler || null, msg: "" };
+    this.liste.push(j); this.rendre(); return j;
+  },
+  progres(j, a, b) {
+    if (!j || j.etat !== "cours") return;
+    const p = b ? Math.min(100, Math.floor(a * 100 / b)) : 0;
+    if (p !== j.pct) { j.pct = p; this.rendre(); }
+  },
+  fin(j, etat, msg) {
+    if (!j) return;
+    j.etat = etat; j.msg = msg || ""; if (etat === "ok") j.pct = 100;
+    this.rendre();
+    setTimeout(() => { this.liste = this.liste.filter(x => x !== j); this.rendre(); }, etat === "ok" ? 4000 : 10000);
+  },
+  rendre() {
+    const cours = this.liste.filter(j => j.etat === "cours");
+    try {
+      if (cours.length) LumuNative.envoi(true, cours.length === 1 ? cours[0].sorte + " " + cours[0].pct + " % · " + cours[0].titre : cours.length + " transferts en cours");
+      else LumuNative.envoi(false, "");
+    } catch (e) {}
+    window.onbeforeunload = cours.length ? () => true : null;
+    let el = document.getElementById("tr");
+    if (!this.liste.length) { if (el) el.remove(); return; }
+    if (!el) {
+      el = document.createElement("div"); el.id = "tr";
+      el.style.cssText = "position:fixed;left:10px;right:10px;top:10px;z-index:99990;background:#0f5132;color:#fff;border-radius:12px;padding:10px 12px;font-size:13px;box-shadow:0 4px 14px rgba(0,0,0,.3)";
+      el.addEventListener("click", ev => { const b = ev.target.closest("[data-tr-x]"); if (!b) return; const j = this.liste.find(x => x.id === b.dataset.trX); if (j && j.annuler) j.annuler(); });
+      document.body.appendChild(el);
+    }
+    el.innerHTML = this.liste.map(j => {
+      const st = j.etat === "cours" ? j.pct + " %" : j.etat === "ok" ? "Terminé ✓" : j.etat === "annule" ? "Annulé" : "Échec" + (j.msg ? " : " + esc(j.msg) : "");
+      const x = j.etat === "cours" && j.annuler ? ' <button data-tr-x="' + j.id + '" style="background:none;border:1px solid #fff;color:#fff;border-radius:8px;padding:0 6px">✕</button>' : "";
+      return '<div style="display:flex;justify-content:space-between;gap:8px;align-items:center"><span dir="auto" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + esc(j.sorte) + " · " + esc(j.titre) + '</span><span style="white-space:nowrap">' + st + x + '</span></div>'
+        + '<div style="height:5px;margin:6px 0 2px;background:rgba(255,255,255,.25);border-radius:3px;overflow:hidden"><i style="display:block;height:100%;width:' + j.pct + '%;background:#fff"></i></div>';
+    }).join("");
+  }
+};
 const HORS = {
   pret: null, _db: null, ids: new Set(), MAX: 20, TAILLE_MAX: 120 * 1024 * 1024, enCours: new Set(), annul: new Set(),
   ouvrir() {
@@ -7459,8 +7500,8 @@ function vueImport() {
   async function lancer() {
     const commun = { cat: w.querySelector("#cat").value, groupe: (w.querySelector("#groupe") || {}).value || "" };
     enCours = true; stop = false;
-    etat.envoiEnCours = true; window.onbeforeunload = () => true; garderEveille(true);
-    try { LumuNative.envoi(true, "Envoi de fichiers vers Lumu"); } catch (e) {}
+    garderEveille(true);
+    const job = TR.debut("Import de " + items.length + " fichier(s)", "Envoi", () => { stop = true; items.filter(i => i.statut === "cours").forEach(it => { if (it.envoi) it.envoi.annuler(); }); });
     await demanderTitres(items);
     etat.annulerEnvoi = () => { stop = true; items.filter(i => i.statut === "cours").forEach(it => { if (it.envoi) it.envoi.annuler(); }); };
     dessiner();
@@ -7474,12 +7515,13 @@ function vueImport() {
         const maj = m => { it.msg = m; const s = it.el && it.el.querySelector(".st"); if (s) s.textContent = m; };
         try { await importerUn(it, commun, maj); it.statut = "ok"; }
         catch (e) { it.statut = "erreur"; it.msg = /annulé/i.test(String(e && e.message)) ? "Annulé" : messageEnvoi(e) === "L'envoi a échoué. Réessayez." && e && e.message ? e.message : messageEnvoi(e); }
+        TR.progres(job, items.filter(i => i.statut === "ok").length, items.length);
         if (w.isConnected) dessiner();
       }
     };
     await Promise.all(Array.from({ length: lent ? 1 : Math.min(2, file.length) }, ouvrier));
-    enCours = false; etat.envoiEnCours = false; etat.annulerEnvoi = null; window.onbeforeunload = null; garderEveille(false);
-    try { LumuNative.envoi(false, ""); } catch (e) {}
+    enCours = false; etat.annulerEnvoi = null; garderEveille(false);
+    TR.fin(job, stop ? "annule" : (items.some(i => i.statut === "erreur") ? "erreur" : "ok"), "");
     items.forEach(i => { if (i.statut === "cours") i.statut = "attente"; });
     if (w.isConnected) dessiner();
   }
