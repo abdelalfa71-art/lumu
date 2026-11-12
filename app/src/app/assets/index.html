@@ -5801,7 +5801,7 @@ async function vueEcouter() {
   w.querySelector("#ec-radio").onclick = () => { router("radio"); setTimeout(() => { try { RADIO.demarrer(); } catch (e) {} }, 700); };
   const CH = [["", "Tout", null], ["coran", "Coran", /coran|quran|r[ée]citation/i], ["cours", "Cours", /cours|conf[ée]rence|[ée]ducation|pr[eê]che/i], ["rappels", "Rappels", /rappel|invocation|dou?a|dhikr/i]];
   const DLP = {};
-  let tous = [], filtre = "", imams = [], abos = false;
+  let tous = [], filtre = "", imams = [], abos = false, ecCharge = false;
   const liste = w.querySelector("#ec-liste");
   const joue = c => !!(AUD.c && AUD.c.id === c.id && AUD.a && !AUD.a.paused);
   const synchro = () => { w.querySelectorAll(".ec-row").forEach(r => { const c = r._c; if (!c) return; const j = joue(c); r.classList.toggle("lit", !!(AUD.c && AUD.c.id === c.id)); r.querySelector(".ec-pl").innerHTML = ico(j ? "pause" : "play", 26, true); }); };
@@ -5837,7 +5837,7 @@ async function vueEcouter() {
       const vus = new Set(loc.map(c => c.id)); l = [...loc, ...serveur.filter(c => !vus.has(c.id))];
     } else l = tous.filter(c => !re || re.test(c.category || "") || re.test(c.title || ""));
     { const ep = chargerLocal(EPING_CLE, []); l = [...l.filter(c => ep.includes(c.id)), ...l.filter(c => !ep.includes(c.id))]; }
-    liste.innerHTML = l.length ? "" : `<p class="ec-vide">${rech ? "Aucun résultat." : "Aucun audio pour l'instant."}</p>`;
+    liste.innerHTML = l.length ? "" : `<p class="ec-vide">${rech ? "Aucun résultat." : (ecCharge ? "Aucun audio pour l'instant." : "Veuillez patienter…")}</p>`;
     if (!rech && fileAttente().length) {
       const n = fileAttente().length, d = document.createElement("div");
       d.style.cssText = "display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 12px;padding:12px 14px;border-radius:14px;background:rgba(127,127,127,.12)";
@@ -5914,6 +5914,7 @@ async function vueEcouter() {
     }
     const r = { data: brut };
     tous = brut.filter(c => c.fichier_path && !c.embed_id && langOk(c));
+    ecCharge = true;
     if (brut.length) cacheLocal("cache_ecoute", brut.slice(0, 60));
     ec_notice(w, "");
     if (!w.isConnected) return;
@@ -5927,6 +5928,7 @@ async function vueEcouter() {
     const cache = lireCacheLocal("cache_ecoute");
     if (cache && w.isConnected) {
       tous = cache.d.filter(c => c.fichier_path && !c.embed_id && langOk(c));
+      ecCharge = true;
       if (!abos) { const vus = new Map(); tous.forEach(c => { const ch = c.yt_channels; if (ch && ch.id && !vus.has(ch.id)) vus.set(ch.id, ch); }); imams = [...vus.values()]; }
       ec_notice(w, "Hors connexion : dernière liste enregistrée le " + new Date(cache.t).toLocaleDateString("fr-FR", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }) + ".");
       dessinerImams(); lignes();
