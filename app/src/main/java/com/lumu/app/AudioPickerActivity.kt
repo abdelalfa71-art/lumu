@@ -234,51 +234,8 @@ class AudioPickerActivity : AppCompatActivity() {
 
     private fun terminer() {
         if (choisis.isEmpty()) return
-        val uris = choisis.toList()
-        val items = uris.map { u -> tous.firstOrNull { it.uri == u } }
-        val noms = items.map { it?.nom ?: "" }
-        val peutAlleger = items.any { it != null && !it.video }
-        if (!peutAlleger && noms.none { Convertisseur.estAmr(it) }) { rendre(uris); return }
-        valider.isEnabled = false
-        valider.text = "⏳ Préparation…"
-        barre.visibility = View.GONE
-        conversion = true; annuleConv = false
-        Thread {
-            val aFaire = uris.indices.map { k -> Convertisseur.estAmr(noms[k]) || (items[k] != null && !items[k]!!.video && Convertisseur.aAlleger(this, uris[k], items[k]!!.taille)) }
-            val total = aFaire.count { it }
-            val finaux = mutableListOf<Uri>()
-            var echecs = 0
-            var rang = 0
-            var raison = ""
-            uris.forEachIndexed { k, u ->
-                if (annuleConv) return@forEachIndexed
-                if (aFaire[k]) {
-                    rang++
-                    val r = rang
-                    val amr = Convertisseur.estAmr(noms[k])
-                    val base = noms[k].substringBeforeLast('.').replace(Regex("[\\\\/:*?\"<>|]"), " ").trim().ifEmpty { "audio" }
-                    val f = java.io.File(cacheDir, "conv/${System.currentTimeMillis()}/$base.m4a")
-                    val ok = Convertisseur.versM4a(this, u, f, {}, { annuleConv })
-                    if (ok && f.length() > 0) finaux += androidx.core.content.FileProvider.getUriForFile(this, "$packageName.fp", f)
-                    else if (amr) { echecs++; if (raison.isEmpty()) raison = Convertisseur.derniereErreur }
-                    else finaux += u   // échec de l'allègement : on garde l'original
-                } else finaux += u
-            }
-            runOnUiThread {
-                conversion = false; barre.visibility = View.GONE
-                if (annuleConv) {
-                    valider.isEnabled = true; majBouton()
-                    
-                } else if (finaux.isEmpty()) {
-                    valider.text = "❌ Conversion impossible — choisissez un MP3 ou M4A"
-                    valider.isEnabled = true
-                    if (raison.isNotEmpty()) android.widget.Toast.makeText(this, "Détail : $raison", android.widget.Toast.LENGTH_LONG).show()
-                } else {
-                    if (echecs > 0) android.widget.Toast.makeText(this, "$echecs fichier(s) AMR non convertis", android.widget.Toast.LENGTH_LONG).show()
-                    rendre(finaux)
-                }
-            }
-        }.start()
+        // Fichiers envoyés tels quels, sans conversion ni allègement (comme WhatsApp)
+        rendre(choisis.toList())
     }
 
     private fun rendre(uris: List<Uri>) {
