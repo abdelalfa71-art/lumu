@@ -8539,7 +8539,7 @@ async function vueLivres() {
     rech.oninput = () => dessine();
     z.appendChild(rech);
     const zPub = document.createElement("div"); zPub.id = "lv-pub"; z.appendChild(zPub);
-    let mode = "tous", serieChoisie = "";
+    let mode = "groupes", serieChoisie = "";
     const ouvre = l => router("livre", { id: l.id });
     const cleDe = (m, l) => m === "auteur" ? ((l.yt_channels && l.yt_channels.name) || "Sans auteur") : (/^[0-9]/.test((l.titre || "").trim()) ? "0-9" : ((l.titre || "?").trim().charAt(0).toUpperCase() || "?"));
     /* Mode Audios : on n'affiche que les audios (pas de titres de livres, ni PDF, ni boutons livre) */
@@ -8547,14 +8547,13 @@ async function vueLivres() {
     const dessine = () => {
       majVueAudio();
       zPub.innerHTML = "";
-      if (!data.length) { zPub.innerHTML = `<p>Aucun livre publié.</p>`; return; }
       if (mode === "groupes") {
         if (!regroupements.length) { zPub.innerHTML = `<p>Aucun regroupement pour l'instant.</p>`; return; }
         regroupements.forEach(g => {
-          const ids = (g.yt_groupes_livres_items || []).map(x => x.livre_id);
+          const ids = (g.yt_groupes_livres_items || []).map(x => x.contenu_id);
           const h = document.createElement("h2"); h.className = "pf-h"; h.textContent = g.nom; zPub.appendChild(h);
           if (g.description) { const p = document.createElement("p"); p.textContent = g.description; zPub.appendChild(p); }
-          data.filter(l => ids.includes(l.id)).forEach(l => zPub.appendChild(carteLivre(l, () => ouvre(l))));
+          ids.map(id => audiosGroupes.get(id)).filter(Boolean).forEach(a => zPub.appendChild(carteContenu(a)));
         });
         return;
       }
@@ -8611,44 +8610,38 @@ async function vueLivres() {
       }
     };
     const barre = w.querySelector("#lv-modes");
-    const modes = [["tous", "Tous"], ["auteur", "Par auteur"], ["titre", "Par livre (A-Z)"], ["groupes", "Regroupements"], ["audios", "Audios des livres"]];
+    const modes = [["groupes", "Regroupements"]];
     const majBarre = () => { barre.innerHTML = modes.map(([k, n]) => `<button type="button" class="chip${k === mode ? " actif" : ""}" data-m="${k}" aria-pressed="${k === mode}">${n}</button>`).join(""); barre.querySelectorAll("button").forEach(b => b.onclick = () => { mode = b.dataset.m; majBarre(); dessine(); }); };
     /* Audios des livres traduits : le rattachement se fait par le titre de l'audio (il contient le titre du livre) */
     let audiosLivres = [];
     try { const a = await sb.from("yt_contenus").select(CHAMPS_CONTENU).eq("status", "published").eq("type", "audio").order("published_at", { ascending: false }).limit(300); audiosLivres = ((a && a.data) || []).filter(c => c.fichier_path && !c.embed_id && langOk(c)); } catch (e) {}
     const normeTitre = s => (s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9؀-ۿ]+/g, " ").trim();
-    let regroupements = [];
-    try { const g = await sb.from("yt_groupes_livres").select("id,nom,description,channel_id,yt_groupes_livres_items(livre_id)").order("created_at", { ascending: true }); regroupements = (g && g.data) || []; } catch (e) {}
+    let regroupements = [], audiosGroupes = new Map();
+    try { const g = await sb.from("yt_groupes_livres").select("id,nom,description,channel_id,yt_groupes_livres_items(contenu_id)").order("created_at", { ascending: true }); regroupements = (g && g.data) || []; } catch (e) {}
+    try {
+      const idsAud = [...new Set(regroupements.flatMap(g => (g.yt_groupes_livres_items || []).map(x => x.contenu_id)).filter(Boolean))];
+      if (idsAud.length) { const r = await sb.from("yt_contenus").select(CHAMPS_CONTENU).in("id", idsAud); ((r && r.data) || []).forEach(a => audiosGroupes.set(a.id, a)); }
+    } catch (e) {}
     if (estCreateur() && etat.chaine) {
       const b = document.createElement("button"); b.id = "nv-groupe"; b.className = "btn-outline"; b.style.marginBottom = "10px"; b.textContent = "➕ Nouveau regroupement";
-      b.onclick = () => nouveauRegroupement(data.filter(l => l.channel_id === etat.chaine.id));
+      b.onclick = async () => {
+        const r = await sb.from("yt_contenus").select(CHAMPS_CONTENU).eq("channel_id", etat.chaine.id).eq("status", "published").eq("type", "audio").order("published_at", { ascending: false }).limit(300);
+        nouveauRegroupement(((r && r.data) || []).filter(c => c.fichier_path && !c.embed_id));
+      };
       z.insertAdjacentElement("beforebegin", b);
     }
     majBarre(); dessine();
-    const cl = await donneesArabe("cache_livres", "livres_islamiques", "id,categorie,titre_ar,titre_fr,auteur_fr,deces_hijri,fichier_url", ["categorie", "id"]).catch(() => []);
     if (!w.isConnected) return;
-    if (data.length) { z.firstChild && z.insertAdjacentHTML("afterbegin", `<h2 class="pf-h" style="margin-top:0">Livres des imams</h2>`); }
-    else z.innerHTML = "";
-    if (cl && cl.length) {
-      z.insertAdjacentHTML("beforeend", `<h2 class="pf-h">Livres classiques</h2>`);
-      cl.forEach(l => {
-        const c = document.createElement("div"); c.className = "carte";
-        const lien = l.fichier_url && /^https:\/\//.test(l.fichier_url) ? `<a class="lien-livre" href="${esc(l.fichier_url)}" target="_blank" rel="noopener">📖 Ouvrir le livre</a>` : `<p style="margin-top:8px;font-size:12px">Texte bientôt disponible</p>`;
-        c.innerHTML = `<div class="texte-arabe livre-ar" dir="rtl" lang="ar">${esc(l.titre_ar)}</div><b style="font-size:15px">${esc(l.titre_fr)}</b><p style="margin-top:4px">${esc(l.auteur_fr)}${l.deces_hijri ? " (m. " + esc(l.deces_hijri) + " H)" : ""}</p>${lien}`;
-        z.appendChild(c);
-      });
-    }
-    if (!data.length && !(cl && cl.length)) z.innerHTML = `<p>Aucun livre publié.</p>`;
     z.insertAdjacentHTML("beforeend", `<button class="btn-outline" id="docs" style="margin-top:14px">📄 Documents PDF</button>`);
     z.querySelector("#docs").onclick = () => router("dossier", { type: "pdf", titre: "Documents" });
     Array.from(z.children).forEach(el => { if (el !== zPub && el !== rech) el.style.display = mode === "audios" ? "none" : ""; });
   } catch (e) { if (w.isConnected) w.querySelector("#liste").innerHTML = `<p class="erreur">${esc(txtErr(e, "Chargement impossible."))}</p>`; }
 }
 /* Création d'un regroupement de livres par l'imam (ses propres livres publiés) */
-function nouveauRegroupement(mesLivres) {
-  if (!mesLivres.length) { alert("Publiez d'abord un livre pour créer un regroupement."); return; }
-  const cases = mesLivres.map(l => `<label style="display:flex;gap:10px;align-items:center;min-height:48px"><input type="checkbox" value="${esc(l.id)}"><span dir="auto">${esc(l.titre)}</span></label>`).join("");
-  ouvrirFeuille("Nouveau regroupement", `<form id="rg-f" style="display:grid;gap:12px"><label style="display:grid;gap:6px">Nom du regroupement<input id="rg-nom" required maxlength="120" placeholder="Ex. Fiqh de base"></label><label style="display:grid;gap:6px">Description (facultatif)<textarea id="rg-desc" rows="2"></textarea></label><p>Livres à regrouper :</p>${cases}<p class="erreur" id="rg-err" hidden></p><button class="btn" type="submit">Enregistrer</button></form>`, (corps, fermer) => {
+function nouveauRegroupement(mesAudios) {
+  if (!mesAudios.length) { alert("Publiez d'abord un audio pour créer un regroupement."); return; }
+  const cases = mesAudios.map(a => `<label style="display:flex;gap:10px;align-items:center;min-height:48px"><input type="checkbox" value="${esc(a.id)}"><span dir="auto">${esc(a.title)}</span></label>`).join("");
+  ouvrirFeuille("Nouveau regroupement", `<form id="rg-f" style="display:grid;gap:12px"><label style="display:grid;gap:6px">Nom du regroupement<input id="rg-nom" required maxlength="120" placeholder="Ex. Fiqh de base"></label><label style="display:grid;gap:6px">Description (facultatif)<textarea id="rg-desc" rows="2"></textarea></label><p>Audios à regrouper :</p>${cases}<p class="erreur" id="rg-err" hidden></p><button class="btn" type="submit">Enregistrer</button></form>`, (corps, fermer) => {
     corps.querySelector("#rg-f").onsubmit = async ev => {
       ev.preventDefault();
       const nom = corps.querySelector("#rg-nom").value.trim();
@@ -8659,7 +8652,7 @@ function nouveauRegroupement(mesLivres) {
       const { data: g, error } = await sb.from("yt_groupes_livres").insert({ channel_id: etat.chaine.id, nom, description: corps.querySelector("#rg-desc").value.trim() || null }).select("id").single();
       if (error || !g) return montre("Enregistrement impossible. Vérifiez la connexion.");
       if (ids.length) {
-        const { error: e2 } = await sb.from("yt_groupes_livres_items").insert(ids.map((id, i) => ({ groupe_id: g.id, livre_id: id, position: i })));
+        const { error: e2 } = await sb.from("yt_groupes_livres_items").insert(ids.map((id, i) => ({ groupe_id: g.id, contenu_id: id, position: i })));
         if (e2) return montre("Groupe créé, mais les livres n'ont pas été ajoutés.");
       }
       fermer(); router("livres");
