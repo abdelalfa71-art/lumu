@@ -462,7 +462,7 @@ html.nuit .ec-imam, html:root[data-theme="dark"] .ec-imam { color: #7FD6C2; }
 .ec-rech { padding: 8px 12px; background: var(--fond); border-bottom: 1px solid var(--bordure); }
 .ec-rech input { width: 100%; box-sizing: border-box; min-height: 46px; border-radius: 999px; border: 0; padding: 0 18px; font-size: 17px; background: color-mix(in srgb, var(--texte) 8%, var(--surface)); color: var(--texte); }
 .ec-rech[hidden] { display: none; }
-.ec-cherche .ec-radio, .ec-cherche .ec-reprise, .ec-cherche #ec-chips, .ec-cherche #ec-rep, .ec-cherche #ec-rappel { display: none; }
+.ec-cherche .ec-radio, .ec-cherche .ec-reprise, .ec-cherche #ec-chips, .ec-cherche #ec-rep, .ec-cherche #ec-rappel, .ec-cherche #ec-moment { display: none; }
 
 /* ===== Tailles façon WhatsApp ===== */
 html:root .ec-haut b { font-size: 20px; }
@@ -5773,6 +5773,35 @@ function dateCourte(iso) {
   } catch (e) { return ""; }
 }
 /* ====================== ÉCOUTER : nouvel accueil (imams + liste d'audios, gros boutons) ====================== */
+/* ---------- Ambiance selon le moment : Ramadan, dix jours de Dhoul-Hijja, vendredi, moments de la journée ---------- */
+function momentIslamique(maintenant) {
+  const d = maintenant || new Date(), h = {};
+  try { new Intl.DateTimeFormat("en-u-ca-islamic-umalqura", { month: "numeric", day: "numeric" }).formatToParts(d).forEach(x => { if (x.type === "month" || x.type === "day") h[x.type] = +x.value; }); } catch (e) {}
+  if (h.month === 9) return { cle: "ramadan", ic: "🌙", titre: "Ramadan Moubarak", texte: "Jour " + h.day + " du mois béni (date indicative)", fond: "linear-gradient(135deg,#0f3d36,#1b6b5c 60%,#c9a227)", q: "ramadan" };
+  if (h.month === 12 && h.day <= 10) return { cle: "hijja", ic: "🕋", titre: "Les dix jours de Dhoul-Hijja", texte: "Jour " + h.day + " (date indicative) · multipliez le rappel et les bonnes œuvres", fond: "linear-gradient(135deg,#3b2f1a,#8a6a1f 60%,#c9a227)", q: "hajj" };
+  if (d.getDay() === 5) return { cle: "vendredi", ic: "🕌", titre: "Jumu'a Moubarak", texte: "Sourate Al-Kahf, invocations et prêche du vendredi", fond: "linear-gradient(135deg,#0f3d36,#12805f)", q: "kahf" };
+  /* Moment de la journée : d'après les heures de prière enregistrées, sinon d'après l'horloge */
+  let now = d.getHours() * 60 + d.getMinutes(), faj = 300, asr = 960, mag = 1110, ish = 1230;
+  try {
+    const pr = chargerLocal("priere_n", null);
+    if (pr && pr.t) { if (!maintenant) now = PRIERE.minutes(pr.tz); faj = PRIERE.vers(pr.t.Fajr); asr = PRIERE.vers(pr.t.Asr); mag = PRIERE.vers(pr.t.Maghrib); ish = PRIERE.vers(pr.t.Isha); }
+  } catch (e) {}
+  if (now >= faj && now < faj + 150) return { cle: "fajr", ic: "🌅", titre: "Après le Fajr", texte: "Commencez la journée par le Coran et le rappel du matin", fond: "linear-gradient(135deg,#c96a2b,#e8a84c)", q: "matin" };
+  if (now >= asr && now < mag) return { cle: "soir", ic: "🌇", titre: "Fin de journée", texte: "Le moment des invocations du soir", fond: "linear-gradient(135deg,#5b3a6b,#c2674f)", q: "soir" };
+  if (now >= ish + 30 || now < faj) return { cle: "nuit", ic: "🌙", titre: "Avant de dormir", texte: "Un rappel calme pour finir la journée", fond: "linear-gradient(135deg,#0d1b3a,#27406e)", dormir: true };
+  return null;
+}
+function carteMoment(w) {
+  const zone = w.querySelector("#ec-moment"); if (!zone) return;
+  let m = null; try { m = momentIslamique(); } catch (e) {}
+  if (!m) { zone.innerHTML = ""; return; }
+  zone.innerHTML = `<button type="button" style="display:flex;align-items:center;gap:12px;width:calc(100% - 32px);margin:6px 16px 10px;padding:14px 16px;border:0;border-radius:18px;color:#fff;text-align:start;background:${m.fond};box-shadow:0 4px 14px rgba(0,0,0,.18)"><span style="font-size:30px" aria-hidden="true">${m.ic}</span><span style="flex:1;min-width:0"><b style="display:block;font-size:17px;color:#fff">${esc(m.titre)}</b><span style="display:block;font-size:13px;opacity:.95;color:#fff">${esc(m.texte)}</span></span><span aria-hidden="true" style="font-size:22px">›</span></button>`;
+  zone.firstChild.onclick = () => {
+    if (m.dormir) { const b = w.querySelector("#th-dormir"); if (b) b.click(); return; }
+    const z = w.querySelector("#ec-rech"), i = w.querySelector("#ec-rin"); if (!z || !i) return;
+    z.hidden = false; i.value = m.q; i.dispatchEvent(new Event("input"));
+  };
+}
 async function vueEcouter() {
   const w = document.createElement("div");
   w.className = "ecran ec";
@@ -5781,6 +5810,7 @@ async function vueEcouter() {
     <div class="ec-rech" id="ec-rech" hidden><input id="ec-rin" type="search" enterkeyhint="search" autocomplete="off" placeholder="Rechercher un imam, un titre…"><div id="ec-sugg" class="ec-sugg"></div></div>
     <div class="ec-corps">
       <div class="st-row" id="st-row" hidden></div>
+      <div id="ec-moment"></div>
       <div id="ec-rep"></div>
       <div class="ec-ligne"><button class="ec-radio" id="ec-radio"><span class="ec-rp">${ico("play", 30, true)}</span><span><b>Lumu Radio</b><small>Rappels, Coran, invocations</small></span></button><select id="ec-cat" aria-label="Catégorie"><option value="">Tout</option><option value="coran">Coran</option><option value="cours">Cours</option><option value="rappels">Rappels</option></select></div>
       <details class="ec-plus"><summary>Plus de choix ▾</summary><div class="ec-gros"><button id="eg-hors"><span>⬇</span>Mes audios</button><button id="eg-disc"><span>💬</span>Discuter</button><button id="eg-imams"><span>👥</span>Imams</button><button id="eg-q"><span>🔍</span>Chercher</button></div>
@@ -5792,6 +5822,7 @@ async function vueEcouter() {
       <div id="ec-liste">${squelettes(3)}</div>
     </div>`;
   app.appendChild(w);
+  carteMoment(w);
   synchroEpingles();
   if (ACCES.simple()) w.classList.add("ec-simple");
   try { STAT.monter(w.querySelector("#st-row")); } catch (e) {}
