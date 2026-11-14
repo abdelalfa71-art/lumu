@@ -33,7 +33,7 @@ if (d.requetes && d.requetes.length) {
 }
 if (d.livres && d.livres.length) {
   for (const L of (d.livres || [d])) {
-    for (const f of fs.readdirSync("/tmp").filter(f => /^p-\d+\.jpg$/.test(f))) fs.rmSync("/tmp/" + f);
+    for (const f of fs.readdirSync("/tmp").filter(f => /^p-\d+\.(jpg|png)$/.test(f))) fs.rmSync("/tmp/" + f);
     const dir = "livres/" + L.id;
     fs.rmSync(dir, { recursive: true, force: true }); fs.mkdirSync(dir, { recursive: true });
     { let ok = false, err = null;
@@ -49,17 +49,18 @@ if (d.livres && d.livres.length) {
     try { fs.writeFileSync(dir + "/_images.txt", execFileSync("pdfimages", ["-list", "-l", "12", "/tmp/livre.pdf"]).toString()); } catch (e) {}
     if (L.debut) args.push("-f", String(L.debut));
     if (L.fin) args.push("-l", String(L.fin));
+    const ext = L.ext || "jpg";
     if (L.originaux) {
-      /* Images d'origine du scan, extraites telles quelles (aucun réencodage) : une image JPEG par page */
+      /* Images d'origine du scan, extraites telles quelles : JPEG d'origine sans réencodage, ou PNG sans perte pour les scans en noir et blanc */
       for (const f of fs.readdirSync("/tmp").filter(f => /^o-\d+\./.test(f))) fs.rmSync("/tmp/" + f);
-      execFileSync("pdfimages", ["-j", "/tmp/livre.pdf", "/tmp/o"], { stdio: "inherit" });
+      execFileSync("pdfimages", [ext === "png" ? "-png" : "-j", "/tmp/livre.pdf", "/tmp/o"], { stdio: "inherit" });
       const o = fs.readdirSync("/tmp").filter(f => /^o-\d+\./.test(f)).sort();
-      if (!o.length || o.some(f => !f.endsWith(".jpg"))) throw new Error("Ce PDF ne contient pas une image JPEG par page : " + o.slice(0, 5).join(","));
-      o.forEach((f, i) => fs.renameSync("/tmp/" + f, "/tmp/p-" + (i + 1) + ".jpg"));
+      if (!o.length || o.some(f => !f.endsWith("." + ext))) throw new Error("Ce PDF ne contient pas une image " + ext + " par page : " + o.slice(0, 5).join(","));
+      o.forEach((f, i) => fs.renameSync("/tmp/" + f, "/tmp/p-" + (i + 1) + "." + ext));
     } else execFileSync("pdftoppm", [...args, "/tmp/livre.pdf", "/tmp/p"], { stdio: "inherit" });
-    const fichiers = fs.readdirSync("/tmp").filter(f => /^p-\d+\.jpg$/.test(f)).sort((a, b) => parseInt(a.slice(2)) - parseInt(b.slice(2)));
+    const fichiers = fs.readdirSync("/tmp").filter(f => /^p-\d+\.(jpg|png)$/.test(f) && f.endsWith("." + ext)).sort((a, b) => parseInt(a.slice(2)) - parseInt(b.slice(2)));
     const emp = {};
-    fichiers.forEach((f, i) => { const b = fs.readFileSync("/tmp/" + f); fs.writeFileSync(dir + "/" + (i + 1) + ".jpg", b); emp[i + 1] = crypto.createHash("sha256").update(b).digest("hex"); });
+    fichiers.forEach((f, i) => { const b = fs.readFileSync("/tmp/" + f); fs.writeFileSync(dir + "/" + (i + 1) + "." + ext, b); emp[i + 1] = crypto.createHash("sha256").update(b).digest("hex"); });
     const pdf = fs.readFileSync("/tmp/livre.pdf");
     fs.writeFileSync(dir + "/empreintes.json", JSON.stringify({ pages: fichiers.length, algorithme: "sha256", origine: L.url, pdf_sha256: crypto.createHash("sha256").update(pdf).digest("hex"), pdf_octets: pdf.length, empreintes: emp }, null, 0));
     console.log("pages:", fichiers.length);

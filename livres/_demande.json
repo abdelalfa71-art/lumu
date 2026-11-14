@@ -1,31 +1,10 @@
 {
  "livres": [
   {
-   "id": "akhdari",
-   "url": "https://archive.org/download/Akhdari-Tha3alibia/Akhdarirare.pdf",
-   "originaux": true
-  }
- ],
- "apercus": [
-  {
-   "nom": "risala-g",
-   "url": "https://archive.org/download/Pdf4478/%D9%83%D8%AA%D8%A7%D8%A8%20%20%20pdf%20%20%20%20%20%20%20%D8%A7%D9%82%D8%B1%D8%A7%20%20%D8%A7%D9%88%D9%86%D9%84%D8%A7%D9%8A%D9%86%20%204478%20-%20%D9%85%D8%AA%D9%86%20%D8%A7%D9%84%D8%B1%D8%B3%D8%A7%D9%84%D8%A9%20%D9%84%D8%A7%D8%A8%D9%86%20%D8%B2%D9%8A%D8%AF%20%D8%A7%D9%84%D9%82%D9%8A%D8%B1%D9%88%D8%A7%D9%86%D9%8A.pdf"
-  },
-  {
-   "nom": "risala-h",
-   "url": "https://archive.org/download/20250129_20250129_1622/%D8%A7%D9%84%D8%B1%D8%B3%D8%A7%D9%84%D8%A9%20%D9%84%D8%A7%D8%A8%D9%86%20%D8%A3%D8%A8%D9%8A%20%D8%B2%D9%8A%D8%AF%20%D8%A7%D9%84%D9%82%D9%8A%D8%B1%D9%88%D8%A7%D9%86%D9%8A.pdf"
-  },
-  {
-   "nom": "risala-c",
-   "url": "https://archive.org/download/20210226_20210226_1258/%D8%A7%D9%84%D8%B1%D8%B3%D8%A7%D9%84%D8%A9%20%D9%84%D8%A7%D8%A8%D9%86%20%D8%A3%D8%A8%D9%8A%20%D8%B2%D9%8A%D8%AF%20%D8%A7%D9%84%D9%82%D9%8A%D8%B1%D9%88%D8%A7%D9%86%D9%8A.pdf"
-  },
-  {
-   "nom": "risala-e",
-   "url": "https://archive.org/download/20191118_20191118_1943/%D9%85%D8%AA%D9%86_%D8%A7%D9%84%D8%B1%D8%B3%D8%A7%D9%84%D8%A9_%D9%84%D8%A7%D8%A8%D9%86_%D8%A3%D8%A8%D9%8A_%D8%B2%D9%8A%D8%AF_%D8%A7%D9%84%D9%82%D9%8A%D8%B1%D9%88%D8%A7%D9%86%D9%8A.pdf"
-  },
-  {
-   "nom": "akhdari-d",
-   "url": "https://archive.org/download/20240102_20240102_1225/%D9%85%D8%AE%D8%AA%D8%B5%D8%B1%20%D8%A7%D9%84%D8%A3%D8%AE%D8%B6%D8%B1%D9%8A%20%D8%A7%D9%84%D8%B7%D8%A8%D8%B9%D8%A9%20%D8%A7%D9%84%D8%AB%D8%B9%D8%A7%D9%84%D8%A8%D9%8A%D8%A9%20%D8%A7%D9%84%D9%82%D8%AF%D9%8A%D9%85%D8%A9.pdf"
+   "id": "risala",
+   "url": "https://archive.org/download/Pdf4478/%D9%83%D8%AA%D8%A7%D8%A8%20%20%20pdf%20%20%20%20%20%20%20%D8%A7%D9%82%D8%B1%D8%A7%20%20%D8%A7%D9%88%D9%86%D9%84%D8%A7%D9%8A%D9%86%20%204478%20-%20%D9%85%D8%AA%D9%86%20%D8%A7%D9%84%D8%B1%D8%B3%D8%A7%D9%84%D8%A9%20%D9%84%D8%A7%D8%A8%D9%86%20%D8%B2%D9%8A%D8%AF%20%D8%A7%D9%84%D9%82%D9%8A%D8%B1%D9%88%D8%A7%D9%86%D9%8A.pdf",
+   "originaux": true,
+   "ext": "png"
   }
  ]
 }
