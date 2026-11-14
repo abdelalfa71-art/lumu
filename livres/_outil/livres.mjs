@@ -44,7 +44,9 @@ if (d.livres && d.livres.length) {
       if (!ok) throw err; }
     const tete = fs.readFileSync("/tmp/livre.pdf").subarray(0, 5).toString();
     if (tete !== "%PDF-") throw new Error("Le fichier téléchargé n'est pas un PDF");
-    const args = ["-jpeg", "-jpegopt", "quality=88", "-scale-to-x", String(L.largeur || 1400), "-scale-to-y", "-1"];
+    const args = ["-jpeg", "-jpegopt", "quality=" + (L.qualite || 88), "-scale-to-x", String(L.largeur || 1400), "-scale-to-y", "-1"];
+    if (L.gris) args.push("-gray");
+    try { fs.writeFileSync(dir + "/_images.txt", execFileSync("pdfimages", ["-list", "-l", "12", "/tmp/livre.pdf"]).toString()); } catch (e) {}
     if (L.debut) args.push("-f", String(L.debut));
     if (L.fin) args.push("-l", String(L.fin));
     execFileSync("pdftoppm", [...args, "/tmp/livre.pdf", "/tmp/p"], { stdio: "inherit" });

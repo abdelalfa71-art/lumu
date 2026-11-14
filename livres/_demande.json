@@ -1,24 +1,17 @@
 {
- "apercus": [
+ "livres": [
   {
-   "nom": "akhdari-c",
-   "url": "https://archive.org/download/Akhdari-Tha3alibia/Akhdarirare.pdf"
+   "id": "akhdari",
+   "url": "https://archive.org/download/Akhdari-Tha3alibia/Akhdarirare.pdf",
+   "largeur": 1500,
+   "qualite": 88
   },
   {
-   "nom": "risala-c",
-   "url": "https://archive.org/download/20210226_20210226_1258/%D8%A7%D9%84%D8%B1%D8%B3%D8%A7%D9%84%D8%A9%20%D9%84%D8%A7%D8%A8%D9%86%20%D8%A3%D8%A8%D9%8A%20%D8%B2%D9%8A%D8%AF%20%D8%A7%D9%84%D9%82%D9%8A%D8%B1%D9%88%D8%A7%D9%86%D9%8A.pdf"
-  },
-  {
-   "nom": "risala-d",
-   "url": "https://archive.org/download/ArrisalaAlQairawania/ArrisalaIbnAbiZaidAlQayrawani.pdf"
-  },
-  {
-   "nom": "risala-e",
-   "url": "https://archive.org/download/20191118_20191118_1943/%D9%85%D8%AA%D9%86_%D8%A7%D9%84%D8%B1%D8%B3%D8%A7%D9%84%D8%A9_%D9%84%D8%A7%D8%A8%D9%86_%D8%A3%D8%A8%D9%8A_%D8%B2%D9%8A%D8%AF_%D8%A7%D9%84%D9%82%D9%8A%D8%B1%D9%88%D8%A7%D9%86%D9%8A.pdf"
-  },
-  {
-   "nom": "risala-f",
-   "url": "https://archive.org/download/RissalaFiqhya/34-Elrissala_Fiqhia.pdf"
+   "id": "risala",
+   "url": "https://archive.org/download/ArrisalaAlQairawania/ArrisalaIbnAbiZaidAlQayrawani.pdf",
+   "largeur": 1500,
+   "qualite": 85,
+   "gris": true
   }
  ]
 }
