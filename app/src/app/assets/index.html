@@ -5873,7 +5873,7 @@ const AZKAR = {
 AZKAR.soir = AZKAR.matin.slice(0, 6).concat([]);
 async function vueAzkar() {
   const w = ecran("Azkar", ["livres"], `<div style="display:flex;gap:8px;margin:0 0 12px"><button class="btn" id="az-m" style="flex:1;margin:0">🌅 Matin</button><button class="btn-outline" id="az-s" style="flex:1;margin:0">🌙 Soir</button></div><div id="az-l" style="display:grid;gap:12px"></div><p style="font-size:12px;text-align:center" dir="auto">Texte tiré du livre « Al-Khulasa al-Hasna fi Azkar as-Sabah wal-Masa’ ». À vérifier avant diffusion.</p>`);
-  let liste = "matin";
+  let liste = etat.params && etat.params.liste === "soir" ? "soir" : "matin";
   const compte = {};
   const dessiner = () => {
     const L = w.querySelector("#az-l");
@@ -6342,8 +6342,8 @@ function momentIslamique(maintenant) {
     const pr = chargerLocal("priere_n", null);
     if (pr && pr.t) { if (!maintenant) now = PRIERE.minutes(pr.tz); faj = PRIERE.vers(pr.t.Fajr); asr = PRIERE.vers(pr.t.Asr); mag = PRIERE.vers(pr.t.Maghrib); ish = PRIERE.vers(pr.t.Isha); }
   } catch (e) {}
-  if (now >= faj && now < faj + 150) return { cle: "fajr", ic: "🌅", titre: "Après le Fajr", texte: "Commencez la journée par le Coran et le rappel du matin", fond: "linear-gradient(135deg,#c96a2b,#e8a84c)", q: "matin" };
-  if (now >= asr && now < mag) return { cle: "soir", ic: "🌇", titre: "Fin de journée", texte: "Le moment des invocations du soir", fond: "linear-gradient(135deg,#5b3a6b,#c2674f)", q: "soir" };
+  if (now >= faj && now < faj + 150) return { cle: "fajr", ic: "🌅", titre: "Après le Fajr", texte: "Touchez pour lire les Azkar du matin", fond: "linear-gradient(135deg,#c96a2b,#e8a84c)", q: "matin", azkar: "matin" };
+  if (now >= asr && now < mag) return { cle: "soir", ic: "🌇", titre: "Fin de journée", texte: "Touchez pour lire les Azkar du soir", fond: "linear-gradient(135deg,#5b3a6b,#c2674f)", q: "soir", azkar: "soir" };
   if (now >= ish + 30 || now < faj) return { cle: "nuit", ic: "🌙", titre: "Avant de dormir", texte: "Un rappel calme pour finir la journée", fond: "linear-gradient(135deg,#0d1b3a,#27406e)", dormir: true };
   return null;
 }
@@ -6360,6 +6360,7 @@ function carteMoment(w) {
   if (bm) bm.onclick = () => {
     if (m.dormir) { const b = w.querySelector("#th-dormir"); if (b) b.click(); return; }
     if (m.coran) { router("coran", { page: m.coran }); return; }
+    if (m.azkar) { router("azkar", { liste: m.azkar }); return; }
     const z = w.querySelector("#ec-rech"), i = w.querySelector("#ec-rin"); if (!z || !i) return;
     z.hidden = false; i.value = m.q; i.dispatchEvent(new Event("input"));
   };
