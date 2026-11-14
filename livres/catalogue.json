@@ -28,6 +28,20 @@
    "rev": "522993b627853256e8b069fc61815f06bccdf5e2",
    "emp": "43b8edcdafb838d77dedab9f8343ead8571333f248171e3c312558c08a593906",
    "source": "Imprimerie Tha'alibiyya, Alger, 2ᵉ impression, 1928 (archive.org, Akhdari-Tha3alibia)."
+  },
+  {
+   "id": "bulugh",
+   "titre": "بلوغ المرام من أدلة الأحكام",
+   "titreFr": "Bulugh al-Maram",
+   "auteur": "ابن حجر العسقلاني",
+   "auteurFr": "Ibn Hajar al-Asqalani",
+   "theme": "Hadith",
+   "couleur": "#6b4a12",
+   "pages": 325,
+   "ext": "png",
+   "rev": "1f1ded7520330e7f277a5f735b7ee3ba53fee742",
+   "emp": "dcbebab89ca601962b3007828bb9f07b68e6c692f820acd3ef52a3f7d26307af",
+   "source": "Édition de Muhammad Hamid al-Fiqi, al-Maktaba at-Tijariyya al-Kubra, Le Caire, 1933 (archive.org, 1933_20210228). Fond du papier éclairci."
   }
  ]
 }
