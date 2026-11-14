@@ -5836,7 +5836,7 @@ async function vueBibliotheque() {
   const w = ecran("Bibliothèque", null, `<style>.bib-photo .bib-in{padding:0 !important;background:#fff !important;box-shadow:0 6px 14px rgba(0,0,0,.25) !important;border-radius:6px !important;overflow:hidden}</style><div class="bib-g" id="bib-g">${BIBLIO.couverturePhoto({ id: "coran", titreFr: "Le Coran", couleur: "#0b3d2e" })}</div><p id="bib-n" style="font-size:13px;text-align:center">Veuillez patienter…</p>`);
   const tc = w.querySelector(".bib-g .bib-photo");
   tc.onclick = () => router("coran");
-  CORAN.page(1).then(b => { if (tc.isConnected) tc.querySelector("img").src = URL.createObjectURL(b); }).catch(() => {});
+  tc.querySelector("img").src = "couverture-coran.webp";
   const livres = await BIBLIO.catalogue();
   if (!w.isConnected) return;
   const g = w.querySelector("#bib-g"), n = w.querySelector("#bib-n");
