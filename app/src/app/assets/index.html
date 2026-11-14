@@ -5868,6 +5868,7 @@ async function vueBiblioLire() {
     <div id="bl-zone" translate="no" class="notranslate" style="position:relative;flex:1;min-height:0;background:#fff;overflow:auto;touch-action:pan-y"><div id="bl-cadre" style="overflow:hidden;width:100%;margin:0 auto"><img id="bl-img" alt="" draggable="false" style="display:block;width:100%;max-width:none;height:auto"></div><div id="bl-etat" style="position:absolute;inset:0;display:flex;flex-direction:column;gap:10px;align-items:center;justify-content:center;padding:20px;text-align:center;background:#fff;color:#1f2a24"></div></div>
     <div style="display:flex;align-items:stretch;gap:2px;padding:4px 6px;background:#e9e4d6;color:#1f2a24"><button class="bl-b" id="bl-aller">⌕<small>Aller à</small></button><button class="bl-b" id="bl-zoom">🔍<small>Agrandir</small></button><button class="bl-b" id="bl-opt" aria-label="Plus" aria-expanded="false">⋯<small>Plus</small></button></div>
     <div id="bl-plus" style="display:none;gap:12px;max-height:45vh;overflow:auto;padding:0 10px 10px">
+      ${EXPLICATIONS[l.id] ? `<button ${bo} id="bl-expl">🎧 Écouter l'explication</button>` : ""}
       <button class="btn-outline" id="bl-dl" style="margin:0">⬇ Télécharger le livre pour lire sans connexion</button>
       <p class="texte-arabe" lang="ar" dir="rtl" translate="no" style="text-align:center;font-size:18px;margin:0">${esc(l.titre)}${l.auteur ? " · " + esc(l.auteur) : ""}</p>
       <p style="font-size:12px;text-align:center;margin:0" dir="auto">${esc(l.source || "")}</p>
@@ -5922,6 +5923,11 @@ async function vueBiblioLire() {
   $("#bl-suiv").onclick = () => aff(p + 1);
   $("#bl-prec").onclick = () => aff(p - 1);
   $("#bl-retour").onclick = () => router("livres");
+  if (EXPLICATIONS[l.id]) $("#bl-expl").onclick = async () => {
+    const ids = EXPLICATIONS[l.id];
+    const { data } = await sb.from("yt_contenus").select(CHAMPS_CONTENU).eq("id", ids[0]).eq("status", "published").maybeSingle();
+    if (data) router("contenu", { id: ids[0], c: data, playlist: { ids, i: 0 }, auto: true }); else alert("Explication indisponible. Vérifiez la connexion internet.");
+  };
   $("#bl-opt").onclick = () => { const pl = $("#bl-plus"), ouvert = pl.style.display === "none"; pl.style.display = ouvert ? "grid" : "none"; $("#bl-opt").setAttribute("aria-expanded", ouvert ? "true" : "false"); if (ouvert) pl.scrollIntoView({ block: "nearest", behavior: "smooth" }); };
   $("#bl-zoom").onclick = () => regleZoom(zoom > 1 ? 1 : 2);
   let x0 = null, y0 = 0, d0 = 0, z0 = 1, pince = false;
@@ -6035,6 +6041,10 @@ const CORAN_ETAT = {
       return change;
     } catch (x) { return false; }
   }
+};
+/* Explications audio liées aux livres (publications de l'application, dans l'ordre des volumes) */
+const EXPLICATIONS = {
+  risala: ["bb9bf578-abf0-4366-ac4d-de241eb6cc86", "4741ef37-9e6e-4b1f-ba0c-bcc9bb477012", "b525063c-acbe-479e-993f-bfede91810f4", "501e4a8c-0a65-4a68-bf7f-ad7cdb48ed96", "1fc2203b-271c-4842-97d3-3147799828e2", "44439e55-4fa7-45ac-9ffe-77a4fbaa3967", "eaa28810-146b-4fcd-bb74-1d386ffc4f49", "9481d3df-733b-4438-a35e-1bb674f326b3", "a8e10188-5d15-4f85-b161-498c2c25a973", "a66aa768-2916-4f55-aa89-d201d7e44916"]
 };
 const LECTEUR_PLEIN = "position:fixed;inset:0;z-index:900;display:flex;flex-direction:column;background:#fff;padding:0;margin:0;max-width:none;width:100%;height:100%;overflow:hidden;box-sizing:border-box";
 async function vueCoran() {
