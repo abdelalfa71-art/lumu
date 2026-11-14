@@ -1,0 +1,547 @@
+{
+ "requete": "(رياض الصالحين) AND (وقف OR \"يوزع مجانا\" OR \"يوزع مجاناً\" OR \"وزارة الشؤون الإسلامية\" OR \"وزارة الأوقاف\" OR \"مجمع الملك فهد\")",
+ "date": "2026-11-14T03:53:59.365Z",
+ "resultats": [
+  {
+   "downloads": 54381,
+   "identifier": "4siy2018_gmail_48_201811",
+   "language": "Arabic",
+   "title": "كتب صيغة ورد وورد 6538 كتاب من المكتبة الشاملة word",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": []
+  },
+  {
+   "downloads": 12623,
+   "identifier": "Learn_Islam_religion",
+   "language": "ara",
+   "title": "خمسون كتاباً بترتيب متدرج لتعريف غير المسلمين بدين الإسلام",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "01 العقيدة الميسرة - أحمد بن عبد الرحمن القاضي.pdf",
+     "format": "Image Container PDF",
+     "mo": 2.9
+    },
+    {
+     "nom": "01 العقيدة الميسرة - أحمد بن عبد الرحمن القاضي_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 3.4
+    },
+    {
+     "nom": "02 مناعة إيمانية - هيثم طلعت.pdf",
+     "format": "Text PDF",
+     "mo": 1.9
+    },
+    {
+     "nom": "03 البناء العقدي للجيل الصاعد - أحمد السيد.pdf",
+     "format": "Text PDF",
+     "mo": 3.8
+    },
+    {
+     "nom": "05 عقيدة المؤمن - أبو بكر الجزائري.pdf",
+     "format": "Image Container PDF",
+     "mo": 12.8
+    },
+    {
+     "nom": "05 عقيدة المؤمن - أبو بكر الجزائري_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 15.1
+    },
+    {
+     "nom": "06 ما معنى أن تكون مسلمًا؟ - محمود حسين عوض.pdf",
+     "format": "Text PDF",
+     "mo": 1.7
+    },
+    {
+     "nom": "07 لماذا يطلب الله من البشر عبادته - سامي عامري.pdf",
+     "format": "Text PDF",
+     "mo": 5.8
+    },
+    {
+     "nom": "08  العبادة بين احتياج العبد واستغناء الرب جل وعلا - مصطفى حسين عوض.pdf",
+     "format": "Text PDF",
+     "mo": 20.4
+    },
+    {
+     "nom": "09 بين التوحيد والإلحاد - محمود حسين عوض.pdf",
+     "format": "Text PDF",
+     "mo": 36.3
+    },
+    {
+     "nom": "10 الإسلام والإلحاد وجهاً لوجه - هيثم طلعت.pdf",
+     "format": "Text PDF",
+     "mo": 2.1
+    },
+    {
+     "nom": "11 تعرف على الخالق جل وعلا - محمود حسين عوض.pdf",
+     "format": "Text PDF",
+     "mo": 30.3
+    },
+    {
+     "nom": "11 لأنك الله.pdf",
+     "format": "Image Container PDF",
+     "mo": 3.6
+    },
+    {
+     "nom": "11 لأنك الله_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 3.6
+    },
+    {
+     "nom": "12 صفات الله المنفية في الكتاب والسنة النبوية - ماهر مقدم.pdf",
+     "format": "Image Container PDF",
+     "mo": 9.9
+    },
+    {
+     "nom": "12 صفات الله المنفية في الكتاب والسنة النبوية - ماهر مقدم_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 11.6
+    },
+    {
+     "nom": "13 بيان التوحيد - عبد العزيز بن باز.pdf",
+     "format": "Text PDF",
+     "mo": 3.9
+    },
+    {
+     "nom": "14 شهادة أن لا إلٓه إلاّ الله - صالح سندي.pdf",
+     "format": "Text PDF",
+     "mo": 5.1
+    },
+    {
+     "nom": "15 قصص الأنبياء - عثمان الخميس.pdf",
+     "format": "Text PDF",
+     "mo": 8.5
+    },
+    {
+     "nom": "16 المستفاد من قصص القرآن - عبد الكريم زيدان.pdf",
+     "format": "Image Container PDF",
+     "mo": 21.4
+    },
+    {
+     "nom": "16 المستفاد من قصص القرآن - عبد الكريم زيدان_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 42.3
+    },
+    {
+     "nom": "17 محاسن الإسلام - أحمد السيد.pdf",
+     "format": "Image Container PDF",
+     "mo": 4.5
+    },
+    {
+     "nom": "17 محاسن الإسلام - أحمد السيد_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 0.6
+    },
+    {
+     "nom": "18 الدروس المهمة لعامة الأمة لابن باز - بشرح عبد الرزاق البدر.pdf",
+     "format": "Text PDF",
+     "mo": 8.5
+    },
+    {
+     "nom": "19 شرح تسهيل العقيدة الإسلامية - عبد الله ابن جبرين.pdf",
+     "format": "Image Container PDF",
+     "mo": 16.9
+    },
+    {
+     "nom": "19 شرح تسهيل العقيدة الإسلامية - عبد الله ابن جبرين_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 18.8
+    },
+    {
+     "nom": "20 الإرشاد إلى صحيح الاعتقاد - صالح الفوزان.pdf",
+     "format": "Text PDF",
+     "mo": 55.5
+    },
+    {
+     "nom": "21 العقيدة في الله - عمر الأشقر.pdf",
+     "format": "Image Container PDF",
+     "mo": 5.5
+    },
+    {
+     "nom": "21 العقيدة في الله - عمر الأشقر_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 9.6
+    },
+    {
+     "nom": "22 العقيدة في الملائكة - عمر الأشقر.pdf",
+     "format": "Image Container PDF",
+     "mo": 1.8
+    },
+    {
+     "nom": "22 العقيدة في الملائكة - عمر الأشقر_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 2.4
+    },
+    {
+     "nom": "23 العقيدة في الشياطين والجن - عمر الأشقر.pdf",
+     "format": "Image Container PDF",
+     "mo": 2.6
+    },
+    {
+     "nom": "23 العقيدة في الشياطين والجن - عمر الأشقر_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 5
+    },
+    {
+     "nom": "24 العقيدة في الأنبياء والرسل - عمر الأشقر.pdf",
+     "format": "Image Container PDF",
+     "mo": 3.7
+    },
+    {
+     "nom": "24 العقيدة في الأنبياء والرسل - عمر الأشقر_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 6.6
+    },
+    {
+     "nom": "25 الدار الآخرة - القيامة الصغرى - عمر الأشقر.pdf",
+     "format": "Image Container PDF",
+     "mo": 5.1
+    },
+    {
+     "nom": "25 الدار الآخرة - القيامة الصغرى - عمر الأشقر_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 7.9
+    },
+    {
+     "nom": "26 الدار الآخرة - القيامة الكبرى - عمر الأشقر.pdf",
+     "format": "Image Container PDF",
+     "mo": 4.6
+    },
+    {
+     "nom": "26 الدار الآخرة - القيامة الكبرى - عمر الأشقر_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 7.8
+    },
+    {
+     "nom": "27 الدار الآخرة - الجنة والنار - عمر الأشقر.pdf",
+     "format": "Image Container PDF",
+     "mo": 4.4
+    },
+    {
+     "nom": "27 الدار الآخرة - الجنة والنار - عمر الأشقر_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 7.3
+    },
+    {
+     "nom": "28 العقيدة في القضاء والقدر - عمر الأشقر.pdf",
+     "format": "Image Container PDF",
+     "mo": 2.1
+    },
+    {
+     "nom": "28 العقيدة في القضاء والقدر - عمر الأشقر_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 3.6
+    },
+    {
+     "nom": "29 اليوم الآخر في القرآن والسنة - عبد المحسن المطيري.pdf",
+     "format": "Text PDF",
+     "mo": 16.3
+    },
+    {
+     "nom": "30 هذا هو محمد صلى الله عليه وسلم - مصطفى حسين عوض.pdf",
+     "format": "Text PDF",
+     "mo": 24.9
+    },
+    {
+     "nom": "31 كيف عاملهم محمد صلى الله عليه وسلم - محمد صالح المنجد.pdf",
+     "format": "Text PDF",
+     "mo": 11.7
+    },
+    {
+     "nom": "32 أحوال المصطفى صلى الله عليه وسلم - محمد صالح المنجد.pdf",
+     "format": "Text PDF",
+     "mo": 11.2
+    },
+    {
+     "nom": "33 مختصر موسوعة الأخلاق - مؤسسة الدرر السنية.pdf",
+     "format": "Text PDF",
+     "mo": 21.9
+    },
+    {
+     "nom": "34 أعمال القلوب - محمد صالح المنجد.pdf",
+     "format": "Image Container PDF",
+     "mo": 35.4
+    },
+    {
+     "nom": "34 أعمال القلوب - محمد صالح المنجد_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 5.6
+    },
+    {
+     "nom": "35 مفسدات القلوب - محمد صالح المنجد.pdf",
+     "format": "Image Container PDF",
+     "mo": 29
+    },
+    {
+     "nom": "35 مفسدات القلوب - محمد صالح المنجد_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 4.4
+    },
+    {
+     "nom": "36 كيف تدعو إلى الإسلام - هيثم طلعت.pdf",
+     "format": "Text PDF",
+     "mo": 56.3
+    },
+    {
+     "nom": "37 تفسير العشر الأخير - مجموعة علماء ط19.pdf",
+     "format": "Text PDF",
+     "mo": 115.7
+    },
+    {
+     "nom": "38 منهاج المسلم - أبو بكر الجزائري.pdf",
+     "format": "Image Container PDF",
+     "mo": 24.2
+    },
+    {
+     "nom": "38 منهاج المسلم - أبو بكر الجزائري_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 27.7
+    },
+    {
+     "nom": "39 المختصر المفيد للمسلم الجديد - محمد الشهري.pdf",
+     "format": "Text PDF",
+     "mo": 23.2
+    },
+    {
+     "nom": "40 الملخص المفيد في أحكام المسلم الجديد - دار الإفتاء الكويتية.pdf",
+     "format": "Text PDF",
+     "mo": 9.5
+    },
+    {
+     "nom": "41 شخصية المسلم كما يصوغها الإسلام - محمد علي الهاشمي.pdf",
+     "format": "Image Container PDF",
+     "mo": 10.3
+    },
+    {
+     "nom": "41 شخصية المسلم كما يصوغها الإسلام - محمد علي الهاشمي_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 9.4
+    },
+    {
+     "nom": "42 دليل المسلم الجديد - فهد بن سالم باهمام.pdf",
+     "format": "Text PDF",
+     "mo": 83.6
+    },
+    {
+     "nom": "42 فقه العبادات المصور - عبد الله بن سالم باهمام.pdf",
+     "format": "Text PDF",
+     "mo": 33
+    },
+    {
+     "nom": "43 المختصر في التفسير - مركز تفسير بالرياض ط6.pdf",
+     "format": "Image Container PDF",
+     "mo": 208.8
+    },
+    {
+     "nom": "43 المختصر في التفسير - مركز تفسير بالرياض ط6_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 25.9
+    },
+    {
+     "nom": "44 رياض الصالحين - يحيى النووي.pdf",
+     "format": "Image Container PDF",
+     "mo": 11.8
+    },
+    {
+     "nom": "44 رياض الصالحين - يحيى النووي_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 22.5
+    },
+    {
+     "nom": "45 فقه الأدعية والأذكار - عبد الرزاق البدر.pdf",
+     "format": "Image Container PDF",
+     "mo": 29.1
+    },
+    {
+     "nom": "45 فقه الأدعية والأذكار - عبد الرزاق البدر_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 34.1
+    },
+    {
+     "nom": "46 كتاب 200 سؤال وجواب فى العقيدة - حافظ حكمي.pdf",
+     "format": "Image Container PDF",
+     "mo": 3.2
+    },
+    {
+     "nom": "46 كتاب 200 سؤال وجواب فى العقيدة - حافظ حكمي_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 5.4
+    },
+    {
+     "nom": "47 الأسباب التي تصد عن قبول الحق وسبل الوقاية منها في القرآن الكريم - نايف العُتَيبي.pdf",
+     "format": "Text PDF",
+     "mo": 12
+    },
+    {
+     "nom": "48 المقولات التي أبطلها القرآن ومنهجه في إبطالها - وليد العُمَري.pdf",
+     "format": "Text PDF",
+     "mo": 15.4
+    },
+    {
+     "nom": "49 منهج القرآن الكريم في الرد على المخالفين في العقيدة - ساري فَرُّوح.pdf",
+     "format": "Text PDF",
+     "mo": 14.7
+    },
+    {
+     "nom": "50 منهج القرآن الكريم في دحض شبهات الملحدين - أفنان الغماس.pdf",
+     "format": "Text PDF",
+     "mo": 11.1
+    },
+    {
+     "nom": "51 منهج القرآن الكريم في محاربة الشرك - إبراهيم الحُمَيضي.pdf",
+     "format": "Text PDF",
+     "mo": 59.7
+    },
+    {
+     "nom": "52 تحقيق الإفادة بتحرير مفهوم العبادة - سلطان العميري.pdf",
+     "format": "Image Container PDF",
+     "mo": 4.2
+    },
+    {
+     "nom": "52 تحقيق الإفادة بتحرير مفهوم العبادة - سلطان العميري_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 6.6
+    },
+    {
+     "nom": "53 عقيدة المسلم في ضوء الكتاب والسنة - سعيد القحطاني.pdf",
+     "format": "Image Container PDF",
+     "mo": 21.7
+    },
+    {
+     "nom": "53 عقيدة المسلم في ضوء الكتاب والسنة - سعيد القحطاني_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 38.8
+    },
+    {
+     "nom": "54 معارج القبول بشرح سلم الوصول - حافظ حكمي.pdf",
+     "format": "Image Container PDF",
+     "mo": 40.6
+    },
+    {
+     "nom": "54 معارج القبول بشرح سلم الوصول - حافظ حكمي_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 54.7
+    },
+    {
+     "nom": "55 رفع الاشتباه عن معنى العبادة والإله وتحقيق معنى التوحيد والشرك بالله.pdf",
+     "format": "Text PDF",
+     "mo": 22.9
+    }
+   ]
+  },
+  {
+   "downloads": 8916,
+   "identifier": "0001Htm48_201901",
+   "language": "Arabic",
+   "title": "كتب صيغة ويب اتش تي ام من المكتبة الشاملة 6538 كتاب بصيغة htm",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": []
+  },
+  {
+   "downloads": 2499,
+   "identifier": "50475869975498756000",
+   "language": "Arabic",
+   "title": "كتب صيغة وورد 6538 كتاب إسلامي كل ألف برابط",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": []
+  },
+  {
+   "downloads": 1991,
+   "identifier": "500160066666666333330",
+   "language": "Arabic",
+   "title": "موسوعة الكتب 6538 كتاب اسلامي بصيغة ورد وورد word",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": []
+  },
+  {
+   "downloads": 1787,
+   "identifier": "50016077777777777777777777",
+   "language": "Arabic",
+   "title": "كتب إسلامية وورد 6 ألف",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": []
+  },
+  {
+   "downloads": 1382,
+   "identifier": "500166666666666666666666664",
+   "language": "Arabic",
+   "title": "الموسوعة المقروءة المكتوبة كتب صيغة وورد ورد اكثر من 6 آلاف كتاب",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": []
+  },
+  {
+   "downloads": 1099,
+   "identifier": "50011111111111111111111111116000",
+   "language": "Arabic",
+   "title": "موسوعة الكتب 6538 كتاب اسلامي بصيغة ويب HTM",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": []
+  },
+  {
+   "downloads": 554,
+   "identifier": "5022222222222222222016000",
+   "language": "Arabic",
+   "title": "الموسوعة المقروءة المكتوبة كتب صيغة ويب اتش تي ام - اكثر من 6 آلاف كتاب",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": []
+  },
+  {
+   "downloads": 460,
+   "identifier": "000110001111111111111111Htm",
+   "language": "Arabic",
+   "title": "كتب صيغة ويب اتش تي ام بعدد 6538 كتاب إسلامي كل ألف برابط htm",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": []
+  },
+  {
+   "downloads": 452,
+   "identifier": "5555555555555555555650016000",
+   "language": "Arabic",
+   "title": "كتب إسلامية بصيغة ويب 6 ألف",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": []
+  },
+  {
+   "downloads": 297,
+   "identifier": "50444444440160004",
+   "language": "urd",
+   "title": "islamic 6538 book word from shamelah library",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": []
+  },
+  {
+   "downloads": 232,
+   "identifier": "50016000777888888888888888888888888888",
+   "language": "urd",
+   "title": "islamic 6538 book HTM WEB from shamelah library in 7 zip",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": []
+  }
+ ]
+}
