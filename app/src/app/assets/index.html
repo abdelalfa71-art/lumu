@@ -5825,40 +5825,47 @@ const BIBLIO = {
   },
   async page(l, n) { const e = await this.empreintes(l); return this.fichier(l, n + "." + (l.ext || "jpg"), e[n]); },
   async enCache(l, n) { try { const c = await caches.open(this.CACHE); return !!(await c.match(this.cle(l, n + "." + (l.ext || "jpg")))); } catch (e) { return false; } },
+  couverturePhoto(l) {
+    return `<button type="button" class="bib-c bib-photo" data-id="${esc(l.id)}" style="--c:${esc(l.couleur || "#0f5132")}"><span class="bib-in"><img alt="" draggable="false" src="" style="display:block;width:100%;height:100%;object-fit:cover"></span><span class="bib-fr" dir="auto">${esc(l.titreFr || l.titre)}</span></button>`;
+  },
   couverture(ar, auteurAr, fr, couleur, attr) {
     return `<button type="button" class="bib-c" ${attr || ""} style="--c:${esc(couleur || "#0f5132")}"><span class="bib-in"><span class="bib-ar texte-arabe" lang="ar" dir="rtl" translate="no">${esc(ar)}</span>${auteurAr ? `<span class="bib-au texte-arabe" lang="ar" dir="rtl" translate="no">${esc(auteurAr)}</span>` : ""}</span><span class="bib-fr" dir="auto">${esc(fr || "")}</span></button>`;
   }
 };
 async function vueBibliotheque() {
-  const w = ecran("Bibliothèque", null, `<div class="bib-g" id="bib-g">${BIBLIO.couverture("القرآن الكريم", "مصحف المدينة · حفص", "Le Coran", "#0b3d2e", 'id="bib-coran"')}</div><p id="bib-n" style="font-size:13px;text-align:center">Veuillez patienter…</p>`);
+  const w = ecran("Bibliothèque", null, `<style>.bib-photo .bib-in{padding:0 !important;background:#fff !important;box-shadow:0 6px 14px rgba(0,0,0,.25) !important;border-radius:6px !important;overflow:hidden}</style><div class="bib-g" id="bib-g">${BIBLIO.couverture("القرآن الكريم", "مصحف المدينة · حفص", "Le Coran", "#0b3d2e", 'id="bib-coran"')}</div><p id="bib-n" style="font-size:13px;text-align:center">Veuillez patienter…</p>`);
   w.querySelector("#bib-coran").onclick = () => router("coran");
   const livres = await BIBLIO.catalogue();
   if (!w.isConnected) return;
   const g = w.querySelector("#bib-g"), n = w.querySelector("#bib-n");
   if (livres === null) { n.textContent = "Liste des livres indisponible. Vérifiez la connexion internet."; return; }
   livres.forEach(l => {
-    g.insertAdjacentHTML("beforeend", BIBLIO.couverture(l.titre, l.auteur, l.titreFr, l.couleur, `data-id="${esc(l.id)}"`));
-    g.lastElementChild.onclick = () => router("biblio-lire", { id: l.id });
+    g.insertAdjacentHTML("beforeend", BIBLIO.couverturePhoto(l));
+    const t = g.lastElementChild;
+    t.onclick = () => router("biblio-lire", { id: l.id });
+    BIBLIO.page(l, 1).then(b => { if (t.isConnected) t.querySelector("img").src = URL.createObjectURL(b); }).catch(() => {});
   });
   n.textContent = livres.length ? "Livres en pages du livre imprimé, sans modification." : "D'autres livres arrivent bientôt.";
 }
 async function vueBiblioLire() {
   const id = etat.params.id;
   const w = ecran("", ["livres"], `<div class="centre"><div class="spinner"></div></div>`);
+  w.style.cssText = LECTEUR_PLEIN;
   const livres = await BIBLIO.catalogue();
   if (!w.isConnected) return;
   const l = (livres || []).find(x => x.id === id);
   if (!l) { w.querySelector(".centre").innerHTML = `<p>${livres === null ? "Livre indisponible. Vérifiez la connexion internet." : "Livre introuvable."}</p>`; return; }
   w.querySelector("h1").textContent = l.titreFr || l.titre;
   w.querySelector(".centre").remove();
+  w.querySelectorAll(":scope > .entete, :scope > h1").forEach(e => e.remove());
   const N = +l.pages || 1, etats = chargerLocal("biblio_etat", {}) || {};
   let p = Math.min(N, Math.max(1, +(etats[l.id] && etats[l.id].page) || 1));
   const bo = 'class="btn-outline" style="flex:1;margin:0"';
   w.insertAdjacentHTML("beforeend", `<style>.bl-fl{width:38px;height:38px;flex:none;margin:0;padding:0;border:0;border-radius:50%;background:transparent;color:inherit;font-size:24px;line-height:1}.bl-fl:disabled{opacity:.3}.bl-b{flex:1;min-width:0;margin:0;padding:6px 2px;border:0;background:transparent;color:inherit;font:inherit;font-size:20px;line-height:1.1;display:flex;flex-direction:column;align-items:center;gap:3px}.bl-b small{font-size:11px;opacity:.85;white-space:nowrap}</style>
-    <div style="display:flex;align-items:center;justify-content:center;gap:2px;padding:8px 10px;background:#e9e4d6;color:#1f2a24;border-radius:8px 8px 0 0"><button class="bl-fl" id="bl-suiv" aria-label="Page suivante">‹</button><b id="bl-num" style="min-width:72px;text-align:center;font-size:16px"></b><button class="bl-fl" id="bl-prec" aria-label="Page précédente">›</button></div>
-    <div id="bl-zone" translate="no" class="notranslate" style="position:relative;min-height:55vh;background:#fff;overflow:auto;touch-action:pan-y"><div id="bl-cadre" style="overflow:hidden;width:100%"><img id="bl-img" alt="" draggable="false" style="display:block;width:100%;max-width:none;height:auto"></div><div id="bl-etat" style="position:absolute;inset:0;display:flex;flex-direction:column;gap:10px;align-items:center;justify-content:center;padding:20px;text-align:center;background:#fff;color:#1f2a24"></div></div>
+    <div style="display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:8px 10px;background:#e9e4d6;color:#1f2a24"><div><button class="bl-fl" id="bl-retour" aria-label="Retour">←</button></div><div style="display:flex;align-items:center;gap:2px"><button class="bl-fl" id="bl-suiv" aria-label="Page suivante">‹</button><b id="bl-num" style="min-width:72px;text-align:center;font-size:16px"></b><button class="bl-fl" id="bl-prec" aria-label="Page précédente">›</button></div><span></span></div>
+    <div id="bl-zone" translate="no" class="notranslate" style="position:relative;flex:1;min-height:0;background:#fff;overflow:auto;touch-action:pan-y"><div id="bl-cadre" style="overflow:hidden;width:100%;margin:0 auto"><img id="bl-img" alt="" draggable="false" style="display:block;width:100%;max-width:none;height:auto"></div><div id="bl-etat" style="position:absolute;inset:0;display:flex;flex-direction:column;gap:10px;align-items:center;justify-content:center;padding:20px;text-align:center;background:#fff;color:#1f2a24"></div></div>
     <div style="display:flex;align-items:stretch;gap:2px;padding:4px 6px;background:#e9e4d6;color:#1f2a24"><button class="bl-b" id="bl-aller">⌕<small>Aller à</small></button><button class="bl-b" id="bl-zoom">🔍<small>Agrandir</small></button><button class="bl-b" id="bl-opt" aria-label="Plus" aria-expanded="false">⋯<small>Plus</small></button></div>
-    <div id="bl-plus" style="display:none;gap:12px">
+    <div id="bl-plus" style="display:none;gap:12px;max-height:45vh;overflow:auto;padding:0 10px 10px">
       <button class="btn-outline" id="bl-dl" style="margin:0">⬇ Télécharger le livre pour lire sans connexion</button>
       <p class="texte-arabe" lang="ar" dir="rtl" translate="no" style="text-align:center;font-size:18px;margin:0">${esc(l.titre)}${l.auteur ? " · " + esc(l.auteur) : ""}</p>
       <p style="font-size:12px;text-align:center;margin:0" dir="auto">${esc(l.source || "")}</p>
@@ -5868,7 +5875,11 @@ async function vueBiblioLire() {
   let tour = 0, url = null, zoom = 1, rognes = null;
   const cadre = $("#bl-cadre");
   /* Cadre de lecture : on n'affiche que la zone du texte de la page (marges blanches et bords du scan masqués), pour un texte plus grand. Le fichier de la page n'est pas modifié. */
-  const appliquerCadre = () => {
+  /* Taille du cadre : la plus grande possible sans déborder, selon la taille de l'écran */
+  const fitCadre = () => { if (!img.naturalWidth) return; cadre.style.width = ""; const cw = zone.clientWidth; if (!cw) return; const ratio = cadre.offsetHeight / cw; let W = zone.clientHeight / ratio; if (!(W > 0) || W > cw) W = cw; cadre.style.width = (W * zoom) + "px"; };
+  window.addEventListener("resize", () => { if (w.isConnected) fitCadre(); });
+  const appliquerCadre = () => { appliquerCadreBrut(); fitCadre(); };
+  const appliquerCadreBrut = () => {
     const r = (rognes && rognes[p]) || [0, 0, 0, 0], nw = img.naturalWidth, nh = img.naturalHeight;
     const fw = 1 - r[0] - r[2], fh = 1 - r[1] - r[3];
     if (!nw || !nh || fw < 0.4 || fh < 0.3) { cadre.style.aspectRatio = ""; img.style.width = "100%"; img.style.marginLeft = img.style.marginTop = "0"; return; }
@@ -5881,7 +5892,7 @@ async function vueBiblioLire() {
   const regleZoom = (z, cx) => {
     const anc = zoom; zoom = Math.min(3, Math.max(1, z));
     const c = cx == null ? zone.clientWidth / 2 : cx;
-    cadre.style.width = (zoom * 100) + "%"; zone.scrollLeft = (zone.scrollLeft + c) * (zoom / anc) - c;
+    fitCadre(); zone.scrollLeft = (zone.scrollLeft + c) * (zoom / anc) - c;
     zone.style.touchAction = zoom > 1 ? "pan-x pan-y" : "pan-y";
     $("#bl-zoom").innerHTML = zoom > 1 ? "🔍<small>Normal</small>" : "🔍<small>Agrandir</small>";
   };
@@ -5908,6 +5919,7 @@ async function vueBiblioLire() {
   };
   $("#bl-suiv").onclick = () => aff(p + 1);
   $("#bl-prec").onclick = () => aff(p - 1);
+  $("#bl-retour").onclick = () => router("livres");
   $("#bl-opt").onclick = () => { const pl = $("#bl-plus"), ouvert = pl.style.display === "none"; pl.style.display = ouvert ? "grid" : "none"; $("#bl-opt").setAttribute("aria-expanded", ouvert ? "true" : "false"); if (ouvert) pl.scrollIntoView({ block: "nearest", behavior: "smooth" }); };
   $("#bl-zoom").onclick = () => regleZoom(zoom > 1 ? 1 : 2);
   let x0 = null, y0 = 0, d0 = 0, z0 = 1, pince = false;
@@ -6022,18 +6034,20 @@ const CORAN_ETAT = {
     } catch (x) { return false; }
   }
 };
+const LECTEUR_PLEIN = "position:fixed;inset:0;z-index:900;display:flex;flex-direction:column;background:#fff;padding:0;margin:0;max-width:none;width:100%;height:100%;overflow:hidden;box-sizing:border-box";
 async function vueCoran() {
   const w = document.createElement("div");
   w.className = "ecran";
+  w.style.cssText = LECTEUR_PLEIN;
   let E = CORAN_ETAT.lire();
   const pageDemandee = parseInt(etat.params.page, 10) || 0;
   let p = Math.min(CORAN.N, Math.max(1, pageDemandee || E.page));
   const bo = 'class="btn-outline" style="flex:1;margin:0"';
   w.innerHTML = `<style>.co-fl{width:38px;height:38px;flex:none;margin:0;padding:0;border:0;border-radius:50%;background:transparent;color:inherit;font-size:24px;line-height:1}.co-fl:disabled{opacity:.3}.co-b{flex:1;min-width:0;margin:0;padding:6px 2px;border:0;background:transparent;color:inherit;font:inherit;font-size:20px;line-height:1.1;display:flex;flex-direction:column;align-items:center;gap:3px}.co-b small{font-size:11px;opacity:.85;white-space:nowrap}</style>
-    <div id="co-haut" class="co-chrome" style="display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:6px;padding:8px 10px;background:#e9e4d6;color:#1f2a24;font-size:14px"><span id="co-sur" style="min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"></span><div style="display:flex;align-items:center;gap:2px"><button class="co-fl" id="co-suiv" aria-label="Page suivante">‹</button><b id="co-num" style="min-width:48px;text-align:center;font-size:16px"></b><button class="co-fl" id="co-prec" aria-label="Page précédente">›</button></div><span id="co-jz" style="text-align:end;white-space:nowrap"></span></div>
-    <div id="co-zone" translate="no" class="notranslate" style="position:relative;min-height:55vh;background:#fff;overflow:auto;touch-action:pan-y"><img id="co-img" alt="" draggable="false" style="display:block;width:100%;max-width:none;height:auto"><div id="co-etat" style="position:absolute;inset:0;display:flex;flex-direction:column;gap:10px;align-items:center;justify-content:center;padding:20px;text-align:center;background:#fff;color:#1f2a24"></div></div>
+    <div id="co-haut" class="co-chrome" style="display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:6px;padding:8px 10px;background:#e9e4d6;color:#1f2a24;font-size:14px"><div style="display:flex;align-items:center;gap:4px;min-width:0"><button class="co-fl" id="co-retour" aria-label="Retour">←</button><span id="co-sur" style="min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"></span></div><div style="display:flex;align-items:center;gap:2px"><button class="co-fl" id="co-suiv" aria-label="Page suivante">‹</button><b id="co-num" style="min-width:48px;text-align:center;font-size:16px"></b><button class="co-fl" id="co-prec" aria-label="Page précédente">›</button></div><span id="co-jz" style="text-align:end;white-space:nowrap"></span></div>
+    <div id="co-zone" translate="no" class="notranslate" style="position:relative;flex:1;min-height:0;background:#fff;overflow:auto;touch-action:pan-y"><img id="co-img" alt="" draggable="false" style="display:block;margin:0 auto"><div id="co-etat" style="position:absolute;inset:0;display:flex;flex-direction:column;gap:10px;align-items:center;justify-content:center;padding:20px;text-align:center;background:#fff;color:#1f2a24"></div></div>
     <div id="co-bar" class="co-chrome" style="display:flex;align-items:stretch;gap:2px;padding:4px 6px;background:#e9e4d6;color:#1f2a24"><button class="co-b" id="co-som">☰<small>Sourates</small></button><button class="co-b" id="co-juz">◔<small>Juz</small></button><button class="co-b" id="co-aller">⌕<small>Aller à</small></button><button class="co-b" id="co-mq">🔖<small>Marquer</small></button><button class="co-b" id="co-opt" aria-label="Plus" aria-expanded="false">⋯<small>Plus</small></button></div>
-    <div id="co-plus" style="display:none;gap:12px">
+    <div id="co-plus" style="display:none;gap:12px;max-height:45vh;overflow:auto;padding:0 10px 10px">
       <div style="display:flex;gap:8px"><button ${bo} id="co-mqs">Mes marque-pages</button></div>
       <div style="display:flex;gap:8px"><button ${bo} id="co-zoom">🔍 Agrandir</button><button ${bo} id="co-nuit"></button></div>
       <div class="carte" id="co-kh" style="padding:14px"></div>
@@ -6046,6 +6060,9 @@ async function vueCoran() {
   /* Page sur toute la largeur de l'écran */
   try { const pad = parseFloat(getComputedStyle(w).paddingLeft) || 0; if (pad) { zone.style.marginLeft = zone.style.marginRight = -pad + "px"; } } catch (e) {}
   let tour = 0, url = null, zoom = 1, tLu = 0;
+  /* Taille de la page : la plus grande possible sans déborder, selon la taille de l'écran */
+  const fit = () => { if (!img.naturalWidth) return; const zw = zone.clientWidth, zh = zone.clientHeight, ar = img.naturalHeight / img.naturalWidth; let W = zh / ar, H = zh; if (W > zw) { W = zw; H = zw * ar; } img.style.width = (W * zoom) + "px"; img.style.height = (H * zoom) + "px"; };
+  window.addEventListener("resize", () => { if (w.isConnected) fit(); });
   const majNuit = () => { img.style.filter = E.nuit ? "invert(1) hue-rotate(180deg)" : ""; zone.style.background = E.nuit ? "#000" : "#fff"; zEtat.style.background = E.nuit ? "#000" : "#fff"; zEtat.style.color = E.nuit ? "#eee" : "#1f2a24"; w.querySelectorAll(".co-chrome").forEach(e => { e.style.background = E.nuit ? "#111" : "#e9e4d6"; e.style.color = E.nuit ? "#eee" : "#1f2a24"; }); $("#co-nuit").textContent = E.nuit ? "☀️ Mode jour" : "🌙 Mode nuit"; };
   const majMq = () => { const on = E.marques.some(x => x.p === p); $("#co-mq").innerHTML = (on ? "✔" : "🔖") + "<small>" + (on ? "Marquée" : "Marquer") + "</small>"; };
   const majKh = () => {
@@ -6071,7 +6088,7 @@ async function vueCoran() {
   const regleZoom = (z, cx) => {
     const anc = zoom; zoom = Math.min(3, Math.max(1, z));
     const c = cx == null ? zone.clientWidth / 2 : cx, r = zoom / anc;
-    img.style.width = (zoom * 100) + "%";
+    fit();
     zone.scrollLeft = (zone.scrollLeft + c) * r - c;
     zone.style.touchAction = zoom > 1 ? "pan-x pan-y" : "pan-y";
     $("#co-zoom").textContent = zoom > 1 ? "🔍 Taille normale" : "🔍 Agrandir";
@@ -6091,7 +6108,7 @@ async function vueCoran() {
       const b = await CORAN.page(p);
       if (moi !== tour || !w.isConnected) return;
       const u = URL.createObjectURL(b);
-      img.onload = () => { if (moi === tour) zEtat.style.display = "none"; };
+      img.onload = () => { fit(); if (moi === tour) zEtat.style.display = "none"; };
       img.src = u; if (url) URL.revokeObjectURL(url); url = u;
       /* Page comptée comme lue après quelques secondes d'affichage */
       tLu = setTimeout(() => {
@@ -6110,6 +6127,7 @@ async function vueCoran() {
   };
   $("#co-suiv").onclick = () => aff(p + 1);
   $("#co-prec").onclick = () => aff(p - 1);
+  $("#co-retour").onclick = () => router("home");
   $("#co-opt").onclick = () => { const pl = $("#co-plus"), ouvert = pl.style.display === "none"; pl.style.display = ouvert ? "grid" : "none"; $("#co-opt").setAttribute("aria-expanded", ouvert ? "true" : "false"); if (ouvert) pl.scrollIntoView({ block: "nearest", behavior: "smooth" }); };
   $("#co-zoom").onclick = () => regleZoom(zoom > 1 ? 1 : 2);
   $("#co-nuit").onclick = () => { E.nuit = !E.nuit; CORAN_ETAT.ecrire(E); majNuit(); };
@@ -6132,7 +6150,7 @@ async function vueCoran() {
     if (Math.abs(dx) < 60 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
     if (dx > 0 && p < CORAN.N) aff(p + 1); else if (dx < 0 && p > 1) aff(p - 1);
   }, { passive: true });
-  $("#co-som").onclick = () => ouvrirFeuille("Sourates", `<div id="co-ls" style="display:grid;gap:6px">${CORAN.NOMS.map((n, i) => `<button type="button" class="carte ligne-menu" data-p="${CORAN.DEBUTS[i]}" style="text-align:start"><span>${i + 1}.</span><span style="flex:1">${esc(n)}</span><small>p. ${CORAN.DEBUTS[i]}</small></button>`).join("")}</div>`, (corps, fermer) => {
+  $("#co-som").onclick = () => ouvrirFeuille("Sourates", `<div id="co-ls" style="display:grid;gap:6px">${CORAN.NOMS.map((n, i) => `<button type="button" class="carte ligne-menu" data-p="${CORAN.DEBUTS[i]}" style="text-align:start;color:#1f2a24"><span>${i + 1}.</span><span style="flex:1">${esc(n)}</span><small>p. ${CORAN.DEBUTS[i]}</small></button>`).join("")}</div>`, (corps, fermer) => {
     corps.querySelectorAll("[data-p]").forEach(b => b.onclick = () => { fermer(); aff(+b.dataset.p); });
   });
   $("#co-juz").onclick = () => ouvrirFeuille("Juz", `<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">${Array.from({ length: 30 }, (_, i) => `<button type="button" class="btn-outline" data-p="${CORAN.debutJuz(i + 1)}" style="margin:0">Juz ${i + 1}</button>`).join("")}</div>`, (corps, fermer) => {
