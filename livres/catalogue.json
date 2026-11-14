@@ -1,4 +1,33 @@
 {
-  "version": 1,
-  "livres": []
+ "version": 1,
+ "livres": [
+  {
+   "id": "risala",
+   "titre": "متن الرسالة",
+   "titreFr": "Ar-Risala",
+   "auteur": "ابن أبي زيد القيرواني",
+   "auteurFr": "Ibn Abi Zayd al-Qayrawani",
+   "theme": "Fiqh malikite",
+   "couleur": "#5b2a1e",
+   "pages": 193,
+   "ext": "png",
+   "rev": "522993b627853256e8b069fc61815f06bccdf5e2",
+   "emp": "03680ed1e85eff9d014d7f35984d75f71e9dc9748cb78c0e36529745a2263f51",
+   "source": "Texte établi par Abd al-Majid ach-Charnoubi al-Azhari, al-Maktaba ath-Thaqafiyya, Beyrouth. Scan de la Bibliotheca Alexandrina (archive.org, Pdf4478)."
+  },
+  {
+   "id": "akhdari",
+   "titre": "مختصر الأخضري في العبادات",
+   "titreFr": "Al-Akhdari",
+   "auteur": "عبد الرحمن الأخضري",
+   "auteurFr": "Abd ar-Rahman al-Akhdari",
+   "theme": "Fiqh malikite",
+   "couleur": "#1d3f6b",
+   "pages": 33,
+   "ext": "jpg",
+   "rev": "522993b627853256e8b069fc61815f06bccdf5e2",
+   "emp": "43b8edcdafb838d77dedab9f8343ead8571333f248171e3c312558c08a593906",
+   "source": "Imprimerie Tha'alibiyya, Alger, 2ᵉ impression, 1928 (archive.org, Akhdari-Tha3alibia)."
+  }
+ ]
 }
