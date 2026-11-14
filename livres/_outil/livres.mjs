@@ -35,7 +35,12 @@ if (d.action === "chercher") {
     for (const f of fs.readdirSync("/tmp").filter(f => /^p-\d+\.jpg$/.test(f))) fs.rmSync("/tmp/" + f);
     const dir = "livres/" + L.id;
     fs.rmSync(dir, { recursive: true, force: true }); fs.mkdirSync(dir, { recursive: true });
-    execFileSync("curl", ["-L", "--fail", "--retry", "3", "-A", "lumu-bibliotheque/1.0", "-o", "/tmp/livre.pdf", L.url], { stdio: "inherit" });
+    { let ok = false, err = null;
+      for (let essai = 0; essai < 4 && !ok; essai++) {
+        try { const r = await fetch(L.url, { redirect: "follow", headers: { "user-agent": "Mozilla/5.0 (lumu-bibliotheque)" } }); if (!r.ok) throw new Error("HTTP " + r.status); fs.writeFileSync("/tmp/livre.pdf", Buffer.from(await r.arrayBuffer())); ok = true; }
+        catch (e) { err = e; console.log("essai", essai + 1, String(e.message || e), e.cause ? String(e.cause.message || e.cause) : ""); await new Promise(r => setTimeout(r, 5000)); }
+      }
+      if (!ok) throw err; }
     const tete = fs.readFileSync("/tmp/livre.pdf").subarray(0, 5).toString();
     if (tete !== "%PDF-") throw new Error("Le fichier téléchargé n'est pas un PDF");
     const args = ["-jpeg", "-jpegopt", "quality=88", "-scale-to-x", String(L.largeur || 1400), "-scale-to-y", "-1"];
