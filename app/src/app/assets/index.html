@@ -5845,7 +5845,7 @@ async function vueBibliotheque() {
     g.insertAdjacentHTML("beforeend", BIBLIO.couverturePhoto(l));
     const t = g.lastElementChild;
     t.onclick = () => router("biblio-lire", { id: l.id });
-    BIBLIO.page(l, 1).then(b => { if (t.isConnected) t.querySelector("img").src = URL.createObjectURL(b); }).catch(() => {});
+    t.querySelector("img").src = "couverture-" + l.id + ".webp";
   });
   n.textContent = livres.length ? "Livres en pages du livre imprimé, sans modification." : "D'autres livres arrivent bientôt.";
 }
