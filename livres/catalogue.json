@@ -44,6 +44,48 @@
    "emp": "dcbebab89ca601962b3007828bb9f07b68e6c692f820acd3ef52a3f7d26307af",
    "source": "Édition de Muhammad Hamid al-Fiqi, al-Maktaba at-Tijariyya al-Kubra, Le Caire, 1933 (archive.org, 1933_20210228). Fond du papier éclairci.",
    "rogneEmp": "b97538fbb449c05db5136627efa64463cceae102268cfb4a1e6c6450b94b36eb"
+  },
+  {
+   "id": "ahlwardt-six-poetes",
+   "pages": 385,
+   "ext": "jpg",
+   "rev": "e797cf91d58537fdcca3faf566f75ce827a709f3",
+   "emp": "9640172610d7d146efe710fa7a8ede510f992fa159d68d6de04ec2245a413379",
+   "titre": "ديوان الشعراء الستة الجاهليين",
+   "titreFr": "Les six poètes anciens",
+   "auteur": "الشعراء الستة الجاهليون",
+   "auteurFr": "Poètes préislamiques",
+   "theme": "Poésie arabe ancienne",
+   "couleur": "#4a3b1f",
+   "source": "Édition de Wilhelm Ahlwardt, Londres (Trübner), 1870 (archive.org, divanssixancien00alqgoog). Pages sans retouche."
+  },
+  {
+   "id": "jahili-zawzani-mualaqat",
+   "pages": 180,
+   "ext": "jpg",
+   "rev": "e797cf91d58537fdcca3faf566f75ce827a709f3",
+   "emp": "2cb92c2dd71f6533568c639b35bbd03035726480040cb4298559b1920ad79bb2",
+   "titre": "شرح المعلقات السبع للزوزني",
+   "titreFr": "Les sept Mu'allaqat (Zawzani)",
+   "auteur": "الحسين بن أحمد الزوزني",
+   "auteurFr": "Al-Zawzani",
+   "theme": "Poésie arabe ancienne",
+   "couleur": "#2f4a2a",
+   "source": "Archive.org (ar107diwan32). Pages sans retouche."
+  },
+  {
+   "id": "muwatta-tunis",
+   "pages": 428,
+   "ext": "jpg",
+   "rev": "e797cf91d58537fdcca3faf566f75ce827a709f3",
+   "emp": "b83dc3dfefa785c7c8c85a072a00ed1ef7df5fa53af74ab37a0804a736d96693",
+   "titre": "موطأ الإمام مالك",
+   "titreFr": "Al-Muwatta' (édition de Tunis)",
+   "auteur": "مالك بن أنس",
+   "auteurFr": "Malik ibn Anas",
+   "theme": "Hadith",
+   "couleur": "#3a2d5c",
+   "source": "Édition ancienne de Tunis (archive.org, almuwattalilimmm00mlik). Pages sans retouche."
   }
  ]
 }
