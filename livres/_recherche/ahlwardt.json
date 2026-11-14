@@ -1,0 +1,675 @@
+{
+ "requete": "title:(divans six ancient Arabic poets) OR (creator:(Ahlwardt) AND title:(divans)) OR title:(العقد الثمين)",
+ "date": "2026-11-14T04:04:50.621Z",
+ "resultats": [
+  {
+   "creator": "العقد الثمين شرح منظومة ابن عثيمين في أصول الفقه وقواعده - أ.د خالد المشيقح pdf",
+   "downloads": 7486,
+   "identifier": "a1002n",
+   "language": "Arabic",
+   "title": "العقد الثمين شرح منظومة ابن عثيمين في أصول الفقه وقواعده - أ.د خالد المشيقح pdf",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "a1002n.pdf",
+     "format": "Image Container PDF",
+     "mo": 5.8
+    },
+    {
+     "nom": "a1002n_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 10.5
+    }
+   ]
+  },
+  {
+   "downloads": 3357,
+   "identifier": "20230813_20230813_2020",
+   "language": "ara",
+   "title": "العقد الثمين فى تاريخ البلد الأمين",
+   "year": 1998,
+   "droits": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+   "editeur": "",
+   "date": "1998",
+   "pdfs": [
+    {
+     "nom": "العقد الثمين فى تاريخ البلد الأمين  ـ الجز 1.pdf",
+     "format": "Image Container PDF",
+     "mo": 7.9
+    },
+    {
+     "nom": "العقد الثمين فى تاريخ البلد الأمين  ـ الجز 1_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 14.6
+    },
+    {
+     "nom": "العقد الثمين فى تاريخ البلد الأمين  ـ الجز 2.pdf",
+     "format": "Image Container PDF",
+     "mo": 8.4
+    },
+    {
+     "nom": "العقد الثمين فى تاريخ البلد الأمين  ـ الجز 2_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 16
+    },
+    {
+     "nom": "العقد الثمين فى تاريخ البلد الأمين  ـ الجز 3.pdf",
+     "format": "Image Container PDF",
+     "mo": 8.8
+    },
+    {
+     "nom": "العقد الثمين فى تاريخ البلد الأمين  ـ الجز 3_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 16.9
+    },
+    {
+     "nom": "العقد الثمين فى تاريخ البلد الأمين  ـ الجز 4.pdf",
+     "format": "Image Container PDF",
+     "mo": 9
+    },
+    {
+     "nom": "العقد الثمين فى تاريخ البلد الأمين  ـ الجز 4_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 17.7
+    },
+    {
+     "nom": "العقد الثمين فى تاريخ البلد الأمين  ـ الجز 5.pdf",
+     "format": "Image Container PDF",
+     "mo": 9.5
+    },
+    {
+     "nom": "العقد الثمين فى تاريخ البلد الأمين  ـ الجز 5_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 18.3
+    },
+    {
+     "nom": "العقد الثمين فى تاريخ البلد الأمين  ـ الجز 6.pdf",
+     "format": "Image Container PDF",
+     "mo": 8.8
+    },
+    {
+     "nom": "العقد الثمين فى تاريخ البلد الأمين  ـ الجز 6_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 16.6
+    },
+    {
+     "nom": "العقد الثمين فى تاريخ البلد الأمين  ـ الجز 7.pdf",
+     "format": "Image Container PDF",
+     "mo": 4.3
+    },
+    {
+     "nom": "العقد الثمين فى تاريخ البلد الأمين  ـ الجز 7_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 10.9
+    },
+    {
+     "nom": "العقد الثمين فى تاريخ البلد الأمين.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.7
+    },
+    {
+     "nom": "العقد الثمين فى تاريخ البلد الأمين_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 0.3
+    }
+   ]
+  },
+  {
+   "creator": "Ahlwardt, W. (Wilhelm), 1828-1909, editor",
+   "downloads": 2413,
+   "identifier": "divanssixancien00alqgoog",
+   "language": "eng",
+   "title": "The divans of the six ancient Arabic poets Ennabiga, 'Antara, Tharafa, Zuhair, 'Alqama and Imruulqais ; chiefly according to the mss. of Paris, Gotha, and Leyden; and the collection of their fragments with a list of the various readings of the text",
+   "year": 1870,
+   "droits": "NOT_IN_COPYRIGHT",
+   "editeur": "London : Trübner",
+   "date": "1870",
+   "pdfs": [
+    {
+     "nom": "divanssixancien00alqgoog.pdf",
+     "format": "Image Container PDF",
+     "mo": 9.1
+    },
+    {
+     "nom": "divanssixancien00alqgoog_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 11.7
+    }
+   ]
+  },
+  {
+   "creator": "Wilhelm Ahlwardt",
+   "downloads": 1983,
+   "identifier": "KitabAlIqdAlThameenFeyAlShoaraa",
+   "language": "ara",
+   "title": "كتاب العقد الثمين في دواوين الشعراء الستة الجاهليين",
+   "year": 1870,
+   "droits": "http://creativecommons.org/licenses/by-nc-nd/4.0/",
+   "editeur": "",
+   "date": "1870",
+   "pdfs": [
+    {
+     "nom": "KitabAlIqdAlThameenFeyAlShoaraa.pdf",
+     "format": "Image Container PDF",
+     "mo": 10
+    },
+    {
+     "nom": "KitabAlIqdAlThameenFeyAlShoaraa_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 20
+    }
+   ]
+  },
+  {
+   "creator": "Ahlwardt, W.",
+   "downloads": 1781,
+   "identifier": "in.ernet.dli.2015.69412",
+   "language": "eng",
+   "title": "Divans Of The Six Ancient Arabic Poets",
+   "year": 1870,
+   "droits": "",
+   "editeur": "",
+   "date": "1870",
+   "pdfs": [
+    {
+     "nom": "2015.69412.Divans-Of-The-Six-Ancient-Arabic-Poets.pdf",
+     "format": "Image Container PDF",
+     "mo": 8.6
+    },
+    {
+     "nom": "2015.69412.Divans-Of-The-Six-Ancient-Arabic-Poets_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 10.6
+    }
+   ]
+  },
+  {
+   "downloads": 1767,
+   "identifier": "love_777",
+   "language": "Arabic",
+   "title": "العقد الثمين في تبيين احكام الائمة الهادين",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "العقد الثمين في تبيين أحكام الأئمة الهادين.pdf",
+     "format": "Text PDF",
+     "mo": 1.2
+    },
+    {
+     "nom": "العقد الثمين في تبيين احكام الائمة الهادين.pdf",
+     "format": "Text PDF",
+     "mo": 14.4
+    }
+   ]
+  },
+  {
+   "downloads": 1736,
+   "identifier": "20230813_20230813_1949",
+   "language": "ara",
+   "title": "العقد الثمين فى تاريخ البلد الأمين",
+   "year": 1986,
+   "droits": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+   "editeur": "",
+   "date": "1986",
+   "pdfs": [
+    {
+     "nom": "العقد الثمين فى تاريخ البلد الأمين ـ الجز 1.pdf",
+     "format": "Image Container PDF",
+     "mo": 7.4
+    },
+    {
+     "nom": "العقد الثمين فى تاريخ البلد الأمين ـ الجز 1_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 13.9
+    },
+    {
+     "nom": "العقد الثمين فى تاريخ البلد الأمين ـ الجز 2.pdf",
+     "format": "Image Container PDF",
+     "mo": 7
+    },
+    {
+     "nom": "العقد الثمين فى تاريخ البلد الأمين ـ الجز 2A.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.1
+    },
+    {
+     "nom": "العقد الثمين فى تاريخ البلد الأمين ـ الجز 2A_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 0.5
+    },
+    {
+     "nom": "العقد الثمين فى تاريخ البلد الأمين ـ الجز 2_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 12.9
+    },
+    {
+     "nom": "العقد الثمين فى تاريخ البلد الأمين ـ الجز 3.pdf",
+     "format": "Image Container PDF",
+     "mo": 7.4
+    },
+    {
+     "nom": "العقد الثمين فى تاريخ البلد الأمين ـ الجز 3_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 13.2
+    },
+    {
+     "nom": "العقد الثمين فى تاريخ البلد الأمين ـ الجز 4.pdf",
+     "format": "Image Container PDF",
+     "mo": 10
+    },
+    {
+     "nom": "العقد الثمين فى تاريخ البلد الأمين ـ الجز 4_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 18.5
+    },
+    {
+     "nom": "العقد الثمين فى تاريخ البلد الأمين ـ الجز 5.pdf",
+     "format": "Image Container PDF",
+     "mo": 8.9
+    },
+    {
+     "nom": "العقد الثمين فى تاريخ البلد الأمين ـ الجز 5_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 16
+    },
+    {
+     "nom": "العقد الثمين فى تاريخ البلد الأمين ـ الجز 6.pdf",
+     "format": "Image Container PDF",
+     "mo": 8
+    },
+    {
+     "nom": "العقد الثمين فى تاريخ البلد الأمين ـ الجز 6_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 14.5
+    },
+    {
+     "nom": "العقد الثمين فى تاريخ البلد الأمين ـ الجز 7.pdf",
+     "format": "Image Container PDF",
+     "mo": 8.1
+    },
+    {
+     "nom": "العقد الثمين فى تاريخ البلد الأمين ـ الجز 7_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 15.1
+    },
+    {
+     "nom": "العقد الثمين فى تاريخ البلد الأمين ـ الجز 8.pdf",
+     "format": "Image Container PDF",
+     "mo": 5.3
+    },
+    {
+     "nom": "العقد الثمين فى تاريخ البلد الأمين ـ الجز 8A.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.1
+    },
+    {
+     "nom": "العقد الثمين فى تاريخ البلد الأمين ـ الجز 8A_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 0.2
+    },
+    {
+     "nom": "العقد الثمين فى تاريخ البلد الأمين ـ الجز 8_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 9.7
+    },
+    {
+     "nom": "العقد الثمين فى تاريخ البلد الأمين.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.8
+    },
+    {
+     "nom": "العقد الثمين فى تاريخ البلد الأمين_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 0.3
+    }
+   ]
+  },
+  {
+   "downloads": 1220,
+   "identifier": "05-73405",
+   "title": "العقد الثمين في تاريخ البلد الأمين",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "العقد الثمين في تاريخ البلد الأمين/00_73401.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.7
+    },
+    {
+     "nom": "العقد الثمين في تاريخ البلد الأمين/00_73401_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 0.2
+    },
+    {
+     "nom": "العقد الثمين في تاريخ البلد الأمين/01_73401.pdf",
+     "format": "Image Container PDF",
+     "mo": 7.9
+    },
+    {
+     "nom": "العقد الثمين في تاريخ البلد الأمين/01_73401_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 14.6
+    },
+    {
+     "nom": "العقد الثمين في تاريخ البلد الأمين/02_73402.pdf",
+     "format": "Image Container PDF",
+     "mo": 8.4
+    },
+    {
+     "nom": "العقد الثمين في تاريخ البلد الأمين/02_73402_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 16
+    },
+    {
+     "nom": "العقد الثمين في تاريخ البلد الأمين/03_73403.pdf",
+     "format": "Image Container PDF",
+     "mo": 8.8
+    },
+    {
+     "nom": "العقد الثمين في تاريخ البلد الأمين/03_73403_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 16.9
+    },
+    {
+     "nom": "العقد الثمين في تاريخ البلد الأمين/04_73404.pdf",
+     "format": "Image Container PDF",
+     "mo": 9
+    },
+    {
+     "nom": "العقد الثمين في تاريخ البلد الأمين/04_73404_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 17.7
+    },
+    {
+     "nom": "العقد الثمين في تاريخ البلد الأمين/05_73405.pdf",
+     "format": "Image Container PDF",
+     "mo": 9.5
+    },
+    {
+     "nom": "العقد الثمين في تاريخ البلد الأمين/05_73405_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 18.3
+    },
+    {
+     "nom": "العقد الثمين في تاريخ البلد الأمين/06_73406.pdf",
+     "format": "Image Container PDF",
+     "mo": 8.8
+    },
+    {
+     "nom": "العقد الثمين في تاريخ البلد الأمين/06_73406_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 16.6
+    },
+    {
+     "nom": "العقد الثمين في تاريخ البلد الأمين/07_73407.pdf",
+     "format": "Image Container PDF",
+     "mo": 4.3
+    },
+    {
+     "nom": "العقد الثمين في تاريخ البلد الأمين/07_73407_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 11
+    }
+   ]
+  },
+  {
+   "creator": "الإمام الحافظ المحدث المؤرخ الفقيه والمفسرالشيخ العلامة أبي المعالي علي بن أبي السعود محمد سعيد بن ابي البركات عبد الله الشهير بالسويدي البغدادي العباسي الشافعي رحمة الله عليه المتوفیٰ 1237ھ",
+   "downloads": 1131,
+   "identifier": "20200131_20200131_1052",
+   "language": "ara",
+   "title": "العقد الثمين في بيان مسائل الدين وشرحه",
+   "year": 2020,
+   "droits": "",
+   "editeur": "",
+   "date": "2020-01-31",
+   "pdfs": [
+    {
+     "nom": "العقد الثمين في بيان مسائل الدين وشرحه.pdf",
+     "format": "Image Container PDF",
+     "mo": 14.7
+    },
+    {
+     "nom": "العقد الثمين في بيان مسائل الدين وشرحه_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 23.8
+    }
+   ]
+  },
+  {
+   "creator": "Ahlwardt, W.",
+   "downloads": 1076,
+   "identifier": "in.gov.ignca.10598",
+   "language": "eng",
+   "title": "Divans of the six ancient Arabic poets",
+   "year": 1870,
+   "droits": "",
+   "editeur": "",
+   "date": "1870",
+   "pdfs": [
+    {
+     "nom": "10598.pdf",
+     "format": "Image Container PDF",
+     "mo": 8.1
+    },
+    {
+     "nom": "10598_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 46.8
+    }
+   ]
+  },
+  {
+   "creator": "أحمد كمال",
+   "downloads": 1040,
+   "identifier": "AlIqdAlThameen",
+   "language": "ara",
+   "title": "العقد الثمين في محاسن أخبار و بدائع آثار الاقدمين المصريين",
+   "year": 1882,
+   "droits": "http://creativecommons.org/licenses/by-nc-nd/3.0/",
+   "editeur": "",
+   "date": "1882-12-10",
+   "pdfs": [
+    {
+     "nom": "AlIqdAlThameen.pdf",
+     "format": "Text PDF",
+     "mo": 5.6
+    }
+   ]
+  },
+  {
+   "creator": "Maktabah az zaen",
+   "downloads": 965,
+   "identifier": "202405_mktbhazzaen",
+   "language": "ara",
+   "title": "العقد الثمين شرح منظومة الستين المسماة الفتح المبين",
+   "year": 2024,
+   "droits": "https://creativecommons.org/licenses/by-nd/4.0/",
+   "editeur": "",
+   "date": "2024-05-01",
+   "pdfs": [
+    {
+     "nom": "العقد_الثمين_شرح_منظومة_الستين_المسماة_الفتح_المبين_compressed.pdf",
+     "format": "Image Container PDF",
+     "mo": 13
+    },
+    {
+     "nom": "العقد_الثمين_شرح_منظومة_الستين_المسماة_الفتح_المبين_compressed_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 2.5
+    }
+   ]
+  },
+  {
+   "downloads": 874,
+   "identifier": "20230916_20230916_1743",
+   "language": "Arabic",
+   "title": "‎⁨ العقد الثمين من فيض الحق المبين ‏للشيخ العلامة الرباني عبيدالله بن عبدالله العماني مجموعة بدر الربيعي ⁩",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "‎⁨ العقد الثمين من فيض الحق المبين  ‏للشيخ العلامة الرباني عبيدالله بن عبدالله العماني مجموعة بدر الربيعي ⁩.pdf",
+     "format": "Text PDF",
+     "mo": 0.8
+    }
+   ]
+  },
+  {
+   "creator": "elgamelyan",
+   "downloads": 809,
+   "identifier": "khaled_20190421_1309",
+   "language": "Arabic",
+   "title": "العقد الثمين فى محاسن أخبار وبدائع أثار الاقدمين من المصريين",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "العقد الثمين فى محاسن أخبار وبدائع أثار الاقدمين من المصريين.pdf",
+     "format": "Image Container PDF",
+     "mo": 4.7
+    },
+    {
+     "nom": "العقد الثمين فى محاسن أخبار وبدائع أثار الاقدمين من المصريين_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 5.7
+    }
+   ]
+  },
+  {
+   "creator": "عبدالله محمد الحبشي",
+   "downloads": 739,
+   "identifier": "20250310_20250310_2113",
+   "language": "ara",
+   "title": "تاريخ الشحر المسمى العقد الثمين الفاخر في تاريخ القرن العاشر",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "تاريخ الشحر المسمى العقد الثمين الفاخر في تاريخ القرن العاشر - باسنجلة.pdf",
+     "format": "Image Container PDF",
+     "mo": 11.5
+    },
+    {
+     "nom": "تاريخ الشحر المسمى العقد الثمين الفاخر في تاريخ القرن العاشر - باسنجلة_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 3.9
+    }
+   ]
+  },
+  {
+   "downloads": 714,
+   "identifier": "1131p.d.f1051",
+   "language": "Arabic",
+   "title": "1131 العقد الثمين فى فضائل البلد الأمين P.d.f كتاب 1051",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "1131 - العقد الثمين فى فضائل البلد الأمين  p.d.f    كتاب  1051.pdf",
+     "format": "Image Container PDF",
+     "mo": 6.4
+    },
+    {
+     "nom": "1131 - العقد الثمين فى فضائل البلد الأمين  p.d.f    كتاب  1051_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 8.6
+    }
+   ]
+  },
+  {
+   "downloads": 631,
+   "identifier": "1683Pdf",
+   "language": "Arabic",
+   "title": "1683 العقد الثمين في شرح أحاديث أصول الدين غنام ت الهبدان ط القاسم كتاب اقرا اونلاين Pdf",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "1683 - العقد الثمين في شرح أحاديث أصول الدين - غنام - ت الهبدان - ط القاسم  كتاب اقرا اونلاين     pdf   .pdf",
+     "format": "Image Container PDF",
+     "mo": 4.4
+    },
+    {
+     "nom": "1683 - العقد الثمين في شرح أحاديث أصول الدين - غنام - ت الهبدان - ط القاسم  كتاب اقرا اونلاين     pdf   _text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 17
+    }
+   ]
+  },
+  {
+   "downloads": 595,
+   "identifier": "AkdThaminHind",
+   "language": "Arabic",
+   "title": "العقد الثمين في فتوح الهند ومن ورد فيها من الصحابة والتابعين",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "العقد الثمين فيمن ورد الهند من الصحابة والتابعين.pdf",
+     "format": "Image Container PDF",
+     "mo": 6.3
+    },
+    {
+     "nom": "العقد الثمين فيمن ورد الهند من الصحابة والتابعين_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 10.3
+    }
+   ]
+  },
+  {
+   "downloads": 561,
+   "identifier": "20210103_20210103_0848",
+   "language": "Arabic",
+   "title": "العقد الثمين في فتوح الهند ومن ورد فيها من الصحابة والتابعين جمعه وألفه أطهر المباركبوري",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "العقد الثمين في فتوح الهند ومن ورد فيها من الصحابة والتابعين - جمعه وألفه أطهر المباركبوري.pdf",
+     "format": "Image Container PDF",
+     "mo": 5.4
+    },
+    {
+     "nom": "العقد الثمين في فتوح الهند ومن ورد فيها من الصحابة والتابعين - جمعه وألفه أطهر المباركبوري_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 8.2
+    }
+   ]
+  },
+  {
+   "creator": "الشوكان اليماني الصنعاني",
+   "downloads": 533,
+   "identifier": "alegdalthmen",
+   "language": "ara",
+   "title": "العقد الثمين في إثبات وصايا أمير المؤمنين",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "alegd althmen.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.3
+    },
+    {
+     "nom": "alegd althmen_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 3.5
+    }
+   ]
+  }
+ ]
+}
