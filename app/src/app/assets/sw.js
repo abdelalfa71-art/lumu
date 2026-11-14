@@ -1,8 +1,9 @@
 /* Lumu — service worker : démarrage hors ligne + cache des images */
-const V = "lumu-v129";
+const V = "lumu-v130";
 const IMG = "lumu-img-v1";
 const AUDIO = "lumu-audio-v1";
 const CORAN = "lumu-coran-v1";
+const LIVRES = "lumu-livres-v1";
 const SHELL = ["/", "/manifest.json", "/icon-192.png", "/favicon-32.png"];
 
 self.addEventListener("install", e => {
@@ -10,7 +11,7 @@ self.addEventListener("install", e => {
 });
 self.addEventListener("activate", e => {
   e.waitUntil(
-    caches.keys().then(ks => Promise.all(ks.filter(k => k !== V && k !== IMG && k !== AUDIO && k !== CORAN).map(k => caches.delete(k))))
+    caches.keys().then(ks => Promise.all(ks.filter(k => k !== V && k !== IMG && k !== AUDIO && k !== CORAN && k !== LIVRES).map(k => caches.delete(k))))
       .then(() => self.clients.claim())
       .then(() => self.clients.matchAll({ type: "window" }))
       .then(l => l.forEach(c => c.postMessage({ type: "maj", v: V })))
@@ -66,7 +67,7 @@ self.addEventListener("fetch", e => {
     e.respondWith(reseauPuisCache(req, V, "/"));
     return;
   }
-  if (u.pathname.includes("/coran/hafs/")) return;
+  if (u.pathname.includes("/coran/hafs/") || ((u.hostname === "cdn.jsdelivr.net" || u.hostname === "raw.githubusercontent.com") && u.pathname.includes("/livres/"))) return;
   if (u.hostname === "cdn.jsdelivr.net") { e.respondWith(cacheEtRevalide(req, V)); return; }
   if (u.origin === location.origin) { e.respondWith(cacheEtRevalide(req, V)); return; }
   if (u.pathname.includes("/storage/v1/object/public/") && /\.(jpe?g|png|webp|avif|gif)$/i.test(u.pathname)) {
