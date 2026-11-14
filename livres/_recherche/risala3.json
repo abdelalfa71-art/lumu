@@ -1,0 +1,3892 @@
+{
+ "requete": "(\"رسالة ابن أبي زيد\" OR \"الرسالة الفقهية\" OR \"risala ibn abi zayd\")",
+ "date": "2026-11-14T02:56:53.626Z",
+ "resultats": [
+  {
+   "creator": "www.islamspirit.com",
+   "downloads": 68816,
+   "identifier": "IslamSpirit-Aqida-Sunnah-PDF-01",
+   "language": "Arabic",
+   "title": "موسوعة العقيدة والسنة ( بي دي اف )",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "00.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.2
+    },
+    {
+     "nom": "00_110472.pdf",
+     "format": "Image Container PDF",
+     "mo": 0
+    },
+    {
+     "nom": "00_110472_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 0
+    },
+    {
+     "nom": "00_138991.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.6
+    },
+    {
+     "nom": "00_138991_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 0
+    },
+    {
+     "nom": "00_3656.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.1
+    },
+    {
+     "nom": "00_3656_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 0
+    },
+    {
+     "nom": "00_47291.pdf",
+     "format": "Image Container PDF",
+     "mo": 0
+    },
+    {
+     "nom": "00_47291_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 0
+    },
+    {
+     "nom": "00_51901.pdf",
+     "format": "Image Container PDF",
+     "mo": 1.9
+    },
+    {
+     "nom": "00_51901_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 0.4
+    },
+    {
+     "nom": "00_55028.pdf",
+     "format": "Image Container PDF",
+     "mo": 0
+    },
+    {
+     "nom": "00_55028_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 0
+    },
+    {
+     "nom": "00_64511.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.8
+    },
+    {
+     "nom": "00_64511_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 0.3
+    },
+    {
+     "nom": "00_72637.pdf",
+     "format": "Image Container PDF",
+     "mo": 0
+    },
+    {
+     "nom": "00_72637_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 0
+    },
+    {
+     "nom": "00_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 0.6
+    },
+    {
+     "nom": "01-02_110472.pdf",
+     "format": "Image Container PDF",
+     "mo": 15
+    },
+    {
+     "nom": "01-02_110472_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 46.1
+    },
+    {
+     "nom": "01.pdf",
+     "format": "Image Container PDF",
+     "mo": 7.2
+    },
+    {
+     "nom": "0177.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.9
+    },
+    {
+     "nom": "0177_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 0.8
+    },
+    {
+     "nom": "01_138991.pdf",
+     "format": "Image Container PDF",
+     "mo": 5.9
+    },
+    {
+     "nom": "01_138991_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 19.5
+    },
+    {
+     "nom": "01_3656.pdf",
+     "format": "Image Container PDF",
+     "mo": 7.4
+    },
+    {
+     "nom": "01_3656_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 22.6
+    },
+    {
+     "nom": "01_47291.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.8
+    },
+    {
+     "nom": "01_47291_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 2.3
+    },
+    {
+     "nom": "01_51901.pdf",
+     "format": "Image Container PDF",
+     "mo": 7.1
+    },
+    {
+     "nom": "01_51901_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 23.3
+    },
+    {
+     "nom": "01_55028.pdf",
+     "format": "Image Container PDF",
+     "mo": 7.3
+    },
+    {
+     "nom": "01_55028_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 22.8
+    },
+    {
+     "nom": "01_55028p1.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.1
+    },
+    {
+     "nom": "01_55028p1_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 0.1
+    },
+    {
+     "nom": "01_55028p2.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.6
+    },
+    {
+     "nom": "01_55028p2_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 0.7
+    },
+    {
+     "nom": "01_55028p3.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.2
+    },
+    {
+     "nom": "01_55028p3_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 0.4
+    },
+    {
+     "nom": "01_64511.pdf",
+     "format": "Image Container PDF",
+     "mo": 7.8
+    },
+    {
+     "nom": "01_64511_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 25.4
+    },
+    {
+     "nom": "01_72637.pdf",
+     "format": "Image Container PDF",
+     "mo": 4.9
+    },
+    {
+     "nom": "01_72637_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 8.2
+    },
+    {
+     "nom": "01_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 21
+    },
+    {
+     "nom": "02.pdf",
+     "format": "Image Container PDF",
+     "mo": 7.3
+    },
+    {
+     "nom": "02_138992.pdf",
+     "format": "Image Container PDF",
+     "mo": 6
+    },
+    {
+     "nom": "02_138992_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 20.1
+    },
+    {
+     "nom": "02_3657.pdf",
+     "format": "Image Container PDF",
+     "mo": 7.3
+    },
+    {
+     "nom": "02_3657_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 12.1
+    },
+    {
+     "nom": "02_47292.pdf",
+     "format": "Image Container PDF",
+     "mo": 4.9
+    },
+    {
+     "nom": "02_47292_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 15.7
+    },
+    {
+     "nom": "02_51902.pdf",
+     "format": "Image Container PDF",
+     "mo": 5.6
+    },
+    {
+     "nom": "02_51902_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 18.5
+    },
+    {
+     "nom": "02_55029.pdf",
+     "format": "Image Container PDF",
+     "mo": 6.3
+    },
+    {
+     "nom": "02_55029_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 9.6
+    },
+    {
+     "nom": "02_64512.pdf",
+     "format": "Image Container PDF",
+     "mo": 6.7
+    },
+    {
+     "nom": "02_64512_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 22.2
+    },
+    {
+     "nom": "02_72638.pdf",
+     "format": "Image Container PDF",
+     "mo": 9
+    },
+    {
+     "nom": "02_72638_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 30.2
+    },
+    {
+     "nom": "02_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 16
+    },
+    {
+     "nom": "03.pdf",
+     "format": "Image Container PDF",
+     "mo": 8.9
+    },
+    {
+     "nom": "03_110474.pdf",
+     "format": "Image Container PDF",
+     "mo": 6.1
+    },
+    {
+     "nom": "03_110474_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 18
+    },
+    {
+     "nom": "03_138993.pdf",
+     "format": "Image Container PDF",
+     "mo": 6.4
+    },
+    {
+     "nom": "03_138993_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 21
+    },
+    {
+     "nom": "03_3658.pdf",
+     "format": "Image Container PDF",
+     "mo": 7.7
+    },
+    {
+     "nom": "03_3658_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 24.6
+    },
+    {
+     "nom": "03_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 26.2
+    },
+    {
+     "nom": "04_110504.pdf",
+     "format": "Image Container PDF",
+     "mo": 6.9
+    },
+    {
+     "nom": "04_110504_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 21.5
+    },
+    {
+     "nom": "04_3659.pdf",
+     "format": "Image Container PDF",
+     "mo": 5.9
+    },
+    {
+     "nom": "04_3659_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 19.1
+    },
+    {
+     "nom": "05_110505.pdf",
+     "format": "Image Container PDF",
+     "mo": 6
+    },
+    {
+     "nom": "05_110505_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 18.8
+    },
+    {
+     "nom": "05_3660.pdf",
+     "format": "Image Container PDF",
+     "mo": 7.1
+    },
+    {
+     "nom": "05_3660_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 22.3
+    },
+    {
+     "nom": "06_110506.pdf",
+     "format": "Image Container PDF",
+     "mo": 6.6
+    },
+    {
+     "nom": "06_110506_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 9.2
+    },
+    {
+     "nom": "06_3661.pdf",
+     "format": "Image Container PDF",
+     "mo": 6.1
+    },
+    {
+     "nom": "06_3661_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 19
+    },
+    {
+     "nom": "07_110507.pdf",
+     "format": "Image Container PDF",
+     "mo": 6.2
+    },
+    {
+     "nom": "07_110507_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 19.2
+    },
+    {
+     "nom": "07_110507p.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.4
+    },
+    {
+     "nom": "07_110507p_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 0.4
+    },
+    {
+     "nom": "07_3662.pdf",
+     "format": "Image Container PDF",
+     "mo": 5.5
+    },
+    {
+     "nom": "07_3662_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 8.6
+    },
+    {
+     "nom": "08-09_110508.pdf",
+     "format": "Image Container PDF",
+     "mo": 12.7
+    },
+    {
+     "nom": "08-09_110508_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 42.9
+    },
+    {
+     "nom": "08_3663.pdf",
+     "format": "Image Container PDF",
+     "mo": 7.1
+    },
+    {
+     "nom": "08_3663_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 22
+    },
+    {
+     "nom": "09_3664.pdf",
+     "format": "Image Container PDF",
+     "mo": 6.9
+    },
+    {
+     "nom": "09_3664_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 21.3
+    },
+    {
+     "nom": "102463.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.5
+    },
+    {
+     "nom": "102463_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 3.8
+    },
+    {
+     "nom": "102659.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.2
+    },
+    {
+     "nom": "102659_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 0.2
+    },
+    {
+     "nom": "106321.pdf",
+     "format": "Image Container PDF",
+     "mo": 16.8
+    },
+    {
+     "nom": "106321_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 25.3
+    },
+    {
+     "nom": "106321p.pdf",
+     "format": "Image Container PDF",
+     "mo": 2
+    },
+    {
+     "nom": "106321p_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 5.8
+    },
+    {
+     "nom": "1128.pdf",
+     "format": "Image Container PDF",
+     "mo": 6.6
+    },
+    {
+     "nom": "1128_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 14.9
+    },
+    {
+     "nom": "12891.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.6
+    },
+    {
+     "nom": "12891_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 2
+    },
+    {
+     "nom": "13116.pdf",
+     "format": "Image Container PDF",
+     "mo": 3.7
+    },
+    {
+     "nom": "13116_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 5.8
+    },
+    {
+     "nom": "16040.pdf",
+     "format": "Image Container PDF",
+     "mo": 12.5
+    },
+    {
+     "nom": "16040_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 45.2
+    },
+    {
+     "nom": "16222.pdf",
+     "format": "Image Container PDF",
+     "mo": 12
+    },
+    {
+     "nom": "16222_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 36.3
+    },
+    {
+     "nom": "18296.pdf",
+     "format": "Image Container PDF",
+     "mo": 2.2
+    },
+    {
+     "nom": "18296_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 6.8
+    },
+    {
+     "nom": "18458.pdf",
+     "format": "Image Container PDF",
+     "mo": 1.8
+    },
+    {
+     "nom": "18458_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 2.9
+    },
+    {
+     "nom": "212.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.8
+    },
+    {
+     "nom": "212_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 1.2
+    },
+    {
+     "nom": "21718-0.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.1
+    },
+    {
+     "nom": "21718-0_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 0.4
+    },
+    {
+     "nom": "21718-1.pdf",
+     "format": "Image Container PDF",
+     "mo": 2
+    },
+    {
+     "nom": "21718-1_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 6
+    },
+    {
+     "nom": "21718-2.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.4
+    },
+    {
+     "nom": "21718-2_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 1.1
+    },
+    {
+     "nom": "21937.pdf",
+     "format": "Image Container PDF",
+     "mo": 1.2
+    },
+    {
+     "nom": "21937_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 3.7
+    },
+    {
+     "nom": "21937p.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.2
+    },
+    {
+     "nom": "21937p_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 0.5
+    },
+    {
+     "nom": "21943.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.9
+    },
+    {
+     "nom": "21943_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 3
+    },
+    {
+     "nom": "21964.pdf",
+     "format": "Image Container PDF",
+     "mo": 1.3
+    },
+    {
+     "nom": "21964_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 1.5
+    },
+    {
+     "nom": "24486.pdf",
+     "format": "Image Container PDF",
+     "mo": 1.9
+    },
+    {
+     "nom": "24486_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 5.7
+    },
+    {
+     "nom": "25555.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.6
+    },
+    {
+     "nom": "25555_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 1.8
+    },
+    {
+     "nom": "25623.pdf",
+     "format": "Image Container PDF",
+     "mo": 5
+    },
+    {
+     "nom": "25623_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 14.3
+    },
+    {
+     "nom": "25749.pdf",
+     "format": "Image Container PDF",
+     "mo": 3.1
+    },
+    {
+     "nom": "25749_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 3.7
+    },
+    {
+     "nom": "26444.pdf",
+     "format": "Image Container PDF",
+     "mo": 4.1
+    },
+    {
+     "nom": "26444_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 5
+    },
+    {
+     "nom": "28659.pdf",
+     "format": "Image Container PDF",
+     "mo": 1.3
+    },
+    {
+     "nom": "28659_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 3.8
+    },
+    {
+     "nom": "33096.pdf",
+     "format": "Image Container PDF",
+     "mo": 4
+    },
+    {
+     "nom": "33096_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 5.6
+    },
+    {
+     "nom": "33096p.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.4
+    },
+    {
+     "nom": "33096p_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 1.1
+    },
+    {
+     "nom": "33149.pdf",
+     "format": "Image Container PDF",
+     "mo": 1.6
+    },
+    {
+     "nom": "33149_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 4.9
+    },
+    {
+     "nom": "33394.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.5
+    },
+    {
+     "nom": "33394_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 0.7
+    },
+    {
+     "nom": "33597.pdf",
+     "format": "Image Container PDF",
+     "mo": 3.6
+    },
+    {
+     "nom": "33597_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 11.5
+    },
+    {
+     "nom": "33600.pdf",
+     "format": "Image Container PDF",
+     "mo": 4
+    },
+    {
+     "nom": "33600_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 13.3
+    },
+    {
+     "nom": "33600p.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.7
+    },
+    {
+     "nom": "33600p_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 1.1
+    },
+    {
+     "nom": "3771.pdf",
+     "format": "Image Container PDF",
+     "mo": 1.3
+    },
+    {
+     "nom": "3771_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 3.8
+    },
+    {
+     "nom": "37726.pdf",
+     "format": "Image Container PDF",
+     "mo": 1.5
+    },
+    {
+     "nom": "37726_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 5
+    },
+    {
+     "nom": "38386.pdf",
+     "format": "Image Container PDF",
+     "mo": 3
+    },
+    {
+     "nom": "38386_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 9.1
+    },
+    {
+     "nom": "3839.pdf",
+     "format": "Image Container PDF",
+     "mo": 1.7
+    },
+    {
+     "nom": "3839_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 5.6
+    },
+    {
+     "nom": "42444s.pdf",
+     "format": "Text PDF",
+     "mo": 0.5
+    },
+    {
+     "nom": "43566.pdf",
+     "format": "Image Container PDF",
+     "mo": 3.8
+    },
+    {
+     "nom": "43566_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 13.2
+    },
+    {
+     "nom": "43575.pdf",
+     "format": "Image Container PDF",
+     "mo": 2.2
+    },
+    {
+     "nom": "43575_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 7.2
+    },
+    {
+     "nom": "44531.pdf",
+     "format": "Image Container PDF",
+     "mo": 2.4
+    },
+    {
+     "nom": "44531_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 7.6
+    },
+    {
+     "nom": "47312.pdf",
+     "format": "Image Container PDF",
+     "mo": 9.5
+    },
+    {
+     "nom": "47312_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 29.5
+    },
+    {
+     "nom": "48106.pdf",
+     "format": "Image Container PDF",
+     "mo": 2.2
+    },
+    {
+     "nom": "48106_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 6.8
+    },
+    {
+     "nom": "48112.pdf",
+     "format": "Image Container PDF",
+     "mo": 1.8
+    },
+    {
+     "nom": "48112_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 5.4
+    },
+    {
+     "nom": "49540.pdf",
+     "format": "Image Container PDF",
+     "mo": 3.8
+    },
+    {
+     "nom": "49540_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 5.6
+    },
+    {
+     "nom": "50062.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.8
+    },
+    {
+     "nom": "50062_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 2.4
+    },
+    {
+     "nom": "50740.pdf",
+     "format": "Image Container PDF",
+     "mo": 2.8
+    },
+    {
+     "nom": "50740_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 8.8
+    },
+    {
+     "nom": "50740p.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.3
+    },
+    {
+     "nom": "50740p_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 0.9
+    },
+    {
+     "nom": "51688.pdf",
+     "format": "Image Container PDF",
+     "mo": 1
+    },
+    {
+     "nom": "51688_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 3
+    },
+    {
+     "nom": "51910.pdf",
+     "format": "Image Container PDF",
+     "mo": 1.3
+    },
+    {
+     "nom": "51910_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 3
+    },
+    {
+     "nom": "51913.pdf",
+     "format": "Image Container PDF",
+     "mo": 1.5
+    },
+    {
+     "nom": "51913_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 1.7
+    },
+    {
+     "nom": "51914.pdf",
+     "format": "Image Container PDF",
+     "mo": 1
+    },
+    {
+     "nom": "51914_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 1.1
+    },
+    {
+     "nom": "52073.pdf",
+     "format": "Image Container PDF",
+     "mo": 2.6
+    },
+    {
+     "nom": "52073_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 8.6
+    },
+    {
+     "nom": "52697.pdf",
+     "format": "Image Container PDF",
+     "mo": 3.9
+    },
+    {
+     "nom": "52697_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 6.1
+    },
+    {
+     "nom": "53981.pdf",
+     "format": "Image Container PDF",
+     "mo": 1.1
+    },
+    {
+     "nom": "53981_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 3
+    },
+    {
+     "nom": "54778.pdf",
+     "format": "Image Container PDF",
+     "mo": 11.9
+    },
+    {
+     "nom": "54778_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 16.3
+    },
+    {
+     "nom": "55316.pdf",
+     "format": "Image Container PDF",
+     "mo": 2.8
+    },
+    {
+     "nom": "55316_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 9
+    },
+    {
+     "nom": "57296.pdf",
+     "format": "Image Container PDF",
+     "mo": 3.4
+    },
+    {
+     "nom": "57296_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 10.4
+    },
+    {
+     "nom": "63632.pdf",
+     "format": "Image Container PDF",
+     "mo": 5.4
+    },
+    {
+     "nom": "63632_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 16.6
+    },
+    {
+     "nom": "6384.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.7
+    },
+    {
+     "nom": "6384_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 1.1
+    },
+    {
+     "nom": "65319.pdf",
+     "format": "Image Container PDF",
+     "mo": 2.6
+    },
+    {
+     "nom": "65319_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 8.6
+    },
+    {
+     "nom": "67023.pdf",
+     "format": "Image Container PDF",
+     "mo": 1.9
+    },
+    {
+     "nom": "67023_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 6.1
+    },
+    {
+     "nom": "67197.pdf",
+     "format": "Image Container PDF",
+     "mo": 15.7
+    },
+    {
+     "nom": "67197_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 28.8
+    },
+    {
+     "nom": "70007.pdf",
+     "format": "Image Container PDF",
+     "mo": 9.3
+    },
+    {
+     "nom": "70007_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 14
+    },
+    {
+     "nom": "72153.pdf",
+     "format": "Image Container PDF",
+     "mo": 1.9
+    },
+    {
+     "nom": "72153_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 3.1
+    },
+    {
+     "nom": "74259.pdf",
+     "format": "Image Container PDF",
+     "mo": 2.1
+    },
+    {
+     "nom": "74259_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 6.5
+    },
+    {
+     "nom": "80939.pdf",
+     "format": "Image Container PDF",
+     "mo": 13.1
+    },
+    {
+     "nom": "80939_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 42.4
+    },
+    {
+     "nom": "80939p.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.1
+    },
+    {
+     "nom": "80939p_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 0.2
+    },
+    {
+     "nom": "80998.pdf",
+     "format": "Image Container PDF",
+     "mo": 5.5
+    },
+    {
+     "nom": "80998_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 17.8
+    },
+    {
+     "nom": "82114.pdf",
+     "format": "Image Container PDF",
+     "mo": 5.5
+    },
+    {
+     "nom": "82114_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 17.3
+    },
+    {
+     "nom": "82114p.pdf",
+     "format": "Image Container PDF",
+     "mo": 1
+    },
+    {
+     "nom": "82114p_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 2.8
+    },
+    {
+     "nom": "8628.pdf",
+     "format": "Image Container PDF",
+     "mo": 10.1
+    },
+    {
+     "nom": "8628_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 30.2
+    },
+    {
+     "nom": "8638.pdf",
+     "format": "Image Container PDF",
+     "mo": 6.5
+    },
+    {
+     "nom": "8638_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 20.7
+    },
+    {
+     "nom": "93600.pdf",
+     "format": "Image Container PDF",
+     "mo": 21.7
+    },
+    {
+     "nom": "93600_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 30.4
+    },
+    {
+     "nom": "94521.pdf",
+     "format": "Image Container PDF",
+     "mo": 8.6
+    },
+    {
+     "nom": "94521_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 27.1
+    },
+    {
+     "nom": "94663.pdf",
+     "format": "Image Container PDF",
+     "mo": 4.9
+    },
+    {
+     "nom": "94663_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 14.9
+    },
+    {
+     "nom": "954.pdf",
+     "format": "Image Container PDF",
+     "mo": 3.1
+    },
+    {
+     "nom": "954_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 10.1
+    },
+    {
+     "nom": "95816.pdf",
+     "format": "Image Container PDF",
+     "mo": 1.7
+    },
+    {
+     "nom": "95816_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 2.5
+    },
+    {
+     "nom": "97356.pdf",
+     "format": "Image Container PDF",
+     "mo": 5.7
+    },
+    {
+     "nom": "97356_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 17.3
+    },
+    {
+     "nom": "99100.pdf",
+     "format": "Image Container PDF",
+     "mo": 4.5
+    },
+    {
+     "nom": "99100_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 7.4
+    },
+    {
+     "nom": "9960.pdf",
+     "format": "Image Container PDF",
+     "mo": 1.3
+    },
+    {
+     "nom": "9960_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 3.6
+    },
+    {
+     "nom": "99617.pdf",
+     "format": "Image Container PDF",
+     "mo": 5.5
+    },
+    {
+     "nom": "99617_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 17.4
+    },
+    {
+     "nom": "aas.pdf",
+     "format": "Image Container PDF",
+     "mo": 4.7
+    },
+    {
+     "nom": "aas_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 7.6
+    },
+    {
+     "nom": "abet.pdf",
+     "format": "Image Container PDF",
+     "mo": 1
+    },
+    {
+     "nom": "abet_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 2.8
+    },
+    {
+     "nom": "akiwasman.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.8
+    },
+    {
+     "nom": "akiwasman_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 1.8
+    },
+    {
+     "nom": "aqth.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.4
+    },
+    {
+     "nom": "aqth_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 1.2
+    },
+    {
+     "nom": "asra.pdf",
+     "format": "Image Container PDF",
+     "mo": 3.1
+    },
+    {
+     "nom": "asra_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 10.9
+    },
+    {
+     "nom": "astas.pdf",
+     "format": "Image Container PDF",
+     "mo": 4.1
+    },
+    {
+     "nom": "astas_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 12.2
+    },
+    {
+     "nom": "baoa0.pdf",
+     "format": "Image Container PDF",
+     "mo": 0
+    },
+    {
+     "nom": "baoa0_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 0
+    },
+    {
+     "nom": "baoa1.pdf",
+     "format": "Image Container PDF",
+     "mo": 12.2
+    },
+    {
+     "nom": "baoa1_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 19.2
+    },
+    {
+     "nom": "baoa2.pdf",
+     "format": "Image Container PDF",
+     "mo": 9.8
+    },
+    {
+     "nom": "baoa2_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 30.3
+    },
+    {
+     "nom": "eaaamsa.pdf",
+     "format": "Image Container PDF",
+     "mo": 1
+    },
+    {
+     "nom": "eaaamsa_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 2.9
+    },
+    {
+     "nom": "eaq.pdf",
+     "format": "Image Container PDF",
+     "mo": 2
+    },
+    {
+     "nom": "eaq_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 6.3
+    },
+    {
+     "nom": "eas.pdf",
+     "format": "Image Container PDF",
+     "mo": 1.5
+    },
+    {
+     "nom": "eas_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 4.7
+    },
+    {
+     "nom": "ebana.pdf",
+     "format": "Image Container PDF",
+     "mo": 11.7
+    },
+    {
+     "nom": "ebana_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 43.8
+    },
+    {
+     "nom": "ebnfg.pdf",
+     "format": "Image Container PDF",
+     "mo": 2.4
+    },
+    {
+     "nom": "ebnfg_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 7.7
+    },
+    {
+     "nom": "edaa.pdf",
+     "format": "Image Container PDF",
+     "mo": 13.5
+    },
+    {
+     "nom": "edaa_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 41
+    },
+    {
+     "nom": "ehaka.pdf",
+     "format": "Image Container PDF",
+     "mo": 3.1
+    },
+    {
+     "nom": "ehaka_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 8.4
+    },
+    {
+     "nom": "esgmhm.pdf",
+     "format": "Image Container PDF",
+     "mo": 1.7
+    },
+    {
+     "nom": "esgmhm_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 5.6
+    },
+    {
+     "nom": "eso.pdf",
+     "format": "Image Container PDF",
+     "mo": 3.5
+    },
+    {
+     "nom": "eso_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 11.3
+    },
+    {
+     "nom": "etqaad.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.8
+    },
+    {
+     "nom": "etqaad_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 2.5
+    },
+    {
+     "nom": "etsh.pdf",
+     "format": "Image Container PDF",
+     "mo": 1.2
+    },
+    {
+     "nom": "etsh_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 3.7
+    },
+    {
+     "nom": "fthmkb.pdf",
+     "format": "Image Container PDF",
+     "mo": 9.1
+    },
+    {
+     "nom": "fthmkb_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 43.2
+    },
+    {
+     "nom": "isle.pdf",
+     "format": "Image Container PDF",
+     "mo": 6.3
+    },
+    {
+     "nom": "isle_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 19.5
+    },
+    {
+     "nom": "islep.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.1
+    },
+    {
+     "nom": "islep_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 0.4
+    },
+    {
+     "nom": "itas.pdf",
+     "format": "Image Container PDF",
+     "mo": 7
+    },
+    {
+     "nom": "itas_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 24.9
+    },
+    {
+     "nom": "iymrss.pdf",
+     "format": "Image Container PDF",
+     "mo": 1.5
+    },
+    {
+     "nom": "iymrss_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 4.7
+    },
+    {
+     "nom": "kaaag.pdf",
+     "format": "Image Container PDF",
+     "mo": 6.1
+    },
+    {
+     "nom": "kaaag_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 6.4
+    },
+    {
+     "nom": "kee.pdf",
+     "format": "Image Container PDF",
+     "mo": 1.3
+    },
+    {
+     "nom": "kee_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 3.6
+    },
+    {
+     "nom": "kes.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.9
+    },
+    {
+     "nom": "kes_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 3
+    },
+    {
+     "nom": "knks.pdf",
+     "format": "Image Container PDF",
+     "mo": 2.8
+    },
+    {
+     "nom": "knks_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 8.3
+    },
+    {
+     "nom": "ksag.pdf",
+     "format": "Image Container PDF",
+     "mo": 30.7
+    },
+    {
+     "nom": "ksag_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 74.4
+    },
+    {
+     "nom": "ksiaa.pdf",
+     "format": "Image Container PDF",
+     "mo": 15.8
+    },
+    {
+     "nom": "ksiaa_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 53.2
+    },
+    {
+     "nom": "ksunna.pdf",
+     "format": "Image Container PDF",
+     "mo": 4.3
+    },
+    {
+     "nom": "ksunna_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 13.7
+    },
+    {
+     "nom": "ktar0.pdf",
+     "format": "Image Container PDF",
+     "mo": 0
+    },
+    {
+     "nom": "ktar0_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 0
+    },
+    {
+     "nom": "ktar1.pdf",
+     "format": "Image Container PDF",
+     "mo": 4.2
+    },
+    {
+     "nom": "ktar11.pdf",
+     "format": "Image Container PDF",
+     "mo": 4.2
+    },
+    {
+     "nom": "ktar11_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 19.7
+    },
+    {
+     "nom": "ktar1_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 19.7
+    },
+    {
+     "nom": "ktar2.pdf",
+     "format": "Image Container PDF",
+     "mo": 5.6
+    },
+    {
+     "nom": "ktar2_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 26.5
+    },
+    {
+     "nom": "ktir.pdf",
+     "format": "Image Container PDF",
+     "mo": 1.7
+    },
+    {
+     "nom": "ktir_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 5.3
+    },
+    {
+     "nom": "labsaa1.pdf",
+     "format": "Image Container PDF",
+     "mo": 9.3
+    },
+    {
+     "nom": "labsaa1_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 27.3
+    },
+    {
+     "nom": "labsaa2.pdf",
+     "format": "Image Container PDF",
+     "mo": 9.4
+    },
+    {
+     "nom": "labsaa2_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 27.8
+    },
+    {
+     "nom": "laslas0.pdf",
+     "format": "Image Container PDF",
+     "mo": 0
+    },
+    {
+     "nom": "laslas0_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 0
+    },
+    {
+     "nom": "laslas1.pdf",
+     "format": "Image Container PDF",
+     "mo": 4.6
+    },
+    {
+     "nom": "laslas1_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 12.9
+    },
+    {
+     "nom": "laslas2.pdf",
+     "format": "Image Container PDF",
+     "mo": 5.9
+    },
+    {
+     "nom": "laslas2_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 8.9
+    },
+    {
+     "nom": "masgtas.pdf",
+     "format": "Image Container PDF",
+     "mo": 1.6
+    },
+    {
+     "nom": "masgtas_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 4.5
+    },
+    {
+     "nom": "masgtasp.pdf",
+     "format": "Image Container PDF",
+     "mo": 0
+    },
+    {
+     "nom": "masgtasp_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 0
+    },
+    {
+     "nom": "moaska.pdf",
+     "format": "Image Container PDF",
+     "mo": 6.2
+    },
+    {
+     "nom": "moaska_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 9.1
+    },
+    {
+     "nom": "mrgas.pdf",
+     "format": "Image Container PDF",
+     "mo": 6.6
+    },
+    {
+     "nom": "mrgas_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 9.8
+    },
+    {
+     "nom": "mrs.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.8
+    },
+    {
+     "nom": "mrs_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 2.4
+    },
+    {
+     "nom": "msmsr.pdf",
+     "format": "Image Container PDF",
+     "mo": 2.4
+    },
+    {
+     "nom": "msmsr_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 6.9
+    },
+    {
+     "nom": "muak.pdf",
+     "format": "Image Container PDF",
+     "mo": 4.8
+    },
+    {
+     "nom": "muak_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 15.2
+    },
+    {
+     "nom": "odika.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.7
+    },
+    {
+     "nom": "odika_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 2.2
+    },
+    {
+     "nom": "oshumaidi.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.9
+    },
+    {
+     "nom": "oshumaidi_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 2.5
+    },
+    {
+     "nom": "qoesmk.pdf",
+     "format": "Image Container PDF",
+     "mo": 1.1
+    },
+    {
+     "nom": "qoesmk_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 1.7
+    },
+    {
+     "nom": "raa.pdf",
+     "format": "Image Container PDF",
+     "mo": 3.7
+    },
+    {
+     "nom": "raa_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 11.7
+    },
+    {
+     "nom": "rdbm.pdf",
+     "format": "Image Container PDF",
+     "mo": 4
+    },
+    {
+     "nom": "rdbm_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 11.5
+    },
+    {
+     "nom": "rdbmp.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.5
+    },
+    {
+     "nom": "rdbmp_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 1.5
+    },
+    {
+     "nom": "sasu.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.8
+    },
+    {
+     "nom": "sasu_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 2.5
+    },
+    {
+     "nom": "sawh.pdf",
+     "format": "Image Container PDF",
+     "mo": 5.2
+    },
+    {
+     "nom": "sawh_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 17.1
+    },
+    {
+     "nom": "sh-j.pdf",
+     "format": "Image Container PDF",
+     "mo": 2.9
+    },
+    {
+     "nom": "sh-j_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 9.6
+    },
+    {
+     "nom": "sh-rad.pdf",
+     "format": "Image Container PDF",
+     "mo": 1.9
+    },
+    {
+     "nom": "sh-rad_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 6.7
+    },
+    {
+     "nom": "siga0.pdf",
+     "format": "Image Container PDF",
+     "mo": 0
+    },
+    {
+     "nom": "siga0_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 0
+    },
+    {
+     "nom": "siga1.pdf",
+     "format": "Image Container PDF",
+     "mo": 2.8
+    },
+    {
+     "nom": "siga1_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 8.7
+    },
+    {
+     "nom": "siga2-3.pdf",
+     "format": "Image Container PDF",
+     "mo": 5.1
+    },
+    {
+     "nom": "siga2-3_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 16.7
+    },
+    {
+     "nom": "so.pdf",
+     "format": "Image Container PDF",
+     "mo": 2
+    },
+    {
+     "nom": "so_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 6.5
+    },
+    {
+     "nom": "soeasg.pdf",
+     "format": "Image Container PDF",
+     "mo": 22.3
+    },
+    {
+     "nom": "soeasg_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 73.6
+    },
+    {
+     "nom": "soeasgi.pdf",
+     "format": "Image Container PDF",
+     "mo": 1.7
+    },
+    {
+     "nom": "soeasgi_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 6.8
+    },
+    {
+     "nom": "soeasgp.pdf",
+     "format": "Image Container PDF",
+     "mo": 1.6
+    },
+    {
+     "nom": "soeasgp_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 5.4
+    },
+    {
+     "nom": "srhke0.pdf",
+     "format": "Image Container PDF",
+     "mo": 0
+    },
+    {
+     "nom": "srhke0_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 0
+    },
+    {
+     "nom": "srhke1.pdf",
+     "format": "Image Container PDF",
+     "mo": 15.7
+    },
+    {
+     "nom": "srhke1_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 44.5
+    },
+    {
+     "nom": "srhke2.pdf",
+     "format": "Image Container PDF",
+     "mo": 11.3
+    },
+    {
+     "nom": "srhke2_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 31.3
+    },
+    {
+     "nom": "srhke3.pdf",
+     "format": "Image Container PDF",
+     "mo": 9.1
+    },
+    {
+     "nom": "srhke3_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 25.5
+    },
+    {
+     "nom": "srhke4.pdf",
+     "format": "Image Container PDF",
+     "mo": 7.6
+    },
+    {
+     "nom": "srhke4_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 21.5
+    },
+    {
+     "nom": "srhke5.pdf",
+     "format": "Image Container PDF",
+     "mo": 8.7
+    },
+    {
+     "nom": "srhke5_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 24.6
+    },
+    {
+     "nom": "srhke6.pdf",
+     "format": "Image Container PDF",
+     "mo": 7.9
+    },
+    {
+     "nom": "srhke6_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 22.6
+    },
+    {
+     "nom": "srhkei.pdf",
+     "format": "Image Container PDF",
+     "mo": 4.3
+    },
+    {
+     "nom": "srhkei_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 13.6
+    },
+    {
+     "nom": "sunnaa.pdf",
+     "format": "Image Container PDF",
+     "mo": 5
+    },
+    {
+     "nom": "sunnaa_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 6.6
+    },
+    {
+     "nom": "tmqn.pdf",
+     "format": "Image Container PDF",
+     "mo": 15.2
+    },
+    {
+     "nom": "tmqn_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 36.8
+    },
+    {
+     "nom": "wesagt.pdf",
+     "format": "Image Container PDF",
+     "mo": 5.2
+    },
+    {
+     "nom": "wesagt_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 14.9
+    }
+   ]
+  },
+  {
+   "downloads": 54381,
+   "identifier": "4siy2018_gmail_48_201811",
+   "language": "Arabic",
+   "title": "كتب صيغة ورد وورد 6538 كتاب من المكتبة الشاملة word",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": []
+  },
+  {
+   "creator": "الشيخ باي بلعالم رحمه الله",
+   "downloads": 41384,
+   "identifier": "ZadSalek",
+   "language": "Arabic",
+   "title": "زاد السالك شرح أسهل المسالك",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "ZadSalek.pdf",
+     "format": "Text PDF",
+     "mo": 23.1
+    }
+   ]
+  },
+  {
+   "creator": "Yedali",
+   "downloads": 36434,
+   "identifier": "fawakeh_dewani",
+   "language": "Arabic",
+   "title": "الفواكه الدواني على رسالة ابن أبي زيد القيرواني",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "fawakeh_dewani01.pdf",
+     "format": "Image Container PDF",
+     "mo": 25.9
+    },
+    {
+     "nom": "fawakeh_dewani01_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 34.5
+    },
+    {
+     "nom": "fawakeh_dewani02.pdf",
+     "format": "Image Container PDF",
+     "mo": 23.4
+    },
+    {
+     "nom": "fawakeh_dewani02_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 31.7
+    }
+   ]
+  },
+  {
+   "downloads": 23585,
+   "identifier": "IslamSpirit-Fiqh-Malaki-PDF-01",
+   "language": "Arabic",
+   "title": "موسوعة الفقه المالكي ( بي دي اف )",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "0.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.6
+    },
+    {
+     "nom": "00_36162.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.6
+    },
+    {
+     "nom": "00_kemkkh.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.1
+    },
+    {
+     "nom": "01-1-2-3_36162.pdf",
+     "format": "Image Container PDF",
+     "mo": 23.2
+    },
+    {
+     "nom": "01_kemkkh.pdf",
+     "format": "Image Container PDF",
+     "mo": 22.8
+    },
+    {
+     "nom": "02-1-2-3_98063p.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.6
+    },
+    {
+     "nom": "02_kemkkh.pdf",
+     "format": "Image Container PDF",
+     "mo": 23.8
+    },
+    {
+     "nom": "03-1_98066.pdf",
+     "format": "Image Container PDF",
+     "mo": 7
+    },
+    {
+     "nom": "03-2_98067.pdf",
+     "format": "Image Container PDF",
+     "mo": 8.3
+    },
+    {
+     "nom": "03_kemkkh.pdf",
+     "format": "Image Container PDF",
+     "mo": 19.1
+    },
+    {
+     "nom": "04_kemkkh.pdf",
+     "format": "Image Container PDF",
+     "mo": 13.7
+    },
+    {
+     "nom": "05_kemkkh.pdf",
+     "format": "Image Container PDF",
+     "mo": 19.8
+    },
+    {
+     "nom": "06_kemkkh.pdf",
+     "format": "Image Container PDF",
+     "mo": 15.5
+    },
+    {
+     "nom": "07_kemkkh.pdf",
+     "format": "Image Container PDF",
+     "mo": 15.9
+    },
+    {
+     "nom": "08_kemkkh.pdf",
+     "format": "Image Container PDF",
+     "mo": 15.3
+    },
+    {
+     "nom": "1.pdf",
+     "format": "Image Container PDF",
+     "mo": 18.7
+    },
+    {
+     "nom": "113136.pdf",
+     "format": "Image Container PDF",
+     "mo": 3.8
+    },
+    {
+     "nom": "13268338751.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.5
+    },
+    {
+     "nom": "13268338752.pdf",
+     "format": "Image Container PDF",
+     "mo": 10.9
+    },
+    {
+     "nom": "13268338753.pdf",
+     "format": "Image Container PDF",
+     "mo": 7.4
+    },
+    {
+     "nom": "13268360451.pdf",
+     "format": "Image Container PDF",
+     "mo": 7.3
+    },
+    {
+     "nom": "13268360452.pdf",
+     "format": "Image Container PDF",
+     "mo": 9.2
+    },
+    {
+     "nom": "13268360453.pdf",
+     "format": "Image Container PDF",
+     "mo": 6.4
+    },
+    {
+     "nom": "13268379761.pdf",
+     "format": "Image Container PDF",
+     "mo": 6.9
+    },
+    {
+     "nom": "13268379762.pdf",
+     "format": "Image Container PDF",
+     "mo": 6.3
+    },
+    {
+     "nom": "13268379763.pdf",
+     "format": "Image Container PDF",
+     "mo": 8
+    },
+    {
+     "nom": "13268403651.pdf",
+     "format": "Image Container PDF",
+     "mo": 6.4
+    },
+    {
+     "nom": "13268403652.pdf",
+     "format": "Image Container PDF",
+     "mo": 8.7
+    },
+    {
+     "nom": "13268403653.pdf",
+     "format": "Image Container PDF",
+     "mo": 9.7
+    },
+    {
+     "nom": "13268703731.pdf",
+     "format": "Image Container PDF",
+     "mo": 8.3
+    },
+    {
+     "nom": "13268703732.pdf",
+     "format": "Image Container PDF",
+     "mo": 9.2
+    },
+    {
+     "nom": "13268703743.pdf",
+     "format": "Image Container PDF",
+     "mo": 8.8
+    },
+    {
+     "nom": "13268708031.pdf",
+     "format": "Image Container PDF",
+     "mo": 4.6
+    },
+    {
+     "nom": "13269163991.pdf",
+     "format": "Image Container PDF",
+     "mo": 15
+    },
+    {
+     "nom": "13269164002.pdf",
+     "format": "Image Container PDF",
+     "mo": 15.2
+    },
+    {
+     "nom": "13269814391.pdf",
+     "format": "Image Container PDF",
+     "mo": 22.8
+    },
+    {
+     "nom": "13269814402.pdf",
+     "format": "Image Container PDF",
+     "mo": 23.4
+    },
+    {
+     "nom": "13269814403.pdf",
+     "format": "Image Container PDF",
+     "mo": 19.1
+    },
+    {
+     "nom": "13270383191.pdf",
+     "format": "Image Container PDF",
+     "mo": 13.6
+    },
+    {
+     "nom": "13270383192.pdf",
+     "format": "Image Container PDF",
+     "mo": 19.8
+    },
+    {
+     "nom": "13270383193.pdf",
+     "format": "Image Container PDF",
+     "mo": 15.5
+    },
+    {
+     "nom": "13270412221.pdf",
+     "format": "Image Container PDF",
+     "mo": 15.9
+    },
+    {
+     "nom": "13270412222.pdf",
+     "format": "Image Container PDF",
+     "mo": 15.2
+    },
+    {
+     "nom": "13592011782.pdf",
+     "format": "Image Container PDF",
+     "mo": 9.4
+    },
+    {
+     "nom": "13637329381.pdf",
+     "format": "Image Container PDF",
+     "mo": 1.8
+    },
+    {
+     "nom": "13637340481.pdf",
+     "format": "Image Container PDF",
+     "mo": 44.1
+    },
+    {
+     "nom": "13637353701.pdf",
+     "format": "Image Container PDF",
+     "mo": 52.4
+    },
+    {
+     "nom": "13637580151.pdf",
+     "format": "Image Container PDF",
+     "mo": 50.7
+    },
+    {
+     "nom": "13637601481.pdf",
+     "format": "Image Container PDF",
+     "mo": 49.6
+    },
+    {
+     "nom": "13642970151.pdf",
+     "format": "Image Container PDF",
+     "mo": 21.1
+    },
+    {
+     "nom": "13642981441.pdf",
+     "format": "Image Container PDF",
+     "mo": 23.4
+    },
+    {
+     "nom": "13642988951.pdf",
+     "format": "Image Container PDF",
+     "mo": 24.6
+    },
+    {
+     "nom": "13643036211.pdf",
+     "format": "Image Container PDF",
+     "mo": 18.2
+    },
+    {
+     "nom": "13643036411.pdf",
+     "format": "Image Container PDF",
+     "mo": 24
+    },
+    {
+     "nom": "13643656481.pdf",
+     "format": "Image Container PDF",
+     "mo": 20.7
+    },
+    {
+     "nom": "13643662081.pdf",
+     "format": "Image Container PDF",
+     "mo": 22.8
+    },
+    {
+     "nom": "13643668621.pdf",
+     "format": "Image Container PDF",
+     "mo": 24.1
+    },
+    {
+     "nom": "16620.pdf",
+     "format": "Image Container PDF",
+     "mo": 17.4
+    },
+    {
+     "nom": "2.pdf",
+     "format": "Image Container PDF",
+     "mo": 19.7
+    },
+    {
+     "nom": "21537.pdf",
+     "format": "Image Container PDF",
+     "mo": 12.1
+    },
+    {
+     "nom": "27582.pdf",
+     "format": "Image Container PDF",
+     "mo": 10.6
+    },
+    {
+     "nom": "3.pdf",
+     "format": "Image Container PDF",
+     "mo": 19
+    },
+    {
+     "nom": "4.pdf",
+     "format": "Image Container PDF",
+     "mo": 23.1
+    },
+    {
+     "nom": "595.pdf",
+     "format": "Image Container PDF",
+     "mo": 22.2
+    },
+    {
+     "nom": "70297.pdf",
+     "format": "Image Container PDF",
+     "mo": 2.2
+    },
+    {
+     "nom": "87452.pdf",
+     "format": "Image Container PDF",
+     "mo": 17.9
+    },
+    {
+     "nom": "Almad5al_01.pdf",
+     "format": "Image Container PDF",
+     "mo": 6.4
+    },
+    {
+     "nom": "Almad5al_02.pdf",
+     "format": "Image Container PDF",
+     "mo": 7
+    },
+    {
+     "nom": "Almad5al_03.pdf",
+     "format": "Image Container PDF",
+     "mo": 6
+    },
+    {
+     "nom": "Almad5al_04.pdf",
+     "format": "Image Container PDF",
+     "mo": 6.4
+    },
+    {
+     "nom": "Erchad_Salek.pdf",
+     "format": "Text PDF",
+     "mo": 1.1
+    },
+    {
+     "nom": "Kafi_Fi_Fiqh_Ahel_Madina.pdf",
+     "format": "Image Container PDF",
+     "mo": 58.9
+    },
+    {
+     "nom": "Madkhal01.pdf",
+     "format": "Image Container PDF",
+     "mo": 9.1
+    },
+    {
+     "nom": "Madkhal02.pdf",
+     "format": "Image Container PDF",
+     "mo": 15.7
+    },
+    {
+     "nom": "Madkhal03.pdf",
+     "format": "Image Container PDF",
+     "mo": 11.3
+    },
+    {
+     "nom": "Modawanh_00.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.1
+    },
+    {
+     "nom": "Modawanh_01.pdf",
+     "format": "Image Container PDF",
+     "mo": 11.5
+    },
+    {
+     "nom": "Modawanh_02.pdf",
+     "format": "Image Container PDF",
+     "mo": 10
+    },
+    {
+     "nom": "Modawanh_03.pdf",
+     "format": "Image Container PDF",
+     "mo": 10.1
+    },
+    {
+     "nom": "Modawanh_04.pdf",
+     "format": "Image Container PDF",
+     "mo": 12.9
+    },
+    {
+     "nom": "Modawanh_05.pdf",
+     "format": "Image Container PDF",
+     "mo": 12.4
+    },
+    {
+     "nom": "Modawanh_06.pdf",
+     "format": "Image Container PDF",
+     "mo": 10.5
+    },
+    {
+     "nom": "Nathm_Matin_Akhdari.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.7
+    },
+    {
+     "nom": "Part1.pdf",
+     "format": "Image Container PDF",
+     "mo": 40.1
+    },
+    {
+     "nom": "Part2.pdf",
+     "format": "Image Container PDF",
+     "mo": 63.8
+    },
+    {
+     "nom": "Part3.pdf",
+     "format": "Image Container PDF",
+     "mo": 39.4
+    },
+    {
+     "nom": "Part4.pdf",
+     "format": "Image Container PDF",
+     "mo": 59.3
+    },
+    {
+     "nom": "Part5.pdf",
+     "format": "Image Container PDF",
+     "mo": 41.6
+    },
+    {
+     "nom": "Tahdib_Modaouana01.pdf",
+     "format": "Image Container PDF",
+     "mo": 8.3
+    },
+    {
+     "nom": "Tahdib_Modaouana02.pdf",
+     "format": "Image Container PDF",
+     "mo": 9
+    },
+    {
+     "nom": "Tahdib_Modaouana03.pdf",
+     "format": "Image Container PDF",
+     "mo": 9.2
+    },
+    {
+     "nom": "Tahdib_Modaouana04.pdf",
+     "format": "Image Container PDF",
+     "mo": 8.5
+    },
+    {
+     "nom": "Talkin1.pdf",
+     "format": "Image Container PDF",
+     "mo": 10
+    },
+    {
+     "nom": "Talkin2.pdf",
+     "format": "Image Container PDF",
+     "mo": 6.8
+    },
+    {
+     "nom": "addassou9i-1.pdf",
+     "format": "Image Container PDF",
+     "mo": 25.7
+    },
+    {
+     "nom": "addassou9i-2.pdf",
+     "format": "Image Container PDF",
+     "mo": 24.6
+    },
+    {
+     "nom": "addassou9i-3.pdf",
+     "format": "Image Container PDF",
+     "mo": 25.3
+    },
+    {
+     "nom": "addassou9i-4.pdf",
+     "format": "Image Container PDF",
+     "mo": 23.9
+    },
+    {
+     "nom": "bidaya_mujtahid_abadi.pdf",
+     "format": "Image Container PDF",
+     "mo": 35.6
+    },
+    {
+     "nom": "bita00.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.1
+    },
+    {
+     "nom": "bita01.pdf",
+     "format": "Image Container PDF",
+     "mo": 8.6
+    },
+    {
+     "nom": "bita02.pdf",
+     "format": "Image Container PDF",
+     "mo": 10.3
+    },
+    {
+     "nom": "bita03.pdf",
+     "format": "Image Container PDF",
+     "mo": 7.6
+    },
+    {
+     "nom": "bita04.pdf",
+     "format": "Image Container PDF",
+     "mo": 8.2
+    },
+    {
+     "nom": "bita05.pdf",
+     "format": "Image Container PDF",
+     "mo": 7.6
+    },
+    {
+     "nom": "bita06.pdf",
+     "format": "Image Container PDF",
+     "mo": 7.7
+    },
+    {
+     "nom": "bita07.pdf",
+     "format": "Image Container PDF",
+     "mo": 8.3
+    },
+    {
+     "nom": "bita08.pdf",
+     "format": "Image Container PDF",
+     "mo": 8
+    },
+    {
+     "nom": "bita09.pdf",
+     "format": "Image Container PDF",
+     "mo": 7.2
+    },
+    {
+     "nom": "bita10.pdf",
+     "format": "Image Container PDF",
+     "mo": 8.7
+    },
+    {
+     "nom": "bita11.pdf",
+     "format": "Image Container PDF",
+     "mo": 5.9
+    },
+    {
+     "nom": "bita12.pdf",
+     "format": "Image Container PDF",
+     "mo": 8.1
+    },
+    {
+     "nom": "bita13.pdf",
+     "format": "Image Container PDF",
+     "mo": 7.9
+    },
+    {
+     "nom": "bita14.pdf",
+     "format": "Image Container PDF",
+     "mo": 9.6
+    },
+    {
+     "nom": "bita15.pdf",
+     "format": "Image Container PDF",
+     "mo": 8.2
+    },
+    {
+     "nom": "bita16.pdf",
+     "format": "Image Container PDF",
+     "mo": 7.6
+    },
+    {
+     "nom": "bita17.pdf",
+     "format": "Image Container PDF",
+     "mo": 11.7
+    },
+    {
+     "nom": "bita18.pdf",
+     "format": "Image Container PDF",
+     "mo": 10.7
+    },
+    {
+     "nom": "bita19.pdf",
+     "format": "Image Container PDF",
+     "mo": 6.1
+    },
+    {
+     "nom": "bita20.pdf",
+     "format": "Image Container PDF",
+     "mo": 4.2
+    },
+    {
+     "nom": "bmnm0.pdf",
+     "format": "Image Container PDF",
+     "mo": 0
+    },
+    {
+     "nom": "bmnm1.pdf",
+     "format": "Image Container PDF",
+     "mo": 14.7
+    },
+    {
+     "nom": "bmnm2.pdf",
+     "format": "Image Container PDF",
+     "mo": 15
+    },
+    {
+     "nom": "bulght1.pdf",
+     "format": "Image Container PDF",
+     "mo": 13.3
+    },
+    {
+     "nom": "dhakhira1.pdf",
+     "format": "Image Container PDF",
+     "mo": 13.6
+    },
+    {
+     "nom": "dhakhira10.pdf",
+     "format": "Image Container PDF",
+     "mo": 12.5
+    },
+    {
+     "nom": "dhakhira3.pdf",
+     "format": "Image Container PDF",
+     "mo": 11.8
+    },
+    {
+     "nom": "dhakhira4.pdf",
+     "format": "Image Container PDF",
+     "mo": 14.2
+    },
+    {
+     "nom": "dhakhira5.pdf",
+     "format": "Image Container PDF",
+     "mo": 11.8
+    },
+    {
+     "nom": "dhakhira6.pdf",
+     "format": "Image Container PDF",
+     "mo": 13.8
+    },
+    {
+     "nom": "dhakhira7.pdf",
+     "format": "Image Container PDF",
+     "mo": 13.2
+    },
+    {
+     "nom": "dhakhira8.pdf",
+     "format": "Image Container PDF",
+     "mo": 12.3
+    },
+    {
+     "nom": "dhakhira9.pdf",
+     "format": "Image Container PDF",
+     "mo": 13.2
+    },
+    {
+     "nom": "elmokadimat1.pdf",
+     "format": "Text PDF",
+     "mo": 16.7
+    },
+    {
+     "nom": "elmokadimat2.pdf",
+     "format": "Text PDF",
+     "mo": 13.6
+    },
+    {
+     "nom": "elmokadimat3.pdf",
+     "format": "Text PDF",
+     "mo": 12.4
+    },
+    {
+     "nom": "fawakeh_dewani01.pdf",
+     "format": "Image Container PDF",
+     "mo": 25.9
+    },
+    {
+     "nom": "fawakeh_dewani02.pdf",
+     "format": "Image Container PDF",
+     "mo": 23.4
+    },
+    {
+     "nom": "jamii_ummahat.pdf",
+     "format": "Image Container PDF",
+     "mo": 15.3
+    },
+    {
+     "nom": "kawkab_zahri.pdf",
+     "format": "Image Container PDF",
+     "mo": 1.2
+    },
+    {
+     "nom": "kgzfm.pdf",
+     "format": "Image Container PDF",
+     "mo": 3.3
+    },
+    {
+     "nom": "kifaya_talib_rabani_01.pdf",
+     "format": "Image Container PDF",
+     "mo": 18.3
+    },
+    {
+     "nom": "kifaya_talib_rabani_02.pdf",
+     "format": "Image Container PDF",
+     "mo": 18.5
+    },
+    {
+     "nom": "majalis_ibnKassem.pdf",
+     "format": "Text PDF",
+     "mo": 4.5
+    },
+    {
+     "nom": "mkhtsr-abd-alrhmn.pdf",
+     "format": "Text PDF",
+     "mo": 0.1
+    },
+    {
+     "nom": "mtnashmawiea.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.9
+    },
+    {
+     "nom": "xx005.pdf",
+     "format": "Image Container PDF",
+     "mo": 5
+    },
+    {
+     "nom": "zakhira00.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.2
+    },
+    {
+     "nom": "zakhira01.pdf",
+     "format": "Image Container PDF",
+     "mo": 6.6
+    },
+    {
+     "nom": "zakhira02.pdf",
+     "format": "Image Container PDF",
+     "mo": 8.7
+    },
+    {
+     "nom": "zakhira03.pdf",
+     "format": "Image Container PDF",
+     "mo": 8.1
+    },
+    {
+     "nom": "zakhira04.pdf",
+     "format": "Image Container PDF",
+     "mo": 7.6
+    },
+    {
+     "nom": "zakhira05.pdf",
+     "format": "Image Container PDF",
+     "mo": 9.1
+    },
+    {
+     "nom": "zakhira06.pdf",
+     "format": "Image Container PDF",
+     "mo": 6
+    },
+    {
+     "nom": "zakhira07.pdf",
+     "format": "Image Container PDF",
+     "mo": 6.8
+    },
+    {
+     "nom": "zakhira08.pdf",
+     "format": "Image Container PDF",
+     "mo": 5.8
+    },
+    {
+     "nom": "zakhira09.pdf",
+     "format": "Image Container PDF",
+     "mo": 5.4
+    },
+    {
+     "nom": "zakhira10.pdf",
+     "format": "Image Container PDF",
+     "mo": 7
+    },
+    {
+     "nom": "zakhira11.pdf",
+     "format": "Image Container PDF",
+     "mo": 6.4
+    },
+    {
+     "nom": "zakhira12.pdf",
+     "format": "Image Container PDF",
+     "mo": 7
+    },
+    {
+     "nom": "zakhira13.pdf",
+     "format": "Image Container PDF",
+     "mo": 5.8
+    },
+    {
+     "nom": "zakhira14.pdf",
+     "format": "Image Container PDF",
+     "mo": 3.7
+    }
+   ]
+  },
+  {
+   "creator": "عبد الله بن الحاج حماه الله القلاوي المالكي",
+   "downloads": 20425,
+   "identifier": "NazmR",
+   "language": "Arabic",
+   "title": "نظم رسالة ابن أبي زيد القيرواني",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "NazmR.pdf",
+     "format": "Image Container PDF",
+     "mo": 1.8
+    },
+    {
+     "nom": "NazmR_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 3.4
+    }
+   ]
+  },
+  {
+   "creator": "محمد أحمد الداه الشنقيطي",
+   "downloads": 16743,
+   "identifier": "FathRabani",
+   "language": "Arabic",
+   "title": "الفتح الرباني شرح على نظم رسالة ابن أبي زيد القيرواني",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "FathRabani.pdf",
+     "format": "Text PDF",
+     "mo": 18.3
+    }
+   ]
+  },
+  {
+   "creator": "الشيخ أحمد زروق",
+   "downloads": 12394,
+   "identifier": "Zarouk",
+   "language": "Arabic",
+   "title": "شرح زروق على متن الرسالة",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "Zarouk1.pdf",
+     "format": "Image Container PDF",
+     "mo": 31.8
+    },
+    {
+     "nom": "Zarouk1_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 42.2
+    },
+    {
+     "nom": "Zarouk2.pdf",
+     "format": "Image Container PDF",
+     "mo": 34.5
+    },
+    {
+     "nom": "Zarouk2_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 45.1
+    }
+   ]
+  },
+  {
+   "creator": "القاضي عبد الوهاب بن علي البغدادي",
+   "downloads": 11687,
+   "identifier": "CharhRissala",
+   "language": "ara",
+   "title": "شرح الرسالة للقاضي عبد الوهاب بن علي البغدادي",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "CharhRissala_01.pdf",
+     "format": "Image Container PDF",
+     "mo": 8.1
+    },
+    {
+     "nom": "CharhRissala_01_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 27.9
+    },
+    {
+     "nom": "CharhRissala_02.pdf",
+     "format": "Image Container PDF",
+     "mo": 5.8
+    },
+    {
+     "nom": "CharhRissala_02_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 22.8
+    }
+   ]
+  },
+  {
+   "creator": "عثمان بن عمر بن سداق بن عمر بن الأمين البونسي الرحموني",
+   "downloads": 11198,
+   "identifier": "Mo3inRissala",
+   "language": "Arabic",
+   "title": "معين التلاميذ على قراءة الرسالة",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "Mo3inRissala.pdf",
+     "format": "Image Container PDF",
+     "mo": 55.2
+    },
+    {
+     "nom": "Mo3inRissala_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 37.2
+    }
+   ]
+  },
+  {
+   "downloads": 10647,
+   "identifier": "la-risala-ibn-abi-zayd-al-qayrawani",
+   "language": "fre",
+   "title": "La Risâla - Ibn Abi Zayd Al-Qayrawani",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "La risâla - Ibn Abi Zayd Al-Qayrawani.pdf",
+     "format": "Image Container PDF",
+     "mo": 62.7
+    },
+    {
+     "nom": "La risâla - Ibn Abi Zayd Al-Qayrawani_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 14.5
+    }
+   ]
+  },
+  {
+   "creator": "عبد الله معصر",
+   "downloads": 10390,
+   "identifier": "MostalahatM",
+   "language": "Arabic",
+   "title": "تقريب معجم مصطلحات الفقه المالكي",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "Mostalahat_M.pdf",
+     "format": "Image Container PDF",
+     "mo": 3.2
+    },
+    {
+     "nom": "Mostalahat_M_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 5.6
+    }
+   ]
+  },
+  {
+   "creator": "الشيخ الأمانه ولد إبراهيم",
+   "downloads": 10263,
+   "identifier": "FathMajid",
+   "language": "ara",
+   "title": "فتح المجيد شرح على نظم رسالة ابن أبي زيد القيرواني",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "FathMajid_01.pdf",
+     "format": "Image Container PDF",
+     "mo": 5.7
+    },
+    {
+     "nom": "FathMajid_01_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 9.6
+    },
+    {
+     "nom": "FathMajid_02.pdf",
+     "format": "Image Container PDF",
+     "mo": 10.1
+    },
+    {
+     "nom": "FathMajid_02_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 9.2
+    }
+   ]
+  },
+  {
+   "downloads": 9380,
+   "identifier": "20240618_20240618_1057",
+   "language": "Arabic",
+   "title": "التحرير والتحبير في شرح رسالة ابن أبي زيد القيرواني الملقب بمالك الصغير (1-6)",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "التحرير والتحبير في شرح رسالة ابن أبي زيد القيرواني الملقب بمالك الصغير١.pdf",
+     "format": "Image Container PDF",
+     "mo": 17.5
+    },
+    {
+     "nom": "التحرير والتحبير في شرح رسالة ابن أبي زيد القيرواني الملقب بمالك الصغير١_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 31.9
+    },
+    {
+     "nom": "التحرير والتحبير في شرح رسالة ابن أبي زيد القيرواني الملقب بمالك الصغير٢.pdf",
+     "format": "Image Container PDF",
+     "mo": 11.2
+    },
+    {
+     "nom": "التحرير والتحبير في شرح رسالة ابن أبي زيد القيرواني الملقب بمالك الصغير٢_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 27.6
+    },
+    {
+     "nom": "التحرير والتحبير في شرح رسالة ابن أبي زيد القيرواني الملقب بمالك الصغير٣.pdf",
+     "format": "Image Container PDF",
+     "mo": 11.7
+    },
+    {
+     "nom": "التحرير والتحبير في شرح رسالة ابن أبي زيد القيرواني الملقب بمالك الصغير٣_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 28.6
+    },
+    {
+     "nom": "التحرير والتحبير في شرح رسالة ابن أبي زيد القيرواني الملقب بمالك الصغير٤.pdf",
+     "format": "Image Container PDF",
+     "mo": 12
+    },
+    {
+     "nom": "التحرير والتحبير في شرح رسالة ابن أبي زيد القيرواني الملقب بمالك الصغير٤_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 29.6
+    },
+    {
+     "nom": "التحرير والتحبير في شرح رسالة ابن أبي زيد القيرواني الملقب بمالك الصغير٥.pdf",
+     "format": "Image Container PDF",
+     "mo": 11.9
+    },
+    {
+     "nom": "التحرير والتحبير في شرح رسالة ابن أبي زيد القيرواني الملقب بمالك الصغير٥_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 29.1
+    },
+    {
+     "nom": "التحرير والتحبير في شرح رسالة ابن أبي زيد القيرواني الملقب بمالك الصغير٦.pdf",
+     "format": "Image Container PDF",
+     "mo": 12.8
+    },
+    {
+     "nom": "التحرير والتحبير في شرح رسالة ابن أبي زيد القيرواني الملقب بمالك الصغير٦_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 31.8
+    }
+   ]
+  },
+  {
+   "creator": "العلامة يحي بن محمد بن محمد الحطّاب الرعيني المالكي",
+   "downloads": 9365,
+   "identifier": "HachietHatab",
+   "language": "ara",
+   "title": "حاشية الحطّاب على رسالة ابن أبي زيد القيرواني",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "HachietHatab.pdf",
+     "format": "Image Container PDF",
+     "mo": 11.7
+    },
+    {
+     "nom": "HachietHatab_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 21.7
+    },
+    {
+     "nom": "HachietRisala.pdf",
+     "format": "Text PDF",
+     "mo": 4.5
+    }
+   ]
+  },
+  {
+   "creator": "المبروك زيد الخير",
+   "downloads": 9141,
+   "identifier": "AlfiaMalikiaa",
+   "language": "Arabic",
+   "title": "الألفية الفقهية على مذهب السادة المالكية",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "AlfiaMalikia.pdf",
+     "format": "Image Container PDF",
+     "mo": 10.1
+    },
+    {
+     "nom": "AlfiaMalikia_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 4.4
+    }
+   ]
+  },
+  {
+   "creator": "الدكتور حمزة أبو فارس",
+   "downloads": 9043,
+   "identifier": "ManhajKadi",
+   "language": "ara",
+   "title": "القاضي عبد الوهاب البغدادي ومنهجه في شرح رسالة ابن أبي زيد القيرواني",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "ManhajKadi.pdf",
+     "format": "Image Container PDF",
+     "mo": 9.8
+    },
+    {
+     "nom": "ManhajKadi_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 31.7
+    }
+   ]
+  },
+  {
+   "downloads": 8916,
+   "identifier": "0001Htm48_201901",
+   "language": "Arabic",
+   "title": "كتب صيغة ويب اتش تي ام من المكتبة الشاملة 6538 كتاب بصيغة htm",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": []
+  },
+  {
+   "creator": "Yedali",
+   "downloads": 7835,
+   "identifier": "Kivayat_talib",
+   "language": "Arabic",
+   "title": "كفاية الطالب الرباني على رسالة إبن أبي زيد القيرواني",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "Kivayat_talib01.pdf",
+     "format": "Image Container PDF",
+     "mo": 17.9
+    },
+    {
+     "nom": "Kivayat_talib01_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 17.7
+    },
+    {
+     "nom": "Kivayat_talib02.pdf",
+     "format": "Image Container PDF",
+     "mo": 18.3
+    },
+    {
+     "nom": "Kivayat_talib02_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 19
+    },
+    {
+     "nom": "Kivayat_talib03.pdf",
+     "format": "Image Container PDF",
+     "mo": 17
+    },
+    {
+     "nom": "Kivayat_talib03_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 16.7
+    },
+    {
+     "nom": "Kivayat_talib04.pdf",
+     "format": "Image Container PDF",
+     "mo": 17.1
+    },
+    {
+     "nom": "Kivayat_talib04_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 18.9
+    }
+   ]
+  },
+  {
+   "creator": "Shaykh Ibn abi zayd",
+   "downloads": 7243,
+   "identifier": "risala_ibn_abi_zayd_201603",
+   "language": "eng",
+   "title": "risala of ibn abi zayd",
+   "year": 2016,
+   "droits": "",
+   "editeur": "",
+   "date": "2016-03-05",
+   "pdfs": [
+    {
+     "nom": "risala_ibn_abi_zayd.pdf",
+     "format": "Text PDF",
+     "mo": 3.3
+    }
+   ]
+  },
+  {
+   "creator": "المبروك زيد الخير",
+   "downloads": 6730,
+   "identifier": "Emanthoma_Sounia",
+   "language": "Arabic",
+   "title": "الألفية الفقهية على مذهب السادة المالكية",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "Emanthoma_Sounia.pdf",
+     "format": "Image Container PDF",
+     "mo": 10.1
+    },
+    {
+     "nom": "Emanthoma_Sounia_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 2.7
+    }
+   ]
+  },
+  {
+   "creator": "Yedali",
+   "downloads": 6323,
+   "identifier": "RissalatIbnAbuZeid",
+   "language": "Arabic",
+   "title": "رسالة ابن أبي زيد القيرواني",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "33-Rissala_Idah.pdf",
+     "format": "Image Container PDF",
+     "mo": 3.8
+    },
+    {
+     "nom": "33-Rissala_Idah_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 5.8
+    }
+   ]
+  },
+  {
+   "creator": "Yedali",
+   "downloads": 6100,
+   "identifier": "ThamruDani",
+   "language": "Arabic",
+   "title": "الثمر الداني شرح رسالة ابن أبي زيد القيرواني",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "32-ThamruDani.pdf",
+     "format": "Image Container PDF",
+     "mo": 21
+    },
+    {
+     "nom": "32-ThamruDani_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 18.9
+    }
+   ]
+  },
+  {
+   "creator": "عثمان بن عمر بن سداق بن عمر بن الأمين البونسي الرحموني",
+   "downloads": 5956,
+   "identifier": "Mo3inDirassa",
+   "language": "Arabic",
+   "title": "معين التلاميذ على قراءة الرسالة",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "Mo3inDirassa.pdf",
+     "format": "Image Container PDF",
+     "mo": 11.3
+    },
+    {
+     "nom": "Mo3inDirassa_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 13.3
+    }
+   ]
+  },
+  {
+   "creator": "قاسم بن عيسى بن ناجي التنوخي القيرواني",
+   "downloads": 5836,
+   "identifier": "Tanoukhi",
+   "language": "Arabic",
+   "title": "شرح ابن ناجي التنوخي على متن الرسالة",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "Tanoukhi_01.pdf",
+     "format": "Image Container PDF",
+     "mo": 9
+    },
+    {
+     "nom": "Tanoukhi_01_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 34.7
+    },
+    {
+     "nom": "Tanoukhi_02.pdf",
+     "format": "Image Container PDF",
+     "mo": 9.3
+    },
+    {
+     "nom": "Tanoukhi_02_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 39.2
+    }
+   ]
+  },
+  {
+   "creator": "Ibn Abi Zayd",
+   "downloads": 5090,
+   "identifier": "risala_ibn_abi_zayd",
+   "language": "eng",
+   "title": "the risala of Ibn Abi Zayd Al Maliki",
+   "year": 2016,
+   "droits": "",
+   "editeur": "",
+   "date": "2016-03-05",
+   "pdfs": [
+    {
+     "nom": "risala_ibn_abi_zayd.pdf",
+     "format": "Text PDF",
+     "mo": 3.3
+    }
+   ]
+  },
+  {
+   "creator": "Yedali",
+   "downloads": 4902,
+   "identifier": "MassalikDilala",
+   "language": "Arabic",
+   "title": "مسالك الدلالة في شرح مسائل الرسالة",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "59-massalik_dalala.pdf",
+     "format": "Image Container PDF",
+     "mo": 8.7
+    },
+    {
+     "nom": "59-massalik_dalala_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 16.8
+    }
+   ]
+  },
+  {
+   "creator": "الشيخ أحمد زروق",
+   "downloads": 4415,
+   "identifier": "ChrhZerrouk",
+   "language": "Arabic",
+   "title": "شرح زروق على متن الرسالة",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "ChrhZerrouk.pdf",
+     "format": "Image Container PDF",
+     "mo": 23.9
+    },
+    {
+     "nom": "ChrhZerrouk_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 89.3
+    }
+   ]
+  },
+  {
+   "creator": "Yedali",
+   "downloads": 3887,
+   "identifier": "SharhZaruqResala",
+   "language": "Arabic",
+   "title": "شرح الرسالة لابن ابي ازيد القيرواني",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "rissala-zrou9-1.pdf",
+     "format": "Text PDF",
+     "mo": 24.5
+    },
+    {
+     "nom": "rissala-zrou9-2.pdf",
+     "format": "Text PDF",
+     "mo": 26.6
+    }
+   ]
+  },
+  {
+   "creator": "Yedali",
+   "downloads": 3217,
+   "identifier": "KifayatuTalibRabani",
+   "language": "Arabic",
+   "title": "كفاية الطالب الرباني على رسالة إبن أبي زيد القيرواني",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "Kifaya_Adoui1.pdf",
+     "format": "Image Container PDF",
+     "mo": 14
+    },
+    {
+     "nom": "Kifaya_Adoui1_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 17
+    },
+    {
+     "nom": "Kifaya_Adoui2.pdf",
+     "format": "Image Container PDF",
+     "mo": 14.1
+    },
+    {
+     "nom": "Kifaya_Adoui2_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 17
+    },
+    {
+     "nom": "Kifaya_Adoui3.pdf",
+     "format": "Image Container PDF",
+     "mo": 17
+    },
+    {
+     "nom": "Kifaya_Adoui3_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 16.4
+    },
+    {
+     "nom": "Kifaya_Adoui4.pdf",
+     "format": "Image Container PDF",
+     "mo": 13.2
+    },
+    {
+     "nom": "Kifaya_Adoui4_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 15.9
+    }
+   ]
+  },
+  {
+   "downloads": 2572,
+   "identifier": "20250926_20250926_0621",
+   "title": "التحرير والتحبير في شرح رسالة ابن أبي زيد القيرواني الملقب بمالك الصغير١",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "التحرير والتحبير في شرح رسالة ابن أبي زيد القيرواني الملقب بمالك الصغير١.pdf",
+     "format": "Image Container PDF",
+     "mo": 13.4
+    },
+    {
+     "nom": "التحرير والتحبير في شرح رسالة ابن أبي زيد القيرواني الملقب بمالك الصغير١_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 30.5
+    }
+   ]
+  },
+  {
+   "downloads": 2499,
+   "identifier": "50475869975498756000",
+   "language": "Arabic",
+   "title": "كتب صيغة وورد 6538 كتاب إسلامي كل ألف برابط",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": []
+  },
+  {
+   "downloads": 2447,
+   "identifier": "20201225_20201225_1756",
+   "language": "Arabic",
+   "title": "عقيدة السلف مقدمة ابن أبي زيد القيرواني لكتابه الرسالة",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "عقيدة السلف مقدمة ابن أبي زيد القيرواني لكتابه الرسالة.pdf",
+     "format": "Image Container PDF",
+     "mo": 3.6
+    },
+    {
+     "nom": "عقيدة السلف مقدمة ابن أبي زيد القيرواني لكتابه الرسالة_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 4.1
+    }
+   ]
+  },
+  {
+   "downloads": 2435,
+   "identifier": "alfirdwsiy2014201810",
+   "language": "Arabic",
+   "title": "المكتبه الشامله 2812 كتاب كتب بصيغة تكست داخل ملف مضغوط txt",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": []
+  },
+  {
+   "creator": "Yedali",
+   "downloads": 2396,
+   "identifier": "TahrirMaghala",
+   "language": "Arabic",
+   "title": "تحرير المقالة شرح نظم نظائر الرسالة",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "38-tahrirolmakala.pdf",
+     "format": "Image Container PDF",
+     "mo": 1.9
+    },
+    {
+     "nom": "38-tahrirolmakala_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 2.2
+    }
+   ]
+  },
+  {
+   "creator": "Yedali",
+   "downloads": 2163,
+   "identifier": "FathRabaniNathmRissala",
+   "language": "Arabic",
+   "title": "الفتح الرباني شرح نظم رسالة ابن أبي زيد القيرواني",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "Fath_Rabani_Nathm_Rissala.pdf",
+     "format": "Text PDF",
+     "mo": 19.7
+    }
+   ]
+  },
+  {
+   "downloads": 1991,
+   "identifier": "500160066666666333330",
+   "language": "Arabic",
+   "title": "موسوعة الكتب 6538 كتاب اسلامي بصيغة ورد وورد word",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": []
+  },
+  {
+   "creator": "المحكمة الإسلامية",
+   "downloads": 1953,
+   "identifier": "01-shreqaqawa",
+   "language": "ara",
+   "title": "شرح القاضي عبد الوهاب على رسالة ابن أبي زيد",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "01_shreqaqawa.pdf",
+     "format": "Image Container PDF",
+     "mo": 10.3
+    },
+    {
+     "nom": "01_shreqaqawa_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 19.7
+    },
+    {
+     "nom": "02_shreqaqawa.pdf",
+     "format": "Image Container PDF",
+     "mo": 3.8
+    },
+    {
+     "nom": "02_shreqaqawa_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 7.4
+    },
+    {
+     "nom": "03_shreqaqawa.pdf",
+     "format": "Image Container PDF",
+     "mo": 6.1
+    },
+    {
+     "nom": "03_shreqaqawa_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 11.9
+    },
+    {
+     "nom": "04_shreqaqawa.pdf",
+     "format": "Image Container PDF",
+     "mo": 6.3
+    },
+    {
+     "nom": "04_shreqaqawa_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 12.3
+    },
+    {
+     "nom": "05_shreqaqawa.pdf",
+     "format": "Image Container PDF",
+     "mo": 7
+    },
+    {
+     "nom": "05_shreqaqawa_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 14.3
+    },
+    {
+     "nom": "06_shreqaqawa.pdf",
+     "format": "Image Container PDF",
+     "mo": 8.1
+    },
+    {
+     "nom": "06_shreqaqawa_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 16.2
+    },
+    {
+     "nom": "07_shreqaqawa.pdf",
+     "format": "Image Container PDF",
+     "mo": 8.2
+    },
+    {
+     "nom": "07_shreqaqawa_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 16.4
+    },
+    {
+     "nom": "08_shreqaqawa.pdf",
+     "format": "Image Container PDF",
+     "mo": 7.8
+    },
+    {
+     "nom": "08_shreqaqawa_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 15.8
+    },
+    {
+     "nom": "09_shreqaqawa.pdf",
+     "format": "Image Container PDF",
+     "mo": 7.4
+    },
+    {
+     "nom": "09_shreqaqawa_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 14.8
+    },
+    {
+     "nom": "10_shreqaqawa.pdf",
+     "format": "Image Container PDF",
+     "mo": 8.1
+    },
+    {
+     "nom": "10_shreqaqawa_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 16.3
+    },
+    {
+     "nom": "11_shreqaqawa.pdf",
+     "format": "Image Container PDF",
+     "mo": 5.4
+    },
+    {
+     "nom": "11_shreqaqawa_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 12.7
+    },
+    {
+     "nom": "12_shreqaqawa.pdf",
+     "format": "Image Container PDF",
+     "mo": 5.7
+    },
+    {
+     "nom": "12_shreqaqawa_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 13.4
+    }
+   ]
+  },
+  {
+   "creator": "المبروك زيد الخير الجزائري المالكي",
+   "downloads": 1892,
+   "identifier": "AlfiaMalikia",
+   "language": "Arabic",
+   "title": "الألفية الفقهية على مذهب السادة المالكية",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "AlfiaMalikia.pdf",
+     "format": "Image Container PDF",
+     "mo": 10.1
+    },
+    {
+     "nom": "AlfiaMalikia_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 6.8
+    }
+   ]
+  },
+  {
+   "downloads": 1802,
+   "identifier": "1285_20241209",
+   "language": "ara",
+   "title": "نظم مقدمة رسالة ابن أبي زيد القيرواني للشيخ أحمد بن مشرف الأحسائي المالكي المتوفى سنة 1285 هـ",
+   "year": 2024,
+   "droits": "",
+   "editeur": "",
+   "date": "2024-12-09",
+   "pdfs": [
+    {
+     "nom": "نظم مقدمة رسالة ابن أبي زيد القيرواني للشيخ أحمد بن مشرف الأحسائي المالكي المتوفى سنة 1285 هـ.pdf",
+     "format": "Text PDF",
+     "mo": 2.9
+    }
+   ]
+  }
+ ]
+}

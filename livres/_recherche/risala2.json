@@ -1,0 +1,1010 @@
+{
+ "requete": "title:(الرسالة) AND (القيرواني OR \"ابن أبي زيد\")",
+ "date": "2026-11-14T02:56:28.530Z",
+ "resultats": [
+  {
+   "downloads": 19443,
+   "identifier": "168290",
+   "language": "Arabic",
+   "title": "المغربية في شرح العقيدة القيروانية «مقدمة الرسالة لابن أبي زيد القيرواني المغربي ت 386 هـ»",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "168290.pdf",
+     "format": "Image Container PDF",
+     "mo": 6.7
+    },
+    {
+     "nom": "168290_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 26
+    }
+   ]
+  },
+  {
+   "creator": "أبو سليمان المختار بن العربي مؤمن الجزائري ثم الشنقيطي",
+   "downloads": 19262,
+   "identifier": "Manhal_Zoulala",
+   "language": "Arabic",
+   "title": "المناهل الزلالة في شرح وأدلة الرسالة",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "Manhal_01.pdf",
+     "format": "Image Container PDF",
+     "mo": 8.7
+    },
+    {
+     "nom": "Manhal_01_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 12
+    },
+    {
+     "nom": "Manhal_02.pdf",
+     "format": "Image Container PDF",
+     "mo": 13.8
+    },
+    {
+     "nom": "Manhal_02_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 25.6
+    },
+    {
+     "nom": "Manhal_03.pdf",
+     "format": "Image Container PDF",
+     "mo": 14.4
+    },
+    {
+     "nom": "Manhal_03_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 26.7
+    },
+    {
+     "nom": "Manhal_04.pdf",
+     "format": "Image Container PDF",
+     "mo": 12.7
+    },
+    {
+     "nom": "Manhal_04_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 17.5
+    }
+   ]
+  },
+  {
+   "downloads": 16221,
+   "identifier": "akidakairawani",
+   "language": "Arabic",
+   "title": "ابن أبي زيد القيرواني وعقيدته في الرسالة والجامع",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "ابن أبي زيد القيرواني وعقيدته في الرسالة والجامع.pdf",
+     "format": "Text PDF",
+     "mo": 1
+    }
+   ]
+  },
+  {
+   "creator": "الفقه المالكي",
+   "downloads": 12683,
+   "identifier": "feqhmaliki74",
+   "language": "Arabic",
+   "title": "متن الرسالة لابن أبي زيد القيرواني",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "feqhmaliki74.pdf",
+     "format": "Image Container PDF",
+     "mo": 2
+    },
+    {
+     "nom": "feqhmaliki74_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 3.6
+    }
+   ]
+  },
+  {
+   "creator": "الشيخ أحمد زروق",
+   "downloads": 12394,
+   "identifier": "Zarouk",
+   "language": "Arabic",
+   "title": "شرح زروق على متن الرسالة",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "Zarouk1.pdf",
+     "format": "Image Container PDF",
+     "mo": 31.8
+    },
+    {
+     "nom": "Zarouk1_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 42.2
+    },
+    {
+     "nom": "Zarouk2.pdf",
+     "format": "Image Container PDF",
+     "mo": 34.5
+    },
+    {
+     "nom": "Zarouk2_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 45.1
+    }
+   ]
+  },
+  {
+   "creator": "القاضي عبد الوهاب بن علي البغدادي",
+   "downloads": 11687,
+   "identifier": "CharhRissala",
+   "language": "ara",
+   "title": "شرح الرسالة للقاضي عبد الوهاب بن علي البغدادي",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "CharhRissala_01.pdf",
+     "format": "Image Container PDF",
+     "mo": 8.1
+    },
+    {
+     "nom": "CharhRissala_01_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 27.9
+    },
+    {
+     "nom": "CharhRissala_02.pdf",
+     "format": "Image Container PDF",
+     "mo": 5.8
+    },
+    {
+     "nom": "CharhRissala_02_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 22.8
+    }
+   ]
+  },
+  {
+   "creator": "عثمان بن عمر بن سداق بن عمر بن الأمين البونسي الرحموني",
+   "downloads": 11198,
+   "identifier": "Mo3inRissala",
+   "language": "Arabic",
+   "title": "معين التلاميذ على قراءة الرسالة",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "Mo3inRissala.pdf",
+     "format": "Image Container PDF",
+     "mo": 55.2
+    },
+    {
+     "nom": "Mo3inRissala_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 37.2
+    }
+   ]
+  },
+  {
+   "creator": "أبو الحسن علي بن محمد بن خلف المعافري القابسي القيرواني",
+   "downloads": 10369,
+   "identifier": "Kabissi",
+   "language": "Arabic",
+   "title": "الرسالة المفصلة لأحوال المتعلمين وأحكام المعلمين والمتعلمين",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "Kabissi.pdf",
+     "format": "Image Container PDF",
+     "mo": 9.8
+    },
+    {
+     "nom": "Kabissi_AR.pdf",
+     "format": "Image Container PDF",
+     "mo": 4.3
+    },
+    {
+     "nom": "Kabissi_AR_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 5.4
+    },
+    {
+     "nom": "Kabissi_FR.pdf",
+     "format": "Image Container PDF",
+     "mo": 4.9
+    },
+    {
+     "nom": "Kabissi_FR_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 3.8
+    },
+    {
+     "nom": "Kabissi_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 9.2
+    }
+   ]
+  },
+  {
+   "creator": "محمد بن إبراهيم بن خليل التتائي المصري المالكي",
+   "downloads": 8767,
+   "identifier": "tanwir",
+   "language": "Arabic",
+   "title": "تنوير المقالة في حل ألفاظ الرسالة",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "tanwirmaqala_01.pdf",
+     "format": "Image Container PDF",
+     "mo": 11
+    },
+    {
+     "nom": "tanwirmaqala_01_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 21.4
+    },
+    {
+     "nom": "tanwirmaqala_02.pdf",
+     "format": "Image Container PDF",
+     "mo": 9.4
+    },
+    {
+     "nom": "tanwirmaqala_02_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 36.4
+    },
+    {
+     "nom": "tanwirmaqala_03.pdf",
+     "format": "Image Container PDF",
+     "mo": 10.6
+    },
+    {
+     "nom": "tanwirmaqala_03_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 40.7
+    }
+   ]
+  },
+  {
+   "creator": "عثمان بن عمر بن سداق بن عمر بن الأمين البونسي الرحموني",
+   "downloads": 5956,
+   "identifier": "Mo3inDirassa",
+   "language": "Arabic",
+   "title": "معين التلاميذ على قراءة الرسالة",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "Mo3inDirassa.pdf",
+     "format": "Image Container PDF",
+     "mo": 11.3
+    },
+    {
+     "nom": "Mo3inDirassa_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 13.3
+    }
+   ]
+  },
+  {
+   "creator": "قاسم بن عيسى بن ناجي التنوخي القيرواني",
+   "downloads": 5836,
+   "identifier": "Tanoukhi",
+   "language": "Arabic",
+   "title": "شرح ابن ناجي التنوخي على متن الرسالة",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "Tanoukhi_01.pdf",
+     "format": "Image Container PDF",
+     "mo": 9
+    },
+    {
+     "nom": "Tanoukhi_01_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 34.7
+    },
+    {
+     "nom": "Tanoukhi_02.pdf",
+     "format": "Image Container PDF",
+     "mo": 9.3
+    },
+    {
+     "nom": "Tanoukhi_02_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 39.2
+    }
+   ]
+  },
+  {
+   "creator": "Yedali",
+   "downloads": 4902,
+   "identifier": "MassalikDilala",
+   "language": "Arabic",
+   "title": "مسالك الدلالة في شرح مسائل الرسالة",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "59-massalik_dalala.pdf",
+     "format": "Image Container PDF",
+     "mo": 8.7
+    },
+    {
+     "nom": "59-massalik_dalala_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 16.8
+    }
+   ]
+  },
+  {
+   "creator": "الشيخ أحمد زروق",
+   "downloads": 4415,
+   "identifier": "ChrhZerrouk",
+   "language": "Arabic",
+   "title": "شرح زروق على متن الرسالة",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "ChrhZerrouk.pdf",
+     "format": "Image Container PDF",
+     "mo": 23.9
+    },
+    {
+     "nom": "ChrhZerrouk_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 89.3
+    }
+   ]
+  },
+  {
+   "creator": "عبد الله بن الحاج حماه الله القلاوي المالكي",
+   "downloads": 4145,
+   "identifier": "Taoudih",
+   "language": "Arabic",
+   "title": "توضيح المقالة على نظم الرسالة",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "Taoudih.pdf",
+     "format": "Image Container PDF",
+     "mo": 6.6
+    },
+    {
+     "nom": "Taoudih_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 12.2
+    }
+   ]
+  },
+  {
+   "creator": "Yedali",
+   "downloads": 3887,
+   "identifier": "SharhZaruqResala",
+   "language": "Arabic",
+   "title": "شرح الرسالة لابن ابي ازيد القيرواني",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "rissala-zrou9-1.pdf",
+     "format": "Text PDF",
+     "mo": 24.5
+    },
+    {
+     "nom": "rissala-zrou9-2.pdf",
+     "format": "Text PDF",
+     "mo": 26.6
+    }
+   ]
+  },
+  {
+   "downloads": 2447,
+   "identifier": "20201225_20201225_1756",
+   "language": "Arabic",
+   "title": "عقيدة السلف مقدمة ابن أبي زيد القيرواني لكتابه الرسالة",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "عقيدة السلف مقدمة ابن أبي زيد القيرواني لكتابه الرسالة.pdf",
+     "format": "Image Container PDF",
+     "mo": 3.6
+    },
+    {
+     "nom": "عقيدة السلف مقدمة ابن أبي زيد القيرواني لكتابه الرسالة_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 4.1
+    }
+   ]
+  },
+  {
+   "creator": "Yedali",
+   "downloads": 2396,
+   "identifier": "TahrirMaghala",
+   "language": "Arabic",
+   "title": "تحرير المقالة شرح نظم نظائر الرسالة",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "38-tahrirolmakala.pdf",
+     "format": "Image Container PDF",
+     "mo": 1.9
+    },
+    {
+     "nom": "38-tahrirolmakala_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 2.2
+    }
+   ]
+  },
+  {
+   "creator": "Yedali",
+   "downloads": 1109,
+   "identifier": "RissalaFiqhya",
+   "language": "Arabic",
+   "title": "الرسالة الفقهية",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "34-Elrissala_Fiqhia.pdf",
+     "format": "Image Container PDF",
+     "mo": 2
+    },
+    {
+     "nom": "34-Elrissala_Fiqhia_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 2.7
+    }
+   ]
+  },
+  {
+   "downloads": 1071,
+   "identifier": "1_20200409_20200409_2255",
+   "language": "Arabic",
+   "title": "شرح الرسالة للقاضي عبد الوهاب البغدادي",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "شرح الرسالة - ج 1 صلاة العيدين - الزكاة.pdf",
+     "format": "Image Container PDF",
+     "mo": 7.3
+    },
+    {
+     "nom": "شرح الرسالة - ج 1 صلاة العيدين - الزكاة_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 26.7
+    },
+    {
+     "nom": "شرح الرسالة - ج 2 تابع الزكاة - الحج والعمرة.pdf",
+     "format": "Image Container PDF",
+     "mo": 5.8
+    },
+    {
+     "nom": "شرح الرسالة - ج 2 تابع الزكاة - الحج والعمرة_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 22.9
+    },
+    {
+     "nom": "شرح الرسالة للقاضي عبد الوهاب البغدادي.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.8
+    },
+    {
+     "nom": "شرح الرسالة للقاضي عبد الوهاب البغدادي_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 2
+    },
+    {
+     "nom": "عقيدة السلف مقدمة ابن أبي زيد القيرواني لكتابه الرسالة .pdf",
+     "format": "Image Container PDF",
+     "mo": 3.6
+    },
+    {
+     "nom": "عقيدة السلف مقدمة ابن أبي زيد القيرواني لكتابه الرسالة _text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 3.7
+    }
+   ]
+  },
+  {
+   "downloads": 771,
+   "identifier": "20240701_20240701_1013",
+   "language": "ara",
+   "title": "شرح مقدمة الرسالة لابن أبي زيد القيرواني أ د أحمد القاضي",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "شرح_مقدمة_الرسالة_لابن_أبي_زيد_القيرواني_أ_د_أحمد_القاضي.pdf",
+     "format": "Text PDF",
+     "mo": 25.3
+    }
+   ]
+  },
+  {
+   "creator": "Ahmed DAKIR",
+   "downloads": 695,
+   "identifier": "Makhtotah7075",
+   "language": "ara",
+   "title": "مرشد المبتدئين في الفاظ الرسالة للكرامي واجوبة ابن سحنون Makhtotah 7075",
+   "year": 2016,
+   "droits": "",
+   "editeur": "",
+   "date": "2016-10-08",
+   "pdfs": []
+  },
+  {
+   "creator": "مع تحيات أبي يعلى البيضاوي غفر الله له ولوالديه آمين",
+   "downloads": 679,
+   "identifier": "ujala-risala",
+   "language": "ara",
+   "title": "العجالة في شرح الرسالة، مفهرس",
+   "year": 2025,
+   "droits": "https://creativecommons.org/publicdomain/mark/1.0/",
+   "editeur": "",
+   "date": "2025-08-17",
+   "pdfs": [
+    {
+     "nom": "ujala 01.pdf",
+     "format": "Text PDF",
+     "mo": 11.2
+    },
+    {
+     "nom": "ujala 02.pdf",
+     "format": "Text PDF",
+     "mo": 6.7
+    },
+    {
+     "nom": "ujala 03.pdf",
+     "format": "Text PDF",
+     "mo": 6.9
+    },
+    {
+     "nom": "ujala 04.pdf",
+     "format": "Text PDF",
+     "mo": 6.3
+    },
+    {
+     "nom": "ujala 05.pdf",
+     "format": "Text PDF",
+     "mo": 7.2
+    }
+   ]
+  },
+  {
+   "creator": "Al Khadimiyyah Academy - الأكاديمية الخديمية",
+   "downloads": 642,
+   "identifier": "20210226_20210226_1258",
+   "language": "ara",
+   "title": "الرسالة لابن أبي زيد القيرواني - Rissâla",
+   "droits": "http://creativecommons.org/publicdomain/mark/1.0/",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "الرسالة لابن أبي زيد القيرواني.pdf",
+     "format": "Image Container PDF",
+     "mo": 2.2
+    },
+    {
+     "nom": "الرسالة لابن أبي زيد القيرواني_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 8.1
+    }
+   ]
+  },
+  {
+   "creator": "ابن ابي زيد القيرواني",
+   "downloads": 516,
+   "identifier": "20191118_20191118_1943",
+   "language": "ara",
+   "title": "متن الرسالة لابن أبي زيد القيرواني",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "متن_الرسالة_لابن_أبي_زيد_القيرواني.pdf",
+     "format": "Image Container PDF",
+     "mo": 2.3
+    },
+    {
+     "nom": "متن_الرسالة_لابن_أبي_زيد_القيرواني_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 4.4
+    }
+   ]
+  },
+  {
+   "downloads": 443,
+   "identifier": "3193.Pdf",
+   "language": "Arabic",
+   "title": "3193 عقيدة السلف مقدمة ابن أبي زيد القيرواني لكتابه الرسالة (ط. الأوقاف كتاب اقرا اونلاين Pdf",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "3193 - عقيدة السلف مقدمة ابن أبي زيد القيرواني لكتابه الرسالة (ط. الأوقاف  كتاب اقرا اونلاين     pdf   .pdf",
+     "format": "Image Container PDF",
+     "mo": 3.6
+    },
+    {
+     "nom": "3193 - عقيدة السلف مقدمة ابن أبي زيد القيرواني لكتابه الرسالة (ط. الأوقاف  كتاب اقرا اونلاين     pdf   _text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 3.7
+    }
+   ]
+  },
+  {
+   "downloads": 440,
+   "identifier": "ArrisalaAlQairawania",
+   "language": "Arabic",
+   "title": "الرسالة لأبن أبي زيد القيرواني",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "ArrisalaIbnAbiZaidAlQayrawani.pdf",
+     "format": "Image Container PDF",
+     "mo": 2.3
+    },
+    {
+     "nom": "ArrisalaIbnAbiZaidAlQayrawani_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 3.5
+    }
+   ]
+  },
+  {
+   "creator": "عبدالرزاق",
+   "downloads": 337,
+   "identifier": "20200823",
+   "language": "ara",
+   "title": "عقيدة السلف مقدمة ابن أبي زيد القيرواني لكتابه الرسالة",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "الصوفية والتصوف - هذه هي الصوفية لعبدالرحمن الوكيل.pdf",
+     "format": "Image Container PDF",
+     "mo": 13
+    },
+    {
+     "nom": "الصوفية والتصوف - هذه هي الصوفية لعبدالرحمن الوكيل_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 8.5
+    },
+    {
+     "nom": "عقيدة السلف مقدمة ابن أبي زيد القيرواني لكتابه الرسالة.pdf",
+     "format": "Image Container PDF",
+     "mo": 3.6
+    },
+    {
+     "nom": "عقيدة السلف مقدمة ابن أبي زيد القيرواني لكتابه الرسالة_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 3.7
+    }
+   ]
+  },
+  {
+   "downloads": 311,
+   "identifier": "Pdf4478",
+   "language": "Arabic",
+   "title": "كتاب Pdf اقرا اونلاين 4478 متن الرسالة لابن زيد القيرواني",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "كتاب   pdf       اقرا  اونلاين  4478 - متن الرسالة لابن زيد القيرواني.pdf",
+     "format": "Image Container PDF",
+     "mo": 4
+    },
+    {
+     "nom": "كتاب   pdf       اقرا  اونلاين  4478 - متن الرسالة لابن زيد القيرواني_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 4.9
+    }
+   ]
+  },
+  {
+   "creator": "المكتبة القيروانية",
+   "downloads": 247,
+   "identifier": "kayrawania1437_gmail_20151111",
+   "language": "Arabic",
+   "title": "ابن أبي زيد القيرواني وعقيدته في الرسالة والجامع",
+   "year": 2015,
+   "droits": "",
+   "editeur": "",
+   "date": "2015-11-11",
+   "pdfs": [
+    {
+     "nom": "ابن أبي زيد القيرواني وعقيدته في  الرسالة والجامع.pdf",
+     "format": "Text PDF",
+     "mo": 1
+    }
+   ]
+  },
+  {
+   "downloads": 228,
+   "identifier": "2723.Pdf",
+   "language": "Arabic",
+   "title": "2723 عقيدة السلف مقدمة ابن أبي زيد القيرواني لكتابه الرسالة (ط. الأوقاف Pdf",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "2723- عقيدة السلف مقدمة ابن أبي زيد القيرواني لكتابه الرسالة (ط. الأوقاف    pdf  .pdf",
+     "format": "Image Container PDF",
+     "mo": 3.6
+    },
+    {
+     "nom": "2723- عقيدة السلف مقدمة ابن أبي زيد القيرواني لكتابه الرسالة (ط. الأوقاف    pdf  _text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 3.7
+    }
+   ]
+  },
+  {
+   "downloads": 215,
+   "identifier": "lionsunna_IBN_ABI_ZAID_KAYRAWANII_",
+   "language": "Arabic",
+   "title": "ابن أبي زيد القيرواني وعقيدته في الرسالة والجامع",
+   "year": 2017,
+   "droits": "",
+   "editeur": "",
+   "date": "2017-05-09",
+   "pdfs": [
+    {
+     "nom": "ابن أبي زيد القيرواني وعقيدته في الرسالة والجامع.pdf",
+     "format": "Text PDF",
+     "mo": 1
+    }
+   ]
+  },
+  {
+   "creator": "ابن أبي زيد القيرواني",
+   "downloads": 186,
+   "identifier": "20250129_20250129_1622",
+   "language": "lat",
+   "title": "الرسالة لابن أبي زيد القيرواني",
+   "year": 2025,
+   "droits": "",
+   "editeur": "",
+   "date": "2025-01-29",
+   "pdfs": [
+    {
+     "nom": "الرسالة لابن أبي زيد القيرواني.pdf",
+     "format": "Image Container PDF",
+     "mo": 3.8
+    },
+    {
+     "nom": "الرسالة لابن أبي زيد القيرواني_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 7.8
+    }
+   ]
+  },
+  {
+   "creator": "azk",
+   "downloads": 185,
+   "identifier": "01_20250318_20250318_1454",
+   "language": "ara",
+   "title": "شرح الرسالة للقاضي عبد الوهاب بن علي البغدادي",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "شرح الرسالة للقاضي عبد الوهاب بن علي البغدادي_01.pdf",
+     "format": "Image Container PDF",
+     "mo": 8.1
+    },
+    {
+     "nom": "شرح الرسالة للقاضي عبد الوهاب بن علي البغدادي_01_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 14.7
+    },
+    {
+     "nom": "شرح الرسالة للقاضي عبد الوهاب بن علي البغدادي_02.pdf",
+     "format": "Image Container PDF",
+     "mo": 5.8
+    },
+    {
+     "nom": "شرح الرسالة للقاضي عبد الوهاب بن علي البغدادي_02_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 12.1
+    }
+   ]
+  },
+  {
+   "downloads": 162,
+   "identifier": "2_20240130_202401",
+   "language": "ara",
+   "title": "تقييد على ما ذكره الإمام ابن أبي زيد القيرواني في الرسالة من أحاديث ( 2)",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "تقييد_على_ما_ذكره_الإمام_ابن_أبي_زيد_القيرواني_في_الرسالة_من_أحاديث (2).PDF",
+     "format": "Text PDF",
+     "mo": 2.5
+    },
+    {
+     "nom": "تقييد_على_ما_ذكره_الإمام_ابن_أبي_زيد_القيرواني_في_الرسالة_من_أحاديث (2).pdf",
+     "format": "Text PDF",
+     "mo": 0.4
+    }
+   ]
+  },
+  {
+   "creator": [
+    "الحداد, عزيز بن محمد أمزيان",
+    "Ibn Šayẖ al Ḥaddād, ‘Azīz (1842? - 1895)",
+    "ابن أبي زيد القيرواني, عبد الله بن عبد الرحمن",
+    "Ibn Abī Zayd al-Qayrawānī, ʿAbd Allāh ibn ʿAbd al-Raḥmān (0922-0996)"
+   ],
+   "downloads": 152,
+   "identifier": "MS.ARA.242",
+   "language": "ara",
+   "title": "الرسالة al-Risālaẗ",
+   "year": 1864,
+   "droits": "https://creativecommons.org/publicdomain/mark/1.0/",
+   "editeur": "",
+   "date": "1864",
+   "pdfs": [
+    {
+     "nom": "BULAC_MS_ARA_242.pdf",
+     "format": "Image Container PDF",
+     "mo": 1299.3
+    },
+    {
+     "nom": "BULAC_MS_ARA_242_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 63.6
+    }
+   ]
+  },
+  {
+   "downloads": 138,
+   "identifier": "Tmp120621268726415",
+   "language": "Arabic",
+   "title": "Tmp 12062 ابن أبي زيد القيرواني وعقيدته في الرسالة والجامع 1268726415",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "tmp_12062-ابن أبي زيد القيرواني وعقيدته في الرسالة والجامع1268726415.pdf",
+     "format": "Text PDF",
+     "mo": 1
+    }
+   ]
+  },
+  {
+   "downloads": 103,
+   "identifier": "hm-3901",
+   "language": "Arabic",
+   "title": "Hm 3901نسخة شمس الدين التتائي من الرسالة",
+   "droits": "http://creativecommons.org/publicdomain/mark/1.0/",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "hm3901نسخة شمس الدين التتائي من الرسالة.pdf",
+     "format": "Image Container PDF",
+     "mo": 38.5
+    },
+    {
+     "nom": "hm3901نسخة شمس الدين التتائي من الرسالة_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 11.5
+    }
+   ]
+  },
+  {
+   "downloads": 101,
+   "identifier": "20240703_20240703_1812",
+   "language": "ara",
+   "title": "شرح مقدمة الرسالة لابن أبي زيد القيرواني أ د أحمد القاضي",
+   "year": 2024,
+   "droits": "",
+   "editeur": "",
+   "date": "2024-07-03",
+   "pdfs": [
+    {
+     "nom": "شرح_مقدمة_الرسالة_لابن_أبي_زيد_القيرواني_أ_د_أحمد_القاضي.pdf",
+     "format": "Text PDF",
+     "mo": 25.2
+    }
+   ]
+  },
+  {
+   "creator": "\"ابن الصديق، أحمد بن محمد\"",
+   "downloads": 96,
+   "identifier": "AAlexandrina-093844",
+   "language": "Arabic",
+   "title": "093844_مسالك_الدلالة_على_مسائل_متن_الرسالة",
+   "year": 1900,
+   "droits": "",
+   "editeur": "مكتبة القاهرة",
+   "date": "[19--]",
+   "pdfs": [
+    {
+     "nom": "093844_مسالك_الدلالة_على_مسائل_متن_الرسالة.pdf",
+     "format": "Image Container PDF",
+     "mo": 52.3
+    },
+    {
+     "nom": "093844_مسالك_الدلالة_على_مسائل_متن_الرسالة_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 11.6
+    }
+   ]
+  },
+  {
+   "creator": "محمد بن محمد الحطاب",
+   "downloads": 95,
+   "identifier": "38-tahrirolmakala",
+   "language": "ara",
+   "title": "تحرير المقالة شرح نظم نظائر الرسالة",
+   "year": 2007,
+   "droits": "",
+   "editeur": "",
+   "date": "2007",
+   "pdfs": [
+    {
+     "nom": "38-tahrirolmakala.pdf",
+     "format": "Image Container PDF",
+     "mo": 1.9
+    },
+    {
+     "nom": "38-tahrirolmakala_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 2.6
+    }
+   ]
+  }
+ ]
+}
