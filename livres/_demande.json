@@ -1,0 +1,7 @@
+{
+  "action": "chercher",
+  "requetes": [
+    { "nom": "risala", "q": "title:(رسالة القيرواني) OR title:(الرسالة ابن أبي زيد) OR title:(متن الرسالة)", "n": 25 },
+    { "nom": "akhdari", "q": "title:(الأخضري) OR title:(akhdari)", "n": 25 }
+  ]
+}

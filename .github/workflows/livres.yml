@@ -1,0 +1,29 @@
+name: Bibliothèque (chercher ou ajouter un livre)
+on:
+  push:
+    paths:
+      - "livres/_demande.json"
+permissions:
+  contents: write
+concurrency: livres
+jobs:
+  livres:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils
+      - name: Traiter la demande
+        run: node livres/_outil/livres.mjs
+      - name: Enregistrer le résultat
+        run: |
+          git config user.name "lumu-bibliotheque"
+          git config user.email "actions@users.noreply.github.com"
+          git add livres
+          git diff --cached --quiet && { echo "rien à enregistrer"; exit 0; }
+          git commit -q -m "Bibliothèque : résultat de la demande ($(node -e 'console.log(JSON.parse(require("fs").readFileSync("livres/_demande.json","utf8")).action)'))"
+          git pull -q --rebase origin main
+          git push -q origin HEAD:main
