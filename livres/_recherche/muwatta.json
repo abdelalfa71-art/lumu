@@ -1,0 +1,2820 @@
+{
+ "requete": "title:(الموطأ) OR title:(موطأ الإمام مالك) OR title:(موطأ مالك)",
+ "date": "2026-11-14T03:49:28.516Z",
+ "resultats": [
+  {
+   "creator": "الإمام مالك؛ مالك بن أنس بن مالك الأصبحي الحميري، أبو عبد الله",
+   "downloads": 496045,
+   "identifier": "waq5776_906",
+   "language": "Arabic",
+   "title": "موطأ مالك",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "5776.pdf",
+     "format": "Image Container PDF",
+     "mo": 23.7
+    },
+    {
+     "nom": "5776_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 63.3
+    },
+    {
+     "nom": "5776p.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.7
+    },
+    {
+     "nom": "5776p_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 4.2
+    }
+   ]
+  },
+  {
+   "downloads": 77699,
+   "identifier": "shroh_mutaa",
+   "language": "Arabic",
+   "title": "موسوعة شروح الموطأ",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "msmutaa00.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.5
+    },
+    {
+     "nom": "msmutaa00_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 0.2
+    },
+    {
+     "nom": "msmutaa01.pdf",
+     "format": "Image Container PDF",
+     "mo": 7.5
+    },
+    {
+     "nom": "msmutaa01_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 9.4
+    },
+    {
+     "nom": "msmutaa02.pdf",
+     "format": "Image Container PDF",
+     "mo": 9.9
+    },
+    {
+     "nom": "msmutaa02_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 14.4
+    },
+    {
+     "nom": "msmutaa03.pdf",
+     "format": "Image Container PDF",
+     "mo": 10.4
+    },
+    {
+     "nom": "msmutaa03_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 15
+    },
+    {
+     "nom": "msmutaa04.pdf",
+     "format": "Image Container PDF",
+     "mo": 12.1
+    },
+    {
+     "nom": "msmutaa04_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 17.4
+    },
+    {
+     "nom": "msmutaa05.pdf",
+     "format": "Image Container PDF",
+     "mo": 11.3
+    },
+    {
+     "nom": "msmutaa05_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 17
+    },
+    {
+     "nom": "msmutaa06.pdf",
+     "format": "Image Container PDF",
+     "mo": 9.2
+    },
+    {
+     "nom": "msmutaa06_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 13.9
+    },
+    {
+     "nom": "msmutaa07.pdf",
+     "format": "Image Container PDF",
+     "mo": 10.3
+    },
+    {
+     "nom": "msmutaa07_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 14.6
+    },
+    {
+     "nom": "msmutaa08.pdf",
+     "format": "Image Container PDF",
+     "mo": 11.3
+    },
+    {
+     "nom": "msmutaa08_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 15.5
+    },
+    {
+     "nom": "msmutaa09.pdf",
+     "format": "Image Container PDF",
+     "mo": 9.1
+    },
+    {
+     "nom": "msmutaa09_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 12.7
+    },
+    {
+     "nom": "msmutaa10.pdf",
+     "format": "Image Container PDF",
+     "mo": 10.6
+    },
+    {
+     "nom": "msmutaa10_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 14.9
+    },
+    {
+     "nom": "msmutaa11.pdf",
+     "format": "Image Container PDF",
+     "mo": 10.1
+    },
+    {
+     "nom": "msmutaa11_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 14.2
+    },
+    {
+     "nom": "msmutaa12.pdf",
+     "format": "Image Container PDF",
+     "mo": 10.9
+    },
+    {
+     "nom": "msmutaa12_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 16.3
+    },
+    {
+     "nom": "msmutaa13.pdf",
+     "format": "Image Container PDF",
+     "mo": 8.1
+    },
+    {
+     "nom": "msmutaa13_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 12
+    },
+    {
+     "nom": "msmutaa14.pdf",
+     "format": "Image Container PDF",
+     "mo": 9.3
+    },
+    {
+     "nom": "msmutaa14_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 13.7
+    },
+    {
+     "nom": "msmutaa15.pdf",
+     "format": "Image Container PDF",
+     "mo": 8.9
+    },
+    {
+     "nom": "msmutaa15_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 13.1
+    },
+    {
+     "nom": "msmutaa16.pdf",
+     "format": "Image Container PDF",
+     "mo": 10.6
+    },
+    {
+     "nom": "msmutaa16_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 14.8
+    },
+    {
+     "nom": "msmutaa17.pdf",
+     "format": "Image Container PDF",
+     "mo": 11.3
+    },
+    {
+     "nom": "msmutaa17_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 16
+    },
+    {
+     "nom": "msmutaa18.pdf",
+     "format": "Image Container PDF",
+     "mo": 12.9
+    },
+    {
+     "nom": "msmutaa18_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 16.3
+    },
+    {
+     "nom": "msmutaa19.pdf",
+     "format": "Image Container PDF",
+     "mo": 11.3
+    },
+    {
+     "nom": "msmutaa19_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 14.2
+    },
+    {
+     "nom": "msmutaa20.pdf",
+     "format": "Image Container PDF",
+     "mo": 11.7
+    },
+    {
+     "nom": "msmutaa20_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 14.6
+    },
+    {
+     "nom": "msmutaa21.pdf",
+     "format": "Image Container PDF",
+     "mo": 13.1
+    },
+    {
+     "nom": "msmutaa21_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 16.4
+    },
+    {
+     "nom": "msmutaa22.pdf",
+     "format": "Image Container PDF",
+     "mo": 12.3
+    },
+    {
+     "nom": "msmutaa22_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 17.9
+    },
+    {
+     "nom": "msmutaa23.pdf",
+     "format": "Image Container PDF",
+     "mo": 12.7
+    },
+    {
+     "nom": "msmutaa23_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 18.2
+    },
+    {
+     "nom": "msmutaa24-25.pdf",
+     "format": "Image Container PDF",
+     "mo": 16.1
+    },
+    {
+     "nom": "msmutaa24-25_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 29.7
+    }
+   ]
+  },
+  {
+   "creator": "مالك بن أنس",
+   "downloads": 55388,
+   "identifier": "FP98768",
+   "language": "ara",
+   "title": "موطأ مالك",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "98768.pdf",
+     "format": "Image Container PDF",
+     "mo": 9.6
+    },
+    {
+     "nom": "98768_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 20.1
+    },
+    {
+     "nom": "98768p.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.3
+    },
+    {
+     "nom": "98768p_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 1.2
+    }
+   ]
+  },
+  {
+   "creator": "الإمام مالك",
+   "downloads": 53597,
+   "identifier": "66073",
+   "language": "ara",
+   "title": "موطأ الإمام مالك - رواية محمد بن الحسن - تحقيق عبدالوهاب عبداللطيف - الطبعة الثانية - المكتبة العلمية",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "66073.pdf",
+     "format": "Image Container PDF",
+     "mo": 10.7
+    },
+    {
+     "nom": "66073_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 14.3
+    }
+   ]
+  },
+  {
+   "creator": "ibn abd al bar; ابن عبد البر",
+   "downloads": 39363,
+   "identifier": "01172271",
+   "language": "ara",
+   "title": "التمهيد لما في الموطأ من المعاني والأسانيد",
+   "year": 1070,
+   "droits": "",
+   "editeur": "",
+   "date": "1070",
+   "pdfs": [
+    {
+     "nom": "00_172271.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.2
+    },
+    {
+     "nom": "00_172271_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 1
+    },
+    {
+     "nom": "01_172271.pdf",
+     "format": "Image Container PDF",
+     "mo": 13.9
+    },
+    {
+     "nom": "01_172271_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 29.6
+    },
+    {
+     "nom": "02_172272.pdf",
+     "format": "Image Container PDF",
+     "mo": 10.7
+    },
+    {
+     "nom": "02_172272_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 24.4
+    },
+    {
+     "nom": "03_172273.pdf",
+     "format": "Image Container PDF",
+     "mo": 13.5
+    },
+    {
+     "nom": "03_172273_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 30.9
+    },
+    {
+     "nom": "04_172274.pdf",
+     "format": "Image Container PDF",
+     "mo": 8.5
+    },
+    {
+     "nom": "04_172274_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 19.5
+    },
+    {
+     "nom": "05_172275.pdf",
+     "format": "Image Container PDF",
+     "mo": 11.9
+    },
+    {
+     "nom": "05_172275_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 25.7
+    },
+    {
+     "nom": "06_172276.pdf",
+     "format": "Image Container PDF",
+     "mo": 10.2
+    },
+    {
+     "nom": "06_172276_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 21.7
+    },
+    {
+     "nom": "07_172277.pdf",
+     "format": "Image Container PDF",
+     "mo": 8.7
+    },
+    {
+     "nom": "07_172277_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 18.9
+    },
+    {
+     "nom": "08_172278.pdf",
+     "format": "Image Container PDF",
+     "mo": 9
+    },
+    {
+     "nom": "08_172278_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 19.4
+    },
+    {
+     "nom": "09_172279.pdf",
+     "format": "Image Container PDF",
+     "mo": 9.4
+    },
+    {
+     "nom": "09_172279_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 21.7
+    },
+    {
+     "nom": "10_172280.pdf",
+     "format": "Image Container PDF",
+     "mo": 9
+    },
+    {
+     "nom": "10_172280_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 20.3
+    },
+    {
+     "nom": "11_172281.pdf",
+     "format": "Image Container PDF",
+     "mo": 11.7
+    },
+    {
+     "nom": "11_172281_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 26.3
+    },
+    {
+     "nom": "12_172282.pdf",
+     "format": "Image Container PDF",
+     "mo": 9.7
+    },
+    {
+     "nom": "12_172282_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 21.8
+    },
+    {
+     "nom": "13_172283.pdf",
+     "format": "Image Container PDF",
+     "mo": 11.4
+    },
+    {
+     "nom": "13_172283_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 24.1
+    },
+    {
+     "nom": "14_172284.pdf",
+     "format": "Image Container PDF",
+     "mo": 8.6
+    },
+    {
+     "nom": "14_172284_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 17.9
+    },
+    {
+     "nom": "15_172285.pdf",
+     "format": "Image Container PDF",
+     "mo": 10.3
+    },
+    {
+     "nom": "15_172285_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 21.4
+    },
+    {
+     "nom": "16_172286.pdf",
+     "format": "Image Container PDF",
+     "mo": 7.5
+    },
+    {
+     "nom": "16_172286_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 16.8
+    },
+    {
+     "nom": "17_172287.pdf",
+     "format": "Image Container PDF",
+     "mo": 8.9
+    },
+    {
+     "nom": "17_172287_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 21.2
+    }
+   ]
+  },
+  {
+   "creator": "الأمام مالك بن أنس",
+   "downloads": 23872,
+   "identifier": "AlMuwatae",
+   "language": "Arabic",
+   "title": "الموطأ",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "MuwataeCover.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.3
+    },
+    {
+     "nom": "MuwataeCover_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 0
+    },
+    {
+     "nom": "MuwataeVol.1.pdf",
+     "format": "Image Container PDF",
+     "mo": 10.1
+    },
+    {
+     "nom": "MuwataeVol.1_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 12.6
+    },
+    {
+     "nom": "MuwataeVol.2.pdf",
+     "format": "Image Container PDF",
+     "mo": 12.4
+    },
+    {
+     "nom": "MuwataeVol.2_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 15.8
+    },
+    {
+     "nom": "MuwataeVol.3.pdf",
+     "format": "Image Container PDF",
+     "mo": 11.5
+    },
+    {
+     "nom": "MuwataeVol.3_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 14.7
+    },
+    {
+     "nom": "MuwataeVol.4.pdf",
+     "format": "Image Container PDF",
+     "mo": 10.6
+    },
+    {
+     "nom": "MuwataeVol.4_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 13.9
+    },
+    {
+     "nom": "MuwataeVol.5.pdf",
+     "format": "Image Container PDF",
+     "mo": 6.3
+    },
+    {
+     "nom": "MuwataeVol.5_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 9.6
+    }
+   ]
+  },
+  {
+   "downloads": 22764,
+   "identifier": "montaqa-charh-mowattae-malek",
+   "language": "ara",
+   "title": "المنتقى شرح موطأ إمام دار الهجرة مالك بن أنس - أبو الوليد الباجي الأندلسي المالكي - 8 أجزاء",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "المنتقى شرح موطأ إمام دار الهجرة مالك بن أنس أبو الوليد الباجي الأندلسي المالكي - ج 1.pdf",
+     "format": "Image Container PDF",
+     "mo": 7.3
+    },
+    {
+     "nom": "المنتقى شرح موطأ إمام دار الهجرة مالك بن أنس أبو الوليد الباجي الأندلسي المالكي - ج 1_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 16
+    },
+    {
+     "nom": "المنتقى شرح موطأ إمام دار الهجرة مالك بن أنس أبو الوليد الباجي الأندلسي المالكي - ج 2.pdf",
+     "format": "Image Container PDF",
+     "mo": 9.1
+    },
+    {
+     "nom": "المنتقى شرح موطأ إمام دار الهجرة مالك بن أنس أبو الوليد الباجي الأندلسي المالكي - ج 2_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 22.2
+    },
+    {
+     "nom": "المنتقى شرح موطأ إمام دار الهجرة مالك بن أنس أبو الوليد الباجي الأندلسي المالكي - ج 3.pdf",
+     "format": "Image Container PDF",
+     "mo": 9.6
+    },
+    {
+     "nom": "المنتقى شرح موطأ إمام دار الهجرة مالك بن أنس أبو الوليد الباجي الأندلسي المالكي - ج 3_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 21.3
+    },
+    {
+     "nom": "المنتقى شرح موطأ إمام دار الهجرة مالك بن أنس أبو الوليد الباجي الأندلسي المالكي - ج 4.pdf",
+     "format": "Image Container PDF",
+     "mo": 8.9
+    },
+    {
+     "nom": "المنتقى شرح موطأ إمام دار الهجرة مالك بن أنس أبو الوليد الباجي الأندلسي المالكي - ج 4_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 21.6
+    },
+    {
+     "nom": "المنتقى شرح موطأ إمام دار الهجرة مالك بن أنس أبو الوليد الباجي الأندلسي المالكي - ج 5.pdf",
+     "format": "Image Container PDF",
+     "mo": 8.1
+    },
+    {
+     "nom": "المنتقى شرح موطأ إمام دار الهجرة مالك بن أنس أبو الوليد الباجي الأندلسي المالكي - ج 5_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 19.9
+    },
+    {
+     "nom": "المنتقى شرح موطأ إمام دار الهجرة مالك بن أنس أبو الوليد الباجي الأندلسي المالكي - ج 6.pdf",
+     "format": "Image Container PDF",
+     "mo": 9.4
+    },
+    {
+     "nom": "المنتقى شرح موطأ إمام دار الهجرة مالك بن أنس أبو الوليد الباجي الأندلسي المالكي - ج 6_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 23
+    },
+    {
+     "nom": "المنتقى شرح موطأ إمام دار الهجرة مالك بن أنس أبو الوليد الباجي الأندلسي المالكي - ج 7.pdf",
+     "format": "Image Container PDF",
+     "mo": 9.1
+    },
+    {
+     "nom": "المنتقى شرح موطأ إمام دار الهجرة مالك بن أنس أبو الوليد الباجي الأندلسي المالكي - ج 7_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 20.1
+    },
+    {
+     "nom": "المنتقى شرح موطأ إمام دار الهجرة مالك بن أنس أبو الوليد الباجي الأندلسي المالكي - ج 8.pdf",
+     "format": "Image Container PDF",
+     "mo": 7.8
+    },
+    {
+     "nom": "المنتقى شرح موطأ إمام دار الهجرة مالك بن أنس أبو الوليد الباجي الأندلسي المالكي - ج 8_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 18.9
+    }
+   ]
+  },
+  {
+   "creator": "الحافظ جلال الدين السيوطي",
+   "downloads": 22507,
+   "identifier": "TnwerElhawalek",
+   "language": "Arabic",
+   "title": "تنوير الحوالك شرح موطأ مالك",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "TnwerElhawalek1.pdf",
+     "format": "Image Container PDF",
+     "mo": 7.9
+    },
+    {
+     "nom": "TnwerElhawalek1_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 10
+    },
+    {
+     "nom": "TnwerElhawalek2.pdf",
+     "format": "Image Container PDF",
+     "mo": 6.4
+    },
+    {
+     "nom": "TnwerElhawalek2_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 6
+    },
+    {
+     "nom": "TnwerElhawalek3.pdf",
+     "format": "Image Container PDF",
+     "mo": 4.6
+    },
+    {
+     "nom": "TnwerElhawalek3_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 4.4
+    }
+   ]
+  },
+  {
+   "downloads": 20922,
+   "identifier": "ahmedmadi81_gmail_09",
+   "language": "Arabic",
+   "title": "أوجز المسالك إلى موطأ مالك 1-17",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "01.pdf",
+     "format": "Image Container PDF",
+     "mo": 12.6
+    },
+    {
+     "nom": "01_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 42.3
+    },
+    {
+     "nom": "02.pdf",
+     "format": "Image Container PDF",
+     "mo": 19.9
+    },
+    {
+     "nom": "02_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 43.7
+    },
+    {
+     "nom": "03.pdf",
+     "format": "Image Container PDF",
+     "mo": 19.2
+    },
+    {
+     "nom": "03_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 42.7
+    },
+    {
+     "nom": "04.pdf",
+     "format": "Image Container PDF",
+     "mo": 18.9
+    },
+    {
+     "nom": "04_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 20.5
+    },
+    {
+     "nom": "05.pdf",
+     "format": "Image Container PDF",
+     "mo": 19.5
+    },
+    {
+     "nom": "05_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 21.1
+    },
+    {
+     "nom": "06.pdf",
+     "format": "Image Container PDF",
+     "mo": 18.5
+    },
+    {
+     "nom": "06_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 19.9
+    },
+    {
+     "nom": "07.pdf",
+     "format": "Image Container PDF",
+     "mo": 19
+    },
+    {
+     "nom": "07_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 20.5
+    },
+    {
+     "nom": "08.pdf",
+     "format": "Image Container PDF",
+     "mo": 19.1
+    },
+    {
+     "nom": "08_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 42.5
+    },
+    {
+     "nom": "09.pdf",
+     "format": "Image Container PDF",
+     "mo": 20.6
+    },
+    {
+     "nom": "09_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 45.4
+    },
+    {
+     "nom": "10.pdf",
+     "format": "Image Container PDF",
+     "mo": 18.6
+    },
+    {
+     "nom": "10_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 40.9
+    },
+    {
+     "nom": "11.pdf",
+     "format": "Image Container PDF",
+     "mo": 20.4
+    },
+    {
+     "nom": "11_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 44.4
+    },
+    {
+     "nom": "12.pdf",
+     "format": "Image Container PDF",
+     "mo": 20.4
+    },
+    {
+     "nom": "12_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 21.4
+    },
+    {
+     "nom": "13.pdf",
+     "format": "Image Container PDF",
+     "mo": 20.3
+    },
+    {
+     "nom": "13_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 44
+    },
+    {
+     "nom": "14.pdf",
+     "format": "Image Container PDF",
+     "mo": 20.6
+    },
+    {
+     "nom": "14_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 44.4
+    },
+    {
+     "nom": "15.pdf",
+     "format": "Image Container PDF",
+     "mo": 12.9
+    },
+    {
+     "nom": "15_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 44.8
+    },
+    {
+     "nom": "16.pdf",
+     "format": "Image Container PDF",
+     "mo": 17.3
+    },
+    {
+     "nom": "16_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 38.3
+    },
+    {
+     "nom": "17.pdf",
+     "format": "Image Container PDF",
+     "mo": 11.9
+    },
+    {
+     "nom": "17_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 40.6
+    }
+   ]
+  },
+  {
+   "creator": "matnawi",
+   "downloads": 19019,
+   "identifier": "szorqanim",
+   "language": "ara",
+   "title": "شرح الزرقاني على موطأ الإمام مالك - الزرقاني - ت. عبد الباقي",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "szmm1.pdf",
+     "format": "Image Container PDF",
+     "mo": 13
+    },
+    {
+     "nom": "szmm1_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 52.3
+    },
+    {
+     "nom": "szmm2.pdf",
+     "format": "Image Container PDF",
+     "mo": 11.9
+    },
+    {
+     "nom": "szmm2_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 48.9
+    },
+    {
+     "nom": "szmm3.pdf",
+     "format": "Image Container PDF",
+     "mo": 11
+    },
+    {
+     "nom": "szmm3_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 45.6
+    },
+    {
+     "nom": "szmm4.pdf",
+     "format": "Image Container PDF",
+     "mo": 13.6
+    },
+    {
+     "nom": "szmm4_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 55.2
+    }
+   ]
+  },
+  {
+   "creator": "إمام مالك",
+   "downloads": 16441,
+   "identifier": "1c_20200421",
+   "language": "ara",
+   "title": "موطأ إمام مالك",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "1c-الحديث.pdf",
+     "format": "Image Container PDF",
+     "mo": 21.3
+    },
+    {
+     "nom": "1c-الحديث_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 71
+    }
+   ]
+  },
+  {
+   "creator": "Yedali",
+   "downloads": 14564,
+   "identifier": "TamhidIbnAbdelbar",
+   "language": "Arabic",
+   "title": "التمهيد لما في الموطأ من المعاني و الأسانيد - الإمام الحافظ أبي عمر يوسف بن عبد الله بن عبد البر النَمَرِيّ الأندلسي القرطبي المالكي",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "ta_bar00.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.3
+    },
+    {
+     "nom": "ta_bar00_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 0.5
+    },
+    {
+     "nom": "ta_bar01.pdf",
+     "format": "Image Container PDF",
+     "mo": 5.1
+    },
+    {
+     "nom": "ta_bar01_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 7.8
+    },
+    {
+     "nom": "ta_bar02.pdf",
+     "format": "Image Container PDF",
+     "mo": 5.3
+    },
+    {
+     "nom": "ta_bar02_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 7.7
+    },
+    {
+     "nom": "ta_bar03.pdf",
+     "format": "Image Container PDF",
+     "mo": 5.1
+    },
+    {
+     "nom": "ta_bar03_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 7.6
+    },
+    {
+     "nom": "ta_bar04.pdf",
+     "format": "Image Container PDF",
+     "mo": 4.8
+    },
+    {
+     "nom": "ta_bar04_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 7.2
+    },
+    {
+     "nom": "ta_bar05.pdf",
+     "format": "Image Container PDF",
+     "mo": 5.7
+    },
+    {
+     "nom": "ta_bar05_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 8.1
+    },
+    {
+     "nom": "ta_bar06.pdf",
+     "format": "Image Container PDF",
+     "mo": 7.6
+    },
+    {
+     "nom": "ta_bar06_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 10.5
+    },
+    {
+     "nom": "ta_bar07.pdf",
+     "format": "Image Container PDF",
+     "mo": 3.7
+    },
+    {
+     "nom": "ta_bar07_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 5.6
+    },
+    {
+     "nom": "ta_bar08.pdf",
+     "format": "Image Container PDF",
+     "mo": 5.7
+    },
+    {
+     "nom": "ta_bar08_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 8.1
+    },
+    {
+     "nom": "ta_bar09.pdf",
+     "format": "Image Container PDF",
+     "mo": 4.1
+    },
+    {
+     "nom": "ta_bar09_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 5.7
+    },
+    {
+     "nom": "ta_bar10.pdf",
+     "format": "Image Container PDF",
+     "mo": 4
+    },
+    {
+     "nom": "ta_bar10_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 5.5
+    },
+    {
+     "nom": "ta_bar11.pdf",
+     "format": "Image Container PDF",
+     "mo": 3.2
+    },
+    {
+     "nom": "ta_bar11_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 4.6
+    },
+    {
+     "nom": "ta_bar12.pdf",
+     "format": "Image Container PDF",
+     "mo": 3.7
+    },
+    {
+     "nom": "ta_bar12_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 5.2
+    },
+    {
+     "nom": "ta_bar13.pdf",
+     "format": "Image Container PDF",
+     "mo": 4.4
+    },
+    {
+     "nom": "ta_bar13_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 6.2
+    },
+    {
+     "nom": "ta_bar14.pdf",
+     "format": "Image Container PDF",
+     "mo": 5.2
+    },
+    {
+     "nom": "ta_bar14_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 7.3
+    },
+    {
+     "nom": "ta_bar15.pdf",
+     "format": "Image Container PDF",
+     "mo": 3.4
+    },
+    {
+     "nom": "ta_bar15_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 5
+    },
+    {
+     "nom": "ta_bar16.pdf",
+     "format": "Image Container PDF",
+     "mo": 4.4
+    },
+    {
+     "nom": "ta_bar16_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 6.2
+    },
+    {
+     "nom": "ta_bar17.pdf",
+     "format": "Image Container PDF",
+     "mo": 6.2
+    },
+    {
+     "nom": "ta_bar17_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 8.2
+    },
+    {
+     "nom": "ta_bar18.pdf",
+     "format": "Image Container PDF",
+     "mo": 4.1
+    },
+    {
+     "nom": "ta_bar18_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 5.6
+    },
+    {
+     "nom": "ta_bar19.pdf",
+     "format": "Image Container PDF",
+     "mo": 4.3
+    },
+    {
+     "nom": "ta_bar19_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 6.7
+    },
+    {
+     "nom": "ta_bar20.pdf",
+     "format": "Image Container PDF",
+     "mo": 3.6
+    },
+    {
+     "nom": "ta_bar20_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 5.5
+    },
+    {
+     "nom": "ta_bar21.pdf",
+     "format": "Image Container PDF",
+     "mo": 4
+    },
+    {
+     "nom": "ta_bar21_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 5.9
+    },
+    {
+     "nom": "ta_bar22.pdf",
+     "format": "Image Container PDF",
+     "mo": 4.3
+    },
+    {
+     "nom": "ta_bar22_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 6.8
+    },
+    {
+     "nom": "ta_bar23.pdf",
+     "format": "Image Container PDF",
+     "mo": 7.9
+    },
+    {
+     "nom": "ta_bar23_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 8.2
+    },
+    {
+     "nom": "ta_bar24.pdf",
+     "format": "Image Container PDF",
+     "mo": 7.9
+    },
+    {
+     "nom": "ta_bar24_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 8.1
+    },
+    {
+     "nom": "ta_bar25.pdf",
+     "format": "Image Container PDF",
+     "mo": 5.3
+    },
+    {
+     "nom": "ta_bar25_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 5.6
+    },
+    {
+     "nom": "ta_bar26.pdf",
+     "format": "Image Container PDF",
+     "mo": 4
+    },
+    {
+     "nom": "ta_bar26_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 4.1
+    }
+   ]
+  },
+  {
+   "downloads": 14385,
+   "identifier": "20200606_20200606_1559",
+   "language": "Arabic",
+   "title": "الموطأ الطبعة المغربية الثانية",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "الموطأ الطبعة المغربية الثانية.pdf",
+     "format": "Image Container PDF",
+     "mo": 723.8
+    },
+    {
+     "nom": "الموطأ الطبعة المغربية الثانية_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 53.3
+    }
+   ]
+  },
+  {
+   "creator": "أبو بكر محمد بن عبد الله بن العربي المعافري",
+   "downloads": 13307,
+   "identifier": "QabasMuatta",
+   "language": "Arabic",
+   "title": "القبس في شرح موطأ مالك بن أنس",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "QabasMuatta.pdf",
+     "format": "Image Container PDF",
+     "mo": 25
+    },
+    {
+     "nom": "QabasMuatta_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 39.7
+    }
+   ]
+  },
+  {
+   "creator": "مالك بن أنس",
+   "downloads": 12785,
+   "identifier": "muwatta.maroc",
+   "language": "Arabic",
+   "title": "الموطأ الطبعة المغربية",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "1.pdf",
+     "format": "Image Container PDF",
+     "mo": 26.6
+    },
+    {
+     "nom": "1_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 59.9
+    },
+    {
+     "nom": "2.pdf",
+     "format": "Image Container PDF",
+     "mo": 25.8
+    },
+    {
+     "nom": "2_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 26.5
+    }
+   ]
+  },
+  {
+   "creator": "Yedali",
+   "downloads": 11355,
+   "identifier": "MousuatShuruhMuwata",
+   "language": "Arabic",
+   "title": "موسوعة موطأ الإمام مالك",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "msmutaa00.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.5
+    },
+    {
+     "nom": "msmutaa00_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 0.2
+    },
+    {
+     "nom": "msmutaa01.pdf",
+     "format": "Image Container PDF",
+     "mo": 7.5
+    },
+    {
+     "nom": "msmutaa01_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 9.5
+    },
+    {
+     "nom": "msmutaa02.pdf",
+     "format": "Image Container PDF",
+     "mo": 9.9
+    },
+    {
+     "nom": "msmutaa02_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 14.5
+    },
+    {
+     "nom": "msmutaa03.pdf",
+     "format": "Image Container PDF",
+     "mo": 10.4
+    },
+    {
+     "nom": "msmutaa03_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 15.2
+    },
+    {
+     "nom": "msmutaa04.pdf",
+     "format": "Image Container PDF",
+     "mo": 12.1
+    },
+    {
+     "nom": "msmutaa04_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 17.6
+    },
+    {
+     "nom": "msmutaa05.pdf",
+     "format": "Image Container PDF",
+     "mo": 11.3
+    },
+    {
+     "nom": "msmutaa05_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 17.2
+    },
+    {
+     "nom": "msmutaa06.pdf",
+     "format": "Image Container PDF",
+     "mo": 9.2
+    },
+    {
+     "nom": "msmutaa06_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 14.1
+    },
+    {
+     "nom": "msmutaa07.pdf",
+     "format": "Image Container PDF",
+     "mo": 10.3
+    },
+    {
+     "nom": "msmutaa07_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 14.7
+    },
+    {
+     "nom": "msmutaa08.pdf",
+     "format": "Image Container PDF",
+     "mo": 11.3
+    },
+    {
+     "nom": "msmutaa08_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 15.7
+    },
+    {
+     "nom": "msmutaa09.pdf",
+     "format": "Image Container PDF",
+     "mo": 9.1
+    },
+    {
+     "nom": "msmutaa09_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 12.8
+    },
+    {
+     "nom": "msmutaa10.pdf",
+     "format": "Image Container PDF",
+     "mo": 10.6
+    },
+    {
+     "nom": "msmutaa10_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 15.1
+    },
+    {
+     "nom": "msmutaa11.pdf",
+     "format": "Image Container PDF",
+     "mo": 10.1
+    },
+    {
+     "nom": "msmutaa11_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 14.3
+    },
+    {
+     "nom": "msmutaa12.pdf",
+     "format": "Image Container PDF",
+     "mo": 10.9
+    },
+    {
+     "nom": "msmutaa12_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 16.5
+    },
+    {
+     "nom": "msmutaa13.pdf",
+     "format": "Image Container PDF",
+     "mo": 8.1
+    },
+    {
+     "nom": "msmutaa13_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 12.1
+    },
+    {
+     "nom": "msmutaa14.pdf",
+     "format": "Image Container PDF",
+     "mo": 9.3
+    },
+    {
+     "nom": "msmutaa14_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 13.9
+    },
+    {
+     "nom": "msmutaa15.pdf",
+     "format": "Image Container PDF",
+     "mo": 8.9
+    },
+    {
+     "nom": "msmutaa15_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 13.3
+    },
+    {
+     "nom": "msmutaa16.pdf",
+     "format": "Image Container PDF",
+     "mo": 10.6
+    },
+    {
+     "nom": "msmutaa16_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 15
+    },
+    {
+     "nom": "msmutaa17.pdf",
+     "format": "Image Container PDF",
+     "mo": 11.3
+    },
+    {
+     "nom": "msmutaa17_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 16.1
+    },
+    {
+     "nom": "msmutaa18.pdf",
+     "format": "Image Container PDF",
+     "mo": 12.9
+    },
+    {
+     "nom": "msmutaa18_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 16.4
+    },
+    {
+     "nom": "msmutaa19.pdf",
+     "format": "Image Container PDF",
+     "mo": 11.3
+    },
+    {
+     "nom": "msmutaa19_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 14.3
+    },
+    {
+     "nom": "msmutaa20.pdf",
+     "format": "Image Container PDF",
+     "mo": 11.7
+    },
+    {
+     "nom": "msmutaa20_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 14.7
+    },
+    {
+     "nom": "msmutaa21.pdf",
+     "format": "Image Container PDF",
+     "mo": 13.1
+    },
+    {
+     "nom": "msmutaa21_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 16.5
+    },
+    {
+     "nom": "msmutaa22.pdf",
+     "format": "Image Container PDF",
+     "mo": 12.3
+    },
+    {
+     "nom": "msmutaa22_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 18.1
+    },
+    {
+     "nom": "msmutaa23.pdf",
+     "format": "Image Container PDF",
+     "mo": 12.7
+    },
+    {
+     "nom": "msmutaa23_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 18.4
+    },
+    {
+     "nom": "msmutaa24-25.pdf",
+     "format": "Image Container PDF",
+     "mo": 16.1
+    },
+    {
+     "nom": "msmutaa24-25_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 30.1
+    }
+   ]
+  },
+  {
+   "creator": "أبو عبد الملك مروان بن علي البوني",
+   "downloads": 9959,
+   "identifier": "BoiniTafsir",
+   "language": "Arabic",
+   "title": "تفسير الموطأ للبوني",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "BoiniTafsir.pdf",
+     "format": "Image Container PDF",
+     "mo": 19.5
+    },
+    {
+     "nom": "BoiniTafsir_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 37.6
+    }
+   ]
+  },
+  {
+   "creator": "أبو المُطَرِّف عبد الرحمن بن مروان القنازعي القرطبي",
+   "downloads": 9111,
+   "identifier": "MotrfTafsir",
+   "language": "Arabic",
+   "title": "تفسير الموطأ لأبي المطرف",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "MotrfTafsir.pdf",
+     "format": "Image Container PDF",
+     "mo": 15.2
+    },
+    {
+     "nom": "MotrfTafsir_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 54.9
+    }
+   ]
+  },
+  {
+   "creator": "djamel",
+   "downloads": 8922,
+   "identifier": "mofie3",
+   "language": "Arabic",
+   "title": "الموطأ في الإعراب - (بيان لطريقة الإعراب) - أبو عبد العزيز سليمان العيوني",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "mfe.PDF",
+     "format": "Image Container PDF",
+     "mo": 10.8
+    },
+    {
+     "nom": "mfe.pdf",
+     "format": "Text PDF",
+     "mo": 0.9
+    }
+   ]
+  },
+  {
+   "creator": "الفقه المالكي",
+   "downloads": 8859,
+   "identifier": "feqhmaliki09",
+   "language": "ara",
+   "title": "أوجز المسالك إلى موطأ مالك",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "G1.pdf",
+     "format": "Image Container PDF",
+     "mo": 12.6
+    },
+    {
+     "nom": "G10.pdf",
+     "format": "Image Container PDF",
+     "mo": 18.6
+    },
+    {
+     "nom": "G10_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 41
+    },
+    {
+     "nom": "G11.pdf",
+     "format": "Image Container PDF",
+     "mo": 20.4
+    },
+    {
+     "nom": "G11_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 44.5
+    },
+    {
+     "nom": "G12.pdf",
+     "format": "Image Container PDF",
+     "mo": 20.4
+    },
+    {
+     "nom": "G12_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 44.6
+    },
+    {
+     "nom": "G13.pdf",
+     "format": "Image Container PDF",
+     "mo": 20.3
+    },
+    {
+     "nom": "G13_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 44.1
+    },
+    {
+     "nom": "G14.pdf",
+     "format": "Image Container PDF",
+     "mo": 20.6
+    },
+    {
+     "nom": "G14_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 44.5
+    },
+    {
+     "nom": "G15.pdf",
+     "format": "Image Container PDF",
+     "mo": 12.9
+    },
+    {
+     "nom": "G15_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 44.9
+    },
+    {
+     "nom": "G16.pdf",
+     "format": "Image Container PDF",
+     "mo": 17.3
+    },
+    {
+     "nom": "G16_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 38.3
+    },
+    {
+     "nom": "G17.pdf",
+     "format": "Image Container PDF",
+     "mo": 11.9
+    },
+    {
+     "nom": "G17_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 40.6
+    },
+    {
+     "nom": "G1_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 42.4
+    },
+    {
+     "nom": "G2.pdf",
+     "format": "Image Container PDF",
+     "mo": 19.9
+    },
+    {
+     "nom": "G2_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 21.5
+    },
+    {
+     "nom": "G3.pdf",
+     "format": "Image Container PDF",
+     "mo": 19.2
+    },
+    {
+     "nom": "G3_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 42.9
+    },
+    {
+     "nom": "G4.pdf",
+     "format": "Image Container PDF",
+     "mo": 18.9
+    },
+    {
+     "nom": "G4_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 42.1
+    },
+    {
+     "nom": "G5.pdf",
+     "format": "Image Container PDF",
+     "mo": 19.5
+    },
+    {
+     "nom": "G5_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 43.7
+    },
+    {
+     "nom": "G6.pdf",
+     "format": "Image Container PDF",
+     "mo": 18.5
+    },
+    {
+     "nom": "G6_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 20
+    },
+    {
+     "nom": "G7.pdf",
+     "format": "Image Container PDF",
+     "mo": 19
+    },
+    {
+     "nom": "G7_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 20.6
+    },
+    {
+     "nom": "G8.pdf",
+     "format": "Image Container PDF",
+     "mo": 19.1
+    },
+    {
+     "nom": "G8_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 20.8
+    },
+    {
+     "nom": "G9.pdf",
+     "format": "Image Container PDF",
+     "mo": 20.6
+    },
+    {
+     "nom": "G9_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 45.6
+    }
+   ]
+  },
+  {
+   "downloads": 8522,
+   "identifier": "shinqiti",
+   "language": "Arabic",
+   "title": "تفريغات دروس الشنقيطي -كتاب البيوع من عمدة الأحكام -كتاب الصوم من الموطأ",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "1.pdf",
+     "format": "Text PDF",
+     "mo": 0.6
+    },
+    {
+     "nom": "10.pdf",
+     "format": "Text PDF",
+     "mo": 0.4
+    },
+    {
+     "nom": "11.pdf",
+     "format": "Text PDF",
+     "mo": 0.4
+    },
+    {
+     "nom": "12.pdf",
+     "format": "Text PDF",
+     "mo": 0.3
+    },
+    {
+     "nom": "13.pdf",
+     "format": "Text PDF",
+     "mo": 0.3
+    },
+    {
+     "nom": "14.pdf",
+     "format": "Text PDF",
+     "mo": 0.3
+    },
+    {
+     "nom": "15.pdf",
+     "format": "Text PDF",
+     "mo": 0.2
+    },
+    {
+     "nom": "16.pdf",
+     "format": "Text PDF",
+     "mo": 0.7
+    },
+    {
+     "nom": "17.pdf",
+     "format": "Text PDF",
+     "mo": 0.4
+    },
+    {
+     "nom": "18.pdf",
+     "format": "Text PDF",
+     "mo": 0.7
+    },
+    {
+     "nom": "19.pdf",
+     "format": "Text PDF",
+     "mo": 0.4
+    },
+    {
+     "nom": "2.pdf",
+     "format": "Text PDF",
+     "mo": 0.5
+    },
+    {
+     "nom": "20.pdf",
+     "format": "Text PDF",
+     "mo": 0.4
+    },
+    {
+     "nom": "21.pdf",
+     "format": "Text PDF",
+     "mo": 0.8
+    },
+    {
+     "nom": "22.pdf",
+     "format": "Text PDF",
+     "mo": 0.2
+    },
+    {
+     "nom": "23.pdf",
+     "format": "Text PDF",
+     "mo": 0.3
+    },
+    {
+     "nom": "24.pdf",
+     "format": "Text PDF",
+     "mo": 0.2
+    },
+    {
+     "nom": "25.pdf",
+     "format": "Text PDF",
+     "mo": 0.2
+    },
+    {
+     "nom": "26.pdf",
+     "format": "Text PDF",
+     "mo": 0.3
+    },
+    {
+     "nom": "27.pdf",
+     "format": "Text PDF",
+     "mo": 0.3
+    },
+    {
+     "nom": "28.pdf",
+     "format": "Text PDF",
+     "mo": 0.3
+    },
+    {
+     "nom": "29.pdf",
+     "format": "Text PDF",
+     "mo": 0.3
+    },
+    {
+     "nom": "3.pdf",
+     "format": "Text PDF",
+     "mo": 0.3
+    },
+    {
+     "nom": "30.pdf",
+     "format": "Text PDF",
+     "mo": 0.5
+    },
+    {
+     "nom": "31.pdf",
+     "format": "Text PDF",
+     "mo": 0.3
+    },
+    {
+     "nom": "32.pdf",
+     "format": "Text PDF",
+     "mo": 0.3
+    },
+    {
+     "nom": "33.pdf",
+     "format": "Text PDF",
+     "mo": 0.2
+    },
+    {
+     "nom": "34.pdf",
+     "format": "Text PDF",
+     "mo": 0.4
+    },
+    {
+     "nom": "35.pdf",
+     "format": "Text PDF",
+     "mo": 0.2
+    },
+    {
+     "nom": "36.pdf",
+     "format": "Text PDF",
+     "mo": 0.3
+    },
+    {
+     "nom": "37.pdf",
+     "format": "Text PDF",
+     "mo": 0.4
+    },
+    {
+     "nom": "38.pdf",
+     "format": "Text PDF",
+     "mo": 0.3
+    },
+    {
+     "nom": "4.pdf",
+     "format": "Text PDF",
+     "mo": 0.3
+    },
+    {
+     "nom": "5.pdf",
+     "format": "Text PDF",
+     "mo": 0.3
+    },
+    {
+     "nom": "6.pdf",
+     "format": "Text PDF",
+     "mo": 0.3
+    },
+    {
+     "nom": "7.pdf",
+     "format": "Text PDF",
+     "mo": 0.4
+    },
+    {
+     "nom": "8.pdf",
+     "format": "Text PDF",
+     "mo": 0.3
+    },
+    {
+     "nom": "9.pdf",
+     "format": "Text PDF",
+     "mo": 0.3
+    },
+    {
+     "nom": "motaa1.pdf",
+     "format": "Text PDF",
+     "mo": 1.1
+    }
+   ]
+  },
+  {
+   "creator": "pdf صحيح الموطأ للإمام مالك - سليم الهلالي",
+   "downloads": 8475,
+   "identifier": "a962n",
+   "language": "Arabic",
+   "title": "pdf صحيح الموطأ للإمام مالك - سليم الهلالي",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "a962n.pdf",
+     "format": "Image Container PDF",
+     "mo": 15.3
+    },
+    {
+     "nom": "a962n_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 21.2
+    }
+   ]
+  },
+  {
+   "creator": "محمد حبيب الله بن مايأبي الجكني الشنقيطي المالكي",
+   "downloads": 8207,
+   "identifier": "Idaat_Halek",
+   "language": "Arabic",
+   "title": "إضاءة الحالك من ألفاظ دليل السالك إلى موطأ الإمام مالك",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "Idaat_Halek.pdf",
+     "format": "Text PDF",
+     "mo": 45.2
+    }
+   ]
+  },
+  {
+   "creator": "العلامة محمد بن علوي المالكي الحسني",
+   "downloads": 7965,
+   "identifier": "Anouar_Elmassalek",
+   "language": "Arabic",
+   "title": "أنوار المسالك إلى روايات موطأ مالك",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "Anouar_Elmassalek.pdf",
+     "format": "Image Container PDF",
+     "mo": 3.1
+    },
+    {
+     "nom": "Anouar_Elmassalek_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 6.9
+    }
+   ]
+  },
+  {
+   "creator": "الإمام مالك بن أنس",
+   "downloads": 7871,
+   "identifier": "20220206_20220206_1550",
+   "language": "Arabic",
+   "title": "الموطأ - موطأ الإمام مالك بن أنس رواية يحيى بن يحيى الليثي - ت بشار عواد",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "الموطأ للإمام مالك بن أنس رواية يحي بن يحي الليثي.pdf",
+     "format": "Image Container PDF",
+     "mo": 19.3
+    },
+    {
+     "nom": "الموطأ للإمام مالك بن أنس رواية يحي بن يحي الليثي_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 43.8
+    }
+   ]
+  },
+  {
+   "creator": "محمد بن أبي بكر المعروف بابن ناصر الدين الدمشقي",
+   "downloads": 7715,
+   "identifier": "ithafelsalek",
+   "language": "Arabic",
+   "title": "إتحاف السالك برواة الموطأ عن الإمام مالك",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "ithafelsalekmouata.pdf",
+     "format": "Text PDF",
+     "mo": 19
+    },
+    {
+     "nom": "mem6.pdf",
+     "format": "Image Container PDF",
+     "mo": 5.6
+    },
+    {
+     "nom": "mem6_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 8.4
+    }
+   ]
+  },
+  {
+   "creator": "Yedali",
+   "downloads": 7170,
+   "identifier": "Muata3Zayid",
+   "language": "Arabic",
+   "title": "موطأ الإمام مالك - طبعة مؤسسة زايد",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "mem0.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.2
+    },
+    {
+     "nom": "mem0_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 0.1
+    },
+    {
+     "nom": "mem1.pdf",
+     "format": "Image Container PDF",
+     "mo": 7.5
+    },
+    {
+     "nom": "mem1_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 10.2
+    },
+    {
+     "nom": "mem2-5.pdf",
+     "format": "Image Container PDF",
+     "mo": 25.1
+    },
+    {
+     "nom": "mem2-5_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 35.4
+    },
+    {
+     "nom": "mem6.pdf",
+     "format": "Image Container PDF",
+     "mo": 5.6
+    },
+    {
+     "nom": "mem6_2.pdf",
+     "format": "Image Container PDF",
+     "mo": 5.6
+    },
+    {
+     "nom": "mem6_2_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 9.6
+    },
+    {
+     "nom": "mem6_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 9.6
+    },
+    {
+     "nom": "mem7-8.pdf",
+     "format": "Image Container PDF",
+     "mo": 15.7
+    },
+    {
+     "nom": "mem7-8_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 31.9
+    }
+   ]
+  },
+  {
+   "creator": "أبو عبد الله بن الحذاء القرطبي",
+   "downloads": 7129,
+   "identifier": "MenDoukira",
+   "language": "Arabic",
+   "title": "التعريف بمن ذكر في الموطأ من النساء والرجال",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "MenDoukira_FiMuwataa01.pdf",
+     "format": "Image Container PDF",
+     "mo": 5
+    },
+    {
+     "nom": "MenDoukira_FiMuwataa01_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 7
+    },
+    {
+     "nom": "MenDoukira_FiMuwataa02.pdf",
+     "format": "Image Container PDF",
+     "mo": 7.8
+    },
+    {
+     "nom": "MenDoukira_FiMuwataa02_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 11.7
+    },
+    {
+     "nom": "MenDoukira_FiMuwataa03.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.8
+    },
+    {
+     "nom": "MenDoukira_FiMuwataa03_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 1.3
+    }
+   ]
+  },
+  {
+   "creator": "Yedali",
+   "downloads": 6920,
+   "identifier": "MuntaqaBaji",
+   "language": "Arabic",
+   "title": "المنتقى شرح الموطأ",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "00.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.1
+    },
+    {
+     "nom": "00_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 0
+    },
+    {
+     "nom": "01.pdf",
+     "format": "Image Container PDF",
+     "mo": 8.2
+    },
+    {
+     "nom": "01_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 9.1
+    },
+    {
+     "nom": "02.pdf",
+     "format": "Image Container PDF",
+     "mo": 6.6
+    },
+    {
+     "nom": "02_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 12.6
+    },
+    {
+     "nom": "03.pdf",
+     "format": "Text PDF",
+     "mo": 9.7
+    },
+    {
+     "nom": "04.pdf",
+     "format": "Text PDF",
+     "mo": 8.1
+    },
+    {
+     "nom": "05.pdf",
+     "format": "Text PDF",
+     "mo": 8
+    },
+    {
+     "nom": "06.pdf",
+     "format": "Text PDF",
+     "mo": 8.2
+    },
+    {
+     "nom": "07.pdf",
+     "format": "Text PDF",
+     "mo": 9.5
+    }
+   ]
+  },
+  {
+   "creator": "شرح الموطأ في الإعراب - أ.د. سليمان العيوني PDF",
+   "downloads": 6918,
+   "identifier": "topp8",
+   "language": "Arabic",
+   "title": "شرح الموطأ في الإعراب - أ.د. سليمان العيوني PDF",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "topp8.pdf",
+     "format": "Text PDF",
+     "mo": 3.4
+    }
+   ]
+  },
+  {
+   "creator": "الإمام محمد بن الحسن الشيباني",
+   "downloads": 6479,
+   "identifier": "20220421_20220421_0335",
+   "language": "Arabic",
+   "title": "موطأ الإمام مالك برواية محمد بن الحسن الشيباني دار القلم",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "موطأ الإمام مالك برواية محمد بن الحسن الشيباني دار القلم.pdf",
+     "format": "Image Container PDF",
+     "mo": 36.6
+    },
+    {
+     "nom": "موطأ الإمام مالك برواية محمد بن الحسن الشيباني دار القلم_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 24.7
+    }
+   ]
+  },
+  {
+   "creator": "pdf ضعيف الموطأ للإمام مالك - سليم الهلالي",
+   "downloads": 6136,
+   "identifier": "a961n",
+   "language": "Arabic",
+   "title": "pdf ضعيف الموطأ للإمام مالك - سليم الهلالي",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "a961n.pdf",
+     "format": "Image Container PDF",
+     "mo": 2.8
+    },
+    {
+     "nom": "a961n_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 3.9
+    }
+   ]
+  },
+  {
+   "creator": "ط1 2003م",
+   "downloads": 6075,
+   "identifier": "1_20200811_20200811_1239",
+   "language": "ara",
+   "title": "أوجز المسالك على موطأ الامام مالك تأليف محمد زكريا الكاندهلوي 1",
+   "droits": "http://creativecommons.org/publicdomain/mark/1.0/",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "أوجز المسالك على موطأ الامام مالك تأليف محمد زكريا الكاندهلوي (2).pdf",
+     "format": "Image Container PDF",
+     "mo": 12.8
+    },
+    {
+     "nom": "أوجز المسالك على موطأ الامام مالك تأليف محمد زكريا الكاندهلوي (2)_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 43.4
+    },
+    {
+     "nom": "أوجز المسالك على موطأ الامام مالك تأليف محمد زكريا الكاندهلوي (3).pdf",
+     "format": "Image Container PDF",
+     "mo": 12.4
+    },
+    {
+     "nom": "أوجز المسالك على موطأ الامام مالك تأليف محمد زكريا الكاندهلوي (3)_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 42.5
+    },
+    {
+     "nom": "أوجز المسالك على موطأ الامام مالك تأليف محمد زكريا الكاندهلوي (4).pdf",
+     "format": "Image Container PDF",
+     "mo": 12.3
+    },
+    {
+     "nom": "أوجز المسالك على موطأ الامام مالك تأليف محمد زكريا الكاندهلوي (4)_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 41.7
+    },
+    {
+     "nom": "أوجز المسالك على موطأ الامام مالك تأليف محمد زكريا الكاندهلوي (5).pdf",
+     "format": "Image Container PDF",
+     "mo": 12.6
+    },
+    {
+     "nom": "أوجز المسالك على موطأ الامام مالك تأليف محمد زكريا الكاندهلوي (5)_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 43.2
+    },
+    {
+     "nom": "أوجز المسالك على موطأ الامام مالك تأليف محمد زكريا الكاندهلوي1.pdf",
+     "format": "Image Container PDF",
+     "mo": 12.6
+    },
+    {
+     "nom": "أوجز المسالك على موطأ الامام مالك تأليف محمد زكريا الكاندهلوي10.pdf",
+     "format": "Image Container PDF",
+     "mo": 11.3
+    },
+    {
+     "nom": "أوجز المسالك على موطأ الامام مالك تأليف محمد زكريا الكاندهلوي10_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 39.5
+    },
+    {
+     "nom": "أوجز المسالك على موطأ الامام مالك تأليف محمد زكريا الكاندهلوي11.pdf",
+     "format": "Image Container PDF",
+     "mo": 12.4
+    },
+    {
+     "nom": "أوجز المسالك على موطأ الامام مالك تأليف محمد زكريا الكاندهلوي11_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 42.9
+    },
+    {
+     "nom": "أوجز المسالك على موطأ الامام مالك تأليف محمد زكريا الكاندهلوي12.pdf",
+     "format": "Image Container PDF",
+     "mo": 12.2
+    },
+    {
+     "nom": "أوجز المسالك على موطأ الامام مالك تأليف محمد زكريا الكاندهلوي12_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 43.1
+    },
+    {
+     "nom": "أوجز المسالك على موطأ الامام مالك تأليف محمد زكريا الكاندهلوي13.pdf",
+     "format": "Image Container PDF",
+     "mo": 12.3
+    },
+    {
+     "nom": "أوجز المسالك على موطأ الامام مالك تأليف محمد زكريا الكاندهلوي13_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 42.6
+    },
+    {
+     "nom": "أوجز المسالك على موطأ الامام مالك تأليف محمد زكريا الكاندهلوي14.pdf",
+     "format": "Image Container PDF",
+     "mo": 12.3
+    },
+    {
+     "nom": "أوجز المسالك على موطأ الامام مالك تأليف محمد زكريا الكاندهلوي14_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 43
+    },
+    {
+     "nom": "أوجز المسالك على موطأ الامام مالك تأليف محمد زكريا الكاندهلوي15.pdf",
+     "format": "Image Container PDF",
+     "mo": 12.9
+    },
+    {
+     "nom": "أوجز المسالك على موطأ الامام مالك تأليف محمد زكريا الكاندهلوي15_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 44.9
+    },
+    {
+     "nom": "أوجز المسالك على موطأ الامام مالك تأليف محمد زكريا الكاندهلوي16.pdf",
+     "format": "Image Container PDF",
+     "mo": 10.6
+    },
+    {
+     "nom": "أوجز المسالك على موطأ الامام مالك تأليف محمد زكريا الكاندهلوي16_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 36.9
+    },
+    {
+     "nom": "أوجز المسالك على موطأ الامام مالك تأليف محمد زكريا الكاندهلوي17.pdf",
+     "format": "Image Container PDF",
+     "mo": 11.9
+    },
+    {
+     "nom": "أوجز المسالك على موطأ الامام مالك تأليف محمد زكريا الكاندهلوي17_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 40.6
+    },
+    {
+     "nom": "أوجز المسالك على موطأ الامام مالك تأليف محمد زكريا الكاندهلوي1_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 20.9
+    },
+    {
+     "nom": "أوجز المسالك على موطأ الامام مالك تأليف محمد زكريا الكاندهلوي6.pdf",
+     "format": "Image Container PDF",
+     "mo": 11.9
+    },
+    {
+     "nom": "أوجز المسالك على موطأ الامام مالك تأليف محمد زكريا الكاندهلوي6_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 19.9
+    },
+    {
+     "nom": "أوجز المسالك على موطأ الامام مالك تأليف محمد زكريا الكاندهلوي7.pdf",
+     "format": "Image Container PDF",
+     "mo": 12.1
+    },
+    {
+     "nom": "أوجز المسالك على موطأ الامام مالك تأليف محمد زكريا الكاندهلوي7_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 41.8
+    },
+    {
+     "nom": "أوجز المسالك على موطأ الامام مالك تأليف محمد زكريا الكاندهلوي8.pdf",
+     "format": "Image Container PDF",
+     "mo": 12.1
+    },
+    {
+     "nom": "أوجز المسالك على موطأ الامام مالك تأليف محمد زكريا الكاندهلوي8_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 42.3
+    },
+    {
+     "nom": "أوجز المسالك على موطأ الامام مالك تأليف محمد زكريا الكاندهلوي9.pdf",
+     "format": "Image Container PDF",
+     "mo": 13
+    },
+    {
+     "nom": "أوجز المسالك على موطأ الامام مالك تأليف محمد زكريا الكاندهلوي9_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 45.2
+    }
+   ]
+  },
+  {
+   "creator": "أبو العباس أحمد بن طاهر بن علي بن عيسى الداني",
+   "downloads": 6003,
+   "identifier": "Imaa_Muata",
+   "language": "Arabic",
+   "title": "الإيماء إلى أطراف أحاديث كتاب الموطأ",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "imaa.pdf",
+     "format": "Image Container PDF",
+     "mo": 7.1
+    },
+    {
+     "nom": "imaa_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 8.2
+    }
+   ]
+  },
+  {
+   "downloads": 5509,
+   "identifier": "kawasafi_hotmail_201507",
+   "language": "Arabic",
+   "title": "الموطأ الجزء الأول",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "الموطأ - الجزء الأول.pdf",
+     "format": "Image Container PDF",
+     "mo": 45.5
+    },
+    {
+     "nom": "الموطأ - الجزء الأول_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 72.6
+    }
+   ]
+  },
+  {
+   "creator": "ثنائيات موطأ الإمام مالك - محفوظ الرحمن الفيضي",
+   "downloads": 5453,
+   "identifier": "a1549n",
+   "language": "Arabic",
+   "title": "ثنائيات موطأ الإمام مالك PDF",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "a1549n.pdf",
+     "format": "Image Container PDF",
+     "mo": 3.3
+    },
+    {
+     "nom": "a1549n_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 5.9
+    }
+   ]
+  },
+  {
+   "creator": "د. يوسف حميتو",
+   "downloads": 5336,
+   "identifier": "2_20190905",
+   "language": "ara",
+   "title": "مجلة الموطأ 2",
+   "year": 2019,
+   "droits": "",
+   "editeur": "",
+   "date": "2019-09-05",
+   "pdfs": [
+    {
+     "nom": "مجلة الموطأ 2.pdf",
+     "format": "Text PDF",
+     "mo": 15.8
+    }
+   ]
+  },
+  {
+   "downloads": 4964,
+   "identifier": "shar7-mwata-malek-alkhudir",
+   "language": "Arabic",
+   "title": "شرح موطأ الإمام مالك - عبدالكريم بن عبدالله الخضير",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "شرح موطأ الإمام مالك 1من7 - عبدالكريم بن عبدالله الخضير.pdf",
+     "format": "Text PDF",
+     "mo": 7.5
+    },
+    {
+     "nom": "شرح موطأ الإمام مالك 2من7 - عبدالكريم بن عبدالله الخضير.pdf",
+     "format": "Text PDF",
+     "mo": 7.9
+    },
+    {
+     "nom": "شرح موطأ الإمام مالك 3من7 - عبدالكريم بن عبدالله الخضير.pdf",
+     "format": "Text PDF",
+     "mo": 7.5
+    },
+    {
+     "nom": "شرح موطأ الإمام مالك 4من7 - عبدالكريم بن عبدالله الخضير.pdf",
+     "format": "Text PDF",
+     "mo": 7.4
+    },
+    {
+     "nom": "شرح موطأ الإمام مالك 5من7 - عبدالكريم بن عبدالله الخضير.pdf",
+     "format": "Text PDF",
+     "mo": 6.9
+    },
+    {
+     "nom": "شرح موطأ الإمام مالك 6من7 - عبدالكريم بن عبدالله الخضير.pdf",
+     "format": "Text PDF",
+     "mo": 8.9
+    },
+    {
+     "nom": "شرح موطأ الإمام مالك 7من7 - عبدالكريم بن عبدالله الخضير.pdf",
+     "format": "Text PDF",
+     "mo": 9
+    }
+   ]
+  },
+  {
+   "creator": "أبو عبد الله محمد بن عبد الباقي الزرقاني",
+   "downloads": 4894,
+   "identifier": "zarkanib",
+   "language": "ara",
+   "title": "شرح الزرقاني على موطأ مالك بن أنس",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "ZarkaniB_00.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.1
+    },
+    {
+     "nom": "ZarkaniB_00_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 0.1
+    },
+    {
+     "nom": "ZarkaniB_01.pdf",
+     "format": "Image Container PDF",
+     "mo": 18.8
+    },
+    {
+     "nom": "ZarkaniB_01_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 55.5
+    },
+    {
+     "nom": "ZarkaniB_02.pdf",
+     "format": "Image Container PDF",
+     "mo": 15.5
+    },
+    {
+     "nom": "ZarkaniB_02_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 22.9
+    },
+    {
+     "nom": "ZarkaniB_03.pdf",
+     "format": "Image Container PDF",
+     "mo": 11
+    },
+    {
+     "nom": "ZarkaniB_03_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 36.7
+    },
+    {
+     "nom": "ZarkaniB_04.pdf",
+     "format": "Image Container PDF",
+     "mo": 10.9
+    },
+    {
+     "nom": "ZarkaniB_04_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 16
+    }
+   ]
+  },
+  {
+   "downloads": 4720,
+   "identifier": "20200320_20200320_1142",
+   "language": "Arabic",
+   "title": "تفريغ شرح كتاب الصيام من موطأ الإمام مالك الشيخ سليمان الرحيلي",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "تفريغ شرح كتاب الصيام من موطأ الإمام مالك الشيخ سليمان الرحيلي.pdf",
+     "format": "Text PDF",
+     "mo": 2.4
+    }
+   ]
+  }
+ ]
+}

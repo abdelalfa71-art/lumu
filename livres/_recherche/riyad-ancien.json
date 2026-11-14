@@ -1,0 +1,167 @@
+{
+ "requete": "(رياض الصالحين OR \"riyad al-salihin\" OR \"riyad us saliheen\") AND date:[1800-01-01 TO 1950-12-31]",
+ "date": "2026-11-14T03:49:24.007Z",
+ "resultats": [
+  {
+   "creator": "\"ابن علان، محمد علي\"",
+   "downloads": 221,
+   "identifier": "AAlexandrina-190210",
+   "language": "Arabic",
+   "title": "190210_رياض_الصالحين_من_كلام_سيد_المرسلين",
+   "year": 1900,
+   "droits": "",
+   "editeur": "دار نهر النيل :",
+   "date": "[19--]",
+   "pdfs": [
+    {
+     "nom": "190210_رياض_الصالحين_من_كلام_سيد_المرسلين.pdf",
+     "format": "Image Container PDF",
+     "mo": 57.1
+    },
+    {
+     "nom": "190210_رياض_الصالحين_من_كلام_سيد_المرسلين_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 12.9
+    }
+   ]
+  },
+  {
+   "creator": "\"عمارة، مصطفى محمد.\"",
+   "downloads": 92,
+   "identifier": "AAlexandrina-021447",
+   "language": "Arabic",
+   "title": "021447_رياض_الصالحين_من_كلام_سيد_المرسلين",
+   "year": 1900,
+   "droits": "",
+   "editeur": "دار احياء الكتب العربية",
+   "date": "[19--]",
+   "pdfs": [
+    {
+     "nom": "021447_رياض_الصالحين_من_كلام_سيد_المرسلين.pdf",
+     "format": "Image Container PDF",
+     "mo": 63
+    },
+    {
+     "nom": "021447_رياض_الصالحين_من_كلام_سيد_المرسلين_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 14
+    }
+   ]
+  },
+  {
+   "creator": "\"عمارة، مصطفى محمد.\"",
+   "downloads": 89,
+   "identifier": "AAlexandrina-123675",
+   "language": "Arabic",
+   "title": "123675_رياض_الصالحين_من_كلام_سيد_المرسلين",
+   "year": 1900,
+   "droits": "",
+   "editeur": "دار احياء الكتب العربية",
+   "date": "[19--]",
+   "pdfs": [
+    {
+     "nom": "123675_رياض_الصالحين_من_كلام_سيد_المرسلين.pdf",
+     "format": "Image Container PDF",
+     "mo": 41.7
+    },
+    {
+     "nom": "123675_رياض_الصالحين_من_كلام_سيد_المرسلين_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 25.3
+    }
+   ]
+  },
+  {
+   "creator": "\"النووي، يحيى بن شرف\"",
+   "downloads": 86,
+   "identifier": "AAlexandrina-194193",
+   "language": "Arabic",
+   "title": "194193 - رياض الصالحين",
+   "year": 1900,
+   "droits": "",
+   "editeur": "دار الفكر العربى",
+   "date": "[19--?]",
+   "pdfs": [
+    {
+     "nom": "194193 - رياض الصالحين.pdf",
+     "format": "Image Container PDF",
+     "mo": 49.4
+    },
+    {
+     "nom": "194193 - رياض الصالحين_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 10.9
+    }
+   ]
+  },
+  {
+   "creator": "\"النووي، يحيى بن شرف\"",
+   "downloads": 70,
+   "identifier": "AAlexandrina-191604",
+   "language": "Arabic",
+   "title": "191604_رياض_الصالحين_من_كلام_سيد_المرسلين",
+   "year": 1927,
+   "droits": "",
+   "editeur": "د. ن.]",
+   "date": "1927",
+   "pdfs": [
+    {
+     "nom": "191604_رياض_الصالحين_من_كلام_سيد_المرسلين.pdf",
+     "format": "Image Container PDF",
+     "mo": 62.1
+    },
+    {
+     "nom": "191604_رياض_الصالحين_من_كلام_سيد_المرسلين_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 12.4
+    }
+   ]
+  },
+  {
+   "creator": "\"النووي، يحيى بن شرف\"",
+   "downloads": 62,
+   "identifier": "AAlexandrina-021516",
+   "language": "Arabic",
+   "title": "021516_رياض_الصالحين_من_كلام_سيد_المرسلين",
+   "year": 1900,
+   "droits": "",
+   "editeur": "دار ابن خلدون",
+   "date": "[19--]",
+   "pdfs": [
+    {
+     "nom": "021516_رياض_الصالحين_من_كلام_سيد_المرسلين.pdf",
+     "format": "Image Container PDF",
+     "mo": 44.2
+    },
+    {
+     "nom": "021516_رياض_الصالحين_من_كلام_سيد_المرسلين_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 9.7
+    }
+   ]
+  },
+  {
+   "creator": "\"عمارة، مصطفى محمد.\"",
+   "downloads": 56,
+   "identifier": "AAlexandrina-009943",
+   "language": "Arabic",
+   "title": "009943_رياض_الصالحين_من_كلام_سيد_المرسلين",
+   "year": 1900,
+   "droits": "",
+   "editeur": "دار احياء الكتب العربية",
+   "date": "[19--]",
+   "pdfs": [
+    {
+     "nom": "009943_رياض_الصالحين_من_كلام_سيد_المرسلين.pdf",
+     "format": "Image Container PDF",
+     "mo": 59.9
+    },
+    {
+     "nom": "009943_رياض_الصالحين_من_كلام_سيد_المرسلين_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 13.8
+    }
+   ]
+  }
+ ]
+}

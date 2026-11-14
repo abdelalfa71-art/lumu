@@ -1,0 +1,28 @@
+{
+ "requete": "(الأربعين النووية OR الأربعون النووية OR \"arbain nawawi\" OR \"forty hadith\") AND date:[1800-01-01 TO 1950-12-31]",
+ "date": "2026-11-14T03:48:17.000Z",
+ "resultats": [
+  {
+   "downloads": 310,
+   "identifier": "mscodex1970",
+   "language": "ota",
+   "title": "Collection of forty Hadith with commentary.",
+   "year": 1800,
+   "droits": "http://creativecommons.org/publicdomain/mark/1.0/",
+   "editeur": "",
+   "date": "1800",
+   "pdfs": [
+    {
+     "nom": "mscodex1970.pdf",
+     "format": "Image Container PDF",
+     "mo": 47.9
+    },
+    {
+     "nom": "mscodex1970_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 2.9
+    }
+   ]
+  }
+ ]
+}

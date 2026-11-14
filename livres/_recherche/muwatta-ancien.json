@@ -1,0 +1,444 @@
+{
+ "requete": "(الموطأ OR موطأ OR muwatta) AND date:[1800-01-01 TO 1950-12-31]",
+ "date": "2026-11-14T03:50:00.632Z",
+ "resultats": [
+  {
+   "creator": "Mlik ibn Anas, d. 795",
+   "downloads": 3491,
+   "identifier": "almuwattalilimmm00mlik",
+   "language": "ara",
+   "title": "Al-Muwatta' lil-Imm Mlik",
+   "year": 1863,
+   "droits": "",
+   "editeur": "Tunis",
+   "date": "1863",
+   "pdfs": [
+    {
+     "nom": "almuwattalilimmm00mlik.pdf",
+     "format": "Text PDF",
+     "mo": 33.7
+    }
+   ]
+  },
+  {
+   "creator": "Abu-l-Hasanaat Muhammadd 'Abbdu-l-Hayy Ibbn Muhammadd 'Abbdu-l-Haleem Al-Busawyree Firangee-Maahilee Al-Laknawee Al-Hindee Al-Ayyoobee Al-Annsaawree (R'A)",
+   "downloads": 2061,
+   "identifier": "BooksCollection_201808",
+   "language": "ara",
+   "title": "Books Collection",
+   "year": 1886,
+   "droits": "http://creativecommons.org/publicdomain/mark/1.0/",
+   "editeur": "",
+   "date": "1886",
+   "pdfs": [
+    {
+     "nom": "Al-Athaaru-l-Marfoo'ah fi-l-Akhbaru-l-Maudwoo'ah.pdf",
+     "format": "Image Container PDF",
+     "mo": 2.8
+    },
+    {
+     "nom": "Al-Athaaru-l-Marfoo'ah fi-l-Akhbaru-l-Maudwoo'ah_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 10.9
+    },
+    {
+     "nom": "Al-Fawaa'idu-l-Bahiyyah fee Taraawjim Al-Hanafiyyah.pdf",
+     "format": "Image Container PDF",
+     "mo": 11.1
+    },
+    {
+     "nom": "Al-Fawaa'idu-l-Bahiyyah fee Taraawjim Al-Hanafiyyah_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 16
+    },
+    {
+     "nom": "Al-Ifaadatu-l-Khatweerawh.pdf",
+     "format": "Image Container PDF",
+     "mo": 21.4
+    },
+    {
+     "nom": "Al-Ifaadatu-l-Khatweerawh_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 60.6
+    },
+    {
+     "nom": "Al-Innsaawfu fee Hukmi-l-I'tikaaf.pdf",
+     "format": "Text PDF",
+     "mo": 1.1
+    },
+    {
+     "nom": "Ann-Naafi'u-l-Kabeer Sharh Al-Jaami'u-s-Sawgheer.pdf",
+     "format": "Image Container PDF",
+     "mo": 10
+    },
+    {
+     "nom": "Ann-Naafi'u-l-Kabeer Sharh Al-Jaami'u-s-Sawgheer_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 15.6
+    },
+    {
+     "nom": "Ar-Rawf'u wa-t-Takmeel fi-l-Jarhu wa-t-Ta'deel.pdf",
+     "format": "Image Container PDF",
+     "mo": 4.2
+    },
+    {
+     "nom": "Ar-Rawf'u wa-t-Takmeel fi-l-Jarhu wa-t-Ta'deel_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 5.9
+    },
+    {
+     "nom": "At--Ta'leeqaawtu-l-Saniyyah 'ala-l-Fawaa'idu-l-Bahiyyah.pdf",
+     "format": "Image Container PDF",
+     "mo": 9.3
+    },
+    {
+     "nom": "At--Ta'leeqaawtu-l-Saniyyah 'ala-l-Fawaa'idu-l-Bahiyyah_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 28.9
+    },
+    {
+     "nom": "At-Ta'leequ-l-Mumajjadd 'alaa Muwattaaw' Muhammadd.pdf",
+     "format": "Image Container PDF",
+     "mo": 31.8
+    },
+    {
+     "nom": "At-Ta'leequ-l-Mumajjadd 'alaa Muwattaaw' Muhammadd_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 52.8
+    },
+    {
+     "nom": "Biography.pdf",
+     "format": "Image Container PDF",
+     "mo": 4.1
+    },
+    {
+     "nom": "Biography_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 7.5
+    },
+    {
+     "nom": "Fuswoolu-l-Muhimmah fee Huswoolu-l-Mutimmah.pdf",
+     "format": "Image Container PDF",
+     "mo": 1.4
+    },
+    {
+     "nom": "Fuswoolu-l-Muhimmah fee Huswoolu-l-Mutimmah_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 2.4
+    },
+    {
+     "nom": "Hayaat wa Khiddmaat.pdf",
+     "format": "Text PDF",
+     "mo": 3.6
+    },
+    {
+     "nom": "Iqaawmatu-l-Hujjah 'alaa 'ani-l-Akhtaar fi-t-Ta'abbudd Laisa bi-Bid'ah.pdf",
+     "format": "Image Container PDF",
+     "mo": 3.4
+    },
+    {
+     "nom": "Iqaawmatu-l-Hujjah 'alaa 'ani-l-Akhtaar fi-t-Ta'abbudd Laisa bi-Bid'ah_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 4
+    },
+    {
+     "nom": "Kasrat-i-'Ibaadat - 'Azeemat ya Bid'at.pdf",
+     "format": "Text PDF",
+     "mo": 2.7
+    },
+    {
+     "nom": "Majjmoo'ah Rawsaa'il.pdf",
+     "format": "Image Container PDF",
+     "mo": 68.3
+    },
+    {
+     "nom": "Majjmoo'ah Rawsaa'il_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 187.2
+    },
+    {
+     "nom": "Majjmu'atu-l-Fataawaa.pdf",
+     "format": "Image Container PDF",
+     "mo": 56.2
+    },
+    {
+     "nom": "Majjmu'atu-l-Fataawaa_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 66.7
+    },
+    {
+     "nom": "Ridd'u-l-Ikhwaan 'An Muhadithaat Aakhir Jumu'ati Rawmadaawn.pdf",
+     "format": "Image Container PDF",
+     "mo": 1.3
+    },
+    {
+     "nom": "Ridd'u-l-Ikhwaan 'An Muhadithaat Aakhir Jumu'ati Rawmadaawn_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 7.3
+    },
+    {
+     "nom": "Sharhu-l-Hidaayah Sharh Bidaayatu-l-Mubbtadee.pdf",
+     "format": "Text PDF",
+     "mo": 113
+    },
+    {
+     "nom": "Sibaahatu-l-Fikr fi-l-Jahri bi-dh-Dhikr.pdf",
+     "format": "Image Container PDF",
+     "mo": 2.3
+    },
+    {
+     "nom": "Sibaahatu-l-Fikr fi-l-Jahri bi-dh-Dhikr_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 3.7
+    },
+    {
+     "nom": "Zawfar Al-Amaanee fee Mukhtasawr Al-Jurjaanee.pdf",
+     "format": "Image Container PDF",
+     "mo": 12.5
+    },
+    {
+     "nom": "Zawfar Al-Amaanee fee Mukhtasawr Al-Jurjaanee_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 13.2
+    }
+   ]
+  },
+  {
+   "creator": "Iy ibn Msá, 1083-1149",
+   "downloads": 1306,
+   "identifier": "kitbmashriqalanw00iyib",
+   "language": "ara",
+   "title": "Kitb mashriq al-anwr al ih al-thr",
+   "year": 1910,
+   "droits": "",
+   "editeur": "[S.l. : s.n.]",
+   "date": "1910",
+   "pdfs": [
+    {
+     "nom": "kitbmashriqalanw00iyib.pdf",
+     "format": "Text PDF",
+     "mo": 24.4
+    }
+   ]
+  },
+  {
+   "creator": "Wensinck, Arent Jan, 1882-1939",
+   "downloads": 303,
+   "identifier": "concordanceetind0078wens",
+   "language": "fre",
+   "title": "Concordance et indices de la tradition musulmane: les six livres, le Musnad d'al-Darimi, le Muwatta' de Malik, le Musnad de Ahmad ibn Hanbal",
+   "year": 1933,
+   "droits": "",
+   "editeur": "Leiden E.J. Brill",
+   "date": "1933",
+   "pdfs": [
+    {
+     "nom": "concordanceetind0078wens.pdf",
+     "format": "Text PDF",
+     "mo": 38.4
+    },
+    {
+     "nom": "concordanceetind0078wens_encrypted.pdf",
+     "format": "ACS Encrypted PDF",
+     "mo": 38.2
+    }
+   ]
+  },
+  {
+   "downloads": 292,
+   "identifier": "1_20230831_20230831_0947",
+   "language": "ara",
+   "title": "شرح الزرقاني على الموطأ وبهامشه سنن أبي داود",
+   "year": 1892,
+   "droits": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+   "editeur": "",
+   "date": "1892",
+   "pdfs": [
+    {
+     "nom": "0.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.1
+    },
+    {
+     "nom": "0_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 0.1
+    },
+    {
+     "nom": "1.pdf",
+     "format": "Image Container PDF",
+     "mo": 18.8
+    },
+    {
+     "nom": "1_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 24.7
+    },
+    {
+     "nom": "2.pdf",
+     "format": "Image Container PDF",
+     "mo": 15.5
+    },
+    {
+     "nom": "2_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 22.3
+    },
+    {
+     "nom": "3.pdf",
+     "format": "Image Container PDF",
+     "mo": 11
+    },
+    {
+     "nom": "3_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 15.8
+    },
+    {
+     "nom": "4.pdf",
+     "format": "Image Container PDF",
+     "mo": 10.9
+    },
+    {
+     "nom": "4_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 15.7
+    }
+   ]
+  },
+  {
+   "creator": [
+    "الزرقاني, محمد بن عبد الباقي (1645-1710)",
+    "Zurqānī, Muḥammad ibn ʿAbd al-Bāqī al- (1645-1710)"
+   ],
+   "downloads": 167,
+   "identifier": "BULAC.RES.MON.Fol.23",
+   "language": "ara",
+   "title": "الجزء الأول [- الرابع] من شرح ... العلامة سيدي محمد الزرقاني على صحيح الموطأ لإمام الأئمة وعالم المدينة مالك بن أنس ... Al-ǧuzʾ al-awwal [- al-rābiʿ] min Šarḥ ... al-ʿallāmaẗ Sayyidī Muḥammad al-Zurqānī ʿalá ṣaḥīḥ al-Muwaṭṭaʾ li-Imām al-aʾimmaẗ wa-ʿālim al-Madīnaẗ Mālik ibn Anas ...",
+   "year": 1862,
+   "droits": "https://creativecommons.org/publicdomain/mark/1.0/",
+   "editeur": "Al-Maṭbaʿaẗ al-Miṣriyyaẗ al-Kastilliyyaẗ ([Al-Qāhiraẗ])",
+   "date": "1862/1863",
+   "pdfs": [
+    {
+     "nom": "BULAC_RES_MON_FOL_23.pdf",
+     "format": "Text PDF",
+     "mo": 438.9
+    }
+   ]
+  },
+  {
+   "creator": "مالك بن أنس",
+   "downloads": 148,
+   "identifier": "AAlexandrina-194247",
+   "language": "Arabic",
+   "title": "194247_شرح_محمد_الزرقانى_على_صحيح_الموطأ_لمالك_بن_انس",
+   "year": 1892,
+   "droits": "",
+   "editeur": "د. ن",
+   "date": "1892]",
+   "pdfs": [
+    {
+     "nom": "194247_شرح_محمد_الزرقانى_على_صحيح_الموطأ_لمالك_بن_انس.pdf",
+     "format": "Image Container PDF",
+     "mo": 89.8
+    },
+    {
+     "nom": "194247_شرح_محمد_الزرقانى_على_صحيح_الموطأ_لمالك_بن_انس_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 19.6
+    }
+   ]
+  },
+  {
+   "creator": "مالك بن أنس",
+   "downloads": 66,
+   "identifier": "AAlexandrina-194245",
+   "language": "Arabic",
+   "title": "194245_شرح_محمد_الزرقانى_على_صحيح_الموطأ_لمالك_بن_انس",
+   "year": 1892,
+   "droits": "",
+   "editeur": "د. ن",
+   "date": "1892]",
+   "pdfs": [
+    {
+     "nom": "194245_شرح_محمد_الزرقانى_على_صحيح_الموطأ_لمالك_بن_انس.pdf",
+     "format": "Image Container PDF",
+     "mo": 66.3
+    },
+    {
+     "nom": "194245_شرح_محمد_الزرقانى_على_صحيح_الموطأ_لمالك_بن_انس_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 15.4
+    }
+   ]
+  },
+  {
+   "creator": "مالك بن أنس",
+   "downloads": 60,
+   "identifier": "AAlexandrina-194248",
+   "language": "Arabic",
+   "title": "194248_شرح_محمد_الزرقانى_على_صحيح_الموطأ_لمالك_بن_انس",
+   "year": 1892,
+   "droits": "",
+   "editeur": "د. ن",
+   "date": "1892]",
+   "pdfs": [
+    {
+     "nom": "194248_شرح_محمد_الزرقانى_على_صحيح_الموطأ_لمالك_بن_انس.pdf",
+     "format": "Image Container PDF",
+     "mo": 105.7
+    },
+    {
+     "nom": "194248_شرح_محمد_الزرقانى_على_صحيح_الموطأ_لمالك_بن_انس_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 22.5
+    }
+   ]
+  },
+  {
+   "creator": "مالك بن أنس",
+   "downloads": 59,
+   "identifier": "AAlexandrina-194246",
+   "language": "Arabic",
+   "title": "194246_شرح_محمد_الزرقانى_على_صحيح_الموطأ_لمالك_بن_انس",
+   "year": 1892,
+   "droits": "",
+   "editeur": "د. ن",
+   "date": "1892]",
+   "pdfs": [
+    {
+     "nom": "194246_شرح_محمد_الزرقانى_على_صحيح_الموطأ_لمالك_بن_انس.pdf",
+     "format": "Image Container PDF",
+     "mo": 70.6
+    },
+    {
+     "nom": "194246_شرح_محمد_الزرقانى_على_صحيح_الموطأ_لمالك_بن_انس_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 15.6
+    }
+   ]
+  },
+  {
+   "creator": [
+    "الزرقاني, محمد بن عبد الباقي (1645-1710)",
+    "Zurqānī, Muḥammad ibn ʿAbd al-Bāqī al- (1645-1710)"
+   ],
+   "downloads": 57,
+   "identifier": "BULAC.RES.MON.Fol.21",
+   "language": "ara",
+   "title": "الجزء الأول [- الرابع] من شرح ... العلامة سيدي محمد الزرقاني على صحيح الموطأ لإمام الأئمة وعالم المدينة مالك بن أنس ...",
+   "year": 1862,
+   "droits": "https://creativecommons.org/publicdomain/mark/1.0/",
+   "editeur": "[éditeur inconnu] ([القاهرة])",
+   "date": "1862/1863",
+   "pdfs": [
+    {
+     "nom": "BULAC_RES_MON_FOL_21.pdf",
+     "format": "Text PDF",
+     "mo": 605
+    }
+   ]
+  }
+ ]
+}
