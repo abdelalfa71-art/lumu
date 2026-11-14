@@ -1,34 +1,24 @@
 {
- "requetes": [
+ "apercus": [
   {
-   "nom": "nawawi40",
-   "q": "title:(الأربعون النووية) OR title:(الأربعين النووية) OR title:(\"متن الأربعين\")",
-   "n": 40
+   "nom": "nawawi-a",
+   "url": "https://archive.org/download/Matn_alarbaein_alnawawiuh/%D9%85%D8%AA%D9%86%20%D8%A7%D9%84%D8%A3%D8%B1%D8%A8%D8%B9%D9%8A%D9%86%20%D8%A7%D9%84%D9%86%D9%88%D9%88%D9%8A%D9%87.pdf"
   },
   {
-   "nom": "nawawi40-ancien",
-   "q": "(الأربعين النووية OR الأربعون النووية OR \"arbain nawawi\" OR \"forty hadith\") AND date:[1800-01-01 TO 1950-12-31]",
-   "n": 30
+   "nom": "nawawi-b",
+   "url": "https://archive.org/download/20200814_20200814_2226/%D8%A7%D9%84%D8%A3%D8%B1%D8%A8%D8%B9%D9%8A%D9%86%20%D8%A7%D9%84%D9%86%D9%88%D9%88%D9%8A%D8%A9.pdf"
   },
   {
-   "nom": "riyad",
-   "q": "title:(رياض الصالحين)",
-   "n": 40
+   "nom": "nawawi-c",
+   "url": "https://archive.org/download/fahadfirozkhan_live/%D9%83%D8%AA%D8%A7%D8%A8%20%D8%A7%D9%84%D8%A3%D8%B1%D8%A8%D8%B9%D9%8A%D9%86%20%D8%A7%D9%84%D9%86%D9%88%D9%88%D9%8A%D8%A9.pdf"
   },
   {
-   "nom": "riyad-ancien",
-   "q": "(رياض الصالحين OR \"riyad al-salihin\" OR \"riyad us saliheen\") AND date:[1800-01-01 TO 1950-12-31]",
-   "n": 30
+   "nom": "riyad-a",
+   "url": "https://archive.org/download/AAlexandrina-191604/191604_%D8%B1%D9%8A%D8%A7%D8%B6_%D8%A7%D9%84%D8%B5%D8%A7%D9%84%D8%AD%D9%8A%D9%86_%D9%85%D9%86_%D9%83%D9%84%D8%A7%D9%85_%D8%B3%D9%8A%D8%AF_%D8%A7%D9%84%D9%85%D8%B1%D8%B3%D9%84%D9%8A%D9%86.pdf"
   },
   {
-   "nom": "muwatta",
-   "q": "title:(الموطأ) OR title:(موطأ الإمام مالك) OR title:(موطأ مالك)",
-   "n": 40
-  },
-  {
-   "nom": "muwatta-ancien",
-   "q": "(الموطأ OR موطأ OR muwatta) AND date:[1800-01-01 TO 1950-12-31]",
-   "n": 30
+   "nom": "muwatta-a",
+   "url": "https://archive.org/download/almuwattalilimmm00mlik/almuwattalilimmm00mlik.pdf"
   }
  ]
 }
