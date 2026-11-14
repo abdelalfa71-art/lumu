@@ -1,0 +1,2341 @@
+{
+ "requete": "title:(بلوغ المرام)",
+ "date": "2026-11-14T03:58:57.234Z",
+ "resultats": [
+  {
+   "creator": "الفقه الحنبلي",
+   "downloads": 85791,
+   "identifier": "minhatoulallam",
+   "language": "Arabic",
+   "title": "منحة العلام في شرح بلوغ المرام",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "minhat1.pdf",
+     "format": "Image Container PDF",
+     "mo": 10.8
+    },
+    {
+     "nom": "minhat10.pdf",
+     "format": "Image Container PDF",
+     "mo": 8.5
+    },
+    {
+     "nom": "minhat10_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 31.1
+    },
+    {
+     "nom": "minhat1_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 14.9
+    },
+    {
+     "nom": "minhat2.pdf",
+     "format": "Image Container PDF",
+     "mo": 12.3
+    },
+    {
+     "nom": "minhat2_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 16.9
+    },
+    {
+     "nom": "minhat3.pdf",
+     "format": "Image Container PDF",
+     "mo": 12
+    },
+    {
+     "nom": "minhat3_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 20.2
+    },
+    {
+     "nom": "minhat4.pdf",
+     "format": "Image Container PDF",
+     "mo": 12.1
+    },
+    {
+     "nom": "minhat4_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 15.9
+    },
+    {
+     "nom": "minhat5.pdf",
+     "format": "Image Container PDF",
+     "mo": 9.2
+    },
+    {
+     "nom": "minhat5_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 12.4
+    },
+    {
+     "nom": "minhat6.pdf",
+     "format": "Image Container PDF",
+     "mo": 12
+    },
+    {
+     "nom": "minhat6_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 16.4
+    },
+    {
+     "nom": "minhat7.pdf",
+     "format": "Image Container PDF",
+     "mo": 16.8
+    },
+    {
+     "nom": "minhat7_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 23.2
+    },
+    {
+     "nom": "minhat8.pdf",
+     "format": "Image Container PDF",
+     "mo": 13.3
+    },
+    {
+     "nom": "minhat8_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 21.8
+    },
+    {
+     "nom": "minhat9.pdf",
+     "format": "Image Container PDF",
+     "mo": 13.6
+    },
+    {
+     "nom": "minhat9_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 24.3
+    }
+   ]
+  },
+  {
+   "creator": "الفقه الحنبلي",
+   "downloads": 50839,
+   "identifier": "Fdjwicbm",
+   "language": "ara",
+   "title": "فتح ذي الجلال والإكرام بشرح بلوغ المرام",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "01_fdjwicbm.pdf",
+     "format": "Image Container PDF",
+     "mo": 75.9
+    },
+    {
+     "nom": "01_fdjwicbm_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 94.3
+    },
+    {
+     "nom": "02_fdjwicbm.pdf",
+     "format": "Image Container PDF",
+     "mo": 64.5
+    },
+    {
+     "nom": "02_fdjwicbm_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 74.2
+    },
+    {
+     "nom": "03_fdjwicbm.pdf",
+     "format": "Image Container PDF",
+     "mo": 63.9
+    },
+    {
+     "nom": "03_fdjwicbm_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 76
+    },
+    {
+     "nom": "04_fdjwicbm.pdf",
+     "format": "Image Container PDF",
+     "mo": 66.2
+    },
+    {
+     "nom": "04_fdjwicbm_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 80.2
+    },
+    {
+     "nom": "05_fdjwicbm.pdf",
+     "format": "Image Container PDF",
+     "mo": 68.9
+    },
+    {
+     "nom": "05_fdjwicbm_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 79.7
+    },
+    {
+     "nom": "06_fdjwicbm.pdf",
+     "format": "Image Container PDF",
+     "mo": 35.7
+    },
+    {
+     "nom": "06_fdjwicbm_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 47.7
+    },
+    {
+     "nom": "07_fdjwicbm.pdf",
+     "format": "Image Container PDF",
+     "mo": 59
+    },
+    {
+     "nom": "07_fdjwicbm_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 76.3
+    },
+    {
+     "nom": "08_fdjwicbm.pdf",
+     "format": "Image Container PDF",
+     "mo": 35.6
+    },
+    {
+     "nom": "08_fdjwicbm_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 47.5
+    },
+    {
+     "nom": "09_fdjwicbm.pdf",
+     "format": "Image Container PDF",
+     "mo": 60.7
+    },
+    {
+     "nom": "09_fdjwicbm_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 77.8
+    },
+    {
+     "nom": "10_fdjwicbm.pdf",
+     "format": "Image Container PDF",
+     "mo": 59.6
+    },
+    {
+     "nom": "10_fdjwicbm_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 77.7
+    },
+    {
+     "nom": "11_fdjwicbm.pdf",
+     "format": "Image Container PDF",
+     "mo": 58.8
+    },
+    {
+     "nom": "11_fdjwicbm_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 77.6
+    },
+    {
+     "nom": "12_fdjwicbm.pdf",
+     "format": "Image Container PDF",
+     "mo": 52.6
+    },
+    {
+     "nom": "12_fdjwicbm_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 68.1
+    },
+    {
+     "nom": "13_fdjwicbm.pdf",
+     "format": "Image Container PDF",
+     "mo": 61.4
+    },
+    {
+     "nom": "13_fdjwicbm_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 76.9
+    },
+    {
+     "nom": "14_fdjwicbm.pdf",
+     "format": "Image Container PDF",
+     "mo": 81.1
+    },
+    {
+     "nom": "14_fdjwicbm_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 98.5
+    },
+    {
+     "nom": "15_fdjwicbm.pdf",
+     "format": "Image Container PDF",
+     "mo": 88.4
+    },
+    {
+     "nom": "15_fdjwicbm_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 242.8
+    }
+   ]
+  },
+  {
+   "creator": "الشرح المختصر على بلوغ المرام - ابن عثيمين PDF",
+   "downloads": 38998,
+   "identifier": "a1643n",
+   "language": "Arabic",
+   "title": "الشرح المختصر على بلوغ المرام - ابن عثيمين PDF",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "a1643n.pdf",
+     "format": "Image Container PDF",
+     "mo": 56.8
+    },
+    {
+     "nom": "a1643n_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 74.2
+    }
+   ]
+  },
+  {
+   "creator": "عبدالرزاق",
+   "downloads": 29156,
+   "identifier": "bensaoud_gmail_20170329_2301",
+   "language": "ara",
+   "title": "بلوغ المرام من أدلة الأحكام",
+   "year": 2017,
+   "droits": "",
+   "editeur": "",
+   "date": "2017",
+   "pdfs": [
+    {
+     "nom": "بلوغ المرام من أدلة الأحكام.pdf",
+     "format": "Image Container PDF",
+     "mo": 8
+    },
+    {
+     "nom": "بلوغ المرام من أدلة الأحكام_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 28.4
+    }
+   ]
+  },
+  {
+   "downloads": 25753,
+   "identifier": "fthallam_bolog",
+   "language": "Arabic",
+   "title": "فتح العلام في دراسة أحاديث بلوغ المرام «حديثيا وفقهيا مع ذكر بعض المسائل الملحقة» - أبو عبد الله محمد بن علي بن حزام الفضلي البعداني»",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "01.pdf",
+     "format": "Text PDF",
+     "mo": 4.7
+    },
+    {
+     "nom": "02.pdf",
+     "format": "Text PDF",
+     "mo": 6.8
+    },
+    {
+     "nom": "03.pdf",
+     "format": "Text PDF",
+     "mo": 6
+    },
+    {
+     "nom": "04.pdf",
+     "format": "Text PDF",
+     "mo": 5.8
+    },
+    {
+     "nom": "05.pdf",
+     "format": "Text PDF",
+     "mo": 6.6
+    },
+    {
+     "nom": "06.pdf",
+     "format": "Text PDF",
+     "mo": 5.3
+    },
+    {
+     "nom": "07.pdf",
+     "format": "Text PDF",
+     "mo": 5.1
+    },
+    {
+     "nom": "08.pdf",
+     "format": "Text PDF",
+     "mo": 7.4
+    },
+    {
+     "nom": "09.pdf",
+     "format": "Text PDF",
+     "mo": 6.4
+    },
+    {
+     "nom": "10.pdf",
+     "format": "Text PDF",
+     "mo": 7.8
+    }
+   ]
+  },
+  {
+   "creator": "عبدالمحسن القاسم",
+   "downloads": 22440,
+   "identifier": "0501BulooghAlQasim",
+   "language": "ara",
+   "title": "بلوغ المرام من أدلة الأحكام | لان حجر العسقلاني الشافعي | تحقيق عبد المحسن القاسم",
+   "year": 2015,
+   "droits": "http://creativecommons.org/licenses/by-nc-sa/4.0/",
+   "editeur": "",
+   "date": "2015",
+   "pdfs": [
+    {
+     "nom": "050101_BulooghAlMaraam_Hifz_AlQasim.pdf",
+     "format": "Text PDF",
+     "mo": 36.9
+    },
+    {
+     "nom": "050102_BulooghAlMaraam_Footnotes_AlQasim.pdf",
+     "format": "Text PDF",
+     "mo": 47.7
+    }
+   ]
+  },
+  {
+   "downloads": 21471,
+   "identifier": "a1130n",
+   "language": "Arabic",
+   "title": "فتح العلام في دراسة أحاديث بلوغ المرام - محمد البعداني pdf",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "a1130n.pdf",
+     "format": "Image Container PDF",
+     "mo": 88.2
+    },
+    {
+     "nom": "a1130n_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 161.2
+    }
+   ]
+  },
+  {
+   "downloads": 16013,
+   "identifier": "alfirdwsiy2018_gmail_2013",
+   "language": "Arabic",
+   "title": "2013 توضيح الأحكام من بلوغ المرام البسام كتاب اقرا اونلاين",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "2013 - توضيح الأحكام من بلوغ المرام - البسام   كتاب  اقرا  اونلاين.pdf",
+     "format": "Image Container PDF",
+     "mo": 62.2
+    },
+    {
+     "nom": "2013 - توضيح الأحكام من بلوغ المرام - البسام   كتاب  اقرا  اونلاين_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 108.8
+    }
+   ]
+  },
+  {
+   "downloads": 13670,
+   "identifier": "ibanat-ahkam",
+   "language": "Arabic",
+   "title": "إبانة الأحكام شرح بلوغ المرام - 2 مجلدات / ابن حجر . تأليف عبد السلام علوش - حسن سليمان النوري - علوي عباس المالكي",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "Ibanat_Ahkam_1.pdf",
+     "format": "Image Container PDF",
+     "mo": 23.2
+    },
+    {
+     "nom": "Ibanat_Ahkam_1_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 26.8
+    },
+    {
+     "nom": "Ibanat_Ahkam_2.pdf",
+     "format": "Image Container PDF",
+     "mo": 22.7
+    },
+    {
+     "nom": "Ibanat_Ahkam_2_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 26.5
+    }
+   ]
+  },
+  {
+   "downloads": 13354,
+   "identifier": "a1019n",
+   "language": "Arabic",
+   "title": "سبل السلام الموصلة إلى بلوغ المرام - الصنعاني ، ت حلاق ط 3 PDF",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "a1019n.pdf",
+     "format": "Image Container PDF",
+     "mo": 67.9
+    },
+    {
+     "nom": "a1019n_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 90.8
+    }
+   ]
+  },
+  {
+   "creator": "matnawi",
+   "downloads": 10539,
+   "identifier": "i3lamanam",
+   "language": "Arabic",
+   "title": "إعلام الأنام شرح بلوغ المرام من أحاديث الأحكام - نور الدين عتر",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "ianam0.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.2
+    },
+    {
+     "nom": "ianam0_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 1.1
+    },
+    {
+     "nom": "ianam1.pdf",
+     "format": "Image Container PDF",
+     "mo": 9.6
+    },
+    {
+     "nom": "ianam1_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 17
+    },
+    {
+     "nom": "ianam2.pdf",
+     "format": "Image Container PDF",
+     "mo": 10.3
+    },
+    {
+     "nom": "ianam2_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 18.2
+    },
+    {
+     "nom": "ianam3.pdf",
+     "format": "Image Container PDF",
+     "mo": 10.2
+    },
+    {
+     "nom": "ianam3_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 17.7
+    },
+    {
+     "nom": "ianam4.pdf",
+     "format": "Text PDF",
+     "mo": 9
+    }
+   ]
+  },
+  {
+   "creator": "سرمد حاتم شكر",
+   "downloads": 10001,
+   "identifier": "20230326_20230326_1642",
+   "language": "ara",
+   "title": "فتح ذي الجلال والإكرام بشرح بلوغ المرام - ابن عثيمين",
+   "year": 2023,
+   "droits": "",
+   "editeur": "",
+   "date": "2023-03-26",
+   "pdfs": [
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام١ ط المؤسسة.pdf",
+     "format": "Image Container PDF",
+     "mo": 17.3
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام١ ط المؤسسة_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 43.5
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام٢ ط المؤسسة.pdf",
+     "format": "Image Container PDF",
+     "mo": 18.2
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام٢ ط المؤسسة_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 42.7
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام٣ ط المؤسسة.pdf",
+     "format": "Image Container PDF",
+     "mo": 19.3
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام٣ ط المؤسسة_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 48.3
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام٤ ط المؤسسة.pdf",
+     "format": "Image Container PDF",
+     "mo": 12.1
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام٤ ط المؤسسة_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 29
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام٥ ط المؤسسة.pdf",
+     "format": "Image Container PDF",
+     "mo": 16.8
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام٥ ط المؤسسة_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 43.4
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام٦ ط المؤسسة.pdf",
+     "format": "Image Container PDF",
+     "mo": 20
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام٦ ط المؤسسة_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 53.4
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام٧ ط المؤسسة.pdf",
+     "format": "Image Container PDF",
+     "mo": 18.1
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام٧ ط المؤسسة_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 44.3
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام٨ ط المؤسسة.pdf",
+     "format": "Image Container PDF",
+     "mo": 16.7
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام٨ ط المؤسسة_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 40.8
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام٩ ط المؤسسة.pdf",
+     "format": "Image Container PDF",
+     "mo": 16.4
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام٩ ط المؤسسة_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 44
+    }
+   ]
+  },
+  {
+   "creator": "djamel",
+   "downloads": 9662,
+   "identifier": "mn3afshbomo",
+   "language": "Arabic",
+   "title": "منحة العلام في شرح (بلوغ المرام) لابن حجر - عبدالله صالح الفوزان (ط1) دار ابن الجوزي",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "m3fsbm-dij.pdf",
+     "format": "Image Container PDF",
+     "mo": 114.1
+    },
+    {
+     "nom": "m3fsbm-dij_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 3135
+    }
+   ]
+  },
+  {
+   "creator": "روضة الأفهام في شرح زوائد المحرر على بلوغ المرام - عبد الله الفوزان PDF",
+   "downloads": 8328,
+   "identifier": "a1680n",
+   "language": "Arabic",
+   "title": "روضة الأفهام في شرح زوائد المحرر على بلوغ المرام - عبد الله الفوزان PDF",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "a1680n.pdf",
+     "format": "Image Container PDF",
+     "mo": 39
+    },
+    {
+     "nom": "a1680n_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 50
+    }
+   ]
+  },
+  {
+   "downloads": 7723,
+   "identifier": "sharha-baloogh-ul-maraam-min-adillatil-ahkam-jilad-1",
+   "language": "urd",
+   "title": "فتح ذی الجلال والاکرام شرح بلوغ المرام",
+   "year": 2016,
+   "droits": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+   "editeur": "",
+   "date": "2016-06-01",
+   "pdfs": [
+    {
+     "nom": "Sharha-Baloogh-ul-Maraam-Min-Adillatil-Ahkam-Jilad-1.PDF",
+     "format": "Text PDF",
+     "mo": 22.3
+    },
+    {
+     "nom": "Sharha-Baloogh-ul-Maraam-Min-Adillatil-Ahkam-Jilad-1.pdf",
+     "format": "Text PDF",
+     "mo": 146.6
+    },
+    {
+     "nom": "Sharha-Baloogh-ul-Maraam-Min-Adillatil-Ahkam-Jilad-2.PDF",
+     "format": "Text PDF",
+     "mo": 18.1
+    },
+    {
+     "nom": "Sharha-Baloogh-ul-Maraam-Min-Adillatil-Ahkam-Jilad-2.pdf",
+     "format": "Text PDF",
+     "mo": 48.9
+    }
+   ]
+  },
+  {
+   "creator": "مكتبة المنارة الأزهرية",
+   "downloads": 7466,
+   "identifier": "taha_119",
+   "language": "Arabic",
+   "title": "منحة العلام في شرح بلوغ المرام للفوزان",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "منحة العلام.pdf",
+     "format": "Image Container PDF",
+     "mo": 114.1
+    },
+    {
+     "nom": "منحة العلام_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 158.1
+    }
+   ]
+  },
+  {
+   "creator": "الإمام العلامة المحدث المؤرخ الفقيه والمفسر المحقق شيخ الإسلام امير المؤمنين في الحديث الحافظ الشيخ شهاب الدين أبو الفضل أحمد بن علي بن محمد بن محمد بن علي بن محمود بن أحمد بن أحمد ابن حجر العسقلاني الكناني ثم المصري الشافعي رحمة الله عليه المتوفیٰ 852ھ",
+   "downloads": 7465,
+   "identifier": "20200201_20200201_1406",
+   "language": "ara",
+   "title": "بلوغ المرام من أدلة الأحكام ابن حجر العسقلاني",
+   "year": 2020,
+   "droits": "",
+   "editeur": "",
+   "date": "2020-02-01",
+   "pdfs": [
+    {
+     "nom": "بلوغ المرام من أدلة الأحكام.pdf",
+     "format": "Image Container PDF",
+     "mo": 8
+    },
+    {
+     "nom": "بلوغ المرام من أدلة الأحكام_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 28.4
+    }
+   ]
+  },
+  {
+   "creator": "matnawi",
+   "downloads": 6927,
+   "identifier": "ntylmaram",
+   "language": "ara",
+   "title": "نيل المرام شرح بلوغ المرام من أدلة الأحكام - محمد بن ياسين بن عبد الله",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "nmsbm1.pdf",
+     "format": "Image Container PDF",
+     "mo": 4.7
+    },
+    {
+     "nom": "nmsbm1_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 7.4
+    },
+    {
+     "nom": "nmsbm2.pdf",
+     "format": "Image Container PDF",
+     "mo": 4.9
+    },
+    {
+     "nom": "nmsbm2_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 7.6
+    },
+    {
+     "nom": "nmsbm3.pdf",
+     "format": "Image Container PDF",
+     "mo": 5
+    },
+    {
+     "nom": "nmsbm3_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 7.8
+    },
+    {
+     "nom": "nmsbm4.pdf",
+     "format": "Image Container PDF",
+     "mo": 5.7
+    },
+    {
+     "nom": "nmsbm4_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 9
+    },
+    {
+     "nom": "nmsbm5.pdf",
+     "format": "Image Container PDF",
+     "mo": 6.7
+    },
+    {
+     "nom": "nmsbm5_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 10.4
+    }
+   ]
+  },
+  {
+   "downloads": 5978,
+   "identifier": "abuhuraira_hotmail_3_201805",
+   "language": "Arabic",
+   "title": "فتح العلام في دراسة أحاديث بلوغ المرام حديثيا وفقهيا",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "فتح العلام 1.pdf",
+     "format": "Image Container PDF",
+     "mo": 74.7
+    },
+    {
+     "nom": "فتح العلام 1_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 55.7
+    },
+    {
+     "nom": "فتح العلام 2.pdf",
+     "format": "Image Container PDF",
+     "mo": 70
+    },
+    {
+     "nom": "فتح العلام 2_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 52.7
+    },
+    {
+     "nom": "فتح العلام 3.pdf",
+     "format": "Image Container PDF",
+     "mo": 77
+    },
+    {
+     "nom": "فتح العلام 3_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 57.8
+    },
+    {
+     "nom": "فتح العلام 4.pdf",
+     "format": "Image Container PDF",
+     "mo": 75.8
+    },
+    {
+     "nom": "فتح العلام 4_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 56.5
+    },
+    {
+     "nom": "فتح العلام 5.pdf",
+     "format": "Image Container PDF",
+     "mo": 70.4
+    },
+    {
+     "nom": "فتح العلام 5_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 53.3
+    }
+   ]
+  },
+  {
+   "downloads": 5551,
+   "identifier": "tibyan_takhrij-wa-tabwib_abm",
+   "language": "Arabic",
+   "title": "الطبعة الثانية من كتاب التبيان في تخريج وتبويب أحاديث بلوغ المرام وبيان ما ورد في الباب",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "1.pdf",
+     "format": "Image Container PDF",
+     "mo": 32.7
+    },
+    {
+     "nom": "10.pdf",
+     "format": "Image Container PDF",
+     "mo": 40.5
+    },
+    {
+     "nom": "11.pdf",
+     "format": "Image Container PDF",
+     "mo": 37.9
+    },
+    {
+     "nom": "12.pdf",
+     "format": "Image Container PDF",
+     "mo": 56.7
+    },
+    {
+     "nom": "2.pdf",
+     "format": "Image Container PDF",
+     "mo": 51.1
+    },
+    {
+     "nom": "3.pdf",
+     "format": "Image Container PDF",
+     "mo": 46.5
+    },
+    {
+     "nom": "4.pdf",
+     "format": "Image Container PDF",
+     "mo": 59.4
+    },
+    {
+     "nom": "5.pdf",
+     "format": "Image Container PDF",
+     "mo": 43.6
+    },
+    {
+     "nom": "6.pdf",
+     "format": "Image Container PDF",
+     "mo": 56.8
+    },
+    {
+     "nom": "7.pdf",
+     "format": "Image Container PDF",
+     "mo": 47.5
+    },
+    {
+     "nom": "8.pdf",
+     "format": "Image Container PDF",
+     "mo": 30.3
+    },
+    {
+     "nom": "9.pdf",
+     "format": "Image Container PDF",
+     "mo": 52.5
+    }
+   ]
+  },
+  {
+   "downloads": 5412,
+   "identifier": "20230325_20230325_0232",
+   "language": "Arabic",
+   "title": "فتح ذي الجلال والإكرام بشرح بلوغ المرام (1-9) - طبعة المؤسسة",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام١ ط المؤسسة.pdf",
+     "format": "Image Container PDF",
+     "mo": 17.3
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام١ ط المؤسسة_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 43.5
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام٢ ط المؤسسة.pdf",
+     "format": "Image Container PDF",
+     "mo": 18.2
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام٢ ط المؤسسة_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 42.4
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام٣ ط المؤسسة.pdf",
+     "format": "Image Container PDF",
+     "mo": 19.3
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام٣ ط المؤسسة_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 48.1
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام٤ ط المؤسسة.pdf",
+     "format": "Image Container PDF",
+     "mo": 12.1
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام٤ ط المؤسسة_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 28.9
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام٥ ط المؤسسة.pdf",
+     "format": "Image Container PDF",
+     "mo": 16.8
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام٥ ط المؤسسة_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 43.2
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام٦ ط المؤسسة.pdf",
+     "format": "Image Container PDF",
+     "mo": 20
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام٦ ط المؤسسة_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 53.2
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام٧ ط المؤسسة.pdf",
+     "format": "Image Container PDF",
+     "mo": 18.1
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام٧ ط المؤسسة_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 44.1
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام٨ ط المؤسسة.pdf",
+     "format": "Image Container PDF",
+     "mo": 16.7
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام٨ ط المؤسسة_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 40.7
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام٩ ط المؤسسة.pdf",
+     "format": "Image Container PDF",
+     "mo": 16.4
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام٩ ط المؤسسة_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 43.9
+    }
+   ]
+  },
+  {
+   "downloads": 5301,
+   "identifier": "20240210_20240210_1808",
+   "language": "Arabic",
+   "title": "بلوغ المرام من أدلة الأحكام - مركز حفاظ الوحيين",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "بلوغ المرام من أدلة الأحكام - حفاظ الوحيين.pdf",
+     "format": "Image Container PDF",
+     "mo": 13
+    },
+    {
+     "nom": "بلوغ المرام من أدلة الأحكام - حفاظ الوحيين_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 27.9
+    }
+   ]
+  },
+  {
+   "downloads": 5240,
+   "identifier": "20221222_20221222_0758",
+   "language": "Arabic",
+   "title": "فقه بلوغ المرام (1-5)",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "فقه بلوغ المرام١.pdf",
+     "format": "Image Container PDF",
+     "mo": 9.1
+    },
+    {
+     "nom": "فقه بلوغ المرام١_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 14.2
+    },
+    {
+     "nom": "فقه بلوغ المرام٢.pdf",
+     "format": "Image Container PDF",
+     "mo": 8.5
+    },
+    {
+     "nom": "فقه بلوغ المرام٢_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 15.5
+    },
+    {
+     "nom": "فقه بلوغ المرام٣.pdf",
+     "format": "Image Container PDF",
+     "mo": 10.2
+    },
+    {
+     "nom": "فقه بلوغ المرام٣_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 16.8
+    },
+    {
+     "nom": "فقه بلوغ المرام٤.pdf",
+     "format": "Image Container PDF",
+     "mo": 8.4
+    },
+    {
+     "nom": "فقه بلوغ المرام٤_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 13
+    },
+    {
+     "nom": "فقه بلوغ المرام٥.pdf",
+     "format": "Image Container PDF",
+     "mo": 8.6
+    },
+    {
+     "nom": "فقه بلوغ المرام٥_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 14.4
+    }
+   ]
+  },
+  {
+   "downloads": 4982,
+   "identifier": "ziom7",
+   "language": "Arabic",
+   "title": "التطبيقات الحديثية والأصولية على بلوغ المرام - وضاح محمد مساعد PDF",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "ziom7.pdf",
+     "format": "Text PDF",
+     "mo": 30.1
+    }
+   ]
+  },
+  {
+   "creator": "أبو عبد الله الطرنباطي الفاسي المالكي",
+   "downloads": 4755,
+   "identifier": "CharefELilm",
+   "language": "Arabic",
+   "title": "بلوغ أقصى المرام في شرف العلم و ما يتعلق به من الأحكام",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "CharefIlm.pdf",
+     "format": "Image Container PDF",
+     "mo": 8.8
+    },
+    {
+     "nom": "CharefIlm_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 12.5
+    }
+   ]
+  },
+  {
+   "creator": "محمد بن إسماعيل الصنعاني",
+   "downloads": 4699,
+   "identifier": "SUBULUSSELAMerhBULUGELMERAM12MuhammedB.IsmailEsSanani",
+   "language": "ara",
+   "title": "سبل السلام الموصلة إلى بلوغ المرام",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "SUBULU-S-SELAM šerh BULUG EL-MERAM   0   -   front page.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.8
+    },
+    {
+     "nom": "SUBULU-S-SELAM šerh BULUG EL-MERAM   0   -   front page_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 1
+    },
+    {
+     "nom": "SUBULU-S-SELAM šerh BULUG EL-MERAM   1-2   -   Muhammed b. Isma'il es-San'ani.pdf",
+     "format": "Image Container PDF",
+     "mo": 17.4
+    },
+    {
+     "nom": "SUBULU-S-SELAM šerh BULUG EL-MERAM   1-2   -   Muhammed b. Isma'il es-San'ani_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 21.2
+    },
+    {
+     "nom": "SUBULU-S-SELAM šerh BULUG EL-MERAM   3-4   -   Muhammed b. Isma'il es-San'ani.pdf",
+     "format": "Image Container PDF",
+     "mo": 15.5
+    },
+    {
+     "nom": "SUBULU-S-SELAM šerh BULUG EL-MERAM   3-4   -   Muhammed b. Isma'il es-San'ani_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 18.4
+    },
+    {
+     "nom": "SUBULU-S-SELAM šerh BULUG EL-MERAM   5-6   -   Muhammed b. Isma'il es-San'ani.pdf",
+     "format": "Image Container PDF",
+     "mo": 15.4
+    },
+    {
+     "nom": "SUBULU-S-SELAM šerh BULUG EL-MERAM   5-6   -   Muhammed b. Isma'il es-San'ani_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 25
+    },
+    {
+     "nom": "SUBULU-S-SELAM šerh BULUG EL-MERAM   7-8   -   Muhammed b. Isma'il es-San'ani.pdf",
+     "format": "Image Container PDF",
+     "mo": 17.2
+    },
+    {
+     "nom": "SUBULU-S-SELAM šerh BULUG EL-MERAM   7-8   -   Muhammed b. Isma'il es-San'ani_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 20.6
+    },
+    {
+     "nom": "SUBULU-S-SELAM šerh BULUG EL-MERAM   9 (el-feharis)   -   Muhammed b. Isma'il es-San'ani.pdf",
+     "format": "Image Container PDF",
+     "mo": 8
+    },
+    {
+     "nom": "SUBULU-S-SELAM šerh BULUG EL-MERAM   9 (el-feharis)   -   Muhammed b. Isma'il es-San'ani_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 9
+    }
+   ]
+  },
+  {
+   "creator": "فتح العلام في دراسة أحاديث بلوغ المرام الطبعة الرابعة pdf",
+   "downloads": 4507,
+   "identifier": "yvdx4",
+   "language": "Arabic",
+   "title": "فتح العلام في دراسة أحاديث بلوغ المرام الطبعة الرابعة pdf",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "yvdx4.pdf",
+     "format": "Text PDF",
+     "mo": 99.2
+    }
+   ]
+  },
+  {
+   "creator": "الإمام العلامة الحافظ المحدث المؤرخ الفقيه والمفسر وقاضي المجتھد أبو إبراهيم عز الدين محمد بن إسماعيل بن صلاح بن محمد بن علي بن حفظ الدين بن شرف الدين بن صلاح بن الحسن بن المهدي بن محمد بن إدريس بن علي بن محمد بن أحمد بن يحي بن حمزة الصنعاني الكحلاني المعروف كأسلافه بالأمير رحمة الله عليه المتوفیٰ 1182ھ",
+   "downloads": 4197,
+   "identifier": "20200129_20200129_1441",
+   "language": "ara",
+   "title": "سبل السلام شرح بلوغ المرام",
+   "year": 2020,
+   "droits": "",
+   "editeur": "",
+   "date": "2020-01-29",
+   "pdfs": [
+    {
+     "nom": "سبل السلام شرح بلوغ المرام.pdf",
+     "format": "Image Container PDF",
+     "mo": 29
+    },
+    {
+     "nom": "سبل السلام شرح بلوغ المرام_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 49.7
+    }
+   ]
+  },
+  {
+   "downloads": 4197,
+   "identifier": "20220522_20220522_0652",
+   "language": "urd",
+   "title": "بلوغ المرام",
+   "year": 1997,
+   "droits": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+   "editeur": "",
+   "date": "1997-09-01",
+   "pdfs": [
+    {
+     "nom": "بلوغ المرام.pdf",
+     "format": "Text PDF",
+     "mo": 35.4
+    }
+   ]
+  },
+  {
+   "downloads": 4045,
+   "identifier": "20200611_20200611_0958",
+   "language": "Arabic",
+   "title": "فتح ذي الجلال والإكرام بشرح بلوغ المرام المجلد الخامس عشر",
+   "droits": "http://creativecommons.org/publicdomain/mark/1.0/",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام  المجلد الأول.pdf",
+     "format": "Image Container PDF",
+     "mo": 75.2
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام  المجلد الأول_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 94.5
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام  المجلد التاسع.pdf",
+     "format": "Image Container PDF",
+     "mo": 60.7
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام  المجلد التاسع_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 77.8
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام  المجلد الثالث عشر.pdf",
+     "format": "Image Container PDF",
+     "mo": 61.4
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام  المجلد الثالث عشر_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 76.9
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام  المجلد الثالث.pdf",
+     "format": "Image Container PDF",
+     "mo": 63.4
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام  المجلد الثالث_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 76.1
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام  المجلد الثامن.pdf",
+     "format": "Image Container PDF",
+     "mo": 35.6
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام  المجلد الثامن_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 47.6
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام  المجلد الثاني عشر.pdf",
+     "format": "Image Container PDF",
+     "mo": 52.6
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام  المجلد الثاني عشر_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 68.1
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام  المجلد الثاني.pdf",
+     "format": "Image Container PDF",
+     "mo": 64
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام  المجلد الثاني_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 74.3
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام  المجلد الحادي عشر.pdf",
+     "format": "Image Container PDF",
+     "mo": 58.8
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام  المجلد الحادي عشر_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 77.6
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام  المجلد الخامس عشر.pdf",
+     "format": "Image Container PDF",
+     "mo": 87.6
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام  المجلد الخامس عشر_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 78.8
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام  المجلد الخامس.pdf",
+     "format": "Image Container PDF",
+     "mo": 68.9
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام  المجلد الخامس_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 79.9
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام  المجلد الرابع عشر.pdf",
+     "format": "Image Container PDF",
+     "mo": 81.1
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام  المجلد الرابع عشر_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 98.5
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام  المجلد الرابع.pdf",
+     "format": "Image Container PDF",
+     "mo": 66.2
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام  المجلد الرابع_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 80.3
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام  المجلد السابع.pdf",
+     "format": "Image Container PDF",
+     "mo": 59
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام  المجلد السابع_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 76.3
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام  المجلد السادس.pdf",
+     "format": "Image Container PDF",
+     "mo": 35.7
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام  المجلد السادس_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 47.8
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام  المجلد العشر.pdf",
+     "format": "Image Container PDF",
+     "mo": 59.6
+    },
+    {
+     "nom": "فتح ذي الجلال والإكرام بشرح بلوغ المرام  المجلد العشر_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 77.7
+    }
+   ]
+  },
+  {
+   "downloads": 3405,
+   "identifier": "20190720_20190720_1025",
+   "language": "Arabic",
+   "title": "زوائد منتقى الأخبارعلى بلوغ المرام، من أول أبواب المسح على الخفين إلى نهاية أبواب الأغسال المستحبة، جمعاً ودراسة",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "زوائد منتقى الأخبارعلى بلوغ المرام، من أول أبواب المسح على الخفين  إلى نهاية أبواب الأغسال المستحبة، جمعاً ودراسة.pdf",
+     "format": "Text PDF",
+     "mo": 3.6
+    }
+   ]
+  },
+  {
+   "downloads": 3393,
+   "identifier": "abuarialkurdy_gmail_1_201412",
+   "language": "Arabic",
+   "title": "شه‌رحی بلوغ المرام 1",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "شه‌رحی بلوغ المرام-1.pdf",
+     "format": "Image Container PDF",
+     "mo": 12.6
+    },
+    {
+     "nom": "شه‌رحی بلوغ المرام-1_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 17.5
+    }
+   ]
+  },
+  {
+   "downloads": 3274,
+   "identifier": "20191015_20191015_1410",
+   "language": "Arabic",
+   "title": "التبيان في تخريج وتبويب أحاديث بلوغ المرام للشلاحي",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "1 (1).pdf",
+     "format": "Image Container PDF",
+     "mo": 7.7
+    },
+    {
+     "nom": "1 (1)_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 2.8
+    },
+    {
+     "nom": "1 (10).pdf",
+     "format": "Image Container PDF",
+     "mo": 8.9
+    },
+    {
+     "nom": "1 (10)_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 3.3
+    },
+    {
+     "nom": "1 (11).pdf",
+     "format": "Image Container PDF",
+     "mo": 7.3
+    },
+    {
+     "nom": "1 (11)_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 2.7
+    },
+    {
+     "nom": "1 (12).pdf",
+     "format": "Image Container PDF",
+     "mo": 10.7
+    },
+    {
+     "nom": "1 (12)_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 3.9
+    },
+    {
+     "nom": "1 (2).pdf",
+     "format": "Image Container PDF",
+     "mo": 8.9
+    },
+    {
+     "nom": "1 (2)_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 3.3
+    },
+    {
+     "nom": "1 (3).pdf",
+     "format": "Image Container PDF",
+     "mo": 8.3
+    },
+    {
+     "nom": "1 (3)_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 3.1
+    },
+    {
+     "nom": "1 (4).pdf",
+     "format": "Image Container PDF",
+     "mo": 10.6
+    },
+    {
+     "nom": "1 (4)_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 3.9
+    },
+    {
+     "nom": "1 (5).pdf",
+     "format": "Image Container PDF",
+     "mo": 7.5
+    },
+    {
+     "nom": "1 (5)_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 2.8
+    },
+    {
+     "nom": "1 (6).pdf",
+     "format": "Image Container PDF",
+     "mo": 9.4
+    },
+    {
+     "nom": "1 (6)_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 3.5
+    },
+    {
+     "nom": "1 (7).pdf",
+     "format": "Image Container PDF",
+     "mo": 10.5
+    },
+    {
+     "nom": "1 (7)_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 3.8
+    },
+    {
+     "nom": "1 (8).pdf",
+     "format": "Image Container PDF",
+     "mo": 8.4
+    },
+    {
+     "nom": "1 (8)_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 3.2
+    },
+    {
+     "nom": "1 (9).pdf",
+     "format": "Image Container PDF",
+     "mo": 8.5
+    },
+    {
+     "nom": "1 (9)_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 3.2
+    },
+    {
+     "nom": "التبيان في تخريج وتبويب أحاديث بلوغ المرام للشلاحي.pdf",
+     "format": "Image Container PDF",
+     "mo": 106.7
+    },
+    {
+     "nom": "التبيان في تخريج وتبويب أحاديث بلوغ المرام للشلاحي_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 38.9
+    }
+   ]
+  },
+  {
+   "downloads": 3270,
+   "identifier": "00726-pdf",
+   "title": "00726 كتاب Pdf الشيخ ابن إبن باز شرح كتاب الجامع من بلوغ المرام للشيخ عبدالعزيز بن باز",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "00726 كتاب     pdf  الشيخ ابن إبن باز  شرح_كتاب_الجامع_من_بلوغ_المرام_للشيخ_عبدالعزيز_بن_باز.pdf",
+     "format": "Text PDF",
+     "mo": 10.2
+    }
+   ]
+  },
+  {
+   "downloads": 3092,
+   "identifier": "ansalfahd2014_gmail_20160423_1730",
+   "language": "Arabic",
+   "title": "بلوغ المرام ت الفحل",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "بلوغ المرام ت الفحل.pdf",
+     "format": "Image Container PDF",
+     "mo": 11.4
+    },
+    {
+     "nom": "بلوغ المرام ت الفحل_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 20.1
+    }
+   ]
+  },
+  {
+   "downloads": 3081,
+   "identifier": "20260120_20260120_0742",
+   "title": "سبل السلام شرح بلوغ المرام",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "سبل السلام شرح بلوغ المرام.pdf",
+     "format": "Image Container PDF",
+     "mo": 27.8
+    },
+    {
+     "nom": "سبل السلام شرح بلوغ المرام_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 54.9
+    }
+   ]
+  },
+  {
+   "downloads": 2880,
+   "identifier": "qoak7",
+   "language": "Arabic",
+   "title": "مختصر أحكام الصيام من كتاب منحة العلام شرح بلوغ المرام للعلامة عبد الله الفوزان - اختصره ولخصه أحمد بن خفيف المناصي الشمري",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "qoak7.pdf",
+     "format": "Text PDF",
+     "mo": 1.7
+    }
+   ]
+  },
+  {
+   "downloads": 2722,
+   "identifier": "noor-book.com_20230223",
+   "language": "Arabic",
+   "title": "Noor Book.com بلوغ المرام من أدلة الأحكام ت الفحل",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "Noor-Book.com  بلوغ المرام من أدلة الأحكام ت الفحل.pdf",
+     "format": "Image Container PDF",
+     "mo": 11.4
+    },
+    {
+     "nom": "Noor-Book.com  بلوغ المرام من أدلة الأحكام ت الفحل_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 22
+    }
+   ]
+  },
+  {
+   "downloads": 2651,
+   "identifier": "fbm03",
+   "language": "Arabic",
+   "title": "فقه بلوغ المرام لبيان الأحكام الشرعية - الدكتور محمد مصطفى الزحيلي",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "fbm01.pdf",
+     "format": "Image Container PDF",
+     "mo": 8.9
+    },
+    {
+     "nom": "fbm01_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 14.2
+    },
+    {
+     "nom": "fbm02.pdf",
+     "format": "Image Container PDF",
+     "mo": 8.3
+    },
+    {
+     "nom": "fbm02_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 15.5
+    },
+    {
+     "nom": "fbm03.pdf",
+     "format": "Image Container PDF",
+     "mo": 10.2
+    },
+    {
+     "nom": "fbm03_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 16.8
+    },
+    {
+     "nom": "fbm04.pdf",
+     "format": "Image Container PDF",
+     "mo": 8.2
+    },
+    {
+     "nom": "fbm04_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 12.9
+    },
+    {
+     "nom": "fbm05.pdf",
+     "format": "Image Container PDF",
+     "mo": 8.4
+    },
+    {
+     "nom": "fbm05_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 14.4
+    }
+   ]
+  },
+  {
+   "downloads": 2651,
+   "identifier": "ianam2",
+   "language": "Arabic",
+   "title": "اعلام الانام شرح بلوغ المرام",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "اعلام الانام شرح بلوغ المرام/ianam1.pdf",
+     "format": "Image Container PDF",
+     "mo": 9.9
+    },
+    {
+     "nom": "اعلام الانام شرح بلوغ المرام/ianam1_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 36.7
+    },
+    {
+     "nom": "اعلام الانام شرح بلوغ المرام/ianam2.pdf",
+     "format": "Image Container PDF",
+     "mo": 10.5
+    },
+    {
+     "nom": "اعلام الانام شرح بلوغ المرام/ianam2_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 19
+    },
+    {
+     "nom": "اعلام الانام شرح بلوغ المرام/ianam3.pdf",
+     "format": "Image Container PDF",
+     "mo": 10.3
+    },
+    {
+     "nom": "اعلام الانام شرح بلوغ المرام/ianam3_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 17.8
+    },
+    {
+     "nom": "اعلام الانام شرح بلوغ المرام/ianam4.pdf",
+     "format": "Text PDF",
+     "mo": 9.6
+    }
+   ]
+  },
+  {
+   "downloads": 2596,
+   "identifier": "abuarialkurdy_gmail_2_201412",
+   "language": "Arabic",
+   "title": "شه‌رحی بلوغ المرام 2",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "شه‌رحی بلوغ المرام - 2.pdf",
+     "format": "Image Container PDF",
+     "mo": 14.4
+    },
+    {
+     "nom": "شه‌رحی بلوغ المرام - 2_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 20.2
+    }
+   ]
+  },
+  {
+   "creator": "ayyubsoebandi",
+   "downloads": 2461,
+   "identifier": "minha_allam_10",
+   "language": "Arabic",
+   "title": "منحة العلام في شرح بلوغ المرام للفوزان الجزء 10",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "منحة العلام   ج 10.pdf",
+     "format": "Image Container PDF",
+     "mo": 8.5
+    },
+    {
+     "nom": "منحة العلام   ج 10_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 31.1
+    }
+   ]
+  },
+  {
+   "creator": "الشيخين صالح ال الشيخ وعبدالمحسن الزامل",
+   "downloads": 2450,
+   "identifier": "zamil-bolog-doc",
+   "language": "Arabic",
+   "title": "تفريغ شرح بلوغ المرام",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "Bolog-zamil.pdf",
+     "format": "Image Container PDF",
+     "mo": 11.7
+    },
+    {
+     "nom": "Bolog-zamil_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 55.5
+    }
+   ]
+  },
+  {
+   "downloads": 2419,
+   "identifier": "1_20220612_20220612_1523",
+   "language": "Arabic",
+   "title": "الجامع لفوائد بلوغ المرام - النسخة الكاملة",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "الجامع لفوائد بلوغ المرام (1).pdf",
+     "format": "Image Container PDF",
+     "mo": 17.8
+    },
+    {
+     "nom": "الجامع لفوائد بلوغ المرام (1)_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 19.2
+    },
+    {
+     "nom": "الجامع لفوائد بلوغ المرام (2).pdf",
+     "format": "Image Container PDF",
+     "mo": 15.6
+    },
+    {
+     "nom": "الجامع لفوائد بلوغ المرام (2)_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 16
+    },
+    {
+     "nom": "الجامع لفوائد بلوغ المرام (3).pdf",
+     "format": "Image Container PDF",
+     "mo": 13.2
+    },
+    {
+     "nom": "الجامع لفوائد بلوغ المرام (3)_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 14.3
+    }
+   ]
+  },
+  {
+   "creator": "الأستاذ الدكتور نور الدين عتر",
+   "downloads": 2375,
+   "identifier": "ialam_alanam",
+   "language": "Arabic",
+   "title": "إعلام الأنام شرح بلوغ المرام من أحاديث الأحكام",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "إعلام الأنام0.pdf",
+     "format": "Image Container PDF",
+     "mo": 1
+    },
+    {
+     "nom": "إعلام الأنام0_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 1.7
+    },
+    {
+     "nom": "إعلام الأنام1.pdf",
+     "format": "Image Container PDF",
+     "mo": 9.6
+    },
+    {
+     "nom": "إعلام الأنام1_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 36.4
+    },
+    {
+     "nom": "إعلام الأنام2.pdf",
+     "format": "Image Container PDF",
+     "mo": 10.3
+    },
+    {
+     "nom": "إعلام الأنام2_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 18.8
+    },
+    {
+     "nom": "إعلام الأنام3.pdf",
+     "format": "Image Container PDF",
+     "mo": 10.2
+    },
+    {
+     "nom": "إعلام الأنام3_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 17.7
+    },
+    {
+     "nom": "إعلام الأنام4.pdf",
+     "format": "Text PDF",
+     "mo": 8.9
+    }
+   ]
+  },
+  {
+   "downloads": 2358,
+   "identifier": "alfirdwsiy2018_gmail_1869",
+   "language": "Arabic",
+   "title": "1869 تحفة الكرام شرح بلوغ المرام كتاب اقرا اونلاين",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "1869 - تحفة الكرام شرح بلوغ المرام  كتاب اقرا  اونلاين   .pdf",
+     "format": "Image Container PDF",
+     "mo": 12.5
+    },
+    {
+     "nom": "1869 - تحفة الكرام شرح بلوغ المرام  كتاب اقرا  اونلاين   _text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 20.3
+    }
+   ]
+  },
+  {
+   "downloads": 2348,
+   "identifier": "20220820_20220820_0738",
+   "language": "urd",
+   "title": "مخطوطات كتاب بلوغ المرام من أدلة الأحكام للإمام ابن حجر العسقلاني",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "بلوغ المرام - أياصوفيا 1038.pdf",
+     "format": "Image Container PDF",
+     "mo": 74
+    },
+    {
+     "nom": "بلوغ المرام - أياصوفيا 1038_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 9.1
+    },
+    {
+     "nom": "بلوغ المرام - الأزهرية 6311.pdf",
+     "format": "Image Container PDF",
+     "mo": 22.8
+    },
+    {
+     "nom": "بلوغ المرام - الأزهرية 6311_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 4.5
+    },
+    {
+     "nom": "بلوغ المرام - الأزهرية 7599.pdf",
+     "format": "Image Container PDF",
+     "mo": 18.8
+    },
+    {
+     "nom": "بلوغ المرام - الأزهرية 7599_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 3
+    },
+    {
+     "nom": "بلوغ المرام - الإفتاء السعودية 537 - 86.pdf",
+     "format": "Image Container PDF",
+     "mo": 19.3
+    },
+    {
+     "nom": "بلوغ المرام - الإفتاء السعودية 537 - 86_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 2.9
+    },
+    {
+     "nom": "بلوغ المرام - المسجد النبوي 213.101.pdf",
+     "format": "Image Container PDF",
+     "mo": 32.1
+    },
+    {
+     "nom": "بلوغ المرام - المسجد النبوي 213.101_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 5.2
+    },
+    {
+     "nom": "بلوغ المرام - الملك سعود 1273.pdf",
+     "format": "Image Container PDF",
+     "mo": 50.3
+    },
+    {
+     "nom": "بلوغ المرام - الملك سعود 1273_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 8
+    },
+    {
+     "nom": "بلوغ المرام - الملك سعود 2868.pdf",
+     "format": "Image Container PDF",
+     "mo": 19.9
+    },
+    {
+     "nom": "بلوغ المرام - الملك سعود 2868_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 4.7
+    },
+    {
+     "nom": "بلوغ المرام - الملك عبدالعزيز 2-775.pdf",
+     "format": "Image Container PDF",
+     "mo": 24.2
+    },
+    {
+     "nom": "بلوغ المرام - الملك عبدالعزيز 2-775_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 4.6
+    },
+    {
+     "nom": "بلوغ المرام - اليمن ن1 .pdf",
+     "format": "Image Container PDF",
+     "mo": 54.8
+    },
+    {
+     "nom": "بلوغ المرام - اليمن ن1 _text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 8.3
+    },
+    {
+     "nom": "بلوغ المرام - اليمن ن2.pdf",
+     "format": "Image Container PDF",
+     "mo": 55.6
+    },
+    {
+     "nom": "بلوغ المرام - اليمن ن2_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 8.3
+    },
+    {
+     "nom": "بلوغ المرام - اليمن ن3.pdf",
+     "format": "Image Container PDF",
+     "mo": 57.4
+    },
+    {
+     "nom": "بلوغ المرام - اليمن ن3_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 7.8
+    },
+    {
+     "nom": "بلوغ المرام - جامعة الإمام 778.pdf",
+     "format": "Image Container PDF",
+     "mo": 36
+    },
+    {
+     "nom": "بلوغ المرام - جامعة الإمام 778_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 6.2
+    },
+    {
+     "nom": "بلوغ المرام - جامعة الإمام 848.pdf",
+     "format": "Image Container PDF",
+     "mo": 42.4
+    },
+    {
+     "nom": "بلوغ المرام - جامعة الإمام 848_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 5.6
+    },
+    {
+     "nom": "بلوغ المرام - جامعة الإمام 8972.pdf",
+     "format": "Image Container PDF",
+     "mo": 51.1
+    },
+    {
+     "nom": "بلوغ المرام - جامعة الإمام 8972_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 6.6
+    },
+    {
+     "nom": "بلوغ المرام - جامعة ليدن.pdf",
+     "format": "Image Container PDF",
+     "mo": 210.4
+    },
+    {
+     "nom": "بلوغ المرام - جامعة ليدن_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 22.7
+    },
+    {
+     "nom": "بلوغ المرام - دار الكتب المصرية.pdf",
+     "format": "Image Container PDF",
+     "mo": 28.1
+    },
+    {
+     "nom": "بلوغ المرام - دار الكتب المصرية_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 4.5
+    },
+    {
+     "nom": "بلوغ المرام - فيض الله 2161.pdf",
+     "format": "Image Container PDF",
+     "mo": 60.6
+    },
+    {
+     "nom": "بلوغ المرام - فيض الله 2161_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 10.8
+    },
+    {
+     "nom": "بلوغ المرام - فيض الله 2171.pdf",
+     "format": "Image Container PDF",
+     "mo": 64.5
+    },
+    {
+     "nom": "بلوغ المرام - فيض الله 2171_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 10.5
+    },
+    {
+     "nom": "بلوغ المرام - مكتبة آل عبدالقادر.pdf",
+     "format": "Image Container PDF",
+     "mo": 35.6
+    },
+    {
+     "nom": "بلوغ المرام - مكتبة آل عبدالقادر_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 8.1
+    },
+    {
+     "nom": "بلوغ المرام - مكتبة الأكاديمية الوطنية للينسي وكورسينيانا، روما.pdf",
+     "format": "Image Container PDF",
+     "mo": 280.7
+    },
+    {
+     "nom": "بلوغ المرام - مكتبة الأكاديمية الوطنية للينسي وكورسينيانا، روما_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 28.3
+    },
+    {
+     "nom": "بلوغ المرام بخط الشيخ أحمد شاكر.pdf",
+     "format": "Text PDF",
+     "mo": 7.6
+    },
+    {
+     "nom": "بلوغ المرام، كتاب الجامع - بيازيد3099.pdf",
+     "format": "Image Container PDF",
+     "mo": 37.8
+    },
+    {
+     "nom": "بلوغ المرام، كتاب الجامع - بيازيد3099_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 6.3
+    }
+   ]
+  },
+  {
+   "downloads": 2332,
+   "identifier": "abuarialkurdy_gmail_3_201412",
+   "language": "Arabic",
+   "title": "شه‌رحی بلوغ المرام 3",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "شه‌رحی بلوغ المرام -3.pdf",
+     "format": "Image Container PDF",
+     "mo": 9.4
+    },
+    {
+     "nom": "شه‌رحی بلوغ المرام -3_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 33.7
+    }
+   ]
+  },
+  {
+   "creator": "الإمام الحافظ المحدث المؤرخ الفقيه والمفسر وقاضي المجتھد العلامة الشيخ أبو إبراهيم عز الدين محمد بن إسماعيل بن صلاح بن محمد بن علي بن حفظ الدين بن شرف الدين بن صلاح بن الحسن بن المهدي بن محمد بن إدريس بن علي بن محمد بن أحمد بن يحي بن حمزة الصنعاني الكحلاني المعروف كأسلافه بالأمير رحمة الله عليه المتوفیٰ 1182ھ",
+   "downloads": 2241,
+   "identifier": "20200203_20200203_0626",
+   "language": "ara",
+   "title": "سبل السلام الموصلة إلى بلوغ المرام",
+   "year": 2020,
+   "droits": "",
+   "editeur": "",
+   "date": "2020-02-03",
+   "pdfs": [
+    {
+     "nom": "سبل السلام الموصلة إلى بلوغ المرام.pdf",
+     "format": "Image Container PDF",
+     "mo": 67.9
+    },
+    {
+     "nom": "سبل السلام الموصلة إلى بلوغ المرام_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 90.8
+    }
+   ]
+  },
+  {
+   "downloads": 2183,
+   "identifier": "00367-pdf",
+   "title": "00367 كتاب Pdf الشيخ سعد الشتري شرح بلوغ المرام سعد الشثري",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "00367 كتاب     pdf  الشيخ  سعد الشتري       شرح بلوغ المرام - سعد الشثري.pdf",
+     "format": "Image Container PDF",
+     "mo": 31.8
+    },
+    {
+     "nom": "00367 كتاب     pdf  الشيخ  سعد الشتري       شرح بلوغ المرام - سعد الشثري_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 41.1
+    }
+   ]
+  }
+ ]
+}

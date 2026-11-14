@@ -1,0 +1,228 @@
+{
+ "requete": "(بلوغ المرام OR \"bulugh al-maram\") AND date:[1800-01-01 TO 1950-12-31]",
+ "date": "2026-11-14T03:59:31.525Z",
+ "resultats": [
+  {
+   "creator": "Ibn ajar al-Asqaln, Amad ibn Al, 1372-1449",
+   "downloads": 10726,
+   "identifier": "kitabbulughalmar00ibna",
+   "language": "ara",
+   "title": "Kitab bulugh al-maram",
+   "year": 1911,
+   "droits": "",
+   "editeur": "Misr Matba'at al-tamaddun al-Sina'iyah",
+   "date": "1911",
+   "pdfs": [
+    {
+     "nom": "kitabbulughalmar00ibna.pdf",
+     "format": "Text PDF",
+     "mo": 7.7
+    }
+   ]
+  },
+  {
+   "creator": "ابن حجر العسقلاني",
+   "downloads": 2012,
+   "identifier": "1933_20210228",
+   "language": "ara",
+   "title": "بلوغ المرام من أدلة الأحكام - ابن حجر العسقلاني - طبعة نادرة و قديمة و ملونة",
+   "year": 1933,
+   "droits": "",
+   "editeur": "",
+   "date": "1933",
+   "pdfs": [
+    {
+     "nom": "بلوغ المرام من أدلة الأحكام - ابن حجر العسقلاني - ط. التجارية - 1933.pdf",
+     "format": "Image Container PDF",
+     "mo": 186.2
+    },
+    {
+     "nom": "بلوغ المرام من أدلة الأحكام - ابن حجر العسقلاني - ط. التجارية - 1933_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 11.8
+    },
+    {
+     "nom": "بلوغ المرام من أدلة الأحكام - ابن حجر العسقلاني - مصطفى البابي الحلبي - القاهرة - 1932.pdf",
+     "format": "Image Container PDF",
+     "mo": 153.7
+    },
+    {
+     "nom": "بلوغ المرام من أدلة الأحكام - ابن حجر العسقلاني - مصطفى البابي الحلبي - القاهرة - 1932_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 7.8
+    }
+   ]
+  },
+  {
+   "creator": "الصنعاني",
+   "downloads": 760,
+   "identifier": "1-2-1369-1949",
+   "language": "ara",
+   "title": "سبل السلام شرح بلوغ المرام - الصنعاني - طبعة نادرة و قديمة و ملونة",
+   "year": 1949,
+   "droits": "",
+   "editeur": "",
+   "date": "1949",
+   "pdfs": [
+    {
+     "nom": "سبل السلام - الصنعاني 1-2   1369-1949.pdf",
+     "format": "Image Container PDF",
+     "mo": 364.1
+    },
+    {
+     "nom": "سبل السلام - الصنعاني 1-2   1369-1949_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 23.7
+    },
+    {
+     "nom": "سبل السلام - الصنعاني 3-4   1369-1949.pdf",
+     "format": "Image Container PDF",
+     "mo": 353.2
+    },
+    {
+     "nom": "سبل السلام - الصنعاني 3-4   1369-1949_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 23.1
+    }
+   ]
+  },
+  {
+   "creator": "\"المكي، علوي بن عباس.\"",
+   "downloads": 139,
+   "identifier": "AAlexandrina-069889",
+   "language": "Arabic",
+   "title": "069889_ابانة_الاحكام_شرح_بلوغ_المرام",
+   "year": 1900,
+   "droits": "",
+   "editeur": "مطابع شركة الشمرلى",
+   "date": "[19--]",
+   "pdfs": [
+    {
+     "nom": "069889_ابانة_الاحكام_شرح_بلوغ_المرام.pdf",
+     "format": "Image Container PDF",
+     "mo": 50.1
+    },
+    {
+     "nom": "069889_ابانة_الاحكام_شرح_بلوغ_المرام_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 10.4
+    }
+   ]
+  },
+  {
+   "creator": "\"الصنعاني، محمد بن إسماعيل\"",
+   "downloads": 111,
+   "identifier": "AAlexandrina-154439",
+   "language": "Arabic",
+   "title": "154439_سبل_السلام_شرح_بلوغ_المرام_من_جمع_ادلة_الاحكام",
+   "year": 1900,
+   "droits": "",
+   "editeur": "المكتبة التوفيقية",
+   "date": "[19--]",
+   "pdfs": [
+    {
+     "nom": "154439_سبل_السلام_شرح_بلوغ_المرام_من_جمع_ادلة_الاحكام.pdf",
+     "format": "Image Container PDF",
+     "mo": 49.6
+    },
+    {
+     "nom": "154439_سبل_السلام_شرح_بلوغ_المرام_من_جمع_ادلة_الاحكام_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 10.4
+    }
+   ]
+  },
+  {
+   "creator": "انستاس مارى",
+   "downloads": 72,
+   "identifier": "AAlexandrina-111907",
+   "language": "Arabic",
+   "title": "111907_كتاب_بلوغ_المرام_فى_شرح_مسك_الختام_فى_من_تولى_ملك_ا_و_امام",
+   "year": 1939,
+   "droits": "",
+   "editeur": "مطبعة البرتيرى",
+   "date": "1939.",
+   "pdfs": [
+    {
+     "nom": "111907_كتاب_بلوغ_المرام_فى_شرح_مسك_الختام_فى_من_تولى_ملك_ا_و_امام.pdf",
+     "format": "Image Container PDF",
+     "mo": 43.2
+    },
+    {
+     "nom": "111907_كتاب_بلوغ_المرام_فى_شرح_مسك_الختام_فى_من_تولى_ملك_ا_و_امام_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 9.3
+    }
+   ]
+  },
+  {
+   "creator": "\"ابن حجر العسقلاني، أحمد بن علي\"",
+   "downloads": 65,
+   "identifier": "AAlexandrina-194194",
+   "language": "Arabic",
+   "title": "194194_سبل_السلام_شرح_بلوغ_المرام_من_ادلة_الاحكام_ج_1_الكبرى",
+   "year": 1934,
+   "droits": "",
+   "editeur": "المكتبة التجارية الكبرى",
+   "date": "1934.",
+   "pdfs": [
+    {
+     "nom": "194194_سبل_السلام_شرح_بلوغ_المرام_من_ادلة_الاحكام_ج_1_الكبرى.pdf",
+     "format": "Image Container PDF",
+     "mo": 41.5
+    },
+    {
+     "nom": "194194_سبل_السلام_شرح_بلوغ_المرام_من_ادلة_الاحكام_ج_1_الكبرى_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 27.9
+    }
+   ]
+  },
+  {
+   "creator": "\"ابن حجر العسقلاني، أحمد بن علي\"",
+   "downloads": 62,
+   "identifier": "AAlexandrina-020030",
+   "language": "Arabic",
+   "title": "020030 - فتح العلام لشرح بلوغ المرام",
+   "year": 1900,
+   "droits": "",
+   "editeur": "دار صادر",
+   "date": "[19--]",
+   "pdfs": [
+    {
+     "nom": "020030 - فتح العلام لشرح بلوغ المرام.pdf",
+     "format": "Image Container PDF",
+     "mo": 58.8
+    },
+    {
+     "nom": "020030 - فتح العلام لشرح بلوغ المرام_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 12.9
+    }
+   ]
+  },
+  {
+   "creator": "\"ابن حجر العسقلاني، أحمد بن علي\"",
+   "downloads": 56,
+   "identifier": "AAlexandrina-020029",
+   "language": "Arabic",
+   "title": "020029 - فتح العلام لشرح بلوغ المرام",
+   "year": 1900,
+   "droits": "",
+   "editeur": "دار صادر",
+   "date": "[19--]",
+   "pdfs": [
+    {
+     "nom": "020029 - فتح العلام لشرح بلوغ المرام.pdf",
+     "format": "Image Container PDF",
+     "mo": 50.7
+    },
+    {
+     "nom": "020029 - فتح العلام لشرح بلوغ المرام_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 11.6
+    }
+   ]
+  }
+ ]
+}

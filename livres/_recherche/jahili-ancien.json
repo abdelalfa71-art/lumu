@@ -1,0 +1,932 @@
+{
+ "requete": "(الشعراء الستة OR \"الشعر الجاهلي\" OR المعلقات OR \"six ancient Arabic poets\" OR Ahlwardt OR \"divans\") AND date:[1800-01-01 TO 1950-12-31]",
+ "date": "2026-11-14T03:57:33.504Z",
+ "resultats": [
+  {
+   "creator": [
+    "Preussische Staatsbibliothek",
+    "Pertz, G. H. (Georg Heinrich), 1795-1876"
+   ],
+   "downloads": 16522,
+   "identifier": "diehandschriften22preu",
+   "language": "ger",
+   "title": "Die Handschriften-verzeichnisse der Königlichen Bibliothek zu Berlin",
+   "year": 1853,
+   "droits": "NOT_IN_COPYRIGHT",
+   "editeur": "Berlin : A. Asher",
+   "date": "1853",
+   "pdfs": [
+    {
+     "nom": "diehandschriften22preu.pdf",
+     "format": "Text PDF",
+     "mo": 36.8
+    }
+   ]
+  },
+  {
+   "creator": [
+    "Preussische Staatsbibliothek",
+    "Pertz, G. H. (Georg Heinrich), 1795-1876"
+   ],
+   "downloads": 7524,
+   "identifier": "diehandschriften0202preu",
+   "language": "ger",
+   "title": "Die Handschriften-verzeichnisse der Königlichen Bibliothek zu Berlin",
+   "year": 1853,
+   "droits": "NOT_IN_COPYRIGHT",
+   "editeur": "Berlin : A. Asher",
+   "date": "1853",
+   "pdfs": [
+    {
+     "nom": "diehandschriften0202preu.pdf",
+     "format": "Text PDF",
+     "mo": 14.6
+    },
+    {
+     "nom": "diehandschriften0202preu_bw.pdf",
+     "format": "Grayscale PDF",
+     "mo": 12.3
+    }
+   ]
+  },
+  {
+   "creator": [
+    "Preussische Staatsbibliothek",
+    "Pertz, G. H. (Georg Heinrich), 1795-1876"
+   ],
+   "downloads": 7078,
+   "identifier": "diehandschriften0501preu",
+   "language": "ger",
+   "title": "Die Handschriften-verzeichnisse der Königlichen Bibliothek zu Berlin",
+   "year": 1853,
+   "droits": "NOT_IN_COPYRIGHT",
+   "editeur": "Berlin : A. Asher",
+   "date": "1853",
+   "pdfs": [
+    {
+     "nom": "diehandschriften0501preu.pdf",
+     "format": "Text PDF",
+     "mo": 26.2
+    },
+    {
+     "nom": "diehandschriften0501preu_bw.pdf",
+     "format": "Grayscale PDF",
+     "mo": 21.2
+    }
+   ]
+  },
+  {
+   "creator": [
+    "Preussische Staatsbibliothek",
+    "Pertz, G. H. (Georg Heinrich), 1795-1876"
+   ],
+   "downloads": 6996,
+   "identifier": "diehandschriften07preu",
+   "language": "ger",
+   "title": "Die Handschriften-verzeichnisse der Königlichen Bibliothek zu Berlin",
+   "year": 1853,
+   "droits": "NOT_IN_COPYRIGHT",
+   "editeur": "Berlin : A. Asher",
+   "date": "1853",
+   "pdfs": [
+    {
+     "nom": "diehandschriften07preu.pdf",
+     "format": "Text PDF",
+     "mo": 34.5
+    },
+    {
+     "nom": "diehandschriften07preu_bw.pdf",
+     "format": "Grayscale PDF",
+     "mo": 29.3
+    }
+   ]
+  },
+  {
+   "creator": "Ahlwardt, Wilhelm, 1828-1909",
+   "downloads": 6635,
+   "identifier": "sammlungenaltera00ahlwuoft",
+   "language": "ara",
+   "title": "Sammlungen alter Arabischer Dichter",
+   "year": 1902,
+   "droits": "NOT_IN_COPYRIGHT",
+   "editeur": "Berlin, Reuther",
+   "date": "1902",
+   "pdfs": [
+    {
+     "nom": "sammlungenaltera00ahlwuoft.pdf",
+     "format": "Text PDF",
+     "mo": 40
+    }
+   ]
+  },
+  {
+   "creator": [
+    "Preussische Staatsbibliothek",
+    "Pertz, G. H. (Georg Heinrich), 1795-1876"
+   ],
+   "downloads": 6632,
+   "identifier": "diehandschriften0502preu",
+   "language": "ger",
+   "title": "Die Handschriften-verzeichnisse der Königlichen Bibliothek zu Berlin",
+   "year": 1853,
+   "droits": "NOT_IN_COPYRIGHT",
+   "editeur": "Berlin : A. Asher",
+   "date": "1853",
+   "pdfs": [
+    {
+     "nom": "diehandschriften0502preu.pdf",
+     "format": "Text PDF",
+     "mo": 36.8
+    },
+    {
+     "nom": "diehandschriften0502preu_bw.pdf",
+     "format": "Grayscale PDF",
+     "mo": 30.4
+    }
+   ]
+  },
+  {
+   "creator": [
+    "Preussische Staatsbibliothek",
+    "Pertz, G. H. (Georg Heinrich), 1795-1876"
+   ],
+   "downloads": 6121,
+   "identifier": "diehandschriften1303preu",
+   "language": "ger",
+   "title": "Die Handschriften-verzeichnisse der Königlichen Bibliothek zu Berlin",
+   "year": 1853,
+   "droits": "NOT_IN_COPYRIGHT",
+   "editeur": "Berlin : A. Asher",
+   "date": "1853",
+   "pdfs": [
+    {
+     "nom": "diehandschriften1303preu.pdf",
+     "format": "Text PDF",
+     "mo": 45.3
+    }
+   ]
+  },
+  {
+   "creator": [
+    "Preussische Staatsbibliothek",
+    "Pertz, G. H. (Georg Heinrich), 1795-1876"
+   ],
+   "downloads": 6072,
+   "identifier": "diehandschriften01preu",
+   "language": "ger",
+   "title": "Die Handschriften-verzeichnisse der Königlichen Bibliothek zu Berlin",
+   "year": 1853,
+   "droits": "NOT_IN_COPYRIGHT",
+   "editeur": "Berlin : A. Asher",
+   "date": "1853",
+   "pdfs": [
+    {
+     "nom": "diehandschriften01preu.pdf",
+     "format": "Text PDF",
+     "mo": 35.6
+    },
+    {
+     "nom": "diehandschriften01preu_bw.pdf",
+     "format": "Grayscale PDF",
+     "mo": 29.2
+    }
+   ]
+  },
+  {
+   "creator": [
+    "Preussische Staatsbibliothek",
+    "Pertz, G. H. (Georg Heinrich), 1795-1876"
+   ],
+   "downloads": 5820,
+   "identifier": "diehandschriften08preu",
+   "language": "ger",
+   "title": "Die Handschriften-verzeichnisse der Königlichen Bibliothek zu Berlin",
+   "year": 1853,
+   "droits": "NOT_IN_COPYRIGHT",
+   "editeur": "Berlin : A. Asher",
+   "date": "1853",
+   "pdfs": [
+    {
+     "nom": "diehandschriften08preu.pdf",
+     "format": "Text PDF",
+     "mo": 49.2
+    }
+   ]
+  },
+  {
+   "creator": [
+    "Preussische Staatsbibliothek",
+    "Pertz, G. H. (Georg Heinrich), 1795-1876"
+   ],
+   "downloads": 5766,
+   "identifier": "diehandschriften12preu",
+   "language": "ger",
+   "title": "Die Handschriften-verzeichnisse der Königlichen Bibliothek zu Berlin",
+   "year": 1853,
+   "droits": "NOT_IN_COPYRIGHT",
+   "editeur": "Berlin : A. Asher",
+   "date": "1853",
+   "pdfs": [
+    {
+     "nom": "diehandschriften12preu.pdf",
+     "format": "Text PDF",
+     "mo": 43.1
+    }
+   ]
+  },
+  {
+   "creator": [
+    "Preussische Staatsbibliothek",
+    "Pertz, G. H. (Georg Heinrich), 1795-1876"
+   ],
+   "downloads": 5384,
+   "identifier": "diehandschriften0503preu",
+   "language": "ger",
+   "title": "Die Handschriften-verzeichnisse der Königlichen Bibliothek zu Berlin",
+   "year": 1853,
+   "droits": "NOT_IN_COPYRIGHT",
+   "editeur": "Berlin : A. Asher",
+   "date": "1853",
+   "pdfs": [
+    {
+     "nom": "diehandschriften0503preu.pdf",
+     "format": "Text PDF",
+     "mo": 41.9
+    },
+    {
+     "nom": "diehandschriften0503preu_bw.pdf",
+     "format": "Grayscale PDF",
+     "mo": 37
+    }
+   ]
+  },
+  {
+   "creator": [
+    "Preussische Staatsbibliothek",
+    "Pertz, G. H. (Georg Heinrich), 1795-1876"
+   ],
+   "downloads": 5334,
+   "identifier": "diehandschriften1302preu",
+   "language": "ger",
+   "title": "Die Handschriften-verzeichnisse der Königlichen Bibliothek zu Berlin",
+   "year": 1853,
+   "droits": "NOT_IN_COPYRIGHT",
+   "editeur": "Berlin : A. Asher",
+   "date": "1853",
+   "pdfs": [
+    {
+     "nom": "diehandschriften1302preu.pdf",
+     "format": "Text PDF",
+     "mo": 39.8
+    },
+    {
+     "nom": "diehandschriften1302preu_bw.pdf",
+     "format": "Grayscale PDF",
+     "mo": 36
+    }
+   ]
+  },
+  {
+   "creator": [
+    "Preussische Staatsbibliothek",
+    "Pertz, G. H. (Georg Heinrich), 1795-1876"
+   ],
+   "downloads": 5240,
+   "identifier": "diehandschriften17preu",
+   "language": "ger",
+   "title": "Die Handschriften-verzeichnisse der Königlichen Bibliothek zu Berlin",
+   "year": 1853,
+   "droits": "NOT_IN_COPYRIGHT",
+   "editeur": "Berlin : A. Asher",
+   "date": "1853",
+   "pdfs": [
+    {
+     "nom": "diehandschriften17preu.pdf",
+     "format": "Text PDF",
+     "mo": 42.3
+    }
+   ]
+  },
+  {
+   "creator": [
+    "Preussische Staatsbibliothek",
+    "Pertz, G. H. (Georg Heinrich), 1795-1876"
+   ],
+   "downloads": 5132,
+   "identifier": "diehandschriften06preu",
+   "language": "ger",
+   "title": "Die Handschriften-verzeichnisse der Königlichen Bibliothek zu Berlin",
+   "year": 1853,
+   "droits": "NOT_IN_COPYRIGHT",
+   "editeur": "Berlin : A. Asher",
+   "date": "1853",
+   "pdfs": [
+    {
+     "nom": "diehandschriften06preu.pdf",
+     "format": "Text PDF",
+     "mo": 35.5
+    },
+    {
+     "nom": "diehandschriften06preu_bw.pdf",
+     "format": "Grayscale PDF",
+     "mo": 29.9
+    }
+   ]
+  },
+  {
+   "creator": [
+    "Preussische Staatsbibliothek",
+    "Pertz, G. H. (Georg Heinrich), 1795-1876"
+   ],
+   "downloads": 5057,
+   "identifier": "diehandschriften21preu",
+   "language": "ger",
+   "title": "Die Handschriften-verzeichnisse der Königlichen Bibliothek zu Berlin",
+   "year": 1853,
+   "droits": "NOT_IN_COPYRIGHT",
+   "editeur": "Berlin : A. Asher",
+   "date": "1853",
+   "pdfs": [
+    {
+     "nom": "diehandschriften21preu.pdf",
+     "format": "Text PDF",
+     "mo": 46
+    },
+    {
+     "nom": "diehandschriften21preu_bw.pdf",
+     "format": "Grayscale PDF",
+     "mo": 42.4
+    }
+   ]
+  },
+  {
+   "creator": [
+    "Preussische Staatsbibliothek",
+    "Pertz, G. H. (Georg Heinrich), 1795-1876"
+   ],
+   "downloads": 5037,
+   "identifier": "diehandschriften18preu",
+   "language": "ger",
+   "title": "Die Handschriften-verzeichnisse der Königlichen Bibliothek zu Berlin",
+   "year": 1853,
+   "droits": "NOT_IN_COPYRIGHT",
+   "editeur": "Berlin : A. Asher",
+   "date": "1853",
+   "pdfs": [
+    {
+     "nom": "diehandschriften18preu.pdf",
+     "format": "Text PDF",
+     "mo": 47.2
+    },
+    {
+     "nom": "diehandschriften18preu_bw.pdf",
+     "format": "Grayscale PDF",
+     "mo": 42.7
+    }
+   ]
+  },
+  {
+   "creator": [
+    "Preussische Staatsbibliothek",
+    "Pertz, G. H. (Georg Heinrich), 1795-1876"
+   ],
+   "downloads": 4673,
+   "identifier": "diehandschriften0201preu",
+   "language": "ger",
+   "title": "Die Handschriften-verzeichnisse der Königlichen Bibliothek zu Berlin",
+   "year": 1853,
+   "droits": "NOT_IN_COPYRIGHT",
+   "editeur": "Berlin : A. Asher",
+   "date": "1853",
+   "pdfs": [
+    {
+     "nom": "diehandschriften0201preu.pdf",
+     "format": "Text PDF",
+     "mo": 12.1
+    },
+    {
+     "nom": "diehandschriften0201preu_bw.pdf",
+     "format": "Grayscale PDF",
+     "mo": 10.1
+    }
+   ]
+  },
+  {
+   "creator": [
+    "Preussische Staatsbibliothek",
+    "Pertz, G. H. (Georg Heinrich), 1795-1876"
+   ],
+   "downloads": 4590,
+   "identifier": "diehandschriften16preu",
+   "language": "ger",
+   "title": "Die Handschriften-verzeichnisse der Königlichen Bibliothek zu Berlin",
+   "year": 1853,
+   "droits": "NOT_IN_COPYRIGHT",
+   "editeur": "Berlin : A. Asher",
+   "date": "1853",
+   "pdfs": [
+    {
+     "nom": "diehandschriften16preu.pdf",
+     "format": "Text PDF",
+     "mo": 39.1
+    }
+   ]
+  },
+  {
+   "creator": [
+    "Preussische Staatsbibliothek",
+    "Pertz, G. H. (Georg Heinrich), 1795-1876"
+   ],
+   "downloads": 4472,
+   "identifier": "diehandschriften09preu",
+   "language": "ger",
+   "title": "Die Handschriften-verzeichnisse der Königlichen Bibliothek zu Berlin",
+   "year": 1853,
+   "droits": "NOT_IN_COPYRIGHT",
+   "editeur": "Berlin : A. Asher",
+   "date": "1853",
+   "pdfs": [
+    {
+     "nom": "diehandschriften09preu.pdf",
+     "format": "Text PDF",
+     "mo": 43.2
+    }
+   ]
+  },
+  {
+   "creator": [
+    "Preussische Staatsbibliothek",
+    "Pertz, G. H. (Georg Heinrich), 1795-1876"
+   ],
+   "downloads": 4433,
+   "identifier": "diehandschriften04preu",
+   "language": "ger",
+   "title": "Die Handschriften-verzeichnisse der Königlichen Bibliothek zu Berlin",
+   "year": 1853,
+   "droits": "NOT_IN_COPYRIGHT",
+   "editeur": "Berlin : A. Asher",
+   "date": "1853",
+   "pdfs": [
+    {
+     "nom": "diehandschriften04preu.pdf",
+     "format": "Text PDF",
+     "mo": 65.1
+    }
+   ]
+  },
+  {
+   "creator": [
+    "Preussische Staatsbibliothek",
+    "Pertz, G. H. (Georg Heinrich), 1795-1876"
+   ],
+   "downloads": 4212,
+   "identifier": "diehandschriften19preu",
+   "language": "ger",
+   "title": "Die Handschriften-verzeichnisse der Königlichen Bibliothek zu Berlin",
+   "year": 1853,
+   "droits": "NOT_IN_COPYRIGHT",
+   "editeur": "Berlin : A. Asher",
+   "date": "1853",
+   "pdfs": [
+    {
+     "nom": "diehandschriften19preu.pdf",
+     "format": "Text PDF",
+     "mo": 61.4
+    },
+    {
+     "nom": "diehandschriften19preu_bw.pdf",
+     "format": "Grayscale PDF",
+     "mo": 54.9
+    }
+   ]
+  },
+  {
+   "creator": [
+    "Preussische Staatsbibliothek",
+    "Pertz, G. H. (Georg Heinrich), 1795-1876"
+   ],
+   "downloads": 4123,
+   "identifier": "diehandschriften2301preu",
+   "language": "ger",
+   "title": "Die Handschriften-verzeichnisse der Königlichen Bibliothek zu Berlin",
+   "year": 1853,
+   "droits": "NOT_IN_COPYRIGHT",
+   "editeur": "Berlin : A. Asher",
+   "date": "1853",
+   "pdfs": [
+    {
+     "nom": "diehandschriften2301preu.pdf",
+     "format": "Text PDF",
+     "mo": 32.4
+    },
+    {
+     "nom": "diehandschriften2301preu_bw.pdf",
+     "format": "Grayscale PDF",
+     "mo": 25.7
+    }
+   ]
+  },
+  {
+   "creator": [
+    "Preussische Staatsbibliothek",
+    "Pertz, G. H. (Georg Heinrich), 1795-1876"
+   ],
+   "downloads": 4072,
+   "identifier": "diehandschriften1301preu",
+   "language": "ger",
+   "title": "Die Handschriften-verzeichnisse der Königlichen Bibliothek zu Berlin",
+   "year": 1853,
+   "droits": "NOT_IN_COPYRIGHT",
+   "editeur": "Berlin : A. Asher",
+   "date": "1853",
+   "pdfs": [
+    {
+     "nom": "diehandschriften1301preu.pdf",
+     "format": "Text PDF",
+     "mo": 48.7
+    }
+   ]
+  },
+  {
+   "creator": [
+    "Preussische Staatsbibliothek",
+    "Pertz, G. H. (Georg Heinrich), 1795-1876"
+   ],
+   "downloads": 4003,
+   "identifier": "diehandschriften14preu",
+   "language": "ger",
+   "title": "Die Handschriften-verzeichnisse der Königlichen Bibliothek zu Berlin",
+   "year": 1853,
+   "droits": "NOT_IN_COPYRIGHT",
+   "editeur": "Berlin : A. Asher",
+   "date": "1853",
+   "pdfs": [
+    {
+     "nom": "diehandschriften14preu.pdf",
+     "format": "Text PDF",
+     "mo": 21.2
+    },
+    {
+     "nom": "diehandschriften14preu_bw.pdf",
+     "format": "Grayscale PDF",
+     "mo": 18.9
+    }
+   ]
+  },
+  {
+   "creator": "Abel, Ludwig",
+   "downloads": 3735,
+   "identifier": "diesiebenmuallak00abeluoft",
+   "language": "ara",
+   "title": "Die sieben Mu'allakt. Text, vollständiges Wörterverzeichniss, deutscher und arabischer Commentar bearb. von Ludwig Abel",
+   "year": 1891,
+   "droits": "NOT_IN_COPYRIGHT",
+   "editeur": "Berlin W. Spemann",
+   "date": "1891",
+   "pdfs": [
+    {
+     "nom": "diesiebenmuallak00abeluoft.pdf",
+     "format": "Text PDF",
+     "mo": 10.2
+    }
+   ]
+  },
+  {
+   "creator": [
+    "Preussische Staatsbibliothek",
+    "Pertz, G. H. (Georg Heinrich), 1795-1876"
+   ],
+   "downloads": 3692,
+   "identifier": "diehandschriften11preu",
+   "language": "ger",
+   "title": "Die Handschriften-verzeichnisse der Königlichen Bibliothek zu Berlin",
+   "year": 1853,
+   "droits": "NOT_IN_COPYRIGHT",
+   "editeur": "Berlin : A. Asher",
+   "date": "1853",
+   "pdfs": [
+    {
+     "nom": "diehandschriften11preu.pdf",
+     "format": "Text PDF",
+     "mo": 22.6
+    },
+    {
+     "nom": "diehandschriften11preu_bw.pdf",
+     "format": "Grayscale PDF",
+     "mo": 19.7
+    }
+   ]
+  },
+  {
+   "downloads": 3419,
+   "identifier": "septommoallatca00unkngoog",
+   "language": [
+    "lat",
+    "ara"
+   ],
+   "title": "Septom Moʻallaḳāt, carmina antiquissima Arabum",
+   "year": 1850,
+   "droits": "NOT_IN_COPYRIGHT",
+   "editeur": "Lipsia, Sumptibus F.C.G. Vogelii",
+   "date": "1850",
+   "pdfs": [
+    {
+     "nom": "septommoallatca00unkngoog.pdf",
+     "format": "Image Container PDF",
+     "mo": 9.3
+    }
+   ]
+  },
+  {
+   "creator": [
+    "Preussische Staatsbibliothek",
+    "Pertz, G. H. (Georg Heinrich), 1795-1876"
+   ],
+   "downloads": 3396,
+   "identifier": "diehandschriften20preu",
+   "language": "ger",
+   "title": "Die Handschriften-verzeichnisse der Königlichen Bibliothek zu Berlin",
+   "year": 1853,
+   "droits": "NOT_IN_COPYRIGHT",
+   "editeur": "Berlin : A. Asher",
+   "date": "1853",
+   "pdfs": [
+    {
+     "nom": "diehandschriften20preu.pdf",
+     "format": "Text PDF",
+     "mo": 39.9
+    },
+    {
+     "nom": "diehandschriften20preu_bw.pdf",
+     "format": "Grayscale PDF",
+     "mo": 37.1
+    }
+   ]
+  },
+  {
+   "creator": [
+    "Preussische Staatsbibliothek",
+    "Pertz, G. H. (Georg Heinrich), 1795-1876"
+   ],
+   "downloads": 2697,
+   "identifier": "diehandschriften10preu",
+   "language": "ger",
+   "title": "Die Handschriften-verzeichnisse der Königlichen Bibliothek zu Berlin",
+   "year": 1853,
+   "droits": "NOT_IN_COPYRIGHT",
+   "editeur": "Berlin : A. Asher",
+   "date": "1853",
+   "pdfs": [
+    {
+     "nom": "diehandschriften10preu.pdf",
+     "format": "Text PDF",
+     "mo": 7.4
+    },
+    {
+     "nom": "diehandschriften10preu_bw.pdf",
+     "format": "Grayscale PDF",
+     "mo": 6.4
+    }
+   ]
+  },
+  {
+   "creator": [
+    "Preussische Staatsbibliothek",
+    "Pertz, G. H. (Georg Heinrich), 1795-1876"
+   ],
+   "downloads": 2651,
+   "identifier": "diehandschriften232preu",
+   "language": "ger",
+   "title": "Die Handschriften-verzeichnisse der Königlichen Bibliothek zu Berlin",
+   "year": 1853,
+   "droits": "NOT_IN_COPYRIGHT",
+   "editeur": "Berlin : A. Asher",
+   "date": "1853",
+   "pdfs": [
+    {
+     "nom": "diehandschriften232preu.pdf",
+     "format": "Text PDF",
+     "mo": 34.6
+    }
+   ]
+  },
+  {
+   "creator": [
+    "Preussische Staatsbibliothek",
+    "Pertz, G. H. (Georg Heinrich), 1795-1876"
+   ],
+   "downloads": 2624,
+   "identifier": "diehandschriften03preu",
+   "language": "ger",
+   "title": "Die Handschriften-verzeichnisse der Königlichen Bibliothek zu Berlin",
+   "year": 1853,
+   "droits": "NOT_IN_COPYRIGHT",
+   "editeur": "Berlin : A. Asher",
+   "date": "1853",
+   "pdfs": [
+    {
+     "nom": "diehandschriften03preu.pdf",
+     "format": "Text PDF",
+     "mo": 7.1
+    },
+    {
+     "nom": "diehandschriften03preu_bw.pdf",
+     "format": "Grayscale PDF",
+     "mo": 5.8
+    }
+   ]
+  },
+  {
+   "creator": "Ahlwardt, W. (Wilhelm), 1828-1909, editor",
+   "downloads": 2413,
+   "identifier": "divanssixancien00alqgoog",
+   "language": "eng",
+   "title": "The divans of the six ancient Arabic poets Ennabiga, 'Antara, Tharafa, Zuhair, 'Alqama and Imruulqais ; chiefly according to the mss. of Paris, Gotha, and Leyden; and the collection of their fragments with a list of the various readings of the text",
+   "year": 1870,
+   "droits": "NOT_IN_COPYRIGHT",
+   "editeur": "London : Trübner",
+   "date": "1870",
+   "pdfs": [
+    {
+     "nom": "divanssixancien00alqgoog.pdf",
+     "format": "Image Container PDF",
+     "mo": 9.1
+    },
+    {
+     "nom": "divanssixancien00alqgoog_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 11.7
+    }
+   ]
+  },
+  {
+   "creator": [
+    "Preussische Staatsbibliothek",
+    "Pertz, G. H. (Georg Heinrich), 1795-1876"
+   ],
+   "downloads": 2176,
+   "identifier": "diehandschriften2401preu",
+   "language": "ger",
+   "title": "Die Handschriften-verzeichnisse der Königlichen Bibliothek zu Berlin",
+   "year": 1853,
+   "droits": "NOT_IN_COPYRIGHT",
+   "editeur": "Berlin : A. Asher",
+   "date": "1853",
+   "pdfs": [
+    {
+     "nom": "diehandschriften2401preu.pdf",
+     "format": "Text PDF",
+     "mo": 14.5
+    },
+    {
+     "nom": "diehandschriften2401preu_bw.pdf",
+     "format": "Grayscale PDF",
+     "mo": 12.8
+    }
+   ]
+  },
+  {
+   "creator": [
+    "Preussische Staatsbibliothek",
+    "Landberg, Carlo, 1848-1924",
+    "Ahlwardt, Wilhelm, 1828-1909"
+   ],
+   "downloads": 2140,
+   "identifier": "kurzesverzeichni00preuuoft",
+   "language": "ger",
+   "title": "Kurzes Verzeichniss der Landberg'schen Sammlung arabischer Handschriften",
+   "year": 1885,
+   "droits": "NOT_IN_COPYRIGHT",
+   "editeur": "Berling A.W. Schade's Buchdruckerei (L. Schade)",
+   "date": "1885",
+   "pdfs": [
+    {
+     "nom": "kurzesverzeichni00preuuoft.pdf",
+     "format": "Text PDF",
+     "mo": 6
+    }
+   ]
+  },
+  {
+   "creator": "Wilhelm Ahlwardt",
+   "downloads": 1983,
+   "identifier": "KitabAlIqdAlThameenFeyAlShoaraa",
+   "language": "ara",
+   "title": "كتاب العقد الثمين في دواوين الشعراء الستة الجاهليين",
+   "year": 1870,
+   "droits": "http://creativecommons.org/licenses/by-nc-nd/4.0/",
+   "editeur": "",
+   "date": "1870",
+   "pdfs": [
+    {
+     "nom": "KitabAlIqdAlThameenFeyAlShoaraa.pdf",
+     "format": "Image Container PDF",
+     "mo": 10
+    },
+    {
+     "nom": "KitabAlIqdAlThameenFeyAlShoaraa_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 20
+    }
+   ]
+  },
+  {
+   "creator": "Muḥammad ibn ʻAlī Ibn al-Ṭiqṭaqā, Wilhelm Ahlwardt",
+   "downloads": 1926,
+   "identifier": "alfakhrfaladbal00unkngoog",
+   "language": "Arabic",
+   "title": "al-Fakhrī fī al-adāb al-sulṭānīyah wa-al-duwalal-Islāmīyah",
+   "year": 1860,
+   "droits": "NOT_IN_COPYRIGHT",
+   "editeur": "al-Madrasah al-Kullīyah al-Malikīyah",
+   "date": "1860",
+   "pdfs": [
+    {
+     "nom": "alfakhrfaladbal00unkngoog.pdf",
+     "format": "Image Container PDF",
+     "mo": 11.8
+    }
+   ]
+  },
+  {
+   "creator": "Ossian, 3. st",
+   "downloads": 1876,
+   "identifier": "diegedichteossia01macp",
+   "language": "ger",
+   "title": "Die Gedichte Ossian's",
+   "year": 1861,
+   "droits": "http://creativecommons.org/licenses/by-nc-sa/2.5/scotland/",
+   "editeur": "Leipzig : G.J. Göschen'sche Verlagshandlung",
+   "date": "1861",
+   "pdfs": [
+    {
+     "nom": "diegedichteossia01macp.pdf",
+     "format": "Text PDF",
+     "mo": 34.3
+    }
+   ]
+  },
+  {
+   "creator": [
+    "Bayram Khan, Khan Khanan",
+    "Ross, E. Denison (Edward Denison), Sir, 1871-1940"
+   ],
+   "downloads": 1865,
+   "identifier": "persianturkidv00bayruoft",
+   "language": "eng",
+   "title": "The Persian and Turki dîvâns. Edited by E. Denison Ross",
+   "year": 1910,
+   "droits": "NOT_IN_COPYRIGHT",
+   "editeur": "Calcutta Asiatic Society",
+   "date": "1910",
+   "pdfs": [
+    {
+     "nom": "persianturkidv00bayruoft.pdf",
+     "format": "Text PDF",
+     "mo": 5.4
+    }
+   ]
+  },
+  {
+   "creator": "Paul Massing",
+   "downloads": 1817,
+   "identifier": "RehearsalForDestructionAStudyOfPoliticalAntiSemitismInImperialGermany",
+   "language": "eng",
+   "title": "Rehearsal For Destruction. A Study Of Political Anti Semitism In Imperial Germany",
+   "year": 1949,
+   "droits": "",
+   "editeur": "",
+   "date": "1949",
+   "pdfs": [
+    {
+     "nom": "Paul Massing - Rehearsal for Destruction. A Study of Political Anti-Semitism in Imperial Germany (1949)_compressed.pdf",
+     "format": "Text PDF",
+     "mo": 4.9
+    }
+   ]
+  },
+  {
+   "creator": "Ahlwardt, W.",
+   "downloads": 1781,
+   "identifier": "in.ernet.dli.2015.69412",
+   "language": "eng",
+   "title": "Divans Of The Six Ancient Arabic Poets",
+   "year": 1870,
+   "droits": "",
+   "editeur": "",
+   "date": "1870",
+   "pdfs": [
+    {
+     "nom": "2015.69412.Divans-Of-The-Six-Ancient-Arabic-Poets.pdf",
+     "format": "Image Container PDF",
+     "mo": 8.6
+    },
+    {
+     "nom": "2015.69412.Divans-Of-The-Six-Ancient-Arabic-Poets_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 10.6
+    }
+   ]
+  }
+ ]
+}
