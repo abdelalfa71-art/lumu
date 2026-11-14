@@ -1,37 +1,24 @@
 {
- "requetes": [
-  {
-   "nom": "risala2",
-   "q": "title:(الرسالة) AND (القيرواني OR \"ابن أبي زيد\")",
-   "n": 40
-  },
-  {
-   "nom": "risala3",
-   "q": "(\"رسالة ابن أبي زيد\" OR \"الرسالة الفقهية\" OR \"risala ibn abi zayd\")",
-   "n": 40
-  },
-  {
-   "nom": "akhdari2",
-   "q": "(\"مختصر الأخضري\" OR \"متن الأخضري\" OR \"الأخضري في العبادات\")",
-   "n": 40
-  }
- ],
  "apercus": [
   {
-   "nom": "risala-a",
-   "url": "https://archive.org/download/RissalatIbnAbuZeid/33-Rissala_Idah.pdf"
+   "nom": "akhdari-c",
+   "url": "https://archive.org/download/Akhdari-Tha3alibia/Akhdarirare.pdf"
   },
   {
-   "nom": "risala-b",
-   "url": "https://archive.org/download/3_20250926_202509/%D8%B1%D8%B3%D8%A7%D9%84%D8%A9%20%D8%A3%D8%A8%D9%8A%20%D8%B2%D9%8A%D8%AF%20%D8%A7%D9%84%D9%82%D9%8A%D8%B1%D9%88%D8%A7%D9%86%D9%8A%203%20.pdf"
+   "nom": "risala-c",
+   "url": "https://archive.org/download/20210226_20210226_1258/%D8%A7%D9%84%D8%B1%D8%B3%D8%A7%D9%84%D8%A9%20%D9%84%D8%A7%D8%A8%D9%86%20%D8%A3%D8%A8%D9%8A%20%D8%B2%D9%8A%D8%AF%20%D8%A7%D9%84%D9%82%D9%8A%D8%B1%D9%88%D8%A7%D9%86%D9%8A.pdf"
   },
   {
-   "nom": "akhdari-a",
-   "url": "https://archive.org/download/2_20200930_20200930_1919/%D9%85%D8%AE%D8%AA%D8%B5%D8%B1%20%D8%A7%D9%84%D8%A3%D8%AE%D8%B6%D8%B1%D9%8A%282%29.pdf"
+   "nom": "risala-d",
+   "url": "https://archive.org/download/ArrisalaAlQairawania/ArrisalaIbnAbiZaidAlQayrawani.pdf"
   },
   {
-   "nom": "akhdari-b",
-   "url": "https://archive.org/download/mkhtsr-abd-alrhmn/mkhtsr-abd-alrhmn.pdf"
+   "nom": "risala-e",
+   "url": "https://archive.org/download/20191118_20191118_1943/%D9%85%D8%AA%D9%86_%D8%A7%D9%84%D8%B1%D8%B3%D8%A7%D9%84%D8%A9_%D9%84%D8%A7%D8%A8%D9%86_%D8%A3%D8%A8%D9%8A_%D8%B2%D9%8A%D8%AF_%D8%A7%D9%84%D9%82%D9%8A%D8%B1%D9%88%D8%A7%D9%86%D9%8A.pdf"
+  },
+  {
+   "nom": "risala-f",
+   "url": "https://archive.org/download/RissalaFiqhya/34-Elrissala_Fiqhia.pdf"
   }
  ]
 }
