@@ -2036,7 +2036,7 @@ function render() {
     "changer-mot-de-passe": vueChangerMotDePasse,
     "pin-verrou": vuePinVerrou, "pin-creation": vuePinCreation, "arabe": vueArabe,
     "presentation": vuePresentation, "tarifs": vueTarifs, "videos": vueFlux, "affiches": vueAffiches, "coran": vueCoran, "questions": vueQuestions, "questions-imam": vueQuestionsImam, "parcours": vueParcours, "parcours-voir": vueParcoursVoir, "passage": vuePassage, "parcours-revoir": vueRevoir, "mes-parcours": vueMesParcours, "parcours-edit": vueParcoursEdit, "passage-edit": vuePassageEdit, "home": vueDecouvrir, "savants": vueSavants, "preches": vuePreches, "priere": vuePriere, "langues-choix": vueLanguesChoix, "tutoriel": vueTutoriel, "biblio": vueBiblio, "dossier": vueDossier, "direct": vueDirect, "chaine-edit": vueChaineEdit, "notifications": vueNotifications, "publier": vuePublier, "je-publie": vueJePublie, "profil": vueProfil, "contenu": vueContenu,
-    "langue": vueLangue, "fil": vueFlux, "flux": vueEcouter, "radio": vueFlux, "recherche": vueRecherche, "abos": vueAbos, "espace": vueEspace, "importer": vueImport, "reels": vueFlux, "groupes": vueGroupes, "groupe": vueGroupe, "discussions": vueDiscussions, "conv": vueConv, "groupe-nouveau": vueNouveauGroupe, "livres": vueBibliotheque, "regroupements": vueRegroupements, "biblio-lire": vueBiblioLire, "livre": vueLivre, "mes-livres": vueMesLivres, "livre-edition": vueEditeurLivre, "lives": vueLives, "live": vueLive, "live-nouveau": vueNouveauLive, "devenir-createur": vueDevenirCreateur, "admin": vueAdmin, "push-admin": vuePushAdmin, "mes-contenus": vueMesContenus, "legal": vueLegal, "lien": vueLien, "chaine": vueChaine, "playlist": vuePlaylist, "playlists": vuePlaylists, "stats": vueStats, "abonnements": vueAbonnements, "favoris": vueListeUtilisateur, "historique": vueListeUtilisateur, "hors": vueHors
+    "langue": vueLangue, "fil": vueFlux, "flux": vueEcouter, "radio": vueFlux, "recherche": vueRecherche, "abos": vueAbos, "espace": vueEspace, "importer": vueImport, "reels": vueFlux, "groupes": vueGroupes, "groupe": vueGroupe, "discussions": vueDiscussions, "conv": vueConv, "groupe-nouveau": vueNouveauGroupe, "livres": vueBibliotheque, "regroupements": vueRegroupements, "biblio-lire": vueBiblioLire, "azkar": vueAzkar, "livre": vueLivre, "mes-livres": vueMesLivres, "livre-edition": vueEditeurLivre, "lives": vueLives, "live": vueLive, "live-nouveau": vueNouveauLive, "devenir-createur": vueDevenirCreateur, "admin": vueAdmin, "push-admin": vuePushAdmin, "mes-contenus": vueMesContenus, "legal": vueLegal, "lien": vueLien, "chaine": vueChaine, "playlist": vuePlaylist, "playlists": vuePlaylists, "stats": vueStats, "abonnements": vueAbonnements, "favoris": vueListeUtilisateur, "historique": vueListeUtilisateur, "hors": vueHors
   };
   document.body.classList.toggle("branche-tobi", TOBI_ROUTES.includes(etat.route));
   (vues[etat.route] || vueConnexion)();
@@ -5835,7 +5835,8 @@ const BIBLIO = {
   }
 };
 async function vueBibliotheque() {
-  const w = ecran("Bibliothèque", null, `<style>.bib-photo .bib-in{padding:0 !important;background:#fff !important;box-shadow:0 6px 14px rgba(0,0,0,.25) !important;border-radius:6px !important;overflow:hidden}</style><div class="bib-g" id="bib-g">${BIBLIO.couverturePhoto({ id: "coran", titreFr: "Le Coran", couleur: "#0b3d2e" })}</div><p id="bib-n" style="font-size:13px;text-align:center">Veuillez patienter…</p>`);
+  const w = ecran("Bibliothèque", null, `<style>.bib-photo .bib-in{padding:0 !important;background:#fff !important;box-shadow:0 6px 14px rgba(0,0,0,.25) !important;border-radius:6px !important;overflow:hidden}</style><button class="carte" id="bib-az" style="width:100%;text-align:start;margin:0 0 14px;display:flex;gap:10px;align-items:center"><span style="font-size:28px">🌅🌙</span><b style="flex:1">Azkar du matin et du soir</b></button><div class="bib-g" id="bib-g">${BIBLIO.couverturePhoto({ id: "coran", titreFr: "Le Coran", couleur: "#0b3d2e" })}</div><p id="bib-n" style="font-size:13px;text-align:center">Veuillez patienter…</p>`);
+  w.querySelector("#bib-az").onclick = () => router("azkar");
   const tc = w.querySelector(".bib-g .bib-photo");
   tc.onclick = () => router("coran");
   tc.querySelector("img").src = "couverture-coran.webp";
@@ -5850,6 +5851,43 @@ async function vueBibliotheque() {
     t.querySelector("img").src = "couverture-" + l.id + ".webp";
   });
   n.textContent = livres.length ? "Livres en pages du livre imprimé, sans modification." : "D'autres livres arrivent bientôt.";
+}
+/* Azkar du matin et du soir (texte transcrit du PDF « Al-Khulasa al-Hasna ») */
+const AZKAR = {
+  matin: [
+    { t: "اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ، أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ، أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ، وَأَبُوءُ لَكَ بِذَنْبِي فَاغْفِرْ لِي، فَإِنَّهُ لَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ.", r: "مَرَّةً وَاحِدَةً", n: 1 },
+    { t: "يَا حَيُّ، يَا قَيُّومُ، بِرَحْمَتِكَ أَسْتَغِيثُ، أَصْلِحْ لِي شَأْنِي كُلَّهُ، وَلَا تَكِلْنِي إِلَى نَفْسِي طَرْفَةَ عَيْنٍ.", r: "مَرَّةً وَاحِدَةً", n: 1 },
+    { t: "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَافِيَةَ فِي الدُّنْيَا وَالْآخِرَةِ، اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي دِينِي وَدُنْيَايَ وَأَهْلِي وَمَالِي، اللَّهُمَّ اسْتُرْ عَوْرَاتِي، وَآمِنْ رَوْعَاتِي، اللَّهُمَّ احْفَظْنِي مِنْ بَيْنِ يَدَيَّ، وَمِنْ خَلْفِي، وَعَنْ يَمِينِي، وَعَنْ شِمَالِي، وَمِنْ فَوْقِي، وَأَعُوذُ بِعَظَمَتِكَ أَنْ أُغْتَالَ مِنْ تَحْتِي.", r: "مَرَّةً وَاحِدَةً", n: 1 },
+    { t: "اللَّهُمَّ عَالِمَ الْغَيْبِ وَالشَّهَادَةِ، فَاطِرَ السَّمَوَاتِ وَالْأَرْضِ، رَبَّ كُلِّ شَيْءٍ وَمَلِيكَهُ، أَشْهَدُ أَلَّا إِلَهَ إِلَّا أَنْتَ، أَعُوذُ بِكَ مِنْ شَرِّ نَفْسِي، وَشَرِّ الشَّيْطَانِ وَشِرْكِهِ.", r: "مَرَّةً وَاحِدَةً", n: 1 },
+    { t: "رَضِيتُ بِاللهِ رَبًّا، وَبِالْإِسْلَامِ دِينًا، وَبِمُحَمَّدٍ ﷺ نَبِيًّا.", r: "ثَلَاثَ مَرَّاتٍ", n: 3 },
+    { t: "بِسْمِ اللهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ، وَهُوَ السَّمِيعُ الْعَلِيمُ.", r: "ثَلَاثَ مَرَّاتٍ", n: 3 },
+    { t: "لَا إِلَهَ إِلَّا اللهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ، وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ.", r: "عَشْرَ مَرَّاتٍ", n: 10 },
+    { t: "سُبْحَانَ اللهِ وَبِحَمْدِهِ.", r: "مِائَةَ مَرَّةٍ، وَيَزِيدُ مَا شِئْتَ", n: 100 },
+    { t: "اللَّهُمَّ بِكَ أَصْبَحْنَا، وَبِكَ أَمْسَيْنَا، وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ، وَإِلَيْكَ النُّشُورُ.", r: "مَرَّةً وَاحِدَةً", n: 1 },
+    { t: "أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ، لَا إِلَهَ إِلَّا اللهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ، وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، رَبِّ أَسْأَلُكَ خَيْرَ مَا فِي هَذَا الْيَوْمِ وَخَيْرَ مَا بَعْدَهُ، وَأَعُوذُ بِكَ مِنْ شَرِّ مَا فِي هَذَا الْيَوْمِ وَشَرِّ مَا بَعْدَهُ، رَبِّ أَعُوذُ بِكَ مِنَ الْكَسَلِ، وَسُوءِ الْكِبَرِ، رَبِّ أَعُوذُ بِكَ مِنْ عَذَابٍ فِي النَّارِ، وَعَذَابٍ فِي الْقَبْرِ.", r: "مَرَّةً وَاحِدَةً", n: 1 },
+    { t: "اللَّهُمَّ مَا أَصْبَحَ بِي مِنْ نِعْمَةٍ، أَوْ بِأَحَدٍ مِنْ خَلْقِكَ؛ فَمِنْكَ وَحْدَكَ لَا شَرِيكَ لَكَ، فَلَكَ الْحَمْدُ، وَلَكَ الشُّكْرُ.", r: "مَرَّةً وَاحِدَةً", n: 1 },
+    { t: "أَصْبَحْنَا عَلَى فِطْرَةِ الْإِسْلَامِ، وَعَلَى كَلِمَةِ الْإِخْلَاصِ، وَعَلَى دِينِ نَبِيِّنَا مُحَمَّدٍ ﷺ، وَعَلَى مِلَّةِ أَبِينَا إِبْرَاهِيمَ حَنِيفًا مُسْلِمًا، وَمَا كَانَ مِنَ الْمُشْرِكِينَ.", r: "مَرَّةً وَاحِدَةً", n: 1 },
+    { t: "اللَّهُمَّ إِنَّا أَصْبَحْنَا نُشْهِدُكَ، وَنُشْهِدُ حَمَلَةَ عَرْشِكَ، وَمَلَائِكَتَكَ، وَجَمِيعَ خَلْقِكَ، أَنَّكَ أَنْتَ اللهُ لَا إِلَهَ إِلَّا أَنْتَ، وَحْدَكَ لَا شَرِيكَ لَكَ، وَأَنَّ مُحَمَّدًا عَبْدُكَ وَرَسُولُكَ.", r: "مَرَّتَيْنِ، أَوْ ثَلَاثًا، أَوْ أَرْبَعًا، فِي الصَّبَاحِ فَقَطْ", n: 2 }
+  ]
+};
+AZKAR.soir = AZKAR.matin.slice(0, 6).concat([]);
+async function vueAzkar() {
+  const w = ecran("Azkar", ["livres"], `<div style="display:flex;gap:8px;margin:0 0 12px"><button class="btn" id="az-m" style="flex:1;margin:0">🌅 Matin</button><button class="btn-outline" id="az-s" style="flex:1;margin:0">🌙 Soir</button></div><div id="az-l" style="display:grid;gap:12px"></div><p style="font-size:12px;text-align:center" dir="auto">Texte tiré du livre « Al-Khulasa al-Hasna fi Azkar as-Sabah wal-Masa’ ». À vérifier avant diffusion.</p>`);
+  let liste = "matin";
+  const compte = {};
+  const dessiner = () => {
+    const L = w.querySelector("#az-l");
+    L.innerHTML = AZKAR[liste].map((z, i) => {
+      const k = liste + i, c = compte[k] || 0, fini = c >= z.n;
+      return `<div class="carte" style="padding:14px;${fini ? "border:2px solid #12805f" : ""}"><p class="texte-arabe" dir="rtl" lang="ar" style="font-size:22px;line-height:2;margin:0">${esc(z.t)}</p><div style="display:flex;align-items:center;gap:10px;margin-top:8px"><small style="flex:1;color:#8a5a2b" dir="rtl" lang="ar">(${esc(z.r)})</small><button class="btn-outline" data-i="${i}" style="width:auto;margin:0;min-width:96px">${fini ? "✓ " : ""}${c} / ${z.n}</button></div></div>`;
+    }).join("");
+    L.querySelectorAll("[data-i]").forEach(b => b.onclick = () => { const k = liste + b.dataset.i, z = AZKAR[liste][+b.dataset.i]; compte[k] = (compte[k] || 0) + 1; if (compte[k] > z.n) compte[k] = 0; dessiner(); });
+    w.querySelector("#az-m").className = liste === "matin" ? "btn" : "btn-outline";
+    w.querySelector("#az-s").className = liste === "soir" ? "btn" : "btn-outline";
+  };
+  w.querySelector("#az-m").onclick = () => { liste = "matin"; dessiner(); };
+  w.querySelector("#az-s").onclick = () => { liste = "soir"; dessiner(); };
+  dessiner();
 }
 async function vueBiblioLire() {
   const id = etat.params.id;
