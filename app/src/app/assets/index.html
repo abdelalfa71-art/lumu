@@ -5854,12 +5854,14 @@ async function vueBiblioLire() {
   const N = +l.pages || 1, etats = chargerLocal("biblio_etat", {}) || {};
   let p = Math.min(N, Math.max(1, +(etats[l.id] && etats[l.id].page) || 1));
   const bo = 'class="btn-outline" style="flex:1;margin:0"';
-  w.insertAdjacentHTML("beforeend", `<p class="texte-arabe" lang="ar" dir="rtl" translate="no" style="text-align:center;font-size:20px;margin:0">${esc(l.titre)}${l.auteur ? " · " + esc(l.auteur) : ""}</p>
-    <div id="bl-zone" translate="no" class="notranslate" style="position:relative;min-height:55vh;background:#fff;overflow:auto;touch-action:pan-y"><div id="bl-cadre" style="overflow:hidden;width:100%"><img id="bl-img" alt="" draggable="false" style="display:block;width:100%;max-width:none;height:auto"></div><div id="bl-etat" style="position:absolute;inset:0;display:flex;flex-direction:column;gap:10px;align-items:center;justify-content:center;padding:20px;text-align:center;background:#fff;color:#1f2a24"></div></div>
-    <div style="display:flex;gap:8px;align-items:center"><button class="btn" id="bl-suiv" style="flex:1;margin:0">← Suivante</button><b id="bl-num" style="min-width:86px;text-align:center"></b><button ${bo} id="bl-prec">Précédente →</button></div>
-    <div style="display:flex;gap:8px"><button ${bo} id="bl-zoom">🔍 Agrandir</button><button ${bo} id="bl-aller">Page…</button></div>
-    <button class="btn-outline" id="bl-dl" style="margin:0">⬇ Télécharger le livre pour lire sans connexion</button>
-    <p style="font-size:12px;text-align:center" dir="auto">${esc(l.source || "")}${l.source ? " · " : ""}Pages du livre imprimé, sans modification.</p>`);
+  w.insertAdjacentHTML("beforeend", `<div id="bl-zone" translate="no" class="notranslate" style="position:relative;min-height:55vh;background:#fff;overflow:auto;touch-action:pan-y"><div id="bl-cadre" style="overflow:hidden;width:100%"><img id="bl-img" alt="" draggable="false" style="display:block;width:100%;max-width:none;height:auto"></div><div id="bl-etat" style="position:absolute;inset:0;display:flex;flex-direction:column;gap:10px;align-items:center;justify-content:center;padding:20px;text-align:center;background:#fff;color:#1f2a24"></div></div>
+    <div style="display:flex;align-items:center;gap:8px"><button class="btn-outline" style="width:52px;flex:none;margin:0;padding:0;font-size:28px;line-height:1" id="bl-suiv" aria-label="Page suivante">‹</button><b id="bl-num" style="flex:1;text-align:center"></b><button class="btn-outline" style="width:52px;flex:none;margin:0;padding:0;font-size:28px;line-height:1" id="bl-prec" aria-label="Page précédente">›</button><button class="btn-outline" style="width:52px;flex:none;margin:0;padding:0;font-size:28px;line-height:1" id="bl-opt" aria-label="Options" aria-expanded="false">⋯</button></div>
+    <div id="bl-plus" style="display:none;gap:12px">
+      <div style="display:flex;gap:8px"><button ${bo} id="bl-zoom">🔍 Agrandir</button><button ${bo} id="bl-aller">Page…</button></div>
+      <button class="btn-outline" id="bl-dl" style="margin:0">⬇ Télécharger le livre pour lire sans connexion</button>
+      <p class="texte-arabe" lang="ar" dir="rtl" translate="no" style="text-align:center;font-size:18px;margin:0">${esc(l.titre)}${l.auteur ? " · " + esc(l.auteur) : ""}</p>
+      <p style="font-size:12px;text-align:center;margin:0" dir="auto">${esc(l.source || "")}</p>
+    </div>`);
   const $ = q => w.querySelector(q), img = $("#bl-img"), zEtat = $("#bl-etat"), zone = $("#bl-zone");
   try { const pad = parseFloat(getComputedStyle(w).paddingLeft) || 0; if (pad) zone.style.marginLeft = zone.style.marginRight = -pad + "px"; } catch (e) {}
   let tour = 0, url = null, zoom = 1, rognes = null;
@@ -5886,7 +5888,7 @@ async function vueBiblioLire() {
     p = Math.min(N, Math.max(1, n));
     const e = chargerLocal("biblio_etat", {}) || {}; e[l.id] = { page: p, t: Date.now() }; sauverLocal("biblio_etat", e);
     const moi = ++tour; if (zoom !== 1) regleZoom(1);
-    $("#bl-num").textContent = "Page " + p + " / " + N;
+    $("#bl-num").textContent = p + " / " + N;
     $("#bl-suiv").disabled = p >= N; $("#bl-prec").disabled = p <= 1;
     zEtat.style.display = "flex"; zEtat.innerHTML = `<div class="spinner"></div><span>Veuillez patienter…</span>`;
     try {
@@ -5905,6 +5907,7 @@ async function vueBiblioLire() {
   };
   $("#bl-suiv").onclick = () => aff(p + 1);
   $("#bl-prec").onclick = () => aff(p - 1);
+  $("#bl-opt").onclick = () => { const pl = $("#bl-plus"), ouvert = pl.style.display === "none"; pl.style.display = ouvert ? "grid" : "none"; $("#bl-opt").setAttribute("aria-expanded", ouvert ? "true" : "false"); if (ouvert) pl.scrollIntoView({ block: "nearest", behavior: "smooth" }); };
   $("#bl-zoom").onclick = () => regleZoom(zoom > 1 ? 1 : 2);
   let x0 = null, y0 = 0, d0 = 0, z0 = 1, pince = false;
   const ecart = t => Math.hypot(t[0].clientX - t[1].clientX, t[0].clientY - t[1].clientY);
@@ -6025,16 +6028,16 @@ async function vueCoran() {
   const pageDemandee = parseInt(etat.params.page, 10) || 0;
   let p = Math.min(CORAN.N, Math.max(1, pageDemandee || E.page));
   const bo = 'class="btn-outline" style="flex:1;margin:0"';
-  w.innerHTML = `<div class="entete" style="padding:0"><h1>Le Coran</h1></div>
-    <div style="display:flex;gap:8px"><button ${bo} id="co-som">Sourates</button><button ${bo} id="co-juz">Juz</button><button ${bo} id="co-aller">Page…</button></div>
-    <div style="display:flex;gap:8px"><button ${bo} id="co-mq"></button><button ${bo} id="co-mqs">Mes marque-pages</button></div>
-    <div id="co-info" style="text-align:center;font-size:14px"></div>
-    <div id="co-zone" translate="no" class="notranslate" style="position:relative;min-height:55vh;background:#fff;overflow:auto;touch-action:pan-y"><img id="co-img" alt="" draggable="false" style="display:block;width:100%;max-width:none;height:auto"><div id="co-etat" style="position:absolute;inset:0;display:flex;flex-direction:column;gap:10px;align-items:center;justify-content:center;padding:20px;text-align:center;background:#fff;color:#1f2a24"></div></div>
-    <div style="display:flex;gap:8px;align-items:center"><button class="btn" id="co-suiv" style="flex:1;margin:0">← Suivante</button><b id="co-num" style="min-width:86px;text-align:center"></b><button ${bo} id="co-prec">Précédente →</button></div>
-    <div style="display:flex;gap:8px"><button ${bo} id="co-zoom">🔍 Agrandir</button><button ${bo} id="co-nuit"></button></div>
-    <div class="carte" id="co-kh" style="padding:14px"></div>
-    <button class="btn-outline" id="co-dl" style="margin:0"></button>
-    <p style="font-size:12px;text-align:center">Mushaf de Médine, lecture Hafs. Pages affichées sans modification du texte. Glissez vers la droite pour la page suivante, écartez deux doigts pour agrandir.</p>`;
+  w.innerHTML = `<div id="co-zone" translate="no" class="notranslate" style="position:relative;min-height:55vh;background:#fff;overflow:auto;touch-action:pan-y"><img id="co-img" alt="" draggable="false" style="display:block;width:100%;max-width:none;height:auto"><div id="co-etat" style="position:absolute;inset:0;display:flex;flex-direction:column;gap:10px;align-items:center;justify-content:center;padding:20px;text-align:center;background:#fff;color:#1f2a24"></div></div>
+    <div style="display:flex;align-items:center;gap:8px"><button class="btn-outline" style="width:52px;flex:none;margin:0;padding:0;font-size:28px;line-height:1" id="co-suiv" aria-label="Page suivante">‹</button><div style="flex:1;min-width:0;text-align:center"><b id="co-num"></b><div id="co-info" style="font-size:13px;opacity:.8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"></div></div><button class="btn-outline" style="width:52px;flex:none;margin:0;padding:0;font-size:28px;line-height:1" id="co-prec" aria-label="Page précédente">›</button><button class="btn-outline" style="width:52px;flex:none;margin:0;padding:0;font-size:28px;line-height:1" id="co-opt" aria-label="Options" aria-expanded="false">⋯</button></div>
+    <div id="co-plus" style="display:none;gap:12px">
+      <div style="display:flex;gap:8px"><button ${bo} id="co-som">Sourates</button><button ${bo} id="co-juz">Juz</button><button ${bo} id="co-aller">Page…</button></div>
+      <div style="display:flex;gap:8px"><button ${bo} id="co-mq"></button><button ${bo} id="co-mqs">Mes marque-pages</button></div>
+      <div style="display:flex;gap:8px"><button ${bo} id="co-zoom">🔍 Agrandir</button><button ${bo} id="co-nuit"></button></div>
+      <div class="carte" id="co-kh" style="padding:14px"></div>
+      <button class="btn-outline" id="co-dl" style="margin:0"></button>
+      <p style="font-size:12px;text-align:center;margin:0">Mushaf de Médine, lecture Hafs. Pages affichées sans modification du texte.</p>
+    </div>`;
   app.appendChild(w);
   const $ = q => w.querySelector(q);
   const img = $("#co-img"), zEtat = $("#co-etat"), zone = $("#co-zone");
@@ -6076,7 +6079,7 @@ async function vueCoran() {
     E.page = p; CORAN_ETAT.ecrire(E);
     const moi = ++tour; clearTimeout(tLu);
     if (zoom !== 1) regleZoom(1);
-    $("#co-num").textContent = "Page " + p + " / " + CORAN.N;
+    $("#co-num").textContent = p + " / " + CORAN.N;
     $("#co-info").textContent = CORAN.sourates(p).map(i => (i + 1) + ". " + CORAN.NOMS[i]).join(" · ") + " — Juz " + CORAN.juz(p);
     $("#co-suiv").disabled = p >= CORAN.N; $("#co-prec").disabled = p <= 1;
     zEtat.style.display = "flex"; zEtat.innerHTML = `<div class="spinner"></div><span>Veuillez patienter…</span>`;
@@ -6104,6 +6107,7 @@ async function vueCoran() {
   };
   $("#co-suiv").onclick = () => aff(p + 1);
   $("#co-prec").onclick = () => aff(p - 1);
+  $("#co-opt").onclick = () => { const pl = $("#co-plus"), ouvert = pl.style.display === "none"; pl.style.display = ouvert ? "grid" : "none"; $("#co-opt").setAttribute("aria-expanded", ouvert ? "true" : "false"); if (ouvert) pl.scrollIntoView({ block: "nearest", behavior: "smooth" }); };
   $("#co-zoom").onclick = () => regleZoom(zoom > 1 ? 1 : 2);
   $("#co-nuit").onclick = () => { E.nuit = !E.nuit; CORAN_ETAT.ecrire(E); majNuit(); };
   /* Gestes : glisser vers la droite pour avancer (comme un Mushaf), écarter deux doigts pour agrandir */
