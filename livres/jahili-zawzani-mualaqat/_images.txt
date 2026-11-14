@@ -1,0 +1,12 @@
+page   num  type   width height color comp bpc  enc interp  object ID x-ppi y-ppi size ratio
+--------------------------------------------------------------------------------------------
+   1     0 image    2144  3024  index   1   4  image  no       758  0   300   300  351K  11%
+   3     1 image     640    96  gray    1   1  jbig2  no        13  0   300   300  144B 1.9%
+   5     2 image     896  2016  gray    1   1  jbig2  no        19  0   300   300  224B 0.1%
+   6     3 image    1136   224  gray    1   1  jbig2  no        23  0   300   300  192B 0.6%
+   7     4 image    1488  1904  gray    1   1  jbig2  no        27  0   300   300 2256B 0.6%
+   8     5 image    1440  2272  gray    1   1  jbig2  no        31  0   300   300  800B 0.2%
+   9     6 image    1568  2192  gray    1   1  jbig2  no        35  0   300   300 3456B 0.8%
+  10     7 image    1584  2320  gray    1   1  jbig2  no        39  0   300   300 4400B 1.0%
+  11     8 image    1520  2368  gray    1   1  jbig2  no        43  0   300   300 4224B 0.9%
+  12     9 image    1424  2272  gray    1   1  jbig2  no        47  0   300   300 4192B 1.0%
