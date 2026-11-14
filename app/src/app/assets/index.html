@@ -5879,8 +5879,8 @@ async function vueBiblioLire() {
   let tour = 0, url = null, zoom = 1, rognes = null;
   const cadre = $("#bl-cadre");
   /* Cadre de lecture : on n'affiche que la zone du texte de la page (marges blanches et bords du scan masqués), pour un texte plus grand. Le fichier de la page n'est pas modifié. */
-  /* Taille du cadre : la plus grande possible sans déborder, selon la taille de l'écran */
-  const fitCadre = () => { if (!img.naturalWidth) return; cadre.style.width = ""; const cw = zone.clientWidth; if (!cw) return; const ratio = cadre.offsetHeight / cw; let W = zone.clientHeight / ratio; if (!(W > 0) || W > cw) W = cw; cadre.style.width = (W * zoom) + "px"; };
+  /* Pleine largeur de l'écran, pour un texte plus grand ; défilement vertical. Contraste renforcé à l'affichage seulement. */
+  const fitCadre = () => { if (!img.naturalWidth) return; cadre.style.width = ""; const cw = zone.clientWidth; if (!cw) return; cadre.style.width = (cw * zoom) + "px"; img.style.filter = "contrast(1.3) brightness(1.03)"; };
   window.addEventListener("resize", () => { if (w.isConnected) fitCadre(); });
   const appliquerCadre = () => { appliquerCadreBrut(); fitCadre(); };
   const appliquerCadreBrut = () => {
