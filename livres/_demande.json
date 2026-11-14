@@ -1,34 +1,28 @@
 {
- "requetes": [
+ "apercus": [
   {
-   "nom": "jahili",
-   "q": "title:(الشعراء الستة) OR title:(الشعراء الجاهليين) OR title:(الشعر الجاهلي) OR title:(العقد الثمين في دواوين) OR title:(المعلقات)",
-   "n": 50
+   "nom": "jahili-a",
+   "url": "https://archive.org/download/ar102arab42/%D8%A7%D9%84%D8%A3%D8%B9%D9%84%D9%85%20%D8%A7%D9%84%D8%B4%D9%86%D8%AA%D9%85%D8%B1%D9%8A-%D8%A3%D8%B4%D8%B9%D8%A7%D8%B1%20%D8%A7%D9%84%D8%B4%D8%B9%D8%B1%D8%A7%D8%A1%20%D8%A7%D9%84%D8%B3%D8%AA%D8%A9%20%D8%A7%D9%84%D8%AC%D8%A7%D9%87%D9%84%D9%8A%D9%8A%D9%86.pdf"
   },
   {
-   "nom": "jahili-ancien",
-   "q": "(الشعراء الستة OR \"الشعر الجاهلي\" OR المعلقات OR \"six ancient Arabic poets\" OR Ahlwardt OR \"divans\") AND date:[1800-01-01 TO 1950-12-31]",
-   "n": 40
+   "nom": "jahili-b",
+   "url": "https://archive.org/download/20230904_20230904_1747/%D8%A3%D8%B4%D8%B9%D8%A7%D8%B1%20%D8%A7%D9%84%D8%B4%D8%B9%D8%B1%D8%A7%D8%A1%20%D8%A7%D9%84%D8%B3%D8%AA%D8%A9%20%D8%A7%D9%84%D8%AC%D8%A7%D9%87%D9%84%D9%8A%D9%8A%D9%86.pdf"
   },
   {
-   "nom": "umda",
-   "q": "title:(عمدة الأحكام)",
-   "n": 50
+   "nom": "umda-a",
+   "url": "https://archive.org/download/20200116_20200116_2045/%D8%B9%D9%85%D8%AF%D8%A9%20%D8%A7%D9%84%D8%A3%D8%AD%D9%83%D8%A7%D9%85%20%D8%AA%D8%AD%D9%82%D9%8A%D9%82%20%D8%A7%D9%84%D9%81%D8%A7%D8%B1%D9%8A%D8%A7%D8%A8%D9%8A.pdf"
   },
   {
-   "nom": "umda-ancien",
-   "q": "(عمدة الأحكام OR \"umdat al-ahkam\") AND date:[1800-01-01 TO 1950-12-31]",
-   "n": 30
+   "nom": "umda-b",
+   "url": "https://archive.org/download/20210119_20210119_0642/%D9%85%D8%AA%D9%86%20%D8%B9%D9%85%D8%AF%D8%A9%20%D8%A7%D9%84%D8%A3%D8%AD%D9%83%D8%A7%D9%85-%20%D8%B7%20%D8%A7%D9%84%D9%82%D8%A7%D8%B3%D9%85.pdf"
   },
   {
-   "nom": "bulugh",
-   "q": "title:(بلوغ المرام)",
-   "n": 50
+   "nom": "bulugh-a",
+   "url": "https://archive.org/download/kitabbulughalmar00ibna/kitabbulughalmar00ibna.pdf"
   },
   {
-   "nom": "bulugh-ancien",
-   "q": "(بلوغ المرام OR \"bulugh al-maram\") AND date:[1800-01-01 TO 1950-12-31]",
-   "n": 30
+   "nom": "bulugh-b",
+   "url": "https://archive.org/download/1933_20210228/%D8%A8%D9%84%D9%88%D8%BA%20%D8%A7%D9%84%D9%85%D8%B1%D8%A7%D9%85%20%D9%85%D9%86%20%D8%A3%D8%AF%D9%84%D8%A9%20%D8%A7%D9%84%D8%A3%D8%AD%D9%83%D8%A7%D9%85%20-%20%D8%A7%D8%A8%D9%86%20%D8%AD%D8%AC%D8%B1%20%D8%A7%D9%84%D8%B9%D8%B3%D9%82%D9%84%D8%A7%D9%86%D9%8A%20-%20%D8%B7.%20%D8%A7%D9%84%D8%AA%D8%AC%D8%A7%D8%B1%D9%8A%D8%A9%20-%201933.pdf"
   }
  ]
 }
