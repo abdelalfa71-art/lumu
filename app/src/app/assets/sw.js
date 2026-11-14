@@ -1,5 +1,5 @@
 /* Lumu — service worker : démarrage hors ligne + cache des images */
-const V = "lumu-v144";
+const V = "lumu-v145";
 const IMG = "lumu-img-v1";
 const AUDIO = "lumu-audio-v1";
 const CORAN = "lumu-coran-v1";
