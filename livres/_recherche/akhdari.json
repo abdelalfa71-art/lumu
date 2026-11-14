@@ -1,0 +1,641 @@
+{
+ "requete": "title:(الأخضري) OR title:(akhdari)",
+ "date": "2026-11-14T00:38:35.838Z",
+ "resultats": [
+  {
+   "downloads": 51084,
+   "identifier": "kawkb-zahiri",
+   "language": "Arabic",
+   "title": "الكوكب الزهري نظم مختصر الأخضري",
+   "droits": "",
+   "editeur": "youcef123",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "21.PDF",
+     "format": "Text PDF",
+     "mo": 1.6
+    },
+    {
+     "nom": "41.pdf",
+     "format": "Text PDF",
+     "mo": 1.5
+    },
+    {
+     "nom": "42.pdf",
+     "format": "Text PDF",
+     "mo": 5.5
+    },
+    {
+     "nom": "43.PDF",
+     "format": "Text PDF",
+     "mo": 1
+    },
+    {
+     "nom": "44.pdf",
+     "format": "Text PDF",
+     "mo": 0.9
+    },
+    {
+     "nom": "45.PDF",
+     "format": "Text PDF",
+     "mo": 0.4
+    },
+    {
+     "nom": "46.pdf",
+     "format": "Text PDF",
+     "mo": 0.7
+    },
+    {
+     "nom": "47.pdf",
+     "format": "Text PDF",
+     "mo": 0.4
+    },
+    {
+     "nom": "48.pdf",
+     "format": "Text PDF",
+     "mo": 1.1
+    },
+    {
+     "nom": "49.PDF",
+     "format": "Text PDF",
+     "mo": 2.3
+    },
+    {
+     "nom": "50.PDF",
+     "format": "Text PDF",
+     "mo": 1.3
+    },
+    {
+     "nom": "51.pdf",
+     "format": "Text PDF",
+     "mo": 0.6
+    },
+    {
+     "nom": "52.pdf",
+     "format": "Text PDF",
+     "mo": 1.3
+    },
+    {
+     "nom": "53.pdf",
+     "format": "Text PDF",
+     "mo": 1.2
+    },
+    {
+     "nom": "54.pdf",
+     "format": "Text PDF",
+     "mo": 1.8
+    },
+    {
+     "nom": "55.pdf",
+     "format": "Text PDF",
+     "mo": 1.8
+    },
+    {
+     "nom": "56.pdf",
+     "format": "Text PDF",
+     "mo": 2.5
+    },
+    {
+     "nom": "57.PDF",
+     "format": "Text PDF",
+     "mo": 0.8
+    },
+    {
+     "nom": "58.pdf",
+     "format": "Text PDF",
+     "mo": 0.6
+    },
+    {
+     "nom": "59.pdf",
+     "format": "Text PDF",
+     "mo": 1.1
+    },
+    {
+     "nom": "60.PDF",
+     "format": "Text PDF",
+     "mo": 0.9
+    },
+    {
+     "nom": "61.pdf",
+     "format": "Text PDF",
+     "mo": 1.6
+    },
+    {
+     "nom": "62.pdf",
+     "format": "Text PDF",
+     "mo": 0.8
+    },
+    {
+     "nom": "63.pdf",
+     "format": "Text PDF",
+     "mo": 2.2
+    },
+    {
+     "nom": "64.PDF",
+     "format": "Text PDF",
+     "mo": 0.2
+    },
+    {
+     "nom": "65.PDF",
+     "format": "Text PDF",
+     "mo": 0.9
+    },
+    {
+     "nom": "66.PDF",
+     "format": "Text PDF",
+     "mo": 0.7
+    },
+    {
+     "nom": "67.PDF",
+     "format": "Text PDF",
+     "mo": 3.8
+    },
+    {
+     "nom": "68.PDF",
+     "format": "Text PDF",
+     "mo": 1.1
+    },
+    {
+     "nom": "69.pdf",
+     "format": "Text PDF",
+     "mo": 9.1
+    },
+    {
+     "nom": "70.pdf",
+     "format": "Text PDF",
+     "mo": 1.4
+    },
+    {
+     "nom": "kawkab_zahri.pdf",
+     "format": "Image Container PDF",
+     "mo": 1.2
+    },
+    {
+     "nom": "kawkab_zahri_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 4.1
+    },
+    {
+     "nom": "rihla.pdf",
+     "format": "Image Container PDF",
+     "mo": 4.8
+    },
+    {
+     "nom": "tarikh-al3asr-alaomaoi.pdf",
+     "format": "Image Container PDF",
+     "mo": 10.5
+    }
+   ]
+  },
+  {
+   "creator": "السيد أبي عبد الله محمد بن أبّ بن محمد بن عثمان التواتي",
+   "downloads": 42997,
+   "identifier": "Elabkari",
+   "language": "Arabic",
+   "title": "كتاب النظم المسمى العبقري في سهو الأخضري",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "Elabkari.pdf",
+     "format": "Image Container PDF",
+     "mo": 1.5
+    },
+    {
+     "nom": "Elabkari_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 0.3
+    }
+   ]
+  },
+  {
+   "creator": "الشيخ الحاج سعد بن عمر بن سعيد جلياتوري الفوتي",
+   "downloads": 32379,
+   "identifier": "HalAkhdari",
+   "language": "ara",
+   "title": "حل المسائل في شرح مختصر الأخضري بالدلائل",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "HalAkhdari.pdf",
+     "format": "Image Container PDF",
+     "mo": 13.2
+    },
+    {
+     "nom": "HalAkhdari_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 1.9
+    }
+   ]
+  },
+  {
+   "creator": "المختار بن العربي مؤمن الجزائري ثم الشنقيطي",
+   "downloads": 24911,
+   "identifier": "MiskAzfari",
+   "language": "ara",
+   "title": "المسك الأذفري في شرح وأدلة مختصر الأخضري",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "MiskAzfari.pdf",
+     "format": "Text PDF",
+     "mo": 32
+    }
+   ]
+  },
+  {
+   "creator": "Yedali",
+   "downloads": 22516,
+   "identifier": "mkhtsr-abd-alrhmn",
+   "language": "Arabic",
+   "title": "مختصر الأخضري في فقه العبادات",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "mkhtsr-abd-alrhmn.pdf",
+     "format": "Text PDF",
+     "mo": 0.1
+    }
+   ]
+  },
+  {
+   "creator": "محمد بن محمد سالم المجلسـي الشنقيطي",
+   "downloads": 17360,
+   "identifier": "MinahAlie",
+   "language": "Arabic",
+   "title": "منح العلي في شرح كتاب الأخضري في فقه العبادات المالكي",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "منح العلي في شرح كتاب الأخضري في فقه العبادات المالكي.pdf",
+     "format": "Image Container PDF",
+     "mo": 5
+    },
+    {
+     "nom": "منح العلي في شرح كتاب الأخضري في فقه العبادات المالكي_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 10.5
+    }
+   ]
+  },
+  {
+   "downloads": 15049,
+   "identifier": "sharh_akhdari_sullam",
+   "language": "Arabic",
+   "title": "شرح الأخضري على السلم المنورق",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "شرح الأخضري على السلم المنورق.pdf",
+     "format": "Text PDF",
+     "mo": 4.1
+    }
+   ]
+  },
+  {
+   "downloads": 14538,
+   "identifier": "20221004_20221004_1937",
+   "language": "Arabic",
+   "title": "إتحاف المبتدي شرح الأخضري",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "إتحاف المبتدي شرح الأخضري.pdf",
+     "format": "Text PDF",
+     "mo": 9
+    }
+   ]
+  },
+  {
+   "creator": "أبو يوسف المالكي",
+   "downloads": 11972,
+   "identifier": "20200324_20200324_1237",
+   "language": "Arabic",
+   "title": "هداية المتعبد السالك في مذهب الإمام مالك (شرح مختصر الأخضري)",
+   "year": 2020,
+   "droits": "",
+   "editeur": "",
+   "date": "2020-03-24",
+   "pdfs": [
+    {
+     "nom": "هداية-المتعبد-السالك-في-مذهب-الإمام-مالك.pdf",
+     "format": "Image Container PDF",
+     "mo": 6.1
+    },
+    {
+     "nom": "هداية-المتعبد-السالك-في-مذهب-الإمام-مالك_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 16.3
+    }
+   ]
+  },
+  {
+   "creator": "الكاتب والباحث: بوزياني الدراجي",
+   "downloads": 11549,
+   "identifier": "Akhdarie",
+   "language": "Arabic",
+   "title": "عبد الرحمن الأخضري العالم الصوفي الذي تفوق في عصره",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "Akhdari.pdf",
+     "format": "Image Container PDF",
+     "mo": 27.4
+    },
+    {
+     "nom": "Akhdari_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 3.5
+    }
+   ]
+  },
+  {
+   "creator": "Yedali",
+   "downloads": 11429,
+   "identifier": "NathmMatinAkhdari",
+   "language": "Arabic",
+   "title": "نظم متن الأخضري",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "Nathm_Matin_Akhdari.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.7
+    },
+    {
+     "nom": "Nathm_Matin_Akhdari_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 1.4
+    }
+   ]
+  },
+  {
+   "downloads": 11084,
+   "identifier": "20211114_20211114_2114",
+   "language": "Arabic",
+   "title": "متن الأخضري في العبادات",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "متن الأخضري في العبادات.pdf",
+     "format": "Text PDF",
+     "mo": 8.2
+    }
+   ]
+  },
+  {
+   "downloads": 9990,
+   "identifier": "2_20200930_20200930_1919",
+   "language": "Arabic",
+   "title": "مختصر الأخضري( 2)",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "مختصر الأخضري(2).pdf",
+     "format": "Text PDF",
+     "mo": 0.7
+    }
+   ]
+  },
+  {
+   "downloads": 8804,
+   "identifier": "AkhdariPacket101314",
+   "language": "eng",
+   "title": "The Mukhtaṣar of al-Akhḍarī Course Packet: Fiqh 101A",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "Akhdari-packet-10-13-14.pdf",
+     "format": "Text PDF",
+     "mo": 1.1
+    }
+   ]
+  },
+  {
+   "creator": "assollam_akhdari",
+   "downloads": 8651,
+   "identifier": "assollam_akhdari",
+   "title": "assollam_akhdari",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "assollam_akhdari.pdf",
+     "format": "Text PDF",
+     "mo": 0.3
+    }
+   ]
+  },
+  {
+   "downloads": 7473,
+   "identifier": "20221019_20221019_1750",
+   "language": "Arabic",
+   "title": "شرح الجوهر المكنون في صدف الثلاثة الفنون لعبد الرحمن الأخضري",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "شرح الجوهر المكنون في صدف الثلاثة الفنون لعبد الرحمن الأخضري.pdf",
+     "format": "Text PDF",
+     "mo": 15
+    }
+   ]
+  },
+  {
+   "creator": "محمد بن عبد الرحمن الفليسي البكري المغربي الجزائري",
+   "downloads": 6016,
+   "identifier": "CharhFlissi",
+   "language": "ara",
+   "title": "شرح الفليسي المغربي على متن الإمام الأخضري",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "CharhFlissi.pdf",
+     "format": "Image Container PDF",
+     "mo": 3.5
+    },
+    {
+     "nom": "CharhFlissi_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 15.6
+    }
+   ]
+  },
+  {
+   "creator": "charh_akhdari",
+   "downloads": 5617,
+   "identifier": "charh_akhdari",
+   "title": "charh_akhdari",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "charh_akhdari.pdf",
+     "format": "Image Container PDF",
+     "mo": 3.3
+    },
+    {
+     "nom": "charh_akhdari_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 3.1
+    }
+   ]
+  },
+  {
+   "downloads": 5433,
+   "identifier": "Pdf1901",
+   "language": "Arabic",
+   "title": "كتاب Pdf اقرا اونلاين 1901 الفلق البهي على شرح نظم الأخضري",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "كتاب   pdf     اقرا اونلاين   1901 - الفلق البهي على شرح نظم الأخضري.pdf",
+     "format": "Image Container PDF",
+     "mo": 66
+    },
+    {
+     "nom": "كتاب   pdf     اقرا اونلاين   1901 - الفلق البهي على شرح نظم الأخضري_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 29.2
+    }
+   ]
+  },
+  {
+   "downloads": 5348,
+   "identifier": "ar102arab181",
+   "language": "ara",
+   "title": "عبد الرحمن بن صغير الأخضري الجوهر المكنون في صدف الثلاثة الفنون",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "عبد الرحمن بن صغير الأخضري-الجوهر المكنون في صدف الثلاثة الفنون.pdf",
+     "format": "Text PDF",
+     "mo": 0.7
+    }
+   ]
+  },
+  {
+   "downloads": 5345,
+   "identifier": "20190813_20190813_2309",
+   "language": "Arabic",
+   "title": "شرح سجود الأخضري",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "شرح سجود الأخضري_.pdf",
+     "format": "Text PDF",
+     "mo": 2.1
+    }
+   ]
+  },
+  {
+   "downloads": 5140,
+   "identifier": "MukhtassarAlAkhdari",
+   "language": "French",
+   "title": "Mukhtassar Al Akhdari avec son commentaire",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "Mukhtassar-al-Akhdari.pdf",
+     "format": "Text PDF",
+     "mo": 0.5
+    }
+   ]
+  },
+  {
+   "creator": "kudsiya_akhdari",
+   "downloads": 4990,
+   "identifier": "kudsiya_akhdari",
+   "title": "kudsiya_akhdari",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "kudsiya_akhdari.pdf",
+     "format": "Image Container PDF",
+     "mo": 0.2
+    },
+    {
+     "nom": "kudsiya_akhdari_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 0.3
+    }
+   ]
+  },
+  {
+   "downloads": 4512,
+   "identifier": "al-Akhdari",
+   "language": "Arabic",
+   "title": "عبد الرحمن الأخضري العالم الصوفي الذي تفوق في عصره",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "al-Akhdari.pdf",
+     "format": "Image Container PDF",
+     "mo": 58.5
+    },
+    {
+     "nom": "al-Akhdari_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 5
+    }
+   ]
+  },
+  {
+   "downloads": 4496,
+   "identifier": "islam400husa400_gmail_20190208",
+   "language": "Arabic",
+   "title": "شرح سهو الأخضري",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "شرح سهو الأخضري.pdf",
+     "format": "Text PDF",
+     "mo": 0.3
+    }
+   ]
+  }
+ ]
+}

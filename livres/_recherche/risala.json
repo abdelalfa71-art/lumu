@@ -1,0 +1,699 @@
+{
+ "requete": "title:(رسالة القيرواني) OR title:(الرسالة ابن أبي زيد) OR title:(متن الرسالة)",
+ "date": "2026-11-14T00:38:00.231Z",
+ "resultats": [
+  {
+   "creator": "Yedali",
+   "downloads": 36434,
+   "identifier": "fawakeh_dewani",
+   "language": "Arabic",
+   "title": "الفواكه الدواني على رسالة ابن أبي زيد القيرواني",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "fawakeh_dewani01.pdf",
+     "format": "Image Container PDF",
+     "mo": 25.9
+    },
+    {
+     "nom": "fawakeh_dewani01_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 34.5
+    },
+    {
+     "nom": "fawakeh_dewani02.pdf",
+     "format": "Image Container PDF",
+     "mo": 23.4
+    },
+    {
+     "nom": "fawakeh_dewani02_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 31.7
+    }
+   ]
+  },
+  {
+   "creator": "عبد الله بن الحاج حماه الله القلاوي المالكي",
+   "downloads": 20425,
+   "identifier": "NazmR",
+   "language": "Arabic",
+   "title": "نظم رسالة ابن أبي زيد القيرواني",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "NazmR.pdf",
+     "format": "Image Container PDF",
+     "mo": 1.8
+    },
+    {
+     "nom": "NazmR_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 3.4
+    }
+   ]
+  },
+  {
+   "creator": "محمد أحمد الداه الشنقيطي",
+   "downloads": 16743,
+   "identifier": "FathRabani",
+   "language": "Arabic",
+   "title": "الفتح الرباني شرح على نظم رسالة ابن أبي زيد القيرواني",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "FathRabani.pdf",
+     "format": "Text PDF",
+     "mo": 18.3
+    }
+   ]
+  },
+  {
+   "downloads": 16221,
+   "identifier": "akidakairawani",
+   "language": "Arabic",
+   "title": "ابن أبي زيد القيرواني وعقيدته في الرسالة والجامع",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "ابن أبي زيد القيرواني وعقيدته في الرسالة والجامع.pdf",
+     "format": "Text PDF",
+     "mo": 1
+    }
+   ]
+  },
+  {
+   "downloads": 14583,
+   "identifier": "3_20250926_202509",
+   "title": "رسالة أبي زيد القيرواني 3",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "رسالة أبي زيد القيرواني 3 .pdf",
+     "format": "Image Container PDF",
+     "mo": 4.7
+    },
+    {
+     "nom": "رسالة أبي زيد القيرواني 3 _text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 6.8
+    }
+   ]
+  },
+  {
+   "creator": "الفقه المالكي",
+   "downloads": 12683,
+   "identifier": "feqhmaliki74",
+   "language": "Arabic",
+   "title": "متن الرسالة لابن أبي زيد القيرواني",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "feqhmaliki74.pdf",
+     "format": "Image Container PDF",
+     "mo": 2
+    },
+    {
+     "nom": "feqhmaliki74_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 3.6
+    }
+   ]
+  },
+  {
+   "creator": "الشيخ أحمد زروق",
+   "downloads": 12394,
+   "identifier": "Zarouk",
+   "language": "Arabic",
+   "title": "شرح زروق على متن الرسالة",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "Zarouk1.pdf",
+     "format": "Image Container PDF",
+     "mo": 31.8
+    },
+    {
+     "nom": "Zarouk1_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 42.2
+    },
+    {
+     "nom": "Zarouk2.pdf",
+     "format": "Image Container PDF",
+     "mo": 34.5
+    },
+    {
+     "nom": "Zarouk2_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 45.1
+    }
+   ]
+  },
+  {
+   "downloads": 11374,
+   "identifier": "zulhusnimatresat93_yahoo_O",
+   "language": "Arabic",
+   "title": "متن الرسالة الشمسية في القواعد المنطقية",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "متن الرسالة الشمسية في القواعد المنطقية.o.pdf",
+     "format": "Text PDF",
+     "mo": 0.8
+    }
+   ]
+  },
+  {
+   "creator": "الشيخ زايد الأذان الشنقيطي",
+   "downloads": 10683,
+   "identifier": "Idhak_Hawani",
+   "language": "Arabic",
+   "title": "العذاق الحواني على نظم رسالة القيرواني",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "Idhak_Hawani1.pdf",
+     "format": "Image Container PDF",
+     "mo": 2.8
+    },
+    {
+     "nom": "Idhak_Hawani1_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 20.7
+    },
+    {
+     "nom": "Idhak_Hawani2.pdf",
+     "format": "Image Container PDF",
+     "mo": 2.3
+    },
+    {
+     "nom": "Idhak_Hawani2_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 20.3
+    },
+    {
+     "nom": "Idhak_Hawani3.pdf",
+     "format": "Image Container PDF",
+     "mo": 2.8
+    },
+    {
+     "nom": "Idhak_Hawani3_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 25.9
+    }
+   ]
+  },
+  {
+   "creator": "الشيخ الأمانه ولد إبراهيم",
+   "downloads": 10263,
+   "identifier": "FathMajid",
+   "language": "ara",
+   "title": "فتح المجيد شرح على نظم رسالة ابن أبي زيد القيرواني",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "FathMajid_01.pdf",
+     "format": "Image Container PDF",
+     "mo": 5.7
+    },
+    {
+     "nom": "FathMajid_01_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 9.6
+    },
+    {
+     "nom": "FathMajid_02.pdf",
+     "format": "Image Container PDF",
+     "mo": 10.1
+    },
+    {
+     "nom": "FathMajid_02_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 9.2
+    }
+   ]
+  },
+  {
+   "downloads": 9380,
+   "identifier": "20240618_20240618_1057",
+   "language": "Arabic",
+   "title": "التحرير والتحبير في شرح رسالة ابن أبي زيد القيرواني الملقب بمالك الصغير (1-6)",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "التحرير والتحبير في شرح رسالة ابن أبي زيد القيرواني الملقب بمالك الصغير١.pdf",
+     "format": "Image Container PDF",
+     "mo": 17.5
+    },
+    {
+     "nom": "التحرير والتحبير في شرح رسالة ابن أبي زيد القيرواني الملقب بمالك الصغير١_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 31.9
+    },
+    {
+     "nom": "التحرير والتحبير في شرح رسالة ابن أبي زيد القيرواني الملقب بمالك الصغير٢.pdf",
+     "format": "Image Container PDF",
+     "mo": 11.2
+    },
+    {
+     "nom": "التحرير والتحبير في شرح رسالة ابن أبي زيد القيرواني الملقب بمالك الصغير٢_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 27.6
+    },
+    {
+     "nom": "التحرير والتحبير في شرح رسالة ابن أبي زيد القيرواني الملقب بمالك الصغير٣.pdf",
+     "format": "Image Container PDF",
+     "mo": 11.7
+    },
+    {
+     "nom": "التحرير والتحبير في شرح رسالة ابن أبي زيد القيرواني الملقب بمالك الصغير٣_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 28.6
+    },
+    {
+     "nom": "التحرير والتحبير في شرح رسالة ابن أبي زيد القيرواني الملقب بمالك الصغير٤.pdf",
+     "format": "Image Container PDF",
+     "mo": 12
+    },
+    {
+     "nom": "التحرير والتحبير في شرح رسالة ابن أبي زيد القيرواني الملقب بمالك الصغير٤_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 29.6
+    },
+    {
+     "nom": "التحرير والتحبير في شرح رسالة ابن أبي زيد القيرواني الملقب بمالك الصغير٥.pdf",
+     "format": "Image Container PDF",
+     "mo": 11.9
+    },
+    {
+     "nom": "التحرير والتحبير في شرح رسالة ابن أبي زيد القيرواني الملقب بمالك الصغير٥_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 29.1
+    },
+    {
+     "nom": "التحرير والتحبير في شرح رسالة ابن أبي زيد القيرواني الملقب بمالك الصغير٦.pdf",
+     "format": "Image Container PDF",
+     "mo": 12.8
+    },
+    {
+     "nom": "التحرير والتحبير في شرح رسالة ابن أبي زيد القيرواني الملقب بمالك الصغير٦_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 31.8
+    }
+   ]
+  },
+  {
+   "creator": "العلامة يحي بن محمد بن محمد الحطّاب الرعيني المالكي",
+   "downloads": 9365,
+   "identifier": "HachietHatab",
+   "language": "ara",
+   "title": "حاشية الحطّاب على رسالة ابن أبي زيد القيرواني",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "HachietHatab.pdf",
+     "format": "Image Container PDF",
+     "mo": 11.7
+    },
+    {
+     "nom": "HachietHatab_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 21.7
+    },
+    {
+     "nom": "HachietRisala.pdf",
+     "format": "Text PDF",
+     "mo": 4.5
+    }
+   ]
+  },
+  {
+   "creator": "الدكتور حمزة أبو فارس",
+   "downloads": 9028,
+   "identifier": "ManhajKadi",
+   "language": "ara",
+   "title": "القاضي عبد الوهاب البغدادي ومنهجه في شرح رسالة ابن أبي زيد القيرواني",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "ManhajKadi.pdf",
+     "format": "Image Container PDF",
+     "mo": 9.8
+    },
+    {
+     "nom": "ManhajKadi_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 31.7
+    }
+   ]
+  },
+  {
+   "creator": "Yedali",
+   "downloads": 7803,
+   "identifier": "Kivayat_talib",
+   "language": "Arabic",
+   "title": "كفاية الطالب الرباني على رسالة إبن أبي زيد القيرواني",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "Kivayat_talib01.pdf",
+     "format": "Image Container PDF",
+     "mo": 17.9
+    },
+    {
+     "nom": "Kivayat_talib01_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 17.7
+    },
+    {
+     "nom": "Kivayat_talib02.pdf",
+     "format": "Image Container PDF",
+     "mo": 18.3
+    },
+    {
+     "nom": "Kivayat_talib02_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 19
+    },
+    {
+     "nom": "Kivayat_talib03.pdf",
+     "format": "Image Container PDF",
+     "mo": 17
+    },
+    {
+     "nom": "Kivayat_talib03_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 16.7
+    },
+    {
+     "nom": "Kivayat_talib04.pdf",
+     "format": "Image Container PDF",
+     "mo": 17.1
+    },
+    {
+     "nom": "Kivayat_talib04_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 18.9
+    }
+   ]
+  },
+  {
+   "creator": "أبو يحيى السلفي",
+   "downloads": 7469,
+   "identifier": "Dalil-Talib-Sultan-3id",
+   "language": "Arabic",
+   "title": "متن دليل الطالب لنيل المطالب ت. سلطان العيد ط. مؤسسة الرسالة",
+   "droits": "http://ia600305.us.archive.org/17/items/Dalil-Talib-Sultan-3id/dalil-sultan.pdf",
+   "editeur": "أبو يحيى السلفي",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "dalil-sultan.pdf",
+     "format": "Text PDF",
+     "mo": 7.3
+    }
+   ]
+  },
+  {
+   "creator": "Yedali",
+   "downloads": 6323,
+   "identifier": "RissalatIbnAbuZeid",
+   "language": "Arabic",
+   "title": "رسالة ابن أبي زيد القيرواني",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "33-Rissala_Idah.pdf",
+     "format": "Image Container PDF",
+     "mo": 3.8
+    },
+    {
+     "nom": "33-Rissala_Idah_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 5.8
+    }
+   ]
+  },
+  {
+   "creator": "Yedali",
+   "downloads": 6100,
+   "identifier": "ThamruDani",
+   "language": "Arabic",
+   "title": "الثمر الداني شرح رسالة ابن أبي زيد القيرواني",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "32-ThamruDani.pdf",
+     "format": "Image Container PDF",
+     "mo": 21
+    },
+    {
+     "nom": "32-ThamruDani_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 18.9
+    }
+   ]
+  },
+  {
+   "creator": "قاسم بن عيسى بن ناجي التنوخي القيرواني",
+   "downloads": 5836,
+   "identifier": "Tanoukhi",
+   "language": "Arabic",
+   "title": "شرح ابن ناجي التنوخي على متن الرسالة",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "Tanoukhi_01.pdf",
+     "format": "Image Container PDF",
+     "mo": 9
+    },
+    {
+     "nom": "Tanoukhi_01_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 34.7
+    },
+    {
+     "nom": "Tanoukhi_02.pdf",
+     "format": "Image Container PDF",
+     "mo": 9.3
+    },
+    {
+     "nom": "Tanoukhi_02_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 39.2
+    }
+   ]
+  },
+  {
+   "creator": "الشيخ أحمد زروق",
+   "downloads": 4415,
+   "identifier": "ChrhZerrouk",
+   "language": "Arabic",
+   "title": "شرح زروق على متن الرسالة",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "ChrhZerrouk.pdf",
+     "format": "Image Container PDF",
+     "mo": 23.9
+    },
+    {
+     "nom": "ChrhZerrouk_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 89.3
+    }
+   ]
+  },
+  {
+   "creator": "Yedali",
+   "downloads": 3199,
+   "identifier": "KifayatuTalibRabani",
+   "language": "Arabic",
+   "title": "كفاية الطالب الرباني على رسالة إبن أبي زيد القيرواني",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "Kifaya_Adoui1.pdf",
+     "format": "Image Container PDF",
+     "mo": 14
+    },
+    {
+     "nom": "Kifaya_Adoui1_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 17
+    },
+    {
+     "nom": "Kifaya_Adoui2.pdf",
+     "format": "Image Container PDF",
+     "mo": 14.1
+    },
+    {
+     "nom": "Kifaya_Adoui2_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 17
+    },
+    {
+     "nom": "Kifaya_Adoui3.pdf",
+     "format": "Image Container PDF",
+     "mo": 17
+    },
+    {
+     "nom": "Kifaya_Adoui3_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 16.4
+    },
+    {
+     "nom": "Kifaya_Adoui4.pdf",
+     "format": "Image Container PDF",
+     "mo": 13.2
+    },
+    {
+     "nom": "Kifaya_Adoui4_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 15.9
+    }
+   ]
+  },
+  {
+   "creator": "الإمام العلامة المحدث الحافظ المؤرخ الفقيه والمفسر شهاب الدين أبو العباس أحمد بن أحمد بن محمد بن عيسى البرنسي الفاسي المعروف بـزرّوق المالكي الصوفي رحمة الله عليه المتوفیٰ 899ھ",
+   "downloads": 2957,
+   "identifier": "20200130_20200130_0618",
+   "language": "ara",
+   "title": "شرح زروق على متن الرسالة",
+   "year": 2020,
+   "droits": "",
+   "editeur": "",
+   "date": "2020-01-30",
+   "pdfs": [
+    {
+     "nom": "شرح زروق على متن الرسالة.pdf",
+     "format": "Image Container PDF",
+     "mo": 23.9
+    },
+    {
+     "nom": "شرح زروق على متن الرسالة_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 43
+    }
+   ]
+  },
+  {
+   "downloads": 2572,
+   "identifier": "20250926_20250926_0621",
+   "title": "التحرير والتحبير في شرح رسالة ابن أبي زيد القيرواني الملقب بمالك الصغير١",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "التحرير والتحبير في شرح رسالة ابن أبي زيد القيرواني الملقب بمالك الصغير١.pdf",
+     "format": "Image Container PDF",
+     "mo": 13.4
+    },
+    {
+     "nom": "التحرير والتحبير في شرح رسالة ابن أبي زيد القيرواني الملقب بمالك الصغير١_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 30.5
+    }
+   ]
+  },
+  {
+   "creator": "khaldoun-algeria",
+   "downloads": 2501,
+   "identifier": "fakihani",
+   "language": "Arabic",
+   "title": "مخطوط جزء من شرح الفاكهاني على رسالة ابن أبي ز القيرواني",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "fakihani.pdf",
+     "format": "Image Container PDF",
+     "mo": 27.3
+    },
+    {
+     "nom": "fakihani_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 8.7
+    }
+   ]
+  },
+  {
+   "downloads": 2447,
+   "identifier": "20201225_20201225_1756",
+   "language": "Arabic",
+   "title": "عقيدة السلف مقدمة ابن أبي زيد القيرواني لكتابه الرسالة",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "عقيدة السلف مقدمة ابن أبي زيد القيرواني لكتابه الرسالة.pdf",
+     "format": "Image Container PDF",
+     "mo": 3.6
+    },
+    {
+     "nom": "عقيدة السلف مقدمة ابن أبي زيد القيرواني لكتابه الرسالة_text.pdf",
+     "format": "Additional Text PDF",
+     "mo": 4.1
+    }
+   ]
+  },
+  {
+   "creator": "Yedali",
+   "downloads": 2163,
+   "identifier": "FathRabaniNathmRissala",
+   "language": "Arabic",
+   "title": "الفتح الرباني شرح نظم رسالة ابن أبي زيد القيرواني",
+   "droits": "",
+   "editeur": "",
+   "date": "",
+   "pdfs": [
+    {
+     "nom": "Fath_Rabani_Nathm_Rissala.pdf",
+     "format": "Text PDF",
+     "mo": 19.7
+    }
+   ]
+  }
+ ]
+}
