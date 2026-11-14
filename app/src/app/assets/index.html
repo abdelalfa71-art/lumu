@@ -2583,6 +2583,7 @@ async function vueContenu() {
       <button class="btn-outline" id="env-a">📨 Envoyer à…</button>
       <button class="btn-outline" id="signaler">🚩 Signaler</button>
     </div></div>
+    ${etat.params.playlist && etat.params.playlist.nom ? `<p class="preuve" style="margin:0 0 8px">🎧 ${esc(etat.params.playlist.nom)} · volume ${etat.params.playlist.i + 1} sur ${etat.params.playlist.ids.length}</p>` : ""}
     ${lecteurHTML(c)}
     <h1 dir="auto" style="margin-top:6px">${esc(c.title)}</h1>
     ${(c.views_count || 0) >= 20 ? `<p class="preuve">👂 <b>${esc(fmtNb(c.views_count))}</b> personnes ${c.type === "audio" ? "ont écouté" : "ont regardé"} ce ${c.type === "audio" ? "prêche" : "contenu"}</p>` : ""}
@@ -5926,7 +5927,7 @@ async function vueBiblioLire() {
   if (EXPLICATIONS[l.id]) $("#bl-expl").onclick = async () => {
     const ids = EXPLICATIONS[l.id];
     const { data } = await sb.from("yt_contenus").select(CHAMPS_CONTENU).eq("id", ids[0]).eq("status", "published").maybeSingle();
-    if (data) router("contenu", { id: ids[0], c: data, playlist: { ids, i: 0 }, auto: true }); else alert("Explication indisponible. Vérifiez la connexion internet.");
+    if (data) router("contenu", { id: ids[0], c: data, playlist: { ids, i: 0, nom: "Explication" }, auto: true }); else alert("Explication indisponible. Vérifiez la connexion internet.");
   };
   $("#bl-opt").onclick = () => { const pl = $("#bl-plus"), ouvert = pl.style.display === "none"; pl.style.display = ouvert ? "grid" : "none"; $("#bl-opt").setAttribute("aria-expanded", ouvert ? "true" : "false"); if (ouvert) pl.scrollIntoView({ block: "nearest", behavior: "smooth" }); };
   $("#bl-zoom").onclick = () => regleZoom(zoom > 1 ? 1 : 2);
