@@ -49,7 +49,14 @@ if (d.livres && d.livres.length) {
     try { fs.writeFileSync(dir + "/_images.txt", execFileSync("pdfimages", ["-list", "-l", "12", "/tmp/livre.pdf"]).toString()); } catch (e) {}
     if (L.debut) args.push("-f", String(L.debut));
     if (L.fin) args.push("-l", String(L.fin));
-    execFileSync("pdftoppm", [...args, "/tmp/livre.pdf", "/tmp/p"], { stdio: "inherit" });
+    if (L.originaux) {
+      /* Images d'origine du scan, extraites telles quelles (aucun réencodage) : une image JPEG par page */
+      for (const f of fs.readdirSync("/tmp").filter(f => /^o-\d+\./.test(f))) fs.rmSync("/tmp/" + f);
+      execFileSync("pdfimages", ["-j", "/tmp/livre.pdf", "/tmp/o"], { stdio: "inherit" });
+      const o = fs.readdirSync("/tmp").filter(f => /^o-\d+\./.test(f)).sort();
+      if (!o.length || o.some(f => !f.endsWith(".jpg"))) throw new Error("Ce PDF ne contient pas une image JPEG par page : " + o.slice(0, 5).join(","));
+      o.forEach((f, i) => fs.renameSync("/tmp/" + f, "/tmp/p-" + (i + 1) + ".jpg"));
+    } else execFileSync("pdftoppm", [...args, "/tmp/livre.pdf", "/tmp/p"], { stdio: "inherit" });
     const fichiers = fs.readdirSync("/tmp").filter(f => /^p-\d+\.jpg$/.test(f)).sort((a, b) => parseInt(a.slice(2)) - parseInt(b.slice(2)));
     const emp = {};
     fichiers.forEach((f, i) => { const b = fs.readFileSync("/tmp/" + f); fs.writeFileSync(dir + "/" + (i + 1) + ".jpg", b); emp[i + 1] = crypto.createHash("sha256").update(b).digest("hex"); });
@@ -74,7 +81,8 @@ if (d.apercus && d.apercus.length) {
       const n = +(/Pages:\s+(\d+)/.exec(info) || [0, 0])[1];
       const choix = [...new Set([1, 2, 3, 4, 5, 6, Math.round(n / 3), Math.round(n / 2), Math.round(2 * n / 3), n - 1, n].filter(x => x >= 1 && x <= n))];
       for (const p of choix) execFileSync("pdftoppm", ["-jpeg", "-jpegopt", "quality=70", "-scale-to-x", "700", "-scale-to-y", "-1", "-f", String(p), "-l", String(p), "-singlefile", "/tmp/a.pdf", dir + "/" + p]);
-      fs.writeFileSync(dir + "/info.json", JSON.stringify({ url: A.url, pages: n, octets: fs.statSync("/tmp/a.pdf").size, info: info.slice(0, 600) }, null, 1));
+      let images = ""; try { images = execFileSync("pdfimages", ["-list", "-f", "5", "-l", "9", "/tmp/a.pdf"]).toString(); } catch (e) {}
+      fs.writeFileSync(dir + "/info.json", JSON.stringify({ url: A.url, pages: n, octets: fs.statSync("/tmp/a.pdf").size, info: info.slice(0, 600), images }, null, 1));
       console.log("aperçu", A.nom, n, "pages");
     } catch (e) { fs.writeFileSync(dir + "/info.json", JSON.stringify({ url: A.url, erreur: String(e.message || e) })); console.log("aperçu", A.nom, "échec", String(e.message || e)); }
   }
