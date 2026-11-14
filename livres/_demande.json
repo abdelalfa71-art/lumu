@@ -1,24 +1,19 @@
 {
+ "requetes": [
+  {
+   "nom": "ahlwardt",
+   "q": "title:(divans six ancient Arabic poets) OR (creator:(Ahlwardt) AND title:(divans)) OR title:(العقد الثمين)",
+   "n": 20
+  }
+ ],
  "apercus": [
-  {
-   "nom": "jahili-a",
-   "url": "https://archive.org/download/ar102arab42/%D8%A7%D9%84%D8%A3%D8%B9%D9%84%D9%85%20%D8%A7%D9%84%D8%B4%D9%86%D8%AA%D9%85%D8%B1%D9%8A-%D8%A3%D8%B4%D8%B9%D8%A7%D8%B1%20%D8%A7%D9%84%D8%B4%D8%B9%D8%B1%D8%A7%D8%A1%20%D8%A7%D9%84%D8%B3%D8%AA%D8%A9%20%D8%A7%D9%84%D8%AC%D8%A7%D9%87%D9%84%D9%8A%D9%8A%D9%86.pdf"
-  },
-  {
-   "nom": "jahili-b",
-   "url": "https://archive.org/download/20230904_20230904_1747/%D8%A3%D8%B4%D8%B9%D8%A7%D8%B1%20%D8%A7%D9%84%D8%B4%D8%B9%D8%B1%D8%A7%D8%A1%20%D8%A7%D9%84%D8%B3%D8%AA%D8%A9%20%D8%A7%D9%84%D8%AC%D8%A7%D9%87%D9%84%D9%8A%D9%8A%D9%86.pdf"
-  },
   {
    "nom": "umda-a",
    "url": "https://archive.org/download/20200116_20200116_2045/%D8%B9%D9%85%D8%AF%D8%A9%20%D8%A7%D9%84%D8%A3%D8%AD%D9%83%D8%A7%D9%85%20%D8%AA%D8%AD%D9%82%D9%8A%D9%82%20%D8%A7%D9%84%D9%81%D8%A7%D8%B1%D9%8A%D8%A7%D8%A8%D9%8A.pdf"
   },
   {
-   "nom": "umda-b",
-   "url": "https://archive.org/download/20210119_20210119_0642/%D9%85%D8%AA%D9%86%20%D8%B9%D9%85%D8%AF%D8%A9%20%D8%A7%D9%84%D8%A3%D8%AD%D9%83%D8%A7%D9%85-%20%D8%B7%20%D8%A7%D9%84%D9%82%D8%A7%D8%B3%D9%85.pdf"
-  },
-  {
-   "nom": "bulugh-a",
-   "url": "https://archive.org/download/kitabbulughalmar00ibna/kitabbulughalmar00ibna.pdf"
+   "nom": "jahili-a",
+   "url": "https://archive.org/download/ar102arab42/%D8%A7%D9%84%D8%A3%D8%B9%D9%84%D9%85%20%D8%A7%D9%84%D8%B4%D9%86%D8%AA%D9%85%D8%B1%D9%8A-%D8%A3%D8%B4%D8%B9%D8%A7%D8%B1%20%D8%A7%D9%84%D8%B4%D8%B9%D8%B1%D8%A7%D8%A1%20%D8%A7%D9%84%D8%B3%D8%AA%D8%A9%20%D8%A7%D9%84%D8%AC%D8%A7%D9%87%D9%84%D9%8A%D9%8A%D9%86.pdf"
   },
   {
    "nom": "bulugh-b",

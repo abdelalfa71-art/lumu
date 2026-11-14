@@ -5,6 +5,16 @@ import fs from "node:fs";
 import { execFileSync } from "node:child_process";
 import crypto from "node:crypto";
 
+async function telecharger(url, dest) {
+  let err = null;
+  for (let essai = 0; essai < 3; essai++) {
+    try { const r = await fetch(url, { redirect: "follow", headers: { "user-agent": "Mozilla/5.0 (lumu-bibliotheque)" } }); if (!r.ok) throw new Error("HTTP " + r.status); fs.writeFileSync(dest, Buffer.from(await r.arrayBuffer())); return; }
+    catch (e) { err = e; console.log("fetch, essai", essai + 1, String(e.message || e)); await new Promise(r => setTimeout(r, 4000)); }
+  }
+  try { execFileSync("curl", ["-L", "--fail", "--retry", "6", "--retry-all-errors", "--retry-delay", "5", "--connect-timeout", "60", "--max-time", "1800", "-A", "Mozilla/5.0 (lumu-bibliotheque)", "-o", dest, url], { stdio: "inherit" }); return; }
+  catch (e) { throw new Error("téléchargement impossible : " + String((err && err.message) || err) + " ; curl : " + String(e.message || e).slice(0, 80)); }
+}
+
 const d = JSON.parse(fs.readFileSync("livres/_demande.json", "utf8"));
 const json = async u => { const r = await fetch(u, { headers: { "user-agent": "lumu-bibliotheque/1.0" } }); if (!r.ok) throw new Error("HTTP " + r.status + " " + u); return r.json(); };
 
@@ -36,12 +46,7 @@ if (d.livres && d.livres.length) {
     for (const f of fs.readdirSync("/tmp").filter(f => /^p-\d+\.(jpg|png)$/.test(f))) fs.rmSync("/tmp/" + f);
     const dir = "livres/" + L.id;
     fs.rmSync(dir, { recursive: true, force: true }); fs.mkdirSync(dir, { recursive: true });
-    { let ok = false, err = null;
-      for (let essai = 0; essai < 4 && !ok; essai++) {
-        try { const r = await fetch(L.url, { redirect: "follow", headers: { "user-agent": "Mozilla/5.0 (lumu-bibliotheque)" } }); if (!r.ok) throw new Error("HTTP " + r.status); fs.writeFileSync("/tmp/livre.pdf", Buffer.from(await r.arrayBuffer())); ok = true; }
-        catch (e) { err = e; console.log("essai", essai + 1, String(e.message || e), e.cause ? String(e.cause.message || e.cause) : ""); await new Promise(r => setTimeout(r, 5000)); }
-      }
-      if (!ok) throw err; }
+    await telecharger(L.url, "/tmp/livre.pdf");
     const tete = fs.readFileSync("/tmp/livre.pdf").subarray(0, 5).toString();
     if (tete !== "%PDF-") throw new Error("Le fichier téléchargé n'est pas un PDF");
     const args = ["-jpeg", "-jpegopt", "quality=" + (L.qualite || 88), "-scale-to-x", String(L.largeur || 1400), "-scale-to-y", "-1"];
@@ -72,12 +77,7 @@ if (d.apercus && d.apercus.length) {
   for (const A of d.apercus) {
     const dir = "livres/_apercu/" + A.nom; fs.rmSync(dir, { recursive: true, force: true }); fs.mkdirSync(dir, { recursive: true });
     try {
-      let ok = false, err = null;
-      for (let essai = 0; essai < 4 && !ok; essai++) {
-        try { const r = await fetch(A.url, { redirect: "follow", headers: { "user-agent": "Mozilla/5.0 (lumu-bibliotheque)" } }); if (!r.ok) throw new Error("HTTP " + r.status); fs.writeFileSync("/tmp/a.pdf", Buffer.from(await r.arrayBuffer())); ok = true; }
-        catch (e) { err = e; await new Promise(r => setTimeout(r, 5000)); }
-      }
-      if (!ok) throw err;
+      await telecharger(A.url, "/tmp/a.pdf");
       const info = execFileSync("pdfinfo", ["/tmp/a.pdf"]).toString();
       const n = +(/Pages:\s+(\d+)/.exec(info) || [0, 0])[1];
       const choix = [...new Set([1, 2, 3, 4, 5, 6, Math.round(n / 3), Math.round(n / 2), Math.round(2 * n / 3), n - 1, n].filter(x => x >= 1 && x <= n))];
