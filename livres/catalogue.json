@@ -11,9 +11,10 @@
    "couleur": "#5b2a1e",
    "pages": 193,
    "ext": "png",
-   "rev": "522993b627853256e8b069fc61815f06bccdf5e2",
+   "rev": "a1e6b93f1db934d4c8f929dfd715624693304d7e",
    "emp": "03680ed1e85eff9d014d7f35984d75f71e9dc9748cb78c0e36529745a2263f51",
-   "source": "Texte établi par Abd al-Majid ach-Charnoubi al-Azhari, al-Maktaba ath-Thaqafiyya, Beyrouth. Scan de la Bibliotheca Alexandrina (archive.org, Pdf4478)."
+   "source": "Texte établi par Abd al-Majid ach-Charnoubi al-Azhari, al-Maktaba ath-Thaqafiyya, Beyrouth. Scan de la Bibliotheca Alexandrina (archive.org, Pdf4478).",
+   "rogneEmp": "1a9cee294d9333bf6abdf8c5a0c59960c053dff79c7b88bab14cc03b9f1d514e"
   },
   {
    "id": "akhdari",
@@ -24,10 +25,10 @@
    "theme": "Fiqh malikite",
    "couleur": "#1d3f6b",
    "pages": 33,
-   "ext": "jpg",
-   "rev": "522993b627853256e8b069fc61815f06bccdf5e2",
-   "emp": "43b8edcdafb838d77dedab9f8343ead8571333f248171e3c312558c08a593906",
-   "source": "Imprimerie Tha'alibiyya, Alger, 2ᵉ impression, 1928 (archive.org, Akhdari-Tha3alibia)."
+   "ext": "png",
+   "rev": "a1e6b93f1db934d4c8f929dfd715624693304d7e",
+   "emp": "fe19c723603599b8620d9c70262e8f4f21a87be9e476812099e7c12929980320",
+   "source": "Imprimerie Tha'alibiyya, Alger, 2ᵉ impression, 1928 (archive.org, Akhdari-Tha3alibia). Scan de petite taille : fond blanchi, image agrandie et accentuée."
   },
   {
    "id": "bulugh",
@@ -39,9 +40,10 @@
    "couleur": "#6b4a12",
    "pages": 325,
    "ext": "png",
-   "rev": "1f1ded7520330e7f277a5f735b7ee3ba53fee742",
+   "rev": "a1e6b93f1db934d4c8f929dfd715624693304d7e",
    "emp": "dcbebab89ca601962b3007828bb9f07b68e6c692f820acd3ef52a3f7d26307af",
-   "source": "Édition de Muhammad Hamid al-Fiqi, al-Maktaba at-Tijariyya al-Kubra, Le Caire, 1933 (archive.org, 1933_20210228). Fond du papier éclairci."
+   "source": "Édition de Muhammad Hamid al-Fiqi, al-Maktaba at-Tijariyya al-Kubra, Le Caire, 1933 (archive.org, 1933_20210228). Fond du papier éclairci.",
+   "rogneEmp": "b97538fbb449c05db5136627efa64463cceae102268cfb4a1e6c6450b94b36eb"
   }
  ]
 }

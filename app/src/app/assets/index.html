@@ -5855,18 +5855,30 @@ async function vueBiblioLire() {
   let p = Math.min(N, Math.max(1, +(etats[l.id] && etats[l.id].page) || 1));
   const bo = 'class="btn-outline" style="flex:1;margin:0"';
   w.insertAdjacentHTML("beforeend", `<p class="texte-arabe" lang="ar" dir="rtl" translate="no" style="text-align:center;font-size:20px;margin:0">${esc(l.titre)}${l.auteur ? " · " + esc(l.auteur) : ""}</p>
-    <div id="bl-zone" translate="no" class="notranslate" style="position:relative;min-height:55vh;background:#fff;overflow:auto;touch-action:pan-y"><img id="bl-img" alt="" draggable="false" style="display:block;width:100%;max-width:none;height:auto"><div id="bl-etat" style="position:absolute;inset:0;display:flex;flex-direction:column;gap:10px;align-items:center;justify-content:center;padding:20px;text-align:center;background:#fff;color:#1f2a24"></div></div>
+    <div id="bl-zone" translate="no" class="notranslate" style="position:relative;min-height:55vh;background:#fff;overflow:auto;touch-action:pan-y"><div id="bl-cadre" style="overflow:hidden;width:100%"><img id="bl-img" alt="" draggable="false" style="display:block;width:100%;max-width:none;height:auto"></div><div id="bl-etat" style="position:absolute;inset:0;display:flex;flex-direction:column;gap:10px;align-items:center;justify-content:center;padding:20px;text-align:center;background:#fff;color:#1f2a24"></div></div>
     <div style="display:flex;gap:8px;align-items:center"><button class="btn" id="bl-suiv" style="flex:1;margin:0">← Suivante</button><b id="bl-num" style="min-width:86px;text-align:center"></b><button ${bo} id="bl-prec">Précédente →</button></div>
     <div style="display:flex;gap:8px"><button ${bo} id="bl-zoom">🔍 Agrandir</button><button ${bo} id="bl-aller">Page…</button></div>
     <button class="btn-outline" id="bl-dl" style="margin:0">⬇ Télécharger le livre pour lire sans connexion</button>
     <p style="font-size:12px;text-align:center" dir="auto">${esc(l.source || "")}${l.source ? " · " : ""}Pages du livre imprimé, sans modification.</p>`);
   const $ = q => w.querySelector(q), img = $("#bl-img"), zEtat = $("#bl-etat"), zone = $("#bl-zone");
   try { const pad = parseFloat(getComputedStyle(w).paddingLeft) || 0; if (pad) zone.style.marginLeft = zone.style.marginRight = -pad + "px"; } catch (e) {}
-  let tour = 0, url = null, zoom = 1;
+  let tour = 0, url = null, zoom = 1, rognes = null;
+  const cadre = $("#bl-cadre");
+  /* Cadre de lecture : on n'affiche que la zone du texte de la page (marges blanches et bords du scan masqués), pour un texte plus grand. Le fichier de la page n'est pas modifié. */
+  const appliquerCadre = () => {
+    const r = (rognes && rognes[p]) || [0, 0, 0, 0], nw = img.naturalWidth, nh = img.naturalHeight;
+    const fw = 1 - r[0] - r[2], fh = 1 - r[1] - r[3];
+    if (!nw || !nh || fw < 0.4 || fh < 0.3) { cadre.style.aspectRatio = ""; img.style.width = "100%"; img.style.marginLeft = img.style.marginTop = "0"; return; }
+    cadre.style.aspectRatio = (nw * fw) + " / " + (nh * fh);
+    img.style.width = (100 / fw) + "%";
+    img.style.marginLeft = (-r[0] / fw * 100) + "%";
+    img.style.marginTop = (-r[1] * (nh / nw) / fw * 100) + "%";
+  };
+  if (l.rogneEmp) BIBLIO.fichier(l, "rognes.json", l.rogneEmp).then(b => b.text()).then(t => { rognes = JSON.parse(t); appliquerCadre(); }).catch(() => {});
   const regleZoom = (z, cx) => {
     const anc = zoom; zoom = Math.min(3, Math.max(1, z));
     const c = cx == null ? zone.clientWidth / 2 : cx;
-    img.style.width = (zoom * 100) + "%"; zone.scrollLeft = (zone.scrollLeft + c) * (zoom / anc) - c;
+    cadre.style.width = (zoom * 100) + "%"; zone.scrollLeft = (zone.scrollLeft + c) * (zoom / anc) - c;
     zone.style.touchAction = zoom > 1 ? "pan-x pan-y" : "pan-y";
     $("#bl-zoom").textContent = zoom > 1 ? "🔍 Taille normale" : "🔍 Agrandir";
   };
@@ -5881,7 +5893,7 @@ async function vueBiblioLire() {
       const b = await BIBLIO.page(l, p);
       if (moi !== tour || !w.isConnected) return;
       const u = URL.createObjectURL(b);
-      img.onload = () => { if (moi === tour) zEtat.style.display = "none"; };
+      img.onload = () => { if (moi === tour) { appliquerCadre(); zEtat.style.display = "none"; } };
       img.src = u; if (url) URL.revokeObjectURL(url); url = u;
       if (p < N) BIBLIO.page(l, p + 1).catch(() => {});
     } catch (e) {
