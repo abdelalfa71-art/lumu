@@ -5854,10 +5854,11 @@ async function vueBiblioLire() {
   const N = +l.pages || 1, etats = chargerLocal("biblio_etat", {}) || {};
   let p = Math.min(N, Math.max(1, +(etats[l.id] && etats[l.id].page) || 1));
   const bo = 'class="btn-outline" style="flex:1;margin:0"';
-  w.insertAdjacentHTML("beforeend", `<div id="bl-zone" translate="no" class="notranslate" style="position:relative;min-height:55vh;background:#fff;overflow:auto;touch-action:pan-y"><div id="bl-cadre" style="overflow:hidden;width:100%"><img id="bl-img" alt="" draggable="false" style="display:block;width:100%;max-width:none;height:auto"></div><div id="bl-etat" style="position:absolute;inset:0;display:flex;flex-direction:column;gap:10px;align-items:center;justify-content:center;padding:20px;text-align:center;background:#fff;color:#1f2a24"></div></div>
-    <div style="display:flex;align-items:center;gap:8px"><button class="btn-outline" style="width:52px;flex:none;margin:0;padding:0;font-size:28px;line-height:1" id="bl-suiv" aria-label="Page suivante">‹</button><b id="bl-num" style="flex:1;text-align:center"></b><button class="btn-outline" style="width:52px;flex:none;margin:0;padding:0;font-size:28px;line-height:1" id="bl-prec" aria-label="Page précédente">›</button><button class="btn-outline" style="width:52px;flex:none;margin:0;padding:0;font-size:28px;line-height:1" id="bl-opt" aria-label="Options" aria-expanded="false">⋯</button></div>
+  w.insertAdjacentHTML("beforeend", `<style>.bl-fl{width:38px;height:38px;flex:none;margin:0;padding:0;border:0;border-radius:50%;background:transparent;color:inherit;font-size:24px;line-height:1}.bl-fl:disabled{opacity:.3}.bl-b{flex:1;min-width:0;margin:0;padding:6px 2px;border:0;background:transparent;color:inherit;font:inherit;font-size:20px;line-height:1.1;display:flex;flex-direction:column;align-items:center;gap:3px}.bl-b small{font-size:11px;opacity:.85;white-space:nowrap}</style>
+    <div style="display:flex;align-items:center;justify-content:center;gap:2px;padding:8px 10px;background:#e9e4d6;color:#1f2a24;border-radius:8px 8px 0 0"><button class="bl-fl" id="bl-suiv" aria-label="Page suivante">‹</button><b id="bl-num" style="min-width:72px;text-align:center;font-size:16px"></b><button class="bl-fl" id="bl-prec" aria-label="Page précédente">›</button></div>
+    <div id="bl-zone" translate="no" class="notranslate" style="position:relative;min-height:55vh;background:#fff;overflow:auto;touch-action:pan-y"><div id="bl-cadre" style="overflow:hidden;width:100%"><img id="bl-img" alt="" draggable="false" style="display:block;width:100%;max-width:none;height:auto"></div><div id="bl-etat" style="position:absolute;inset:0;display:flex;flex-direction:column;gap:10px;align-items:center;justify-content:center;padding:20px;text-align:center;background:#fff;color:#1f2a24"></div></div>
+    <div style="display:flex;align-items:stretch;gap:2px;padding:4px 6px;background:#e9e4d6;color:#1f2a24"><button class="bl-b" id="bl-aller">⌕<small>Aller à</small></button><button class="bl-b" id="bl-zoom">🔍<small>Agrandir</small></button><button class="bl-b" id="bl-opt" aria-label="Plus" aria-expanded="false">⋯<small>Plus</small></button></div>
     <div id="bl-plus" style="display:none;gap:12px">
-      <div style="display:flex;gap:8px"><button ${bo} id="bl-zoom">🔍 Agrandir</button><button ${bo} id="bl-aller">Page…</button></div>
       <button class="btn-outline" id="bl-dl" style="margin:0">⬇ Télécharger le livre pour lire sans connexion</button>
       <p class="texte-arabe" lang="ar" dir="rtl" translate="no" style="text-align:center;font-size:18px;margin:0">${esc(l.titre)}${l.auteur ? " · " + esc(l.auteur) : ""}</p>
       <p style="font-size:12px;text-align:center;margin:0" dir="auto">${esc(l.source || "")}</p>
@@ -5882,13 +5883,13 @@ async function vueBiblioLire() {
     const c = cx == null ? zone.clientWidth / 2 : cx;
     cadre.style.width = (zoom * 100) + "%"; zone.scrollLeft = (zone.scrollLeft + c) * (zoom / anc) - c;
     zone.style.touchAction = zoom > 1 ? "pan-x pan-y" : "pan-y";
-    $("#bl-zoom").textContent = zoom > 1 ? "🔍 Taille normale" : "🔍 Agrandir";
+    $("#bl-zoom").innerHTML = zoom > 1 ? "🔍<small>Normal</small>" : "🔍<small>Agrandir</small>";
   };
   const aff = async n => {
     p = Math.min(N, Math.max(1, n));
     const e = chargerLocal("biblio_etat", {}) || {}; e[l.id] = { page: p, t: Date.now() }; sauverLocal("biblio_etat", e);
     const moi = ++tour; if (zoom !== 1) regleZoom(1);
-    $("#bl-num").textContent = p + " / " + N;
+    $("#bl-num").textContent = p;
     $("#bl-suiv").disabled = p >= N; $("#bl-prec").disabled = p <= 1;
     zEtat.style.display = "flex"; zEtat.innerHTML = `<div class="spinner"></div><span>Veuillez patienter…</span>`;
     try {
