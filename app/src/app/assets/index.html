@@ -5819,43 +5819,115 @@ const CORAN = {
     throw err || new Error("http");
   }
 };
+/* État de lecture du Coran : page en cours, marque-pages, pages lues (khatma), objectif, mode nuit.
+   Enregistré sur le téléphone, et sur le compte quand on est connecté. */
+const CORAN_ETAT = {
+  CLE: "coran_etat", _t: 0,
+  auj() { try { return new Date().toLocaleDateString("fr-CA"); } catch (e) { return new Date().toISOString().slice(0, 10); } },
+  lire() {
+    const d = chargerLocal(this.CLE, null) || {};
+    return { page: +d.page || +chargerLocal("coran_page", 1) || 1, marques: Array.isArray(d.marques) ? d.marques : [], lues: typeof d.lues === "string" && d.lues.length === 604 ? d.lues : "0".repeat(604),
+      debut: +d.debut || 0, objectif: +d.objectif || 0, jour: d.jour && d.jour.d ? d.jour : { d: "", n: 0 }, nuit: !!d.nuit, maj: +d.maj || 0 };
+  },
+  nbLues(e) { return (e.lues.match(/1/g) || []).length; },
+  ecrire(e) { e.maj = Date.now(); sauverLocal(this.CLE, e); sauverLocal("coran_page", e.page); clearTimeout(this._t); this._t = setTimeout(() => this.envoyer(), 3000); },
+  async uid() { try { const r = await sb.auth.getSession(); return (r && r.data && r.data.session && r.data.session.user && r.data.session.user.id) || null; } catch (e) { return null; } },
+  async envoyer() {
+    try { const id = await this.uid(); if (!id) return; const e = this.lire();
+      await sb.from("yt_coran_etat").upsert({ user_id: id, donnees: { page: e.page, marques: e.marques, lues: e.lues, debut: e.debut, objectif: e.objectif, nuit: e.nuit, maj: e.maj }, maj: new Date().toISOString() }); } catch (x) {}
+  },
+  /* Fusion avec la copie du compte. Renvoie true si l'état local a changé. */
+  async recevoir() {
+    try {
+      const id = await this.uid(); if (!id) return false;
+      const r = await sb.from("yt_coran_etat").select("donnees").eq("user_id", id).maybeSingle();
+      const d = r && r.data && r.data.donnees; if (!d || typeof d !== "object") return false;
+      const e = this.lire(), recent = (+d.maj || 0) > e.maj, dl = typeof d.lues === "string" && d.lues.length === 604 ? d.lues : null, dd = +d.debut || 0;
+      let lues = e.lues, debut = e.debut;
+      if (dl) { if (dd > e.debut) { lues = dl; debut = dd; } else if (dd === e.debut) lues = Array.from(e.lues, (c, i) => c === "1" || dl[i] === "1" ? "1" : "0").join(""); }
+      const f = { ...e, lues, debut, marques: recent && Array.isArray(d.marques) ? d.marques : e.marques, page: recent && +d.page ? +d.page : e.page, objectif: recent ? (+d.objectif || 0) : e.objectif, nuit: recent ? !!d.nuit : e.nuit, maj: Math.max(e.maj, +d.maj || 0) };
+      const change = JSON.stringify([f.lues, f.marques, f.page, f.objectif, f.nuit]) !== JSON.stringify([e.lues, e.marques, e.page, e.objectif, e.nuit]);
+      if (change) { sauverLocal(this.CLE, f); sauverLocal("coran_page", f.page); }
+      return change;
+    } catch (x) { return false; }
+  }
+};
 async function vueCoran() {
   const w = document.createElement("div");
   w.className = "ecran";
-  let p = Math.min(CORAN.N, Math.max(1, parseInt(etat.params.page || chargerLocal("coran_page", 1), 10) || 1));
+  let E = CORAN_ETAT.lire();
+  const pageDemandee = parseInt(etat.params.page, 10) || 0;
+  let p = Math.min(CORAN.N, Math.max(1, pageDemandee || E.page));
+  const bo = 'class="btn-outline" style="flex:1;margin:0"';
   w.innerHTML = `<div class="entete" style="padding:0"><h1>Le Coran</h1></div>
-    <div style="display:flex;gap:8px;margin:0 0 10px"><button class="btn-outline" id="co-som" style="flex:1;margin:0">Sourates</button><button class="btn-outline" id="co-juz" style="flex:1;margin:0">Juz</button><button class="btn-outline" id="co-aller" style="flex:1;margin:0">Page…</button></div>
-    <div id="co-info" style="text-align:center;font-size:14px;margin:0 0 8px"></div>
-    <div id="co-zone" translate="no" class="notranslate" style="position:relative;min-height:55vh;background:#fff;border-radius:12px;overflow:hidden;touch-action:pan-y"><img id="co-img" alt="" draggable="false" style="display:block;width:100%;height:auto"><div id="co-etat" style="position:absolute;inset:0;display:flex;flex-direction:column;gap:10px;align-items:center;justify-content:center;padding:20px;text-align:center;background:#fff;color:#1f2a24"></div></div>
-    <div style="display:flex;gap:8px;align-items:center;margin-top:10px"><button class="btn" id="co-suiv" style="flex:1;margin:0">← Suivante</button><b id="co-num" style="min-width:86px;text-align:center"></b><button class="btn-outline" id="co-prec" style="flex:1;margin:0">Précédente →</button></div>
-    <button class="btn-outline" id="co-dl" style="margin-top:10px"></button>
-    <p style="font-size:12px;text-align:center;margin-top:10px">Mushaf de Médine, lecture Hafs · Complexe du Roi Fahd. Pages affichées sans aucune modification. Glissez vers la droite pour la page suivante.</p>`;
+    <div style="display:flex;gap:8px"><button ${bo} id="co-som">Sourates</button><button ${bo} id="co-juz">Juz</button><button ${bo} id="co-aller">Page…</button></div>
+    <div style="display:flex;gap:8px"><button ${bo} id="co-mq"></button><button ${bo} id="co-mqs">Mes marque-pages</button></div>
+    <div id="co-info" style="text-align:center;font-size:14px"></div>
+    <div id="co-zone" translate="no" class="notranslate" style="position:relative;min-height:55vh;background:#fff;overflow:auto;touch-action:pan-y"><img id="co-img" alt="" draggable="false" style="display:block;width:100%;max-width:none;height:auto"><div id="co-etat" style="position:absolute;inset:0;display:flex;flex-direction:column;gap:10px;align-items:center;justify-content:center;padding:20px;text-align:center;background:#fff;color:#1f2a24"></div></div>
+    <div style="display:flex;gap:8px;align-items:center"><button class="btn" id="co-suiv" style="flex:1;margin:0">← Suivante</button><b id="co-num" style="min-width:86px;text-align:center"></b><button ${bo} id="co-prec">Précédente →</button></div>
+    <div style="display:flex;gap:8px"><button ${bo} id="co-zoom">🔍 Agrandir</button><button ${bo} id="co-nuit"></button></div>
+    <div class="carte" id="co-kh" style="padding:14px"></div>
+    <button class="btn-outline" id="co-dl" style="margin:0"></button>
+    <p style="font-size:12px;text-align:center">Mushaf de Médine, lecture Hafs. Pages affichées sans modification du texte. Glissez vers la droite pour la page suivante, écartez deux doigts pour agrandir.</p>`;
   app.appendChild(w);
-  const img = w.querySelector("#co-img"), zEtat = w.querySelector("#co-etat");
-  let tour = 0, url = null;
+  const $ = q => w.querySelector(q);
+  const img = $("#co-img"), zEtat = $("#co-etat"), zone = $("#co-zone");
+  /* Page sur toute la largeur de l'écran */
+  try { const pad = parseFloat(getComputedStyle(w).paddingLeft) || 0; if (pad) { zone.style.marginLeft = zone.style.marginRight = -pad + "px"; } } catch (e) {}
+  let tour = 0, url = null, zoom = 1, tLu = 0;
+  const majNuit = () => { img.style.filter = E.nuit ? "invert(1) hue-rotate(180deg)" : ""; zone.style.background = E.nuit ? "#000" : "#fff"; zEtat.style.background = E.nuit ? "#000" : "#fff"; zEtat.style.color = E.nuit ? "#eee" : "#1f2a24"; $("#co-nuit").textContent = E.nuit ? "☀️ Mode jour" : "🌙 Mode nuit"; };
+  const majMq = () => { $("#co-mq").textContent = E.marques.some(x => x.p === p) ? "🔖 Retirer le marque-page" : "🔖 Marquer cette page"; };
+  const majKh = () => {
+    const n = CORAN_ETAT.nbLues(E), pct = Math.floor(n * 100 / CORAN.N), nj = E.jour.d === CORAN_ETAT.auj() ? E.jour.n : 0;
+    $("#co-kh").innerHTML = `<b>Ma lecture complète (khatma)</b>
+      <div style="height:8px;background:#e3dccb;border-radius:4px;margin:10px 0 6px;overflow:hidden"><i style="display:block;height:100%;width:${pct}%;background:#12805f"></i></div>
+      <p id="co-kh-t" style="margin:0">${n >= CORAN.N ? "Lecture complète terminée ✓" : n + " pages lues sur " + CORAN.N + " (" + pct + " %)"}</p>
+      ${E.objectif ? `<p id="co-kh-j" style="margin:4px 0 0">Aujourd'hui : ${nj} / ${E.objectif} page${E.objectif > 1 ? "s" : ""}${nj >= E.objectif ? " ✓" : ""}</p>` : ""}
+      <div style="display:flex;gap:8px;margin-top:10px"><button ${bo} id="co-obj">Objectif par jour</button><button ${bo} id="co-raz">Recommencer</button></div>`;
+    $("#co-obj").onclick = () => ouvrirFeuille("Objectif par jour", `<div style="display:grid;gap:8px">${[0, 1, 2, 5, 10, 20].map(v => `<button type="button" class="${v === E.objectif ? "btn" : "btn-outline"}" data-v="${v}" style="margin:0">${v ? v + " page" + (v > 1 ? "s" : "") + " par jour" : "Aucun objectif"}</button>`).join("")}</div>`, (corps, fermer) => {
+      corps.querySelectorAll("[data-v]").forEach(b => b.onclick = () => { E.objectif = +b.dataset.v; CORAN_ETAT.ecrire(E); fermer(); majKh(); });
+    });
+    $("#co-raz").onclick = () => { if (!confirm("Recommencer la lecture complète ? Les pages lues seront remises à zéro.")) return; E.lues = "0".repeat(604); E.debut = Date.now(); E.jour = { d: "", n: 0 }; CORAN_ETAT.ecrire(E); majKh(); };
+  };
   const majDl = async () => {
-    const j = CORAN.juz(p), b = w.querySelector("#co-dl"); if (!b) return;
+    const j = CORAN.juz(p), b = $("#co-dl"); if (!b) return;
     const d = CORAN.debutJuz(j), f = j === 30 ? CORAN.N : CORAN.debutJuz(j + 1) - 1;
     let n = 0; for (let i = d; i <= f; i++) if (await CORAN.enCache(i)) n++;
     if (!b.isConnected || b.dataset.occupe) return;
     b.textContent = n >= f - d + 1 ? "✓ Juz " + j + " disponible sans connexion" : "⬇ Télécharger le juz " + j + " pour lire sans connexion";
     b.disabled = n >= f - d + 1;
   };
+  const regleZoom = (z, cx) => {
+    const anc = zoom; zoom = Math.min(3, Math.max(1, z));
+    const c = cx == null ? zone.clientWidth / 2 : cx, r = zoom / anc;
+    img.style.width = (zoom * 100) + "%";
+    zone.scrollLeft = (zone.scrollLeft + c) * r - c;
+    zone.style.touchAction = zoom > 1 ? "pan-x pan-y" : "pan-y";
+    $("#co-zoom").textContent = zoom > 1 ? "🔍 Taille normale" : "🔍 Agrandir";
+  };
   const aff = async n => {
     p = Math.min(CORAN.N, Math.max(1, n));
-    sauverLocal("coran_page", p);
-    const moi = ++tour;
-    w.querySelector("#co-num").textContent = "Page " + p + " / " + CORAN.N;
-    w.querySelector("#co-info").textContent = CORAN.sourates(p).map(i => (i + 1) + ". " + CORAN.NOMS[i]).join(" · ") + " — Juz " + CORAN.juz(p);
-    w.querySelector("#co-suiv").disabled = p >= CORAN.N; w.querySelector("#co-prec").disabled = p <= 1;
+    E.page = p; CORAN_ETAT.ecrire(E);
+    const moi = ++tour; clearTimeout(tLu);
+    if (zoom !== 1) regleZoom(1);
+    $("#co-num").textContent = "Page " + p + " / " + CORAN.N;
+    $("#co-info").textContent = CORAN.sourates(p).map(i => (i + 1) + ". " + CORAN.NOMS[i]).join(" · ") + " — Juz " + CORAN.juz(p);
+    $("#co-suiv").disabled = p >= CORAN.N; $("#co-prec").disabled = p <= 1;
     zEtat.style.display = "flex"; zEtat.innerHTML = `<div class="spinner"></div><span>Veuillez patienter…</span>`;
-    majDl();
+    majMq(); majDl();
     try {
       const b = await CORAN.page(p);
       if (moi !== tour || !w.isConnected) return;
       const u = URL.createObjectURL(b);
       img.onload = () => { if (moi === tour) zEtat.style.display = "none"; };
       img.src = u; if (url) URL.revokeObjectURL(url); url = u;
+      /* Page comptée comme lue après quelques secondes d'affichage */
+      tLu = setTimeout(() => {
+        if (moi !== tour || !w.isConnected || E.lues[p - 1] === "1") return;
+        E.lues = E.lues.slice(0, p - 1) + "1" + E.lues.slice(p);
+        const a = CORAN_ETAT.auj(); if (E.jour.d !== a) E.jour = { d: a, n: 0 }; E.jour.n++;
+        CORAN_ETAT.ecrire(E); majKh();
+      }, 4000);
       if (p < CORAN.N) CORAN.page(p + 1).catch(() => {});
     } catch (e) {
       if (moi !== tour || !w.isConnected) return;
@@ -5864,41 +5936,78 @@ async function vueCoran() {
       zEtat.querySelector("#co-re").onclick = () => aff(p);
     }
   };
-  w.querySelector("#co-suiv").onclick = () => aff(p + 1);
-  w.querySelector("#co-prec").onclick = () => aff(p - 1);
-  /* Comme un Mushaf : on tourne la page vers la droite pour avancer */
-  let x0 = null, y0 = 0;
-  const zone = w.querySelector("#co-zone");
-  zone.addEventListener("touchstart", ev => { const t = ev.touches[0]; x0 = t.clientX; y0 = t.clientY; }, { passive: true });
+  $("#co-suiv").onclick = () => aff(p + 1);
+  $("#co-prec").onclick = () => aff(p - 1);
+  $("#co-zoom").onclick = () => regleZoom(zoom > 1 ? 1 : 2);
+  $("#co-nuit").onclick = () => { E.nuit = !E.nuit; CORAN_ETAT.ecrire(E); majNuit(); };
+  /* Gestes : glisser vers la droite pour avancer (comme un Mushaf), écarter deux doigts pour agrandir */
+  let x0 = null, y0 = 0, d0 = 0, z0 = 1, pince = false;
+  const ecart = t => Math.hypot(t[0].clientX - t[1].clientX, t[0].clientY - t[1].clientY);
+  zone.addEventListener("touchstart", ev => {
+    if (ev.touches.length === 2) { pince = true; d0 = ecart(ev.touches); z0 = zoom; x0 = null; }
+    else if (ev.touches.length === 1) { pince = false; x0 = ev.touches[0].clientX; y0 = ev.touches[0].clientY; }
+  }, { passive: true });
+  zone.addEventListener("touchmove", ev => {
+    if (ev.touches.length !== 2 || !d0) return;
+    ev.preventDefault();
+    const r = zone.getBoundingClientRect();
+    regleZoom(z0 * ecart(ev.touches) / d0, (ev.touches[0].clientX + ev.touches[1].clientX) / 2 - r.left);
+  }, { passive: false });
   zone.addEventListener("touchend", ev => {
-    if (x0 === null) return; const t = ev.changedTouches[0], dx = t.clientX - x0, dy = t.clientY - y0; x0 = null;
+    if (pince || x0 === null || zoom > 1) { if (!ev.touches.length) pince = false; x0 = null; return; }
+    const t = ev.changedTouches[0], dx = t.clientX - x0, dy = t.clientY - y0; x0 = null;
     if (Math.abs(dx) < 60 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
     if (dx > 0 && p < CORAN.N) aff(p + 1); else if (dx < 0 && p > 1) aff(p - 1);
   }, { passive: true });
-  w.querySelector("#co-som").onclick = () => ouvrirFeuille("Sourates", `<div id="co-ls" style="display:grid;gap:6px">${CORAN.NOMS.map((n, i) => `<button type="button" class="carte ligne-menu" data-p="${CORAN.DEBUTS[i]}" style="text-align:start"><span>${i + 1}.</span><span style="flex:1">${esc(n)}</span><small>p. ${CORAN.DEBUTS[i]}</small></button>`).join("")}</div>`, (corps, fermer) => {
+  $("#co-som").onclick = () => ouvrirFeuille("Sourates", `<div id="co-ls" style="display:grid;gap:6px">${CORAN.NOMS.map((n, i) => `<button type="button" class="carte ligne-menu" data-p="${CORAN.DEBUTS[i]}" style="text-align:start"><span>${i + 1}.</span><span style="flex:1">${esc(n)}</span><small>p. ${CORAN.DEBUTS[i]}</small></button>`).join("")}</div>`, (corps, fermer) => {
     corps.querySelectorAll("[data-p]").forEach(b => b.onclick = () => { fermer(); aff(+b.dataset.p); });
   });
-  w.querySelector("#co-juz").onclick = () => ouvrirFeuille("Juz", `<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">${Array.from({ length: 30 }, (_, i) => `<button type="button" class="btn-outline" data-p="${CORAN.debutJuz(i + 1)}" style="margin:0">Juz ${i + 1}</button>`).join("")}</div>`, (corps, fermer) => {
+  $("#co-juz").onclick = () => ouvrirFeuille("Juz", `<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">${Array.from({ length: 30 }, (_, i) => `<button type="button" class="btn-outline" data-p="${CORAN.debutJuz(i + 1)}" style="margin:0">Juz ${i + 1}</button>`).join("")}</div>`, (corps, fermer) => {
     corps.querySelectorAll("[data-p]").forEach(b => b.onclick = () => { fermer(); aff(+b.dataset.p); });
   });
-  w.querySelector("#co-aller").onclick = () => ouvrirFeuille("Aller à une page", `<form id="co-f" style="display:grid;gap:12px"><label style="display:grid;gap:6px">Numéro de page (1 à 604)<input class="champ" id="co-n" type="number" inputmode="numeric" min="1" max="604" required value="${p}"></label><button class="btn" type="submit">Ouvrir</button></form>`, (corps, fermer) => {
+  $("#co-aller").onclick = () => ouvrirFeuille("Aller à une page", `<form id="co-f" style="display:grid;gap:12px"><label style="display:grid;gap:6px">Numéro de page (1 à 604)<input class="champ" id="co-n" type="number" inputmode="numeric" min="1" max="604" required value="${p}"></label><button class="btn" type="submit">Ouvrir</button></form>`, (corps, fermer) => {
     corps.querySelector("#co-f").onsubmit = ev => { ev.preventDefault(); const n = parseInt(corps.querySelector("#co-n").value, 10); if (n >= 1 && n <= CORAN.N) { fermer(); aff(n); } };
   });
-  w.querySelector("#co-dl").onclick = async () => {
-    const b = w.querySelector("#co-dl"), j = CORAN.juz(p), d = CORAN.debutJuz(j), f = j === 30 ? CORAN.N : CORAN.debutJuz(j + 1) - 1;
+  /* Marque-pages */
+  $("#co-mq").onclick = () => {
+    if (E.marques.some(x => x.p === p)) { E.marques = E.marques.filter(x => x.p !== p); CORAN_ETAT.ecrire(E); majMq(); return; }
+    const ss = CORAN.sourates(p), defaut = CORAN.NOMS[ss[ss.length - 1]] + " · page " + p;
+    ouvrirFeuille("Marquer la page " + p, `<form id="co-mf" style="display:grid;gap:12px"><label style="display:grid;gap:6px">Nom du marque-page<input class="champ" id="co-mn" maxlength="60" value="${esc(defaut)}"></label><button class="btn" type="submit">Enregistrer</button></form>`, (corps, fermer) => {
+      corps.querySelector("#co-mf").onsubmit = ev => { ev.preventDefault(); const nom = corps.querySelector("#co-mn").value.trim() || defaut; E.marques = [{ p, nom, t: Date.now() }, ...E.marques.filter(x => x.p !== p)].slice(0, 60); CORAN_ETAT.ecrire(E); fermer(); majMq(); };
+    });
+  };
+  $("#co-mqs").onclick = () => {
+    const corpsHtml = () => E.marques.length ? `<div id="co-ml" style="display:grid;gap:6px">${E.marques.map(m => `<div class="carte" style="display:flex;gap:8px;align-items:center;padding:6px 10px"><button type="button" data-p="${m.p}" style="flex:1;background:none;border:0;text-align:start;color:inherit;font:inherit;padding:8px 0"><b dir="auto">${esc(m.nom)}</b><br><small>Page ${m.p}</small></button><button type="button" class="btn-text" data-x="${m.p}" aria-label="Supprimer ce marque-page">✕</button></div>`).join("")}</div>` : `<p>Aucun marque-page. Ouvrez une page, puis touchez « Marquer cette page ».</p>`;
+    ouvrirFeuille("Mes marque-pages", corpsHtml(), (corps, fermer) => {
+      const lier = () => {
+        corps.querySelectorAll("[data-p]").forEach(b => b.onclick = () => { fermer(); aff(+b.dataset.p); });
+        corps.querySelectorAll("[data-x]").forEach(b => b.onclick = () => { E.marques = E.marques.filter(x => x.p !== +b.dataset.x); CORAN_ETAT.ecrire(E); corps.innerHTML = corpsHtml(); lier(); majMq(); });
+      };
+      lier();
+    });
+  };
+  $("#co-dl").onclick = async () => {
+    const b = $("#co-dl"), j = CORAN.juz(p), d = CORAN.debutJuz(j), f = j === 30 ? CORAN.N : CORAN.debutJuz(j + 1) - 1;
     if (navigator.onLine === false) { alert("Pas de connexion internet."); return; }
     let stop = false; b.dataset.occupe = "1"; b.disabled = true;
     const job = TR.debut("Coran · Juz " + j, "Téléchargement", () => { stop = true; });
-    let ok = 0, rate = 0;
+    let rate = 0;
     for (let i = d; i <= f && !stop; i++) {
-      try { await CORAN.page(i); ok++; } catch (e) { rate++; }
+      try { await CORAN.page(i); } catch (e) { rate++; }
       TR.progres(job, i - d + 1, f - d + 1);
       if (b.isConnected) b.textContent = "Téléchargement du juz " + j + " : " + (i - d + 1) + " / " + (f - d + 1);
     }
     TR.fin(job, stop ? "annule" : rate ? "erreur" : "ok", rate ? rate + " page(s) non téléchargée(s)" : "");
     delete b.dataset.occupe; majDl();
   };
-  aff(p);
+  majNuit(); majKh(); aff(p);
+  /* Reprise depuis le compte : marque-pages, pages lues et page en cours d'un autre téléphone */
+  CORAN_ETAT.recevoir().then(change => {
+    if (!change || !w.isConnected) return;
+    E = CORAN_ETAT.lire();
+    majNuit(); majKh(); majMq();
+    if (!pageDemandee && tour === 1 && E.page !== p) aff(E.page); else E.page = p;
+  });
 }
 /* ---------- Ambiance selon le moment : Ramadan, dix jours de Dhoul-Hijja, vendredi, moments de la journée ---------- */
 function momentIslamique(maintenant) {
@@ -5921,9 +6030,14 @@ function momentIslamique(maintenant) {
 function carteMoment(w) {
   const zone = w.querySelector("#ec-moment"); if (!zone) return;
   let m = null; try { m = momentIslamique(); } catch (e) {}
-  if (!m) { zone.innerHTML = ""; return; }
-  zone.innerHTML = `<button type="button" style="display:flex;align-items:center;gap:12px;width:calc(100% - 32px);margin:6px 16px 10px;padding:14px 16px;border:0;border-radius:18px;color:#fff;text-align:start;background:${m.fond};box-shadow:0 4px 14px rgba(0,0,0,.18)"><span style="font-size:30px" aria-hidden="true">${m.ic}</span><span style="flex:1;min-width:0"><b style="display:block;font-size:17px;color:#fff">${esc(m.titre)}</b><span style="display:block;font-size:13px;opacity:.95;color:#fff">${esc(m.texte)}</span></span><span aria-hidden="true" style="font-size:22px">›</span></button>`;
-  zone.firstChild.onclick = () => {
+  let html = "";
+  if (m) html += `<button type="button" id="ec-mo" style="display:flex;align-items:center;gap:12px;width:calc(100% - 32px);margin:6px 16px 10px;padding:14px 16px;border:0;border-radius:18px;color:#fff;text-align:start;background:${m.fond};box-shadow:0 4px 14px rgba(0,0,0,.18)"><span style="font-size:30px" aria-hidden="true">${m.ic}</span><span style="flex:1;min-width:0"><b style="display:block;font-size:17px;color:#fff">${esc(m.titre)}</b><span style="display:block;font-size:13px;opacity:.95;color:#fff">${esc(m.texte)}</span></span><span aria-hidden="true" style="font-size:22px">›</span></button>`;
+  let ce = null, nl = 0; try { ce = CORAN_ETAT.lire(); nl = CORAN_ETAT.nbLues(ce); } catch (e) {}
+  if (ce && (nl > 0 || ce.page > 1)) html += `<button type="button" id="ec-co" style="display:flex;align-items:center;gap:12px;width:calc(100% - 32px);margin:0 16px 10px;padding:12px 16px;border:1px solid #cfdcd4;border-radius:16px;background:var(--surface,#fff);color:inherit;text-align:start"><span style="font-size:26px" aria-hidden="true">📖</span><span style="flex:1;min-width:0"><b style="display:block;font-size:15px">Reprendre ma lecture du Coran</b><span style="display:block;font-size:13px;opacity:.8">Page ${ce.page} · ${nl} pages lues sur 604</span></span><span aria-hidden="true" style="font-size:22px">›</span></button>`;
+  zone.innerHTML = html;
+  const bm = zone.querySelector("#ec-mo"), bc = zone.querySelector("#ec-co");
+  if (bc) bc.onclick = () => router("coran");
+  if (bm) bm.onclick = () => {
     if (m.dormir) { const b = w.querySelector("#th-dormir"); if (b) b.click(); return; }
     if (m.coran) { router("coran", { page: m.coran }); return; }
     const z = w.querySelector("#ec-rech"), i = w.querySelector("#ec-rin"); if (!z || !i) return;
