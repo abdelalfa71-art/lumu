@@ -462,7 +462,7 @@ html.nuit .ec-imam, html:root[data-theme="dark"] .ec-imam { color: #7FD6C2; }
 .ec-rech { padding: 8px 12px; background: var(--fond); border-bottom: 1px solid var(--bordure); }
 .ec-rech input { width: 100%; box-sizing: border-box; min-height: 46px; border-radius: 999px; border: 0; padding: 0 18px; font-size: 17px; background: color-mix(in srgb, var(--texte) 8%, var(--surface)); color: var(--texte); }
 .ec-rech[hidden] { display: none; }
-.ec-cherche .ec-radio, .ec-cherche .ec-reprise, .ec-cherche #ec-chips, .ec-cherche #ec-rep, .ec-cherche #ec-rappel, .ec-cherche #ec-moment { display: none; }
+.ec-cherche .ec-radio, .ec-cherche .ec-reprise, .ec-cherche #ec-chips, .ec-cherche #ec-rep, .ec-cherche #ec-rappel, .ec-cherche #ec-moment, .ec-cherche #ec-reg { display: none !important; }
 
 /* ===== Tailles façon WhatsApp ===== */
 html:root .ec-haut b { font-size: 20px; }
@@ -2033,7 +2033,7 @@ function render() {
     "changer-mot-de-passe": vueChangerMotDePasse,
     "pin-verrou": vuePinVerrou, "pin-creation": vuePinCreation, "arabe": vueArabe,
     "presentation": vuePresentation, "tarifs": vueTarifs, "videos": vueFlux, "affiches": vueAffiches, "coran": vueCoran, "questions": vueQuestions, "questions-imam": vueQuestionsImam, "parcours": vueParcours, "parcours-voir": vueParcoursVoir, "passage": vuePassage, "parcours-revoir": vueRevoir, "mes-parcours": vueMesParcours, "parcours-edit": vueParcoursEdit, "passage-edit": vuePassageEdit, "home": vueDecouvrir, "savants": vueSavants, "preches": vuePreches, "priere": vuePriere, "langues-choix": vueLanguesChoix, "tutoriel": vueTutoriel, "biblio": vueBiblio, "dossier": vueDossier, "direct": vueDirect, "chaine-edit": vueChaineEdit, "notifications": vueNotifications, "publier": vuePublier, "je-publie": vueJePublie, "profil": vueProfil, "contenu": vueContenu,
-    "langue": vueLangue, "fil": vueFlux, "flux": vueEcouter, "radio": vueFlux, "recherche": vueRecherche, "abos": vueAbos, "espace": vueEspace, "importer": vueImport, "reels": vueFlux, "groupes": vueGroupes, "groupe": vueGroupe, "discussions": vueDiscussions, "conv": vueConv, "groupe-nouveau": vueNouveauGroupe, "livres": vueBibliotheque, "biblio-lire": vueBiblioLire, "livre": vueLivre, "mes-livres": vueMesLivres, "livre-edition": vueEditeurLivre, "lives": vueLives, "live": vueLive, "live-nouveau": vueNouveauLive, "devenir-createur": vueDevenirCreateur, "admin": vueAdmin, "push-admin": vuePushAdmin, "mes-contenus": vueMesContenus, "legal": vueLegal, "lien": vueLien, "chaine": vueChaine, "playlist": vuePlaylist, "playlists": vuePlaylists, "stats": vueStats, "abonnements": vueAbonnements, "favoris": vueListeUtilisateur, "historique": vueListeUtilisateur, "hors": vueHors
+    "langue": vueLangue, "fil": vueFlux, "flux": vueEcouter, "radio": vueFlux, "recherche": vueRecherche, "abos": vueAbos, "espace": vueEspace, "importer": vueImport, "reels": vueFlux, "groupes": vueGroupes, "groupe": vueGroupe, "discussions": vueDiscussions, "conv": vueConv, "groupe-nouveau": vueNouveauGroupe, "livres": vueBibliotheque, "regroupements": vueRegroupements, "biblio-lire": vueBiblioLire, "livre": vueLivre, "mes-livres": vueMesLivres, "livre-edition": vueEditeurLivre, "lives": vueLives, "live": vueLive, "live-nouveau": vueNouveauLive, "devenir-createur": vueDevenirCreateur, "admin": vueAdmin, "push-admin": vuePushAdmin, "mes-contenus": vueMesContenus, "legal": vueLegal, "lien": vueLien, "chaine": vueChaine, "playlist": vuePlaylist, "playlists": vuePlaylists, "stats": vueStats, "abonnements": vueAbonnements, "favoris": vueListeUtilisateur, "historique": vueListeUtilisateur, "hors": vueHors
   };
   document.body.classList.toggle("branche-tobi", TOBI_ROUTES.includes(etat.route));
   (vues[etat.route] || vueConnexion)();
@@ -2388,7 +2388,7 @@ function ico(n, taille, plein) {
 /* 4 onglets simples : Écouter, Voir, Apprendre, Moi (Publier se trouve dans Moi pour les créateurs) */
 const NAV_BASE = [{ r: "flux", i: "ecouter", t: "Écouter" }, { r: "videos", i: "video", t: "Voir" }, { r: "reels", i: "reel", t: "Réel" }, { r: "coran", i: "coran", t: "Coran" }, { r: "livres", i: "book", t: "Livre" }];
 function navActuelle() { return NAV_BASE; }
-const ONGLET_DE = { "coran": "coran", "questions": "", "questions-imam": "", "priere": "flux", "parcours": "livres", "parcours-voir": "livres", "passage": "livres", "parcours-revoir": "livres", "mes-parcours": "", "parcours-edit": "", "passage-edit": "", "savants": "flux", "chaine-edit": "", "notifications": "", "tarifs": "", "flux": "flux", "fil": "flux", "reels": "reels", "recherche": "flux", "home": "flux", "contenu": "*", "chaine": "*", "playlist": "*", "groupes": "flux", "discussions": "discussions", "livres": "livres", "biblio-lire": "livres", "livre": "flux", "lives": "flux", "live": "flux", "arabe": "flux", "espace": "", "publier": "", "je-publie": "je-publie", "groupe-nouveau": "", "mes-livres": "", "livre-edition": "", "live-nouveau": "", "importer": "", "lien": "", "mes-contenus": "", "devenir-createur": "", "playlists": "", "stats": "", "abos": "flux", "profil": "profil", "videos": "videos", "admin": "", "push-admin": "", "langue": "", "abonnements": "", "legal": "", "favoris": "", "historique": "", "hors": "", "preches": "flux", "biblio": "flux", "dossier": "flux", "direct": "flux" , "radio": "flux" };
+const ONGLET_DE = { "coran": "coran", "questions": "", "questions-imam": "", "priere": "flux", "parcours": "livres", "parcours-voir": "livres", "passage": "livres", "parcours-revoir": "livres", "mes-parcours": "", "parcours-edit": "", "passage-edit": "", "savants": "flux", "chaine-edit": "", "notifications": "", "tarifs": "", "flux": "flux", "fil": "flux", "reels": "reels", "recherche": "flux", "home": "flux", "contenu": "*", "chaine": "*", "playlist": "*", "groupes": "flux", "discussions": "discussions", "livres": "livres", "biblio-lire": "livres", "regroupements": "flux", "livre": "flux", "lives": "flux", "live": "flux", "arabe": "flux", "espace": "", "publier": "", "je-publie": "je-publie", "groupe-nouveau": "", "mes-livres": "", "livre-edition": "", "live-nouveau": "", "importer": "", "lien": "", "mes-contenus": "", "devenir-createur": "", "playlists": "", "stats": "", "abos": "flux", "profil": "profil", "videos": "videos", "admin": "", "push-admin": "", "langue": "", "abonnements": "", "legal": "", "favoris": "", "historique": "", "hors": "", "preches": "flux", "biblio": "flux", "dossier": "flux", "direct": "flux" , "radio": "flux" };
 function creerNav() {
   const nav = document.createElement("nav");
   nav.className = "nav-bas" + (etat.route === "radio" || etat.route === "reels" || etat.route === "videos" || etat.route === "fil" ? " nav-sombre" : "");
@@ -6207,6 +6207,7 @@ async function vueEcouter() {
       <div id="ec-moment"></div>
       <div id="ec-rep"></div>
       <div class="ec-ligne"><button class="ec-radio" id="ec-radio"><span class="ec-rp">${ico("play", 30, true)}</span><span><b>Lumu Radio</b><small>Rappels, Coran, invocations</small></span></button><select id="ec-cat" aria-label="Catégorie"><option value="">Tout</option><option value="coran">Coran</option><option value="cours">Cours</option><option value="rappels">Rappels</option></select></div>
+      <button type="button" id="ec-reg" style="display:flex;align-items:center;gap:10px;width:calc(100% - 32px);margin:0 16px 8px;padding:12px 16px;border:1px solid #cfdcd4;border-radius:16px;background:var(--surface,#fff);color:inherit;text-align:start;font:inherit;font-weight:700"><span aria-hidden="true">📚</span><span style="flex:1">Regroupements</span><span aria-hidden="true">›</span></button>
       <details class="ec-plus"><summary>Plus de choix ▾</summary><div class="ec-gros"><button id="eg-hors"><span>⬇</span>Mes audios</button><button id="eg-disc"><span>💬</span>Discuter</button><button id="eg-imams"><span>👥</span>Imams</button><button id="eg-q"><span>🔍</span>Chercher</button></div>
       <div class="ec-tit" id="ec-tit">Mes imams</div>
       <div class="ec-imams" id="ec-imams"></div>
@@ -6217,6 +6218,7 @@ async function vueEcouter() {
     </div>`;
   app.appendChild(w);
   carteMoment(w);
+  { const br = w.querySelector("#ec-reg"); if (br) br.onclick = () => router("regroupements"); }
   synchroEpingles();
   if (ACCES.simple()) w.classList.add("ec-simple");
   try { STAT.monter(w.querySelector("#st-row")); } catch (e) {}
@@ -9062,6 +9064,35 @@ async function vueLivres() {
     Array.from(z.children).forEach(el => { if (el !== zPub && el !== rech) el.style.display = mode === "audios" ? "none" : ""; });
   } catch (e) { if (w.isConnected) w.querySelector("#liste").innerHTML = `<p class="erreur">${esc(txtErr(e, "Chargement impossible."))}</p>`; }
 }
+/* ---------- Regroupements d'audios (ouverts depuis l'onglet Écouter) ---------- */
+async function vueRegroupements() {
+  const w = ecran("Regroupements", ["flux"], `<div id="rg-liste" class="liste-contenus"><div class="centre"><div class="spinner"></div></div></div>`);
+  if (estCreateur() && etat.chaine) {
+    const b = document.createElement("button"); b.id = "nv-groupe"; b.className = "btn-outline"; b.textContent = "➕ Nouveau regroupement";
+    b.onclick = async () => {
+      const r = await sb.from("yt_contenus").select(CHAMPS_CONTENU).eq("channel_id", etat.chaine.id).eq("status", "published").eq("type", "audio").order("published_at", { ascending: false }).limit(300);
+      nouveauRegroupement(((r && r.data) || []).filter(c => c.fichier_path && !c.embed_id));
+    };
+    w.querySelector("#rg-liste").insertAdjacentElement("beforebegin", b);
+  }
+  try {
+    const g = await sb.from("yt_groupes_livres").select("id,nom,description,channel_id,yt_groupes_livres_items(contenu_id,position)").order("created_at", { ascending: true });
+    if (g.error) throw g.error;
+    const groupes = g.data || [], audios = new Map();
+    const ids = [...new Set(groupes.flatMap(x => (x.yt_groupes_livres_items || []).map(i => i.contenu_id)).filter(Boolean))];
+    if (ids.length) { const r = await sb.from("yt_contenus").select(CHAMPS_CONTENU).in("id", ids); ((r && r.data) || []).forEach(a => audios.set(a.id, a)); }
+    if (!w.isConnected) return;
+    const z = w.querySelector("#rg-liste"); z.innerHTML = "";
+    if (!groupes.length) { z.innerHTML = `<p>Aucun regroupement pour l'instant.</p>`; return; }
+    groupes.forEach(x => {
+      const h = document.createElement("h2"); h.className = "pf-h"; h.textContent = x.nom; z.appendChild(h);
+      if (x.description) { const d = document.createElement("p"); d.textContent = x.description; z.appendChild(d); }
+      const ls = (x.yt_groupes_livres_items || []).slice().sort((a, b) => (a.position || 0) - (b.position || 0)).map(i => audios.get(i.contenu_id)).filter(Boolean);
+      if (!ls.length) { const v = document.createElement("p"); v.textContent = "Aucun audio dans ce regroupement."; z.appendChild(v); }
+      ls.forEach(a => z.appendChild(carteContenu(a)));
+    });
+  } catch (e) { if (w.isConnected) w.querySelector("#rg-liste").innerHTML = `<p class="erreur">${esc(txtErr(e, "Chargement impossible."))}</p>`; }
+}
 /* Création d'un regroupement de livres par l'imam (ses propres livres publiés) */
 function nouveauRegroupement(mesAudios) {
   if (!mesAudios.length) { alert("Publiez d'abord un audio pour créer un regroupement."); return; }
@@ -9080,7 +9111,7 @@ function nouveauRegroupement(mesAudios) {
         const { error: e2 } = await sb.from("yt_groupes_livres_items").insert(ids.map((id, i) => ({ groupe_id: g.id, contenu_id: id, position: i })));
         if (e2) return montre("Groupe créé, mais les livres n'ont pas été ajoutés.");
       }
-      fermer(); router("livres");
+      fermer(); router("regroupements");
     };
   });
 }
