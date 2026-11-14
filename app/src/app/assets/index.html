@@ -5904,12 +5904,13 @@ async function vueBiblioLire() {
   const N = +l.pages || 1, etats = chargerLocal("biblio_etat", {}) || {};
   let p = Math.min(N, Math.max(1, +(etats[l.id] && etats[l.id].page) || 1));
   const bo = 'class="btn-outline" style="flex:1;margin:0"';
-  w.insertAdjacentHTML("beforeend", `<style>.bl-fl{width:38px;height:38px;flex:none;margin:0;padding:0;border:0;border-radius:50%;background:transparent;color:inherit;font-size:24px;line-height:1}.bl-fl:disabled{opacity:.3}.bl-b{flex:1;min-width:0;margin:0;padding:6px 2px;border:0;background:transparent;color:inherit;font:inherit;font-size:20px;line-height:1.1;display:flex;flex-direction:column;align-items:center;gap:3px}.bl-b small{font-size:11px;opacity:.85;white-space:nowrap}</style>
+  w.insertAdjacentHTML("beforeend", `<svg width="0" height="0" style="position:absolute"><filter id="lumu-epais"><feMorphology operator="erode" radius="0.7"/></filter></svg><style>.bl-fl{width:38px;height:38px;flex:none;margin:0;padding:0;border:0;border-radius:50%;background:transparent;color:inherit;font-size:24px;line-height:1}.bl-fl:disabled{opacity:.3}.bl-b{flex:1;min-width:0;margin:0;padding:6px 2px;border:0;background:transparent;color:inherit;font:inherit;font-size:20px;line-height:1.1;display:flex;flex-direction:column;align-items:center;gap:3px}.bl-b small{font-size:11px;opacity:.85;white-space:nowrap}</style>
     <div id="bl-audio" style="display:none;align-items:center;gap:2px;padding:6px 8px;background:#e6d9b8;color:#3b2a1a;font-size:14px"><span id="bl-au-t" style="flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:700"></span><button class="bl-fl" id="bl-au-p1" aria-label="Volume précédent">⏮</button><button class="bl-fl" id="bl-au-r" aria-label="Reculer de 10 secondes">⟲</button><button class="bl-fl" id="bl-au-pp" aria-label="Lecture ou pause">▶</button><button class="bl-fl" id="bl-au-a" aria-label="Avancer de 10 secondes">⟳</button><button class="bl-fl" id="bl-au-n" aria-label="Volume suivant">⏭</button><button class="bl-fl" id="bl-au-x" aria-label="Arrêter">✕</button></div>
     <div style="display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:8px 10px;background:#e6d9b8;color:#1f2a24"><div><button class="bl-fl" id="bl-retour" aria-label="Retour">←</button></div><div style="display:flex;align-items:center;gap:2px"><button class="bl-fl" id="bl-suiv" aria-label="Page suivante">‹</button><b id="bl-num" style="min-width:72px;text-align:center;font-size:16px"></b><button class="bl-fl" id="bl-prec" aria-label="Page précédente">›</button></div><span></span></div>
     <div id="bl-zone" translate="no" class="notranslate" style="position:relative;flex:1;min-height:0;background:#f4ead2;overflow:auto;touch-action:pan-y;padding:0 0.25cm"><div id="bl-cadre" style="overflow:hidden;width:100%;margin:0 auto;box-shadow:0 0 0 2px #8a6d3b"><img id="bl-img" alt="" draggable="false" style="display:block;width:100%;max-width:none;height:auto;mix-blend-mode:multiply"></div><div id="bl-etat" style="position:absolute;inset:0;display:flex;flex-direction:column;gap:10px;align-items:center;justify-content:center;padding:20px;text-align:center;background:#f4ead2;color:#3b2a1a"></div></div>
     <div style="display:flex;align-items:stretch;gap:2px;padding:4px 6px;background:#e6d9b8;color:#1f2a24"><button class="bl-b" id="bl-aller">⌕<small>Aller à</small></button><button class="bl-b" id="bl-zoom">🔍<small>Agrandir</small></button><button class="bl-b" id="bl-opt" aria-label="Plus" aria-expanded="false">⋯<small>Plus</small></button></div>
     <div id="bl-plus" style="display:none;gap:12px;max-height:45vh;overflow:auto;padding:0 10px 10px">
+      <div style="display:flex;gap:8px"><button ${bo} id="bl-epais"></button></div>
       ${EXPLICATIONS[l.id] ? `<button ${bo} id="bl-expl">🎧 Écouter l'explication</button>` : ""}
       <button class="btn-outline" id="bl-dl" style="margin:0">⬇ Télécharger le livre pour lire sans connexion</button>
       <p class="texte-arabe" lang="ar" dir="rtl" translate="no" style="text-align:center;font-size:18px;margin:0">${esc(l.titre)}${l.auteur ? " · " + esc(l.auteur) : ""}</p>
@@ -5921,7 +5922,7 @@ async function vueBiblioLire() {
   const cadre = $("#bl-cadre");
   /* Cadre de lecture : on n'affiche que la zone du texte de la page (marges blanches et bords du scan masqués), pour un texte plus grand. Le fichier de la page n'est pas modifié. */
   /* Pleine largeur de l'écran, pour un texte plus grand ; défilement vertical. Contraste renforcé à l'affichage seulement. */
-  const fitCadre = () => { if (!img.naturalWidth) return; cadre.style.width = ""; const cw = zone.clientWidth - 2 * (parseFloat(getComputedStyle(zone).paddingLeft) || 0); if (!cw) return; cadre.style.width = (cw * zoom) + "px"; img.style.filter = "contrast(1.6) brightness(1.04)"; };
+  const fitCadre = () => { if (!img.naturalWidth) return; cadre.style.width = ""; const cw = zone.clientWidth - 2 * (parseFloat(getComputedStyle(zone).paddingLeft) || 0); if (!cw) return; cadre.style.width = (cw * zoom) + "px"; img.style.filter = (livreEpais() ? "url(#lumu-epais) " : "") + "contrast(1.6) brightness(1.04)"; };
   window.addEventListener("resize", () => { if (w.isConnected) fitCadre(); });
   const appliquerCadre = () => { appliquerCadreBrut(); fitCadre(); };
   const appliquerCadreBrut = () => {
@@ -5965,6 +5966,9 @@ async function vueBiblioLire() {
   $("#bl-suiv").onclick = () => aff(p + 1);
   $("#bl-prec").onclick = () => aff(p - 1);
   $("#bl-retour").onclick = () => router("livres");
+  const majEpais = () => { $("#bl-epais").textContent = livreEpais() ? "✒ Écriture renforcée : oui" : "✒ Écriture renforcée : non"; };
+  $("#bl-epais").onclick = () => { try { localStorage.setItem("livre_epais", livreEpais() ? "0" : "1"); } catch (e) {} majEpais(); fitCadre(); };
+  majEpais();
   if (EXPLICATIONS[l.id]) $("#bl-expl").onclick = async () => {
     const ids = EXPLICATIONS[l.id];
     const { data } = await sb.from("yt_contenus").select("id,title,fichier_path").in("id", ids).eq("status", "published");
@@ -6114,6 +6118,7 @@ const CORAN_TEXTE = {
     return j;
   }
 };
+const livreEpais = () => { try { return localStorage.getItem("livre_epais") !== "0"; } catch (e) { return true; } };
 const texteMode = () => { try { return localStorage.getItem("coran_texte") === "1"; } catch (e) { return false; } };
 /* Explications audio liées aux livres (publications de l'application, dans l'ordre des volumes) */
 const EXPLICATIONS = {
