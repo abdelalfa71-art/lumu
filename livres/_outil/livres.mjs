@@ -31,20 +31,23 @@ if (d.action === "chercher") {
     console.log(q.nom, out.resultats.length, out.erreur || "");
   }
 } else if (d.action === "ajouter") {
-  const dir = "livres/" + d.id;
-  fs.rmSync(dir, { recursive: true, force: true }); fs.mkdirSync(dir, { recursive: true });
-  execFileSync("curl", ["-L", "--fail", "--retry", "3", "-A", "lumu-bibliotheque/1.0", "-o", "/tmp/livre.pdf", d.url], { stdio: "inherit" });
-  const tete = fs.readFileSync("/tmp/livre.pdf").subarray(0, 5).toString();
-  if (tete !== "%PDF-") throw new Error("Le fichier téléchargé n'est pas un PDF");
-  const args = ["-jpeg", "-jpegopt", "quality=88", "-scale-to-x", String(d.largeur || 1400), "-scale-to-y", "-1"];
-  if (d.debut) args.push("-f", String(d.debut));
-  if (d.fin) args.push("-l", String(d.fin));
-  execFileSync("pdftoppm", [...args, "/tmp/livre.pdf", "/tmp/p"], { stdio: "inherit" });
-  const fichiers = fs.readdirSync("/tmp").filter(f => /^p-\d+\.jpg$/.test(f)).sort((a, b) => parseInt(a.slice(2)) - parseInt(b.slice(2)));
-  const emp = {};
-  fichiers.forEach((f, i) => { const b = fs.readFileSync("/tmp/" + f); fs.writeFileSync(dir + "/" + (i + 1) + ".jpg", b); emp[i + 1] = crypto.createHash("sha256").update(b).digest("hex"); });
-  const pdf = fs.readFileSync("/tmp/livre.pdf");
-  fs.writeFileSync(dir + "/empreintes.json", JSON.stringify({ pages: fichiers.length, algorithme: "sha256", origine: d.url, pdf_sha256: crypto.createHash("sha256").update(pdf).digest("hex"), pdf_octets: pdf.length, empreintes: emp }, null, 0));
-  console.log("pages:", fichiers.length);
-  if (!fichiers.length) throw new Error("Aucune page produite");
+  for (const L of (d.livres || [d])) {
+    for (const f of fs.readdirSync("/tmp").filter(f => /^p-\d+\.jpg$/.test(f))) fs.rmSync("/tmp/" + f);
+    const dir = "livres/" + L.id;
+    fs.rmSync(dir, { recursive: true, force: true }); fs.mkdirSync(dir, { recursive: true });
+    execFileSync("curl", ["-L", "--fail", "--retry", "3", "-A", "lumu-bibliotheque/1.0", "-o", "/tmp/livre.pdf", L.url], { stdio: "inherit" });
+    const tete = fs.readFileSync("/tmp/livre.pdf").subarray(0, 5).toString();
+    if (tete !== "%PDF-") throw new Error("Le fichier téléchargé n'est pas un PDF");
+    const args = ["-jpeg", "-jpegopt", "quality=88", "-scale-to-x", String(L.largeur || 1400), "-scale-to-y", "-1"];
+    if (L.debut) args.push("-f", String(L.debut));
+    if (L.fin) args.push("-l", String(L.fin));
+    execFileSync("pdftoppm", [...args, "/tmp/livre.pdf", "/tmp/p"], { stdio: "inherit" });
+    const fichiers = fs.readdirSync("/tmp").filter(f => /^p-\d+\.jpg$/.test(f)).sort((a, b) => parseInt(a.slice(2)) - parseInt(b.slice(2)));
+    const emp = {};
+    fichiers.forEach((f, i) => { const b = fs.readFileSync("/tmp/" + f); fs.writeFileSync(dir + "/" + (i + 1) + ".jpg", b); emp[i + 1] = crypto.createHash("sha256").update(b).digest("hex"); });
+    const pdf = fs.readFileSync("/tmp/livre.pdf");
+    fs.writeFileSync(dir + "/empreintes.json", JSON.stringify({ pages: fichiers.length, algorithme: "sha256", origine: L.url, pdf_sha256: crypto.createHash("sha256").update(pdf).digest("hex"), pdf_octets: pdf.length, empreintes: emp }, null, 0));
+    console.log("pages:", fichiers.length);
+    if (!fichiers.length) throw new Error("Aucune page produite");
+  }
 } else throw new Error("action inconnue");
