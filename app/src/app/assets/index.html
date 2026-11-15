@@ -6197,6 +6197,7 @@ async function vueCoran() {
 .co-ic{width:34px;height:34px;flex:none;border-radius:50%;background:#d4af37;color:#1f2a24;display:flex;align-items:center;justify-content:center;font-size:16px}
 #co-kh{background:rgba(255,255,255,.1) !important;color:#fff !important;border-radius:14px;box-shadow:none !important}#co-kh button{background:transparent !important;color:#fff !important;border-color:#d4af37 !important}#co-kh p,#co-kh b{color:#fff !important}</style>
     <div id="co-zone" translate="no" class="notranslate" style="position:absolute;inset:0;background:#f4ead2;overflow:auto;touch-action:pan-y;padding:0 0.25cm"><img id="co-img" alt="" draggable="false" style="display:block;margin:0 auto;mix-blend-mode:multiply;box-shadow:0 0 0 2px #8a6d3b"><div id="co-txt" style="display:none;padding:14px 16px 24px;direction:rtl;font-family:'Amiri Quran','Amiri',serif;font-size:28px;line-height:2.3;text-align:justify;color:#3b2a1a;background:#f4ead2"></div><div id="co-etat" style="position:absolute;inset:0;display:flex;flex-direction:column;gap:10px;align-items:center;justify-content:center;padding:20px;text-align:center;background:#f4ead2;color:#3b2a1a"></div></div>
+    <div id="co-audio" style="display:none;position:absolute;top:0;left:0;right:0;z-index:5;align-items:center;gap:2px;padding:6px 8px;background:rgba(10,20,16,.9);color:#fff;font-size:13px"><span style="flex:1;min-width:0"><b id="co-au-t" style="display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"></b><small id="co-au-d" style="opacity:.85"></small></span><button class="co-fl" id="co-au-r" aria-label="Reculer de 10 secondes" style="background:none;font-size:20px">⟲</button><button class="co-fl" id="co-au-pp" aria-label="Lecture ou pause" style="background:#d4af37;color:#1f2a24;font-size:18px">▶</button><button class="co-fl" id="co-au-a" aria-label="Avancer de 10 secondes" style="background:none;font-size:20px">⟳</button><button class="co-fl" id="co-au-x" aria-label="Arrêter l'audio" style="background:none;font-size:18px">✕</button></div>
     <div id="co-menu" class="co-chrome">
       <div style="display:flex;align-items:center;gap:8px"><button class="co-fl" id="co-retour" aria-label="Retour">←</button><b id="co-sur" style="flex:1;min-width:0;text-align:center;color:#d4af37;font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"></b><button class="co-fl" id="co-fermer" aria-label="Fermer le menu">✕</button></div>
       <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:4px"><button class="co-fl" id="co-suiv" aria-label="Page suivante">‹</button><span style="min-width:150px;text-align:center">Page <b id="co-num" style="font-size:18px"></b> · <span id="co-jz"></span></span><button class="co-fl" id="co-prec" aria-label="Page précédente">›</button></div>
@@ -6214,6 +6215,24 @@ async function vueCoran() {
     </div>`;
   app.appendChild(w);
   garderEcran(w);
+  /* Barre audio : visible dès qu'un audio joue pendant la lecture */
+  {
+    const ba = w.querySelector("#co-audio"), q = x => w.querySelector(x);
+    const majAu = () => {
+      if (!w.isConnected) { clearInterval(tAu); return; }
+      const on = !!(AUD.c && AUD.a);
+      ba.style.display = on ? "flex" : "none"; if (!on) return;
+      q("#co-au-t").textContent = AUD.c.title || "Audio";
+      const d = (isFinite(AUD.a.duration) && AUD.a.duration) || AUD.c.duration_seconds || 0;
+      q("#co-au-d").textContent = fmtDuree(AUD.a.currentTime || 0) + (d ? " / " + fmtDuree(d) : "");
+      q("#co-au-pp").textContent = AUD.a.paused ? "▶" : "⏸";
+    };
+    const tAu = setInterval(majAu, 500);
+    q("#co-au-pp").onclick = () => { AUD.basculer(); setTimeout(majAu, 150); };
+    q("#co-au-r").onclick = () => { AUD.saut(-10); majAu(); };
+    q("#co-au-a").onclick = () => { AUD.saut(10); majAu(); };
+    q("#co-au-x").onclick = () => { try { AUD.arreter(); } catch (e) {} ba.style.display = "none"; };
+  }
   /* Arrivée depuis un rappel : proposer de lire ou d'écouter */
   if (etat.params.choix) setTimeout(() => { if (w.isConnected) choixRappelCoran(p); }, 500);
   const $ = q => w.querySelector(q);
