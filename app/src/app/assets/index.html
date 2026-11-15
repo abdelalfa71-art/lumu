@@ -4026,6 +4026,16 @@ const HORS = {
   }
 };
 
+/* Message discret quand un audio ne peut pas être lu */
+function afficherErreurAudio() {
+  try {
+    let b = document.getElementById("aud-err"); if (b) b.remove();
+    b = document.createElement("div"); b.id = "aud-err";
+    b.style.cssText = "position:fixed;left:16px;right:16px;bottom:150px;z-index:9500;padding:12px 14px;border-radius:12px;background:#b3261e;color:#fff;font-size:14px;text-align:center";
+    b.textContent = navigator.onLine === false ? "Pas de connexion. Téléchargez l'audio pour l'écouter sans internet." : "Lecture impossible pour le moment. Réessayez.";
+    document.body.appendChild(b); setTimeout(() => b.remove(), 4000);
+  } catch (e) {}
+}
 /* Reprise : on mémorise la position même si l'application est fermée d'un coup */
 function sauverPosAudio() { try { if (AUD.c && AUD.a && AUD.a.currentTime > 1) sauverLocal("pos_" + AUD.c.id, Math.floor(AUD.a.currentTime)); } catch (e) {} }
 document.addEventListener("visibilitychange", () => { if (document.hidden) sauverPosAudio(); });
@@ -5918,10 +5928,10 @@ async function vueBiblioLire() {
   let p = Math.min(N, Math.max(1, +(etats[l.id] && etats[l.id].page) || 1));
   const bo = 'class="btn-outline" style="flex:1;margin:0"';
   w.insertAdjacentHTML("beforeend", `<svg width="0" height="0" style="position:absolute"><filter id="lumu-epais"><feMorphology operator="erode" radius="0.7"/></filter></svg><style>.bl-fl{width:38px;height:38px;flex:none;margin:0;padding:0;border:0;border-radius:50%;background:transparent;color:inherit;font-size:24px;line-height:1}.bl-fl:disabled{opacity:.3}.bl-b{flex:1;min-width:0;margin:0;padding:6px 2px;border:0;background:transparent;color:inherit;font:inherit;font-size:20px;line-height:1.1;display:flex;flex-direction:column;align-items:center;gap:3px}.bl-b small{font-size:11px;opacity:.85;white-space:nowrap}</style>
-    <div id="bl-audio" style="display:none;align-items:center;gap:2px;padding:6px 8px;background:#e6d9b8;color:#3b2a1a;font-size:14px"><span id="bl-au-t" style="flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:700"></span><button class="bl-fl" id="bl-au-p1" aria-label="Volume précédent">⏮</button><button class="bl-fl" id="bl-au-r" aria-label="Reculer de 10 secondes">⟲</button><button class="bl-fl" id="bl-au-pp" aria-label="Lecture ou pause">▶</button><button class="bl-fl" id="bl-au-a" aria-label="Avancer de 10 secondes">⟳</button><button class="bl-fl" id="bl-au-n" aria-label="Volume suivant">⏭</button><button class="bl-fl" id="bl-au-x" aria-label="Arrêter">✕</button></div>
-    <div style="display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:8px 10px;background:#e6d9b8;color:#1f2a24"><div><button class="bl-fl" id="bl-retour" aria-label="Retour">←</button></div><div style="display:flex;align-items:center;gap:2px"><button class="bl-fl" id="bl-suiv" aria-label="Page suivante">‹</button><b id="bl-num" style="min-width:72px;text-align:center;font-size:16px"></b><button class="bl-fl" id="bl-prec" aria-label="Page précédente">›</button></div><span></span></div>
-    <div id="bl-zone" translate="no" class="notranslate" style="position:relative;flex:1;min-height:0;background:#f4ead2;overflow:auto;touch-action:pan-y;padding:0 0.25cm"><div id="bl-cadre" style="overflow:hidden;width:100%;margin:0 auto;box-shadow:0 0 0 2px #8a6d3b"><img id="bl-img" alt="" draggable="false" style="display:block;width:100%;max-width:none;height:auto;mix-blend-mode:multiply"></div><div id="bl-etat" style="position:absolute;inset:0;display:flex;flex-direction:column;gap:10px;align-items:center;justify-content:center;padding:20px;text-align:center;background:#f4ead2;color:#3b2a1a"></div></div>
-    <div style="display:flex;align-items:stretch;gap:2px;padding:4px 6px;background:#e6d9b8;color:#1f2a24"><button class="bl-b" id="bl-aller">⌕<small>Aller à</small></button><button class="bl-b" id="bl-zoom">🔍<small>Agrandir</small></button><button class="bl-b" id="bl-opt" aria-label="Plus" aria-expanded="false">⋯<small>Plus</small></button></div>
+    <div id="bl-audio" style="display:none;align-items:center;gap:2px;padding:6px 8px;background:#f2f2f2;color:#1f2a24;font-size:14px"><span id="bl-au-t" style="flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:700"></span><button class="bl-fl" id="bl-au-p1" aria-label="Volume précédent">⏮</button><button class="bl-fl" id="bl-au-r" aria-label="Reculer de 10 secondes">⟲</button><button class="bl-fl" id="bl-au-pp" aria-label="Lecture ou pause">▶</button><button class="bl-fl" id="bl-au-a" aria-label="Avancer de 10 secondes">⟳</button><button class="bl-fl" id="bl-au-n" aria-label="Volume suivant">⏭</button><button class="bl-fl" id="bl-au-x" aria-label="Arrêter">✕</button></div>
+    <div style="display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:8px 10px;background:#f2f2f2;color:#1f2a24"><div><button class="bl-fl" id="bl-retour" aria-label="Retour">←</button></div><div style="display:flex;align-items:center;gap:2px"><button class="bl-fl" id="bl-suiv" aria-label="Page suivante">‹</button><b id="bl-num" style="min-width:72px;text-align:center;font-size:16px"></b><button class="bl-fl" id="bl-prec" aria-label="Page précédente">›</button></div><span></span></div>
+    <div id="bl-zone" translate="no" class="notranslate" style="position:relative;flex:1;min-height:0;background:#ffffff;overflow:auto;touch-action:pan-y;padding:0 0.25cm"><div id="bl-cadre" style="overflow:hidden;width:100%;margin:0 auto;box-shadow:0 0 0 2px #8a6d3b"><img id="bl-img" alt="" draggable="false" style="display:block;width:100%;max-width:none;height:auto;mix-blend-mode:multiply"></div><div id="bl-etat" style="position:absolute;inset:0;display:flex;flex-direction:column;gap:10px;align-items:center;justify-content:center;padding:20px;text-align:center;background:#ffffff;color:#1f2a24"></div></div>
+    <div style="display:flex;align-items:stretch;gap:2px;padding:4px 6px;background:#f2f2f2;color:#1f2a24"><button class="bl-b" id="bl-aller">⌕<small>Aller à</small></button><button class="bl-b" id="bl-zoom">🔍<small>Agrandir</small></button><button class="bl-b" id="bl-opt" aria-label="Plus" aria-expanded="false">⋯<small>Plus</small></button></div>
     <div id="bl-plus" style="display:none;gap:12px;max-height:45vh;overflow:auto;padding:0 10px 10px">
       <div style="display:flex;gap:8px"><button ${bo} id="bl-epais"></button></div>
       ${EXPLICATIONS[l.id] ? `<button ${bo} id="bl-expl">🎧 Écouter l'explication</button>` : ""}
@@ -6162,7 +6172,7 @@ async function vueCoran() {
 .co-it{display:flex;align-items:center;gap:12px;width:100%;margin:0;padding:10px 12px;border:0;border-radius:14px;background:rgba(255,255,255,.1);color:#fff;font:inherit;font-size:15px;text-align:start}.co-it:disabled{opacity:.6}
 .co-ic{width:34px;height:34px;flex:none;border-radius:50%;background:#d4af37;color:#1f2a24;display:flex;align-items:center;justify-content:center;font-size:16px}
 #co-kh{background:rgba(255,255,255,.1) !important;color:#fff !important;border-radius:14px;box-shadow:none !important}#co-kh button{background:transparent !important;color:#fff !important;border-color:#d4af37 !important}#co-kh p,#co-kh b{color:#fff !important}</style>
-    <div id="co-zone" translate="no" class="notranslate" style="position:absolute;inset:0;background:#f4ead2;overflow:auto;touch-action:pan-y;padding:0 0.25cm"><img id="co-img" alt="" draggable="false" style="display:block;margin:0 auto;mix-blend-mode:multiply;box-shadow:0 0 0 2px #8a6d3b"><div id="co-txt" style="display:none;padding:14px 16px 24px;direction:rtl;font-family:'Amiri Quran','Amiri',serif;font-size:28px;line-height:2.3;text-align:justify;color:#3b2a1a;background:#f4ead2"></div><div id="co-etat" style="position:absolute;inset:0;display:flex;flex-direction:column;gap:10px;align-items:center;justify-content:center;padding:20px;text-align:center;background:#f4ead2;color:#3b2a1a"></div></div>
+    <div id="co-zone" translate="no" class="notranslate" style="position:absolute;inset:0;background:#ffffff;overflow:auto;touch-action:pan-y;padding:0 0.25cm"><img id="co-img" alt="" draggable="false" style="display:block;margin:0 auto;mix-blend-mode:multiply;box-shadow:0 0 0 2px #8a6d3b"><div id="co-txt" style="display:none;padding:14px 16px 24px;direction:rtl;font-family:'Amiri Quran','Amiri',serif;font-size:28px;line-height:2.3;text-align:justify;color:#1f2a24;background:#ffffff"></div><div id="co-etat" style="position:absolute;inset:0;display:flex;flex-direction:column;gap:10px;align-items:center;justify-content:center;padding:20px;text-align:center;background:#ffffff;color:#1f2a24"></div></div>
     <div id="co-menu" class="co-chrome">
       <div style="display:flex;align-items:center;gap:8px"><button class="co-fl" id="co-retour" aria-label="Retour">←</button><b id="co-sur" style="flex:1;min-width:0;text-align:center;color:#d4af37;font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"></b><button class="co-fl" id="co-fermer" aria-label="Fermer le menu">✕</button></div>
       <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:4px"><button class="co-fl" id="co-suiv" aria-label="Page suivante">‹</button><span style="min-width:150px;text-align:center">Page <b id="co-num" style="font-size:18px"></b> · <span id="co-jz"></span></span><button class="co-fl" id="co-prec" aria-label="Page précédente">›</button></div>
@@ -6196,9 +6206,9 @@ async function vueCoran() {
     const W = zw * zoom; img.style.width = W + "px"; img.style.height = (W * ar) + "px";
   };
   window.addEventListener("resize", () => { if (w.isConnected) fit(); });
-  const majNuit = () => { img.style.filter = E.nuit ? "invert(1) hue-rotate(180deg)" : ""; img.style.mixBlendMode = E.nuit ? "" : "multiply"; zone.style.background = E.nuit ? "#000" : "#f4ead2"; zEtat.style.background = E.nuit ? "#000" : "#f4ead2"; zEtat.style.color = E.nuit ? "#eee" : "#3b2a1a"; $("#co-nuit").innerHTML = E.nuit ? coIt("☀️", "Mode jour") : coIt("🌙", "Mode nuit"); };
+  const majNuit = () => { img.style.filter = E.nuit ? "invert(1) hue-rotate(180deg)" : ""; img.style.mixBlendMode = E.nuit ? "" : "multiply"; zone.style.background = E.nuit ? "#000" : "#ffffff"; zEtat.style.background = E.nuit ? "#000" : "#ffffff"; zEtat.style.color = E.nuit ? "#eee" : "#1f2a24"; $("#co-nuit").innerHTML = E.nuit ? coIt("☀️", "Mode jour") : coIt("🌙", "Mode nuit"); };
   const majMq = () => { const on = E.marques.some(x => x.p === p); $("#co-mq").innerHTML = coIt(on ? "✔" : "🔖", on ? "Page marquée" : "Marquer cette page"); };
-  const majMode = () => { $("#co-mode").innerHTML = texteMode() ? coIt("🖼", "Voir la page en image") : coIt("📖", "Voir le texte"); $("#co-txt").style.color = E.nuit ? "#eee" : "#3b2a1a"; $("#co-txt").style.background = E.nuit ? "#000" : "#f4ead2"; $("#co-txt").style.setProperty("--num", E.nuit ? "#d4af37" : "#8a5a2b"); };
+  const majMode = () => { $("#co-mode").innerHTML = texteMode() ? coIt("🖼", "Voir la page en image") : coIt("📖", "Voir le texte"); $("#co-txt").style.color = E.nuit ? "#eee" : "#1f2a24"; $("#co-txt").style.background = E.nuit ? "#000" : "#ffffff"; $("#co-txt").style.setProperty("--num", E.nuit ? "#d4af37" : "#8a5a2b"); };
   $("#co-mode").onclick = () => { try { localStorage.setItem("coran_texte", texteMode() ? "0" : "1"); } catch (e) {} majMode(); aff(p); };
   const majKh = () => {
     const n = CORAN_ETAT.nbLues(E), pct = Math.floor(n * 100 / CORAN.N), nj = E.jour.d === CORAN_ETAT.auj() ? E.jour.n : 0;
@@ -6324,10 +6334,10 @@ async function vueCoran() {
     w.classList.toggle("co-cache");
   });
   $("#co-som").onclick = () => ouvrirFeuille("Sourates", `<div id="co-ls" style="display:grid;gap:6px">${CORAN.NOMS.map((n, i) => `<button type="button" class="carte ligne-menu" data-p="${CORAN.DEBUTS[i]}" style="text-align:start;color:#1f2a24"><span>${i + 1}.</span><span style="flex:1">${esc(n)}</span><small>p. ${CORAN.DEBUTS[i]}</small></button>`).join("")}</div>`, (corps, fermer) => {
-    corps.querySelectorAll("[data-p]").forEach(b => b.onclick = () => { fermer(); aff(+b.dataset.p); });
+    corps.querySelectorAll("[data-p]").forEach(b => b.onclick = () => { fermer(); document.querySelectorAll(".feuille").forEach(x => x.remove()); aff(+b.dataset.p); });
   });
   $("#co-juz").onclick = () => ouvrirFeuille("Juz", `<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">${Array.from({ length: 30 }, (_, i) => `<button type="button" class="btn-outline" data-p="${CORAN.debutJuz(i + 1)}" style="margin:0">Juz ${i + 1}</button>`).join("")}</div>`, (corps, fermer) => {
-    corps.querySelectorAll("[data-p]").forEach(b => b.onclick = () => { fermer(); aff(+b.dataset.p); });
+    corps.querySelectorAll("[data-p]").forEach(b => b.onclick = () => { fermer(); document.querySelectorAll(".feuille").forEach(x => x.remove()); aff(+b.dataset.p); });
   });
   $("#co-aller").onclick = () => ouvrirFeuille("Aller à une page", `<form id="co-f" style="display:grid;gap:12px"><label style="display:grid;gap:6px">Numéro de page (1 à 604)<input class="champ" id="co-n" type="number" inputmode="numeric" min="1" max="604" required value="${p}"></label><button class="btn" type="submit">Ouvrir</button></form>`, (corps, fermer) => {
     corps.querySelector("#co-f").onsubmit = ev => { ev.preventDefault(); const n = parseInt(corps.querySelector("#co-n").value, 10); if (n >= 1 && n <= CORAN.N) { fermer(); aff(n); } };
@@ -6344,7 +6354,7 @@ async function vueCoran() {
     const corpsHtml = () => E.marques.length ? `<div id="co-ml" style="display:grid;gap:6px">${E.marques.map(m => `<div class="carte" style="display:flex;gap:8px;align-items:center;padding:6px 10px"><button type="button" data-p="${m.p}" style="flex:1;background:none;border:0;text-align:start;color:inherit;font:inherit;padding:8px 0"><b dir="auto">${esc(m.nom)}</b><br><small>Page ${m.p}</small></button><button type="button" class="btn-text" data-x="${m.p}" aria-label="Supprimer ce marque-page">✕</button></div>`).join("")}</div>` : `<p>Aucun marque-page. Ouvrez une page, puis touchez « Marquer cette page ».</p>`;
     ouvrirFeuille("Mes marque-pages", corpsHtml(), (corps, fermer) => {
       const lier = () => {
-        corps.querySelectorAll("[data-p]").forEach(b => b.onclick = () => { fermer(); aff(+b.dataset.p); });
+        corps.querySelectorAll("[data-p]").forEach(b => b.onclick = () => { fermer(); document.querySelectorAll(".feuille").forEach(x => x.remove()); aff(+b.dataset.p); });
         corps.querySelectorAll("[data-x]").forEach(b => b.onclick = () => { E.marques = E.marques.filter(x => x.p !== +b.dataset.x); CORAN_ETAT.ecrire(E); corps.innerHTML = corpsHtml(); lier(); majMq(); });
       };
       lier();
@@ -6487,7 +6497,7 @@ async function vueEcouter() {
   const joue = c => !!(AUD.c && AUD.c.id === c.id && AUD.a && !AUD.a.paused);
   /* Temps écoulé / durée d'un audio (en direct pour celui qui joue) */
   const tempsRow = c => { const moi = AUD.c && AUD.c.id === c.id && AUD.a, q = moi ? AUD.a.currentTime || 0 : chargerLocal("pos_" + c.id, 0), d = c.duration_seconds || (moi && isFinite(AUD.a.duration) ? AUD.a.duration : 0); return d ? fmtDuree(q) + " / " + fmtDuree(d) : fmtDuree(q); };
-  const tic = setInterval(() => { if (!w.isConnected) { clearInterval(tic); return; } w.querySelectorAll(".ec-row.lit").forEach(r => { const t = r.querySelector(".ec-tp"); if (t && r._c) t.textContent = tempsRow(r._c); }); }, 1000);
+  const tic = setInterval(() => { if (!w.isConnected) { clearInterval(tic); return; } w.querySelectorAll(".ec-row.lit").forEach(r => { const t = r.querySelector(".ec-tp"); if (t && r._c) t.textContent = tempsRow(r._c); const u = r.querySelector(".ec-bar u"), d = r._c && r._c.duration_seconds; if (u && d && AUD.a) u.style.width = Math.min(100, 100 * (AUD.a.currentTime || 0) / d).toFixed(1) + "%"; }); }, 1000);
   const synchro = () => { w.querySelectorAll(".ec-row").forEach(r => { const c = r._c; if (!c) return; const j = joue(c); r.classList.toggle("lit", !!(AUD.c && AUD.c.id === c.id)); r.querySelector(".ec-pl").innerHTML = ico(j ? "pause" : "play", 26, true); }); };
   function chips() {
     const z = w.querySelector("#ec-chips"); z.innerHTML = "";
@@ -6537,9 +6547,18 @@ async function vueEcouter() {
       el.className = "ec-row"; el._c = c; el.tabIndex = 0; el.setAttribute("role", "button");
       appuiLong(el, (x, y) => ouvrirMenuContenu(c, el, x, y));
       el.innerHTML = `<span class="ec-cv">${cover ? `<img src="${esc(cover)}" alt="" loading="lazy">` : `<img class="ec-logo-ph" src="icon-192.png" alt="" loading="lazy">`}</span>
-        <div class="ec-tx"><span class="ec-imam" data-notrad dir="auto">${estEpingle(c.id) ? "📌 " : ""}${c.published_at && Date.now() - new Date(c.published_at) < 48 * 3600e3 ? '<em style="background:#c9a227;color:#fff;border-radius:6px;padding:0 6px;font-size:11px;font-style:normal;margin-right:4px">Nouveau</em>' : ""}@${esc(nom || "Imam")}</span><b dir="auto" data-notrad>${esc(c.title)}</b><small dir="auto" data-notrad>👁 ${esc(fmtNb(c.views_count))} · <span class="ec-tp">${esc(tempsRow(c))}</span>${chargerLocal("fini_" + c.id, 0) ? " · ✔" : ""}</small>${(() => { const q = chargerLocal("pos_" + c.id, 0); return q > 10 && c.duration_seconds && q < c.duration_seconds - 15 ? `<i class="ec-bar"><u style="width:${Math.round(100 * q / c.duration_seconds)}%"></u></i>` : ""; })()}</div>
+        <div class="ec-tx"><span class="ec-imam" data-notrad dir="auto">${estEpingle(c.id) ? "📌 " : ""}${c.published_at && Date.now() - new Date(c.published_at) < 48 * 3600e3 ? '<em style="background:#c9a227;color:#fff;border-radius:6px;padding:0 6px;font-size:11px;font-style:normal;margin-right:4px">Nouveau</em>' : ""}@${esc(nom || "Imam")}</span><b dir="auto" data-notrad>${esc(c.title)}</b><small dir="auto" data-notrad>👁 ${esc(fmtNb(c.views_count))} · <span class="ec-tp">${esc(tempsRow(c))}</span>${chargerLocal("fini_" + c.id, 0) ? " · ✔" : ""}</small>${(() => { const q = chargerLocal("pos_" + c.id, 0), d = c.duration_seconds || 0; return d ? `<span class="ec-barz" style="display:block;padding:8px 0 6px;margin-bottom:-6px;cursor:pointer"><i class="ec-bar" style="margin-top:0;height:6px"><u style="width:${Math.min(100, Math.round(100 * q / d))}%"></u></i></span>` : ""; })()}</div>
         ${c.fichier_path ? `<button class="ec-dl" aria-label="Télécharger"></button>` : ""}<button class="ec-pl" aria-label="Lecture">${ico("play", 26, true)}</button>`;
       { const chId = c.channel_id || (c.yt_channels && c.yt_channels.id), im = el.querySelector(".ec-imam"); if (im && chId) im.onclick = ev => { ev.stopPropagation(); router("chaine", { id: chId }); }; }
+      const bz = el.querySelector(".ec-barz");
+      if (bz) bz.onclick = ev => {
+        ev.stopPropagation();
+        const r = bz.getBoundingClientRect(), t = Math.max(0, Math.min(1, (ev.clientX - r.left) / r.width)) * c.duration_seconds;
+        bz.querySelector("u").style.width = Math.round(100 * t / c.duration_seconds) + "%";
+        if (AUD.c && AUD.c.id === c.id && AUD.a) { try { AUD.a.currentTime = t; if (AUD.a.paused) AUD.basculer(); } catch (e) {} }
+        else { sauverLocal("pos_" + c.id, Math.floor(t)); lireDirect(c); const viser = () => { try { if (AUD.c && AUD.c.id === c.id && AUD.a.duration) AUD.a.currentTime = Math.min(t, AUD.a.duration - 1); } catch (e) {} }; setTimeout(viser, 900); }
+        setTimeout(synchro, 350);
+      };
       const dl = el.querySelector(".ec-dl");
       if (dl) {
         const dessinerDl = () => {
@@ -8390,6 +8409,7 @@ function lumuQRsvg(texte, px) {
 
 function ouvrirFeuille(titre, html, lier, surFermer) {
   const f = document.createElement("div"); f.className = "feuille";
+  f.style.cssText = "height:100%;max-height:none;border-radius:0;animation:none";
   f.innerHTML = `<div class="feuille-fond"></div><div class="feuille-c" role="dialog"><div class="feuille-t"><b>${esc(titre)}</b><button class="btn-text" aria-label="Fermer">✕</button></div><div class="feuille-corps">${html}</div></div>`;
   document.body.appendChild(f);
   const fermer = () => { f.remove(); if (surFermer) surFermer(); };
