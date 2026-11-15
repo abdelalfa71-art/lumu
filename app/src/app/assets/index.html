@@ -6175,7 +6175,15 @@ async function vueCoran() {
   try { const pad = parseFloat(getComputedStyle(w).paddingLeft) || 0; if (pad) { zone.style.marginLeft = zone.style.marginRight = -pad + "px"; } } catch (e) {}
   let tour = 0, url = null, zoom = 1, tLu = 0;
   /* Taille de la page : la plus grande possible sans déborder, selon la taille de l'écran */
-  const fit = () => { if (!img.naturalWidth) return; const zw = zone.clientWidth - 2 * (parseFloat(getComputedStyle(zone).paddingLeft) || 0), zh = zone.clientHeight, ar = img.naturalHeight / img.naturalWidth; let W = zh / ar, H = zh; if (W > zw) { W = zw; H = zw * ar; } img.style.width = (W * zoom) + "px"; img.style.height = (H * zoom) + "px"; zone.style.paddingTop = zoom === 1 ? Math.max(0, (zh - H) / 2) + "px" : ""; };
+  const fit = () => {
+    if (!img.naturalWidth) return;
+    const zw = zone.clientWidth, zh = zone.clientHeight, ar = img.naturalHeight / img.naturalWidth;
+    zone.style.padding = "0"; zone.style.paddingTop = "0px";
+    /* Page entière, sans rogner le texte : la plus grande possible, centrée */
+    if (zoom === 1) { let W = zh / ar, H = zh; if (W > zw) { W = zw; H = zw * ar; } img.style.width = W + "px"; img.style.height = H + "px"; zone.style.paddingTop = Math.max(0, (zh - H) / 2) + "px"; return; }
+    /* Agrandi : pleine largeur × zoom, on fait défiler */
+    const W = zw * zoom; img.style.width = W + "px"; img.style.height = (W * ar) + "px";
+  };
   window.addEventListener("resize", () => { if (w.isConnected) fit(); });
   const majNuit = () => { img.style.filter = E.nuit ? "invert(1) hue-rotate(180deg)" : ""; img.style.mixBlendMode = E.nuit ? "" : "multiply"; zone.style.background = E.nuit ? "#000" : "#f4ead2"; zEtat.style.background = E.nuit ? "#000" : "#f4ead2"; zEtat.style.color = E.nuit ? "#eee" : "#3b2a1a"; w.querySelectorAll(".co-chrome").forEach(e => { e.style.background = E.nuit ? "#111" : "#e6d9b8"; e.style.color = E.nuit ? "#eee" : "#1f2a24"; }); $("#co-nuit").textContent = E.nuit ? "☀️ Mode jour" : "🌙 Mode nuit"; };
   const majMq = () => { const on = E.marques.some(x => x.p === p); $("#co-mq").innerHTML = (on ? "✔" : "🔖") + "<small>" + (on ? "Marquée" : "Marquer") + "</small>"; };
