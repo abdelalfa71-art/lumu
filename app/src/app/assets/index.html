@@ -5641,11 +5641,21 @@ const PRIERE = {
     return (Math.atan2(Math.sin(dl) * Math.cos(f2), Math.cos(f1) * Math.sin(f2) - Math.sin(f1) * Math.cos(f2) * Math.cos(dl)) * 180 / Math.PI + 360) % 360;
   },
   position() {
-    return new Promise((ok, ko) => { if (!navigator.geolocation) return ko(new Error("x")); navigator.geolocation.getCurrentPosition(p => { sauverLocal("priere_v", { lat: p.coords.latitude, lng: p.coords.longitude, nom: "Ma position" }); sauverLocal("priere_n", null); ok(); }, ko, { timeout: 12000, maximumAge: 6e5 }); });
+    return new Promise((ok, ko) => { if (!navigator.geolocation) return ko(new Error("x")); navigator.geolocation.getCurrentPosition(p => { sauverLocal("priere_v", { lat: p.coords.latitude, lng: p.coords.longitude, nom: "Ma position" }); sauverLocal("priere_n", null); sauverLocal("priere_maj", Date.now()); ok(); }, ko, { timeout: 12000, maximumAge: 6e5 }); });
+  },
+  essaye: false,
+  // Détection automatique : une tentative par ouverture de l'application, et seulement si la position est absente ou ancienne (plus de 24 h)
+  async auto() {
+    if (this.essaye) return false;
+    const l = this.loc(), dernier = +chargerLocal("priere_maj", 0);
+    if (l && l.lat != null && Date.now() - dernier < 864e5) return false;
+    this.essaye = true;
+    try { await this.position(); return true; } catch (e) { return false; }
   }
 };
 async function majPastillePriere(el) {
   if (!el || !el.isConnected) return;
+  await PRIERE.auto(); if (!el.isConnected) return;
   const d = await PRIERE.charger(); if (!el.isConnected) return;
   if (!d) { el.innerHTML = `<span class="pp-ic">🕌</span><span class="pp-t"><b>Heures de prière</b><small>Touchez pour activer</small></span><span class="pp-q">🧭</span>`; return; }
   const n = PRIERE.prochaine(d);
@@ -5662,6 +5672,7 @@ function vuePriere() {
   const z = w.querySelector("#p"); let cap = null, ecoute = null;
   async function afficher() {
     z.innerHTML = `<div class="centre"><div class="spinner"></div></div>`;
+    await PRIERE.auto(); if (!w.isConnected) return;
     const d = await PRIERE.charger(); if (!w.isConnected) return;
     if (!d) {
       z.innerHTML = `<div class="pr-vide"><p style="font-size:56px">🕌</p><p>Où êtes-vous ?</p><button class="btn" id="gps">📍 Utiliser ma position</button><p class="ou">ou</p><input class="champ" id="pv" placeholder="Ville (ex : Garoua)" dir="auto"><input class="champ" id="pp" placeholder="Pays (ex : Cameroun)" dir="auto"><button class="btn-outline" id="ok">Valider</button><p class="erreur" id="er" hidden></p></div>`;
