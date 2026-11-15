@@ -3878,8 +3878,8 @@ function boutonAbonnement(btn, channelId, creatorId, surChangement) {
 /* Centre des transferts : envois et téléchargements qui continuent quand on change d'écran ou que l'application passe en arrière-plan */
 const TR = {
   liste: [],
-  debut(titre, sorte, annuler) {
-    const j = { id: String(Date.now()) + Math.random().toString(36).slice(2), titre: titre || "Fichier", sorte, pct: 0, etat: "cours", annuler: annuler || null, msg: "" };
+  debut(titre, sorte, annuler, detail) {
+    const j = { id: String(Date.now()) + Math.random().toString(36).slice(2), titre: titre || "Fichier", sorte, pct: 0, etat: "cours", annuler: annuler || null, msg: "", detail: detail || null, ouvert: false };
     this.liste.push(j); this.rendre(); return j;
   },
   progres(j, a, b) {
@@ -3905,14 +3905,15 @@ const TR = {
     if (!el) {
       el = document.createElement("div"); el.id = "tr";
       el.style.cssText = "position:fixed;left:10px;right:10px;top:10px;z-index:99990;background:#0f5132;color:#fff;border-radius:12px;padding:10px 12px;font-size:13px;box-shadow:0 4px 14px rgba(0,0,0,.3)";
-      el.addEventListener("click", ev => { const b = ev.target.closest("[data-tr-x]"); if (!b) return; const j = this.liste.find(x => x.id === b.dataset.trX); if (j && j.annuler) j.annuler(); });
+      el.addEventListener("click", ev => { const b = ev.target.closest("[data-tr-x]"); if (b) { const j = this.liste.find(x => x.id === b.dataset.trX); if (j && j.annuler) j.annuler(); return; } const l = ev.target.closest("[data-tr-j]"); if (!l) return; const j = this.liste.find(x => x.id === l.dataset.trJ); if (j && j.detail) { j.ouvert = !j.ouvert; this.rendre(); } });
       document.body.appendChild(el);
     }
     el.innerHTML = this.liste.map(j => {
       const st = j.etat === "cours" ? j.pct + " %" : j.etat === "ok" ? "Terminé ✓" : j.etat === "annule" ? "Annulé" : "Échec" + (j.msg ? " : " + esc(j.msg) : "");
       const x = j.etat === "cours" && j.annuler ? ' <button data-tr-x="' + j.id + '" style="background:none;border:1px solid #fff;color:#fff;border-radius:8px;padding:0 6px">✕</button>' : "";
-      return '<div style="display:flex;justify-content:space-between;gap:8px;align-items:center"><span dir="auto" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + esc(j.sorte) + " · " + esc(j.titre) + '</span><span style="white-space:nowrap">' + st + x + '</span></div>'
-        + '<div style="height:5px;margin:6px 0 2px;background:rgba(255,255,255,.25);border-radius:3px;overflow:hidden"><i style="display:block;height:100%;width:' + j.pct + '%;background:#fff"></i></div>';
+      let det = ""; if (j.detail && j.ouvert) { try { det = '<div style="max-height:40vh;overflow:auto;margin-top:6px;font-size:12px;line-height:1.7">' + j.detail() + '</div>'; } catch (e) {} }
+      return '<div data-tr-j="' + j.id + '"' + (j.detail ? ' style="cursor:pointer"' : '') + '><div style="display:flex;justify-content:space-between;gap:8px;align-items:center"><span dir="auto" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + esc(j.sorte) + " · " + esc(j.titre) + (j.detail ? (j.ouvert ? " ▴" : " ▾") : "") + '</span><span style="white-space:nowrap">' + st + x + '</span></div>'
+        + '<div style="height:6px;margin:6px 0 2px;background:rgba(255,255,255,.25);border-radius:3px;overflow:hidden"><i style="display:block;height:100%;width:' + j.pct + '%;background:#fff;transition:width .3s"></i></div>' + det + '</div>';
     }).join("");
   }
 };
@@ -5928,10 +5929,10 @@ async function vueBiblioLire() {
   let p = Math.min(N, Math.max(1, +(etats[l.id] && etats[l.id].page) || 1));
   const bo = 'class="btn-outline" style="flex:1;margin:0"';
   w.insertAdjacentHTML("beforeend", `<svg width="0" height="0" style="position:absolute"><filter id="lumu-epais"><feMorphology operator="erode" radius="0.7"/></filter></svg><style>.bl-fl{width:38px;height:38px;flex:none;margin:0;padding:0;border:0;border-radius:50%;background:transparent;color:inherit;font-size:24px;line-height:1}.bl-fl:disabled{opacity:.3}.bl-b{flex:1;min-width:0;margin:0;padding:6px 2px;border:0;background:transparent;color:inherit;font:inherit;font-size:20px;line-height:1.1;display:flex;flex-direction:column;align-items:center;gap:3px}.bl-b small{font-size:11px;opacity:.85;white-space:nowrap}</style>
-    <div id="bl-audio" style="display:none;align-items:center;gap:2px;padding:6px 8px;background:#f2f2f2;color:#1f2a24;font-size:14px"><span id="bl-au-t" style="flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:700"></span><button class="bl-fl" id="bl-au-p1" aria-label="Volume précédent">⏮</button><button class="bl-fl" id="bl-au-r" aria-label="Reculer de 10 secondes">⟲</button><button class="bl-fl" id="bl-au-pp" aria-label="Lecture ou pause">▶</button><button class="bl-fl" id="bl-au-a" aria-label="Avancer de 10 secondes">⟳</button><button class="bl-fl" id="bl-au-n" aria-label="Volume suivant">⏭</button><button class="bl-fl" id="bl-au-x" aria-label="Arrêter">✕</button></div>
-    <div style="display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:8px 10px;background:#f2f2f2;color:#1f2a24"><div><button class="bl-fl" id="bl-retour" aria-label="Retour">←</button></div><div style="display:flex;align-items:center;gap:2px"><button class="bl-fl" id="bl-suiv" aria-label="Page suivante">‹</button><b id="bl-num" style="min-width:72px;text-align:center;font-size:16px"></b><button class="bl-fl" id="bl-prec" aria-label="Page précédente">›</button></div><span></span></div>
-    <div id="bl-zone" translate="no" class="notranslate" style="position:relative;flex:1;min-height:0;background:#ffffff;overflow:auto;touch-action:pan-y;padding:0 0.25cm"><div id="bl-cadre" style="overflow:hidden;width:100%;margin:0 auto;box-shadow:0 0 0 2px #8a6d3b"><img id="bl-img" alt="" draggable="false" style="display:block;width:100%;max-width:none;height:auto;mix-blend-mode:multiply"></div><div id="bl-etat" style="position:absolute;inset:0;display:flex;flex-direction:column;gap:10px;align-items:center;justify-content:center;padding:20px;text-align:center;background:#ffffff;color:#1f2a24"></div></div>
-    <div style="display:flex;align-items:stretch;gap:2px;padding:4px 6px;background:#f2f2f2;color:#1f2a24"><button class="bl-b" id="bl-aller">⌕<small>Aller à</small></button><button class="bl-b" id="bl-zoom">🔍<small>Agrandir</small></button><button class="bl-b" id="bl-opt" aria-label="Plus" aria-expanded="false">⋯<small>Plus</small></button></div>
+    <div id="bl-audio" style="display:none;align-items:center;gap:2px;padding:6px 8px;background:#e6d9b8;color:#3b2a1a;font-size:14px"><span id="bl-au-t" style="flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:700"></span><button class="bl-fl" id="bl-au-p1" aria-label="Volume précédent">⏮</button><button class="bl-fl" id="bl-au-r" aria-label="Reculer de 10 secondes">⟲</button><button class="bl-fl" id="bl-au-pp" aria-label="Lecture ou pause">▶</button><button class="bl-fl" id="bl-au-a" aria-label="Avancer de 10 secondes">⟳</button><button class="bl-fl" id="bl-au-n" aria-label="Volume suivant">⏭</button><button class="bl-fl" id="bl-au-x" aria-label="Arrêter">✕</button></div>
+    <div style="display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:8px 10px;background:#e6d9b8;color:#1f2a24"><div><button class="bl-fl" id="bl-retour" aria-label="Retour">←</button></div><div style="display:flex;align-items:center;gap:2px"><button class="bl-fl" id="bl-suiv" aria-label="Page suivante">‹</button><b id="bl-num" style="min-width:72px;text-align:center;font-size:16px"></b><button class="bl-fl" id="bl-prec" aria-label="Page précédente">›</button></div><span></span></div>
+    <div id="bl-zone" translate="no" class="notranslate" style="position:relative;flex:1;min-height:0;background:#f4ead2;overflow:auto;touch-action:pan-y;padding:0 0.25cm"><div id="bl-cadre" style="overflow:hidden;width:100%;margin:0 auto;box-shadow:0 0 0 2px #8a6d3b"><img id="bl-img" alt="" draggable="false" style="display:block;width:100%;max-width:none;height:auto;mix-blend-mode:multiply"></div><div id="bl-etat" style="position:absolute;inset:0;display:flex;flex-direction:column;gap:10px;align-items:center;justify-content:center;padding:20px;text-align:center;background:#f4ead2;color:#3b2a1a"></div></div>
+    <div style="display:flex;align-items:stretch;gap:2px;padding:4px 6px;background:#e6d9b8;color:#1f2a24"><button class="bl-b" id="bl-aller">⌕<small>Aller à</small></button><button class="bl-b" id="bl-zoom">🔍<small>Agrandir</small></button><button class="bl-b" id="bl-opt" aria-label="Plus" aria-expanded="false">⋯<small>Plus</small></button></div>
     <div id="bl-plus" style="display:none;gap:12px;max-height:45vh;overflow:auto;padding:0 10px 10px">
       <div style="display:flex;gap:8px"><button ${bo} id="bl-epais"></button></div>
       ${EXPLICATIONS[l.id] ? `<button ${bo} id="bl-expl">🎧 Écouter l'explication</button>` : ""}
@@ -6172,7 +6173,7 @@ async function vueCoran() {
 .co-it{display:flex;align-items:center;gap:12px;width:100%;margin:0;padding:10px 12px;border:0;border-radius:14px;background:rgba(255,255,255,.1);color:#fff;font:inherit;font-size:15px;text-align:start}.co-it:disabled{opacity:.6}
 .co-ic{width:34px;height:34px;flex:none;border-radius:50%;background:#d4af37;color:#1f2a24;display:flex;align-items:center;justify-content:center;font-size:16px}
 #co-kh{background:rgba(255,255,255,.1) !important;color:#fff !important;border-radius:14px;box-shadow:none !important}#co-kh button{background:transparent !important;color:#fff !important;border-color:#d4af37 !important}#co-kh p,#co-kh b{color:#fff !important}</style>
-    <div id="co-zone" translate="no" class="notranslate" style="position:absolute;inset:0;background:#ffffff;overflow:auto;touch-action:pan-y;padding:0 0.25cm"><img id="co-img" alt="" draggable="false" style="display:block;margin:0 auto;mix-blend-mode:multiply;box-shadow:0 0 0 2px #8a6d3b"><div id="co-txt" style="display:none;padding:14px 16px 24px;direction:rtl;font-family:'Amiri Quran','Amiri',serif;font-size:28px;line-height:2.3;text-align:justify;color:#1f2a24;background:#ffffff"></div><div id="co-etat" style="position:absolute;inset:0;display:flex;flex-direction:column;gap:10px;align-items:center;justify-content:center;padding:20px;text-align:center;background:#ffffff;color:#1f2a24"></div></div>
+    <div id="co-zone" translate="no" class="notranslate" style="position:absolute;inset:0;background:#f4ead2;overflow:auto;touch-action:pan-y;padding:0 0.25cm"><img id="co-img" alt="" draggable="false" style="display:block;margin:0 auto;mix-blend-mode:multiply;box-shadow:0 0 0 2px #8a6d3b"><div id="co-txt" style="display:none;padding:14px 16px 24px;direction:rtl;font-family:'Amiri Quran','Amiri',serif;font-size:28px;line-height:2.3;text-align:justify;color:#3b2a1a;background:#f4ead2"></div><div id="co-etat" style="position:absolute;inset:0;display:flex;flex-direction:column;gap:10px;align-items:center;justify-content:center;padding:20px;text-align:center;background:#f4ead2;color:#3b2a1a"></div></div>
     <div id="co-menu" class="co-chrome">
       <div style="display:flex;align-items:center;gap:8px"><button class="co-fl" id="co-retour" aria-label="Retour">←</button><b id="co-sur" style="flex:1;min-width:0;text-align:center;color:#d4af37;font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"></b><button class="co-fl" id="co-fermer" aria-label="Fermer le menu">✕</button></div>
       <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:4px"><button class="co-fl" id="co-suiv" aria-label="Page suivante">‹</button><span style="min-width:150px;text-align:center">Page <b id="co-num" style="font-size:18px"></b> · <span id="co-jz"></span></span><button class="co-fl" id="co-prec" aria-label="Page précédente">›</button></div>
@@ -6206,9 +6207,9 @@ async function vueCoran() {
     const W = zw * zoom; img.style.width = W + "px"; img.style.height = (W * ar) + "px";
   };
   window.addEventListener("resize", () => { if (w.isConnected) fit(); });
-  const majNuit = () => { img.style.filter = E.nuit ? "invert(1) hue-rotate(180deg)" : ""; img.style.mixBlendMode = E.nuit ? "" : "multiply"; zone.style.background = E.nuit ? "#000" : "#ffffff"; zEtat.style.background = E.nuit ? "#000" : "#ffffff"; zEtat.style.color = E.nuit ? "#eee" : "#1f2a24"; $("#co-nuit").innerHTML = E.nuit ? coIt("☀️", "Mode jour") : coIt("🌙", "Mode nuit"); };
+  const majNuit = () => { img.style.filter = E.nuit ? "invert(1) hue-rotate(180deg)" : ""; img.style.mixBlendMode = E.nuit ? "" : "multiply"; zone.style.background = E.nuit ? "#000" : "#f4ead2"; zEtat.style.background = E.nuit ? "#000" : "#f4ead2"; zEtat.style.color = E.nuit ? "#eee" : "#3b2a1a"; $("#co-nuit").innerHTML = E.nuit ? coIt("☀️", "Mode jour") : coIt("🌙", "Mode nuit"); };
   const majMq = () => { const on = E.marques.some(x => x.p === p); $("#co-mq").innerHTML = coIt(on ? "✔" : "🔖", on ? "Page marquée" : "Marquer cette page"); };
-  const majMode = () => { $("#co-mode").innerHTML = texteMode() ? coIt("🖼", "Voir la page en image") : coIt("📖", "Voir le texte"); $("#co-txt").style.color = E.nuit ? "#eee" : "#1f2a24"; $("#co-txt").style.background = E.nuit ? "#000" : "#ffffff"; $("#co-txt").style.setProperty("--num", E.nuit ? "#d4af37" : "#8a5a2b"); };
+  const majMode = () => { $("#co-mode").innerHTML = texteMode() ? coIt("🖼", "Voir la page en image") : coIt("📖", "Voir le texte"); $("#co-txt").style.color = E.nuit ? "#eee" : "#3b2a1a"; $("#co-txt").style.background = E.nuit ? "#000" : "#f4ead2"; $("#co-txt").style.setProperty("--num", E.nuit ? "#d4af37" : "#8a5a2b"); };
   $("#co-mode").onclick = () => { try { localStorage.setItem("coran_texte", texteMode() ? "0" : "1"); } catch (e) {} majMode(); aff(p); };
   const majKh = () => {
     const n = CORAN_ETAT.nbLues(E), pct = Math.floor(n * 100 / CORAN.N), nj = E.jour.d === CORAN_ETAT.auj() ? E.jour.n : 0;
@@ -7351,7 +7352,7 @@ const ACCES = {
   nom() { return { light: "Clair", dark: "Sombre", nuit: "Nuit étoilée", oasis: "Oasis", contraste: "Grand contraste" }[this.actuel()]; },
   suivant() { const l = ["light", "dark", "nuit", "oasis", "contraste"]; this.theme(l[(l.indexOf(this.actuel()) + 1) % l.length]); }
 };
-try { if (ACCES.grand()) document.documentElement.style.zoom = "1.2"; const th = localStorage.getItem("lumu_theme"); if (th) ACCES.theme(th); } catch (e) {}
+try { if (ACCES.grand()) document.documentElement.style.zoom = "1.2"; const th = localStorage.getItem("lumu_theme"); if (th) ACCES.theme(th); else document.documentElement.setAttribute("data-theme", "light"); } catch (e) { try { document.documentElement.setAttribute("data-theme", "light"); } catch (e2) {} }
 
 /* ---------- Notifications quotidiennes (Web Push) ---------- */
 const PUSH = (() => {
@@ -8097,7 +8098,7 @@ async function importerUn(it, commun, maj) {
   const extNom = ((ext).match(/^[a-z0-9]{1,8}$/) || [""])[0];
   const chemin = `${uid}/${idc}.${extFichier(mime, extNom)}`;
   const cheminCover = `${uid}/${idc}-cover.jpg`;
-  const envoi = envoyerFichier(f, chemin, mime, (a, b) => maj(`${b ? Math.min(100, Math.floor(a * 100 / b)) : 0} %`));
+  const envoi = envoyerFichier(f, chemin, mime, (a, b) => { it.fait = b ? Math.min(1, a / b) : 0; maj(`${b ? Math.min(100, Math.floor(a * 100 / b)) : 0} %`); if (it.surProgres) it.surProgres(); });
   it.envoi = envoi;
   envoi.promesse.catch(() => {});
   const metaP = lireMeta(f, type).then(m => {
@@ -8164,8 +8165,14 @@ function vueImport() {
     const commun = { cat: w.querySelector("#cat").value, groupe: (w.querySelector("#groupe") || {}).value || "" };
     enCours = true; stop = false;
     garderEveille(true);
-    const job = TR.debut("Import de " + items.length + " fichier(s)", "Envoi", () => { stop = true; items.filter(i => i.statut === "cours").forEach(it => { if (it.envoi) it.envoi.annuler(); }); });
     await demanderTitres(items);
+    const lot = items.filter(i => i.statut !== "ok"), octets = lot.reduce((a, i) => a + (i.f.size || 1), 0) || 1;
+    const nbOk = () => lot.filter(i => i.statut === "ok").length;
+    const job = TR.debut("Import · 0/" + lot.length + " fichiers", "Envoi", () => { stop = true; items.filter(i => i.statut === "cours").forEach(it => { if (it.envoi) it.envoi.annuler(); }); },
+      () => lot.map(i => '<div style="display:flex;justify-content:space-between;gap:8px"><span dir="auto" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + esc(i.f.name) + '</span><span style="white-space:nowrap">' + esc(i.statut === "ok" ? "Publié ✓" : i.statut === "erreur" ? "Échec" : i.statut === "cours" ? (i.msg || "…") : "En attente") + '</span></div>').join(""));
+    /* 95 % pour l'envoi des fichiers (selon leur taille), le reste à la publication */
+    const avancer = () => { const fait = lot.reduce((a, i) => a + (i.f.size || 1) * (i.statut === "ok" ? 1 : i.statut === "cours" ? 0.95 * (i.fait || 0) : 0), 0); job.titre = "Import · " + nbOk() + "/" + lot.length + " fichiers"; const avant = job.pct; TR.progres(job, fait, octets); if (job.pct === avant && job.ouvert) TR.rendre(); };
+    lot.forEach(i => { i.fait = 0; i.surProgres = avancer; });
     etat.annulerEnvoi = () => { stop = true; items.filter(i => i.statut === "cours").forEach(it => { if (it.envoi) it.envoi.annuler(); }); };
     dessiner();
     const lent = (() => { try { const c = navigator.connection || {}; return !!c.saveData || /(^|-)2g$/.test(c.effectiveType || ""); } catch (e) { return false; } })();
@@ -8178,7 +8185,7 @@ function vueImport() {
         const maj = m => { it.msg = m; const s = it.el && it.el.querySelector(".st"); if (s) s.textContent = m; };
         try { await importerUn(it, commun, maj); it.statut = "ok"; }
         catch (e) { it.statut = "erreur"; it.msg = /annulé/i.test(String(e && e.message)) ? "Annulé" : messageEnvoi(e) === "L'envoi a échoué. Réessayez." && e && e.message ? e.message : messageEnvoi(e); }
-        TR.progres(job, items.filter(i => i.statut === "ok").length, items.length);
+        avancer(); TR.rendre();
         if (w.isConnected) dessiner();
       }
     };
