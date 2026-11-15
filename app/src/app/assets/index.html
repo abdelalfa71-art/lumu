@@ -2480,9 +2480,9 @@ function ajouterFile(c) {
 async function ouvrirMenuContenu(c, el, x, y) {
   const audioOuVideo = !!(c.fichier_path && !c.embed_id);
   let fav = false; try { fav = (await mesFavorisDe([c.id])).has(c.id); } catch (e) {}
-  const hors = audioOuVideo && HORS.ids.has(c.id);
+  const hors = audioOuVideo && HORS.manuels.has(c.id);
   const items = [{ ic: "🔗", t: "Copier le lien", f: () => { try { navigator.clipboard.writeText(lienPartage(c.id)); } catch (e) {} } }];
-  if (audioOuVideo) items.push({ ic: hors ? "✓" : "⬇", t: hors ? "Retirer du hors-ligne" : "Télécharger (hors-ligne)", f: async () => { if (hors) { await HORS.retirer(c.id); return; } const job = TR.debut(c.title || "Audio", "Téléchargement", () => HORS.annul.add(c.id)); const ok = await HORS.sauver(c, true, (n, t) => TR.progres(job, n, t)); TR.fin(job, ok ? "ok" : "erreur", ok ? "" : "Téléchargement impossible."); } });
+  if (audioOuVideo) items.push({ ic: hors ? "✓" : "⬇", t: hors ? "Retirer du hors-ligne" : "Télécharger (hors-ligne)", f: async () => { if (hors) { await HORS.retirer(c.id); return; } if (HORS.ids.has(c.id) && await HORS.garder(c.id)) return; const job = TR.debut(c.title || "Audio", "Téléchargement", () => HORS.annul.add(c.id)); const ok = await HORS.sauver(c, true, (n, t) => TR.progres(job, n, t)); TR.fin(job, ok ? "ok" : "erreur", ok ? "" : "Téléchargement impossible."); } });
   items.push({ ic: "↗", t: "Partager", f: () => partagerContenu(c, el) });
   if (audioOuVideo && c.type === "audio") items.push({ ic: "➕", t: "Ajouter à la file d'attente", f: () => ajouterFile(c) });
   const ep = estEpingle(c.id);
@@ -3917,7 +3917,7 @@ const TR = {
   }
 };
 const HORS = {
-  pret: null, _db: null, ids: new Set(), MAX: 20, TAILLE_MAX: 120 * 1024 * 1024, enCours: new Set(), annul: new Set(),
+  pret: null, _db: null, ids: new Set(), manuels: new Set(), MAX: 20, TAILLE_MAX: 120 * 1024 * 1024, enCours: new Set(), annul: new Set(),
   ouvrir() {
     if (this._db) return this._db;
     return (this._db = new Promise((ok, ko) => {
@@ -3941,7 +3941,7 @@ const HORS = {
   async lire(id) { try { return await this.op("readonly", st => st.get(id)); } catch (e) { return null; } },
   async tous() { try { return (await this.op("readonly", st => st.getAll())) || []; } catch (e) { return []; } },
   async init() {
-    this.pret = (async () => { try { const r = await this.tous(); this.ids = new Set(r.filter(x => x.blob).map(x => x.id)); } catch (e) {} })();
+    this.pret = (async () => { try { const r = await this.tous(); this.ids = new Set(r.filter(x => x.blob).map(x => x.id)); this.manuels = new Set(r.filter(x => x.blob && x.manuel).map(x => x.id)); } catch (e) {} })();
     await this.pret;
     try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist(); } catch (e) {}
     this.bandeau();
@@ -4005,13 +4005,15 @@ const HORS = {
       const blob = new Blob(morceaux, { type });
       const ancien = await this.lire(c.id);
       await this.op("readwrite", st => st.put({ id: c.id, meta: this.meta(c), blob, taille: blob.size, ts: Date.now(), manuel: !!(manuel || (ancien && ancien.manuel)) }));
-      this.ids.add(c.id);
+      this.ids.add(c.id); if (manuel || (ancien && ancien.manuel)) this.manuels.add(c.id);
       return true;
     } catch (e) { return false; }
     finally { this.enCours.delete(c.id); this.annul.delete(c.id); }
   },
-  async retirer(id) { try { await this.op("readwrite", st => st.delete(id)); } catch (e) {} this.ids.delete(id); },
-  async nettoyerManuel(id) { const r = await this.lire(id); if (!r) return; if (this.recents().some(x => x.id === id)) { r.manuel = false; await this.op("readwrite", st => st.put(r)); } else await this.retirer(id); },
+  async retirer(id) { try { await this.op("readwrite", st => st.delete(id)); } catch (e) {} this.ids.delete(id); this.manuels.delete(id); },
+  /** Transforme une copie automatique en téléchargement gardé pour toujours (sans réseau) */
+  async garder(id) { try { const r = await this.lire(id); if (!r || !r.blob) return false; r.manuel = true; await this.op("readwrite", st => st.put(r)); this.manuels.add(id); return true; } catch (e) { return false; } },
+  async nettoyerManuel(id) { const r = await this.lire(id); if (!r) return; if (this.recents().some(x => x.id === id)) { r.manuel = false; await this.op("readwrite", st => st.put(r)); this.manuels.delete(id); } else await this.retirer(id); },
   bandeau() {
     let b = document.getElementById("hors-bandeau");
     const hors = navigator.onLine === false;
@@ -6483,6 +6485,9 @@ async function vueEcouter() {
   let tous = [], filtre = "", imams = [], abos = false, ecCharge = false;
   const liste = w.querySelector("#ec-liste");
   const joue = c => !!(AUD.c && AUD.c.id === c.id && AUD.a && !AUD.a.paused);
+  /* Temps écoulé / durée d'un audio (en direct pour celui qui joue) */
+  const tempsRow = c => { const moi = AUD.c && AUD.c.id === c.id && AUD.a, q = moi ? AUD.a.currentTime || 0 : chargerLocal("pos_" + c.id, 0), d = c.duration_seconds || (moi && isFinite(AUD.a.duration) ? AUD.a.duration : 0); return d ? fmtDuree(q) + " / " + fmtDuree(d) : fmtDuree(q); };
+  const tic = setInterval(() => { if (!w.isConnected) { clearInterval(tic); return; } w.querySelectorAll(".ec-row.lit").forEach(r => { const t = r.querySelector(".ec-tp"); if (t && r._c) t.textContent = tempsRow(r._c); }); }, 1000);
   const synchro = () => { w.querySelectorAll(".ec-row").forEach(r => { const c = r._c; if (!c) return; const j = joue(c); r.classList.toggle("lit", !!(AUD.c && AUD.c.id === c.id)); r.querySelector(".ec-pl").innerHTML = ico(j ? "pause" : "play", 26, true); }); };
   function chips() {
     const z = w.querySelector("#ec-chips"); z.innerHTML = "";
@@ -6532,21 +6537,22 @@ async function vueEcouter() {
       el.className = "ec-row"; el._c = c; el.tabIndex = 0; el.setAttribute("role", "button");
       appuiLong(el, (x, y) => ouvrirMenuContenu(c, el, x, y));
       el.innerHTML = `<span class="ec-cv">${cover ? `<img src="${esc(cover)}" alt="" loading="lazy">` : `<img class="ec-logo-ph" src="icon-192.png" alt="" loading="lazy">`}</span>
-        <div class="ec-tx"><span class="ec-imam" data-notrad dir="auto">${estEpingle(c.id) ? "📌 " : ""}${c.published_at && Date.now() - new Date(c.published_at) < 48 * 3600e3 ? '<em style="background:#c9a227;color:#fff;border-radius:6px;padding:0 6px;font-size:11px;font-style:normal;margin-right:4px">Nouveau</em>' : ""}@${esc(nom || "Imam")}</span><b dir="auto" data-notrad>${esc(c.title)}</b><small dir="auto" data-notrad>${c.duration_seconds ? esc(fmtDuree(c.duration_seconds)) : ""}${HORS.ids && HORS.ids.has(c.id) ? " · ✓" : ""}${chargerLocal("fini_" + c.id, 0) ? " · ✔" : ""}</small>${(() => { const q = chargerLocal("pos_" + c.id, 0); return q > 10 && c.duration_seconds && q < c.duration_seconds - 15 ? `<i class="ec-bar"><u style="width:${Math.round(100 * q / c.duration_seconds)}%"></u></i>` : ""; })()}</div>
+        <div class="ec-tx"><span class="ec-imam" data-notrad dir="auto">${estEpingle(c.id) ? "📌 " : ""}${c.published_at && Date.now() - new Date(c.published_at) < 48 * 3600e3 ? '<em style="background:#c9a227;color:#fff;border-radius:6px;padding:0 6px;font-size:11px;font-style:normal;margin-right:4px">Nouveau</em>' : ""}@${esc(nom || "Imam")}</span><b dir="auto" data-notrad>${esc(c.title)}</b><small dir="auto" data-notrad>👁 ${esc(fmtNb(c.views_count))} · <span class="ec-tp">${esc(tempsRow(c))}</span>${chargerLocal("fini_" + c.id, 0) ? " · ✔" : ""}</small>${(() => { const q = chargerLocal("pos_" + c.id, 0); return q > 10 && c.duration_seconds && q < c.duration_seconds - 15 ? `<i class="ec-bar"><u style="width:${Math.round(100 * q / c.duration_seconds)}%"></u></i>` : ""; })()}</div>
         ${c.fichier_path ? `<button class="ec-dl" aria-label="Télécharger"></button>` : ""}<button class="ec-pl" aria-label="Lecture">${ico("play", 26, true)}</button>`;
       { const chId = c.channel_id || (c.yt_channels && c.yt_channels.id), im = el.querySelector(".ec-imam"); if (im && chId) im.onclick = ev => { ev.stopPropagation(); router("chaine", { id: chId }); }; }
       const dl = el.querySelector(".ec-dl");
       if (dl) {
         const dessinerDl = () => {
-          const fait = HORS.ids.has(c.id), enc = HORS.enCours.has(c.id), pr = DLP[c.id] || 0;
+          const fait = HORS.manuels.has(c.id), enc = HORS.enCours.has(c.id), pr = DLP[c.id] || 0;
           dl.className = "ec-dl" + (fait ? " fait" : "");
           dl.setAttribute("aria-label", fait ? "Téléchargé. Toucher pour supprimer" : enc ? "Annuler le téléchargement" : "Télécharger");
           dl.innerHTML = fait ? ico("verif", 24) : enc ? `<svg width="46" height="46" viewBox="0 0 46 46" aria-hidden="true"><circle cx="23" cy="23" r="20" fill="none" stroke="var(--bordure)" stroke-width="3"/><circle cx="23" cy="23" r="20" fill="none" stroke="var(--vert)" stroke-width="3" stroke-linecap="round" stroke-dasharray="125.7" stroke-dashoffset="${(125.7 * (1 - pr)).toFixed(1)}" transform="rotate(-90 23 23)"/><path d="M17 17l12 12M29 17L17 29" stroke="var(--vert)" stroke-width="2.5" stroke-linecap="round"/></svg>` : ico("telecharger", 24);
         };
         dl.onclick = async ev => {
           ev.stopPropagation();
-          if (HORS.ids.has(c.id)) { if (confirm("Supprimer ce téléchargement ?")) { await HORS.retirer(c.id); dessinerDl(); } return; }
+          if (HORS.manuels.has(c.id)) { if (confirm("Supprimer ce téléchargement ?")) { await HORS.retirer(c.id); dessinerDl(); } return; }
           if (HORS.enCours.has(c.id)) { HORS.annul.add(c.id); return; }
+          if (HORS.ids.has(c.id) && await HORS.garder(c.id)) { dessinerDl(); return; }
           if (navigator.onLine === false) { alert("Pas de connexion internet."); return; }
           DLP[c.id] = 0; const fin = HORS.sauver(c, true, (n, l) => { DLP[c.id] = n / l; dessinerDl(); }); dessinerDl();
           const ok = await fin; delete DLP[c.id]; dessinerDl();
