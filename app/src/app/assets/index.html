@@ -6179,8 +6179,8 @@ async function vueCoran() {
     if (!img.naturalWidth) return;
     const zw = zone.clientWidth, zh = zone.clientHeight, ar = img.naturalHeight / img.naturalWidth;
     zone.style.padding = "0"; zone.style.paddingTop = "0px";
-    /* Page entière, sans rogner le texte : la plus grande possible, centrée */
-    if (zoom === 1) { let W = zh / ar, H = zh; if (W > zw) { W = zw; H = zw * ar; } img.style.width = W + "px"; img.style.height = H + "px"; zone.style.paddingTop = Math.max(0, (zh - H) / 2) + "px"; return; }
+    /* Plein écran : la page remplit la largeur et la hauteur de l'écran (étirée en hauteur, texte entier) */
+    if (zoom === 1) { img.style.objectFit = "fill"; img.style.width = zw + "px"; img.style.height = zh + "px"; zone.style.paddingTop = "0px"; return; }
     /* Agrandi : pleine largeur × zoom, on fait défiler */
     const W = zw * zoom; img.style.width = W + "px"; img.style.height = (W * ar) + "px";
   };
