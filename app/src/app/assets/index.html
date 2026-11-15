@@ -6153,19 +6153,28 @@ async function vueCoran() {
   const pageDemandee = parseInt(etat.params.page, 10) || 0;
   let p = Math.min(CORAN.N, Math.max(1, pageDemandee || E.page));
   const bo = 'class="btn-outline" style="flex:1;margin:0"';
-  w.innerHTML = `<style>.co-fl{width:38px;height:38px;flex:none;margin:0;padding:0;border:0;border-radius:50%;background:transparent;color:inherit;font-size:24px;line-height:1}.co-fl:disabled{opacity:.3}.co-b{flex:1;min-width:0;margin:0;padding:6px 2px;border:0;background:transparent;color:inherit;font:inherit;font-size:20px;line-height:1.1;display:flex;flex-direction:column;align-items:center;gap:3px}.co-b small{font-size:11px;opacity:.85;white-space:nowrap}
-#co-haut,#co-bar,#co-plus{position:absolute;left:0;right:0;z-index:6;transition:opacity .2s}#co-haut{top:0}#co-bar{bottom:0}#co-plus{bottom:58px;background:#e6d9b8;border-radius:12px 12px 0 0;box-shadow:0 -4px 14px rgba(0,0,0,.15)}
-.co-cache .co-chrome{opacity:0;pointer-events:none}</style>
-    <div id="co-haut" class="co-chrome" style="display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:6px;padding:8px 10px;background:#e6d9b8;color:#1f2a24;font-size:14px"><div style="display:flex;align-items:center;gap:4px;min-width:0"><button class="co-fl" id="co-retour" aria-label="Retour">←</button><span id="co-sur" style="min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"></span></div><div style="display:flex;align-items:center;gap:2px"><button class="co-fl" id="co-suiv" aria-label="Page suivante">‹</button><b id="co-num" style="min-width:48px;text-align:center;font-size:16px"></b><button class="co-fl" id="co-prec" aria-label="Page précédente">›</button></div><span id="co-jz" style="text-align:end;white-space:nowrap"></span></div>
+  const coIt = (ic, t) => `<span class="co-ic">${ic}</span><span>${t}</span>`;
+  w.innerHTML = `<style>.co-fl{width:40px;height:40px;flex:none;margin:0;padding:0;border:0;border-radius:50%;background:rgba(255,255,255,.12);color:#fff;font-size:22px;line-height:1}.co-fl:disabled{opacity:.3}
+#co-menu{position:absolute;inset:0;z-index:6;background:rgba(10,20,16,.9);color:#fff;overflow:auto;padding:14px 16px 24px;display:grid;gap:9px;align-content:start;transition:opacity .2s}
+.co-cache .co-chrome{opacity:0;pointer-events:none}
+.co-it{display:flex;align-items:center;gap:12px;width:100%;margin:0;padding:10px 12px;border:0;border-radius:14px;background:rgba(255,255,255,.1);color:#fff;font:inherit;font-size:15px;text-align:start}.co-it:disabled{opacity:.6}
+.co-ic{width:34px;height:34px;flex:none;border-radius:50%;background:#d4af37;color:#1f2a24;display:flex;align-items:center;justify-content:center;font-size:16px}
+#co-kh{background:rgba(255,255,255,.1) !important;color:#fff !important;border-radius:14px;box-shadow:none !important}#co-kh button{background:transparent !important;color:#fff !important;border-color:#d4af37 !important}#co-kh p,#co-kh b{color:#fff !important}</style>
     <div id="co-zone" translate="no" class="notranslate" style="position:absolute;inset:0;background:#f4ead2;overflow:auto;touch-action:pan-y;padding:0 0.25cm"><img id="co-img" alt="" draggable="false" style="display:block;margin:0 auto;mix-blend-mode:multiply;box-shadow:0 0 0 2px #8a6d3b"><div id="co-txt" style="display:none;padding:14px 16px 24px;direction:rtl;font-family:'Amiri Quran','Amiri',serif;font-size:28px;line-height:2.3;text-align:justify;color:#3b2a1a;background:#f4ead2"></div><div id="co-etat" style="position:absolute;inset:0;display:flex;flex-direction:column;gap:10px;align-items:center;justify-content:center;padding:20px;text-align:center;background:#f4ead2;color:#3b2a1a"></div></div>
-    <div id="co-bar" class="co-chrome" style="display:flex;align-items:stretch;gap:2px;padding:4px 6px;background:#e6d9b8;color:#1f2a24"><button class="co-b" id="co-som">☰<small>Sourates</small></button><button class="co-b" id="co-juz">◔<small>Juz</small></button><button class="co-b" id="co-aller">⌕<small>Aller à</small></button><button class="co-b" id="co-mq">🔖<small>Marquer</small></button><button class="co-b" id="co-opt" aria-label="Plus" aria-expanded="false">⋯<small>Plus</small></button></div>
-    <div id="co-plus" class="co-chrome" style="display:none;gap:12px;max-height:45vh;overflow:auto;padding:0 10px 10px">
-      <div style="display:flex;gap:8px"><button ${bo} id="co-mqs">Mes marque-pages</button></div>
-      <div style="display:flex;gap:8px"><button ${bo} id="co-mode"></button></div>
-      <div style="display:flex;gap:8px"><button ${bo} id="co-zoom">🔍 Agrandir</button><button ${bo} id="co-nuit"></button></div>
-      <div class="carte" id="co-kh" style="padding:14px"></div>
-      <button class="btn-outline" id="co-dl" style="margin:0"></button>
-      <p style="font-size:12px;text-align:center;margin:0">Mushaf de Médine, lecture Hafs. Pages affichées sans modification du texte.</p>
+    <div id="co-menu" class="co-chrome">
+      <div style="display:flex;align-items:center;gap:8px"><button class="co-fl" id="co-retour" aria-label="Retour">←</button><b id="co-sur" style="flex:1;min-width:0;text-align:center;color:#d4af37;font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"></b><button class="co-fl" id="co-fermer" aria-label="Fermer le menu">✕</button></div>
+      <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:4px"><button class="co-fl" id="co-suiv" aria-label="Page suivante">‹</button><span style="min-width:150px;text-align:center">Page <b id="co-num" style="font-size:18px"></b> · <span id="co-jz"></span></span><button class="co-fl" id="co-prec" aria-label="Page précédente">›</button></div>
+      <button class="co-it" id="co-som">${coIt("☰", "Sourates")}</button>
+      <button class="co-it" id="co-juz">${coIt("◔", "Juz")}</button>
+      <button class="co-it" id="co-aller">${coIt("⌕", "Aller à une page")}</button>
+      <button class="co-it" id="co-mq"></button>
+      <button class="co-it" id="co-mqs">${coIt("📑", "Mes marque-pages")}</button>
+      <button class="co-it" id="co-mode"></button>
+      <button class="co-it" id="co-zoom">${coIt("🔍", "Agrandir")}</button>
+      <button class="co-it" id="co-nuit"></button>
+      <div id="co-kh" style="padding:14px"></div>
+      <button class="co-it" id="co-dl"></button>
+      <p style="font-size:12px;text-align:center;margin:4px 0 0;opacity:.8">Mushaf de Médine, lecture Hafs. Pages affichées sans modification du texte.</p>
     </div>`;
   app.appendChild(w);
   garderEcran(w);
@@ -6185,9 +6194,9 @@ async function vueCoran() {
     const W = zw * zoom; img.style.width = W + "px"; img.style.height = (W * ar) + "px";
   };
   window.addEventListener("resize", () => { if (w.isConnected) fit(); });
-  const majNuit = () => { img.style.filter = E.nuit ? "invert(1) hue-rotate(180deg)" : ""; img.style.mixBlendMode = E.nuit ? "" : "multiply"; zone.style.background = E.nuit ? "#000" : "#f4ead2"; zEtat.style.background = E.nuit ? "#000" : "#f4ead2"; zEtat.style.color = E.nuit ? "#eee" : "#3b2a1a"; w.querySelectorAll(".co-chrome").forEach(e => { e.style.background = E.nuit ? "#111" : "#e6d9b8"; e.style.color = E.nuit ? "#eee" : "#1f2a24"; }); $("#co-nuit").textContent = E.nuit ? "☀️ Mode jour" : "🌙 Mode nuit"; };
-  const majMq = () => { const on = E.marques.some(x => x.p === p); $("#co-mq").innerHTML = (on ? "✔" : "🔖") + "<small>" + (on ? "Marquée" : "Marquer") + "</small>"; };
-  const majMode = () => { $("#co-mode").textContent = texteMode() ? "🖼 Voir la page en image" : "📖 Voir le texte"; $("#co-txt").style.color = E.nuit ? "#eee" : "#3b2a1a"; $("#co-txt").style.background = E.nuit ? "#000" : "#f4ead2"; $("#co-txt").style.setProperty("--num", E.nuit ? "#d4af37" : "#8a5a2b"); };
+  const majNuit = () => { img.style.filter = E.nuit ? "invert(1) hue-rotate(180deg)" : ""; img.style.mixBlendMode = E.nuit ? "" : "multiply"; zone.style.background = E.nuit ? "#000" : "#f4ead2"; zEtat.style.background = E.nuit ? "#000" : "#f4ead2"; zEtat.style.color = E.nuit ? "#eee" : "#3b2a1a"; $("#co-nuit").innerHTML = E.nuit ? coIt("☀️", "Mode jour") : coIt("🌙", "Mode nuit"); };
+  const majMq = () => { const on = E.marques.some(x => x.p === p); $("#co-mq").innerHTML = coIt(on ? "✔" : "🔖", on ? "Page marquée" : "Marquer cette page"); };
+  const majMode = () => { $("#co-mode").innerHTML = texteMode() ? coIt("🖼", "Voir la page en image") : coIt("📖", "Voir le texte"); $("#co-txt").style.color = E.nuit ? "#eee" : "#3b2a1a"; $("#co-txt").style.background = E.nuit ? "#000" : "#f4ead2"; $("#co-txt").style.setProperty("--num", E.nuit ? "#d4af37" : "#8a5a2b"); };
   $("#co-mode").onclick = () => { try { localStorage.setItem("coran_texte", texteMode() ? "0" : "1"); } catch (e) {} majMode(); aff(p); };
   const majKh = () => {
     const n = CORAN_ETAT.nbLues(E), pct = Math.floor(n * 100 / CORAN.N), nj = E.jour.d === CORAN_ETAT.auj() ? E.jour.n : 0;
@@ -6206,7 +6215,7 @@ async function vueCoran() {
     const d = CORAN.debutJuz(j), f = j === 30 ? CORAN.N : CORAN.debutJuz(j + 1) - 1;
     let n = 0; for (let i = d; i <= f; i++) if (await CORAN.enCache(i)) n++;
     if (!b.isConnected || b.dataset.occupe) return;
-    b.textContent = n >= f - d + 1 ? "✓ Juz " + j + " disponible sans connexion" : "⬇ Télécharger le juz " + j + " pour lire sans connexion";
+    b.innerHTML = n >= f - d + 1 ? coIt("✓", "Juz " + j + " disponible sans connexion") : coIt("⬇", "Télécharger le juz " + j + " pour lire sans connexion");
     b.disabled = n >= f - d + 1;
   };
   const regleZoom = (z, cx) => {
@@ -6215,9 +6224,11 @@ async function vueCoran() {
     fit();
     zone.scrollLeft = (zone.scrollLeft + c) * r - c;
     zone.style.touchAction = zoom > 1 ? "pan-x pan-y" : "pan-y";
-    $("#co-zoom").textContent = zoom > 1 ? "🔍 Taille normale" : "🔍 Agrandir";
+    $("#co-zoom").innerHTML = coIt("🔍", zoom > 1 ? "Taille normale" : "Agrandir");
   };
   const aff = async n => {
+    /* Le menu reste ouvert pour les flèches (page voisine), se ferme pour un saut ou un changement de mode */
+    if (Math.abs(n - p) !== 1) w.classList.add("co-cache");
     p = Math.min(CORAN.N, Math.max(1, n));
     E.page = p; CORAN_ETAT.ecrire(E);
     const moi = ++tour; clearTimeout(tLu);
@@ -6283,8 +6294,9 @@ async function vueCoran() {
   $("#co-suiv").onclick = () => aff(p + 1);
   $("#co-prec").onclick = () => aff(p - 1);
   $("#co-retour").onclick = () => router("home");
-  $("#co-opt").onclick = () => { const pl = $("#co-plus"), ouvert = pl.style.display === "none"; pl.style.display = ouvert ? "grid" : "none"; $("#co-opt").setAttribute("aria-expanded", ouvert ? "true" : "false"); if (ouvert) pl.scrollIntoView({ block: "nearest", behavior: "smooth" }); };
-  $("#co-zoom").onclick = () => regleZoom(zoom > 1 ? 1 : 2);
+  $("#co-fermer").onclick = () => w.classList.add("co-cache");
+  $("#co-menu").onclick = ev => { if (ev.target === ev.currentTarget) w.classList.add("co-cache"); };
+  $("#co-zoom").onclick = () => { regleZoom(zoom > 1 ? 1 : 2); w.classList.add("co-cache"); };
   $("#co-nuit").onclick = () => { E.nuit = !E.nuit; CORAN_ETAT.ecrire(E); majNuit(); majMode(); };
   /* Gestes : glisser vers la droite pour avancer (comme un Mushaf), écarter deux doigts pour agrandir */
   let x0 = null, y0 = 0, d0 = 0, z0 = 1, pince = false;
@@ -6307,8 +6319,7 @@ async function vueCoran() {
   }, { passive: true });
   /* Page en plein écran : un toucher affiche ou cache les barres */
   zone.addEventListener("click", () => {
-    if (zoom > 1) return;
-    if (w.classList.toggle("co-cache")) $("#co-plus").style.display = "none";
+    w.classList.toggle("co-cache");
   });
   $("#co-som").onclick = () => ouvrirFeuille("Sourates", `<div id="co-ls" style="display:grid;gap:6px">${CORAN.NOMS.map((n, i) => `<button type="button" class="carte ligne-menu" data-p="${CORAN.DEBUTS[i]}" style="text-align:start;color:#1f2a24"><span>${i + 1}.</span><span style="flex:1">${esc(n)}</span><small>p. ${CORAN.DEBUTS[i]}</small></button>`).join("")}</div>`, (corps, fermer) => {
     corps.querySelectorAll("[data-p]").forEach(b => b.onclick = () => { fermer(); aff(+b.dataset.p); });
