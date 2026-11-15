@@ -1930,7 +1930,7 @@ function router(route, params = {}, opts = {}) {
   if ((route === "flux" || route === "home") && etat.lienRoute) {
     const r = etat.lienRoute; etat.lienRoute = null;
     try { history.replaceState(null, "", location.pathname + location.search); } catch(e) {}
-    route = r; params = etat.lienParams || {}; etat.lienParams = null;
+    route = r; params = etat.lienParams || {}; if (r === "coran") params = { ...params, choix: true }; etat.lienParams = null;
   }
   if ((route === "flux" || route === "home") && etat.lienEnAttente) {
     const id = etat.lienEnAttente; etat.lienEnAttente = null;
@@ -6157,6 +6157,29 @@ document.addEventListener("visibilitychange", () => {
   const z = document.getElementById("co-zone") || document.getElementById("bl-zone");
   if (document.visibilityState === "visible" && !verrouEcran && z) garderEcran(z);
 });
+/* Rappel du Coran : continuer la lecture, ou écouter une récitation publiée dans l'application */
+function choixRappelCoran(page) {
+  /* Si une sourate commence sur cette page (ex. Al-Kahf p. 293), c'est elle que vise le rappel */
+  const ss = CORAN.sourates(page), deb = ss.filter(i => CORAN.DEBUTS[i] === page), sur = CORAN.NOMS[deb.length ? deb[deb.length - 1] : ss[0]] || "";
+  ouvrirFeuille("Sourate " + sur, `<div style="display:grid;gap:10px"><button class="btn" id="rc-lire" style="margin:0">📖 Continuer la lecture (page ${page})</button><button class="btn-outline" id="rc-ecouter" style="margin:0" disabled>🎧 Recherche d'une récitation…</button><p id="rc-info" style="font-size:13px;text-align:center;margin:0" hidden></p></div>`, async (corps, fermer) => {
+    corps.querySelector("#rc-lire").onclick = fermer;
+    const b = corps.querySelector("#rc-ecouter"), info = corps.querySelector("#rc-info");
+    const net = x => String(x || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f'’`\-\s]/g, "");
+    try {
+      const r = await sb.from("yt_contenus").select("id,title,category,langue_contenu,fichier_path,cover_path,duration_seconds,views_count,channel_id,auteur,type,embed_id,yt_channels(name)").eq("status", "published").eq("type", "audio").or("category.ilike.%coran%,title.ilike.%sourate%,title.ilike.%" + sur.replace(/^(Al|An|Ar|As|Ash|At|Ad|Adh|Az)-/, "").replace(/[^A-Za-z]/g, "%") + "%").limit(200);
+      if (!b.isConnected) return;
+      const l = ((r && r.data) || []).filter(c => c.fichier_path && !c.embed_id);
+      const cle = net(sur.replace(/^(Al|An|Ar|As|Ash|At|Ad|Adh|Az)-/, ""));
+      const estCoran = c => /coran|quran|r[ée]citation|قرآن/i.test(c.category || "");
+      const exact = cle.length >= 3 ? l.find(c => estCoran(c) && net(c.title).includes(cle)) : null;
+      const c = exact || l.find(estCoran);
+      if (!c) { b.textContent = "🎧 Aucune récitation disponible pour le moment"; return; }
+      b.disabled = false; b.textContent = exact ? "🎧 Écouter la sourate " + sur : "🎧 Écouter une récitation du Coran";
+      if (!exact) { info.hidden = false; info.textContent = "La sourate " + sur + " n'est pas encore disponible en audio : « " + c.title + " » sera lu."; }
+      b.onclick = () => { fermer(); try { lireDirect(c); } catch (e) {} };
+    } catch (e) { if (b.isConnected) b.textContent = navigator.onLine === false ? "🎧 Pas de connexion pour chercher l'audio" : "🎧 Audio indisponible pour le moment"; }
+  });
+}
 const LECTEUR_PLEIN = "position:fixed;inset:0;z-index:900;display:flex;flex-direction:column;background:#fff;padding:0;margin:0;max-width:none;width:100%;height:100%;overflow:hidden;box-sizing:border-box";
 async function vueCoran() {
   const w = document.createElement("div");
@@ -6191,6 +6214,8 @@ async function vueCoran() {
     </div>`;
   app.appendChild(w);
   garderEcran(w);
+  /* Arrivée depuis un rappel : proposer de lire ou d'écouter */
+  if (etat.params.choix) setTimeout(() => { if (w.isConnected) choixRappelCoran(p); }, 500);
   const $ = q => w.querySelector(q);
   const img = $("#co-img"), zEtat = $("#co-etat"), zone = $("#co-zone");
   /* Page sur toute la largeur de l'écran */
@@ -6414,7 +6439,7 @@ function carteMoment(w) {
   if (bc) bc.onclick = () => router("coran");
   if (bm) bm.onclick = () => {
     if (m.dormir) { const b = w.querySelector("#th-dormir"); if (b) b.click(); return; }
-    if (m.coran) { router("coran", { page: m.coran }); return; }
+    if (m.coran) { router("coran", { page: m.coran, choix: true }); return; }
     if (m.azkar) { router("azkar", { liste: m.azkar }); return; }
     const z = w.querySelector("#ec-rech"), i = w.querySelector("#ec-rin"); if (!z || !i) return;
     z.hidden = false; i.value = m.q; i.dispatchEvent(new Event("input"));
