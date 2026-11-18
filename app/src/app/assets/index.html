@@ -8335,15 +8335,16 @@ function vueImport() {
       <select class="champ" id="cat" style="margin:0" aria-label="Catégorie" ${enCours ? "disabled" : ""}>${CATEGORIES.map(c => `<option ${c === cat ? "selected" : ""}>${esc(c)}</option>`).join("")}</select>
       ${groupes.length ? `<select class="champ" id="groupe" style="margin:0" aria-label="Groupe" ${enCours ? "disabled" : ""}><option value="">Publier aussi dans un groupe (facultatif)</option>${groupes.map(g => `<option value="${esc(g.id)}" ${g.id === gr ? "selected" : ""}>${esc(g.nom)}</option>`).join("")}</select>` : ""}
       <div id="liste" class="liste-contenus"></div>
-      ${items.length ? (enCours ? `<div class="imp-prog"><b>Envoi ${items.filter(i => i.statut === "ok").length}/${items.length}</b><progress max="${items.length}" value="${items.filter(i => i.statut === "ok").length}"></progress></div><button class="btn-outline" id="stop">Arrêter</button>` : `<button class="btn" id="go" ${attente ? "" : "disabled"}>${items.some(i => i.statut === "erreur") ? "Réessayer / continuer" : "Tout publier"} (${attente})</button>`) : ""}
-      <p style="font-size:12px">Gardez l'écran allumé pendant l'envoi. Si le réseau coupe, l'envoi reprend tout seul.</p>`);
+      ${items.length ? (enCours ? `<div class="imp-prog"><b>Envoi ${items.filter(i => i.statut === "ok").length}/${items.length} · ${items.filter(i => i.statut === "cours").length} en cours</b><progress max="${items.length}" value="${items.filter(i => i.statut === "ok").length}"></progress></div><button class="btn-outline" id="stop">Arrêter</button>` : `<button class="btn" id="go" ${attente ? "" : "disabled"}>${items.some(i => i.statut === "erreur") ? "Réessayer / continuer" : "Tout publier"} (${attente})</button>`) : ""}
+      <p style="font-size:12px">Tous les fichiers partent en même temps. Gardez l'écran allumé. Si un fichier échoue ou reste bloqué, touchez ↻ pour le relancer.</p>`);
     const z = w.querySelector("#liste");
     items.forEach(it => {
       const el = document.createElement("div"); el.className = "carte";
       const ic = (TYPES[it.type] || TYPES.fichier).ic;
-      el.innerHTML = `<div style="display:flex;gap:8px;align-items:center"><span>${ic}</span><div style="min-width:0;flex:1"><b dir="auto" style="word-break:break-all">${esc(it.f.name)}</b><br><small>${fmtTaille(it.f.size)} · <span class="st" ${it.statut === "erreur" ? `style="color:var(--rouge)"` : ""}>${esc(it.statut === "ok" ? "Publié ✓" : it.statut === "erreur" ? it.msg : it.statut === "cours" ? it.msg : "En attente")}</span></small></div>${enCours || it.statut === "ok" ? "" : `<button class="btn-text" data-r="1" aria-label="Retirer">✕</button>`}</div>`;
+      el.innerHTML = `<div style="display:flex;gap:8px;align-items:center"><span>${ic}</span><div style="min-width:0;flex:1"><b dir="auto" style="word-break:break-all">${esc(it.f.name)}</b><br><small>${fmtTaille(it.f.size)} · <span class="st" ${it.statut === "erreur" ? `style="color:var(--rouge)"` : ""}>${esc(it.statut === "ok" ? "Publié ✓" : it.statut === "erreur" ? it.msg : it.statut === "cours" ? it.msg : "En attente")}</span></small></div>${it.statut === "erreur" || it.statut === "cours" ? `<button type="button" data-relance="1" aria-label="Relancer l'envoi de ce fichier" title="Relancer" style="flex:none;width:40px;height:40px;margin:0;padding:0;border:2px solid var(--vert,#12805f);border-radius:50%;background:${it.statut === "erreur" ? "var(--vert,#12805f)" : "transparent"};color:${it.statut === "erreur" ? "#fff" : "var(--vert,#12805f)"};font-size:20px;line-height:1">↻</button>` : ""}${enCours || it.statut === "ok" ? "" : `<button class="btn-text" data-r="1" aria-label="Retirer">✕</button>`}</div>`;
       it.el = el;
       const r = el.querySelector("[data-r]"); if (r) r.onclick = () => { items = items.filter(x => x !== it); dessiner(); };
+      const rl = el.querySelector("[data-relance]"); if (rl) rl.onclick = () => relancer(it);
       z.appendChild(el);
     });
     const inp = w.querySelector("#fichiers");
@@ -8354,40 +8355,53 @@ function vueImport() {
       dessiner();
       Promise.all(neufs.map(affinerItem)).then(() => { if (w.isConnected && !enCours) dessiner(); }, () => {});
     };
-    const go = w.querySelector("#go"); if (go) go.onclick = lancer;
-    const st = w.querySelector("#stop"); if (st) st.onclick = () => { stop = true; items.filter(i => i.statut === "cours").forEach(it => { if (it.envoi) it.envoi.annuler(); }); };
+    const go = w.querySelector("#go"); if (go) go.onclick = () => lancer();
+    const st = w.querySelector("#stop"); if (st) st.onclick = annulerTout;
   }
-  async function lancer() {
+  /* Un envoi en cours : ses réglages, sa barre, et les fichiers qui tournent */
+  let lotEnCours = null;
+  const actifs = new Set();
+  const annulerTout = () => { stop = true; items.filter(i => i.statut === "cours").forEach(it => { it.essai = (it.essai || 0) + 1; if (it.envoi) it.envoi.annuler(); it.statut = "erreur"; it.msg = "Annulé"; }); if (w.isConnected) dessiner(); };
+  function demarrer(it) {
+    const L = lotEnCours; if (!L) return;
+    const moi = it.essai = (it.essai || 0) + 1;
+    it.statut = "cours"; it.msg = "…"; it.fait = 0; it.surProgres = L.avancer;
+    const maj = m => { if (it.essai !== moi) return; it.msg = m; const sp = it.el && it.el.querySelector(".st"); if (sp) sp.textContent = m; };
+    const p = (async () => {
+      try { await importerUn(it, L.commun, maj); if (it.essai !== moi) return; it.statut = "ok"; }
+      catch (e) { if (it.essai !== moi) return; it.statut = "erreur"; it.msg = /annulé/i.test(String(e && e.message)) ? "Annulé" : messageEnvoi(e) === "L'envoi a échoué. Réessayez." && e && e.message ? e.message : messageEnvoi(e); }
+      L.avancer(); TR.rendre();
+      if (w.isConnected) dessiner();
+    })();
+    actifs.add(p); p.finally(() => actifs.delete(p));
+  }
+  /* Relancer un seul fichier, comme sur WhatsApp : il repart de zéro, les autres continuent */
+  function relancer(it) {
+    /* Fichier déjà envoyé, en train d'être publié : on ne le relance pas (sinon il serait publié deux fois) */
+    if (it.statut === "ok" || (it.statut === "cours" && (it.fait || 0) >= 1)) return;
+    if (it.statut === "cours") { it.essai = (it.essai || 0) + 1; if (it.envoi) { try { it.envoi.annuler(); } catch (e) {} } }
+    if (lotEnCours) { if (!lotEnCours.lot.includes(it)) lotEnCours.lot.push(it); stop = false; demarrer(it); dessiner(); }
+    else lancer([it]);
+  }
+  async function lancer(choix) {
     const commun = { cat: w.querySelector("#cat").value, groupe: (w.querySelector("#groupe") || {}).value || "" };
     enCours = true; stop = false;
     garderEveille(true);
-    await demanderTitres(items);
-    const lot = items.filter(i => i.statut !== "ok"), octets = lot.reduce((a, i) => a + (i.f.size || 1), 0) || 1;
+    const lot = (choix || items).filter(i => i.statut !== "ok");
+    await demanderTitres(lot);
     const nbOk = () => lot.filter(i => i.statut === "ok").length;
-    const job = TR.debut("Import · 0/" + lot.length + " fichiers", "Envoi", () => { stop = true; items.filter(i => i.statut === "cours").forEach(it => { if (it.envoi) it.envoi.annuler(); }); },
-      () => lot.map(i => '<div style="display:flex;justify-content:space-between;gap:8px"><span dir="auto" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + esc(i.f.name) + '</span><span style="white-space:nowrap">' + esc(i.statut === "ok" ? "Publié ✓" : i.statut === "erreur" ? "Échec" : i.statut === "cours" ? (i.msg || "…") : "En attente") + '</span></div>').join(""));
+    const job = TR.debut("Import · 0/" + lot.length + " fichiers", "Envoi", annulerTout,
+      () => lot.map(i => '<div style="display:flex;justify-content:space-between;gap:8px"><span dir="auto" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + esc(i.f.name) + '</span><span style="white-space:nowrap">' + esc(i.statut === "ok" ? "Publié ✓" : i.statut === "erreur" ? (i.msg === "Annulé" ? "Annulé" : "Échec") : i.statut === "cours" ? (i.msg || "…") : "En attente") + '</span></div>').join(""));
     /* 95 % pour l'envoi des fichiers (selon leur taille), le reste à la publication */
-    const avancer = () => { const fait = lot.reduce((a, i) => a + (i.f.size || 1) * (i.statut === "ok" ? 1 : i.statut === "cours" ? 0.95 * (i.fait || 0) : 0), 0); job.titre = "Import · " + nbOk() + "/" + lot.length + " fichiers"; const avant = job.pct; TR.progres(job, fait, octets); if (job.pct === avant && job.ouvert) TR.rendre(); };
-    lot.forEach(i => { i.fait = 0; i.surProgres = avancer; });
-    etat.annulerEnvoi = () => { stop = true; items.filter(i => i.statut === "cours").forEach(it => { if (it.envoi) it.envoi.annuler(); }); };
+    const avancer = () => { const octets = lot.reduce((a, i) => a + (i.f.size || 1), 0) || 1, fait = lot.reduce((a, i) => a + (i.f.size || 1) * (i.statut === "ok" ? 1 : i.statut === "cours" ? 0.95 * (i.fait || 0) : 0), 0); job.titre = "Import · " + nbOk() + "/" + lot.length + " fichiers"; const avant = job.pct; TR.progres(job, fait, octets); if (job.pct === avant && job.ouvert) TR.rendre(); };
+    lotEnCours = { commun, avancer, lot, job };
+    etat.annulerEnvoi = annulerTout;
+    /* Tous les fichiers partent en même temps */
+    lot.forEach(demarrer);
     dessiner();
-    const lent = (() => { try { const c = navigator.connection || {}; return !!c.saveData || /(^|-)2g$/.test(c.effectiveType || ""); } catch (e) { return false; } })();
-    const file = items.filter(i => i.statut !== "ok");
-    const ouvrier = async () => {
-      for (;;) {
-        if (stop) return;
-        const it = file.shift(); if (!it) return;
-        it.statut = "cours"; it.msg = "…";
-        const maj = m => { it.msg = m; const s = it.el && it.el.querySelector(".st"); if (s) s.textContent = m; };
-        try { await importerUn(it, commun, maj); it.statut = "ok"; }
-        catch (e) { it.statut = "erreur"; it.msg = /annulé/i.test(String(e && e.message)) ? "Annulé" : messageEnvoi(e) === "L'envoi a échoué. Réessayez." && e && e.message ? e.message : messageEnvoi(e); }
-        avancer(); TR.rendre();
-        if (w.isConnected) dessiner();
-      }
-    };
-    await Promise.all(Array.from({ length: lent ? 1 : Math.min(2, file.length) }, ouvrier));
-    enCours = false; etat.annulerEnvoi = null; garderEveille(false);
-    TR.fin(job, stop ? "annule" : (items.some(i => i.statut === "erreur") ? "erreur" : "ok"), "");
+    while (actifs.size) await Promise.all([...actifs]);
+    lotEnCours = null; enCours = false; etat.annulerEnvoi = null; garderEveille(false);
+    TR.fin(job, stop ? "annule" : (lot.some(i => i.statut === "erreur") ? "erreur" : "ok"), "");
     items.forEach(i => { if (i.statut === "cours") i.statut = "attente"; });
     if (w.isConnected) dessiner();
   }
