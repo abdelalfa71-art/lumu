@@ -6247,6 +6247,38 @@ const CORAN = {
     throw err || new Error("http");
   }
 };
+/* Coran hors connexion : les 604 pages se téléchargent toutes seules en arrière-plan dès qu'il y a internet,
+   reprennent là où elles s'étaient arrêtées, puis le Coran se lit sans connexion. */
+const CORAN_AUTO = {
+  enCours: false, pause: false,
+  async manquantes() { const l = []; for (let p = 1; p <= CORAN.N; p++) if (!(await CORAN.enCache(p))) l.push(p); return l; },
+  async lancer() {
+    if (this.enCours || this.pause || navigator.onLine === false || !window.caches) return;
+    this.enCours = true;
+    try {
+      const reste = await this.manquantes();
+      if (!reste.length) { sauverLocal("coran_complet", 1); return; }
+      sauverLocal("coran_complet", 0);
+      try { if (navigator.storage && navigator.storage.persist) await navigator.storage.persist(); } catch (e) {}
+      const total = reste.length; let fait = 0, rate = 0;
+      const job = TR.debut("Coran · " + (CORAN.N - total) + "/" + CORAN.N + " pages", "Hors ligne", () => { this.pause = true; });
+      const file = reste.slice();
+      const ouvrier = async () => {
+        while (file.length && !this.pause && navigator.onLine !== false) {
+          const p = file.shift();
+          try { await CORAN.page(p); } catch (e) { rate++; }
+          fait++; job.titre = "Coran · " + (CORAN.N - total + fait) + "/" + CORAN.N + " pages"; TR.progres(job, fait, total);
+        }
+      };
+      await Promise.all([ouvrier(), ouvrier(), ouvrier()]);
+      const fini = !this.pause && fait === total && !rate;
+      if (fini) sauverLocal("coran_complet", 1);
+      TR.fin(job, this.pause ? "annule" : fini ? "ok" : "erreur", fini ? "Le Coran se lit maintenant sans connexion" : this.pause ? "Reprendra à la prochaine ouverture" : "Reprendra dès que la connexion revient");
+    } catch (e) {} finally { this.enCours = false; }
+  }
+};
+setTimeout(() => CORAN_AUTO.lancer(), 6000);
+window.addEventListener("online", () => setTimeout(() => CORAN_AUTO.lancer(), 3000));
 /* État de lecture du Coran : page en cours, marque-pages, pages lues (khatma), objectif, mode nuit.
    Enregistré sur le téléphone, et sur le compte quand on est connecté. */
 const CORAN_ETAT = {
