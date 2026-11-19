@@ -5884,7 +5884,7 @@ function lireTafsir(c) {
   return { c, imam, livre: lv ? lv[1] : "Livre non précisé", sur, partie: p ? +(p[1] || p[2] || p[3]) : 0, cle: t.replace(/\s*\(1\)\s*$/, "").toLowerCase() };
 }
 /* Nom arabe des récitateurs, écrit en calligraphie dans leur case */
-const LECTEURS_AR = { "abdurrahmanassudais": "عبد الرحمن|السديس", "misharyalafasy": "مشاري|العفاسي", "maheralmuaiqly": "ماهر|المعيقلي", "saadalghamidi": "سعد|الغامدي", "abdulbasitabdussamad": "عبد الباسط|عبد الصمد", "mahmoudkhalilalhusary": "محمود خليل|الحصري", "muhammadsiddiqalminshawi": "محمد صديق|المنشاوي", "saudashshuraim": "سعود|الشريم", "yasseraddosari": "ياسر|الدوسري", "ahmedalajmi": "أحمد|العجمي", "abubakrashshatri": "أبو بكر|الشاطري", "ahmedmohamedtaher": "أحمد محمد|طاهر", "yusufalaidarous": "يوسف|العيدروس", "idrissabkar": "إدريس|أبكر" };
+const LECTEURS_AR = { "abdurrahmanassudais": "عبد الرحمن|السديس", "misharyalafasy": "مشاري|العفاسي", "maheralmuaiqly": "ماهر|المعيقلي", "saadalghamidi": "سعد|الغامدي", "abdulbasitabdussamad": "عبد الباسط|عبد الصمد", "mahmoudkhalilalhusary": "محمود خليل|الحصري", "muhammadsiddiqalminshawi": "محمد صديق|المنشاوي", "saudashshuraim": "سعود|الشريم", "yasseraddosari": "ياسر|الدوسري", "yasseraldosari": "ياسر|الدوسري", "ibrahimaddosari": "إبراهيم|الدوسري", "ahmedalajmi": "أحمد|العجمي", "abubakrashshatri": "أبو بكر|الشاطري", "ahmedmohamedtaher": "أحمد محمد|طاهر", "yusufalaidarous": "يوسف|العيدروس", "idrissabkar": "إدريس|أبكر" };
 function nomArabeLecteur(n) { const ar = LECTEURS_AR[nettoyerNom(n)]; if (ar) return ar.split("|"); return /[\u0600-\u06ff]/.test(n) ? [n] : null; }
 function jouerSerie(liste, i) {
   const c = liste[i]; if (!c) return;
