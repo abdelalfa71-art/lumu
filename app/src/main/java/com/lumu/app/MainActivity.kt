@@ -467,25 +467,9 @@ class MainActivity : AppCompatActivity() {
                 fileCallback = callback
                 fileParams = params
 
-                val mimes = params.acceptTypes.flatMap { it.split(",") }
-                    .map { it.trim().lowercase() }.filter { it.isNotEmpty() }
-                val audio = mimes.any { it.startsWith("audio/") || it in AUDIO_EXT }
-                val video = mimes.any { it.startsWith("video/") || it in VIDEO_EXT }
-                val autre = mimes.any { it.startsWith("image/") || it == "application/pdf" || it == ".pdf" }
-                val multiple = params.mode == FileChooserParams.MODE_OPEN_MULTIPLE
-
-                val lumu = when {
-                    (audio || video) && !autre -> if (audio && video) "tous" else if (audio) "audio" else "video"
-                    mimes.isEmpty() || mimes.contains("*/*") -> "tous"
-                    else -> null
-                }
-                if (lumu == null) { lancerSelecteurSysteme(params); return true }
-                return try {
-                    choixLumu.launch(
-                        Intent(this@MainActivity, AudioPickerActivity::class.java)
-                            .putExtra("mode", lumu).putExtra("multiple", multiple)
-                    ); true
-                } catch (e: Exception) { lancerSelecteurSysteme(params); true }
+                // Ouvre directement le sélecteur de fichiers du téléphone (plus l'écran « Choisir mes fichiers »).
+                lancerSelecteurSysteme(params)
+                return true
             }
 
             override fun onPermissionRequest(request: PermissionRequest) {
