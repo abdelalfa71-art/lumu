@@ -60,10 +60,11 @@
       ]
     },
     {
-      "lecteur": "Yasser Ad-Dosari",
+      "lecteur": "Yasser Al-Dosari",
       "cherche": [
-        "dosari",
-        "dossari"
+        "yasseraldosari",
+        "yasseraldossari",
+        "yasseraddosari"
       ]
     },
     {
@@ -94,5 +95,5 @@
       "partiel": true
     }
   ],
-  "relance": "2026-11-19T20:35:23"
+  "relance": "2026-11-19T20:57:49"
 }
