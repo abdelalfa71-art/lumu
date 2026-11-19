@@ -2035,7 +2035,7 @@ function render() {
     "mot-de-passe-oublie": vueMotDePasseOublie, "nouveau-mot-de-passe": vueNouveauMotDePasse,
     "changer-mot-de-passe": vueChangerMotDePasse,
     "pin-verrou": vuePinVerrou, "pin-creation": vuePinCreation, "arabe": vueArabe,
-    "presentation": vuePresentation, "tarifs": vueTarifs, "videos": vueFlux, "affiches": vueAffiches, "coran": vueCoran, "questions": vueQuestions, "questions-imam": vueQuestionsImam, "parcours": vueParcours, "parcours-voir": vueParcoursVoir, "passage": vuePassage, "parcours-revoir": vueRevoir, "mes-parcours": vueMesParcours, "parcours-edit": vueParcoursEdit, "passage-edit": vuePassageEdit, "home": vueDecouvrir, "savants": vueSavants, "preches": vuePreches, "priere": vuePriere, "langues-choix": vueLanguesChoix, "tutoriel": vueTutoriel, "biblio": vueBiblio, "dossier": vueDossier, "direct": vueDirect, "chaine-edit": vueChaineEdit, "notifications": vueNotifications, "publier": vuePublier, "je-publie": vueJePublie, "profil": vueProfil, "contenu": vueContenu,
+    "presentation": vuePresentation, "tarifs": vueTarifs, "videos": vueFlux, "affiches": vueAffiches, "coran": vueCoran, "coran-accueil": vueCoranAccueil, "questions": vueQuestions, "questions-imam": vueQuestionsImam, "parcours": vueParcours, "parcours-voir": vueParcoursVoir, "passage": vuePassage, "parcours-revoir": vueRevoir, "mes-parcours": vueMesParcours, "parcours-edit": vueParcoursEdit, "passage-edit": vuePassageEdit, "home": vueDecouvrir, "savants": vueSavants, "preches": vuePreches, "priere": vuePriere, "langues-choix": vueLanguesChoix, "tutoriel": vueTutoriel, "biblio": vueBiblio, "dossier": vueDossier, "direct": vueDirect, "chaine-edit": vueChaineEdit, "notifications": vueNotifications, "publier": vuePublier, "je-publie": vueJePublie, "profil": vueProfil, "contenu": vueContenu,
     "langue": vueLangue, "fil": vueFlux, "flux": vueEcouter, "radio": vueFlux, "recherche": vueRecherche, "abos": vueAbos, "espace": vueEspace, "importer": vueImport, "reels": vueFlux, "groupes": vueGroupes, "groupe": vueGroupe, "discussions": vueDiscussions, "conv": vueConv, "groupe-nouveau": vueNouveauGroupe, "livres": vueBibliotheque, "regroupements": vueRegroupements, "biblio-lire": vueBiblioLire, "azkar": vueAzkar, "bases": vueBases, "livre": vueLivre, "mes-livres": vueMesLivres, "livre-edition": vueEditeurLivre, "lives": vueLives, "live": vueLive, "live-nouveau": vueNouveauLive, "devenir-createur": vueDevenirCreateur, "admin": vueAdmin, "push-admin": vuePushAdmin, "mes-contenus": vueMesContenus, "legal": vueLegal, "lien": vueLien, "chaine": vueChaine, "playlist": vuePlaylist, "playlists": vuePlaylists, "stats": vueStats, "abonnements": vueAbonnements, "favoris": vueListeUtilisateur, "historique": vueListeUtilisateur, "hors": vueHors
   };
   document.body.classList.toggle("branche-tobi", TOBI_ROUTES.includes(etat.route));
@@ -2389,9 +2389,9 @@ function ico(n, taille, plein) {
   return `<svg class="ico" width="${z}" height="${z}" viewBox="0 0 24 24" fill="${plein ? "currentColor" : "none"}" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${IC[n]}</svg>`;
 }
 /* 4 onglets simples : Écouter, Voir, Apprendre, Moi (Publier se trouve dans Moi pour les créateurs) */
-const NAV_BASE = [{ r: "flux", i: "ecouter", t: "Écouter" }, { r: "videos", i: "video", t: "Voir" }, { r: "reels", i: "reel", t: "Réel" }, { r: "coran", i: "coran", t: "Coran" }, { r: "livres", i: "book", t: "Livre" }];
+const NAV_BASE = [{ r: "flux", i: "ecouter", t: "Écouter" }, { r: "videos", i: "video", t: "Voir" }, { r: "reels", i: "reel", t: "Réel" }, { r: "coran-accueil", i: "coran", t: "Coran" }, { r: "livres", i: "book", t: "Livre" }];
 function navActuelle() { return NAV_BASE; }
-const ONGLET_DE = { "coran": "coran", "questions": "", "questions-imam": "", "priere": "flux", "parcours": "livres", "parcours-voir": "livres", "passage": "livres", "parcours-revoir": "livres", "mes-parcours": "", "parcours-edit": "", "passage-edit": "", "savants": "flux", "chaine-edit": "", "notifications": "", "tarifs": "", "flux": "flux", "fil": "flux", "reels": "reels", "recherche": "flux", "home": "flux", "contenu": "*", "chaine": "*", "playlist": "*", "groupes": "flux", "discussions": "discussions", "livres": "livres", "biblio-lire": "livres", "regroupements": "flux", "livre": "flux", "lives": "flux", "live": "flux", "arabe": "flux", "espace": "", "publier": "", "je-publie": "je-publie", "groupe-nouveau": "", "mes-livres": "", "livre-edition": "", "live-nouveau": "", "importer": "", "lien": "", "mes-contenus": "", "devenir-createur": "", "playlists": "", "stats": "", "abos": "flux", "profil": "profil", "videos": "videos", "admin": "", "push-admin": "", "langue": "", "abonnements": "", "legal": "", "favoris": "", "historique": "", "hors": "", "preches": "flux", "biblio": "flux", "dossier": "flux", "direct": "flux" , "radio": "flux" };
+const ONGLET_DE = { "coran": "coran-accueil", "coran-accueil": "coran-accueil", "questions": "", "questions-imam": "", "priere": "flux", "parcours": "livres", "parcours-voir": "livres", "passage": "livres", "parcours-revoir": "livres", "mes-parcours": "", "parcours-edit": "", "passage-edit": "", "savants": "flux", "chaine-edit": "", "notifications": "", "tarifs": "", "flux": "flux", "fil": "flux", "reels": "reels", "recherche": "flux", "home": "flux", "contenu": "*", "chaine": "*", "playlist": "*", "groupes": "flux", "discussions": "discussions", "livres": "livres", "biblio-lire": "livres", "regroupements": "flux", "livre": "flux", "lives": "flux", "live": "flux", "arabe": "flux", "espace": "", "publier": "", "je-publie": "je-publie", "groupe-nouveau": "", "mes-livres": "", "livre-edition": "", "live-nouveau": "", "importer": "", "lien": "", "mes-contenus": "", "devenir-createur": "", "playlists": "", "stats": "", "abos": "flux", "profil": "profil", "videos": "videos", "admin": "", "push-admin": "", "langue": "", "abonnements": "", "legal": "", "favoris": "", "historique": "", "hors": "", "preches": "flux", "biblio": "flux", "dossier": "flux", "direct": "flux" , "radio": "flux" };
 function creerNav() {
   const nav = document.createElement("nav");
   nav.className = "nav-bas" + (etat.route === "radio" || etat.route === "reels" || etat.route === "videos" || etat.route === "fil" ? " nav-sombre" : "");
@@ -5858,12 +5858,123 @@ const BIBLIO = {
     return `<button type="button" class="bib-c" ${attr || ""} style="--c:${esc(couleur || "#0f5132")}"><span class="bib-in"><span class="bib-ar texte-arabe" lang="ar" dir="rtl" translate="no">${esc(ar)}</span>${auteurAr ? `<span class="bib-au texte-arabe" lang="ar" dir="rtl" translate="no">${esc(auteurAr)}</span>` : ""}</span><span class="bib-fr" dir="auto">${esc(fr || "")}</span></button>`;
   }
 };
+/* ---------- Page Coran : 3 onglets en haut (Lire, Écouter, Tafsir) ---------- */
+const LIVRES_TAFSIR = [[/jalal[ae]yn/i, "Tafsir Al-Jalalayn"], [/kath?ir/i, "Tafsir Ibn Kathir"], [/tabari/i, "Tafsir At-Tabari"], [/qurtubi/i, "Tafsir Al-Qurtubi"], [/sa[‘'’`]?di/i, "Tafsir As-Sa‘di"], [/baghawi/i, "Tafsir Al-Baghawi"], [/muyassar/i, "Tafsir Al-Muyassar"]];
+const nettoyerNom = x => String(x || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z]/g, "");
+/* Retrouve la sourate citée dans un titre (par son nom, sinon par son numéro) */
+function sourateDuTitre(t) {
+  const n = nettoyerNom(t); let best = -1, lg = 0;
+  CORAN.NOMS.forEach((nom, i) => { const k = nettoyerNom(nom.replace(/^(Al|An|Ar|As|Ash|At|Ad|Adh|Az)-/, "")); if (k.length >= 3 && k.length > lg && n.includes(k)) { best = i; lg = k.length; } });
+  return best;
+}
+function lireTafsir(c) {
+  const t = String(c.title || "").replace(/\.(mp3|m4a|opus|ogg|wav|aac)$/i, "").replace(/\s+/g, " ").trim();
+  const m = t.match(/^(.*?)\s*\(?\s*tafs[iy]i?r\s*\)?\s*(.*)$/i), reste = m ? m[2] : t;
+  let imam = m ? m[1].replace(/[-–·:|]+$/, "").trim() : "";
+  if (!imam && m) { const x = reste.match(/([A-Z][a-z]+[ .][A-Z][a-z]+)\s*$/); if (x) imam = x[1].replace(".", " "); }
+  imam = imam || (c.auteur || "").trim() || ((c.yt_channels && c.yt_channels.name) || "Imam non précisé");
+  const lv = LIVRES_TAFSIR.find(x => x[0].test(t));
+  /* « … jalalayn 011 Souat Houd 03 … » : le numéro après le livre est la sourate, le suivant est la partie */
+  let sur = -1, apres = reste;
+  const num = lv ? reste.match(new RegExp(lv[0].source + "\\s*0*(\\d{1,3})", "i")) : null;
+  if (num && +num[1] >= 1 && +num[1] <= 114) { sur = +num[1] - 1; apres = reste.slice(reste.indexOf(num[0]) + num[0].length); }
+  else { sur = sourateDuTitre(reste); }
+  if (sur < 0) { const k = reste.match(/\b0*(\d{1,3})\b/); if (k && +k[1] >= 1 && +k[1] <= 114) { sur = +k[1] - 1; apres = reste.slice(reste.indexOf(k[0]) + k[0].length); } }
+  const p = apres.replace(/\(1\)\s*$/, "").match(/(?:vol|partie|part|n°)\.?\s*0*(\d{1,3})|\(0*(\d{1,3})\)|\b0*(\d{1,3})\b/i);
+  return { c, imam, livre: lv ? lv[1] : "Livre non précisé", sur, partie: p ? +(p[1] || p[2] || p[3]) : 0, cle: t.replace(/\s*\(1\)\s*$/, "").toLowerCase() };
+}
+function jouerSerie(liste, i) {
+  const c = liste[i]; if (!c) return;
+  AUD.jouer(c, i + 1 < liste.length ? () => jouerSerie(liste, i + 1) : null, i > 0 ? () => jouerSerie(liste, i - 1) : null);
+}
+async function vueCoranAccueil() {
+  const w = ecran("Le Saint Coran", null, `<style>.ca-ps{display:flex;gap:8px;margin:2px 0 14px;overflow-x:auto}.ca-p{flex:none;margin:0;padding:9px 18px;border-radius:22px;border:1px solid var(--bordure,#e3dccb);background:var(--surface,#fff);color:inherit;font:inherit;font-size:15px;font-weight:600}.ca-p.on{background:var(--vert,#12805f);border-color:var(--vert,#12805f);color:#fff}
+.ca-l{display:grid;gap:10px}.ca-i{display:flex;align-items:center;gap:12px;width:100%;margin:0;padding:10px 12px;border:0;border-radius:14px;background:var(--surface,#fff);color:inherit;font:inherit;text-align:start;box-shadow:0 1px 3px rgba(0,0,0,.07)}.ca-i b{display:block;font-size:15px}.ca-i small{font-size:12px;opacity:.75}
+.ca-av{width:44px;height:44px;flex:none;border-radius:50%;background:var(--vert-clair,#e3f1e8);color:var(--vert,#12805f);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px}.ca-n{border-radius:12px}.ca-go{margin-inline-start:auto;color:var(--vert,#12805f);font-size:20px;flex:none}
+.ca-sec{margin:14px 2px 8px;font-size:12px;font-weight:800;color:var(--vert,#12805f);text-transform:uppercase;letter-spacing:.04em}
+.ca-hero{border-radius:20px;background:linear-gradient(135deg,#0b3d2e,#12805f);color:#fff;padding:18px;text-align:center;margin-bottom:10px}.ca-hero .ar{font-family:'Amiri Quran','Amiri',serif;font-size:30px;color:#d4af37;line-height:1.6}</style>
+    <div class="ca-ps" role="tablist"><button class="ca-p" data-o="lire" role="tab">📖 Lire</button><button class="ca-p" data-o="ecouter" role="tab">🎧 Écouter</button><button class="ca-p" data-o="tafsir" role="tab">📚 Tafsir</button></div><div id="ca-z"></div>`);
+  const z = w.querySelector("#ca-z");
+  let onglet = etat.params.onglet || chargerLocal("coran_onglet", "lire");
+  let donnees = null;
+  const charger = async () => {
+    if (donnees) return donnees;
+    const r = await sb.from("yt_contenus").select("id,title,category,fichier_path,cover_path,duration_seconds,views_count,channel_id,auteur,type,embed_id,published_at,yt_channels(name)").eq("status", "published").eq("type", "audio").or("category.eq.Coran,title.ilike.%tafsir%,title.ilike.%tafsiir%,title.ilike.%jalalayn%,title.ilike.%تفسير%").limit(3000);
+    if (r.error) throw r.error;
+    const l = (r.data || []).filter(c => c.fichier_path || c.embed_id), estT = c => /tafs[iy]i?r|jalal[ae]yn|تفسير/i.test(c.title || "");
+    /* Les copies en double (« … (1) ») ne sont montrées qu'une fois */
+    const vus = new Set(), tafsir = l.filter(estT).map(lireTafsir).filter(x => { if (vus.has(x.cle)) return false; vus.add(x.cle); return true; });
+    return (donnees = { tafsir, recit: l.filter(c => !estT(c) && /coran|quran|قرآن/i.test(c.category || "")) });
+  };
+  const item = (av, titre, sous, go, numero) => `<button type="button" class="ca-i"><span class="ca-av${numero ? " ca-n" : ""}" dir="auto">${esc(av)}</span><span style="flex:1;min-width:0"><b dir="auto">${esc(titre)}</b>${sous ? `<small dir="auto">${esc(sous)}</small>` : ""}</span><span class="ca-go">${go || "›"}</span></button>`;
+  const brancher = (fns) => z.querySelectorAll(".ca-i").forEach((b, i) => { if (fns[i]) b.onclick = fns[i]; });
+  const initiales = n => String(n).split(/[\s.]+/).filter(Boolean).slice(0, 2).map(x => x[0].toUpperCase()).join("") || "?";
+  const attente = () => { z.innerHTML = `<div class="centre"><div class="spinner"></div></div>`; };
+  const erreur = e => { z.innerHTML = `<p class="vide">${esc(txtErr(e, "Impossible de charger les audios."))}</p>`; };
+  /* Liste d'audios d'une série, rangés, avec lecture enchaînée */
+  const listeAudios = (titre, retour, liste, sousTitre) => {
+    z.innerHTML = `<button class="btn-text" id="ca-ret" style="padding:4px 0;margin:0 0 6px">← ${esc(retour.nom)}</button><div class="ca-sec">${esc(titre)}</div><div class="ca-l">${liste.map((x, i) => item(String(i + 1), x.title, sousTitre(x), "▶", true)).join("")}</div>`;
+    z.querySelector("#ca-ret").onclick = retour.f;
+    brancher(liste.map((x, i) => () => jouerSerie(liste, i)));
+  };
+  const vueLire = () => {
+    const E = CORAN_ETAT.lire(), p = E.page || 1, sur = CORAN.NOMS[CORAN.sourates(p).slice(-1)[0]] || "", hl = chargerLocal("coran_complet", 0);
+    z.innerHTML = `<div class="ca-hero"><div class="ar" dir="rtl" data-notrad>الْقُرْآنُ الْكَرِيمُ</div><small style="opacity:.9">Mushaf de Médine · lecture Hafs · 604 pages${hl ? " · ✓ disponible sans connexion" : ""}</small></div>
+      <button class="btn" id="ca-rep" style="margin:0 0 6px">📖 ${p > 1 ? "Reprendre : sourate " + esc(sur) + " · page " + p : "Commencer la lecture"}</button>
+      <input class="champ" id="ca-q" type="search" placeholder="Chercher une sourate" style="margin:10px 0" aria-label="Chercher une sourate"><div class="ca-l" id="ca-sl"></div>`;
+    z.querySelector("#ca-rep").onclick = () => router("coran");
+    const sl = z.querySelector("#ca-sl"), q = z.querySelector("#ca-q");
+    const dessiner = () => { const k = nettoyerNom(q.value); const ids = CORAN.NOMS.map((n, i) => i).filter(i => !k || nettoyerNom(CORAN.NOMS[i]).includes(k) || String(i + 1) === q.value.trim());
+      sl.innerHTML = ids.map(i => item(String(i + 1), "Sourate " + CORAN.NOMS[i], "page " + CORAN.DEBUTS[i], "›", true)).join("");
+      sl.querySelectorAll(".ca-i").forEach((b, j) => b.onclick = () => router("coran", { page: CORAN.DEBUTS[ids[j]] })); };
+    q.oninput = dessiner; dessiner();
+  };
+  const vueEcouter = async () => {
+    attente(); let d; try { d = await charger(); } catch (e) { erreur(e); return; } if (!w.isConnected || onglet !== "ecouter") return;
+    const groupes = {}; d.recit.forEach(c => { const n = (c.auteur || "").trim() || (c.yt_channels && c.yt_channels.name) || "Lecteur non précisé"; (groupes[n] = groupes[n] || []).push(c); });
+    const noms = Object.keys(groupes).sort((a, b) => groupes[b].length - groupes[a].length);
+    const accueil = () => {
+      z.innerHTML = noms.length ? `<div class="ca-sec">Lecteurs</div><div class="ca-l">${noms.map(n => item(initiales(n), n, groupes[n].length + " récitation" + (groupes[n].length > 1 ? "s" : ""))).join("")}</div>` : `<p class="vide">Aucune récitation publiée pour le moment. Publiez des audios dans la catégorie « Coran » pour qu'ils apparaissent ici, rangés par lecteur.</p>`;
+      brancher(noms.map(n => () => { const l = groupes[n].slice().sort((a, b) => ((sourateDuTitre(a.title) + 1) || 999) - ((sourateDuTitre(b.title) + 1) || 999) || String(a.title).localeCompare(String(b.title), "fr", { numeric: true })); listeAudios(n, { nom: "Lecteurs", f: accueil }, l, x => (x.duration_seconds ? fmtDuree(x.duration_seconds) : "") + (HORS.manuels && HORS.manuels.has(x.id) ? " · ✓ hors ligne" : "")); }));
+    };
+    accueil();
+  };
+  let mode = "imam";
+  const vueTafsir = async () => {
+    attente(); let d; try { d = await charger(); } catch (e) { erreur(e); return; } if (!w.isConnected || onglet !== "tafsir") return;
+    const accueil = () => {
+      const cle = x => mode === "imam" ? x.imam : x.livre, groupes = {};
+      d.tafsir.forEach(x => { (groupes[cle(x)] = groupes[cle(x)] || []).push(x); });
+      const noms = Object.keys(groupes).sort((a, b) => groupes[b].length - groupes[a].length);
+      const autre = n => [...new Set(groupes[n].map(x => mode === "imam" ? x.livre : x.imam))].filter(v => !/non précisé/.test(v)).join(", ");
+      z.innerHTML = `<div class="ca-ps" style="margin-bottom:10px"><button class="ca-p${mode === "imam" ? " on" : ""}" data-m="imam">Par imam</button><button class="ca-p${mode === "livre" ? " on" : ""}" data-m="livre">Par livre</button></div>
+        ${noms.length ? `<div class="ca-l">${noms.map(n => item(mode === "imam" ? initiales(n) : "📚", n, [autre(n), groupes[n].length + " audio" + (groupes[n].length > 1 ? "s" : "")].filter(Boolean).join(" · "))).join("")}</div>` : `<p class="vide">Aucun tafsir publié pour le moment.</p>`}`;
+      z.querySelectorAll("[data-m]").forEach(b => b.onclick = () => { mode = b.dataset.m; accueil(); });
+      brancher(noms.map(n => () => groupe(n, groupes[n])));
+    };
+    const groupe = (nom, l) => {
+      const parS = {}; l.forEach(x => { (parS[x.sur] = parS[x.sur] || []).push(x); });
+      const ss = Object.keys(parS).map(Number).sort((a, b) => (a < 0 ? 999 : a) - (b < 0 ? 999 : b));
+      z.innerHTML = `<button class="btn-text" id="ca-ret" style="padding:4px 0;margin:0 0 6px">← ${mode === "imam" ? "Imams" : "Livres"}</button><div class="ca-sec">${esc(nom)}</div><div class="ca-l">${ss.map(i => { const n = parS[i].length, lus = parS[i].filter(x => chargerLocal("fini_" + x.c.id, 0)).length; return item(i >= 0 ? String(i + 1) : "…", i >= 0 ? "Sourate " + CORAN.NOMS[i] : "Autres", n + " audio" + (n > 1 ? "s" : "") + (lus ? " · " + lus + " écouté" + (lus > 1 ? "s" : "") : ""), "›", true); }).join("")}</div>`;
+      z.querySelector("#ca-ret").onclick = accueil;
+      brancher(ss.map(i => () => { const liste = parS[i].slice().sort((a, b) => a.partie - b.partie || String(a.c.title).localeCompare(String(b.c.title), "fr", { numeric: true })).map(x => x.c); listeAudios((i >= 0 ? "Sourate " + CORAN.NOMS[i] : "Autres") + " · " + nom, { nom, f: () => groupe(nom, l) }, liste, x => (x.duration_seconds ? fmtDuree(x.duration_seconds) : "") + (chargerLocal("fini_" + x.id, 0) ? " · ✔ écouté" : "")); }));
+    };
+    accueil();
+  };
+  const montrer = o => {
+    onglet = o; sauverLocal("coran_onglet", o);
+    w.querySelectorAll(".ca-ps [data-o]").forEach(b => { const on = b.dataset.o === o; b.classList.toggle("on", on); b.setAttribute("aria-selected", on ? "true" : "false"); });
+    (o === "ecouter" ? vueEcouter : o === "tafsir" ? vueTafsir : vueLire)();
+  };
+  w.querySelectorAll(".ca-ps [data-o]").forEach(b => b.onclick = () => montrer(b.dataset.o));
+  montrer(["lire", "ecouter", "tafsir"].includes(onglet) ? onglet : "lire");
+}
 async function vueBibliotheque() {
   const w = ecran("Bibliothèque", null, `<style>.bib-photo .bib-in{padding:0 !important;background:#fff !important;box-shadow:0 6px 14px rgba(0,0,0,.25) !important;border-radius:6px !important;overflow:hidden}</style><button class="carte" id="bib-az" style="width:100%;text-align:start;margin:0 0 14px;display:flex;gap:10px;align-items:center"><span style="font-size:28px">🌅🌙</span><b style="flex:1">Azkar du matin et du soir</b></button><button class="carte" id="bib-ba" style="width:100%;text-align:start;margin:0 0 14px;display:flex;gap:10px;align-items:center"><span style="font-size:28px">🕌</span><span style="flex:1"><b style="display:block">Les bases</b><small>Piliers, ablutions, prière</small></span></button><div class="bib-g" id="bib-g">${BIBLIO.couverturePhoto({ id: "coran", titreFr: "Le Coran", couleur: "#0b3d2e" })}</div><p id="bib-n" style="font-size:13px;text-align:center">Veuillez patienter…</p>`);
   w.querySelector("#bib-az").onclick = () => router("azkar");
   w.querySelector("#bib-ba").onclick = () => router("bases");
   const tc = w.querySelector(".bib-g .bib-photo");
-  tc.onclick = () => router("coran");
+  tc.onclick = () => router("coran-accueil");
   tc.querySelector("img").src = "couverture-coran.webp";
   const livres = await BIBLIO.catalogue();
   if (!w.isConnected) return;
