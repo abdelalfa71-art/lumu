@@ -31,29 +31,48 @@ async function telecharger(url) {
   }
 }
 
-const { deja } = await appel({ a: "deja" });
-const faits = new Set(deja);
-console.log(`${D.lecteur} : ${faits.size} sourates déjà importées`);
-let ok = 0, echecs = 0;
-for (let n = 1; n <= 114; n++) {
-  if (faits.has(n)) continue;
-  const nnn = String(n).padStart(3, "0"), url = D.modele_url.replace("{nnn}", nnn);
-  try {
-    const buf = await telecharger(url);
-    if (buf.length < 20000) throw new Error("fichier trop petit (" + buf.length + " octets)");
-    fs.writeFileSync("s.mp3", buf);
-    const duree = parseFloat(execFileSync("ffprobe", ["-v", "error", "-show_entries", "format=duration", "-of", "default=nw=1:nk=1", "s.mp3"]).toString());
-    const s = await appel({ a: "signer", n });
-    const up = await sb.storage.from("yt-media").uploadToSignedUrl(s.path, s.token, buf, { contentType: "audio/mpeg", upsert: true });
-    if (up.error) throw up.error;
-    await appel({ a: "creer", n, titre: `Sourate ${NOMS[n - 1]}`, duree, taille: buf.length,
-      description: `Récitation de la sourate ${NOMS[n - 1]} (n° ${n}) par ${D.lecteur}. Source : ${D.source_nom}.`,
-      source_nom: D.source_nom, source_url: D.source_page });
-    ok++; console.log(`[${n}/114] ok ${NOMS[n - 1]} · ${(buf.length / 1048576).toFixed(1)} Mo · ${Math.round(duree / 60)} min`);
-  } catch (e) {
-    echecs++; console.log(`::warning::[${n}/114] ÉCHEC ${NOMS[n - 1]} : ${String(e && e.message || e).replace(/\n/g, " ").slice(0, 300)}`);
-  }
+const net = x => String(x || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z]/g, "");
+let API = null;
+async function serveurDe(L) {
+  if (L.modele_url) return L.modele_url;
+  if (!API) { const r = await fetch("https://www.mp3quran.net/api/v3/reciters?language=eng"); if (!r.ok) throw new Error("API mp3quran " + r.status); API = (await r.json()).reciters || []; }
+  const cand = API.filter(x => L.cherche.some(k => net(x.name).includes(net(k))));
+  for (const pref of [m => /hafs/i.test(m.name) && /murattal/i.test(m.name), m => /hafs/i.test(m.name), () => true])
+    for (const x of cand) for (const m of x.moshaf || []) if (+m.surah_total === 114 && pref(m)) { console.log(`${L.lecteur} → ${x.name} · ${m.name} · ${m.server}`); return m.server.replace(/\/?$/, "/") + "{nnn}.mp3"; }
+  throw new Error("récitateur introuvable sur mp3quran (" + cand.map(x => x.name).join(", ") + ")");
 }
-const total = faits.size + ok;
-if (total === 114) { const p = await appel({ a: "publier" }); console.log(`::notice::${D.lecteur} : 114 sourates importées, ${p.publies} publiées maintenant.`); }
-else { console.log(`::error::${D.lecteur} : ${total}/114 sourates importées (${echecs} échecs). Rien n'est publié tant que les 114 ne sont pas là : relancez le workflow.`); process.exit(1); }
+let erreurs = 0;
+for (const L of D.lecteurs) {
+  D.lecteur = L.lecteur;
+  const source_nom = L.source_nom || D.source_nom, source_page = L.source_page || D.source_page;
+  try {
+    const modele = await serveurDe(L);
+    const { deja } = await appel({ a: "deja" });
+    const faits = new Set(deja);
+    if (faits.size === 114) { const p = await appel({ a: "publier" }); console.log(`${L.lecteur} : déjà complet${p.publies ? ", " + p.publies + " publiées" : ""}`); continue; }
+    console.log(`${L.lecteur} : ${faits.size} sourates déjà importées`);
+    let ok = 0, echecs = 0;
+    for (let n = 1; n <= 114; n++) {
+      if (faits.has(n)) continue;
+      const nnn = String(n).padStart(3, "0"), url = modele.replace("{nnn}", nnn);
+      try {
+        const buf = await telecharger(url);
+        if (buf.length < 20000) throw new Error("fichier trop petit (" + buf.length + " octets)");
+        fs.writeFileSync("s.mp3", buf);
+        const duree = parseFloat(execFileSync("ffprobe", ["-v", "error", "-show_entries", "format=duration", "-of", "default=nw=1:nk=1", "s.mp3"]).toString());
+        const s = await appel({ a: "signer", n });
+        const up = await sb.storage.from("yt-media").uploadToSignedUrl(s.path, s.token, buf, { contentType: "audio/mpeg", upsert: true });
+        if (up.error) throw up.error;
+        await appel({ a: "creer", n, titre: `Sourate ${NOMS[n - 1]}`, duree, taille: buf.length,
+          description: `Récitation de la sourate ${NOMS[n - 1]} (n° ${n}) par ${L.lecteur}. Source : ${source_nom}.`, source_nom, source_url: source_page });
+        ok++; console.log(`${L.lecteur} [${n}/114] ok ${NOMS[n - 1]} · ${(buf.length / 1048576).toFixed(1)} Mo`);
+      } catch (e) {
+        echecs++; console.log(`::warning::${L.lecteur} [${n}/114] ÉCHEC ${NOMS[n - 1]} : ${String(e && e.message || e).replace(/\n/g, " ").slice(0, 200)}`);
+        if (echecs >= 5 && ok === 0) throw new Error("5 échecs d'affilée, lecteur abandonné");
+      }
+    }
+    if (faits.size + ok === 114) { const p = await appel({ a: "publier" }); console.log(`::notice::${L.lecteur} : 114 sourates, ${p.publies} publiées.`); }
+    else { erreurs++; console.log(`::error::${L.lecteur} : ${faits.size + ok}/114 (${echecs} échecs). Non publié : relancez.`); }
+  } catch (e) { erreurs++; console.log(`::error::${L.lecteur} : ${String(e && e.message || e).slice(0, 300)}`); }
+}
+if (erreurs) process.exit(1);
