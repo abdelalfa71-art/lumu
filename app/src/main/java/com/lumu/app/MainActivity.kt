@@ -320,8 +320,11 @@ class MainActivity : AppCompatActivity() {
 
     private val choixSysteme =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { r ->
-            val uris = if (r.resultCode == Activity.RESULT_OK)
-                WebChromeClient.FileChooserParams.parseResult(r.resultCode, r.data) else null
+            // Plusieurs fichiers choisis : ils arrivent dans clipData (parseResult n'en garde qu'un).
+            val clip = r.data?.clipData
+            val uris = if (r.resultCode != Activity.RESULT_OK) null
+                else if (clip != null && clip.itemCount > 0) Array(clip.itemCount) { clip.getItemAt(it).uri }
+                else WebChromeClient.FileChooserParams.parseResult(r.resultCode, r.data)
             fileCallback?.onReceiveValue(uris)
             fileCallback = null
         }
@@ -363,7 +366,11 @@ class MainActivity : AppCompatActivity() {
             if (mimes.size > 1) putExtra(Intent.EXTRA_MIME_TYPES, mimes.toTypedArray())
             putExtra(Intent.EXTRA_ALLOW_MULTIPLE, multiple)
         }
-        if (openDoc.resolveActivity(packageManager) != null) initiaux += openDoc
+        // Ouvre directement les fichiers du téléphone (sans passer par la liste d'applications,
+        // où un convertisseur ou une autre appli pouvait s'interposer).
+        if (openDoc.resolveActivity(packageManager) != null) {
+            try { choixSysteme.launch(openDoc); return } catch (e: Exception) { }
+        }
 
         val chooser = Intent.createChooser(getContent, "Choisir un fichier").apply {
             putExtra(Intent.EXTRA_INITIAL_INTENTS, initiaux.toTypedArray())
