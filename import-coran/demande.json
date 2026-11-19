@@ -89,11 +89,11 @@
     },
     {
       "lecteur": "Yusuf Al-Aidarous",
-      "modele_url": "https://archive.org/download/002_20221104_20221104_1814/{nnn}.mp3",
-      "source_nom": "archive.org",
-      "source_page": "https://archive.org/details/002_20221104_20221104_1814",
+      "modele_url": "https://cdn.mp3quran.net/audio/yousef-aidarous/r1/{nnn}.mp3",
+      "source_nom": "mp3quran.net / archive.org",
+      "source_page": "https://mp3quran.net",
       "partiel": true
     }
   ],
-  "relance": "2026-11-19T20:57:49"
+  "relance": "2026-11-19T21:31:59+00:00"
 }
