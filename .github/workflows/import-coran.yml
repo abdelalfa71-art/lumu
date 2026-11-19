@@ -1,0 +1,21 @@
+name: Importer une récitation du Coran
+on:
+  push:
+    paths:
+      - "import-coran/demande.json"
+permissions:
+  id-token: write
+  contents: read
+jobs:
+  importer:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+      - run: npm install --no-save @supabase/supabase-js@2
+      - name: Importer
+        run: node import-coran/run.mjs
