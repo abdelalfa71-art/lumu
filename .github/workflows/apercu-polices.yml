@@ -1,0 +1,29 @@
+name: Aperçu des polices arabes
+on:
+  push:
+    paths:
+      - "apercu-polices/**"
+permissions:
+  contents: read
+jobs:
+  rendu:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Polices
+        run: |
+          mkdir -p polices
+          for f in arefruqaa/ArefRuqaa-Bold.ttf amiri/Amiri-Bold.ttf amiriquran/AmiriQuran-Regular.ttf "reemkufi/ReemKufi[wght].ttf" gulzar/Gulzar-Regular.ttf ruwudu/Ruwudu-Bold.ttf lalezar/Lalezar-Regular.ttf "notonaskharabic/NotoNaskhArabic[wght].ttf"; do
+            curl -sSfL -o "polices/$(basename "$f")" "https://raw.githubusercontent.com/google/fonts/main/ofl/$(echo "$f" | sed 's/\[/%5B/;s/\]/%5D/')" || echo "manque $f"
+          done
+          ls -la polices
+      - run: npm install --no-save playwright@1.47.2 && npx playwright install --with-deps chromium
+      - run: node apercu-polices/rendu.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: apercu-polices
+          path: apercu-polices.png
