@@ -68,9 +68,11 @@ for (const L of D.lecteurs) {
         ok++; console.log(`${L.lecteur} [${n}/114] ok ${NOMS[n - 1]} · ${(buf.length / 1048576).toFixed(1)} Mo`);
       } catch (e) {
         echecs++; console.log(`::warning::${L.lecteur} [${n}/114] ÉCHEC ${NOMS[n - 1]} : ${String(e && e.message || e).replace(/\n/g, " ").slice(0, 200)}`);
-        if (echecs >= 5 && ok === 0) throw new Error("5 échecs d'affilée, lecteur abandonné");
+        if (echecs >= 5 && ok === 0 && !faits.size) throw new Error("5 échecs d'affilée, lecteur abandonné");
       }
     }
+    /* Récitation incomplète à la source (« partiel ») : on publie les sourates disponibles */
+    if (L.partiel && faits.size + ok > 0 && faits.size + ok < 114) { const p = await appel({ a: "publier" }); console.log(`::notice::${L.lecteur} : ${faits.size + ok} sourates disponibles à la source, ${p.publies} publiées.`); continue; }
     if (faits.size + ok === 114) { const p = await appel({ a: "publier" }); console.log(`::notice::${L.lecteur} : 114 sourates, ${p.publies} publiées.`); }
     else { erreurs++; console.log(`::error::${L.lecteur} : ${faits.size + ok}/114 (${echecs} échecs). Non publié : relancez.`); }
   } catch (e) { erreurs++; console.log(`::error::${L.lecteur} : ${String(e && e.message || e).slice(0, 300)}`); }

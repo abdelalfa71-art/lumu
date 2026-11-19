@@ -2,17 +2,96 @@
   "source_nom": "mp3quran.net",
   "source_page": "https://mp3quran.net",
   "lecteurs": [
-    { "lecteur": "Abdurrahman As-Sudais", "modele_url": "https://server11.mp3quran.net/sds/{nnn}.mp3" },
-    { "lecteur": "Mishary Al-Afasy", "cherche": ["alafas", "afasy"] },
-    { "lecteur": "Maher Al-Muaiqly", "cherche": ["meaqli", "muaiqly", "muaiqli"] },
-    { "lecteur": "Saad Al-Ghamidi", "cherche": ["ghamdi", "ghamidi"] },
-    { "lecteur": "Abdul Basit Abdus-Samad", "cherche": ["abdulbasit", "abdelbasset", "abdulbaset", "basit"] },
-    { "lecteur": "Mahmoud Khalil Al-Husary", "cherche": ["hussary", "husary", "hosary"] },
-    { "lecteur": "Muhammad Siddiq Al-Minshawi", "cherche": ["minshawi", "menshawi"] },
-    { "lecteur": "Saud Ash-Shuraim", "cherche": ["shuraim", "shuraym"] },
-    { "lecteur": "Yasser Ad-Dosari", "cherche": ["dosari", "dossari"] },
-    { "lecteur": "Ahmed Al-Ajmi", "cherche": ["ajmy", "ajmi"] },
-    { "lecteur": "Abu Bakr Ash-Shatri", "cherche": ["shatri", "shatiri"] },
-    { "lecteur": "Ahmed Mohamed Taher", "modele_url": "https://archive.org/download/853685368356853683568356853683568/{nnn}.mp3", "source_nom": "archive.org", "source_page": "https://archive.org/details/853685368356853683568356853683568" }
+    {
+      "lecteur": "Abdurrahman As-Sudais",
+      "modele_url": "https://server11.mp3quran.net/sds/{nnn}.mp3"
+    },
+    {
+      "lecteur": "Mishary Al-Afasy",
+      "cherche": [
+        "alafas",
+        "afasy"
+      ]
+    },
+    {
+      "lecteur": "Maher Al-Muaiqly",
+      "cherche": [
+        "meaqli",
+        "muaiqly",
+        "muaiqli"
+      ]
+    },
+    {
+      "lecteur": "Saad Al-Ghamidi",
+      "cherche": [
+        "ghamdi",
+        "ghamidi"
+      ]
+    },
+    {
+      "lecteur": "Abdul Basit Abdus-Samad",
+      "cherche": [
+        "abdulbasit",
+        "abdelbasset",
+        "abdulbaset",
+        "basit"
+      ]
+    },
+    {
+      "lecteur": "Mahmoud Khalil Al-Husary",
+      "cherche": [
+        "hussary",
+        "husary",
+        "hosary"
+      ]
+    },
+    {
+      "lecteur": "Muhammad Siddiq Al-Minshawi",
+      "cherche": [
+        "minshawi",
+        "menshawi"
+      ]
+    },
+    {
+      "lecteur": "Saud Ash-Shuraim",
+      "cherche": [
+        "shuraim",
+        "shuraym"
+      ]
+    },
+    {
+      "lecteur": "Yasser Ad-Dosari",
+      "cherche": [
+        "dosari",
+        "dossari"
+      ]
+    },
+    {
+      "lecteur": "Ahmed Al-Ajmi",
+      "cherche": [
+        "ajmy",
+        "ajmi"
+      ]
+    },
+    {
+      "lecteur": "Abu Bakr Ash-Shatri",
+      "cherche": [
+        "shatri",
+        "shatiri"
+      ]
+    },
+    {
+      "lecteur": "Ahmed Mohamed Taher",
+      "modele_url": "https://archive.org/download/853685368356853683568356853683568/{nnn}.mp3",
+      "source_nom": "archive.org",
+      "source_page": "https://archive.org/details/853685368356853683568356853683568"
+    },
+    {
+      "lecteur": "Yusuf Al-Aidarous",
+      "modele_url": "https://archive.org/download/002_20221104_20221104_1814/{nnn}.mp3",
+      "source_nom": "archive.org",
+      "source_page": "https://archive.org/details/002_20221104_20221104_1814",
+      "partiel": true
+    }
   ]
 }
