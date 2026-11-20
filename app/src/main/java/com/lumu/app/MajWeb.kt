@@ -25,6 +25,8 @@ object MajWeb {
 
     private const val MANIFESTE = "https://raw.githubusercontent.com/abdelalfa71-art/lumu/main/maj/web.json"
     private const val CDN = "https://cdn.jsdelivr.net/gh/abdelalfa71-art/lumu@%s/app/src/app/assets/%s"
+    /** Secours (jsDelivr refuse certains fichiers, comme les SVG) : GitHub, épinglé sur le même commit */
+    private const val BRUT = "https://raw.githubusercontent.com/abdelalfa71-art/lumu/%s/app/src/app/assets/%s"
     private val NOM_SUR = Regex("^[A-Za-z0-9][A-Za-z0-9._-]{0,80}$")
     private val COMMIT_SUR = Regex("^[0-9a-f]{40}$")
     private val SHA_SUR = Regex("^[0-9a-f]{64}$")
@@ -113,7 +115,7 @@ object MajWeb {
                 for (n in noms) {
                     val attendu = f.getString(n).lowercase()
                     if (!NOM_SUR.matches(n) || !SHA_SUR.matches(attendu)) throw Exception("manifeste invalide")
-                    val b = lire(CDN.format(commit, n), 25_000_000)
+                    val b = try { lire(CDN.format(commit, n), 25_000_000) } catch (e: Exception) { lire(BRUT.format(commit, n), 25_000_000) }
                     if (sha256(b) != attendu) throw Exception("empreinte différente : $n")
                     File(tmp, n).writeBytes(b)
                 }

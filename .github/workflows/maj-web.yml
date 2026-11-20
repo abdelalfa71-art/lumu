@@ -34,7 +34,8 @@ jobs:
           m = json.load(open("maj/web.json")); bad = 0
           for n, h in m["fichiers"].items():
               u = f"https://cdn.jsdelivr.net/gh/{os.environ['GITHUB_REPOSITORY']}@{m['commit']}/app/src/app/assets/{n}"
-              for i in range(3):
+              for i in range(4):
+                  if i == 2: u = f"https://raw.githubusercontent.com/{os.environ['GITHUB_REPOSITORY']}/{m['commit']}/app/src/app/assets/{n}"
                   try: b = urllib.request.urlopen(urllib.request.Request(u, headers={"User-Agent": "LumuMaj/1.0"}), timeout=60).read(); break
                   except Exception as e: b = b""; print("  essai", i + 1, n, e); time.sleep(5 * (i + 1))
               ok = hashlib.sha256(b).hexdigest() == h
