@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
         WebViewAssetLoader.Builder()
             .addPathHandler("/recu/", WebViewAssetLoader.InternalStoragePathHandler(this, File(cacheDir, "recu").apply { mkdirs() }))
             .addPathHandler("/conv/", WebViewAssetLoader.InternalStoragePathHandler(this, File(cacheDir, "conv").apply { mkdirs() }))
-            .addPathHandler("/", WebViewAssetLoader.AssetsPathHandler(this))
+            .addPathHandler("/", MajWeb.Gestionnaire(this))
             .build()
     }
 
@@ -496,6 +496,10 @@ class MainActivity : AppCompatActivity() {
 
         if (savedInstanceState != null) webView.restoreState(savedInstanceState)
         else webView.loadUrl(DEPART)
+        // Mise à jour de l'interface sans réinstaller : la page est prévenue quand elle est prête
+        MajWeb.verifier(applicationContext) { v ->
+            runOnUiThread { try { webView.evaluateJavascript("window.__lumuMajWeb&&window.__lumuMajWeb($v)", null) } catch (e: Exception) {} }
+        }
         recevoirPartage(intent)
     }
 
@@ -505,7 +509,12 @@ class MainActivity : AppCompatActivity() {
         // Lecture ou envoi en cours : la page garde ses minuteries et ses transferts (écran éteint)
         if (lectureEnCours || envoiEnCours) webView.resumeTimers() else webView.onPause()
     }
-    override fun onResume() { super.onResume(); webView.onResume() }
+    override fun onResume() {
+        super.onResume(); webView.onResume()
+        MajWeb.verifier(applicationContext) { v ->
+            runOnUiThread { try { webView.evaluateJavascript("window.__lumuMajWeb&&window.__lumuMajWeb($v)", null) } catch (e: Exception) {} }
+        }
+    }
     override fun onDestroy() {
         fileCallback?.onReceiveValue(null)
         if (instance === this) instance = null

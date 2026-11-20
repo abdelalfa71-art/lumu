@@ -1,0 +1,37 @@
+name: Publier la mise à jour de l'interface
+on:
+  push:
+    branches: [main]
+    paths:
+      - "app/src/app/assets/**"
+      - "maj/natif_min"
+permissions:
+  contents: write
+concurrency:
+  group: maj-web
+  cancel-in-progress: false
+jobs:
+  manifeste:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Écrire maj/web.json
+        run: |
+          python3 - <<'PY'
+          import hashlib, json, os, re
+          d = "app/src/app/assets"
+          v = int(re.search(r'lumu-v(\d+)', open(d + "/sw.js").read()).group(1))
+          f = {n: hashlib.sha256(open(os.path.join(d, n), "rb").read()).hexdigest() for n in sorted(os.listdir(d)) if os.path.isfile(os.path.join(d, n)) and re.match(r'^[A-Za-z0-9][A-Za-z0-9._-]{0,80}$', n)}
+          natif = int(open("maj/natif_min").read().strip() or 1)
+          json.dump({"v": v, "commit": os.environ["GITHUB_SHA"], "natif_min": natif, "fichiers": f}, open("maj/web.json", "w"), indent=1)
+          print(v, len(f), "fichiers")
+          PY
+      - name: Préchauffer jsDelivr
+        run: |
+          for n in $(python3 -c "import json;print(' '.join(json.load(open('maj/web.json'))['fichiers']))"); do curl -sS -o /dev/null -w "%{http_code} $n\n" "https://cdn.jsdelivr.net/gh/${GITHUB_REPOSITORY}@${GITHUB_SHA}/app/src/app/assets/$n" || true; done
+      - name: Enregistrer
+        run: |
+          git config user.name "github-actions[bot]"; git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add maj/web.json
+          git commit -m "Mise à jour de l'interface publiée [skip ci]" || exit 0
+          for i in 1 2 3; do git pull --rebase -q && git push -q && break; sleep 5; done

@@ -1443,6 +1443,19 @@ if ("serviceWorker" in navigator) {
   const avecVersion = !!navigator.serviceWorker.controller;
   navigator.serviceWorker.addEventListener("message", e => { if (e.data && e.data.type === "maj" && avecVersion) montrerMaj(); });
   window.addEventListener("load", () => { navigator.serviceWorker.register("/sw.js").catch(() => {}); });
+/* Application Android : une nouvelle version de l'interface vient d'être téléchargée */
+window.__lumuMajWeb = v => {
+  try {
+    if (document.getElementById("maj-web")) return;
+    const b = document.createElement("div"); b.id = "maj-web";
+    b.style.cssText = "position:fixed;left:16px;right:16px;bottom:calc(150px + env(safe-area-inset-bottom,0px));z-index:9600;display:flex;gap:10px;align-items:center;padding:12px 14px;border-radius:14px;background:#0b3d2e;color:#fff;box-shadow:0 6px 18px rgba(0,0,0,.3);font-size:14px";
+    b.innerHTML = `<span style="flex:1">✨ Nouvelle version de Lumu prête</span><button type="button" style="margin:0;padding:8px 12px;border:0;border-radius:10px;background:#d4af37;color:#1f2a24;font-weight:700">Mettre à jour</button><button type="button" aria-label="Plus tard" style="margin:0;padding:6px;border:0;background:none;color:#fff;font-size:18px">✕</button>`;
+    const [ok, non] = b.querySelectorAll("button");
+    ok.onclick = () => location.reload();
+    non.onclick = () => b.remove();
+    document.body.appendChild(b);
+  } catch (e) {}
+};
 }
 function montrerMaj() {
   if (document.getElementById("maj-bandeau")) return;
