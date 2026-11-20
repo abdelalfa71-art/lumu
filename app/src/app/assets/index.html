@@ -6493,6 +6493,35 @@ function choixRappelCoran(page) {
     } catch (e) { if (b.isConnected) b.textContent = navigator.onLine === false ? "🎧 Pas de connexion pour chercher l'audio" : "🎧 Audio indisponible pour le moment"; }
   });
 }
+/* Suivi du verset récité : repères de temps (mp3quran, faits pour nos fichiers) + position des versets sur les pages */
+const VERSETS = {
+  BASE: "https://cdn.jsdelivr.net/gh/abdelalfa71-art/lumu@185775b0a7a0b2c45ddf2184db553fc9ec6d61c2/coran/temps/",
+  /* dossier de nos fichiers → fichier de repères (« yasser-ad-dosari » contient en réalité Ibrahim Al-Dosari) */
+  LECTEURS: { "abdurrahman-as-sudais": "abdurrahman-as-sudais", "mishary-al-afasy": "mishary-al-afasy", "saad-al-ghamidi": "saad-al-ghamidi", "abdul-basit-abdus-samad": "abdul-basit-abdus-samad", "mahmoud-khalil-al-husary": "mahmoud-khalil-al-husary", "muhammad-siddiq-al-minshawi": "muhammad-siddiq-al-minshawi", "saud-ash-shuraim": "saud-ash-shuraim", "yasser-al-dosari": "yasser-al-dosari", "yasser-ad-dosari": "ibrahim-ad-dosari", "ahmed-al-ajmi": "ahmed-al-ajmi", "abu-bakr-ash-shatri": "abu-bakr-ash-shatri" },
+  _c: {},
+  json(nom) {
+    if (this._c[nom]) return this._c[nom];
+    const url = this.BASE + nom + ".json";
+    return (this._c[nom] = (async () => {
+      const cache = await caches.open("lumu-coran-versets").catch(() => null);
+      let r = cache ? await cache.match(url) : null;
+      if (!r) { r = await fetch(url); if (!r.ok) throw new Error("versets"); if (cache) await cache.put(url, r.clone()).catch(() => {}); }
+      return r.json();
+    })().catch(e => { delete this._c[nom]; throw e; }));
+  },
+  lecteurDe(c) { const m = String((c && c.fichier_path) || "").match(/\/coran-([a-z-]+)\/(\d{3})\.mp3$/); return m && this.LECTEURS[m[1]] ? { nom: this.LECTEURS[m[1]], s: +m[2] } : null; },
+  /* Verset en cours de récitation : { s, ayah, page, poly } ou null */
+  async actuel() {
+    const c = AUD.c, a = AUD.a, L = this.lecteurDe(c); if (!L || !a) return null;
+    const [t, g] = await Promise.all([this.json(L.nom), this.json("versets")]);
+    const d = t.s[L.s] && t.s[L.s].d; if (!d || !d.length) return null;
+    const ms = (a.currentTime || 0) * 1000; let i = 0; while (i + 1 < d.length && d[i + 1] <= ms) i++;
+    const v = g[L.s] && g[L.s][i]; if (!v) return null;
+    return { s: L.s, ayah: i + 1, page: v[0], poly: v[1] };
+  },
+  /* Coordonnées des repères → fraction de l'image de page (réglé sur nos 604 images) */
+  frac(page, x, y) { return page <= 2 ? [0.1635 + 0.002873 * x, 0.2395 + 0.0022 * y] : [0.090 + 0.00240 * x, 0.085 + 0.00150 * y]; }
+};
 const LECTEUR_PLEIN = "position:fixed;inset:0;z-index:900;display:flex;flex-direction:column;background:#fff;padding:0;margin:0;max-width:none;width:100%;height:100%;overflow:hidden;box-sizing:border-box";
 async function vueCoran() {
   const w = document.createElement("div");
@@ -6509,7 +6538,7 @@ async function vueCoran() {
 .co-it{display:flex;align-items:center;gap:12px;width:100%;margin:0;padding:10px 12px;border:0;border-radius:14px;background:rgba(255,255,255,.1);color:#fff;font:inherit;font-size:15px;text-align:start}.co-it:disabled{opacity:.6}
 .co-ic{width:34px;height:34px;flex:none;border-radius:50%;background:#d4af37;color:#1f2a24;display:flex;align-items:center;justify-content:center;font-size:16px}
 #co-kh{background:rgba(255,255,255,.1) !important;color:#fff !important;border-radius:14px;box-shadow:none !important}#co-kh button{background:transparent !important;color:#fff !important;border-color:#d4af37 !important}#co-kh p,#co-kh b{color:#fff !important}</style>
-    <div id="co-zone" translate="no" class="notranslate" style="position:absolute;inset:0;background:#f4ead2;overflow:auto;touch-action:pan-y;padding:0 0.25cm"><img id="co-img" alt="" draggable="false" style="display:block;margin:0 auto;mix-blend-mode:multiply;box-shadow:0 0 0 2px #8a6d3b"><div id="co-txt" style="display:none;padding:14px 16px 24px;direction:rtl;font-family:'Amiri Quran','Amiri',serif;font-size:28px;line-height:2.3;text-align:justify;color:#3b2a1a;background:#f4ead2"></div><div id="co-etat" style="position:absolute;inset:0;display:flex;flex-direction:column;gap:10px;align-items:center;justify-content:center;padding:20px;text-align:center;background:#f4ead2;color:#3b2a1a"></div></div>
+    <div id="co-zone" translate="no" class="notranslate" style="position:absolute;inset:0;background:#f4ead2;overflow:auto;touch-action:pan-y;padding:0 0.25cm"><svg id="co-hl" viewBox="0 0 1 1" preserveAspectRatio="none" aria-hidden="true" style="position:absolute;left:0;top:0;width:0;height:0;pointer-events:none;display:none;z-index:2"><polygon id="co-hl-p" points="" style="fill:rgba(212,175,55,.28);stroke:#c9a227;stroke-width:.004;stroke-linejoin:round"/></svg><img id="co-img" alt="" draggable="false" style="display:block;margin:0 auto;mix-blend-mode:multiply;box-shadow:0 0 0 2px #8a6d3b"><div id="co-txt" style="display:none;padding:14px 16px 24px;direction:rtl;font-family:'Amiri Quran','Amiri',serif;font-size:28px;line-height:2.3;text-align:justify;color:#3b2a1a;background:#f4ead2"></div><div id="co-etat" style="position:absolute;inset:0;display:flex;flex-direction:column;gap:10px;align-items:center;justify-content:center;padding:20px;text-align:center;background:#f4ead2;color:#3b2a1a"></div></div>
     <div id="co-audio" style="display:none;position:absolute;top:0;left:0;right:0;z-index:5;align-items:center;gap:2px;padding:6px 8px;background:rgba(10,20,16,.9);color:#fff;font-size:13px"><span style="flex:1;min-width:0"><b id="co-au-t" style="display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"></b><small id="co-au-d" style="opacity:.85"></small></span><button class="co-fl" id="co-au-r" aria-label="Reculer de 10 secondes" style="background:none;font-size:20px">⟲</button><button class="co-fl" id="co-au-pp" aria-label="Lecture ou pause" style="background:#d4af37;color:#1f2a24;font-size:18px">▶</button><button class="co-fl" id="co-au-a" aria-label="Avancer de 10 secondes" style="background:none;font-size:20px">⟳</button><button class="co-fl" id="co-au-x" aria-label="Arrêter l'audio" style="background:none;font-size:18px">✕</button></div>
     <div id="co-menu" class="co-chrome">
       <div style="display:flex;align-items:center;gap:8px"><button class="co-fl" id="co-retour" aria-label="Retour">←</button><b id="co-sur" style="flex:1;min-width:0;text-align:center;color:#d4af37;font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"></b><button class="co-fl" id="co-fermer" aria-label="Fermer le menu">✕</button></div>
@@ -6539,6 +6568,28 @@ async function vueCoran() {
       const d = (isFinite(AUD.a.duration) && AUD.a.duration) || AUD.c.duration_seconds || 0;
       q("#co-au-d").textContent = fmtDuree(AUD.a.currentTime || 0) + (d ? " / " + fmtDuree(d) : "");
       q("#co-au-pp").textContent = AUD.a.paused ? "▶" : "⏸";
+      suivre();
+    };
+    /* Suit le verset récité : page tournée toute seule (sauf si on vient de feuilleter), verset encadré */
+    let vEnCours = "";
+    const suivre = async () => {
+      let v = null; try { v = await VERSETS.actuel(); } catch (e) { v = null; }
+      if (!w.isConnected) return;
+      const t = q("#co-au-t");
+      if (!v) { hl.style.display = "none"; w.querySelectorAll(".co-v.on").forEach(e => { e.classList.remove("on"); e.style.background = ""; }); return; }
+      t.textContent = (AUD.c.title || "Audio") + " · verset " + v.ayah;
+      const lit = AUD.a && !AUD.a.paused;
+      if (v.page !== p) { if (lit && Date.now() - manuel > 8000) aff(v.page, true); hl.style.display = "none"; return; }
+      if (texteMode()) {
+        const cle = v.s + ":" + v.ayah;
+        if (cle !== vEnCours) { vEnCours = cle; w.querySelectorAll(".co-v.on").forEach(e => { e.classList.remove("on"); e.style.background = ""; }); const e = w.querySelector(`.co-v[data-v="${cle}"]`); if (e) { e.classList.add("on"); e.style.background = E.nuit ? "rgba(212,175,55,.3)" : "rgba(212,175,55,.35)"; if (lit && Date.now() - manuel > 8000) e.scrollIntoView({ block: "center", behavior: "smooth" }); } }
+        return;
+      }
+      if (!img.naturalWidth || !v.poly.length) { hl.style.display = "none"; return; }
+      const pts = []; for (let k = 0; k + 1 < v.poly.length; k += 2) { const [fx, fy] = VERSETS.frac(v.page, v.poly[k], v.poly[k + 1]); pts.push(fx.toFixed(4) + "," + fy.toFixed(4)); }
+      hl.style.left = img.offsetLeft + "px"; hl.style.top = img.offsetTop + "px"; hl.style.width = img.offsetWidth + "px"; hl.style.height = img.offsetHeight + "px";
+      hl.querySelector("polygon").setAttribute("points", pts.join(" "));
+      hl.style.display = "block";
     };
     const tAu = setInterval(majAu, 500);
     q("#co-au-pp").onclick = () => { AUD.basculer(); setTimeout(majAu, 150); };
@@ -6549,7 +6600,7 @@ async function vueCoran() {
   /* Arrivée depuis un rappel : proposer de lire ou d'écouter */
   if (etat.params.choix) setTimeout(() => { if (w.isConnected) choixRappelCoran(p); }, 500);
   const $ = q => w.querySelector(q);
-  const img = $("#co-img"), zEtat = $("#co-etat"), zone = $("#co-zone");
+  const img = $("#co-img"), zEtat = $("#co-etat"), zone = $("#co-zone"), hl = $("#co-hl");
   /* Page sur toute la largeur de l'écran */
   try { const pad = parseFloat(getComputedStyle(w).paddingLeft) || 0; if (pad) { zone.style.marginLeft = zone.style.marginRight = -pad + "px"; } } catch (e) {}
   let tour = 0, url = null, zoom = 1, tLu = 0;
@@ -6596,9 +6647,12 @@ async function vueCoran() {
     zone.style.touchAction = zoom > 1 ? "pan-x pan-y" : "pan-y";
     $("#co-zoom").innerHTML = coIt("🔍", zoom > 1 ? "Taille normale" : "Agrandir");
   };
-  const aff = async n => {
+  let manuel = 0;
+  const aff = async (n, auto) => {
+    if (!auto) manuel = Date.now();
+    hl.style.display = "none";
     /* Le menu reste ouvert pour les flèches (page voisine), se ferme pour un saut ou un changement de mode */
-    if (Math.abs(n - p) !== 1) w.classList.add("co-cache");
+    if (!auto && Math.abs(n - p) !== 1) w.classList.add("co-cache");
     p = Math.min(CORAN.N, Math.max(1, n));
     E.page = p; CORAN_ETAT.ecrire(E);
     const moi = ++tour; clearTimeout(tLu);
@@ -6617,7 +6671,7 @@ async function vueCoran() {
         j.data.ayahs.forEach(a => {
           if (a.numberInSurah === 1 && dernier !== a.surah.number) html += `<div style="text-align:center;font-size:24px;margin:12px 0;color:var(--num,#8a5a2b)">${esc(a.surah.name)}</div>`;
           dernier = a.surah.number;
-          html += `<span>${esc(a.text)} <span style="font-size:20px;color:var(--num,#8a5a2b)">﴿${a.numberInSurah}﴾</span></span> `;
+          html += `<span class="co-v" data-v="${a.surah.number}:${a.numberInSurah}" style="border-radius:6px;transition:background .3s">${esc(a.text)} <span style="font-size:20px;color:var(--num,#8a5a2b)">﴿${a.numberInSurah}﴾</span></span> `;
         });
         return html;
       };
@@ -6732,7 +6786,7 @@ async function vueCoran() {
     TR.fin(job, stop ? "annule" : rate ? "erreur" : "ok", rate ? rate + " page(s) non téléchargée(s)" : "");
     delete b.dataset.occupe; majDl();
   };
-  majNuit(); majKh(); majMode(); aff(p);
+  majNuit(); majKh(); majMode(); aff(p, true);
   /* Reprise depuis le compte : marque-pages, pages lues et page en cours d'un autre téléphone */
   CORAN_ETAT.recevoir().then(change => {
     if (!change || !w.isConnected) return;
