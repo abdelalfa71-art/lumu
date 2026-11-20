@@ -35,8 +35,8 @@ jobs:
           for n, h in m["fichiers"].items():
               u = f"https://cdn.jsdelivr.net/gh/{os.environ['GITHUB_REPOSITORY']}@{m['commit']}/app/src/app/assets/{n}"
               for i in range(3):
-                  try: b = urllib.request.urlopen(u, timeout=60).read(); break
-                  except Exception as e: b = b""; time.sleep(5)
+                  try: b = urllib.request.urlopen(urllib.request.Request(u, headers={"User-Agent": "LumuMaj/1.0"}), timeout=60).read(); break
+                  except Exception as e: b = b""; print("  essai", i + 1, n, e); time.sleep(5 * (i + 1))
               ok = hashlib.sha256(b).hexdigest() == h
               bad += not ok
               print("OK " if ok else "ÉCART", n, len(b))
