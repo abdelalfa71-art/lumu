@@ -5,6 +5,7 @@ on:
     paths:
       - "app/src/app/assets/**"
       - "maj/natif_min"
+  workflow_dispatch:
 permissions:
   contents: write
 concurrency:
@@ -26,9 +27,21 @@ jobs:
           json.dump({"v": v, "commit": os.environ["GITHUB_SHA"], "natif_min": natif, "fichiers": f}, open("maj/web.json", "w"), indent=1)
           print(v, len(f), "fichiers")
           PY
-      - name: Préchauffer jsDelivr
+      - name: Préchauffer jsDelivr et vérifier les empreintes
         run: |
-          for n in $(python3 -c "import json;print(' '.join(json.load(open('maj/web.json'))['fichiers']))"); do curl -sS -o /dev/null -w "%{http_code} $n\n" "https://cdn.jsdelivr.net/gh/${GITHUB_REPOSITORY}@${GITHUB_SHA}/app/src/app/assets/$n" || true; done
+          python3 - <<'PY'
+          import hashlib, json, os, time, urllib.request
+          m = json.load(open("maj/web.json")); bad = 0
+          for n, h in m["fichiers"].items():
+              u = f"https://cdn.jsdelivr.net/gh/{os.environ['GITHUB_REPOSITORY']}@{m['commit']}/app/src/app/assets/{n}"
+              for i in range(3):
+                  try: b = urllib.request.urlopen(u, timeout=60).read(); break
+                  except Exception as e: b = b""; time.sleep(5)
+              ok = hashlib.sha256(b).hexdigest() == h
+              bad += not ok
+              print("OK " if ok else "ÉCART", n, len(b))
+          if bad: raise SystemExit(f"{bad} fichier(s) différent(s) sur jsDelivr")
+          PY
       - name: Enregistrer
         run: |
           git config user.name "github-actions[bot]"; git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
