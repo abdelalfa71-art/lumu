@@ -4665,8 +4665,7 @@ function lmSection(titre, voirTout, hero) {
 
 /* ---------- Mode Ramadan ---------- */
 function infoRamadan() {
-  const f = new Intl.DateTimeFormat("en-u-ca-islamic-umalqura", { month: "numeric", day: "numeric" });
-  const hij = d => { const o = {}; f.formatToParts(d).forEach(x => { if (x.type === "month" || x.type === "day") o[x.type] = +x.value; }); return o; };
+  const hij = d => { const x = hijri(d); return { month: x.m, day: x.d }; };
   const auj = new Date(), h = hij(auj);
   if (h.month === 9) return { actif: true, jour: h.day };
   for (let i = 1; i <= 400; i++) { const d = new Date(auj.getTime() + i * 864e5), x = hij(d); if (x.month === 9 && x.day === 1) return { actif: false, avant: i }; }
@@ -5621,9 +5620,32 @@ const SECOUSSE = {
 try { SECOUSSE.attacher(); } catch (e) {}
 
 /* ---------- Bandeau permanent : date islamique + Qibla ---------- */
+/* Date hégirienne {y, m, d} : calendrier Umm al-Qura du téléphone s'il est fiable, sinon calcul arithmétique.
+   Certains WebView Android n'ont pas le calendrier islamique et affichaient une date grégorienne « av. J.-C. ». */
+function hijri(date) {
+  const t = date || new Date(), jd = Math.floor(Date.UTC(t.getFullYear(), t.getMonth(), t.getDate()) / 864e5) + 2440588;
+  let l = jd - 1948440 + 10632; const n = Math.floor((l - 1) / 10631); l = l - 10631 * n + 354;
+  const j = Math.floor((10985 - l) / 5316) * Math.floor(50 * l / 17719) + Math.floor(l / 5670) * Math.floor(43 * l / 15238);
+  l = l - Math.floor((30 - j) / 15) * Math.floor(17719 * j / 50) - Math.floor(j / 16) * Math.floor(15238 * j / 43) + 29;
+  const m = Math.floor(24 * l / 709), calc = { y: 30 * n + j - 30, m, d: l - Math.floor(709 * m / 24) };
+  try {
+    const f = hijri.f || (hijri.f = new Intl.DateTimeFormat("en-u-ca-islamic-umalqura-nu-latn", { year: "numeric", month: "numeric", day: "numeric", era: "short" }));
+    if (!/islamic/.test(f.resolvedOptions().calendar)) return calc;
+    const o = {}; f.formatToParts(t).forEach(x => { o[x.type] = x.value; });
+    const h = { y: parseInt(o.year, 10), m: parseInt(o.month, 10), d: parseInt(o.day, 10) };
+    if (/BC|B\.C/i.test(o.era || "") || !(h.y > 1380 && h.y < 1700) || !(h.m >= 1 && h.m <= 12) || !(h.d >= 1 && h.d <= 30)) return calc;
+    if (Math.abs((h.y * 354.367 + (h.m - 1) * 29.53 + h.d) - (calc.y * 354.367 + (calc.m - 1) * 29.53 + calc.d)) > 3) return calc;
+    return h;
+  } catch (e) { return calc; }
+}
+const MOIS_HIJRI = {
+  fr: ["Mouharram", "Safar", "Rabi' al-awwal", "Rabi' ath-thani", "Joumada al-oula", "Joumada ath-thania", "Rajab", "Cha'bane", "Ramadan", "Chawwal", "Dhou al-qi'da", "Dhou al-hijja"],
+  en: ["Muharram", "Safar", "Rabi al-Awwal", "Rabi al-Thani", "Jumada al-Ula", "Jumada al-Akhirah", "Rajab", "Sha'ban", "Ramadan", "Shawwal", "Dhu al-Qadah", "Dhu al-Hijjah"],
+  ar: ["محرم", "صفر", "ربيع الأول", "ربيع الآخر", "جمادى الأولى", "جمادى الآخرة", "رجب", "شعبان", "رمضان", "شوال", "ذو القعدة", "ذو الحجة"] };
 function dateHijri(court) {
-  const l = ["fr", "en", "ar"].includes(langue) ? langue : "fr";
-  try { const o = court ? { day: "numeric", month: "long" } : { day: "numeric", month: "long", year: "numeric" }; return new Intl.DateTimeFormat(l + "-u-ca-islamic-umalqura", o).format(new Date()).replace(/\s?(AH|هـ)$/, ""); } catch (e) { return ""; }
+  const l = ["en", "ar"].includes(langue) ? langue : "fr", h = hijri(), mois = MOIS_HIJRI[l][h.m - 1];
+  if (l === "ar") { const a = n => String(n).replace(/\d/g, c => "٠١٢٣٤٥٦٧٨٩"[c]); return a(h.d) + " " + mois + (court ? "" : " " + a(h.y) + " هـ"); }
+  return h.d + " " + mois + (court ? "" : " " + h.y + (l === "en" ? " AH" : " H"));
 }
 function majBandeauIslam() {
   let b = document.getElementById("bandeau-islam");
@@ -6824,8 +6846,7 @@ async function vueCoran() {
 }
 /* ---------- Ambiance selon le moment : Ramadan, dix jours de Dhoul-Hijja, vendredi, moments de la journée ---------- */
 function momentIslamique(maintenant) {
-  const d = maintenant || new Date(), h = {};
-  try { new Intl.DateTimeFormat("en-u-ca-islamic-umalqura", { month: "numeric", day: "numeric" }).formatToParts(d).forEach(x => { if (x.type === "month" || x.type === "day") h[x.type] = +x.value; }); } catch (e) {}
+  const d = maintenant || new Date(), x = hijri(d), h = { month: x.m, day: x.d };
   if (h.month === 9) return { cle: "ramadan", ic: "🌙", titre: "Ramadan Moubarak", texte: "Jour " + h.day + " du mois béni (date indicative)", fond: "linear-gradient(135deg,#0f3d36,#1b6b5c 60%,#c9a227)", q: "ramadan" };
   if (h.month === 12 && h.day <= 10) return { cle: "hijja", ic: "🕋", titre: "Les dix jours de Dhoul-Hijja", texte: "Jour " + h.day + " (date indicative) · multipliez le rappel et les bonnes œuvres", fond: "linear-gradient(135deg,#3b2f1a,#8a6a1f 60%,#c9a227)", q: "hajj" };
   if (d.getDay() === 5) return { cle: "vendredi", ic: "🕌", titre: "Jumu'a Moubarak", texte: "Touchez pour lire la sourate Al-Kahf", fond: "linear-gradient(135deg,#0f3d36,#12805f)", coran: 293 };
