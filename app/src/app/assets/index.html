@@ -1399,7 +1399,45 @@ function tobiSVG(humeur, largeur, mini) {
 }
 const SUPABASE_URL = "https://edzzikmtxeslhvowbnix.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVkenppa210eGVzbGh2b3dibml4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQyNjE0MDIsImV4cCI6MjA5OTgzNzQwMn0.i5k6gzYSAaNQyp33LNo0pRCdH0cQuXkTiHx7DqFK6uQ";
-const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+/* Cache des lectures de la base : revenir sur une page ne retélécharge pas les mêmes données.
+   - réponse gardée 5 min (servie instantanément, sans réseau) ; jusqu'à 24 h si le réseau échoue ;
+   - deux demandes identiques en même temps ne partent qu'une fois ;
+   - toute écriture (publier, aimer, commenter…) vide le cache pour rester à jour ;
+   - notifications, messages et direct ne sont jamais mis en cache. */
+const CACHE_API = (() => {
+  const m = new Map(), enCours = new Map(), FRAIS = 10 * 60e3, VIEUX = 24 * 3600e3, MAX = 400;
+  const jamais = /^(yt_notifications|yt_dm|yt_lives|yt_statuts|yt_mes_conversations|yt_demandes_en_attente|yt_chercher_personnes|push_.*|yt_vue|yt_temps_vu|yt_assurer_profil|yt_dm_marquer_lu)$/;
+  const rpcLecture = /^(yt_recommandations|yt_suggestions|yt_rechercher|yt_rechercher_questions|yt_commentaires|yt_groupe_noms|yt_personne|yt_progression|yt_sondage_resultats|yt_stats_createur|yt_qualite|yt_ma_chaine)$/;
+  const tete = (h, k) => { try { return h ? (h instanceof Headers ? h.get(k) : (h[k] || h[k.toLowerCase()] || "")) || "" : ""; } catch (e) { return ""; } };
+  const vers = e => new Response(e.status === 204 || e.status === 304 || e.corps === null ? null : e.corps, { status: e.status, statusText: e.statusText, headers: e.entetes });
+  const oublier = table => { if (!table) { m.clear(); return; } for (const [k, v] of m) if (v.table === table) m.delete(k); };
+  const f = async (entree, init = {}) => {
+    const url = typeof entree === "string" ? entree : (entree && entree.url) || String(entree);
+    const x = url.match(/\/rest\/v1\/(rpc\/)?([a-z0-9_]+)/i);
+    if (!x) return fetch(entree, init);
+    const rpc = !!x[1], nom = x[2], methode = String(init.method || (entree && entree.method) || "GET").toUpperCase();
+    if (jamais.test(nom)) return fetch(entree, init);
+    const lecture = rpc ? rpcLecture.test(nom) : (methode === "GET" || methode === "HEAD");
+    if (!lecture) { const r = await fetch(entree, init); oublier(rpc ? null : nom); if (!rpc) [...m.keys()].forEach(k => { if (m.get(k).rpc) m.delete(k); }); return r; }
+    const h = init.headers, cle = methode + " " + url + " " + tete(h, "Authorization").slice(-24) + " " + tete(h, "Prefer") + " " + tete(h, "Accept") + " " + tete(h, "Range") + " " + (rpc && typeof init.body === "string" ? init.body : "");
+    const e = m.get(cle), age = e ? Date.now() - e.t : Infinity;
+    if (e && age < FRAIS) return vers(e);
+    if (enCours.has(cle)) return enCours.get(cle).then(vers, () => fetch(entree, init));
+    const p = (async () => {
+      const r = await fetch(entree, init);
+      if (!r.ok) { const err = new Error("http"); err.r = r; throw err; }
+      const y = { t: Date.now(), table: rpc ? "" : nom, rpc, status: r.status, statusText: r.statusText, entetes: [...r.headers.entries()], corps: methode === "HEAD" ? null : await r.text() };
+      m.delete(cle); m.set(cle, y); if (m.size > MAX) m.delete(m.keys().next().value);
+      return y;
+    })();
+    enCours.set(cle, p);
+    try { return vers(await p); }
+    catch (err) { if (err && err.r) return err.r; if (e && age < VIEUX) return vers(e); throw err; }
+    finally { enCours.delete(cle); }
+  };
+  return { fetch: f, vider: () => m.clear() };
+})();
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, { global: { fetch: CACHE_API.fetch } });
 
 const app = document.getElementById("app");
 let etat = { route: "connexion", parentId: null, enfant: null, niveaux: [], matieres: [], params: {}, compteNom: false, profil: null, chaine: null, envoiEnCours: false, lienEnAttente: null, lienChaine: null, pile: [], racine: "flux", son: true };
@@ -1992,6 +2030,7 @@ document.addEventListener("error", ev => {
 
 async function init() {
   sb.auth.onAuthStateChange((event, session) => {
+    if (event === "SIGNED_IN" || event === "SIGNED_OUT" || event === "USER_UPDATED") CACHE_API.vider();
     if (event === "PASSWORD_RECOVERY") {
       etat.parentId = session.user.id;
       etat.compteNom = estCompteNom(session.user);
