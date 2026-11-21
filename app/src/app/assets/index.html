@@ -4330,7 +4330,16 @@ const AUD = {
     };
     if (c.fichier_path && !c.embed_id) {
       try { a.pause(); } catch (e) {}
-      HORS.lire(c.id).then(r => lancer(r && r.blob ? URL.createObjectURL(r.blob) : urlMedia(c.fichier_path)), () => lancer(urlMedia(c.fichier_path)));
+      /* Si le fichier a été remplacé sur le serveur (taille différente), la copie gardée sur le téléphone est périmée :
+         on l'efface, on lit la nouvelle version et on la retélécharge si elle avait été gardée exprès. */
+      const perime = n => c.taille_octets > 0 && n > 0 && Math.abs(n - c.taille_octets) > Math.max(50000, c.taille_octets * 0.01);
+      const purgerCache = async () => { try { if (!("caches" in window) || !(c.taille_octets > 0)) return; const ca = await caches.open("lumu-audio-v1"), u = urlMedia(c.fichier_path), rp = await ca.match(u); if (rp && perime(+rp.headers.get("content-length") || 0)) { await ca.delete(u); try { HL.set.delete(u); } catch (e) {} } } catch (e) {} };
+      HORS.lire(c.id).then(async r => {
+        if (r && r.blob && !(c.taille_octets > 0) && navigator.onLine !== false) { try { const q = await Promise.race([sb.from("yt_contenus").select("taille_octets").eq("id", c.id).maybeSingle(), new Promise(ok => setTimeout(() => ok(null), 2500))]); if (q && q.data && q.data.taille_octets) c.taille_octets = q.data.taille_octets; } catch (e) {} }
+        if (r && r.blob && perime(r.blob.size)) { const manuel = !!r.manuel; try { await HORS.retirer(c.id); } catch (e) {} r = null; if (manuel && navigator.onLine !== false) setTimeout(() => { try { HORS.sauver(c, true); } catch (e) {} }, 4000); }
+        if (!r) await purgerCache();
+        lancer(r && r.blob ? URL.createObjectURL(r.blob) : urlMedia(c.fichier_path));
+      }, () => lancer(urlMedia(c.fichier_path)));
       this.maj();
     } else lancer(urlMedia(c.fichier_path));
   },
@@ -5981,7 +5990,7 @@ async function vueCoranAccueil() {
   let donnees = null;
   const charger = async () => {
     if (donnees) return donnees;
-    const r = await sb.from("yt_contenus").select("id,title,category,fichier_path,cover_path,duration_seconds,views_count,channel_id,auteur,type,embed_id,published_at,yt_channels(name)").eq("status", "published").eq("type", "audio").or("category.eq.Coran,category.eq.Invocation,title.ilike.%tafsir%,title.ilike.%tafsiir%,title.ilike.%jalalayn%,title.ilike.%تفسير%").limit(3000);
+    const r = await sb.from("yt_contenus").select("id,title,category,fichier_path,cover_path,duration_seconds,taille_octets,views_count,channel_id,auteur,type,embed_id,published_at,yt_channels(name)").eq("status", "published").eq("type", "audio").or("category.eq.Coran,category.eq.Invocation,title.ilike.%tafsir%,title.ilike.%tafsiir%,title.ilike.%jalalayn%,title.ilike.%تفسير%").limit(3000);
     if (r.error) throw r.error;
     const l = (r.data || []).filter(c => c.fichier_path || c.embed_id), estT = c => /tafs[iy]i?r|jalal[ae]yn|تفسير/i.test(c.title || "");
     /* Les copies en double (« … (1) ») ne sont montrées qu'une fois */
