@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - "import-coran/demande.json"
+      - "import-coran/demande-doua.json"
 permissions:
   id-token: write
   contents: read
@@ -17,5 +18,8 @@ jobs:
           node-version: 22
       - run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
       - run: npm install --no-save @supabase/supabase-js@2
-      - name: Importer
+      - name: Importer les récitations
         run: node import-coran/run.mjs
+      - name: Importer les invocations
+        if: always()
+        run: node import-coran/doua.mjs

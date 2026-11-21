@@ -1,0 +1,14 @@
+{
+  "source_nom": "archive.org",
+  "invocations": [
+    { "lecteur": "Abdurrahman As-Sudais", "archive": "Sudais-Khatm-Dua-1990s", "titre": "Douaa de la clôture du Coran (années 1990)" },
+    { "lecteur": "Abdurrahman As-Sudais", "archive": "makkah-taraweeh-khatm-al-quran-dua-sheikh-abdul-rahman-sudais-29-ramadan-1417-1997", "titre": "Douaa de la clôture du Coran · La Mecque, 29 Ramadan 1417 (1997)" },
+    { "lecteur": "Abdurrahman As-Sudais", "archive": "1445-2024-115-2024-1445", "titre": "Douaa de la clôture du Coran · La Mecque, Ramadan 1445 (2024)" },
+    { "lecteur": "Abdurrahman As-Sudais", "archive": "Ramadan1428_983", "titre": "Douaa du qunut · La Mecque, Ramadan 1428" },
+    { "lecteur": "Abdurrahman As-Sudais", "archive": "Dua-e-qunootFromMakkahOn11thNightOfRamadaan", "titre": "Douaa du qunut · 11e nuit de Ramadan, La Mecque" },
+    { "lecteur": "Abdurrahman As-Sudais", "archive": "Night26WitrAndDua", "fichier": "Night26WitrAndDuaBySheikhSudais.mp3", "titre": "Witr et douaa · 26e nuit de Ramadan, La Mecque" },
+    { "lecteur": "Mishary Al-Afasy", "archive": "40-rabbana-dua-by-sheikh-mishary-rashid-alafasy", "titre": "Les 40 « Rabbana »", "serie": true },
+    { "lecteur": "Mishary Al-Afasy", "archive": "AlafasyQunutDua", "titre": "Douaa du qunut" },
+    { "lecteur": "Mishary Al-Afasy", "archive": "DuaAlafasy", "titre": "Douaa" }
+  ]
+}
