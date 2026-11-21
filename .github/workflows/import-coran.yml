@@ -4,6 +4,7 @@ on:
     paths:
       - "import-coran/demande.json"
       - "import-coran/demande-doua.json"
+      - "import-coran/demande-remplacer.json"
 permissions:
   id-token: write
   contents: read
@@ -23,3 +24,6 @@ jobs:
       - name: Importer les invocations
         if: always()
         run: node import-coran/doua.mjs
+      - name: Remplacer les sourates incomplètes
+        if: always() && hashFiles('import-coran/demande-remplacer.json') != ''
+        run: node import-coran/remplacer.mjs
