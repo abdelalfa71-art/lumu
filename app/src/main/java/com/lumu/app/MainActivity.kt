@@ -13,6 +13,10 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.content.pm.ActivityInfo
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import android.webkit.GeolocationPermissions
 import android.webkit.JavascriptInterface
 import android.webkit.PermissionRequest
@@ -61,6 +65,20 @@ class MainActivity : AppCompatActivity() {
     /** Exposé à la page : adresse publique du site pour les liens de partage. */
     inner class PontNatif {
         @JavascriptInterface fun site(): String = BuildConfig.SITE_URL
+        // Plein écran façon lecteur vidéo (directs de La Mecque / Médine) : paysage + barres système cachées
+        @JavascriptInterface fun pleinEcran(actif: Boolean) {
+            runOnUiThread {
+                val c = WindowCompat.getInsetsController(window, window.decorView)
+                if (actif) {
+                    requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
+                    c.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+                    c.hide(WindowInsetsCompat.Type.systemBars())
+                } else {
+                    requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
+                    c.show(WindowInsetsCompat.Type.systemBars())
+                }
+            }
+        }
 
         /** Fichiers reçus via « Partager » (JSON : [{n,t}]) ; vidé après lecture. */
         @JavascriptInterface fun recus(): String { val r = recusJson; recusJson = ""; return r }

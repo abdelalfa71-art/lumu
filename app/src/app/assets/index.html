@@ -2137,7 +2137,7 @@ window.addEventListener("lumu-donnees", () => {
 });
 function render(rafraichi) {
   RENDU = { t: Date.now(), route: etat.route, refait: !!rafraichi };
-  { const ds = document.getElementById("direct-saint"); if (ds) ds.remove(); }
+  if (document.getElementById("direct-saint")) fermerDirectSaint();
   nettoyerDirect();
   app.innerHTML = "";
   app.className = "entree";
@@ -4700,31 +4700,55 @@ function infoDirects() {
     fetch("https://raw.githubusercontent.com/abdelalfa71-art/lumu/main/maj/directs.json?t=" + Math.floor(Date.now() / 6e5)).then(r => r.ok ? r.json() : null).catch(() => null),
     new Promise(ok => setTimeout(() => ok(null), 4000))]).then(j => { if (!j) DIRECTS_INFO = null; return j || {}; }));
 }
+/* Plein écran façon lecteur vidéo : paysage, barres du téléphone cachées (application récente),
+   sinon l'écran est tourné en paysage par l'affichage lui-même. */
+function pleinEcranDirect(on) {
+  let natif = false;
+  try { if (window.LumuNative && LumuNative.pleinEcran) { LumuNative.pleinEcran(!!on); natif = true; } } catch (e) {}
+  if (!natif) {
+    try { if (on && document.documentElement.requestFullscreen && !document.fullscreenElement) document.documentElement.requestFullscreen().then(() => { try { screen.orientation.lock("landscape").catch(() => {}); } catch (e) {} }).catch(() => {}); } catch (e) {}
+    try { if (!on && document.fullscreenElement) document.exitFullscreen().catch(() => {}); } catch (e) {}
+  }
+  return natif;
+}
+function fermerDirectSaint() { const o = document.getElementById("direct-saint"); if (!o) return; o.remove(); pleinEcranDirect(false); window.removeEventListener("resize", tournerDirect); }
+function tournerDirect() {
+  const o = document.getElementById("direct-saint"); if (!o) return;
+  /* Téléphone tenu en portrait sans rotation possible : on tourne l'image de 90° pour remplir l'écran */
+  const portrait = innerHeight > innerWidth && !o.dataset.natif;
+  o.style.cssText = portrait
+    ? `position:fixed;top:0;left:0;width:${innerHeight}px;height:${innerWidth}px;transform:translateX(${innerWidth}px) rotate(90deg);transform-origin:top left;z-index:2147483000;background:#000;color:#fff;overflow:hidden`
+    : "position:fixed;inset:0;z-index:2147483000;background:#000;color:#fff;overflow:hidden";
+}
 async function ouvrirDirectSaint(i) {
   try { if (AUD.a && !AUD.a.paused) AUD.basculer(); } catch (e) {}
   let o = document.getElementById("direct-saint");
   if (!o) {
-    o = document.createElement("div"); o.id = "direct-saint";
-    o.style.cssText = "position:fixed;inset:0;z-index:2147483000;background:#000;color:#fff;display:flex;flex-direction:column;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)";
-    document.body.appendChild(o);
+    o = document.createElement("div"); o.id = "direct-saint"; document.body.appendChild(o);
+    if (pleinEcranDirect(true)) o.dataset.natif = "1";
+    window.addEventListener("resize", tournerDirect);
   }
+  tournerDirect();
   const d = DIRECTS_SAINTS[i];
-  o.innerHTML = `<div class="centre" style="flex:1;display:flex;align-items:center;justify-content:center"><div class="spin"></div></div>`;
+  o.innerHTML = `<div style="height:100%;display:flex;align-items:center;justify-content:center"><div class="spin"></div></div>`;
   const info = (await infoDirects())[d.k] || {};
   if (!o.isConnected) return;
   const vid = info.id || d.id, enDirect = info.direct !== false && !!vid;
-  o.innerHTML = `<div style="display:flex;align-items:center;gap:10px;padding:12px 14px">
-      <button id="ds-x" aria-label="Fermer" style="width:42px;height:42px;border-radius:50%;border:0;background:rgba(255,255,255,.14);color:#fff;font-size:22px;flex:none">✕</button>
-      <div style="flex:1;min-width:0"><b style="font-size:17px">${d.ic} ${esc(d.nom)} · en direct</b><div dir="rtl" style="font-size:14px;opacity:.75;text-align:left">${esc(d.ar)}</div></div>
-      <span style="background:#d93025;color:#fff;font-size:12px;font-weight:700;padding:3px 8px;border-radius:6px">● DIRECT</span></div>
-    <div style="flex:1;display:flex;align-items:center;justify-content:center;min-height:0">
-      <div style="width:100%;aspect-ratio:16/9;max-height:100%;background:#111">
-        ${enDirect ? `<iframe src="https://www.youtube.com/embed/${esc(vid)}?autoplay=1&playsinline=1&rel=0&modestbranding=1&fs=1" title="${esc(d.nom)} en direct"
-          sandbox="allow-scripts allow-same-origin allow-presentation" referrerpolicy="strict-origin-when-cross-origin"
-          allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen style="width:100%;height:100%;border:0"></iframe>` : `<div style="height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;padding:16px"><div style="font-size:40px">${d.ic}</div><b>${esc(d.nom)} n'est pas en direct en ce moment.</b><span style="opacity:.7;font-size:14px">Réessayez un peu plus tard.</span></div>`}</div></div>
-    <div style="display:flex;gap:10px;justify-content:center;padding:14px">${DIRECTS_SAINTS.map((x, k) => `<button data-k="${k}" style="padding:11px 18px;border-radius:22px;border:1px solid rgba(255,255,255,.35);background:${k === i ? "#F2C43D" : "transparent"};color:${k === i ? "#0E1A33" : "#fff"};font:inherit;font-weight:700;font-size:15px">${x.ic} ${esc(x.nom)}</button>`).join("")}</div>
-    ${enDirect ? `<p style="text-align:center;font-size:13px;opacity:.6;margin:0 16px 14px">Image noire ? La chaîne n'est peut-être pas en direct en ce moment : réessayez plus tard.</p>` : ""}`;
-  o.querySelector("#ds-x").onclick = () => o.remove();
+  const bouton = (x, k) => `<button data-k="${k}" style="padding:9px 16px;border-radius:22px;border:1px solid rgba(255,255,255,.4);background:${k === i ? "#F2C43D" : "rgba(0,0,0,.45)"};color:${k === i ? "#0E1A33" : "#fff"};font:inherit;font-weight:700;font-size:14px">${x.ic} ${esc(x.nom)}</button>`;
+  o.innerHTML = `${enDirect ? `<iframe src="https://www.youtube.com/embed/${esc(vid)}?autoplay=1&playsinline=1&rel=0&modestbranding=1&fs=0&controls=1" title="${esc(d.nom)} en direct"
+        sandbox="allow-scripts allow-same-origin allow-presentation" referrerpolicy="strict-origin-when-cross-origin"
+        allow="autoplay; encrypted-media; picture-in-picture" style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe>`
+      : `<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;padding:16px"><div style="font-size:44px">${d.ic}</div><b style="font-size:18px">${esc(d.nom)} n'est pas en direct en ce moment.</b><span style="opacity:.7;font-size:14px">La chaîne officielle ne diffuse pas sur Internet actuellement. Réessayez plus tard.</span></div>`}
+    <div id="ds-tap" style="position:absolute;left:0;right:0;top:0;height:56px"></div>
+    <div id="ds-ui" style="position:absolute;left:0;right:0;top:0;display:flex;align-items:center;gap:10px;padding:10px 14px;background:linear-gradient(rgba(0,0,0,.75),transparent);transition:opacity .3s">
+      <button id="ds-x" aria-label="Fermer" style="width:40px;height:40px;border-radius:50%;border:0;background:rgba(255,255,255,.18);color:#fff;font-size:20px;flex:none">✕</button>
+      <b style="font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${d.ic} ${esc(d.nom)}</b>
+      ${enDirect ? `<span style="background:#d93025;color:#fff;font-size:11px;font-weight:700;padding:3px 7px;border-radius:6px;flex:none">● DIRECT</span>` : ""}
+      <span style="flex:1"></span>${DIRECTS_SAINTS.map(bouton).join("")}</div>`;
+  const ui = o.querySelector("#ds-ui"); let t = 0;
+  const montrer = () => { ui.style.opacity = "1"; ui.style.pointerEvents = "auto"; clearTimeout(t); if (enDirect) t = setTimeout(() => { ui.style.opacity = "0"; ui.style.pointerEvents = "none"; }, 4000); };
+  o.querySelector("#ds-tap").onclick = montrer; montrer();
+  o.querySelector("#ds-x").onclick = fermerDirectSaint;
   o.querySelectorAll("[data-k]").forEach(b => b.onclick = () => ouvrirDirectSaint(+b.dataset.k));
 }
 const SERIE_OBJ = {};
