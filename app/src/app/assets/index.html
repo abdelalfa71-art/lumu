@@ -349,6 +349,9 @@ html.nuit .lecteur-audio .au-art { border-color: #F2C43D; }
 
 /* Micro-animations légères (transform / opacity) + contraste */
 .au-btns .au-pp, .ec-pl, .ec-rp { transition: transform .12s; }
+.au-btns .au-np { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; padding: 0; color: var(--texte, #1a1a1a); }
+.au-btns .au-np:disabled { opacity: .3; }
+.au-btns { gap: 10px !important; }
 .au-btns .au-pp:active, .ec-pl:active, .ec-rp:active { transform: scale(.92); }
 .au-btns .au-pp { background: #0A564B !important; }
 #jaime.on .ia-i svg, #favori .ia-i { animation: pop .25s ease-out; }
@@ -2650,7 +2653,7 @@ function lecteurHTML(c) {
   const url = urlMedia(c.fichier_path), cover = c.cover_path ? urlMedia(c.cover_path) : "";
   const t = TYPES[c.type] || TYPES.video;
   if (c.type === "video" || c.type === "reel") return `<video id="media" class="lecteur-video" controls playsinline preload="${ECO.actif() ? "none" : "metadata"}" ${cover ? `poster="${esc(cover)}"` : ""} src="${esc(url)}"></video>`;
-  if (c.type === "audio") { const nomC = (c.yt_channels && c.yt_channels.name) || c.title || "L"; return `<div class="lecteur-audio" id="aud-ui">${cover ? `<img class="au-art" src="${esc(cover)}" alt="">` : `<img class="au-art au-logo" src="icon-maskable-512.png" alt="Lumu">`}<div class="au-t"><span id="au-cur">0:00</span><span id="au-dur">${c.duration_seconds ? fmtDuree(c.duration_seconds) : ""}</span></div><input type="range" class="au-seek" id="au-seek" min="0" max="1000" value="0" aria-label="Position"><div class="au-btns"><button id="au-m10" aria-label="Reculer de 10 secondes">⟲ 10</button><button class="au-pp" id="au-pp" aria-label="Lecture"></button><button id="au-p10" aria-label="Avancer de 10 secondes">10 ⟳</button></div><div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap"><button class="btn-text" id="au-vit" style="font-size:13px">Vitesse 1×</button></div></div>`; }
+  if (c.type === "audio") { const nomC = (c.yt_channels && c.yt_channels.name) || c.title || "L"; return `<div class="lecteur-audio" id="aud-ui">${cover ? `<img class="au-art" src="${esc(cover)}" alt="">` : `<img class="au-art au-logo" src="icon-maskable-512.png" alt="Lumu">`}<div class="au-t"><span id="au-cur">0:00</span><span id="au-dur">${c.duration_seconds ? fmtDuree(c.duration_seconds) : ""}</span></div><input type="range" class="au-seek" id="au-seek" min="0" max="1000" value="0" aria-label="Position"><div class="au-btns"><button id="au-prev" class="au-np" aria-label="Précédent"><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true"><path d="M6 5h2v14H6zM20 5v14L9.5 12z"/></svg></button><button id="au-m10" aria-label="Reculer de 10 secondes">⟲ 10</button><button class="au-pp" id="au-pp" aria-label="Lecture"></button><button id="au-p10" aria-label="Avancer de 10 secondes">10 ⟳</button><button id="au-next" class="au-np" aria-label="Suivant"><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true"><path d="M16 5h2v14h-2zM4 5v14l10.5-7z"/></svg></button></div><div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap"><button class="btn-text" id="au-vit" style="font-size:13px">Vitesse 1×</button></div></div>`; }
   if (c.type === "fichier") return `<div class="lecteur-doc"><span class="vig-ic" style="font-size:64px">📎</span><b dir="auto">${esc(c.title)}</b>${c.taille_octets ? `<small>${fmtTaille(c.taille_octets)}</small>` : ""}<a class="btn" style="text-align:center;text-decoration:none;display:block" href="${esc(url)}" target="_blank" rel="noopener noreferrer">Ouvrir</a></div>`;
   if (c.type === "image") return `<a href="${esc(url)}" target="_blank" rel="noopener"><img class="lecteur-image" src="${esc(url)}" alt="${esc(c.title)}"></a>`;
   return `<div class="lecteur-doc">${cover ? `<img src="${esc(cover)}" alt="">` : `<span class="vig-ic" style="font-size:64px">${t.ic}</span>`}
@@ -4681,6 +4684,12 @@ function modalPlaylists(c) {
     await ajouter(data.id);
   };
 }
+const SERIE_OBJ = {};
+function jouerSerie(sr, i) {
+  const o = SERIE_OBJ[sr.ids[i]]; if (!o) return;
+  const s2 = SERIE_OBJ[sr.ids[i + 1]] ? () => jouerSerie(sr, i + 1) : null, p2 = SERIE_OBJ[sr.ids[i - 1]] ? () => jouerSerie(sr, i - 1) : null;
+  AUD.jouer(o, s2, p2);
+}
 function contenuExtras(wrap, c) {
   const ctx = etat.params.playlist || null;
   const vivant = () => wrap.isConnected;
@@ -4691,8 +4700,38 @@ function contenuExtras(wrap, c) {
       if (data) router("contenu", { id, c: data, playlist: { ...ctx, i: ctx.i + delta }, auto: true });
     } catch (e) {}
   }
-  const allerSuivant = suivantId ? () => aller(suivantId, 1) : null;
-  const allerPrecedent = precedentId ? () => aller(precedentId, -1) : null;
+  /* Sans playlist : la « série » est trouvée automatiquement — sourates du même récitateur dans l'ordre du Coran,
+     sinon les audios de la même chaîne et catégorie, dans l'ordre des titres (cours numérotés : 01, 02, 03…) */
+  let serieP = null;
+  const serie = () => serieP || (serieP = (async () => {
+    if (ctx && ctx.ids) return ctx;
+    if (!c || c.type !== "audio") return null;
+    try {
+      const m = /^(.*\/coran-[^/]+)\/(\d{3})\.mp3$/.exec(c.fichier_path || "");
+      let q = sb.from("yt_contenus").select(CHAMPS_CONTENU).eq("status", "published").eq("type", "audio");
+      if (m) q = q.eq("category", c.category || "Coran").like("fichier_path", m[1] + "/%");
+      else { q = q.eq("channel_id", c.channel_id); q = c.category ? q.eq("category", c.category) : q.is("category", null); }
+      const { data } = await q.limit(400);
+      let l = (data || []).filter(x => x.fichier_path || x.embed_id);
+      if (m) l = l.filter(x => /\/\d{3}\.mp3$/.test(x.fichier_path)).sort((a, b) => a.fichier_path.localeCompare(b.fichier_path));
+      else if (l.some(x => /\d/.test(x.title || ""))) l.sort((a, b) => String(a.title).localeCompare(String(b.title), "fr", { numeric: true }) || String(a.published_at).localeCompare(String(b.published_at)));
+      else l.sort((a, b) => String(a.published_at).localeCompare(String(b.published_at)));
+      const i = l.findIndex(x => x.id === c.id); if (i < 0 || l.length < 2) return null;
+      l.forEach(x => { SERIE_OBJ[x.id] = x; });
+      return { titre: m ? (c.auteur || "Coran") : (c.category || (c.yt_channels && c.yt_channels.name) || "Série"), ids: l.map(x => x.id), i };
+    } catch (e) { return null; }
+  })());
+  async function allerSerie(d) {
+    const sr = await serie(); const id = sr && sr.ids[sr.i + d];
+    if (!id) { toast(d > 0 ? "C'est le dernier de la série." : "C'est le premier de la série."); return; }
+    const o = SERIE_OBJ[id];
+    /* Page quittée (on écoute en naviguant ailleurs) : on enchaîne dans le lecteur sans changer d'écran */
+    if (o && !vivant()) { jouerSerie(sr, sr.i + d); return; }
+    if (o) router("contenu", { id, c: o, playlist: { ...sr, i: sr.i + d }, auto: true });
+    else aller(id, d);
+  }
+  const allerSuivant = suivantId ? () => aller(suivantId, 1) : (c && c.type === "audio" ? () => allerSerie(1) : null);
+  const allerPrecedent = precedentId ? () => aller(precedentId, -1) : (c && c.type === "audio" ? () => allerSerie(-1) : null);
 
   if (c.embed_id) {
     const lancer = wrap.querySelector("#pe-lancer");
@@ -4751,7 +4790,13 @@ function contenuExtras(wrap, c) {
     }
   }
   brancher(m0);
-  if (c.type === "audio" && wrap.querySelector("#aud-ui")) AUD.lier(wrap, c, allerSuivant, allerPrecedent, !!etat.params.auto);
+  if (c.type === "audio" && wrap.querySelector("#aud-ui")) {
+    AUD.lier(wrap, c, allerSuivant, allerPrecedent, !!etat.params.auto);
+    const bn = wrap.querySelector("#au-next"), bpv = wrap.querySelector("#au-prev");
+    if (bn) bn.onclick = () => allerSuivant && allerSuivant();
+    if (bpv) bpv.onclick = () => { /* au-delà de 5 s : revenir au début, sinon audio précédent */ if (AUD.c && AUD.c.id === c.id && AUD.a && AUD.a.currentTime > 5) { AUD.a.currentTime = 0; return; } if (allerPrecedent) allerPrecedent(); };
+    serie().then(sr => { if (!wrap.isConnected) return; if (bn) bn.disabled = !(sr && sr.i + 1 < sr.ids.length); if (bpv) bpv.disabled = false; });
+  }
   if (etat.params.auto && m0) { const p = m0.play(); if (p && p.catch) p.catch(() => {}); }
   // Boutons additionnels
   const zoneBtn = wrap.querySelector("#partager");
