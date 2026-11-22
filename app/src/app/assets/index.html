@@ -2153,7 +2153,7 @@ function render(rafraichi) {
     "mot-de-passe-oublie": vueMotDePasseOublie, "nouveau-mot-de-passe": vueNouveauMotDePasse,
     "changer-mot-de-passe": vueChangerMotDePasse,
     "pin-verrou": vuePinVerrou, "pin-creation": vuePinCreation, "arabe": vueArabe,
-    "presentation": vuePresentation, "tarifs": vueTarifs, "videos": vueFlux, "affiches": vueAffiches, "coran": vueCoran, "coran-accueil": vueCoranAccueil, "radios": vueRadios, "enfants": vueEnfants, "questions": vueQuestions, "questions-imam": vueQuestionsImam, "parcours": vueParcours, "parcours-voir": vueParcoursVoir, "passage": vuePassage, "parcours-revoir": vueRevoir, "mes-parcours": vueMesParcours, "parcours-edit": vueParcoursEdit, "passage-edit": vuePassageEdit, "home": vueDecouvrir, "savants": vueSavants, "preches": vuePreches, "priere": vuePriere, "langues-choix": vueLanguesChoix, "tutoriel": vueTutoriel, "biblio": vueBiblio, "dossier": vueDossier, "direct": vueDirect, "chaine-edit": vueChaineEdit, "notifications": vueNotifications, "publier": vuePublier, "je-publie": vueJePublie, "profil": vueProfil, "contenu": vueContenu,
+    "presentation": vuePresentation, "tarifs": vueTarifs, "videos": vueFlux, "affiches": vueAffiches, "coran": vueCoran, "coran-accueil": vueCoranAccueil, "radios": vueRadios, "enfants": vueEnfants, "ramadan": vueRamadan, "mosquees": vueMosquees, "questions": vueQuestions, "questions-imam": vueQuestionsImam, "parcours": vueParcours, "parcours-voir": vueParcoursVoir, "passage": vuePassage, "parcours-revoir": vueRevoir, "mes-parcours": vueMesParcours, "parcours-edit": vueParcoursEdit, "passage-edit": vuePassageEdit, "home": vueDecouvrir, "savants": vueSavants, "preches": vuePreches, "priere": vuePriere, "langues-choix": vueLanguesChoix, "tutoriel": vueTutoriel, "biblio": vueBiblio, "dossier": vueDossier, "direct": vueDirect, "chaine-edit": vueChaineEdit, "notifications": vueNotifications, "publier": vuePublier, "je-publie": vueJePublie, "profil": vueProfil, "contenu": vueContenu,
     "langue": vueLangue, "fil": vueFlux, "flux": vueEcouter, "radio": vueFlux, "recherche": vueRecherche, "abos": vueAbos, "espace": vueEspace, "importer": vueImport, "reels": vueFlux, "groupes": vueGroupes, "groupe": vueGroupe, "discussions": vueDiscussions, "conv": vueConv, "groupe-nouveau": vueNouveauGroupe, "livres": vueBibliotheque, "regroupements": vueRegroupements, "biblio-lire": vueBiblioLire, "azkar": vueAzkar, "bases": vueBases, "livre": vueLivre, "mes-livres": vueMesLivres, "livre-edition": vueEditeurLivre, "lives": vueLives, "live": vueLive, "live-nouveau": vueNouveauLive, "devenir-createur": vueDevenirCreateur, "admin": vueAdmin, "push-admin": vuePushAdmin, "mes-contenus": vueMesContenus, "legal": vueLegal, "lien": vueLien, "chaine": vueChaine, "playlist": vuePlaylist, "playlists": vuePlaylists, "stats": vueStats, "abonnements": vueAbonnements, "favoris": vueListeUtilisateur, "historique": vueListeUtilisateur, "hors": vueHors
   };
   document.body.classList.toggle("branche-tobi", TOBI_ROUTES.includes(etat.route));
@@ -5021,7 +5021,7 @@ function carteRamadan(zone, wrap) {
   const pr = chargerLocal("priere_d", null);
   const aller = () => { const b = [...wrap.querySelectorAll("#lm-chips button, #lm-chips .chip")].find(x => /ramadan/i.test(x.textContent)); if (b) b.click(); };
   zone.innerHTML = `<button class="carte" style="width:100%;text-align:start;padding:14px;color:#fff;border:0;background:linear-gradient(135deg,#0f3d36,#1b6b5c 60%,#c9a227)"><b style="font-size:17px">🌙 ${r.actif ? "Ramadan Moubarak" : "Ramadan approche"}</b><br><span id="rm-t" style="font-size:14px;opacity:.95">${r.actif ? "Jour " + r.jour + " du mois béni" : "Dans " + r.avant + " jour" + (r.avant > 1 ? "s" : "")}</span><br><small style="opacity:.85">Voir les contenus de Ramadan ›</small></button>`;
-  zone.firstChild.onclick = aller;
+  zone.firstChild.onclick = () => router("ramadan");
   if (r.actif && pr && pr.t && pr.tz) {
     const maj = () => {
       if (!zone.isConnected) return;
@@ -6097,6 +6097,97 @@ function vuePriere() {
   const obs = new MutationObserver(() => { if (!w.isConnected) { if (ecoute) window.removeEventListener(ecoute[0], ecoute[1]); obs.disconnect(); } }); obs.observe(document.getElementById("app") || document.body, { childList: true });
 }
 
+/* ---------- Mosquées à proximité (données OpenStreetMap) ---------- */
+function chargerLeaflet() {
+  if (window.L && L.map) return Promise.resolve();
+  return new Promise((ok, ko) => {
+    const c = document.createElement("link"); c.rel = "stylesheet"; c.href = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"; document.head.appendChild(c);
+    const j = document.createElement("script"); j.src = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"; j.onload = ok; j.onerror = ko; document.head.appendChild(j);
+  });
+}
+async function vueMosquees() {
+  const w = ecran("Mosquées à proximité", null, `<div id="mq-carte" style="height:240px;border-radius:16px;overflow:hidden;margin-bottom:12px;background:#e8efe9"></div><div id="mq-l"><div class="centre"><div class="spin"></div><p>Recherche autour de vous…</p></div></div>
+    <p style="font-size:12px;opacity:.65;text-align:center;margin-top:12px">Données © contributeurs OpenStreetMap</p>`);
+  const zl = w.querySelector("#mq-l");
+  let pos = null;
+  try { await PRIERE.position(); } catch (e) {}
+  const l = PRIERE.loc(); if (l && l.lat != null) pos = { lat: l.lat, lng: l.lng };
+  if (!w.isConnected) return;
+  if (!pos) { zl.innerHTML = `<p class="centre">Activez la localisation du téléphone pour trouver les mosquées autour de vous.</p><button class="btn" id="mq-r" style="width:100%">Réessayer</button>`; zl.querySelector("#mq-r").onclick = () => router("mosquees"); return; }
+  const dist = (a, b) => { const R = 6371e3, t = x => x * Math.PI / 180, dl = t(b.lat - a.lat), dg = t(b.lng - a.lng); const h = Math.sin(dl / 2) ** 2 + Math.cos(t(a.lat)) * Math.cos(t(b.lat)) * Math.sin(dg / 2) ** 2; return 2 * R * Math.asin(Math.sqrt(h)); };
+  let liste = [];
+  for (const rayon of [3000, 8000, 20000]) {
+    try {
+      const q = `[out:json][timeout:20];(node["amenity"="place_of_worship"]["religion"="muslim"](around:${rayon},${pos.lat},${pos.lng});way["amenity"="place_of_worship"]["religion"="muslim"](around:${rayon},${pos.lat},${pos.lng}););out center 60;`;
+      const j = await (await fetch("https://overpass-api.de/api/interpreter", { method: "POST", body: "data=" + encodeURIComponent(q), headers: { "content-type": "application/x-www-form-urlencoded" } })).json();
+      liste = (j.elements || []).map(e => { const p = e.type === "node" ? { lat: e.lat, lng: e.lon } : e.center ? { lat: e.center.lat, lng: e.center.lon } : null; return p && { ...p, nom: (e.tags && (e.tags["name:fr"] || e.tags.name || e.tags["name:ar"])) || "Mosquée", d: dist(pos, p) }; }).filter(Boolean).sort((a, b) => a.d - b.d);
+      if (liste.length >= 3) break;
+    } catch (e) { if (!w.isConnected) return; }
+  }
+  if (!w.isConnected) return;
+  if (!liste.length) { zl.innerHTML = `<p class="centre">Aucune mosquée trouvée à moins de 20 km dans les données de la carte, ou la connexion a échoué.</p>`; return; }
+  const km = d => d < 1000 ? Math.round(d / 10) * 10 + " m" : (d / 1000).toFixed(1).replace(".", ",") + " km";
+  zl.innerHTML = liste.slice(0, 40).map((m, i) => `<div class="carte" style="display:flex;align-items:center;gap:12px;margin-bottom:8px;background:var(--surface,#fff);color:var(--texte,#14201b)"><span style="font-size:24px">🕌</span><span style="flex:1;min-width:0"><b dir="auto" style="display:block">${esc(m.nom)}</b><small style="opacity:.7">${km(m.d)}</small></span><button class="btn-outline" data-i="${i}" style="margin:0;padding:8px 12px">Itinéraire</button></div>`).join("");
+  zl.querySelectorAll("[data-i]").forEach(b => b.onclick = () => { const m = liste[+b.dataset.i]; location.href = `https://www.google.com/maps/dir/?api=1&destination=${m.lat},${m.lng}`; });
+  try {
+    await chargerLeaflet(); if (!w.isConnected) return;
+    const carte = L.map(w.querySelector("#mq-carte"), { zoomControl: false }).setView([pos.lat, pos.lng], 14);
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, attribution: "© OpenStreetMap" }).addTo(carte);
+    L.circleMarker([pos.lat, pos.lng], { radius: 8, color: "#1b6b5c", fillColor: "#1b6b5c", fillOpacity: .9 }).addTo(carte).bindPopup("Vous êtes ici");
+    const pts = [[pos.lat, pos.lng]];
+    liste.slice(0, 40).forEach(m => { L.marker([m.lat, m.lng], { icon: L.divIcon({ html: "🕌", className: "", iconSize: [26, 26] }) }).addTo(carte).bindPopup(esc(m.nom) + " · " + km(m.d)); pts.push([m.lat, m.lng]); });
+    carte.fitBounds(pts.slice(0, 8), { padding: [24, 24], maxZoom: 16 });
+  } catch (e) { const c = w.querySelector("#mq-carte"); if (c) c.remove(); }
+}
+/* ---------- Mode Ramadan ---------- */
+async function vueRamadan() {
+  let r = { actif: false, avant: 999 }; try { r = infoRamadan(); } catch (e) {}
+  const jour = r.actif ? r.jour : 0, suivi = chargerLocal("ramadan_suivi", {});
+  const an = (() => { try { return hijri().y; } catch (e) { return 0; } })();
+  const w = ecran("Ramadan", null, `
+    <div class="carte" style="padding:18px;text-align:center;color:#fff;border:0;background:linear-gradient(135deg,#0f3d36,#1b6b5c 60%,#c9a227)">
+      <div style="font-size:15px;opacity:.9">${r.actif ? "🌙 Ramadan Moubarak · jour " + jour + " / 30" : r.avant < 999 ? "🌙 Ramadan dans " + r.avant + " jour" + (r.avant > 1 ? "s" : "") : "🌙 Ramadan"}</div>
+      <div id="rm-gros" style="font-size:34px;font-weight:900;margin:8px 0 2px">—</div><div id="rm-sous" style="font-size:14px;opacity:.9">Ajoutez votre ville (Prière) pour les heures exactes</div>
+      <div id="rm-heures" style="display:flex;justify-content:center;gap:18px;margin-top:10px;font-size:14px"></div>
+    </div>
+    <div class="ec-tit" style="margin:16px 0 8px">🤲 Invocation de la rupture du jeûne</div>
+    <div class="carte" style="padding:16px;background:var(--surface,#fff);color:var(--texte,#14201b)"><p dir="rtl" data-notrad style="font-family:'Amiri',serif;font-size:24px;line-height:2;margin:0;text-align:center">ذَهَبَ الظَّمَأُ وَابْتَلَّتِ الْعُرُوقُ وَثَبَتَ الْأَجْرُ إِنْ شَاءَ اللَّهُ</p>
+      <p style="margin:8px 0 0;font-style:italic">Dhahaba-dh-dhama'u wabtallati-l-'urûqu wa thabata-l-ajru in shâ'a Allâh.</p>
+      <p style="margin:6px 0 0">« La soif est partie, les veines sont humectées et la récompense est acquise, si Allah le veut. » <small style="opacity:.7">(Abû Dâwûd)</small></p></div>
+    <div class="ec-tit" style="margin:16px 0 8px">📖 Un juz par jour</div>
+    <button class="carte" id="rm-juz" style="display:flex;align-items:center;gap:12px;width:100%;text-align:start;font:inherit;background:var(--surface,#fff);color:var(--texte,#14201b)"><span style="font-size:28px">📖</span><span style="flex:1"><b>Juz ${Math.max(1, Math.min(30, jour || 1))} du jour</b><small style="display:block;opacity:.7">Page ${CORAN.debutJuz(Math.max(1, Math.min(30, jour || 1)))} · finir le Coran en 30 jours</small></span><span>›</span></button>
+    <div class="ec-tit" style="margin:16px 0 8px">✅ Mon suivi${an ? " · " + an : ""}</div>
+    <div id="rm-suivi" style="display:grid;grid-template-columns:repeat(6,1fr);gap:6px"></div>
+    <p style="font-size:13px;opacity:.75;margin:6px 0 0">Touchez un jour pour cocher : 🍽️ jeûne → 🕌 + tarawih → 📖 + lecture.</p>
+    <div class="ec-tit" style="margin:16px 0 8px">🌾 Zakât al-fitr</div>
+    <div class="carte" style="padding:16px;background:var(--surface,#fff);color:var(--texte,#14201b)">
+      <label>Nombre de personnes à charge (vous compris)<input class="champ" id="rm-n" type="number" min="1" value="${chargerLocal("zakat_n", 1)}"></label>
+      <p id="rm-z" style="font-size:18px;font-weight:800;margin:10px 0 4px"></p>
+      <p style="font-size:13px;opacity:.8;margin:0">École malikite : un <i>sâʿ</i> (4 <i>mudd</i>, environ 2,5 kg) de l'aliment de base du pays (riz, mil, blé…) par personne, donné avant la prière de l'Aïd. Selon cette école, on donne de la nourriture et non de l'argent.</p></div>`);
+  /* Compte à rebours */
+  const pr = await PRIERE.charger().catch(() => null) || chargerLocal("priere_n", null);
+  const gros = w.querySelector("#rm-gros"), sous = w.querySelector("#rm-sous");
+  if (pr && pr.t) {
+    w.querySelector("#rm-heures").innerHTML = `<span>🌅 Suhur jusqu'à <b>${PRIERE.hm(pr.t.Fajr)}</b></span><span>🌇 Iftar à <b>${PRIERE.hm(pr.t.Maghrib)}</b></span>`;
+    const maj = () => {
+      if (!w.isConnected) return clearInterval(iv);
+      const now = PRIERE.minutes(pr.tz), faj = PRIERE.vers(pr.t.Fajr), mag = PRIERE.vers(pr.t.Maghrib), f = m => PRIERE.reste(((m % 1440) + 1440) % 1440);
+      if (now < faj) { gros.textContent = f(faj - now); sous.textContent = "avant la fin du suhur (Fajr)"; }
+      else if (now < mag) { gros.textContent = f(mag - now); sous.textContent = "avant la rupture du jeûne (Maghrib)"; }
+      else { gros.textContent = "Iftar 🌙"; sous.textContent = "Bonne rupture du jeûne ! Suhur jusqu'à " + PRIERE.hm(pr.t.Fajr); }
+    };
+    maj(); var iv = setInterval(maj, 30000);
+  }
+  w.querySelector("#rm-juz").onclick = () => router("coran", { page: CORAN.debutJuz(Math.max(1, Math.min(30, jour || 1))) });
+  /* Suivi des 30 jours */
+  const cles = ["", "🍽️", "🕌", "📖"], zs = w.querySelector("#rm-suivi"), cleAn = String(an || "x");
+  const dessin = () => { const d = suivi[cleAn] || {}; zs.innerHTML = Array.from({ length: 30 }, (_, i) => { const v = d[i + 1] || 0; return `<button type="button" data-j="${i + 1}" style="aspect-ratio:1;border-radius:12px;border:${i + 1 === jour ? "2px solid #c9a227" : "1px solid var(--bordure,#e3dccb)"};background:${v ? "rgba(27,107,92," + (0.15 + v * 0.2) + ")" : "var(--surface,#fff)"};color:var(--texte,#14201b);font:inherit;font-size:12px;padding:2px"><b style="display:block">${i + 1}</b>${cles.slice(1, v + 1).join("")}</button>`; }).join(""); zs.querySelectorAll("[data-j]").forEach(b => b.onclick = () => { const d2 = suivi[cleAn] = suivi[cleAn] || {}; d2[b.dataset.j] = ((d2[b.dataset.j] || 0) + 1) % 4; sauverLocal("ramadan_suivi", suivi); dessin(); }); };
+  dessin();
+  /* Zakât al-fitr */
+  const zn = w.querySelector("#rm-n"), zz = w.querySelector("#rm-z");
+  const calc = () => { const n = Math.max(1, Math.floor(+zn.value || 1)); sauverLocal("zakat_n", n); zz.textContent = `${n} sâʿ · environ ${(n * 2.5).toLocaleString("fr")} kg de nourriture`; };
+  zn.oninput = calc; calc();
+}
 /* ---------- Espace enfants : petites sourates, répétition, étoiles ---------- */
 function vueEnfants() {
   const e = chargerLocal("etoiles_enfant", {}), total = Object.values(e).reduce((t, x) => t + x, 0);
@@ -7687,7 +7778,7 @@ function vueBiblio() {
   const T = [["❓", "Questions", () => router("questions")], ["🪜", "Parcours", () => router("parcours")], ["📚", "Livres", () => router("livres")], ["🤲", "Invocations", () => router("arabe")], ["🕌", "Les bases", () => router("bases")], ["📖", "Coran", () => router("dossier", { cat: "Coran", titre: "Coran" })],
     ["🎓", "Cours", () => router("dossier", { cat: "Cours", titre: "Cours" })], ["🎤", "Conférences", () => router("dossier", { cat: "Conférence", titre: "Conférences" })],
     ["💬", "Rappels", () => router("dossier", { cat: "Rappel", titre: "Rappels" })]];
-  if (ram) T.push(["🌙", "Ramadan", () => router("dossier", { cat: "Ramadan", titre: "Ramadan" })]);
+  T.push(["🌙", "Ramadan", () => router("ramadan")], ["🕌", "Mosquées proches", () => router("mosquees")]);
   T.push(["🧸", "Histoires enfants", () => router("dossier", { cat: "Enfants", titre: "Histoires pour enfants" })], ["🎙️", "Patrimoine", () => router("dossier", { cat: "Patrimoine", titre: "Patrimoine" })], ["👥", "Groupes", () => router("groupes")]);
   w.innerHTML = `${enteteApp("Bibliothèque")}<div class="bb-langues" id="lg"></div>${modeEnfants() ? `<button class="bb-enf on" id="enf">🧸 <b>Mode Enfants activé</b><i aria-hidden="true">ON</i></button>` : ""}<div class="bb-grille" id="g"></div><details class="bb-plus"><summary>Plus</summary><div class="bb-grille" id="g2"></div></details><button class="btn-text" id="chlg" style="margin-top:14px">🌐 Changer mes langues</button>`;
   app.appendChild(w); brancherEntete(w);
