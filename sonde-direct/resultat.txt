@@ -1,6 +1,2 @@
-https://www.youtube.com/user/SaudiQuranTv/live | 200 | chaîne= | nom= | abonnés= | vidéo= | direct=false | embed= | vérifié=true
-https://www.youtube.com/@SaudiQuranTv | 200 | chaîne=UCos52azQNBgW63_9uDJoPDA | nom=قناة القران الكريم | abonnés= | vidéo= | direct=false | embed= | vérifié=false
-https://www.youtube.com/user/SaudiSunnahTv/live | 200 | chaîne=UCROKYPep-UuODNwyipe6JMw | nom=قناة السنة النبوية | abonnés= | vidéo= | direct=false | embed= | vérifié=false
-https://www.youtube.com/@SaudiSunnahTv | 200 | chaîne=UCROKYPep-UuODNwyipe6JMw | nom=قناة السنة النبوية | abonnés= | vidéo= | direct=false | embed= | vérifié=false
-https://www.youtube.com/channel/UCROKYPep-UuODNwyipe6JMw/live | 200 | chaîne=UCROKYPep-UuODNwyipe6JMw | nom=قناة السنة النبوية | abonnés= | vidéo= | direct=false | embed= | vérifié=false
-https://www.youtube.com/channel/UCos52azQNBgW63_9uDJoPDA/live | 200 | chaîne= | nom= | abonnés= | vidéo= | direct=false | embed= | vérifié=true
+mecque titre: ? · vidéo: true · temps: 0
+medine titre: ? · vidéo: true · temps: 0
