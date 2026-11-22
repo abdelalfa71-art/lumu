@@ -4042,10 +4042,19 @@ const HORS = {
   },
   auto() { return chargerLocal("hors_auto", true) !== false; },
   regler(v) { sauverLocal("hors_auto", !!v); if (!v) return; },
-  async lire(id) { try { return await this.op("readonly", st => st.get(id)); } catch (e) { return null; } },
+  /* Le fichier est rangé dans le stockage des fichiers (écrit directement sur le disque, sans passer par la mémoire) ;
+     les anciennes copies gardées dans la base du navigateur restent lisibles. */
+  FICH: "lumu-hors-v1",
+  async lire(id) {
+    try {
+      const r = await this.op("readonly", st => st.get(id));
+      if (r && !r.blob && r.cache && "caches" in window) { const rp = await (await caches.open(this.FICH)).match(r.cache); if (rp) r.blob = await rp.blob(); }
+      return r;
+    } catch (e) { return null; }
+  },
   async tous() { try { return (await this.op("readonly", st => st.getAll())) || []; } catch (e) { return []; } },
   async init() {
-    this.pret = (async () => { try { const r = await this.tous(); this.ids = new Set(r.filter(x => x.blob).map(x => x.id)); this.manuels = new Set(r.filter(x => x.blob && x.manuel).map(x => x.id)); } catch (e) {} })();
+    this.pret = (async () => { try { const r = await this.tous(); this.ids = new Set(r.filter(x => x.blob || x.cache).map(x => x.id)); this.manuels = new Set(r.filter(x => (x.blob || x.cache) && x.manuel).map(x => x.id)); } catch (e) {} })();
     await this.pret;
     try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist(); } catch (e) {}
     this.bandeau();
@@ -4078,7 +4087,7 @@ const HORS = {
   },
   async sauver(c, manuel, surProgres) {
     if (!c || !c.fichier_path || this.enCours.has(c.id)) return false;
-    this.enCours.add(c.id);
+    this.enCours.add(c.id); this.erreur = "";
     try {
       const url = urlMedia(c.fichier_path);
       let rep = await fetch(url, { mode: "cors" });
@@ -4086,6 +4095,27 @@ const HORS = {
       const len = +rep.headers.get("content-length") || 0;
       if (!manuel && len > this.TAILLE_MAX) throw new Error("gros");
       const type = rep.headers.get("content-type") || c.mime || "audio/mpeg";
+      const ancien0 = await this.op("readonly", st => st.get(c.id)).catch(() => null);
+      /* 1) Écriture directe sur le disque, morceau par morceau (fiable même pour un fichier de 100 Mo) */
+      if ("caches" in window && rep.body && window.TransformStream) {
+        const moi = this; let n = 0;
+        const compteur = new TransformStream({ transform(ch, ctl) { if (moi.annul.has(c.id)) { ctl.error(new Error("annule")); return; } n += ch.byteLength; if (surProgres) surProgres(n, len); ctl.enqueue(ch); } });
+        const ca = await caches.open(this.FICH), cle = "/hors/" + encodeURIComponent(c.id);
+        try {
+          await ca.put(cle, new Response(rep.body.pipeThrough(compteur), { headers: { "content-type": type } }));
+          if (len && n < len) throw new Error("incomplet");
+          const garde = !!(manuel || (ancien0 && ancien0.manuel));
+          await this.op("readwrite", st => st.put({ id: c.id, meta: this.meta(c), cache: cle, taille: n, ts: Date.now(), manuel: garde }));
+          this.ids.add(c.id); if (garde) this.manuels.add(c.id);
+          return true;
+        } catch (e) {
+          try { await ca.delete(cle); } catch (x) {}
+          if (/annule/.test(String(e && e.message))) throw e;
+          if (/quota/i.test(String(e && (e.name || e.message)))) throw new Error("plein");
+          /* 2) Sinon, ancienne méthode (avec reprise en cas de coupure) */
+          rep = await fetch(url, { mode: "cors" }); if (!rep.ok) throw new Error("http");
+        }
+      }
       const morceaux = []; let n = 0, essais = 0;
       if (!rep.body || !rep.body.getReader) { const b0 = await rep.blob(); morceaux.push(b0); n = b0.size; }
       else for (;;) {
@@ -4111,12 +4141,17 @@ const HORS = {
       await this.op("readwrite", st => st.put({ id: c.id, meta: this.meta(c), blob, taille: blob.size, ts: Date.now(), manuel: !!(manuel || (ancien && ancien.manuel)) }));
       this.ids.add(c.id); if (manuel || (ancien && ancien.manuel)) this.manuels.add(c.id);
       return true;
-    } catch (e) { return false; }
+    } catch (e) {
+      const m = String(e && (e.name || "") + " " + (e.message || ""));
+      this.erreur = /annule/.test(m) ? "" : /plein|quota/i.test(m) ? "Mémoire du téléphone pleine. Libérez de l'espace puis réessayez." : /gros/.test(m) ? "" : navigator.onLine === false || /fetch|network|réseau/i.test(m) ? "Connexion coupée pendant le téléchargement. Réessayez." : "Téléchargement impossible (" + m.trim().slice(0, 60) + ").";
+      if (manuel && this.erreur) try { toast(this.erreur); } catch (x) {}
+      return false;
+    }
     finally { this.enCours.delete(c.id); this.annul.delete(c.id); }
   },
-  async retirer(id) { try { await this.op("readwrite", st => st.delete(id)); } catch (e) {} this.ids.delete(id); this.manuels.delete(id); },
+  async retirer(id) { try { const r = await this.op("readonly", st => st.get(id)); if (r && r.cache && "caches" in window) await (await caches.open(this.FICH)).delete(r.cache); } catch (e) {} try { await this.op("readwrite", st => st.delete(id)); } catch (e) {} this.ids.delete(id); this.manuels.delete(id); },
   /** Transforme une copie automatique en téléchargement gardé pour toujours (sans réseau) */
-  async garder(id) { try { const r = await this.lire(id); if (!r || !r.blob) return false; r.manuel = true; await this.op("readwrite", st => st.put(r)); this.manuels.add(id); return true; } catch (e) { return false; } },
+  async garder(id) { try { const r = await this.op("readonly", st => st.get(id)); if (!r || !(r.blob || r.cache)) return false; r.manuel = true; await this.op("readwrite", st => st.put(r)); this.manuels.add(id); return true; } catch (e) { return false; } },
   async nettoyerManuel(id) { const r = await this.lire(id); if (!r) return; if (this.recents().some(x => x.id === id)) { r.manuel = false; await this.op("readwrite", st => st.put(r)); this.manuels.delete(id); } else await this.retirer(id); },
   bandeau() {
     let b = document.getElementById("hors-bandeau");
@@ -4186,11 +4221,11 @@ async function vueHors() {
   let tri = "date";
   async function dessiner() {
     if (!w.isConnected) return;
-    const stock = await HORS.tous(), parId = new Map(stock.filter(x => x.blob).map(x => [x.id, x]));
+    const stock = await HORS.tous(), parId = new Map(stock.filter(x => x.blob || x.cache).map(x => [x.id, x]));
     HORS.ids = new Set(parId.keys());
     const liste = []; const vus = new Set();
     HORS.recents().forEach(m => { liste.push({ m, r: parId.get(m.id), t: m.ecoute || 0 }); vus.add(m.id); });
-    stock.filter(x => x.blob && !vus.has(x.id)).forEach(x => liste.push({ m: x.meta, r: x, t: x.ts || 0 }));
+    stock.filter(x => (x.blob || x.cache) && !vus.has(x.id)).forEach(x => liste.push({ m: x.meta, r: x, t: x.ts || 0 }));
     liste.sort((a, b) => b.t - a.t);
     if (tri === "taille") liste.sort((a, b) => ((b.r && b.r.taille) || 0) - ((a.r && a.r.taille) || 0));
     const tot0 = [...parId.values()].reduce((a, x) => a + (x.taille || 0), 0);
@@ -7225,6 +7260,12 @@ async function vueEcouter() {
 }
 
 /* Cache local léger (dernière liste reçue), pour l'usage hors connexion */
+/* Petit message en bas de l'écran, qui disparaît seul */
+function toast(t) {
+  try { const d = document.createElement("div"); d.textContent = t; d.setAttribute("role", "status");
+    d.style.cssText = "position:fixed;left:16px;right:16px;bottom:calc(150px + env(safe-area-inset-bottom));z-index:99999;background:#1f2a24;color:#fff;padding:12px 16px;border-radius:12px;font-size:15px;line-height:1.4;text-align:center;box-shadow:0 6px 18px rgba(0,0,0,.3)";
+    document.body.appendChild(d); setTimeout(() => d.remove(), 5000); } catch (e) {}
+}
 /* Mélange aléatoire (Fisher-Yates) */
 function melanger(a) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
 function cacheLocal(cle, donnees) { try { sauverLocal(cle, { t: Date.now(), d: donnees.slice(0, 60) }); } catch (e) {} }
