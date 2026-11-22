@@ -2153,7 +2153,7 @@ function render(rafraichi) {
     "mot-de-passe-oublie": vueMotDePasseOublie, "nouveau-mot-de-passe": vueNouveauMotDePasse,
     "changer-mot-de-passe": vueChangerMotDePasse,
     "pin-verrou": vuePinVerrou, "pin-creation": vuePinCreation, "arabe": vueArabe,
-    "presentation": vuePresentation, "tarifs": vueTarifs, "videos": vueFlux, "affiches": vueAffiches, "coran": vueCoran, "coran-accueil": vueCoranAccueil, "radios": vueRadios, "questions": vueQuestions, "questions-imam": vueQuestionsImam, "parcours": vueParcours, "parcours-voir": vueParcoursVoir, "passage": vuePassage, "parcours-revoir": vueRevoir, "mes-parcours": vueMesParcours, "parcours-edit": vueParcoursEdit, "passage-edit": vuePassageEdit, "home": vueDecouvrir, "savants": vueSavants, "preches": vuePreches, "priere": vuePriere, "langues-choix": vueLanguesChoix, "tutoriel": vueTutoriel, "biblio": vueBiblio, "dossier": vueDossier, "direct": vueDirect, "chaine-edit": vueChaineEdit, "notifications": vueNotifications, "publier": vuePublier, "je-publie": vueJePublie, "profil": vueProfil, "contenu": vueContenu,
+    "presentation": vuePresentation, "tarifs": vueTarifs, "videos": vueFlux, "affiches": vueAffiches, "coran": vueCoran, "coran-accueil": vueCoranAccueil, "radios": vueRadios, "enfants": vueEnfants, "questions": vueQuestions, "questions-imam": vueQuestionsImam, "parcours": vueParcours, "parcours-voir": vueParcoursVoir, "passage": vuePassage, "parcours-revoir": vueRevoir, "mes-parcours": vueMesParcours, "parcours-edit": vueParcoursEdit, "passage-edit": vuePassageEdit, "home": vueDecouvrir, "savants": vueSavants, "preches": vuePreches, "priere": vuePriere, "langues-choix": vueLanguesChoix, "tutoriel": vueTutoriel, "biblio": vueBiblio, "dossier": vueDossier, "direct": vueDirect, "chaine-edit": vueChaineEdit, "notifications": vueNotifications, "publier": vuePublier, "je-publie": vueJePublie, "profil": vueProfil, "contenu": vueContenu,
     "langue": vueLangue, "fil": vueFlux, "flux": vueEcouter, "radio": vueFlux, "recherche": vueRecherche, "abos": vueAbos, "espace": vueEspace, "importer": vueImport, "reels": vueFlux, "groupes": vueGroupes, "groupe": vueGroupe, "discussions": vueDiscussions, "conv": vueConv, "groupe-nouveau": vueNouveauGroupe, "livres": vueBibliotheque, "regroupements": vueRegroupements, "biblio-lire": vueBiblioLire, "azkar": vueAzkar, "bases": vueBases, "livre": vueLivre, "mes-livres": vueMesLivres, "livre-edition": vueEditeurLivre, "lives": vueLives, "live": vueLive, "live-nouveau": vueNouveauLive, "devenir-createur": vueDevenirCreateur, "admin": vueAdmin, "push-admin": vuePushAdmin, "mes-contenus": vueMesContenus, "legal": vueLegal, "lien": vueLien, "chaine": vueChaine, "playlist": vuePlaylist, "playlists": vuePlaylists, "stats": vueStats, "abonnements": vueAbonnements, "favoris": vueListeUtilisateur, "historique": vueListeUtilisateur, "hors": vueHors
   };
   document.body.classList.toggle("branche-tobi", TOBI_ROUTES.includes(etat.route));
@@ -6097,6 +6097,48 @@ function vuePriere() {
   const obs = new MutationObserver(() => { if (!w.isConnected) { if (ecoute) window.removeEventListener(ecoute[0], ecoute[1]); obs.disconnect(); } }); obs.observe(document.getElementById("app") || document.body, { childList: true });
 }
 
+/* ---------- Espace enfants : petites sourates, répétition, étoiles ---------- */
+function vueEnfants() {
+  const e = chargerLocal("etoiles_enfant", {}), total = Object.values(e).reduce((t, x) => t + x, 0);
+  const liste = [1, ...Array.from({ length: 37 }, (_, i) => 114 - i)];
+  const w = ecran("Espace enfants", null, `<div style="text-align:center;margin:0 0 12px"><div style="font-size:44px">🧒⭐</div><p style="margin:4px 0;font-size:17px">J'apprends mes sourates</p><b style="font-size:20px">${total} ⭐</b></div>
+    <p style="margin:0 0 12px;opacity:.8;text-align:center">Touche une sourate : chaque verset est répété 3 fois. Répète après le récitateur !</p>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px">${liste.map(n => `<button type="button" class="carte" data-s="${n}" style="margin:0;padding:16px 10px;text-align:center;font:inherit;background:var(--surface,#fff);color:var(--texte,#14201b);border-radius:18px"><div dir="rtl" data-notrad style="font-family:'Amiri','Amiri Quran',serif;font-size:26px;font-weight:700;line-height:1.5">${esc(CORAN.NOMS_AR[n - 1] || "")}</div><small style="display:block;opacity:.75">${n}. ${esc(CORAN.NOMS[n - 1])}</small><div style="margin-top:4px;min-height:20px">${e[n] ? "⭐".repeat(Math.min(5, e[n])) : "☆"}</div></button>`).join("")}</div>`);
+  w.querySelectorAll("[data-s]").forEach(b => b.onclick = () => { const n = +b.dataset.s; router("coran", { page: CORAN.DEBUTS[n - 1], hifz: { s: n, de: 1, a: 999, rep: 3, dossier: "mahmoud-khalil-al-husary", enfant: true } }); });
+}
+/* ---------- Coran complet d'un récitateur en un toucher (hors ligne) ---------- */
+const TOUT_DL = {};
+function boutonToutTelecharger(apres, nom, liste) {
+  if (!apres || !liste.length) return;
+  const b = document.createElement("button"); b.className = "carte"; b.type = "button";
+  b.style.cssText = "display:flex;align-items:center;gap:12px;width:100%;text-align:start;margin:4px 0 12px;font:inherit;background:var(--surface,#fff);color:var(--texte,#14201b)";
+  const maj = () => {
+    const reste = liste.filter(c => !HORS.manuels.has(c.id)), mo = reste.reduce((t, c) => t + (+c.taille_octets || 0), 0) / 1048576;
+    const taille = mo > 1024 ? (mo / 1024).toFixed(1) + " Go" : Math.round(mo) + " Mo";
+    b.innerHTML = TOUT_DL[nom] ? `<span style="font-size:24px">⏳</span><span style="flex:1"><b>Téléchargement en cours…</b><small style="display:block;opacity:.7">Voir la barre en haut de l'écran</small></span>`
+      : !reste.length ? `<span style="font-size:24px">✅</span><span style="flex:1"><b>Tout est sur le téléphone</b><small style="display:block;opacity:.7">${liste.length} sourates écoutables sans connexion</small></span>`
+      : `<span style="font-size:24px">⬇</span><span style="flex:1"><b>Télécharger tout le Coran</b><small style="display:block;opacity:.7">${reste.length} sourate${reste.length > 1 ? "s" : ""}${mo ? " · " + taille : ""} · conseillé en Wi‑Fi</small></span>`;
+  };
+  maj(); apres.after(b);
+  b.onclick = async () => {
+    if (TOUT_DL[nom]) return;
+    const reste = liste.filter(c => !HORS.manuels.has(c.id)); if (!reste.length) return;
+    const cn = navigator.connection;
+    if (cn && cn.type && cn.type !== "wifi" && cn.type !== "ethernet" && !confirm("Vous n'êtes pas en Wi‑Fi : le téléchargement utilisera vos données mobiles. Continuer ?")) return;
+    let stop = false; TOUT_DL[nom] = true; maj();
+    const j = TR.debut("Coran · " + nom, "Téléchargement", () => { stop = true; });
+    let ok = 0;
+    for (let i = 0; i < reste.length && !stop; i++) {
+      j.titre = "Coran · " + nom + " · " + (i + 1) + "/" + reste.length;
+      TR.progres(j, i, reste.length);
+      if (await HORS.sauver(reste[i], true)) ok++;
+      else if (/plein/i.test(HORS.erreur || "")) break;
+    }
+    delete TOUT_DL[nom];
+    TR.fin(j, stop ? "annule" : ok === reste.length ? "ok" : "erreur", stop ? "Arrêté" : ok + " / " + reste.length + " sourates enregistrées");
+    if (b.isConnected) maj();
+  };
+}
 /* ---------- Radios du Coran (mp3quran.net) ---------- */
 const RADIO_SAOUDIE = { id: 109082, ar: "إذاعة القرآن الكريم - السعودية", fr: "Radio du Coran · Arabie saoudite", url: "https://stream.radiojar.com/0tpy1h0kxtzuv" };
 let RADIOS_P = null;
@@ -6307,7 +6349,7 @@ async function vueCoranAccueil() {
 .ca-av{width:44px;height:44px;flex:none;border-radius:50%;background:var(--vert-clair,#e3f1e8);color:var(--vert,#12805f);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px}.ca-n{border-radius:12px}.ca-go{margin-inline-start:auto;color:var(--vert,#12805f);font-size:20px;flex:none}
 .ca-sec{margin:14px 2px 8px;font-size:12px;font-weight:800;color:var(--vert,#12805f);text-transform:uppercase;letter-spacing:.04em}
 .ca-hero{border-radius:20px;background:linear-gradient(135deg,#0b3d2e,#12805f);color:#fff;padding:18px;text-align:center;margin-bottom:10px}.ca-hero .ar{font-family:'Amiri Quran','Amiri',serif;font-size:30px;color:#d4af37;line-height:1.6}</style>
-    <div class="ca-ps" role="tablist"><button class="ca-p" data-o="lire" role="tab">📖 Lire</button><button class="ca-p" data-o="ecouter" role="tab">🎧 Écouter</button><button class="ca-p" data-o="tafsir" role="tab">📚 Tafsir</button><button class="ca-p" id="ca-direct">🕋 Direct</button><button class="ca-p" id="ca-radios">📻 Radios</button></div><div id="ca-z"></div>`);
+    <div class="ca-ps" role="tablist"><button class="ca-p" data-o="lire" role="tab">📖 Lire</button><button class="ca-p" data-o="ecouter" role="tab">🎧 Écouter</button><button class="ca-p" data-o="tafsir" role="tab">📚 Tafsir</button><button class="ca-p" id="ca-direct">🕋 Direct</button><button class="ca-p" id="ca-radios">📻 Radios</button><button class="ca-p" id="ca-enfants">🧒 Enfants</button><button class="ca-p" id="ca-hifz">🧠 Mémoriser</button></div><div id="ca-z"></div>`);
   const z = w.querySelector("#ca-z");
   let onglet = etat.params.onglet || chargerLocal("coran_onglet", "lire");
   let donnees = null;
@@ -6364,6 +6406,7 @@ async function vueCoranAccueil() {
         const dl = (douas[n] || []).slice().sort((a, b) => String(a.title).localeCompare(String(b.title), "fr", { numeric: true }));
         const voirD = partie === "doua" && dl.length;
         listeAudios(voirD ? "Invocations · " + n : n, { nom: "Lecteurs", f: accueil }, voirD ? dl : l, sous);
+        if (!voirD) boutonToutTelecharger(z.querySelector(".ca-sec"), n, l);
         if (!dl.length) return;
         /* Deux boutons en haut : Sourates / Invocations */
         const ps = document.createElement("div"); ps.className = "ca-ps"; ps.style.margin = "4px 0 10px";
@@ -6404,6 +6447,8 @@ async function vueCoranAccueil() {
   w.querySelectorAll(".ca-ps [data-o]").forEach(b => b.onclick = () => montrer(b.dataset.o));
   w.querySelector("#ca-direct").onclick = () => ouvrirDirectSaint(0);
   w.querySelector("#ca-radios").onclick = () => router("radios");
+  w.querySelector("#ca-enfants").onclick = () => router("enfants");
+  w.querySelector("#ca-hifz").onclick = () => feuilleHifz(1, o => router("coran", { page: CORAN.DEBUTS[o.s - 1], hifz: o }));
   montrer(["lire", "ecouter", "tafsir"].includes(onglet) ? onglet : "lire");
 }
 async function vueBibliotheque() {
@@ -6944,6 +6989,65 @@ const VERSETS = {
   /* Coordonnées des repères → fraction de l'image de page (réglé sur nos 604 images) */
   frac(page, x, y) { return page <= 2 ? [0.1635 + 0.002873 * x, 0.2395 + 0.0022 * y] : [0.090 + 0.00240 * x, 0.085 + 0.00150 * y]; }
 };
+/* ---------- Mémorisation (hifz) : répétition verset par verset avec la voix d'un récitateur ---------- */
+const HIFZ_LECTEURS = [["mahmoud-khalil-al-husary", "Mahmoud Khalil Al-Husary"], ["muhammad-siddiq-al-minshawi", "Muhammad Siddiq Al-Minshawi"], ["mishary-al-afasy", "Mishary Al-Afasy"], ["abdurrahman-as-sudais", "Abdurrahman As-Sudais"], ["saad-al-ghamidi", "Saad Al-Ghamidi"], ["abdul-basit-abdus-samad", "Abdul Basit Abdus-Samad"], ["saud-ash-shuraim", "Saud Ash-Shuraim"], ["ahmed-al-ajmi", "Ahmed Al-Ajmi"], ["abu-bakr-ash-shatri", "Abu Bakr Ash-Shatri"], ["yasser-al-dosari", "Yasser Al-Dosari"]];
+const HIFZ = {
+  actif: false, s: 0, de: 1, a: 1, rep: 3, cur: 0, cpt: 0, d: null, cid: null, fin: null, boucle: false,
+  async nbVersets(s) { const g = await VERSETS.json("versets"); return (g[s] || []).length; },
+  etat() { return this.actif ? `Verset ${this.cur + 1} · ${Math.min(this.cpt + 1, this.rep)}/${this.rep}` : ""; },
+  async lancer({ s, de, a, rep, dossier, boucle, fin }) {
+    this.arreter();
+    const { data } = await sb.from("yt_contenus").select(CHAMPS_CONTENU).eq("status", "published").like("fichier_path", `%/coran-${dossier}/${String(s).padStart(3, "0")}.mp3`).limit(1);
+    const c = data && data[0]; if (!c) { toast("Cette sourate n'est pas disponible pour ce récitateur."); return false; }
+    const L = VERSETS.lecteurDe(c); if (!L) { toast("Repères des versets indisponibles pour ce récitateur."); return false; }
+    const t = await VERSETS.json(L.nom); const d = t.s[s] && t.s[s].d; if (!d || !d.length) { toast("Repères des versets indisponibles."); return false; }
+    Object.assign(this, { actif: true, s, de: Math.max(1, de), a: Math.min(d.length, a), rep: Math.max(1, rep), cur: Math.max(1, de) - 1, cpt: 0, d, cid: c.id, boucle: !!boucle, fin: fin || null });
+    AUD.jouer(c);
+    const aller = () => { try { AUD.a.currentTime = this.d[this.cur] / 1000; } catch (e) {} };
+    if (AUD.a.readyState >= 1) aller(); else AUD.a.addEventListener("loadedmetadata", aller, { once: true });
+    if (!this._lie) { this._lie = true; AUD.a.addEventListener("timeupdate", () => this.tick()); }
+    return true;
+  },
+  tick() {
+    if (!this.actif) return;
+    if (!AUD.c || AUD.c.id !== this.cid) { this.arreter(); return; }
+    const ms = (AUD.a.currentTime || 0) * 1000, d = this.d;
+    const finVerset = this.cur + 1 < d.length ? d[this.cur + 1] : Infinity;
+    if (ms + 150 < d[this.cur]) return; // on vient de revenir en arrière
+    if (ms >= finVerset - 120 || AUD.a.ended) {
+      this.cpt++;
+      if (this.cpt < this.rep) { AUD.a.currentTime = d[this.cur] / 1000; if (AUD.a.paused) AUD.lire(); return; }
+      this.cpt = 0; this.cur++;
+      if (this.cur > this.a - 1) {
+        if (this.boucle) { this.cur = this.de - 1; AUD.a.currentTime = d[this.cur] / 1000; return; }
+        const f = this.fin; this.actif = false; try { AUD.a.pause(); } catch (e) {}
+        toast("✅ Mémorisation terminée"); if (f) try { f(); } catch (e) {}
+      }
+    }
+  },
+  arreter() { this.actif = false; }
+};
+function feuilleHifz(sDefaut, surLancer) {
+  const choix = chargerLocal("hifz_choix", { dossier: "mahmoud-khalil-al-husary", rep: 3 });
+  ouvrirFeuille("🧠 Mémoriser", `<p style="margin:0 0 10px;opacity:.8">Chaque verset est répété, puis on passe au suivant. Le verset récité s'illumine sur la page.</p>
+    <label>Sourate<select class="champ" id="hz-s">${CORAN.NOMS.map((n, i) => `<option value="${i + 1}"${i + 1 === sDefaut ? " selected" : ""}>${i + 1}. ${esc(n)} · ${esc(CORAN.NOMS_AR[i] || "")}</option>`).join("")}</select></label>
+    <div style="display:flex;gap:10px"><label style="flex:1">Du verset<input class="champ" id="hz-de" type="number" min="1" value="1"></label><label style="flex:1">Au verset<input class="champ" id="hz-a" type="number" min="1" value="1"></label></div>
+    <label>Répéter chaque verset<div class="ca-ps" id="hz-rep" style="margin:6px 0 10px">${[1, 3, 5, 10].map(k => `<button type="button" class="ca-p${k === choix.rep ? " on" : ""}" data-r="${k}">${k} fois</button>`).join("")}</div></label>
+    <label>Récitateur<select class="champ" id="hz-l">${HIFZ_LECTEURS.map(([k, n]) => `<option value="${k}"${k === choix.dossier ? " selected" : ""}>${esc(n)}</option>`).join("")}</select></label>
+    <label style="display:flex;align-items:center;gap:8px;margin:10px 0"><input type="checkbox" id="hz-b"> Recommencer en boucle</label>
+    <button class="btn" id="hz-go" style="width:100%">▶ Commencer</button>`, (c, fermer) => {
+    let rep = choix.rep;
+    const sS = c.querySelector("#hz-s"), de = c.querySelector("#hz-de"), a = c.querySelector("#hz-a");
+    const majMax = async () => { try { const n = await HIFZ.nbVersets(+sS.value); de.max = a.max = n; de.value = 1; a.value = Math.min(n, 5); } catch (e) {} };
+    sS.onchange = majMax; majMax();
+    c.querySelectorAll("[data-r]").forEach(b => b.onclick = () => { rep = +b.dataset.r; c.querySelectorAll("[data-r]").forEach(x => x.classList.toggle("on", x === b)); });
+    c.querySelector("#hz-go").onclick = async () => {
+      const o = { s: +sS.value, de: +de.value || 1, a: Math.max(+de.value || 1, +a.value || 1), rep, dossier: c.querySelector("#hz-l").value, boucle: c.querySelector("#hz-b").checked };
+      sauverLocal("hifz_choix", { dossier: o.dossier, rep });
+      fermer(); if (surLancer) surLancer(o); else if (await HIFZ.lancer(o)) {}
+    };
+  });
+}
 const LECTEUR_PLEIN = "position:fixed;inset:0;z-index:900;display:flex;flex-direction:column;background:#fff;padding:0;margin:0;max-width:none;width:100%;height:100%;overflow:hidden;box-sizing:border-box";
 async function vueCoran() {
   const w = document.createElement("div");
@@ -6968,6 +7072,7 @@ async function vueCoran() {
       <button class="co-it" id="co-som">${coIt("☰", "Sourates")}</button>
       <button class="co-it" id="co-juz">${coIt("◔", "Juz")}</button>
       <button class="co-it" id="co-aller">${coIt("⌕", "Aller à une page")}</button>
+      <button class="co-it" id="co-hifz">${coIt("🧠", "Mémoriser (répéter des versets)")}</button>
       <button class="co-it" id="co-mq"></button>
       <button class="co-it" id="co-mqs">${coIt("📑", "Mes marque-pages")}</button>
       <button class="co-it" id="co-mode"></button>
@@ -6999,7 +7104,7 @@ async function vueCoran() {
       if (!w.isConnected) return;
       const t = q("#co-au-t");
       if (!v) { hl.style.display = "none"; w.querySelectorAll(".co-v.on").forEach(e => { e.classList.remove("on"); e.style.background = ""; }); return; }
-      t.textContent = (AUD.c.title || "Audio") + " · verset " + v.ayah;
+      t.textContent = (AUD.c.title || "Audio") + " · " + (HIFZ.actif ? "🧠 " + HIFZ.etat() : "verset " + v.ayah);
       const lit = AUD.a && !AUD.a.paused;
       if (v.page !== p) { if (lit && Date.now() - manuel > 8000) aff(v.page, true); hl.style.display = "none"; return; }
       if (texteMode()) {
@@ -7167,6 +7272,12 @@ async function vueCoran() {
   zone.addEventListener("click", () => {
     w.classList.toggle("co-cache");
   });
+  $("#co-hifz").onclick = () => { const l = CORAN.sourates(p) || [0]; feuilleHifz((l[l.length - 1] || 0) + 1, async o => { const pg = CORAN.DEBUTS[o.s - 1]; if (pg && pg !== p) aff(pg); await HIFZ.lancer(o); }); };
+  if (etat.params.hifz) setTimeout(async () => {
+    const o = { ...etat.params.hifz }; if (!w.isConnected || !o.s) return;
+    if (o.enfant) o.fin = () => { const e = chargerLocal("etoiles_enfant", {}); e[o.s] = (e[o.s] || 0) + 1; sauverLocal("etoiles_enfant", e); ouvrirFeuille("⭐ Bravo !", `<div style="text-align:center;padding:20px"><div style="font-size:72px">⭐</div><p style="font-size:20px;font-weight:800">Tu as gagné une étoile !</p><p>Sourate ${esc(CORAN.NOMS[o.s - 1])} · ${e[o.s]} ⭐</p></div>`); };
+    await HIFZ.lancer(o);
+  }, 600);
   $("#co-som").onclick = () => ouvrirFeuille("Sourates", `<div id="co-ls" style="display:grid;gap:6px">${CORAN.NOMS.map((n, i) => `<button type="button" class="carte ligne-menu" data-p="${CORAN.DEBUTS[i]}" style="text-align:start;color:#1f2a24"><span>${i + 1}.</span><span style="flex:1;min-width:0"><b dir="rtl" data-notrad style="display:block;font-family:'Amiri',serif;font-size:19px;font-weight:700">سورة ${esc(CORAN.NOMS_AR[i])}</b><small style="opacity:.7">${esc(n)}</small></span><small>p. ${CORAN.DEBUTS[i]}</small></button>`).join("")}</div>`, (corps, fermer) => {
     corps.querySelectorAll("[data-p]").forEach(b => b.onclick = () => { fermer(); document.querySelectorAll(".feuille").forEach(x => x.remove()); aff(+b.dataset.p); });
   });
