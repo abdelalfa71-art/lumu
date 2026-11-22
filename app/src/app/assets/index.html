@@ -6110,10 +6110,10 @@ function radioEnContenu(x) { return { id: "radio-" + x.id, type: "radio", title:
 function ecouterRadio(x) { try { if (RADIO.actif) RADIO.stop(); } catch (e) {} AUD.jouer(radioEnContenu(x)); }
 async function vueRadios() {
   const w = ecran("Radios du Coran", null, `<p style="margin:0 0 10px;opacity:.75">En direct 24 h/24 · très peu de données · continue écran éteint.</p>
-    <input id="rd-q" type="search" placeholder="Chercher un récitateur" style="width:100%;margin-bottom:12px"><div id="rd-l"><div class="centre"><div class="spin"></div></div></div>`);
+    <input class="champ" id="rd-q" type="search" placeholder="Chercher un récitateur" aria-label="Chercher un récitateur" style="margin:0 0 12px"><div id="rd-l"><div class="centre"><div class="spin"></div></div></div>`);
   const l = await chargerRadios(); if (!w.isConnected) return;
   const vedette = /السعودية|تفسير|الرقية|أذكار|السيرة|المختصر/;
-  const ligne = x => `<button class="carte rd-it" data-id="${x.id}" style="display:flex;align-items:center;gap:12px;width:100%;text-align:start;margin-bottom:8px"><span style="font-size:24px">📻</span><span style="flex:1;min-width:0"><b dir="rtl" style="display:block">${esc(x.ar)}</b>${x.fr && x.fr !== x.ar ? `<small style="opacity:.7">${esc(x.fr)}</small>` : ""}</span><span class="rd-on" style="font-size:12px;font-weight:700;color:#d93025"></span></button>`;
+  const ligne = x => `<button class="carte rd-it" data-id="${x.id}" style="display:flex;align-items:center;gap:12px;width:100%;text-align:start;margin-bottom:8px;font:inherit;background:var(--surface,#fff);color:var(--texte,#14201b)"><span style="font-size:24px">📻</span><span style="flex:1;min-width:0"><b dir="rtl" data-notrad style="display:block;font-size:17px">${esc(x.ar)}</b>${x.fr && x.fr !== x.ar ? `<small data-notrad style="display:block;opacity:.7">${esc(x.fr)}</small>` : ""}</span><span class="rd-on" style="font-size:12px;font-weight:700;color:#d93025"></span></button>`;
   const dessiner = q => {
     const re = q ? new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "i") : null;
     const ok = l.filter(x => !re || re.test(x.ar) || re.test(x.fr || ""));
