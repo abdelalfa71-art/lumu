@@ -23,4 +23,12 @@ for (const [k, ch] of Object.entries(CH)) {
   console.log(k, JSON.stringify(neuf[k]));
 }
 await b.close();
+// Radios du Coran (mp3quran.net, flux libres pour les applications) : liste rafraîchie avec les directs
+try {
+  const lr = async lang => (await (await fetch(`https://mp3quran.net/api/v3/radios?language=${lang}`)).json()).radios || [];
+  const ar = await lr("ar"), fr = await lr("fr").catch(() => []), noms = new Map(fr.map(x => [x.id, x.name]));
+  const radios = ar.filter(x => /^https:\/\//.test(x.url)).map(x => ({ id: x.id, ar: x.name, fr: noms.get(x.id) || "", url: x.url }));
+  if (radios.length > 10) fs.writeFileSync("maj/radios.json", JSON.stringify({ maj: neuf.maj, source: "mp3quran.net", radios }) + "\n");
+  console.log("radios", radios.length);
+} catch (e) { console.log("radios", e.message); }
 fs.writeFileSync(F, JSON.stringify(neuf, null, 1) + "\n");
