@@ -4690,28 +4690,40 @@ function modalPlaylists(c) {
 /* Directs de La Mecque et de Médine (chaînes officielles de la télévision saoudienne), lus DANS l'application :
    le cadre est verrouillé (sandbox sans fenêtres ni navigation) : aucun lien ne peut ouvrir YouTube ou un autre site. */
 const DIRECTS_SAINTS = [
-  { nom: "La Mecque", ar: "قناة القرآن الكريم", ic: "🕋", ch: "UCos52azQNBgW63_9uDJoPDA" },
-  { nom: "Médine", ar: "قناة السنة النبوية", ic: "🕌", ch: "UCROKYPep-UuODNwyipe6JMw" }];
-function ouvrirDirectSaint(i) {
+  { k: "mecque", nom: "La Mecque", ar: "قناة القرآن الكريم", ic: "🕋", ch: "UCos52azQNBgW63_9uDJoPDA", id: "IsJTAdC3-Jw" },
+  { k: "medine", nom: "Médine", ar: "قناة السنة النبوية", ic: "🕌", ch: "UCROKYPep-UuODNwyipe6JMw", id: "" }];
+/* Identifiant du direct en cours, vérifié toutes les 3 h par le dépôt (maj/directs.json) */
+let DIRECTS_INFO = null;
+function infoDirects() {
+  if (DIRECTS_INFO) return DIRECTS_INFO;
+  return (DIRECTS_INFO = Promise.race([
+    fetch("https://raw.githubusercontent.com/abdelalfa71-art/lumu/main/maj/directs.json?t=" + Math.floor(Date.now() / 6e5)).then(r => r.ok ? r.json() : null).catch(() => null),
+    new Promise(ok => setTimeout(() => ok(null), 4000))]).then(j => { if (!j) DIRECTS_INFO = null; return j || {}; }));
+}
+async function ouvrirDirectSaint(i) {
   try { if (AUD.a && !AUD.a.paused) AUD.basculer(); } catch (e) {}
   let o = document.getElementById("direct-saint");
   if (!o) {
     o = document.createElement("div"); o.id = "direct-saint";
-    o.style.cssText = "position:fixed;inset:0;z-index:9000;background:#000;color:#fff;display:flex;flex-direction:column;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)";
+    o.style.cssText = "position:fixed;inset:0;z-index:2147483000;background:#000;color:#fff;display:flex;flex-direction:column;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)";
     document.body.appendChild(o);
   }
   const d = DIRECTS_SAINTS[i];
+  o.innerHTML = `<div class="centre" style="flex:1;display:flex;align-items:center;justify-content:center"><div class="spin"></div></div>`;
+  const info = (await infoDirects())[d.k] || {};
+  if (!o.isConnected) return;
+  const vid = info.id || d.id, enDirect = info.direct !== false && !!vid;
   o.innerHTML = `<div style="display:flex;align-items:center;gap:10px;padding:12px 14px">
       <button id="ds-x" aria-label="Fermer" style="width:42px;height:42px;border-radius:50%;border:0;background:rgba(255,255,255,.14);color:#fff;font-size:22px;flex:none">✕</button>
       <div style="flex:1;min-width:0"><b style="font-size:17px">${d.ic} ${esc(d.nom)} · en direct</b><div dir="rtl" style="font-size:14px;opacity:.75;text-align:left">${esc(d.ar)}</div></div>
       <span style="background:#d93025;color:#fff;font-size:12px;font-weight:700;padding:3px 8px;border-radius:6px">● DIRECT</span></div>
     <div style="flex:1;display:flex;align-items:center;justify-content:center;min-height:0">
       <div style="width:100%;aspect-ratio:16/9;max-height:100%;background:#111">
-        <iframe src="https://www.youtube.com/embed/live_stream?channel=${d.ch}&autoplay=1&playsinline=1&rel=0&modestbranding=1&fs=1" title="${esc(d.nom)} en direct"
+        ${enDirect ? `<iframe src="https://www.youtube.com/embed/${esc(vid)}?autoplay=1&playsinline=1&rel=0&modestbranding=1&fs=1" title="${esc(d.nom)} en direct"
           sandbox="allow-scripts allow-same-origin allow-presentation" referrerpolicy="strict-origin-when-cross-origin"
-          allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen style="width:100%;height:100%;border:0"></iframe></div></div>
+          allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen style="width:100%;height:100%;border:0"></iframe>` : `<div style="height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;padding:16px"><div style="font-size:40px">${d.ic}</div><b>${esc(d.nom)} n'est pas en direct en ce moment.</b><span style="opacity:.7;font-size:14px">Réessayez un peu plus tard.</span></div>`}</div></div>
     <div style="display:flex;gap:10px;justify-content:center;padding:14px">${DIRECTS_SAINTS.map((x, k) => `<button data-k="${k}" style="padding:11px 18px;border-radius:22px;border:1px solid rgba(255,255,255,.35);background:${k === i ? "#F2C43D" : "transparent"};color:${k === i ? "#0E1A33" : "#fff"};font:inherit;font-weight:700;font-size:15px">${x.ic} ${esc(x.nom)}</button>`).join("")}</div>
-    <p style="text-align:center;font-size:13px;opacity:.6;margin:0 16px 14px">Image noire ? La chaîne n'est peut-être pas en direct en ce moment : réessayez plus tard.</p>`;
+    ${enDirect ? `<p style="text-align:center;font-size:13px;opacity:.6;margin:0 16px 14px">Image noire ? La chaîne n'est peut-être pas en direct en ce moment : réessayez plus tard.</p>` : ""}`;
   o.querySelector("#ds-x").onclick = () => o.remove();
   o.querySelectorAll("[data-k]").forEach(b => b.onclick = () => ouvrirDirectSaint(+b.dataset.k));
 }
