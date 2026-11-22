@@ -1965,6 +1965,7 @@ async function ouvrirSession(sessionServeur, code) {
   const { data, error } = await sb.auth.setSession({ access_token: sessionServeur.access_token, refresh_token: sessionServeur.refresh_token });
   if (error || !data.session) throw new Error("Connexion impossible, réessayez.");
   etat.parentId = data.session.user.id;
+  try { HORS.recharger(); } catch (e) {}
   etat.compteNom = true;
   await apresConnexion();
   if (PIN.dispo) await PIN.definir(etat.parentId, code);
@@ -2068,6 +2069,7 @@ document.addEventListener("error", ev => {
 async function init() {
   sb.auth.onAuthStateChange((event, session) => {
     if (event === "SIGNED_IN" || event === "SIGNED_OUT" || event === "USER_UPDATED") CACHE_API.vider();
+    if (event === "SIGNED_IN" || event === "SIGNED_OUT") setTimeout(() => { try { HORS.recharger(); } catch (e) {} }, 300);
     if (event === "PASSWORD_RECOVERY") {
       etat.parentId = session.user.id;
       etat.compteNom = estCompteNom(session.user);
@@ -2078,6 +2080,7 @@ async function init() {
   if (session) {
     etat.parentId = session.user.id;
     etat.compteNom = estCompteNom(session.user);
+    try { HORS.recharger(); } catch (e) {}
     await apresConnexion();
     if (CODE.actif() && etat.compteNom && PIN.dispo && !PIN.existe(etat.parentId)) {
       await deconnecter("Reconnectez-vous avec votre nom et votre code.");
@@ -2270,6 +2273,7 @@ async function deconnecter(message) {
   try { await sb.auth.signOut({ scope: "local" }); } catch(e) {}
   if (id) PIN.effacer(id);
   etat.parentId = null; etat.enfant = null;
+  try { HORS.recharger(); } catch (e) {}
   router("connexion", { message: message || "" });
 }
 
@@ -4045,16 +4049,23 @@ const HORS = {
   /* Le fichier est rangé dans le stockage des fichiers (écrit directement sur le disque, sans passer par la mémoire) ;
      les anciennes copies gardées dans la base du navigateur restent lisibles. */
   FICH: "lumu-hors-v1",
+  /* Chaque téléchargement appartient au(x) compte(s) qui l'ont fait : sur un téléphone partagé, chacun ne voit que les siens */
+  compte() { return (typeof etat !== "undefined" && etat.parentId) || "invite"; },
+  aMoi(x) { return !!x && (!x.comptes || x.comptes.includes(this.compte())); },
+  brut(id) { return this.op("readonly", st => st.get(id)).catch(() => null); },
+  calculer(l) { const m = l.filter(x => (x.blob || x.cache) && this.aMoi(x)); this.ids = new Set(m.map(x => x.id)); this.manuels = new Set(m.filter(x => x.manuel).map(x => x.id)); },
+  async recharger() { try { this.calculer(await this.tous()); } catch (e) {} document.dispatchEvent(new Event("hors-maj")); },
   async lire(id) {
     try {
       const r = await this.op("readonly", st => st.get(id));
+      if (r && !this.aMoi(r)) return null;
       if (r && !r.blob && r.cache && "caches" in window) { const rp = await (await caches.open(this.FICH)).match(r.cache); if (rp) r.blob = await rp.blob(); }
       return r;
     } catch (e) { return null; }
   },
   async tous() { try { return (await this.op("readonly", st => st.getAll())) || []; } catch (e) { return []; } },
   async init() {
-    this.pret = (async () => { try { const r = await this.tous(); this.ids = new Set(r.filter(x => x.blob || x.cache).map(x => x.id)); this.manuels = new Set(r.filter(x => (x.blob || x.cache) && x.manuel).map(x => x.id)); } catch (e) {} })();
+    this.pret = (async () => { try { const r = await this.tous(); this.calculer(r); } catch (e) {} })();
     await this.pret;
     try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist(); } catch (e) {}
     this.bandeau();
@@ -4089,6 +4100,8 @@ const HORS = {
     if (!c || !c.fichier_path || this.enCours.has(c.id)) return false;
     this.enCours.add(c.id); this.erreur = "";
     try {
+      { const ex = await this.brut(c.id);
+        if (ex && (ex.blob || ex.cache) && !this.aMoi(ex)) { ex.comptes = [...new Set([...(ex.comptes || []), this.compte()])]; if (manuel) ex.manuel = true; await this.op("readwrite", st => st.put(ex)); this.ids.add(c.id); if (ex.manuel) this.manuels.add(c.id); return true; } }
       const url = urlMedia(c.fichier_path);
       let rep = await fetch(url, { mode: "cors" });
       if (!rep.ok) throw new Error("http");
@@ -4105,7 +4118,7 @@ const HORS = {
           await ca.put(cle, new Response(rep.body.pipeThrough(compteur), { headers: { "content-type": type } }));
           if (len && n < len) throw new Error("incomplet");
           const garde = !!(manuel || (ancien0 && ancien0.manuel));
-          await this.op("readwrite", st => st.put({ id: c.id, meta: this.meta(c), cache: cle, taille: n, ts: Date.now(), manuel: garde }));
+          await this.op("readwrite", st => st.put({ id: c.id, meta: this.meta(c), cache: cle, taille: n, ts: Date.now(), manuel: garde, comptes: [...new Set([...((ancien0 && ancien0.comptes) || []), this.compte()])] }));
           this.ids.add(c.id); if (garde) this.manuels.add(c.id);
           return true;
         } catch (e) {
@@ -4137,8 +4150,8 @@ const HORS = {
       }
       if (len && n < len) throw new Error("incomplet");
       const blob = new Blob(morceaux, { type });
-      const ancien = await this.lire(c.id);
-      await this.op("readwrite", st => st.put({ id: c.id, meta: this.meta(c), blob, taille: blob.size, ts: Date.now(), manuel: !!(manuel || (ancien && ancien.manuel)) }));
+      const ancien = await this.brut(c.id);
+      await this.op("readwrite", st => st.put({ id: c.id, meta: this.meta(c), blob, taille: blob.size, ts: Date.now(), manuel: !!(manuel || (ancien && ancien.manuel)), comptes: [...new Set([...((ancien && ancien.comptes) || []), this.compte()])] }));
       this.ids.add(c.id); if (manuel || (ancien && ancien.manuel)) this.manuels.add(c.id);
       return true;
     } catch (e) {
@@ -4149,10 +4162,18 @@ const HORS = {
     }
     finally { this.enCours.delete(c.id); this.annul.delete(c.id); }
   },
-  async retirer(id) { try { const r = await this.op("readonly", st => st.get(id)); if (r && r.cache && "caches" in window) await (await caches.open(this.FICH)).delete(r.cache); } catch (e) {} try { await this.op("readwrite", st => st.delete(id)); } catch (e) {} this.ids.delete(id); this.manuels.delete(id); },
+  async retirer(id, tout) {
+    try {
+      const r = await this.brut(id);
+      /* D'autres comptes de ce téléphone le gardent : on le retire seulement du mien */
+      if (!tout && r && r.comptes) { const reste = r.comptes.filter(k => k !== this.compte()); if (reste.length) { r.comptes = reste; await this.op("readwrite", st => st.put(r)); this.ids.delete(id); this.manuels.delete(id); return; } }
+      if (r && r.cache && "caches" in window) await (await caches.open(this.FICH)).delete(r.cache);
+    } catch (e) {}
+    try { await this.op("readwrite", st => st.delete(id)); } catch (e) {} this.ids.delete(id); this.manuels.delete(id);
+  },
   /** Transforme une copie automatique en téléchargement gardé pour toujours (sans réseau) */
-  async garder(id) { try { const r = await this.op("readonly", st => st.get(id)); if (!r || !(r.blob || r.cache)) return false; r.manuel = true; await this.op("readwrite", st => st.put(r)); this.manuels.add(id); return true; } catch (e) { return false; } },
-  async nettoyerManuel(id) { const r = await this.lire(id); if (!r) return; if (this.recents().some(x => x.id === id)) { r.manuel = false; await this.op("readwrite", st => st.put(r)); this.manuels.delete(id); } else await this.retirer(id); },
+  async garder(id) { try { const r = await this.brut(id); if (!r || !(r.blob || r.cache) || !this.aMoi(r)) return false; r.manuel = true; await this.op("readwrite", st => st.put(r)); this.manuels.add(id); return true; } catch (e) { return false; } },
+  async nettoyerManuel(id) { const r = await this.brut(id); if (!r || !this.aMoi(r)) return; if (this.recents().some(x => x.id === id)) { r.manuel = false; await this.op("readwrite", st => st.put(r)); this.manuels.delete(id); } else await this.retirer(id); },
   bandeau() {
     let b = document.getElementById("hors-bandeau");
     const hors = navigator.onLine === false;
@@ -4226,9 +4247,12 @@ async function vueHors() {
     let ca = null; try { if ("caches" in window) ca = await caches.open(HORS.FICH); } catch (e) {}
     const lisibles = [];
     for (const x of stock) {
+      if (!HORS.aMoi(x)) continue;
+      /* Anciens téléchargements (avant les comptes) : rattachés au compte qui les ouvre en premier */
+      if (!x.comptes && (x.blob || x.cache)) { x.comptes = [HORS.compte()]; try { await HORS.op("readwrite", st => st.put(x)); } catch (e) {} }
       if (x.blob && x.blob.size > 0) { lisibles.push(x); continue; }
       if (x.cache && ca) { try { if (await ca.match(x.cache)) { lisibles.push(x); continue; } } catch (e) {} }
-      if (x.cache || x.blob) HORS.retirer(x.id);
+      if (x.cache || x.blob) HORS.retirer(x.id, true);
     }
     const parId = new Map(lisibles.map(x => [x.id, x]));
     HORS.ids = new Set(parId.keys()); HORS.manuels = new Set(lisibles.filter(x => x.manuel).map(x => x.id));
@@ -4428,7 +4452,7 @@ const AUD = {
       const purgerCache = async () => { try { if (!("caches" in window) || !(c.taille_octets > 0)) return; const ca = await caches.open("lumu-audio-v1"), u = urlMedia(c.fichier_path), rp = await ca.match(u); if (rp && perime(+rp.headers.get("content-length") || 0)) { await ca.delete(u); try { HL.set.delete(u); } catch (e) {} } } catch (e) {} };
       HORS.lire(c.id).then(async r => {
         if (r && r.blob && !(c.taille_octets > 0) && navigator.onLine !== false) { try { const q = await Promise.race([sb.from("yt_contenus").select("taille_octets").eq("id", c.id).maybeSingle(), new Promise(ok => setTimeout(() => ok(null), 2500))]); if (q && q.data && q.data.taille_octets) c.taille_octets = q.data.taille_octets; } catch (e) {} }
-        if (r && r.blob && perime(r.blob.size)) { const manuel = !!r.manuel; try { await HORS.retirer(c.id); } catch (e) {} r = null; if (manuel && navigator.onLine !== false) setTimeout(() => { try { HORS.sauver(c, true); } catch (e) {} }, 4000); }
+        if (r && r.blob && perime(r.blob.size)) { const manuel = !!r.manuel; try { await HORS.retirer(c.id, true); } catch (e) {} r = null; if (manuel && navigator.onLine !== false) setTimeout(() => { try { HORS.sauver(c, true); } catch (e) {} }, 4000); }
         if (!r) await purgerCache();
         lancer(r && r.blob ? URL.createObjectURL(r.blob) : urlMedia(c.fichier_path));
       }, () => lancer(urlMedia(c.fichier_path)));
