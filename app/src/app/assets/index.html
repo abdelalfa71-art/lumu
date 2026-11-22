@@ -349,6 +349,7 @@ html.nuit .lecteur-audio .au-art { border-color: #F2C43D; }
 
 /* Micro-animations légères (transform / opacity) + contraste */
 .au-btns .au-pp, .ec-pl, .ec-rp { transition: transform .12s; }
+.flux-direct { margin-left: 10px; padding: 7px 14px; border-radius: 20px; border: 0; background: #F2C43D; color: #0E1A33; font: inherit; font-weight: 700; font-size: 14px; }
 .au-btns .au-np { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; padding: 0; color: var(--texte, #1a1a1a); }
 .au-btns .au-np:disabled { opacity: .3; }
 .au-btns { gap: 10px !important; }
@@ -1718,7 +1719,7 @@ function vueFlux() {
   const reelsSeuls = etat.route === "reels" || etat.route === "videos";
   const wrap = document.createElement("div");
   wrap.className = "flux";
-  wrap.innerHTML = `<div class="flux-haut">${reelsSeuls ? `<button class="flux-ic" id="retour" aria-label="Retour">${ico("back", 26)}</button><span class="flux-titre">${etat.route === "videos" ? "Vidéos" : "Reels"}</span>` : `<div class="flux-modes" id="modes" role="tablist"></div>`}<span class="flux-droite"><button class="flux-ic" id="micro-haut" aria-label="Recherche vocale">${ico("mic", 26)}</button><button class="flux-ic" id="son-haut" aria-label="Son">${ico("mute", 26)}</button><button class="flux-ic" id="chercher" aria-label="Rechercher">${ico("search", 26)}</button><button class="flux-ic" id="h-profil" aria-label="Mon profil">${ico("user", 26)}</button></span></div><div class="flux-defil" id="defil" tabindex="-1"></div>`;
+  wrap.innerHTML = `<div class="flux-haut">${reelsSeuls ? `<button class="flux-ic" id="retour" aria-label="Retour">${ico("back", 26)}</button><span class="flux-titre">${etat.route === "videos" ? "Vidéos" : "Reels"}</span>${etat.route === "videos" ? `<button class="flux-direct" id="direct-saint-b" aria-label="La Mecque et Médine en direct">🕋 Direct</button>` : ""}` : `<div class="flux-modes" id="modes" role="tablist"></div>`}<span class="flux-droite"><button class="flux-ic" id="micro-haut" aria-label="Recherche vocale">${ico("mic", 26)}</button><button class="flux-ic" id="son-haut" aria-label="Son">${ico("mute", 26)}</button><button class="flux-ic" id="chercher" aria-label="Rechercher">${ico("search", 26)}</button><button class="flux-ic" id="h-profil" aria-label="Mon profil">${ico("user", 26)}</button></span></div><div class="flux-defil" id="defil" tabindex="-1"></div>`;
   app.appendChild(wrap);
   const defil = wrap.querySelector("#defil");
   let mode = "pour-vous", total = 0, enCours = false, fini = false, generation = 0, actif = null, deja = [], ordre = null, posO = 0;
@@ -1727,6 +1728,7 @@ function vueFlux() {
   wrap.querySelector("#h-profil").onclick = () => router("profil");
   if (!reelsSeuls) { wrap.appendChild(creerPastillePriere()); wrap.appendChild(creerFlamme()); }
   wrap.querySelector("#micro-haut").onclick = () => MICRO.ouvrir();
+  { const bd = wrap.querySelector("#direct-saint-b"); if (bd) bd.onclick = () => ouvrirDirectSaint(0); }
   const bson = wrap.querySelector("#son-haut");
   bson.onclick = () => { etat.son = !etat.son; majSons(); bson.innerHTML = ico(etat.son ? "sound" : "mute", 26); };
   if (etat.parentId) sb.from("yt_abonnements").select("channel_id").then(r => { (r.data || []).forEach(x => mesAbos.add(x.channel_id)); defil.querySelectorAll(".d-plus").forEach(b => { if (mesAbos.has(b.dataset.ch)) b.remove(); }); }, () => {});
@@ -2135,6 +2137,7 @@ window.addEventListener("lumu-donnees", () => {
 });
 function render(rafraichi) {
   RENDU = { t: Date.now(), route: etat.route, refait: !!rafraichi };
+  { const ds = document.getElementById("direct-saint"); if (ds) ds.remove(); }
   nettoyerDirect();
   app.innerHTML = "";
   app.className = "entree";
@@ -4684,6 +4687,34 @@ function modalPlaylists(c) {
     await ajouter(data.id);
   };
 }
+/* Directs de La Mecque et de Médine (chaînes officielles de la télévision saoudienne), lus DANS l'application :
+   le cadre est verrouillé (sandbox sans fenêtres ni navigation) : aucun lien ne peut ouvrir YouTube ou un autre site. */
+const DIRECTS_SAINTS = [
+  { nom: "La Mecque", ar: "قناة القرآن الكريم", ic: "🕋", ch: "UCos52azQNBgW63_9uDJoPDA" },
+  { nom: "Médine", ar: "قناة السنة النبوية", ic: "🕌", ch: "UCROKYPep-UuODNwyipe6JMw" }];
+function ouvrirDirectSaint(i) {
+  try { if (AUD.a && !AUD.a.paused) AUD.basculer(); } catch (e) {}
+  let o = document.getElementById("direct-saint");
+  if (!o) {
+    o = document.createElement("div"); o.id = "direct-saint";
+    o.style.cssText = "position:fixed;inset:0;z-index:9000;background:#000;color:#fff;display:flex;flex-direction:column;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)";
+    document.body.appendChild(o);
+  }
+  const d = DIRECTS_SAINTS[i];
+  o.innerHTML = `<div style="display:flex;align-items:center;gap:10px;padding:12px 14px">
+      <button id="ds-x" aria-label="Fermer" style="width:42px;height:42px;border-radius:50%;border:0;background:rgba(255,255,255,.14);color:#fff;font-size:22px;flex:none">✕</button>
+      <div style="flex:1;min-width:0"><b style="font-size:17px">${d.ic} ${esc(d.nom)} · en direct</b><div dir="rtl" style="font-size:14px;opacity:.75;text-align:left">${esc(d.ar)}</div></div>
+      <span style="background:#d93025;color:#fff;font-size:12px;font-weight:700;padding:3px 8px;border-radius:6px">● DIRECT</span></div>
+    <div style="flex:1;display:flex;align-items:center;justify-content:center;min-height:0">
+      <div style="width:100%;aspect-ratio:16/9;max-height:100%;background:#111">
+        <iframe src="https://www.youtube.com/embed/live_stream?channel=${d.ch}&autoplay=1&playsinline=1&rel=0&modestbranding=1&fs=1" title="${esc(d.nom)} en direct"
+          sandbox="allow-scripts allow-same-origin allow-presentation" referrerpolicy="strict-origin-when-cross-origin"
+          allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen style="width:100%;height:100%;border:0"></iframe></div></div>
+    <div style="display:flex;gap:10px;justify-content:center;padding:14px">${DIRECTS_SAINTS.map((x, k) => `<button data-k="${k}" style="padding:11px 18px;border-radius:22px;border:1px solid rgba(255,255,255,.35);background:${k === i ? "#F2C43D" : "transparent"};color:${k === i ? "#0E1A33" : "#fff"};font:inherit;font-weight:700;font-size:15px">${x.ic} ${esc(x.nom)}</button>`).join("")}</div>
+    <p style="text-align:center;font-size:13px;opacity:.6;margin:0 16px 14px">Image noire ? La chaîne n'est peut-être pas en direct en ce moment : réessayez plus tard.</p>`;
+  o.querySelector("#ds-x").onclick = () => o.remove();
+  o.querySelectorAll("[data-k]").forEach(b => b.onclick = () => ouvrirDirectSaint(+b.dataset.k));
+}
 const SERIE_OBJ = {};
 function jouerSerie(sr, i) {
   const o = SERIE_OBJ[sr.ids[i]]; if (!o) return;
@@ -6145,7 +6176,7 @@ async function vueCoranAccueil() {
 .ca-av{width:44px;height:44px;flex:none;border-radius:50%;background:var(--vert-clair,#e3f1e8);color:var(--vert,#12805f);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px}.ca-n{border-radius:12px}.ca-go{margin-inline-start:auto;color:var(--vert,#12805f);font-size:20px;flex:none}
 .ca-sec{margin:14px 2px 8px;font-size:12px;font-weight:800;color:var(--vert,#12805f);text-transform:uppercase;letter-spacing:.04em}
 .ca-hero{border-radius:20px;background:linear-gradient(135deg,#0b3d2e,#12805f);color:#fff;padding:18px;text-align:center;margin-bottom:10px}.ca-hero .ar{font-family:'Amiri Quran','Amiri',serif;font-size:30px;color:#d4af37;line-height:1.6}</style>
-    <div class="ca-ps" role="tablist"><button class="ca-p" data-o="lire" role="tab">📖 Lire</button><button class="ca-p" data-o="ecouter" role="tab">🎧 Écouter</button><button class="ca-p" data-o="tafsir" role="tab">📚 Tafsir</button></div><div id="ca-z"></div>`);
+    <div class="ca-ps" role="tablist"><button class="ca-p" data-o="lire" role="tab">📖 Lire</button><button class="ca-p" data-o="ecouter" role="tab">🎧 Écouter</button><button class="ca-p" data-o="tafsir" role="tab">📚 Tafsir</button><button class="ca-p" id="ca-direct">🕋 Direct</button></div><div id="ca-z"></div>`);
   const z = w.querySelector("#ca-z");
   let onglet = etat.params.onglet || chargerLocal("coran_onglet", "lire");
   let donnees = null;
@@ -6240,6 +6271,7 @@ async function vueCoranAccueil() {
     (o === "ecouter" ? vueEcouter : o === "tafsir" ? vueTafsir : vueLire)();
   };
   w.querySelectorAll(".ca-ps [data-o]").forEach(b => b.onclick = () => montrer(b.dataset.o));
+  w.querySelector("#ca-direct").onclick = () => ouvrirDirectSaint(0);
   montrer(["lire", "ecouter", "tafsir"].includes(onglet) ? onglet : "lire");
 }
 async function vueBibliotheque() {
