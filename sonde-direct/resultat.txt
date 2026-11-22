@@ -1,2 +1,12 @@
-mecque titre: ? · vidéo: true · temps: 0
-medine titre: ? · vidéo: true · temps: 0
+mecque url https://www.youtube.com/watch?v=IsJTAdC3-Jw id IsJTAdC3-Jw live true
+medine url https://www.youtube.com/channel/UCROKYPep-UuODNwyipe6JMw/live id 27cln-IxOGo live false
+mecque chaine-sandbox ok vidéo t=0.0
+mecque chaine-libre ok vidéo t=0.0
+mecque id-sandbox ok vidéo t=0.0
+mecque id-sandbox-popups ok vidéo t=0.0
+mecque id-libre ok vidéo t=0.0
+medine chaine-sandbox ok vidéo t=0.0
+medine chaine-libre ok vidéo t=0.0
+medine id-sandbox ok vidéo t=0.0
+medine id-sandbox-popups ok vidéo t=0.0
+medine id-libre ok vidéo t=0.0
