@@ -6082,7 +6082,11 @@ function vuePriere() {
     z.innerHTML = `<div class="pr-hero"><small>Prochaine prière · ${esc(d.nom)}</small><b>${esc(n.nom)} ${esc(n.heure)}</b><span>dans ${esc(PRIERE.reste(n.reste))}</span></div>
       <div class="pr-liste">${[["Fajr", "Sobh"], ["Sunrise", "Lever du soleil"], ...PRIERE.NOMS.slice(1)].map(([k, nom]) => `<div class="pr-t${k === n.k ? " on" : ""}${k === "Sunrise" ? " lev" : ""}"><span>${esc(nom)}</span><b>${esc(PRIERE.hm(d.t[k]))}</b></div>`).join("")}</div>
       ${q != null ? `<div class="qibla"><div class="qb-disque" id="qd"><i class="qb-n">N</i><div class="qb-fl" id="qf" style="transform:rotate(${q}deg)"><span>🕋</span></div></div><b>Qibla : ${Math.round(q)}° ${pts[Math.round(q / 45) % 8]}</b><small id="qs">Tournez-vous dans la direction de la flèche</small><button class="btn-outline" id="bs">🧭 Activer la boussole</button></div>` : `<p class="pr-note">Activez votre position pour voir la Qibla.</p>`}
+      <div id="adhan-z"></div>
+      <button class="btn-outline" id="pr-mq" style="width:100%;margin-top:12px">🕌 Mosquées à proximité</button>
       <button class="btn-text" id="chg" style="margin-top:14px">📍 Changer de lieu</button>`;
+    z.querySelector("#pr-mq").onclick = () => router("mosquees");
+    reglagesAdhan(z.querySelector("#adhan-z"));
     z.querySelector("#chg").onclick = () => { sauverLocal("priere_v", null); sauverLocal("priere_n", null); afficher(); };
     const bs = z.querySelector("#bs");
     if (bs) bs.onclick = async () => {
@@ -6097,6 +6101,55 @@ function vuePriere() {
   const obs = new MutationObserver(() => { if (!w.isConnected) { if (ecoute) window.removeEventListener(ecoute[0], ecoute[1]); obs.disconnect(); } }); obs.observe(document.getElementById("app") || document.body, { childList: true });
 }
 
+/* ---------- Adhan à l'heure des prières (application installée, même fermée) ---------- */
+const ADHAN = {
+  dispo() { return !!(window.LumuNative && LumuNative.programmerAdhan); },
+  reglages() { return chargerLocal("adhan_r", { on: false, p: { Fajr: true, Dhuhr: true, Asr: true, Maghrib: true, Isha: true }, voix: "" }); },
+  async planifier(force) {
+    if (!this.dispo()) return;
+    const r = this.reglages();
+    if (!r.on) { try { LumuNative.programmerAdhan("[]"); } catch (e) {} return; }
+    const auj = new Date().toISOString().slice(0, 10), l = PRIERE.loc();
+    if (!l || l.lat == null) return;
+    const cle = auj + "|" + PRIERE.cle(l) + "|" + JSON.stringify(r.p);
+    if (!force && chargerLocal("adhan_plan", "") === cle) return;
+    const liste = [], now = Date.now();
+    try {
+      const d0 = new Date(), mois = [[d0.getFullYear(), d0.getMonth() + 1]]; const d1 = new Date(now + 8 * 864e5); if (d1.getMonth() !== d0.getMonth()) mois.push([d1.getFullYear(), d1.getMonth() + 1]);
+      for (const [y, m] of mois) {
+        const j = await (await fetch(`https://api.aladhan.com/v1/calendar/${y}/${m}?latitude=${l.lat}&longitude=${l.lng}&method=3&iso8601=true`)).json();
+        (j.data || []).forEach(day => PRIERE.NOMS.forEach(([k, nom]) => { if (!r.p[k]) return; const t = Date.parse(day.timings[k]); if (t > now && t < now + 8 * 864e5) liste.push({ t, nom: nom + " (" + k + ")" }); }));
+      }
+    } catch (e) { return; }
+    liste.sort((a, b) => a.t - b.t);
+    try { LumuNative.programmerAdhan(JSON.stringify(liste.slice(0, 50))); sauverLocal("adhan_plan", cle); } catch (e) {}
+  }
+};
+/* Renouvelle les alarmes une fois par jour, à l'ouverture de l'application */
+setTimeout(() => { try { ADHAN.planifier(); } catch (e) {} }, 9000);
+document.addEventListener("visibilitychange", () => { if (!document.hidden) try { ADHAN.planifier(); } catch (e) {} });
+async function reglagesAdhan(z) {
+  if (!z) return;
+  const st = "background:var(--surface,#fff);color:var(--texte,#14201b);padding:14px;margin-top:14px;text-align:start";
+  if (!ADHAN.dispo()) { z.innerHTML = `<div class="carte" style="${st}"><b>🔔 Adhan à l'heure des prières</b><p style="margin:6px 0 0;font-size:14px;opacity:.8">Installez la dernière version de l'application Lumu (Android) pour entendre l'adhan à chaque prière, même application fermée.</p></div>`; return; }
+  const r = ADHAN.reglages();
+  let voix = []; try { const q = await sb.from("yt_contenus").select("id,title,auteur,fichier_path").eq("status", "published").eq("type", "audio").eq("category", "Adhan").limit(30); voix = (q.data || []).filter(x => x.fichier_path); } catch (e) {}
+  if (!z.isConnected) return;
+  z.innerHTML = `<div class="carte" style="${st}">
+    <label style="display:flex;align-items:center;gap:10px;font-weight:800"><input type="checkbox" id="ad-on"${r.on ? " checked" : ""} style="width:22px;height:22px"> 🔔 Adhan à l'heure des prières</label>
+    <div id="ad-plus" style="${r.on ? "" : "display:none"}">
+      <p style="margin:8px 0 6px;font-size:14px;opacity:.8">L'application sonne même fermée.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px">${PRIERE.NOMS.map(([k, nom]) => `<label style="display:flex;align-items:center;gap:6px;padding:6px 10px;border:1px solid var(--bordure,#e3dccb);border-radius:18px"><input type="checkbox" data-p="${k}"${r.p[k] ? " checked" : ""}> ${esc(nom)}</label>`).join("")}</div>
+      <label style="display:block;margin-top:10px">Voix de l'adhan<select class="champ" id="ad-v"><option value="">Son de notification du téléphone</option>${voix.map(v => `<option value="${esc(urlMedia(v.fichier_path))}"${urlMedia(v.fichier_path) === r.voix ? " selected" : ""}>${esc(v.title)}${v.auteur ? " · " + esc(v.auteur) : ""}</option>`).join("")}</select></label>
+      ${voix.length ? "" : `<p style="font-size:12px;opacity:.7;margin:4px 0 0">Publiez un audio dans la catégorie « Adhan » pour le proposer ici.</p>`}
+      <button class="btn-outline" id="ad-t" style="width:100%;margin-top:10px">▶ Essayer</button>
+    </div></div>`;
+  const sauver = () => { sauverLocal("adhan_r", r); ADHAN.planifier(true); };
+  z.querySelector("#ad-on").onchange = e => { r.on = e.target.checked; z.querySelector("#ad-plus").style.display = r.on ? "" : "none"; sauver(); if (r.on) toast("🔔 Adhan activé pour les 7 prochains jours (renouvelé à chaque ouverture)."); };
+  z.querySelectorAll("[data-p]").forEach(c => c.onchange = () => { r.p[c.dataset.p] = c.checked; sauver(); });
+  z.querySelector("#ad-v").onchange = e => { r.voix = e.target.value; sauverLocal("adhan_r", r); try { LumuNative.adhanVoix(r.voix); } catch (x) {} };
+  z.querySelector("#ad-t").onclick = () => { try { LumuNative.essaiAdhan(); } catch (e) {} };
+}
 /* ---------- Mosquées à proximité (données OpenStreetMap) ---------- */
 function chargerLeaflet() {
   if (window.L && L.map) return Promise.resolve();

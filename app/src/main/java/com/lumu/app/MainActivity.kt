@@ -65,6 +65,24 @@ class MainActivity : AppCompatActivity() {
     /** Exposé à la page : adresse publique du site pour les liens de partage. */
     inner class PontNatif {
         @JavascriptInterface fun site(): String = BuildConfig.SITE_URL
+        // Adhan : la page envoie les prochaines heures de prière ; l'application sonne même fermée
+        @JavascriptInterface fun programmerAdhan(json: String?) { try { Adhan.programmer(applicationContext, json ?: "[]") } catch (e: Exception) {} }
+        // Voix de l'adhan : fichier audio (https) téléchargé une fois sur le téléphone ; vide = son du téléphone
+        @JavascriptInterface fun adhanVoix(url: String?) {
+            val f = Adhan.fichier(applicationContext)
+            if (url.isNullOrEmpty() || !url.startsWith("https://")) { f.delete(); return }
+            Thread {
+                try {
+                    val c = URL(url).openConnection() as HttpURLConnection
+                    c.connectTimeout = 15000; c.readTimeout = 30000
+                    val tmp = File(applicationContext.filesDir, "adhan.tmp")
+                    c.inputStream.use { i -> tmp.outputStream().use { o -> i.copyTo(o) } }
+                    if (tmp.length() > 10000) tmp.renameTo(f) else tmp.delete()
+                } catch (e: Exception) {}
+            }.start()
+        }
+        // Essai immédiat de l'adhan
+        @JavascriptInterface fun essaiAdhan() { try { val s = Intent(applicationContext, AdhanService::class.java).putExtra("nom", "Essai"); if (android.os.Build.VERSION.SDK_INT >= 26) startForegroundService(s) else startService(s) } catch (e: Exception) {} }
         // Ouvre l'écran système « Diffuser » (Smart View / Cast) pour afficher le téléphone sur la télévision
         @JavascriptInterface fun diffuserEcran() {
             runOnUiThread {
