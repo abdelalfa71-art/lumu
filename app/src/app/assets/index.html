@@ -2137,7 +2137,7 @@ window.addEventListener("lumu-donnees", () => {
 });
 function render(rafraichi) {
   RENDU = { t: Date.now(), route: etat.route, refait: !!rafraichi };
-  if (document.getElementById("direct-saint")) fermerDirectSaint();
+  { const ds = document.getElementById("direct-saint"); if (ds && !ds.dataset.mini) fermerDirectSaint(); }
   nettoyerDirect();
   app.innerHTML = "";
   app.className = "entree";
@@ -2147,7 +2147,7 @@ function render(rafraichi) {
     "mot-de-passe-oublie": vueMotDePasseOublie, "nouveau-mot-de-passe": vueNouveauMotDePasse,
     "changer-mot-de-passe": vueChangerMotDePasse,
     "pin-verrou": vuePinVerrou, "pin-creation": vuePinCreation, "arabe": vueArabe,
-    "presentation": vuePresentation, "tarifs": vueTarifs, "videos": vueFlux, "affiches": vueAffiches, "coran": vueCoran, "coran-accueil": vueCoranAccueil, "questions": vueQuestions, "questions-imam": vueQuestionsImam, "parcours": vueParcours, "parcours-voir": vueParcoursVoir, "passage": vuePassage, "parcours-revoir": vueRevoir, "mes-parcours": vueMesParcours, "parcours-edit": vueParcoursEdit, "passage-edit": vuePassageEdit, "home": vueDecouvrir, "savants": vueSavants, "preches": vuePreches, "priere": vuePriere, "langues-choix": vueLanguesChoix, "tutoriel": vueTutoriel, "biblio": vueBiblio, "dossier": vueDossier, "direct": vueDirect, "chaine-edit": vueChaineEdit, "notifications": vueNotifications, "publier": vuePublier, "je-publie": vueJePublie, "profil": vueProfil, "contenu": vueContenu,
+    "presentation": vuePresentation, "tarifs": vueTarifs, "videos": vueFlux, "affiches": vueAffiches, "coran": vueCoran, "coran-accueil": vueCoranAccueil, "radios": vueRadios, "questions": vueQuestions, "questions-imam": vueQuestionsImam, "parcours": vueParcours, "parcours-voir": vueParcoursVoir, "passage": vuePassage, "parcours-revoir": vueRevoir, "mes-parcours": vueMesParcours, "parcours-edit": vueParcoursEdit, "passage-edit": vuePassageEdit, "home": vueDecouvrir, "savants": vueSavants, "preches": vuePreches, "priere": vuePriere, "langues-choix": vueLanguesChoix, "tutoriel": vueTutoriel, "biblio": vueBiblio, "dossier": vueDossier, "direct": vueDirect, "chaine-edit": vueChaineEdit, "notifications": vueNotifications, "publier": vuePublier, "je-publie": vueJePublie, "profil": vueProfil, "contenu": vueContenu,
     "langue": vueLangue, "fil": vueFlux, "flux": vueEcouter, "radio": vueFlux, "recherche": vueRecherche, "abos": vueAbos, "espace": vueEspace, "importer": vueImport, "reels": vueFlux, "groupes": vueGroupes, "groupe": vueGroupe, "discussions": vueDiscussions, "conv": vueConv, "groupe-nouveau": vueNouveauGroupe, "livres": vueBibliotheque, "regroupements": vueRegroupements, "biblio-lire": vueBiblioLire, "azkar": vueAzkar, "bases": vueBases, "livre": vueLivre, "mes-livres": vueMesLivres, "livre-edition": vueEditeurLivre, "lives": vueLives, "live": vueLive, "live-nouveau": vueNouveauLive, "devenir-createur": vueDevenirCreateur, "admin": vueAdmin, "push-admin": vuePushAdmin, "mes-contenus": vueMesContenus, "legal": vueLegal, "lien": vueLien, "chaine": vueChaine, "playlist": vuePlaylist, "playlists": vuePlaylists, "stats": vueStats, "abonnements": vueAbonnements, "favoris": vueListeUtilisateur, "historique": vueListeUtilisateur, "hors": vueHors
   };
   document.body.classList.toggle("branche-tobi", TOBI_ROUTES.includes(etat.route));
@@ -4376,7 +4376,7 @@ const AUD = {
     m.id = "mini-audio"; m.hidden = true;
     m.innerHTML = `<button class="ma-info" aria-label="Ouvrir la lecture"><img alt=""><span><b dir="auto"></b><small></small></span></button><button class="ma-pp" aria-label="Lecture / pause"></button><button class="ma-x" aria-label="Fermer">✕</button><i class="ma-barre"><b></b></i>`;
     document.body.appendChild(m);
-    m.querySelector(".ma-info").onclick = () => { if (this.c) router("contenu", { id: this.c.id, c: this.c }); };
+    m.querySelector(".ma-info").onclick = () => { if (!this.c) return; if (this.c.radio) router("radios"); else router("contenu", { id: this.c.id, c: this.c }); };
     m.querySelector(".ma-pp").onclick = () => this.basculer();
     m.querySelector(".ma-x").onclick = () => this.arreter();
     document.addEventListener("play", ev => { const a = this.a; if (ev.target !== a && ev.target.tagName === "VIDEO" && !a.paused && !(RADIO.actif && ev.target.muted)) a.pause(); }, true);
@@ -4427,7 +4427,7 @@ const AUD = {
     }
   },
   envoyer() {
-    if (this.acc >= 5 && this.c) { const sec = Math.round(this.acc); this.acc = 0; sb.rpc("yt_temps_vu", { p_id: this.c.id, p_sec: sec }).then(() => {}, () => {}); }
+    if (this.acc >= 5 && this.c && !this.c.radio) { const sec = Math.round(this.acc); this.acc = 0; sb.rpc("yt_temps_vu", { p_id: this.c.id, p_sec: sec }).then(() => {}, () => {}); }
   },
   jouer(c, suiv, prec) {
     this.init();
@@ -4443,7 +4443,7 @@ const AUD = {
       if (/^blob:/.test(src)) this.blobUrl = src;
       a.src = src; this.srcOrig = src; this.converti = false;
       a.playbackRate = this.vit;
-      const reprendre = () => { a.removeEventListener("loadedmetadata", reprendre); if (p > 10 && a.duration && p < a.duration - 15) { try { a.currentTime = p; } catch (e) {} } };
+      const reprendre = () => { a.removeEventListener("loadedmetadata", reprendre); if (!c.radio && p > 10 && a.duration && p < a.duration - 15) { try { a.currentTime = p; } catch (e) {} } };
       a.addEventListener("loadedmetadata", reprendre);
       this.lire();
       this.sessionMedia();
@@ -4711,7 +4711,27 @@ function pleinEcranDirect(on) {
   }
   return natif;
 }
-function fermerDirectSaint() { const o = document.getElementById("direct-saint"); if (!o) return; o.remove(); pleinEcranDirect(false); window.removeEventListener("resize", tournerDirect); }
+function fermerDirectSaint() { const o = document.getElementById("direct-saint"); if (!o) return; o.remove(); if (!o.dataset.mini) pleinEcranDirect(false); window.removeEventListener("resize", tournerDirect); }
+/* Pendant le direct, aucun autre son : toute vidéo/audio qui démarre est mise en pause ;
+   en petite fenêtre, lancer un autre audio ferme le direct. */
+document.addEventListener("play", e => {
+  const o = document.getElementById("direct-saint"), m = e.target;
+  if (!o || !m || !/^(VIDEO|AUDIO)$/.test(m.tagName)) return;
+  if (o.dataset.mini) { fermerDirectSaint(); return; }
+  try { m.pause(); } catch (x) {}
+}, true);
+function arreterMedias() { document.querySelectorAll("video, audio").forEach(v => { try { v.pause(); } catch (e) {} }); try { if (AUD.a && !AUD.a.paused) AUD.basculer(); } catch (e) {} }
+/* Petite fenêtre : le direct continue dans un coin pendant qu'on navigue */
+function reduireDirect(on) {
+  const o = document.getElementById("direct-saint"); if (!o) return;
+  if (on) { o.dataset.mini = "1"; if (o.dataset.natif) pleinEcranDirect(false); }
+  else { delete o.dataset.mini; if (pleinEcranDirect(true)) o.dataset.natif = "1"; }
+  tournerDirect();
+  const ui = o.querySelector("#ds-ui"), tap = o.querySelector("#ds-tap"), mx = o.querySelector("#ds-mx");
+  if (ui) ui.style.display = on ? "none" : "flex";
+  if (tap) tap.style.cssText = on ? "position:absolute;inset:0" : "position:absolute;left:0;right:0;top:0;height:56px";
+  if (mx) mx.style.display = on ? "flex" : "none";
+}
 /* Qualité : YouTube choisit la définition selon la taille du lecteur. On dessine le lecteur deux fois plus grand
    puis on le réduit à la taille de l'écran : YouTube envoie alors la HD (720p/1080p) si la connexion le permet. */
 function ajusterQualiteDirect() {
@@ -4724,21 +4744,23 @@ function tournerDirect() {
   const o = document.getElementById("direct-saint"); if (!o) return;
   /* Téléphone tenu en portrait sans rotation possible : on tourne l'image de 90° pour remplir l'écran */
   const portrait = innerHeight > innerWidth && !o.dataset.natif;
+  if (o.dataset.mini) { const L = Math.min(260, innerWidth * .62); o.style.cssText = `position:fixed;right:12px;bottom:calc(178px + env(safe-area-inset-bottom));width:${L}px;height:${L * 9 / 16}px;z-index:2147483000;background:#000;border-radius:12px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.45)`; ajusterQualiteDirect(); return; }
   o.style.cssText = portrait
     ? `position:fixed;top:0;left:0;width:${innerHeight}px;height:${innerWidth}px;transform:translateX(${innerWidth}px) rotate(90deg);transform-origin:top left;z-index:2147483000;background:#000;color:#fff;overflow:hidden`
     : "position:fixed;inset:0;z-index:2147483000;background:#000;color:#fff;overflow:hidden";
   ajusterQualiteDirect();
 }
 async function ouvrirDirectSaint(i) {
-  try { if (AUD.a && !AUD.a.paused) AUD.basculer(); } catch (e) {}
+  arreterMedias();
   let o = document.getElementById("direct-saint");
+  if (o && o.dataset.mini) { reduireDirect(false); if (o.dataset.k == i) return; }
   if (!o) {
     o = document.createElement("div"); o.id = "direct-saint"; document.body.appendChild(o);
     if (pleinEcranDirect(true)) o.dataset.natif = "1";
     window.addEventListener("resize", tournerDirect);
   }
   tournerDirect();
-  const d = DIRECTS_SAINTS[i];
+  const d = DIRECTS_SAINTS[i]; o.dataset.k = i;
   o.innerHTML = `<div style="height:100%;display:flex;align-items:center;justify-content:center"><div class="spin"></div></div>`;
   const info = (await infoDirects())[d.k] || {};
   if (!o.isConnected) return;
@@ -4753,13 +4775,38 @@ async function ouvrirDirectSaint(i) {
       <button id="ds-x" aria-label="Fermer" style="width:40px;height:40px;border-radius:50%;border:0;background:rgba(255,255,255,.18);color:#fff;font-size:20px;flex:none">✕</button>
       <b style="font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${d.ic} ${esc(d.nom)}</b>
       ${enDirect ? `<span style="background:#d93025;color:#fff;font-size:11px;font-weight:700;padding:3px 7px;border-radius:6px;flex:none">● DIRECT</span>` : ""}
-      <span style="flex:1"></span>${DIRECTS_SAINTS.map(bouton).join("")}</div>`;
+      <span style="flex:1"></span>${DIRECTS_SAINTS.map(bouton).join("")}
+      <button id="ds-audio" title="Écouter seulement (écran éteint possible)" style="padding:9px 12px;border-radius:22px;border:1px solid rgba(255,255,255,.4);background:rgba(0,0,0,.45);color:#fff;font:inherit;font-weight:700;font-size:14px">🎧</button>
+      ${enDirect ? `<button id="ds-mini" title="Petite fenêtre" style="padding:9px 12px;border-radius:22px;border:1px solid rgba(255,255,255,.4);background:rgba(0,0,0,.45);color:#fff;font:inherit;font-weight:700;font-size:14px">⧉</button>` : ""}
+      ${window.LumuNative && LumuNative.diffuserEcran ? `<button id="ds-tv" title="Sur la télévision" style="padding:9px 12px;border-radius:22px;border:1px solid rgba(255,255,255,.4);background:rgba(0,0,0,.45);color:#fff;font:inherit;font-weight:700;font-size:14px">📺</button>` : ""}</div>
+    <div id="ds-mx" style="display:none;position:absolute;top:4px;right:4px;gap:4px"><button id="ds-mx-x" aria-label="Fermer" style="width:30px;height:30px;border-radius:50%;border:0;background:rgba(0,0,0,.6);color:#fff;font-size:15px">✕</button></div>`;
   ajusterQualiteDirect();
   const ui = o.querySelector("#ds-ui"); let t = 0;
   const montrer = () => { ui.style.opacity = "1"; ui.style.pointerEvents = "auto"; clearTimeout(t); if (enDirect) t = setTimeout(() => { ui.style.opacity = "0"; ui.style.pointerEvents = "none"; }, 4000); };
-  o.querySelector("#ds-tap").onclick = montrer; montrer();
+  o.querySelector("#ds-tap").onclick = () => { if (o.dataset.mini) reduireDirect(false); else montrer(); }; montrer();
   o.querySelector("#ds-x").onclick = fermerDirectSaint;
+  o.querySelector("#ds-mx-x").onclick = ev => { ev.stopPropagation(); fermerDirectSaint(); };
+  o.querySelector("#ds-audio").onclick = () => { fermerDirectSaint(); ecouterRadio(RADIO_SAOUDIE); toast("🎧 Radio du Coran d'Arabie saoudite : elle continue écran éteint."); };
+  { const bm = o.querySelector("#ds-mini"); if (bm) bm.onclick = () => reduireDirect(true); }
+  { const bt = o.querySelector("#ds-tv"); if (bt) bt.onclick = () => { try { LumuNative.diffuserEcran(); } catch (e) {} }; }
   o.querySelectorAll("[data-k]").forEach(b => b.onclick = () => ouvrirDirectSaint(+b.dataset.k));
+}
+/* Bandeau « en direct » sur l'accueil, avec les grands moments (heure de La Mecque) */
+async function banniereDirect(z) {
+  if (!z) return;
+  const info = await infoDirects(); if (!z.isConnected) return;
+  const m = info.mecque || {}, md = info.medine || {};
+  if (!(m.direct && m.id) && !(md.direct && md.id)) { z.innerHTML = ""; return; }
+  const mk = new Date(Date.now() + 3 * 3600e3), j = mk.getUTCDay(), h = mk.getUTCHours() + mk.getUTCMinutes() / 60;
+  let hj = {}; try { hj = hijri(); } catch (e) {}
+  let titre = "La Mecque en direct", sous = "Le Haram 24 h/24";
+  if (hj.m === 12 && hj.d === 9) { titre = "Jour de ʿArafat · en direct"; sous = "Suivez le grand jour du Hajj"; }
+  else if (hj.m === 12 && hj.d === 10 && h < 9) { titre = "Prière de l'Aïd al-Adha · en direct"; sous = "Depuis La Mecque"; }
+  else if (hj.m === 10 && hj.d === 1 && h < 9) { titre = "Prière de l'Aïd al-Fitr · en direct"; sous = "Depuis La Mecque"; }
+  else if (j === 5 && h >= 11.5 && h < 13.5) { titre = "Prière du vendredi · en direct"; sous = "Sermon et prière depuis La Mecque"; }
+  else if (hj.m === 9 && (h >= 19.5 || h < 1)) { titre = "Tarawih · en direct"; sous = "La prière de nuit du Ramadan depuis La Mecque"; }
+  z.innerHTML = `<button type="button" id="ec-live-b" style="display:flex;align-items:center;gap:12px;width:calc(100% - 32px);margin:0 16px 8px;padding:12px 16px;border:0;border-radius:16px;background:linear-gradient(135deg,#0E1A33,#1d3b2f);color:#fff;text-align:start;font:inherit"><span style="font-size:26px">🕋</span><span style="flex:1;min-width:0"><b style="display:block">${esc(titre)}</b><small style="opacity:.8">${esc(sous)}</small></span><span style="background:#d93025;font-size:11px;font-weight:700;padding:3px 7px;border-radius:6px">● DIRECT</span></button>`;
+  z.querySelector("#ec-live-b").onclick = () => ouvrirDirectSaint(m.direct ? 0 : 1);
 }
 const SERIE_OBJ = {};
 function jouerSerie(sr, i) {
@@ -6039,6 +6086,33 @@ function vuePriere() {
   const obs = new MutationObserver(() => { if (!w.isConnected) { if (ecoute) window.removeEventListener(ecoute[0], ecoute[1]); obs.disconnect(); } }); obs.observe(document.getElementById("app") || document.body, { childList: true });
 }
 
+/* ---------- Radios du Coran (mp3quran.net) ---------- */
+const RADIO_SAOUDIE = { id: 109082, ar: "إذاعة القرآن الكريم - السعودية", fr: "Radio du Coran · Arabie saoudite", url: "https://stream.radiojar.com/0tpy1h0kxtzuv" };
+let RADIOS_P = null;
+function chargerRadios() {
+  if (RADIOS_P) return RADIOS_P;
+  return (RADIOS_P = fetch("https://raw.githubusercontent.com/abdelalfa71-art/lumu/main/maj/radios.json?t=" + Math.floor(Date.now() / 864e5))
+    .then(r => r.ok ? r.json() : null).then(j => { const l = (j && j.radios) || []; if (l.length) sauverLocal("radios_coran", l); return l.length ? l : chargerLocal("radios_coran", [RADIO_SAOUDIE]); })
+    .catch(() => { RADIOS_P = null; return chargerLocal("radios_coran", [RADIO_SAOUDIE]); }));
+}
+function radioEnContenu(x) { return { id: "radio-" + x.id, type: "radio", title: x.fr && !/[\u0600-\u06FF]/.test(x.fr) ? x.fr : x.ar, fichier_path: x.url, yt_channels: { name: "📻 Radio en direct · " + x.ar }, radio: x }; }
+function ecouterRadio(x) { try { if (RADIO.actif) RADIO.stop(); } catch (e) {} AUD.jouer(radioEnContenu(x)); }
+async function vueRadios() {
+  const w = ecran("Radios du Coran", null, `<p style="margin:0 0 10px;opacity:.75">En direct 24 h/24 · très peu de données · continue écran éteint.</p>
+    <input id="rd-q" type="search" placeholder="Chercher un récitateur" style="width:100%;margin-bottom:12px"><div id="rd-l"><div class="centre"><div class="spin"></div></div></div>`);
+  const l = await chargerRadios(); if (!w.isConnected) return;
+  const vedette = /السعودية|تفسير|الرقية|أذكار|السيرة|المختصر/;
+  const ligne = x => `<button class="carte rd-it" data-id="${x.id}" style="display:flex;align-items:center;gap:12px;width:100%;text-align:start;margin-bottom:8px"><span style="font-size:24px">📻</span><span style="flex:1;min-width:0"><b dir="rtl" style="display:block">${esc(x.ar)}</b>${x.fr && x.fr !== x.ar ? `<small style="opacity:.7">${esc(x.fr)}</small>` : ""}</span><span class="rd-on" style="font-size:12px;font-weight:700;color:#d93025"></span></button>`;
+  const dessiner = q => {
+    const re = q ? new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "i") : null;
+    const ok = l.filter(x => !re || re.test(x.ar) || re.test(x.fr || ""));
+    const v = ok.filter(x => vedette.test(x.ar)).sort((a, b) => (/السعودية/.test(b.ar) ? 1 : 0) - (/السعودية/.test(a.ar) ? 1 : 0)), autres = ok.filter(x => !vedette.test(x.ar));
+    w.querySelector("#rd-l").innerHTML = (v.length ? `<div class="ec-tit">⭐ À la une</div>${v.map(ligne).join("")}` : "") + (autres.length ? `<div class="ec-tit">🎙️ Récitateurs</div>${autres.map(ligne).join("")}` : "") || `<p class="centre">Aucune radio trouvée.</p>`;
+    const actuel = AUD.c && AUD.c.radio && AUD.c.radio.id;
+    w.querySelectorAll(".rd-it").forEach(b => { const x = l.find(y => String(y.id) === b.dataset.id); if (String(actuel) === b.dataset.id) b.querySelector(".rd-on").textContent = "● EN COURS"; b.onclick = () => { ecouterRadio(x); dessiner(w.querySelector("#rd-q").value.trim()); }; });
+  };
+  dessiner(""); w.querySelector("#rd-q").oninput = e => dessiner(e.target.value.trim());
+}
 /* ---------- Lumu Radio ---------- */
 const RADIO = {
   actif: false, pool: null, slot: 0, deja: new Set(), cur: null, fin: 0, tm: null, titre: "", genre: "", charge: false,
@@ -6222,7 +6296,7 @@ async function vueCoranAccueil() {
 .ca-av{width:44px;height:44px;flex:none;border-radius:50%;background:var(--vert-clair,#e3f1e8);color:var(--vert,#12805f);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px}.ca-n{border-radius:12px}.ca-go{margin-inline-start:auto;color:var(--vert,#12805f);font-size:20px;flex:none}
 .ca-sec{margin:14px 2px 8px;font-size:12px;font-weight:800;color:var(--vert,#12805f);text-transform:uppercase;letter-spacing:.04em}
 .ca-hero{border-radius:20px;background:linear-gradient(135deg,#0b3d2e,#12805f);color:#fff;padding:18px;text-align:center;margin-bottom:10px}.ca-hero .ar{font-family:'Amiri Quran','Amiri',serif;font-size:30px;color:#d4af37;line-height:1.6}</style>
-    <div class="ca-ps" role="tablist"><button class="ca-p" data-o="lire" role="tab">📖 Lire</button><button class="ca-p" data-o="ecouter" role="tab">🎧 Écouter</button><button class="ca-p" data-o="tafsir" role="tab">📚 Tafsir</button><button class="ca-p" id="ca-direct">🕋 Direct</button></div><div id="ca-z"></div>`);
+    <div class="ca-ps" role="tablist"><button class="ca-p" data-o="lire" role="tab">📖 Lire</button><button class="ca-p" data-o="ecouter" role="tab">🎧 Écouter</button><button class="ca-p" data-o="tafsir" role="tab">📚 Tafsir</button><button class="ca-p" id="ca-direct">🕋 Direct</button><button class="ca-p" id="ca-radios">📻 Radios</button></div><div id="ca-z"></div>`);
   const z = w.querySelector("#ca-z");
   let onglet = etat.params.onglet || chargerLocal("coran_onglet", "lire");
   let donnees = null;
@@ -6318,6 +6392,7 @@ async function vueCoranAccueil() {
   };
   w.querySelectorAll(".ca-ps [data-o]").forEach(b => b.onclick = () => montrer(b.dataset.o));
   w.querySelector("#ca-direct").onclick = () => ouvrirDirectSaint(0);
+  w.querySelector("#ca-radios").onclick = () => router("radios");
   montrer(["lire", "ecouter", "tafsir"].includes(onglet) ? onglet : "lire");
 }
 async function vueBibliotheque() {
@@ -7177,6 +7252,8 @@ async function vueEcouter() {
       <div id="ec-moment"></div>
       <div id="ec-rep"></div>
       <div class="ec-ligne"><button class="ec-radio" id="ec-radio"><span class="ec-rp">${ico("play", 30, true)}</span><span><b>Lumu Radio</b><small>Rappels, Coran, invocations</small></span></button><select id="ec-cat" aria-label="Catégorie"><option value="">Tout</option><option value="coran">Coran</option><option value="cours">Cours</option><option value="rappels">Rappels</option></select></div>
+      <div id="ec-live"></div>
+      <button type="button" id="ec-radios" style="display:flex;align-items:center;gap:10px;width:calc(100% - 32px);margin:0 16px 8px;padding:12px 16px;border:1px solid #cfdcd4;border-radius:16px;background:var(--surface,#fff);color:inherit;text-align:start;font:inherit;font-weight:700"><span aria-hidden="true">📻</span><span style="flex:1">Radios du Coran <small style="font-weight:400;opacity:.7">· 24 h/24</small></span><span aria-hidden="true">›</span></button>
       <button type="button" id="ec-reg" style="display:flex;align-items:center;gap:10px;width:calc(100% - 32px);margin:0 16px 8px;padding:12px 16px;border:1px solid #cfdcd4;border-radius:16px;background:var(--surface,#fff);color:inherit;text-align:start;font:inherit;font-weight:700"><span aria-hidden="true">📚</span><span style="flex:1">Regroupements</span><span aria-hidden="true">›</span></button>
       <details class="ec-plus"><summary>Plus de choix ▾</summary><div class="ec-gros"><button id="eg-hors"><span>⬇</span>Mes audios</button><button id="eg-disc"><span>💬</span>Discuter</button><button id="eg-imams"><span>👥</span>Imams</button><button id="eg-q"><span>🔍</span>Chercher</button></div>
       <div class="ec-tit" id="ec-tit">Mes imams</div>
@@ -7236,6 +7313,8 @@ async function vueEcouter() {
     minRech = setTimeout(chercheEcoute, 300);
   };
   microChamp(w.querySelector("#ec-rin"));
+  w.querySelector("#ec-radios").onclick = () => router("radios");
+  banniereDirect(w.querySelector("#ec-live"));
   w.querySelector("#ec-radio").onclick = () => { router("radio"); setTimeout(() => { try { RADIO.demarrer(); } catch (e) {} }, 700); };
   const CH = [["", "Tout", null], ["coran", "Coran", /coran|quran|r[ée]citation/i], ["cours", "Cours", /cours|conf[ée]rence|[ée]ducation|pr[eê]che/i], ["rappels", "Rappels", /rappel|invocation|dou?a|dhikr/i]];
   const DLP = {};

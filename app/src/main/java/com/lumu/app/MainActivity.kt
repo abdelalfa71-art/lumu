@@ -65,6 +65,14 @@ class MainActivity : AppCompatActivity() {
     /** Exposé à la page : adresse publique du site pour les liens de partage. */
     inner class PontNatif {
         @JavascriptInterface fun site(): String = BuildConfig.SITE_URL
+        // Ouvre l'écran système « Diffuser » (Smart View / Cast) pour afficher le téléphone sur la télévision
+        @JavascriptInterface fun diffuserEcran() {
+            runOnUiThread {
+                val essais = listOf(Intent("android.settings.CAST_SETTINGS"), Intent("android.settings.WIFI_DISPLAY_SETTINGS"), Intent(android.provider.Settings.ACTION_WIRELESS_SETTINGS))
+                for (i in essais) { try { startActivity(i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)); return@runOnUiThread } catch (e: Exception) {} }
+                Toast.makeText(this@MainActivity, "Diffusion non disponible sur ce téléphone.", Toast.LENGTH_LONG).show()
+            }
+        }
         // Plein écran façon lecteur vidéo (directs de La Mecque / Médine) : paysage + barres système cachées
         @JavascriptInterface fun pleinEcran(actif: Boolean) {
             runOnUiThread {
