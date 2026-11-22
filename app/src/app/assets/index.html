@@ -4221,10 +4221,19 @@ async function vueHors() {
   let tri = "date";
   async function dessiner() {
     if (!w.isConnected) return;
-    const stock = await HORS.tous(), parId = new Map(stock.filter(x => x.blob || x.cache).map(x => [x.id, x]));
-    HORS.ids = new Set(parId.keys());
+    /* Seulement ce qui se lit vraiment sans connexion : fichier présent sur le téléphone (vérifié) */
+    const stock = await HORS.tous();
+    let ca = null; try { if ("caches" in window) ca = await caches.open(HORS.FICH); } catch (e) {}
+    const lisibles = [];
+    for (const x of stock) {
+      if (x.blob && x.blob.size > 0) { lisibles.push(x); continue; }
+      if (x.cache && ca) { try { if (await ca.match(x.cache)) { lisibles.push(x); continue; } } catch (e) {} }
+      if (x.cache || x.blob) HORS.retirer(x.id);
+    }
+    const parId = new Map(lisibles.map(x => [x.id, x]));
+    HORS.ids = new Set(parId.keys()); HORS.manuels = new Set(lisibles.filter(x => x.manuel).map(x => x.id));
     const liste = []; const vus = new Set();
-    HORS.recents().forEach(m => { liste.push({ m, r: parId.get(m.id), t: m.ecoute || 0 }); vus.add(m.id); });
+    HORS.recents().forEach(m => { const r = parId.get(m.id); if (!r) return; liste.push({ m, r, t: m.ecoute || 0 }); vus.add(m.id); });
     stock.filter(x => (x.blob || x.cache) && !vus.has(x.id)).forEach(x => liste.push({ m: x.meta, r: x, t: x.ts || 0 }));
     liste.sort((a, b) => b.t - a.t);
     if (tri === "taille") liste.sort((a, b) => ((b.r && b.r.taille) || 0) - ((a.r && a.r.taille) || 0));
@@ -4258,7 +4267,7 @@ async function vueHors() {
       }
       zone.appendChild(carte);
     });
-    if (!liste.length) zone.innerHTML = `<div class="centre">${lumuSVG(64)}<p style="margin-top:8px">Écoutez un audio : il apparaîtra ici.</p></div>`;
+    if (!liste.length) zone.innerHTML = `<div class="centre">${lumuSVG(64)}<p style="margin-top:8px">Aucun audio enregistré sur ce téléphone. Touchez ⬇ sur un audio pour l'écouter sans connexion.</p></div>`;
     const tot = [...parId.values()].reduce((a, x) => a + (x.taille || 0), 0);
     info.textContent = parId.size ? parId.size + " audio(s) · " + tailleLisible(tot) + " sur ce téléphone" : "";
   }
