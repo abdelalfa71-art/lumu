@@ -15,7 +15,7 @@ for (const [k, ch] of Object.entries(CH)) {
     try { await p.click('button:has-text("Accept all"), button:has-text("Tout accepter")', { timeout: 4000 }); } catch (e) {}
     await p.waitForTimeout(4000);
     const u = p.url(), html = await p.content();
-    live = /"isLiveNow":true/.test(html);
+    live = /"isLiveNow":true|"isLive":true|"isLiveContent":true/.test(html) && !/LIVE_STREAM_OFFLINE|"isUpcoming":true/.test(html);
     id = (/[?&]v=([\w-]{11})/.exec(u) || [])[1] || "";
   } catch (e) { console.log(k, e.message); }
   await p.close();
