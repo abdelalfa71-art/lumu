@@ -1718,7 +1718,7 @@ function vueFlux() {
   wrap.innerHTML = `<div class="flux-haut">${reelsSeuls ? `<button class="flux-ic" id="retour" aria-label="Retour">${ico("back", 26)}</button><span class="flux-titre">${etat.route === "videos" ? "Vidéos" : "Reels"}</span>` : `<div class="flux-modes" id="modes" role="tablist"></div>`}<span class="flux-droite"><button class="flux-ic" id="micro-haut" aria-label="Recherche vocale">${ico("mic", 26)}</button><button class="flux-ic" id="son-haut" aria-label="Son">${ico("mute", 26)}</button><button class="flux-ic" id="chercher" aria-label="Rechercher">${ico("search", 26)}</button><button class="flux-ic" id="h-profil" aria-label="Mon profil">${ico("user", 26)}</button></span></div><div class="flux-defil" id="defil" tabindex="-1"></div>`;
   app.appendChild(wrap);
   const defil = wrap.querySelector("#defil");
-  let mode = "pour-vous", total = 0, enCours = false, fini = false, generation = 0, actif = null;
+  let mode = "pour-vous", total = 0, enCours = false, fini = false, generation = 0, actif = null, deja = [], ordre = null, posO = 0;
   const mesLikes = new Set(), mesFavs = new Set(), mesAbos = new Set();
   wrap.querySelector("#chercher").onclick = () => router("recherche");
   wrap.querySelector("#h-profil").onclick = () => router("profil");
@@ -1732,7 +1732,7 @@ function vueFlux() {
     const z = wrap.querySelector("#modes"); if (!z) return; z.innerHTML = "";
     [["abonnements", "Abonnements"], ["pour-vous", "Pour vous"]].forEach(([k, n]) => {
       const b = document.createElement("button"); b.className = "flux-mode" + (k === mode ? " actif" : ""); b.textContent = n; b.setAttribute("role", "tab"); b.setAttribute("aria-selected", k === mode);
-      b.onclick = () => { if (k === mode) return; mode = k; generation++; total = 0; fini = false; enCours = false; actif = null; defil.innerHTML = ""; dessinerModes(); charger(); };
+      b.onclick = () => { if (k === mode) return; mode = k; generation++; total = 0; fini = false; enCours = false; actif = null; deja = []; ordre = null; defil.innerHTML = ""; dessinerModes(); charger(); };
       z.appendChild(b);
     });
   }
@@ -1863,7 +1863,19 @@ function vueFlux() {
   }
 
   async function charger() {
-    if (enCours || fini) return;
+    if (enCours) return;
+    /* Fin de la liste : on recommence, dans un ordre aléatoire, sans fin */
+    if (fini) {
+      if (!deja.length || !wrap.isConnected) return;
+      const lot = [];
+      while (lot.length < Math.min(6, deja.length)) {
+        if (!ordre || posO >= ordre.length) { const der = lot[lot.length - 1] || (ordre && ordre[ordre.length - 1]); ordre = melanger(deja.slice()); if (ordre.length > 1 && der && ordre[0].id === der.id) ordre.push(ordre.shift()); posO = 0; }
+        lot.push(ordre[posO++]);
+      }
+      lot.forEach(c => defil.appendChild(diapo(c)));
+      const cible = defil.children[Math.max(defil.children.length - 3, 0)]; if (cible) obsSuite.observe(cible);
+      return;
+    }
     enCours = true;
     const g = generation;
     if (!total && !reelsSeuls && mode === "pour-vous" && !defil.querySelector(".radio")) defil.appendChild(radioSlide());
@@ -1876,10 +1888,11 @@ function vueFlux() {
       if (!wrap.isConnected || g !== generation) return;
       l.forEach(x => mesLikes.add(x)); f.forEach(x => mesFavs.add(x));
       const sk = defil.querySelector(".sk-diapo"); if (sk) sk.remove();
-      data.forEach(c => defil.appendChild(diapo(c)));
+      melanger(data).forEach(c => defil.appendChild(diapo(c)));
+      deja.push(...data);
       total += data.length;
       if (data.length < 6) fini = true;
-      else { const cible = defil.children[Math.max(defil.children.length - 3, 0)]; if (cible) obsSuite.observe(cible); }
+      if (total) { const cible = defil.children[Math.max(defil.children.length - 3, 0)]; if (cible) obsSuite.observe(cible); }
       if (!total) {
         const vide = document.createElement("section"); vide.className = "diapo vide";
         vide.innerHTML = mode === "abonnements" && !reelsSeuls
@@ -1895,7 +1908,7 @@ function vueFlux() {
     } catch (e) {
       if (g !== generation) return;
       const sk = defil.querySelector(".sk-diapo");
-      if (!total) { defil.innerHTML = `<section class="diapo vide">${lumuSVG(64)}<p>${erreurReseau(e) ? "Pas de connexion internet." : "Impossible de charger le flux."}</p><button class="btn" id="reessayer">Réessayer</button></section>`; defil.querySelector("#reessayer").onclick = () => { enCours = false; fini = false; defil.innerHTML = ""; charger(); }; }
+      if (!total) { defil.innerHTML = `<section class="diapo vide">${lumuSVG(64)}<p>${erreurReseau(e) ? "Pas de connexion internet." : "Impossible de charger le flux."}</p><button class="btn" id="reessayer">Réessayer</button></section>`; defil.querySelector("#reessayer").onclick = () => { enCours = false; fini = false; deja = []; ordre = null; defil.innerHTML = ""; charger(); }; }
     }
     enCours = false;
   }
@@ -7036,6 +7049,8 @@ async function vueEcouter() {
   const CH = [["", "Tout", null], ["coran", "Coran", /coran|quran|r[ée]citation/i], ["cours", "Cours", /cours|conf[ée]rence|[ée]ducation|pr[eê]che/i], ["rappels", "Rappels", /rappel|invocation|dou?a|dhikr/i]];
   const DLP = {};
   let tous = [], filtre = "", imams = [], abos = false, ecCharge = false;
+  /* Ordre aléatoire, tiré une fois par visite (stable quand on change de filtre) */
+  const ALEA = new Map(), alea = c => { if (!ALEA.has(c.id)) ALEA.set(c.id, Math.random()); return ALEA.get(c.id); };
   const liste = w.querySelector("#ec-liste");
   const joue = c => !!(AUD.c && AUD.c.id === c.id && AUD.a && !AUD.a.paused);
   /* Temps écoulé / durée d'un audio (en direct pour celui qui joue) */
@@ -7072,7 +7087,12 @@ async function vueEcouter() {
       const m = rech.toLowerCase(), nomDe = c => ((c.yt_channels && c.yt_channels.name) || c.source_nom || c.auteur || "");
       const loc = tous.filter(c => (c.title || "").toLowerCase().includes(m) || (c.description || "").toLowerCase().includes(m) || nomDe(c).toLowerCase().includes(m));
       const vus = new Set(loc.map(c => c.id)); l = [...loc, ...serveur.filter(c => !vus.has(c.id))];
-    } else l = tous.filter(c => !re || re.test(c.category || "") || re.test(c.title || ""));
+    } else {
+      /* Nouveautés (moins de 48 h) en tête, puis tout le reste dans un ordre aléatoire */
+      const neuf = c => c.published_at && Date.now() - new Date(c.published_at) < 48 * 3600e3;
+      l = tous.filter(c => !re || re.test(c.category || "") || re.test(c.title || ""));
+      l = [...l.filter(neuf), ...l.filter(c => !neuf(c)).sort((a, b) => alea(a) - alea(b))];
+    }
     { const ep = chargerLocal(EPING_CLE, []); l = [...l.filter(c => ep.includes(c.id)), ...l.filter(c => !ep.includes(c.id))]; }
     liste.innerHTML = l.length ? "" : `<p class="ec-vide">${rech ? "Aucun résultat." : (ecCharge ? "Aucun audio pour l'instant." : "Veuillez patienter…")}</p>`;
     if (!rech && fileAttente().length) {
@@ -7083,7 +7103,7 @@ async function vueEcouter() {
       d.querySelector(".ec-file-vide").onclick = () => { sauverLocal(FILE_CLE, []); document.dispatchEvent(new Event("file-maj")); };
       liste.appendChild(d);
     }
-    l.forEach(c => {
+    const ajouter = c => {
       const nom = c.source_nom || (c.yt_channels && c.yt_channels.name) || c.auteur || "";
       const cover = c.cover_path ? urlMedia(c.cover_path) : "";
       const el = document.createElement("div");
@@ -7127,8 +7147,26 @@ async function vueEcouter() {
       el.onclick = () => router("contenu", { id: c.id, c });
       el.onkeydown = ev => { if (ev.key === "Enter") { ev.preventDefault(); el.onclick(); } };
       liste.appendChild(el);
-    });
-    synchro();
+    };
+    /* Affichage par lots de 40 en défilant ; arrivé en bas, la liste recommence dans un nouvel ordre aléatoire (sauf en recherche) */
+    if (lignes.obs) { lignes.obs.disconnect(); lignes.obs = null; }
+    if (!l.length) { synchro(); return; }
+    let pos = 0, tour = l;
+    const sent = document.createElement("div"); sent.style.height = "1px";
+    const suite = () => {
+      if (!w.isConnected) { if (lignes.obs) lignes.obs.disconnect(); return; }
+      if (pos >= tour.length) {
+        if (rech) { sent.remove(); return; }
+        const der = tour[tour.length - 1]; tour = melanger(l.slice()); if (tour.length > 1 && tour[0].id === der.id) tour.push(tour.shift()); pos = 0;
+      }
+      const fin = Math.min(pos + 40, tour.length); for (; pos < fin; pos++) ajouter(tour[pos]);
+      liste.appendChild(sent); synchro();
+      /* Liste courte : on continue à remplir tant que le bas est proche */
+      requestAnimationFrame(() => { if (sent.isConnected && w.isConnected && sent.getBoundingClientRect().top < innerHeight + 800) suite(); });
+    };
+    suite();
+    lignes.obs = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting) && sent.isConnected) suite(); }, { rootMargin: "800px 0px" });
+    lignes.obs.observe(sent);
   }
   chips();
   (function reprise() {
@@ -7187,6 +7225,8 @@ async function vueEcouter() {
 }
 
 /* Cache local léger (dernière liste reçue), pour l'usage hors connexion */
+/* Mélange aléatoire (Fisher-Yates) */
+function melanger(a) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
 function cacheLocal(cle, donnees) { try { sauverLocal(cle, { t: Date.now(), d: donnees.slice(0, 60) }); } catch (e) {} }
 function lireCacheLocal(cle) { try { const x = chargerLocal(cle, null); return x && Array.isArray(x.d) && x.d.length ? x : null; } catch (e) { return null; } }
 function ec_notice(w, texte) {
