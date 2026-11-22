@@ -1415,7 +1415,7 @@ const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 const CACHE_API = (() => {
   const m = new Map(), enCours = new Map(), VIEUX = 7 * 864e5, MAX = 400, GROS = 2.5e6;
   const frais = url => /category\.eq\.Coran|yt_channels\?|yt_savants|yt_categories/.test(url) ? 6 * 3600e3 : 10 * 60e3;
-  const jamais = /^(yt_notifications|yt_dm|yt_lives|yt_statuts|yt_mes_conversations|yt_demandes_en_attente|yt_chercher_personnes|push_.*|yt_vue|yt_temps_vu|yt_assurer_profil|yt_dm_marquer_lu)$/;
+  const jamais = /^(yt_khatmas|yt_khatma_parts|yt_khatma_membres|yt_khatma_creer|yt_khatma_rejoindre|yt_notifications|yt_dm|yt_lives|yt_statuts|yt_mes_conversations|yt_demandes_en_attente|yt_chercher_personnes|push_.*|yt_vue|yt_temps_vu|yt_assurer_profil|yt_dm_marquer_lu)$/;
   const rpcLecture = /^(yt_recommandations|yt_suggestions|yt_rechercher|yt_rechercher_questions|yt_commentaires|yt_groupe_noms|yt_personne|yt_progression|yt_sondage_resultats|yt_stats_createur|yt_qualite|yt_ma_chaine)$/;
   /* Stockage durable (IndexedDB) */
   let db = null;
@@ -2153,7 +2153,7 @@ function render(rafraichi) {
     "mot-de-passe-oublie": vueMotDePasseOublie, "nouveau-mot-de-passe": vueNouveauMotDePasse,
     "changer-mot-de-passe": vueChangerMotDePasse,
     "pin-verrou": vuePinVerrou, "pin-creation": vuePinCreation, "arabe": vueArabe,
-    "presentation": vuePresentation, "tarifs": vueTarifs, "videos": vueFlux, "affiches": vueAffiches, "coran": vueCoran, "coran-accueil": vueCoranAccueil, "radios": vueRadios, "enfants": vueEnfants, "ramadan": vueRamadan, "mosquees": vueMosquees, "questions": vueQuestions, "questions-imam": vueQuestionsImam, "parcours": vueParcours, "parcours-voir": vueParcoursVoir, "passage": vuePassage, "parcours-revoir": vueRevoir, "mes-parcours": vueMesParcours, "parcours-edit": vueParcoursEdit, "passage-edit": vuePassageEdit, "home": vueDecouvrir, "savants": vueSavants, "preches": vuePreches, "priere": vuePriere, "langues-choix": vueLanguesChoix, "tutoriel": vueTutoriel, "biblio": vueBiblio, "dossier": vueDossier, "direct": vueDirect, "chaine-edit": vueChaineEdit, "notifications": vueNotifications, "publier": vuePublier, "je-publie": vueJePublie, "profil": vueProfil, "contenu": vueContenu,
+    "presentation": vuePresentation, "tarifs": vueTarifs, "videos": vueFlux, "affiches": vueAffiches, "coran": vueCoran, "coran-accueil": vueCoranAccueil, "radios": vueRadios, "enfants": vueEnfants, "ramadan": vueRamadan, "mosquees": vueMosquees, "khatma": vueKhatma, "khatma-voir": vueKhatmaVoir, "questions": vueQuestions, "questions-imam": vueQuestionsImam, "parcours": vueParcours, "parcours-voir": vueParcoursVoir, "passage": vuePassage, "parcours-revoir": vueRevoir, "mes-parcours": vueMesParcours, "parcours-edit": vueParcoursEdit, "passage-edit": vuePassageEdit, "home": vueDecouvrir, "savants": vueSavants, "preches": vuePreches, "priere": vuePriere, "langues-choix": vueLanguesChoix, "tutoriel": vueTutoriel, "biblio": vueBiblio, "dossier": vueDossier, "direct": vueDirect, "chaine-edit": vueChaineEdit, "notifications": vueNotifications, "publier": vuePublier, "je-publie": vueJePublie, "profil": vueProfil, "contenu": vueContenu,
     "langue": vueLangue, "fil": vueFlux, "flux": vueEcouter, "radio": vueFlux, "recherche": vueRecherche, "abos": vueAbos, "espace": vueEspace, "importer": vueImport, "reels": vueFlux, "groupes": vueGroupes, "groupe": vueGroupe, "discussions": vueDiscussions, "conv": vueConv, "groupe-nouveau": vueNouveauGroupe, "livres": vueBibliotheque, "regroupements": vueRegroupements, "biblio-lire": vueBiblioLire, "azkar": vueAzkar, "bases": vueBases, "livre": vueLivre, "mes-livres": vueMesLivres, "livre-edition": vueEditeurLivre, "lives": vueLives, "live": vueLive, "live-nouveau": vueNouveauLive, "devenir-createur": vueDevenirCreateur, "admin": vueAdmin, "push-admin": vuePushAdmin, "mes-contenus": vueMesContenus, "legal": vueLegal, "lien": vueLien, "chaine": vueChaine, "playlist": vuePlaylist, "playlists": vuePlaylists, "stats": vueStats, "abonnements": vueAbonnements, "favoris": vueListeUtilisateur, "historique": vueListeUtilisateur, "hors": vueHors
   };
   document.body.classList.toggle("branche-tobi", TOBI_ROUTES.includes(etat.route));
@@ -6192,6 +6192,65 @@ async function vueMosquees() {
     carte.fitBounds(pts.slice(0, 8), { padding: [24, 24], maxZoom: 16 });
   } catch (e) { const c = w.querySelector("#mq-carte"); if (c) c.remove(); }
 }
+/* ---------- Khatma en groupe : 30 juz partagés ---------- */
+const pseudoKhatma = () => (etat.profil && etat.profil.full_name) || chargerLocal("khatma_pseudo", "") || "";
+async function vueKhatma() {
+  if (!etat.parentId) { router("connexion", { message: "Connectez-vous pour lire le Coran en groupe." }); return; }
+  const w = ecran("Khatma en groupe", null, `<p style="margin:0 0 12px;opacity:.8">Lisez le Coran à plusieurs : chacun prend un ou plusieurs juz, et tout le monde voit l'avancement.</p>
+    <button class="btn" id="kh-new" style="width:100%">➕ Créer une khatma</button>
+    <div style="display:flex;gap:8px;margin:10px 0 16px"><input class="champ" id="kh-code" placeholder="Code reçu (ex. 4JXGTH)" maxlength="6" style="margin:0;text-transform:uppercase"><button class="btn-outline" id="kh-join" style="margin:0">Rejoindre</button></div>
+    <div class="ec-tit">Mes khatmas</div><div id="kh-l"><div class="centre"><div class="spin"></div></div></div>`);
+  const pseudo = async () => { let p = pseudoKhatma(); if (!p) { p = (prompt("Votre prénom (visible par le groupe) :") || "").trim().slice(0, 60); if (p) sauverLocal("khatma_pseudo", p); } return p; };
+  w.querySelector("#kh-new").onclick = async () => {
+    const nom = (prompt("Nom de la khatma (ex. Famille Diallo · Ramadan) :") || "").trim(); if (!nom) return;
+    const { data, error } = await sb.rpc("yt_khatma_creer", { p_nom: nom, p_pseudo: await pseudo() });
+    if (error || !data) { toast("Création impossible : " + ((error && error.message) || "réessayez")); return; }
+    router("khatma-voir", { id: data.id });
+  };
+  w.querySelector("#kh-join").onclick = async () => {
+    const code = w.querySelector("#kh-code").value.trim().toUpperCase(); if (code.length < 4) { toast("Entrez le code reçu."); return; }
+    const { data, error } = await sb.rpc("yt_khatma_rejoindre", { p_code: code, p_pseudo: await pseudo() });
+    if (error || !data) { toast(/inconnu/.test((error && error.message) || "") ? "Code inconnu." : "Impossible de rejoindre."); return; }
+    router("khatma-voir", { id: data });
+  };
+  const { data: ks } = await sb.from("yt_khatmas").select("id,nom,code,created_at,yt_khatma_parts(statut)").order("created_at", { ascending: false });
+  if (!w.isConnected) return;
+  const zl = w.querySelector("#kh-l");
+  zl.innerHTML = (ks || []).length ? ks.map(k => { const lus = (k.yt_khatma_parts || []).filter(p => p.statut === "lu").length, pris = (k.yt_khatma_parts || []).length; return `<button class="carte" data-id="${k.id}" style="display:flex;align-items:center;gap:12px;width:100%;text-align:start;margin-bottom:8px;font:inherit;background:var(--surface,#fff);color:var(--texte,#14201b)"><span style="font-size:26px">📖</span><span style="flex:1;min-width:0"><b dir="auto" style="display:block">${esc(k.nom)}</b><small style="opacity:.7">${lus}/30 lus · ${pris}/30 pris · code ${esc(k.code)}</small><i style="display:block;height:6px;border-radius:3px;background:var(--bordure,#e3dccb);margin-top:6px;overflow:hidden"><u style="display:block;height:100%;width:${lus * 100 / 30}%;background:#1b6b5c"></u></i></span><span>›</span></button>`; }).join("") : `<p style="opacity:.7">Aucune khatma pour l'instant.</p>`;
+  zl.querySelectorAll("[data-id]").forEach(b => b.onclick = () => router("khatma-voir", { id: b.dataset.id }));
+}
+async function vueKhatmaVoir() {
+  const id = etat.params.id; if (!id || !etat.parentId) { router("khatma"); return; }
+  const w = ecran("Khatma", ["khatma"], `<div id="kh-z"><div class="centre"><div class="spin"></div></div></div>`);
+  const z = w.querySelector("#kh-z");
+  const dessiner = async () => {
+    const [{ data: k }, { data: parts }] = await Promise.all([sb.from("yt_khatmas").select("id,nom,code,createur").eq("id", id).maybeSingle(), sb.from("yt_khatma_parts").select("juz,user_id,nom,statut").eq("khatma_id", id)]);
+    if (!w.isConnected) return;
+    if (!k) { z.innerHTML = `<p class="centre">Khatma introuvable.</p>`; return; }
+    const parJuz = {}; (parts || []).forEach(p => { parJuz[p.juz] = p; });
+    const lus = (parts || []).filter(p => p.statut === "lu").length;
+    z.innerHTML = `<h2 dir="auto" style="margin:0 0 4px">${esc(k.nom)}</h2>
+      <p style="margin:0 0 10px;opacity:.8">${lus}/30 juz lus${lus === 30 ? " · ✅ Khatma terminée, qu'Allah l'accepte !" : ""}</p>
+      <i style="display:block;height:10px;border-radius:5px;background:var(--bordure,#e3dccb);overflow:hidden;margin-bottom:12px"><u style="display:block;height:100%;width:${lus * 100 / 30}%;background:#1b6b5c"></u></i>
+      <button class="btn-outline" id="kh-inv" style="width:100%;margin:0 0 12px">📤 Inviter · code <b>${esc(k.code)}</b></button>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">${Array.from({ length: 30 }, (_, i) => { const n = i + 1, p = parJuz[n], moi = p && p.user_id === etat.parentId;
+        const fond = !p ? "var(--surface,#fff)" : p.statut === "lu" ? "#1b6b5c" : moi ? "#F2C43D" : "rgba(27,107,92,.18)", coul = p && p.statut === "lu" ? "#fff" : "var(--texte,#14201b)";
+        return `<button type="button" data-j="${n}" style="padding:10px 6px;border-radius:14px;border:1px solid var(--bordure,#e3dccb);background:${fond};color:${coul};font:inherit;text-align:center"><b style="display:block;font-size:17px">Juz ${n}</b><small style="display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${p ? (p.statut === "lu" ? "✓ " : "") + esc(moi ? "Moi" : p.nom || "Pris") : "Libre"}</small></button>`; }).join("")}</div>
+      <p style="font-size:13px;opacity:.75;margin:10px 0 0">Libre : touchez pour le prendre. Le vôtre (jaune) : lire, marquer comme lu ou le rendre.</p>`;
+    z.querySelector("#kh-inv").onclick = () => partagerLien("Khatma · " + k.nom, `Lisons le Coran ensemble sur Lumu ! Ouvrez Lumu → Coran → Khatma et entrez le code ${k.code}.`, SITE);
+    z.querySelectorAll("[data-j]").forEach(b => b.onclick = async () => {
+      const n = +b.dataset.j, p = parJuz[n];
+      if (!p) { const { error } = await sb.from("yt_khatma_parts").insert({ khatma_id: id, juz: n, user_id: etat.parentId, nom: pseudoKhatma() || null }); if (error) toast("Ce juz vient d'être pris."); return dessiner(); }
+      if (p.user_id !== etat.parentId) { toast(`Juz ${n} : pris par ${p.nom || "un membre"}${p.statut === "lu" ? " (lu)" : ""}.`); return; }
+      ouvrirFeuille("Juz " + n, `<button class="btn" id="j-lire" style="width:100%;margin-bottom:8px">📖 Lire le juz ${n}</button><button class="btn-outline" id="j-lu" style="width:100%;margin-bottom:8px">${p.statut === "lu" ? "↩ Marquer comme non lu" : "✓ Marquer comme lu"}</button><button class="btn-text" id="j-rendre" style="width:100%">Rendre ce juz</button>`, (c, fermer) => {
+        c.querySelector("#j-lire").onclick = () => { fermer(); router("coran", { page: CORAN.debutJuz(n) }); };
+        c.querySelector("#j-lu").onclick = async () => { fermer(); await sb.from("yt_khatma_parts").update({ statut: p.statut === "lu" ? "pris" : "lu", updated_at: new Date().toISOString() }).eq("khatma_id", id).eq("juz", n); dessiner(); };
+        c.querySelector("#j-rendre").onclick = async () => { fermer(); await sb.from("yt_khatma_parts").delete().eq("khatma_id", id).eq("juz", n); dessiner(); };
+      });
+    });
+  };
+  dessiner();
+}
 /* ---------- Mode Ramadan ---------- */
 async function vueRamadan() {
   let r = { actif: false, avant: 999 }; try { r = infoRamadan(); } catch (e) {}
@@ -6493,7 +6552,7 @@ async function vueCoranAccueil() {
 .ca-av{width:44px;height:44px;flex:none;border-radius:50%;background:var(--vert-clair,#e3f1e8);color:var(--vert,#12805f);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px}.ca-n{border-radius:12px}.ca-go{margin-inline-start:auto;color:var(--vert,#12805f);font-size:20px;flex:none}
 .ca-sec{margin:14px 2px 8px;font-size:12px;font-weight:800;color:var(--vert,#12805f);text-transform:uppercase;letter-spacing:.04em}
 .ca-hero{border-radius:20px;background:linear-gradient(135deg,#0b3d2e,#12805f);color:#fff;padding:18px;text-align:center;margin-bottom:10px}.ca-hero .ar{font-family:'Amiri Quran','Amiri',serif;font-size:30px;color:#d4af37;line-height:1.6}</style>
-    <div class="ca-ps" role="tablist"><button class="ca-p" data-o="lire" role="tab">📖 Lire</button><button class="ca-p" data-o="ecouter" role="tab">🎧 Écouter</button><button class="ca-p" data-o="tafsir" role="tab">📚 Tafsir</button><button class="ca-p" id="ca-direct">🕋 Direct</button><button class="ca-p" id="ca-radios">📻 Radios</button><button class="ca-p" id="ca-enfants">🧒 Enfants</button><button class="ca-p" id="ca-hifz">🧠 Mémoriser</button></div><div id="ca-z"></div>`);
+    <div class="ca-ps" role="tablist" style="flex-wrap:wrap;overflow:visible"><button class="ca-p" data-o="lire" role="tab">📖 Lire</button><button class="ca-p" data-o="ecouter" role="tab">🎧 Écouter</button><button class="ca-p" data-o="tafsir" role="tab">📚 Tafsir</button><button class="ca-p" id="ca-direct">🕋 Direct</button><button class="ca-p" id="ca-radios">📻 Radios</button><button class="ca-p" id="ca-enfants">🧒 Enfants</button><button class="ca-p" id="ca-hifz">🧠 Mémoriser</button><button class="ca-p" id="ca-khatma">👥 Khatma</button></div><div id="ca-z"></div>`);
   const z = w.querySelector("#ca-z");
   let onglet = etat.params.onglet || chargerLocal("coran_onglet", "lire");
   let donnees = null;
@@ -6592,6 +6651,7 @@ async function vueCoranAccueil() {
   w.querySelector("#ca-direct").onclick = () => ouvrirDirectSaint(0);
   w.querySelector("#ca-radios").onclick = () => router("radios");
   w.querySelector("#ca-enfants").onclick = () => router("enfants");
+  w.querySelector("#ca-khatma").onclick = () => router("khatma");
   w.querySelector("#ca-hifz").onclick = () => feuilleHifz(1, o => router("coran", { page: CORAN.DEBUTS[o.s - 1], hifz: o }));
   montrer(["lire", "ecouter", "tafsir"].includes(onglet) ? onglet : "lire");
 }
@@ -6633,6 +6693,21 @@ const AZKAR = {
   ]
 };
 AZKAR.soir = AZKAR.matin.slice(0, 6).concat([]);
+/* Invocations du coucher, d'après la Sunna authentique (source indiquée après le nombre de fois) */
+AZKAR.coucher = [
+  { t: "اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ ۚ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ ۚ لَهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ ۗ مَنْ ذَا الَّذِي يَشْفَعُ عِنْدَهُ إِلَّا بِإِذْنِهِ ۚ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ ۖ وَلَا يُحِيطُونَ بِشَيْءٍ مِنْ عِلْمِهِ إِلَّا بِمَا شَاءَ ۚ وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ ۖ وَلَا يَئُودُهُ حِفْظُهُمَا ۚ وَهُوَ الْعَلِيُّ الْعَظِيمُ", r: "آيَةُ الْكُرْسِيِّ · مَرَّةً وَاحِدَةً · البخاري", n: 1 },
+  { t: "آمَنَ الرَّسُولُ بِمَا أُنْزِلَ إِلَيْهِ مِنْ رَبِّهِ وَالْمُؤْمِنُونَ ۚ كُلٌّ آمَنَ بِاللَّهِ وَمَلَائِكَتِهِ وَكُتُبِهِ وَرُسُلِهِ لَا نُفَرِّقُ بَيْنَ أَحَدٍ مِنْ رُسُلِهِ ۚ وَقَالُوا سَمِعْنَا وَأَطَعْنَا ۖ غُفْرَانَكَ رَبَّنَا وَإِلَيْكَ الْمَصِيرُ ۝ لَا يُكَلِّفُ اللَّهُ نَفْسًا إِلَّا وُسْعَهَا ۚ لَهَا مَا كَسَبَتْ وَعَلَيْهَا مَا اكْتَسَبَتْ ۗ رَبَّنَا لَا تُؤَاخِذْنَا إِنْ نَسِينَا أَوْ أَخْطَأْنَا ۚ رَبَّنَا وَلَا تَحْمِلْ عَلَيْنَا إِصْرًا كَمَا حَمَلْتَهُ عَلَى الَّذِينَ مِنْ قَبْلِنَا ۚ رَبَّنَا وَلَا تُحَمِّلْنَا مَا لَا طَاقَةَ لَنَا بِهِ ۖ وَاعْفُ عَنَّا وَاغْفِرْ لَنَا وَارْحَمْنَا ۚ أَنْتَ مَوْلَانَا فَانْصُرْنَا عَلَى الْقَوْمِ الْكَافِرِينَ", r: "آخِرُ سُورَةِ الْبَقَرَةِ · مَرَّةً وَاحِدَةً · البخاري ومسلم", n: 1 },
+  { t: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ۝ قُلْ هُوَ اللَّهُ أَحَدٌ ۝ اللَّهُ الصَّمَدُ ۝ لَمْ يَلِدْ وَلَمْ يُولَدْ ۝ وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ\n\nبِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ۝ قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ ۝ مِنْ شَرِّ مَا خَلَقَ ۝ وَمِنْ شَرِّ غَاسِقٍ إِذَا وَقَبَ ۝ وَمِنْ شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ ۝ وَمِنْ شَرِّ حَاسِدٍ إِذَا حَسَدَ\n\nبِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ۝ قُلْ أَعُوذُ بِرَبِّ النَّاسِ ۝ مَلِكِ النَّاسِ ۝ إِلَٰهِ النَّاسِ ۝ مِنْ شَرِّ الْوَسْوَاسِ الْخَنَّاسِ ۝ الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ ۝ مِنَ الْجِنَّةِ وَالنَّاسِ", r: "الْمُعَوِّذَاتُ: يَجْمَعُ كَفَّيْهِ وَيَنْفُثُ فِيهِمَا وَيَمْسَحُ جَسَدَهُ · ثَلَاثَ مَرَّاتٍ · البخاري", n: 3 },
+  { t: "بِاسْمِكَ رَبِّي وَضَعْتُ جَنْبِي، وَبِكَ أَرْفَعُهُ، فَإِنْ أَمْسَكْتَ نَفْسِي فَارْحَمْهَا، وَإِنْ أَرْسَلْتَهَا فَاحْفَظْهَا بِمَا تَحْفَظُ بِهِ عِبَادَكَ الصَّالِحِينَ.", r: "مَرَّةً وَاحِدَةً · البخاري ومسلم", n: 1 },
+  { t: "اللَّهُمَّ خَلَقْتَ نَفْسِي وَأَنْتَ تَوَفَّاهَا، لَكَ مَمَاتُهَا وَمَحْيَاهَا، إِنْ أَحْيَيْتَهَا فَاحْفَظْهَا، وَإِنْ أَمَتَّهَا فَاغْفِرْ لَهَا، اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَافِيَةَ.", r: "مَرَّةً وَاحِدَةً · مسلم", n: 1 },
+  { t: "اللَّهُمَّ قِنِي عَذَابَكَ يَوْمَ تَبْعَثُ عِبَادَكَ.", r: "ثَلَاثَ مَرَّاتٍ · أبو داود والترمذي", n: 3 },
+  { t: "بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا.", r: "مَرَّةً وَاحِدَةً · البخاري", n: 1 },
+  { t: "الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنَا وَسَقَانَا، وَكَفَانَا وَآوَانَا، فَكَمْ مِمَّنْ لَا كَافِيَ لَهُ وَلَا مُؤْوِيَ.", r: "مَرَّةً وَاحِدَةً · مسلم", n: 1 },
+  { t: "سُبْحَانَ اللَّهِ", r: "ثَلَاثًا وَثَلَاثِينَ · البخاري ومسلم", n: 33 },
+  { t: "الْحَمْدُ لِلَّهِ", r: "ثَلَاثًا وَثَلَاثِينَ · البخاري ومسلم", n: 33 },
+  { t: "اللَّهُ أَكْبَرُ", r: "أَرْبَعًا وَثَلَاثِينَ · البخاري ومسلم", n: 34 },
+  { t: "اللَّهُمَّ أَسْلَمْتُ نَفْسِي إِلَيْكَ، وَفَوَّضْتُ أَمْرِي إِلَيْكَ، وَوَجَّهْتُ وَجْهِي إِلَيْكَ، وَأَلْجَأْتُ ظَهْرِي إِلَيْكَ، رَغْبَةً وَرَهْبَةً إِلَيْكَ، لَا مَلْجَأَ وَلَا مَنْجَا مِنْكَ إِلَّا إِلَيْكَ، آمَنْتُ بِكِتَابِكَ الَّذِي أَنْزَلْتَ، وَبِنَبِيِّكَ الَّذِي أَرْسَلْتَ.", r: "آخِرَ مَا يَقُولُ، عَلَى شِقِّهِ الْأَيْمَنِ · البخاري ومسلم", n: 1 }
+];
 /* ---------- Les bases : piliers, ablutions, prière (école malikite, d'après le Mukhtasar d'Al-Akhdari) ---------- */
 const BASES = [
   { ic: "🕋", titre: "Les 5 piliers de l'islam", intro: "L'islam est bâti sur cinq piliers.", source: "Hadith rapporté par Al-Bukhari (n° 8) et Muslim (n° 16).", blocs: [{ items: [
@@ -6785,19 +6860,22 @@ function vueBases() {
   w.querySelector("#ba-ak").onclick = () => router("biblio-lire", { id: "akhdari" });
 }
 async function vueAzkar() {
-  const w = ecran("Azkar", ["livres"], `<div style="display:flex;gap:8px;margin:0 0 12px"><button class="btn" id="az-m" style="flex:1;margin:0">🌅 Matin</button><button class="btn-outline" id="az-s" style="flex:1;margin:0">🌙 Soir</button></div><div id="az-l" style="display:grid;gap:12px"></div><p style="font-size:12px;text-align:center" dir="auto">Texte tiré du livre « Al-Khulasa al-Hasna fi Azkar as-Sabah wal-Masa’ ». À vérifier avant diffusion.</p>`);
-  let liste = etat.params && etat.params.liste === "soir" ? "soir" : "matin";
+  const w = ecran("Azkar", ["livres"], `<div style="display:flex;gap:8px;margin:0 0 12px"><button class="btn" id="az-m" style="flex:1;margin:0">🌅 Matin</button><button class="btn-outline" id="az-s" style="flex:1;margin:0">🌇 Soir</button><button class="btn-outline" id="az-c" style="flex:1;margin:0">😴 Coucher</button></div><div id="az-l" style="display:grid;gap:12px"></div><p id="az-note" style="font-size:12px;text-align:center" dir="auto"></p>`);
+  let liste = etat.params && ["soir", "coucher"].includes(etat.params.liste) ? etat.params.liste : "matin";
   const compte = {};
   const dessiner = () => {
     const L = w.querySelector("#az-l");
     L.innerHTML = AZKAR[liste].map((z, i) => {
       const k = liste + i, c = compte[k] || 0, fini = c >= z.n;
-      return `<div class="carte" style="padding:14px;${fini ? "border:2px solid #12805f" : ""}"><p class="texte-arabe" dir="rtl" lang="ar" style="font-size:22px;line-height:2;margin:0">${esc(z.t)}</p><div style="display:flex;align-items:center;gap:10px;margin-top:8px"><small style="flex:1;color:#8a5a2b" dir="rtl" lang="ar">(${esc(z.r)})</small><button class="btn-outline" data-i="${i}" style="width:auto;margin:0;min-width:96px">${fini ? "✓ " : ""}${c} / ${z.n}</button></div></div>`;
+      return `<div class="carte" style="padding:14px;${fini ? "border:2px solid #12805f" : ""}"><p class="texte-arabe" dir="rtl" lang="ar" style="font-size:22px;line-height:2;margin:0;white-space:pre-line">${esc(z.t)}</p><div style="display:flex;align-items:center;gap:10px;margin-top:8px"><small style="flex:1;color:#8a5a2b" dir="rtl" lang="ar">(${esc(z.r)})</small><button class="btn-outline" data-i="${i}" style="width:auto;margin:0;min-width:96px">${fini ? "✓ " : ""}${c} / ${z.n}</button></div></div>`;
     }).join("");
     L.querySelectorAll("[data-i]").forEach(b => b.onclick = () => { const k = liste + b.dataset.i, z = AZKAR[liste][+b.dataset.i]; compte[k] = (compte[k] || 0) + 1; if (compte[k] > z.n) compte[k] = 0; dessiner(); });
     w.querySelector("#az-m").className = liste === "matin" ? "btn" : "btn-outline";
     w.querySelector("#az-s").className = liste === "soir" ? "btn" : "btn-outline";
+    w.querySelector("#az-c").className = liste === "coucher" ? "btn" : "btn-outline";
+    const note = w.querySelector("#az-note"); if (note) note.textContent = liste === "coucher" ? "Invocations du coucher tirées de la Sunna authentique (Al-Bukhârî, Muslim, Abû Dâwûd, At-Tirmidhî). Dormir en état d'ablutions, sur le côté droit." : "Texte tiré du livre « Al-Khulasa al-Hasna fi Azkar as-Sabah wal-Masa’ ».";
   };
+  w.querySelector("#az-c").onclick = () => { liste = "coucher"; dessiner(); };
   w.querySelector("#az-m").onclick = () => { liste = "matin"; dessiner(); };
   w.querySelector("#az-s").onclick = () => { liste = "soir"; dessiner(); };
   dessiner();
@@ -7176,7 +7254,7 @@ function feuilleHifz(sDefaut, surLancer) {
   ouvrirFeuille("🧠 Mémoriser", `<p style="margin:0 0 10px;opacity:.8">Chaque verset est répété, puis on passe au suivant. Le verset récité s'illumine sur la page.</p>
     <label>Sourate<select class="champ" id="hz-s">${CORAN.NOMS.map((n, i) => `<option value="${i + 1}"${i + 1 === sDefaut ? " selected" : ""}>${i + 1}. ${esc(n)} · ${esc(CORAN.NOMS_AR[i] || "")}</option>`).join("")}</select></label>
     <div style="display:flex;gap:10px"><label style="flex:1">Du verset<input class="champ" id="hz-de" type="number" min="1" value="1"></label><label style="flex:1">Au verset<input class="champ" id="hz-a" type="number" min="1" value="1"></label></div>
-    <label>Répéter chaque verset<div class="ca-ps" id="hz-rep" style="margin:6px 0 10px">${[1, 3, 5, 10].map(k => `<button type="button" class="ca-p${k === choix.rep ? " on" : ""}" data-r="${k}">${k} fois</button>`).join("")}</div></label>
+    <label>Répéter chaque verset<div id="hz-rep" style="display:flex;gap:8px;margin:6px 0 10px">${[1, 3, 5, 10].map(k => `<button type="button" data-r="${k}" style="flex:1;padding:10px 0;border-radius:20px;border:1px solid #1b6b5c;font:inherit;font-weight:700;background:${k === choix.rep ? "#1b6b5c" : "transparent"};color:${k === choix.rep ? "#fff" : "inherit"}">${k} fois</button>`).join("")}</div></label>
     <label>Récitateur<select class="champ" id="hz-l">${HIFZ_LECTEURS.map(([k, n]) => `<option value="${k}"${k === choix.dossier ? " selected" : ""}>${esc(n)}</option>`).join("")}</select></label>
     <label style="display:flex;align-items:center;gap:8px;margin:10px 0"><input type="checkbox" id="hz-b"> Recommencer en boucle</label>
     <button class="btn" id="hz-go" style="width:100%">▶ Commencer</button>`, (c, fermer) => {
@@ -7184,7 +7262,7 @@ function feuilleHifz(sDefaut, surLancer) {
     const sS = c.querySelector("#hz-s"), de = c.querySelector("#hz-de"), a = c.querySelector("#hz-a");
     const majMax = async () => { try { const n = await HIFZ.nbVersets(+sS.value); de.max = a.max = n; de.value = 1; a.value = Math.min(n, 5); } catch (e) {} };
     sS.onchange = majMax; majMax();
-    c.querySelectorAll("[data-r]").forEach(b => b.onclick = () => { rep = +b.dataset.r; c.querySelectorAll("[data-r]").forEach(x => x.classList.toggle("on", x === b)); });
+    c.querySelectorAll("[data-r]").forEach(b => b.onclick = () => { rep = +b.dataset.r; c.querySelectorAll("[data-r]").forEach(x => { const on = x === b; x.style.background = on ? "#1b6b5c" : "transparent"; x.style.color = on ? "#fff" : "inherit"; }); });
     c.querySelector("#hz-go").onclick = async () => {
       const o = { s: +sS.value, de: +de.value || 1, a: Math.max(+de.value || 1, +a.value || 1), rep, dossier: c.querySelector("#hz-l").value, boucle: c.querySelector("#hz-b").checked };
       sauverLocal("hifz_choix", { dossier: o.dossier, rep });
@@ -7486,7 +7564,7 @@ function momentIslamique(maintenant) {
   } catch (e) {}
   if (now >= faj && now < faj + 150) return { cle: "fajr", ic: "🌅", titre: "Après le Fajr", texte: "Touchez pour lire les Azkar du matin", fond: "linear-gradient(135deg,#c96a2b,#e8a84c)", q: "matin", azkar: "matin" };
   if (now >= asr && now < mag) return { cle: "soir", ic: "🌇", titre: "Fin de journée", texte: "Touchez pour lire les Azkar du soir", fond: "linear-gradient(135deg,#5b3a6b,#c2674f)", q: "soir", azkar: "soir" };
-  if (now >= ish + 30 || now < faj) return { cle: "nuit", ic: "🌙", titre: "Avant de dormir", texte: "Un rappel calme pour finir la journée", fond: "linear-gradient(135deg,#0d1b3a,#27406e)", dormir: true };
+  if (now >= ish + 30 || now < faj) return { cle: "nuit", ic: "🌙", titre: "Avant de dormir", texte: "Touchez pour lire les invocations du coucher", fond: "linear-gradient(135deg,#0d1b3a,#27406e)", azkar: "coucher" };
   return null;
 }
 function carteMoment(w) {
