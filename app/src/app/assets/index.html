@@ -1399,18 +1399,46 @@ function tobiSVG(humeur, largeur, mini) {
 }
 const SUPABASE_URL = "https://edzzikmtxeslhvowbnix.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVkenppa210eGVzbGh2b3dibml4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQyNjE0MDIsImV4cCI6MjA5OTgzNzQwMn0.i5k6gzYSAaNQyp33LNo0pRCdH0cQuXkTiHx7DqFK6uQ";
-/* Cache des lectures de la base : revenir sur une page ne retélécharge pas les mêmes données.
-   - réponse gardée 5 min (servie instantanément, sans réseau) ; jusqu'à 24 h si le réseau échoue ;
-   - deux demandes identiques en même temps ne partent qu'une fois ;
-   - toute écriture (publier, aimer, commenter…) vide le cache pour rester à jour ;
-   - notifications, messages et direct ne sont jamais mis en cache. */
+/* Cache des lectures de la base, gardé sur le téléphone (même après fermeture de l'application) :
+   - à l'ouverture, les pages s'affichent tout de suite avec les données enregistrées, puis se mettent à jour en arrière-plan ;
+   - une même demande n'est retéléchargée qu'après 10 min (6 h pour le catalogue du Coran) ;
+   - deux demandes identiques en même temps ne partent qu'une fois ; sans réseau, la dernière version sert (7 jours) ;
+   - toute écriture (publier, aimer, commenter…) efface les données concernées pour rester à jour ;
+   - notifications, messages et direct ne sont jamais gardés. */
 const CACHE_API = (() => {
-  const m = new Map(), enCours = new Map(), FRAIS = 10 * 60e3, VIEUX = 24 * 3600e3, MAX = 400;
+  const m = new Map(), enCours = new Map(), VIEUX = 7 * 864e5, MAX = 400, GROS = 2.5e6;
+  const frais = url => /category\.eq\.Coran|yt_channels\?|yt_savants|yt_categories/.test(url) ? 6 * 3600e3 : 10 * 60e3;
   const jamais = /^(yt_notifications|yt_dm|yt_lives|yt_statuts|yt_mes_conversations|yt_demandes_en_attente|yt_chercher_personnes|push_.*|yt_vue|yt_temps_vu|yt_assurer_profil|yt_dm_marquer_lu)$/;
   const rpcLecture = /^(yt_recommandations|yt_suggestions|yt_rechercher|yt_rechercher_questions|yt_commentaires|yt_groupe_noms|yt_personne|yt_progression|yt_sondage_resultats|yt_stats_createur|yt_qualite|yt_ma_chaine)$/;
+  /* Stockage durable (IndexedDB) */
+  let db = null;
+  const ouvrir = () => new Promise(ok => { try { const r = indexedDB.open("lumu-api", 1); r.onupgradeneeded = () => r.result.createObjectStore("r"); r.onsuccess = () => ok(r.result); r.onerror = () => ok(null); } catch (e) { ok(null); } });
+  const op = (mode, fn) => { if (!db) return; try { const t = db.transaction("r", mode); fn(t.objectStore("r")); } catch (e) {} };
+  const pret = (async () => {
+    db = await ouvrir(); if (!db) return;
+    await new Promise(ok => { try { const t = db.transaction("r", "readonly"), st = t.objectStore("r"), now = Date.now(), vieux = [];
+      const c = st.openCursor(); c.onsuccess = () => { const k = c.result; if (!k) return; if (now - k.value.t < VIEUX) m.set(k.key, k.value); else vieux.push(k.key); k.continue(); };
+      t.oncomplete = () => { if (vieux.length) op("readwrite", s2 => vieux.forEach(x => s2.delete(x))); ok(); }; t.onerror = () => ok(); } catch (e) { ok(); } });
+  })();
+  const attendre = () => Promise.race([pret, new Promise(ok => setTimeout(ok, 500))]);
+  const garder = (cle, y) => { m.delete(cle); m.set(cle, y); if (m.size > MAX) { const k = m.keys().next().value; m.delete(k); op("readwrite", st => st.delete(k)); } if ((y.corps || "").length < GROS) op("readwrite", st => st.put(y, cle)); };
+  const enlever = k => { m.delete(k); op("readwrite", st => st.delete(k)); };
   const tete = (h, k) => { try { return h ? (h instanceof Headers ? h.get(k) : (h[k] || h[k.toLowerCase()] || "")) || "" : ""; } catch (e) { return ""; } };
   const vers = e => new Response(e.status === 204 || e.status === 304 || e.corps === null ? null : e.corps, { status: e.status, statusText: e.statusText, headers: e.entetes });
-  const oublier = table => { if (!table) { m.clear(); return; } for (const [k, v] of m) if (v.table === table) m.delete(k); };
+  const oublier = table => { for (const [k, v] of [...m]) if (!table || v.table === table || v.rpc) enlever(k); };
+  /* Signale qu'une page affichée avec d'anciennes données a reçu du neuf */
+  let signal = null; const nouveau = () => { clearTimeout(signal); signal = setTimeout(() => { try { window.dispatchEvent(new Event("lumu-donnees")); } catch (e) {} }, 400); };
+  const charger = (cle, entree, init, methode, rpc, nom) => {
+    if (enCours.has(cle)) return enCours.get(cle);
+    const p = (async () => {
+      const r = await fetch(entree, init);
+      if (!r.ok) { const err = new Error("http"); err.r = r; throw err; }
+      const y = { t: Date.now(), table: rpc ? "" : nom, rpc, status: r.status, statusText: r.statusText, entetes: [...r.headers.entries()], corps: methode === "HEAD" ? null : await r.text() };
+      garder(cle, y); return y;
+    })();
+    enCours.set(cle, p); p.then(() => enCours.delete(cle), () => enCours.delete(cle));
+    return p;
+  };
   const f = async (entree, init = {}) => {
     const url = typeof entree === "string" ? entree : (entree && entree.url) || String(entree);
     const x = url.match(/\/rest\/v1\/(rpc\/)?([a-z0-9_]+)/i);
@@ -1418,24 +1446,20 @@ const CACHE_API = (() => {
     const rpc = !!x[1], nom = x[2], methode = String(init.method || (entree && entree.method) || "GET").toUpperCase();
     if (jamais.test(nom)) return fetch(entree, init);
     const lecture = rpc ? rpcLecture.test(nom) : (methode === "GET" || methode === "HEAD");
-    if (!lecture) { const r = await fetch(entree, init); oublier(rpc ? null : nom); if (!rpc) [...m.keys()].forEach(k => { if (m.get(k).rpc) m.delete(k); }); return r; }
+    if (!lecture) { const r = await fetch(entree, init); oublier(rpc ? null : nom); return r; }
+    await attendre();
     const h = init.headers, cle = methode + " " + url + " " + tete(h, "Authorization").slice(-24) + " " + tete(h, "Prefer") + " " + tete(h, "Accept") + " " + tete(h, "Range") + " " + (rpc && typeof init.body === "string" ? init.body : "");
     const e = m.get(cle), age = e ? Date.now() - e.t : Infinity;
-    if (e && age < FRAIS) return vers(e);
-    if (enCours.has(cle)) return enCours.get(cle).then(vers, () => fetch(entree, init));
-    const p = (async () => {
-      const r = await fetch(entree, init);
-      if (!r.ok) { const err = new Error("http"); err.r = r; throw err; }
-      const y = { t: Date.now(), table: rpc ? "" : nom, rpc, status: r.status, statusText: r.statusText, entetes: [...r.headers.entries()], corps: methode === "HEAD" ? null : await r.text() };
-      m.delete(cle); m.set(cle, y); if (m.size > MAX) m.delete(m.keys().next().value);
-      return y;
-    })();
-    enCours.set(cle, p);
-    try { return vers(await p); }
-    catch (err) { if (err && err.r) return err.r; if (e && age < VIEUX) return vers(e); throw err; }
-    finally { enCours.delete(cle); }
+    if (e && age < frais(url)) return vers(e);
+    /* Données anciennes : affichées tout de suite, mises à jour en arrière-plan */
+    if (e && age < VIEUX) {
+      if (navigator.onLine !== false) charger(cle, entree, init, methode, rpc, nom).then(y => { if (y.corps !== e.corps) nouveau(); }, () => {});
+      return vers(e);
+    }
+    try { return vers(await charger(cle, entree, init, methode, rpc, nom)); }
+    catch (err) { if (err && err.r) return err.r.clone ? err.r.clone() : err.r; throw err; }
   };
-  return { fetch: f, vider: () => m.clear() };
+  return { fetch: f, vider: () => { m.clear(); op("readwrite", st => st.clear()); } };
 })();
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, { global: { fetch: CACHE_API.fetch } });
 
@@ -2080,7 +2104,18 @@ function enDirect(nom, table, filtre, ancre, cb) {
 function nettoyerDirect() {
   for (let i = DIRECT.length - 1; i >= 0; i--) if (!DIRECT[i].ancre.isConnected) { try { sb.removeChannel(DIRECT[i].ch); } catch (e) {} DIRECT.splice(i, 1); }
 }
-function render() {
+/* Données plus récentes reçues en arrière-plan : la page vient juste de s'ouvrir avec les données enregistrées,
+   on la redessine une fois (sans gêner : seulement en haut de page, sans saisie en cours, dans les 8 premières secondes). */
+let RENDU = { t: 0, route: "", refait: false };
+window.addEventListener("lumu-donnees", () => {
+  const ae = document.activeElement, saisie = ae && /^(INPUT|TEXTAREA|SELECT)$/.test(ae.tagName);
+  if (RENDU.refait || RENDU.route !== etat.route || Date.now() - RENDU.t > 8000 || window.scrollY > 60 || saisie || document.hidden) return;
+  if (!(ROOTS.includes(etat.route) || ["coran-accueil", "chaine", "savants"].includes(etat.route))) return;
+  if (document.querySelector(".feuille, .modal, dialog[open]")) return;
+  RENDU.refait = true; render(true);
+});
+function render(rafraichi) {
+  RENDU = { t: Date.now(), route: etat.route, refait: !!rafraichi };
   nettoyerDirect();
   app.innerHTML = "";
   app.className = "entree";
