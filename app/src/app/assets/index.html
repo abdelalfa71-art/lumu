@@ -2155,7 +2155,7 @@ function render(rafraichi) {
     "mot-de-passe-oublie": vueMotDePasseOublie, "nouveau-mot-de-passe": vueNouveauMotDePasse,
     "changer-mot-de-passe": vueChangerMotDePasse,
     "pin-verrou": vuePinVerrou, "pin-creation": vuePinCreation, "arabe": vueArabe,
-    "presentation": vuePresentation, "tarifs": vueTarifs, "videos": vueFlux, "affiches": vueAffiches, "coran": vueCoran, "coran-accueil": vueCoranAccueil, "radios": vueRadios, "enfants": vueEnfants, "ramadan": vueRamadan, "mosquees": vueMosquees, "khatma": vueKhatma, "khatma-voir": vueKhatmaVoir, "questions": vueQuestions, "questions-imam": vueQuestionsImam, "parcours": vueParcours, "parcours-voir": vueParcoursVoir, "passage": vuePassage, "parcours-revoir": vueRevoir, "mes-parcours": vueMesParcours, "parcours-edit": vueParcoursEdit, "passage-edit": vuePassageEdit, "home": vueDecouvrir, "savants": vueSavants, "preches": vuePreches, "priere": vuePriere, "langues-choix": vueLanguesChoix, "tutoriel": vueTutoriel, "biblio": vueBiblio, "dossier": vueDossier, "direct": vueDirect, "chaine-edit": vueChaineEdit, "notifications": vueNotifications, "publier": vuePublier, "je-publie": vueJePublie, "profil": vueProfil, "contenu": vueContenu,
+    "presentation": vuePresentation, "tarifs": vueTarifs, "videos": vueFlux, "affiches": vueAffiches, "coran": vueCoran, "coran-accueil": vueCoranAccueil, "radios": vueRadios, "enfants": vueEnfants, "ramadan": vueRamadan, "mosquees": vueMosquees, "aujourdhui": vueAujourdhui, "essentiel": vueEssentiel, "essentiel-etape": vueEssentielEtape, "khatma": vueKhatma, "khatma-voir": vueKhatmaVoir, "questions": vueQuestions, "questions-imam": vueQuestionsImam, "parcours": vueParcours, "parcours-voir": vueParcoursVoir, "passage": vuePassage, "parcours-revoir": vueRevoir, "mes-parcours": vueMesParcours, "parcours-edit": vueParcoursEdit, "passage-edit": vuePassageEdit, "home": vueDecouvrir, "savants": vueSavants, "preches": vuePreches, "priere": vuePriere, "langues-choix": vueLanguesChoix, "tutoriel": vueTutoriel, "biblio": vueBiblio, "dossier": vueDossier, "direct": vueDirect, "chaine-edit": vueChaineEdit, "notifications": vueNotifications, "publier": vuePublier, "je-publie": vueJePublie, "profil": vueProfil, "contenu": vueContenu,
     "langue": vueLangue, "fil": vueFlux, "flux": vueEcouter, "radio": vueFlux, "recherche": vueRecherche, "abos": vueAbos, "espace": vueEspace, "importer": vueImport, "reels": vueFlux, "groupes": vueGroupes, "groupe": vueGroupe, "discussions": vueDiscussions, "conv": vueConv, "groupe-nouveau": vueNouveauGroupe, "livres": vueBibliotheque, "regroupements": vueRegroupements, "biblio-lire": vueBiblioLire, "azkar": vueAzkar, "bases": vueBases, "livre": vueLivre, "mes-livres": vueMesLivres, "livre-edition": vueEditeurLivre, "lives": vueLives, "live": vueLive, "live-nouveau": vueNouveauLive, "devenir-createur": vueDevenirCreateur, "admin": vueAdmin, "push-admin": vuePushAdmin, "mes-contenus": vueMesContenus, "legal": vueLegal, "lien": vueLien, "chaine": vueChaine, "playlist": vuePlaylist, "playlists": vuePlaylists, "stats": vueStats, "abonnements": vueAbonnements, "favoris": vueListeUtilisateur, "historique": vueListeUtilisateur, "hors": vueHors
   };
   document.body.classList.toggle("branche-tobi", TOBI_ROUTES.includes(etat.route));
@@ -6194,6 +6194,75 @@ async function vueMosquees() {
     carte.fitBounds(pts.slice(0, 8), { padding: [24, 24], maxZoom: 16 });
   } catch (e) { const c = w.querySelector("#mq-carte"); if (c) c.remove(); }
 }
+/* ---------- Aujourd'hui : l'essentiel de la journée en un écran ---------- */
+const VERSETS_JOUR = [
+  ["فَاذْكُرُونِي أَذْكُرْكُمْ وَاشْكُرُوا لِي وَلَا تَكْفُرُونِ", "Souvenez-vous de Moi, Je Me souviendrai de vous ; soyez-Moi reconnaissants et ne soyez pas ingrats.", "Al-Baqara · 152"],
+  ["أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ", "C'est par le rappel d'Allah que les cœurs s'apaisent.", "Ar-Ra'd · 28"],
+  ["فَإِنَّ مَعَ الْعُسْرِ يُسْرًا ۝ إِنَّ مَعَ الْعُسْرِ يُسْرًا", "Avec la difficulté vient la facilité. Oui, avec la difficulté vient la facilité.", "Ash-Sharh · 5-6"],
+  ["وَقُلْ رَبِّ زِدْنِي عِلْمًا", "Et dis : « Mon Seigneur, accrois mes connaissances. »", "Ta-Ha · 114"],
+  ["إِنَّ اللَّهَ مَعَ الصَّابِرِينَ", "Allah est avec ceux qui sont patients.", "Al-Baqara · 153"],
+  ["وَمَنْ يَتَّقِ اللَّهَ يَجْعَلْ لَهُ مَخْرَجًا", "Quiconque craint Allah, Il lui donnera une issue.", "At-Talaq · 2"],
+  ["ادْعُونِي أَسْتَجِبْ لَكُمْ", "Invoquez-Moi, Je vous répondrai.", "Ghafir · 60"]];
+const HABITUDES = [["coran", "📖", "Lire 1 page du Coran"], ["matin", "🌅", "Adhkâr du matin"], ["soir", "🌇", "Adhkâr du soir"], ["prieres", "🕌", "Mes 5 prières"], ["coucher", "😴", "Invocations du coucher"]];
+function habitudesDuJour() {
+  const auj = new Date().toISOString().slice(0, 10), h = chargerLocal("habitudes", { jours: {}, serie: 0, dernier: "" });
+  return { auj, h, faites: h.jours[auj] || {} };
+}
+async function vueAujourdhui() {
+  const { auj, h, faites } = habitudesDuJour();
+  const prenom = ((etat.profil && etat.profil.full_name) || "").split(" ")[0];
+  const v = VERSETS_JOUR[Math.floor(Date.now() / 864e5) % VERSETS_JOUR.length];
+  const dateG = new Date().toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long" });
+  let hj = ""; try { hj = dateHijri(); } catch (e) {}
+  const nbFait = HABITUDES.filter(([k]) => faites[k]).length;
+  const w = ecran("", null, `
+    <div style="margin:4px 0 14px"><div style="font-size:15px;opacity:.75;text-transform:capitalize">${esc(dateG)} · ${esc(hj)}</div><h1 style="margin:2px 0 0;font-size:28px">Assalâmou ʿalaykoum${prenom ? " " + esc(prenom) : ""} 👋</h1></div>
+    <button class="carte" id="aj-pr" style="display:block;width:100%;text-align:start;padding:18px;border:0;color:#fff;background:linear-gradient(135deg,#0f3d36,#1b6b5c)">
+      <div style="font-size:14px;opacity:.85">🕌 Prochaine prière</div><div id="aj-prn" style="font-size:30px;font-weight:900;margin:2px 0">—</div><div id="aj-prr" style="font-size:15px;opacity:.9">Ajoutez votre ville pour les horaires</div>
+      <div id="aj-prl" style="display:flex;justify-content:space-between;margin-top:12px;font-size:12px;opacity:.85"></div></button>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin:18px 0 8px"><b style="font-size:18px">✅ Mes habitudes du jour</b><span style="font-weight:800;color:#e8590c">🔥 ${h.serie || 0} jour${(h.serie || 0) > 1 ? "s" : ""}</span></div>
+    <div class="carte" style="padding:6px 14px;background:var(--surface,#fff);color:var(--texte,#14201b)">
+      <i style="display:block;height:8px;border-radius:4px;background:var(--bordure,#e3dccb);overflow:hidden;margin:8px 0"><u style="display:block;height:100%;width:${nbFait * 100 / HABITUDES.length}%;background:#1b6b5c"></u></i>
+      ${HABITUDES.map(([k, ic, t]) => `<div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--bordure,#eee)"><button type="button" data-h="${k}" aria-label="Cocher" style="width:32px;height:32px;flex:none;border-radius:50%;border:2px solid #1b6b5c;background:${faites[k] ? "#1b6b5c" : "transparent"};color:#fff;font-size:16px">${faites[k] ? "✓" : ""}</button><span style="font-size:20px">${ic}</span><span style="flex:1;${faites[k] ? "text-decoration:line-through;opacity:.6" : ""}">${t}</span><button type="button" data-o="${k}" class="btn-text" style="margin:0">Ouvrir ›</button></div>`).join("")}</div>
+    <b style="display:block;font-size:18px;margin:18px 0 8px">📜 Verset du jour</b>
+    <div class="carte" style="padding:16px;background:var(--surface,#fff);color:var(--texte,#14201b)"><p dir="rtl" data-notrad style="font-family:'Amiri',serif;font-size:26px;line-height:2;margin:0;text-align:center">${esc(v[0])}</p><p style="margin:8px 0 4px">« ${esc(v[1])} »</p><small style="opacity:.7">${esc(v[2])}</small></div>
+    <b style="display:block;font-size:18px;margin:18px 0 8px">▶ Continuer</b><div id="aj-cont"></div>
+    <b style="display:block;font-size:18px;margin:18px 0 8px">💡 Rappel du jour</b><div id="aj-rap"><div class="centre"><div class="spin"></div></div></div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:18px 0 8px">${[["🕋", "Direct", "direct"], ["📻", "Radios", "radios"], ["🧠", "Mémoriser", "coran-accueil"], ["👥", "Khatma", "khatma"]].map(([i, t, r]) => `<button type="button" data-r="${r}" style="padding:12px 4px;border-radius:16px;border:1px solid var(--bordure,#e3dccb);background:var(--surface,#fff);color:var(--texte,#14201b);font:inherit;font-size:13px"><div style="font-size:26px">${i}</div>${t}</button>`).join("")}</div>`);
+  /* Prière */
+  try {
+    const pr = await PRIERE.charger() || chargerLocal("priere_n", null);
+    if (pr && pr.t && w.isConnected) {
+      const n = PRIERE.prochaine(pr); w.querySelector("#aj-prn").textContent = n.nom + " · " + n.heure; w.querySelector("#aj-prr").textContent = "dans " + PRIERE.reste(n.reste) + " · " + (pr.nom || "");
+      w.querySelector("#aj-prl").innerHTML = PRIERE.NOMS.map(([k, nom]) => `<span style="text-align:center;${k === n.k ? "font-weight:900;opacity:1" : ""}">${esc(nom)}<br>${esc(PRIERE.hm(pr.t[k]))}</span>`).join("");
+    }
+  } catch (e) {}
+  w.querySelector("#aj-pr").onclick = () => router("priere");
+  /* Habitudes */
+  w.querySelectorAll("[data-h]").forEach(b => b.onclick = () => {
+    const x = habitudesDuJour(); x.faites[b.dataset.h] = !x.faites[b.dataset.h]; x.h.jours = { [x.auj]: x.faites }; // on ne garde que le jour en cours
+    const toutes = HABITUDES.every(([k]) => x.faites[k]);
+    if (toutes && x.h.dernier !== x.auj) { const hier = new Date(Date.now() - 864e5).toISOString().slice(0, 10); x.h.serie = x.h.dernier === hier ? (x.h.serie || 0) + 1 : 1; x.h.dernier = x.auj; toast("🔥 Bravo ! Toutes vos habitudes du jour sont faites."); }
+    sauverLocal("habitudes", x.h); router("aujourdhui");
+  });
+  const ouvrir = { coran: () => router("coran"), matin: () => router("azkar", { liste: "matin" }), soir: () => router("azkar", { liste: "soir" }), prieres: () => router("priere"), coucher: () => router("azkar", { liste: "coucher" }) };
+  w.querySelectorAll("[data-o]").forEach(b => b.onclick = () => ouvrir[b.dataset.o]());
+  w.querySelectorAll("[data-r]").forEach(b => b.onclick = () => b.dataset.r === "direct" ? ouvrirDirectSaint(0) : router(b.dataset.r));
+  /* Continuer */
+  const zc = w.querySelector("#aj-cont"), items = [];
+  try { const ce = CORAN_ETAT.lire(); if (ce && ce.page > 1) items.push(["📖", "Coran · page " + ce.page, CORAN_ETAT.nbLues(ce) + " pages lues sur 604", () => router("coran")]); } catch (e) {}
+  try { const m = (HORS.recents() || [])[0]; if (m) { const q = chargerLocal("pos_" + m.id, 0); items.push(["🎧", m.title, q ? "Reprendre à " + fmtDuree(q) : "Réécouter", () => lireDirect(m)]); } } catch (e) {}
+  zc.innerHTML = items.length ? items.map(([i, t, st], k) => `<button type="button" class="carte" data-c="${k}" style="display:flex;align-items:center;gap:12px;width:100%;text-align:start;margin-bottom:8px;font:inherit;background:var(--surface,#fff);color:var(--texte,#14201b)"><span style="font-size:26px">${i}</span><span style="flex:1;min-width:0"><b dir="auto" style="display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(t)}</b><small style="opacity:.7">${esc(st)}</small></span><span>›</span></button>`).join("") : `<p style="opacity:.7;margin:0">Ce que vous écoutez ou lisez apparaîtra ici.</p>`;
+  zc.querySelectorAll("[data-c]").forEach(b => b.onclick = () => items[+b.dataset.c][3]());
+  /* Rappel du jour : le plus récent publié */
+  try {
+    const { data } = await sb.from("yt_contenus").select(CHAMPS_CONTENU).eq("status", "published").in("category", ["Rappel", "Rappels"]).order("published_at", { ascending: false }).limit(1);
+    const c = data && data[0], zr = w.querySelector("#aj-rap"); if (!zr) return;
+    if (!c) { zr.innerHTML = `<p style="opacity:.7;margin:0">Bientôt un nouveau rappel.</p>`; return; }
+    zr.innerHTML = `<button type="button" class="carte" style="display:flex;align-items:center;gap:12px;width:100%;text-align:start;font:inherit;background:var(--surface,#fff);color:var(--texte,#14201b)"><span style="width:52px;height:52px;flex:none;border-radius:50%;background:#1b6b5c;color:#fff;display:flex;align-items:center;justify-content:center;font-size:22px">▶</span><span style="flex:1;min-width:0"><b dir="auto" style="display:block">${esc(c.title)}</b><small style="opacity:.7">${esc((c.yt_channels && c.yt_channels.name) || c.auteur || "")}${c.duration_seconds ? " · " + fmtDuree(c.duration_seconds) : ""}</small></span></button>`;
+    zr.firstChild.onclick = () => lireDirect(c);
+  } catch (e) {}
+}
 /* ---------- Khatma en groupe : 30 juz partagés ---------- */
 /* Petit formulaire dans l'application (remplace la fenêtre système du téléphone) */
 function formulaire(titre, champs, bouton) {
@@ -6852,9 +6921,79 @@ const BASES_ORDRE = [
   ["Jeûne, zakat et pèlerinage", ["Le jeûne du Ramadan", "Jeûnes volontaires et retraite (i‘tikaf)", "L'aumône obligatoire (zakat)", "Le pèlerinage (hajj et ‘umra)"]],
   ["La vie du musulman", ["Le sacrifice et la ‘aqiqa", "Nourriture et abattage", "Serments et vœux", "Le mariage", "Les bonnes manières"]]
 ];
+/* ---------- Parcours de l'essentiel : apprendre pas à pas (école malikite), avec quiz ---------- */
+const ESSENTIEL = {
+  etapes() { const l = []; BASES_ORDRE.forEach(([g, ts]) => ts.forEach(t => { const i = BASES.findIndex(x => x.titre === t); if (i >= 0) l.push({ g, i, b: BASES[i] }); })); return l; },
+  prog() { return chargerLocal("essentiel_prog", {}); },
+  /* Questions tirées du contenu de la leçon elle-même : la bonne réponse et les autres choix viennent des listes du thème */
+  quiz(b) {
+    /* Seules les listes qui s'excluent l'une l'autre (obligations / sunnas / ce qui annule…) servent à fabriquer les mauvaises réponses */
+    const CAT = /obligation|sunna|recommand|annule|condition|déconseill|pilier|interdit|impuret|^l'eau$/i;
+    const blocs = b.blocs.filter(k => k.items && k.items.length >= 2), qs = [], m = a => melanger(a.slice());
+    blocs.forEach((k, bi) => {
+      const nom = k.t || b.titre;
+      if (k.t && CAT.test(k.t)) {
+        const autres = [];
+        blocs.forEach((k2, bj) => { if (bj !== bi && k2.t && CAT.test(k2.t)) k2.items.forEach(x => { if (!k.items.some(y => y[0] === x[0])) autres.push(x[0]); }); });
+        if (autres.length >= 2) { const bon = m(k.items)[0][0], faux = m([...new Set(autres)]).slice(0, 2); qs.push({ q: `Lequel fait partie de : « ${nom} » ?`, bon, choix: m([bon, ...faux]) }); }
+      }
+      const nb = (/\b(\d+)\b/.exec(nom) || [])[1];
+      if (nb && +nb === k.items.length) { const n = +nb, pr = [n, n + 1, n > 2 ? n - 1 : n + 2]; qs.push({ q: `Combien y a-t-il de « ${nom.replace(/^Les \d+ /, "")} » ?`, bon: String(n), choix: m(pr.map(String)) }); }
+    });
+    return m(qs).slice(0, 4);
+  }
+};
+function vueEssentiel() {
+  const et = ESSENTIEL.etapes(), p = ESSENTIEL.prog(), faites = et.filter(e => p[e.i]).length, cur = et.findIndex(e => !p[e.i]);
+  let g0 = "";
+  const w = ecran("Apprendre l'essentiel", null, `${STYLE_BASES}
+    <div class="carte" style="padding:16px;border:0;color:#fff;background:linear-gradient(135deg,#0f3d36,#1b6b5c)"><b style="font-size:18px">🎓 Mon parcours</b><p style="margin:4px 0 10px;color:#fff !important;opacity:.92">La foi, la purification, la prière, le jeûne… pas à pas, selon l'école malikite.</p>
+      <i style="display:block;height:10px;border-radius:5px;background:rgba(255,255,255,.25);overflow:hidden"><u style="display:block;height:100%;width:${faites * 100 / et.length}%;background:#F2C43D"></u></i><small style="display:block;margin-top:6px">${faites} / ${et.length} leçons réussies</small>
+      ${cur >= 0 ? `<button class="btn" id="es-go" style="width:100%;margin-top:12px;background:#F2C43D;color:#0E1A33">▶ ${faites ? "Continuer" : "Commencer"} : ${esc(et[cur].b.titre)}</button>` : `<p style="margin:12px 0 0;font-weight:800">🏆 Parcours terminé, qu'Allah vous en fasse profiter !</p>`}</div>
+    <div id="es-l" style="margin-top:12px">${et.map((e, k) => { const ok = p[e.i], ouvert = ok || k === cur; const h = e.g !== g0 ? `<h3 style="margin:16px 2px 6px;font-size:15px;text-transform:uppercase;letter-spacing:.04em;color:var(--vert,#12805f)">${esc((g0 = e.g))}</h3>` : "";
+      return h + `<button type="button" data-k="${k}" ${ouvert ? "" : "disabled"} style="display:flex;align-items:center;gap:12px;width:100%;margin:0 0 8px;padding:12px 14px;border-radius:16px;border:1px solid var(--bordure,#e3dccb);background:var(--surface,#fff);color:var(--texte,#14201b);font:inherit;text-align:start;opacity:${ouvert ? 1 : .5}"><span style="font-size:24px">${e.b.ic}</span><span style="flex:1">${esc(e.b.titre)}</span><span>${ok ? (ok.sur > 1 ? "✅ " + ok.n + "/" + ok.sur : "✅") : k === cur ? "▶" : "🔒"}</span></button>`; }).join("")}</div>
+    <p style="font-size:12px;text-align:center;margin-top:10px;opacity:.75">D'après le « Mukhtasar » d'Al-Akhdari et la « Risala » d'Ibn Abi Zayd. Pour un cas particulier, demandez à un savant.</p>`);
+  const go = w.querySelector("#es-go"); if (go) go.onclick = () => router("essentiel-etape", { k: cur });
+  w.querySelectorAll("[data-k]").forEach(b => b.onclick = () => router("essentiel-etape", { k: +b.dataset.k }));
+}
+function vueEssentielEtape() {
+  const et = ESSENTIEL.etapes(), k = +etat.params.k || 0, e = et[k]; if (!e) { router("essentiel"); return; }
+  const b = e.b;
+  const w = ecran(b.titre, ["essentiel"], `${STYLE_BASES}<div style="font-size:13px;opacity:.7;margin:-4px 0 8px">Leçon ${k + 1} / ${et.length} · ${esc(e.g)}</div>
+    <div class="ba-s ouv"><div class="ba-c" style="padding-top:14px">${htmlBaseContenu(b)}</div></div>
+    <div id="es-q" style="margin-top:16px"><button class="btn" id="es-qz" style="width:100%">${ESSENTIEL.quiz(b).length ? "✍️ Vérifier mes connaissances" : "✓ J'ai lu et compris cette leçon"}</button></div>`);
+  const zq = w.querySelector("#es-q");
+  const fini = (n, sur) => {
+    const reussi = n >= Math.max(1, sur - 1);
+    if (reussi) { const p = ESSENTIEL.prog(); p[e.i] = { n, sur, d: Date.now() }; sauverLocal("essentiel_prog", p); }
+    zq.innerHTML = `<div class="carte" style="padding:18px;text-align:center;background:var(--surface,#fff);color:var(--texte,#14201b)"><div style="font-size:48px">${reussi ? "🎉" : "📖"}</div><b style="font-size:20px">${n} / ${sur} bonnes réponses</b><p>${reussi ? "Leçon réussie, bravo !" : "Relisez la leçon et réessayez."}</p>
+      ${reussi && et[k + 1] ? `<button class="btn" id="es-n" style="width:100%">Leçon suivante : ${esc(et[k + 1].b.titre)} ›</button>` : ""}<button class="btn-outline" id="es-r" style="width:100%;margin-top:8px">${reussi ? "Retour au parcours" : "Réessayer"}</button></div>`;
+    const bn = zq.querySelector("#es-n"); if (bn) bn.onclick = () => router("essentiel-etape", { k: k + 1 });
+    zq.querySelector("#es-r").onclick = () => reussi ? router("essentiel") : router("essentiel-etape", { k });
+    zq.scrollIntoView({ behavior: "smooth", block: "center" });
+  };
+  w.querySelector("#es-qz").onclick = () => {
+    const qs = ESSENTIEL.quiz(b);
+    if (!qs.length) { const p = ESSENTIEL.prog(); p[e.i] = { n: 1, sur: 1, d: Date.now() }; sauverLocal("essentiel_prog", p); if (et[k + 1]) router("essentiel-etape", { k: k + 1 }); else router("essentiel"); return; }
+    let i = 0, bons = 0;
+    const montrer = () => {
+      const q = qs[i];
+      zq.innerHTML = `<div class="carte" style="padding:16px;background:var(--surface,#fff);color:var(--texte,#14201b)"><small style="opacity:.7">Question ${i + 1} / ${qs.length}</small><p style="font-weight:800;font-size:17px;margin:6px 0 12px;color:var(--texte,#14201b) !important">${esc(q.q)}</p>${q.choix.map((c, j) => `<button type="button" data-j="${j}" style="display:block;width:100%;margin:0 0 8px;padding:12px 14px;border-radius:14px;border:1px solid var(--bordure,#e3dccb);background:transparent;color:inherit;font:inherit;text-align:start">${esc(c)}</button>`).join("")}</div>`;
+      zq.scrollIntoView({ behavior: "smooth", block: "center" });
+      zq.querySelectorAll("[data-j]").forEach(bt => bt.onclick = () => {
+        const c = q.choix[+bt.dataset.j], ok = c === q.bon; if (ok) bons++;
+        zq.querySelectorAll("[data-j]").forEach(x => { x.disabled = true; const v = q.choix[+x.dataset.j]; if (v === q.bon) { x.style.background = "#1b6b5c"; x.style.color = "#fff"; } else if (x === bt) { x.style.background = "#d93025"; x.style.color = "#fff"; } });
+        setTimeout(() => { i++; if (i < qs.length) montrer(); else fini(bons, qs.length); }, 1100);
+      });
+    };
+    montrer();
+  };
+}
+const STYLE_BASES = `<style>.ba-s{border:1px solid var(--bordure,#e3dccb);border-radius:16px;background:var(--surface,#fff);overflow:hidden}.ba-h{display:flex;align-items:center;gap:12px;width:100%;margin:0;padding:14px 16px;border:0;background:none;color:inherit;font:inherit;font-size:17px;font-weight:700;text-align:start}.ba-c{padding:0 16px 16px;display:none}.ba-s.ouv .ba-c{display:block}.ba-t{display:flex;justify-content:space-between;gap:10px;align-items:baseline;margin:14px 0 6px;color:var(--vert,#12805f);font-weight:800}.ba-l{margin:0;padding:0;list-style:none;counter-reset:n}.ba-l li{counter-increment:n;display:flex;gap:10px;align-items:baseline;padding:7px 0;border-top:1px solid var(--bordure,#eee)}.ba-l li:before{content:counter(n);flex:none;width:24px;height:24px;border-radius:50%;background:var(--vert-clair,#e3f1e8);color:var(--vert,#12805f);font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center}.ba-l span{flex:1}.ba-ar{font-family:'Amiri Quran','Amiri',serif;font-size:20px;line-height:1.9;white-space:nowrap}.ba-l .ba-ar{white-space:normal;max-width:45%;text-align:end}.ba-tb{width:100%;border-collapse:collapse;font-size:14px}.ba-tb td{padding:7px 4px;border-top:1px solid var(--bordure,#eee);vertical-align:top}</style>`;
+function htmlBaseContenu(b) { return `${b.intro ? `<p style="margin:0">${esc(b.intro)}</p>` : ""}${b.blocs.map(k => `${k.t ? `<div class="ba-t"><span>${esc(k.t)}${k.items ? " (" + k.items.length + ")" : ""}</span>${k.ar ? `<span class="ba-ar" dir="rtl" data-notrad>${esc(k.ar)}</span>` : ""}</div>` : ""}${k.arTexte ? `<p class="ba-ar" dir="rtl" data-notrad style="white-space:normal;font-size:22px;line-height:2;text-align:center;margin:4px 0">${esc(k.arTexte)}</p>` : ""}${k.texte ? `<p style="margin:0">${esc(k.texte)}</p>` : ""}${k.items ? `<ol class="ba-l">${k.items.map(x => `<li><span>${esc(x[0])}</span>${x[1] ? `<b class="ba-ar" dir="rtl" data-notrad>${esc(x[1])}</b>` : ""}</li>`).join("")}</ol>` : ""}${k.paroles ? k.paroles.map(x => `<div style="padding:9px 0;border-top:1px solid var(--bordure,#eee)">${x[0] ? `<b style="font-size:13px">${esc(x[0])}</b>` : ""}${x[1] ? `<p class="ba-ar" dir="rtl" data-notrad style="white-space:normal;font-size:22px;line-height:2.1;margin:2px 0">${esc(x[1])}</p>` : ""}${x[2] ? `<p style="margin:0;font-size:14px">${esc(x[2])}</p>` : ""}</div>`).join("") : ""}${k.tableau ? `<table class="ba-tb">${k.tableau.map(r => `<tr><td><b>${esc(r[0])}</b></td><td>${esc(r[1])}${r[2] ? `<br><small>${esc(r[2])}</small>` : ""}</td><td><small>${esc(r[3])}</small></td></tr>`).join("")}</table>` : ""}`).join("")}${b.source ? `<p style="font-size:12px;margin:12px 0 0;opacity:.8">${esc(b.source)}</p>` : ""}`; }
 function vueBases() {
-  const w = ecran("Les bases", ["livres"], `<style>.ba-s{border:1px solid var(--bordure,#e3dccb);border-radius:16px;background:var(--surface,#fff);overflow:hidden}.ba-h{display:flex;align-items:center;gap:12px;width:100%;margin:0;padding:14px 16px;border:0;background:none;color:inherit;font:inherit;font-size:17px;font-weight:700;text-align:start}.ba-c{padding:0 16px 16px;display:none}.ba-s.ouv .ba-c{display:block}.ba-t{display:flex;justify-content:space-between;gap:10px;align-items:baseline;margin:14px 0 6px;color:var(--vert,#12805f);font-weight:800}.ba-l{margin:0;padding:0;list-style:none;counter-reset:n}.ba-l li{counter-increment:n;display:flex;gap:10px;align-items:baseline;padding:7px 0;border-top:1px solid var(--bordure,#eee)}.ba-l li:before{content:counter(n);flex:none;width:24px;height:24px;border-radius:50%;background:var(--vert-clair,#e3f1e8);color:var(--vert,#12805f);font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center}.ba-l span{flex:1}.ba-ar{font-family:'Amiri Quran','Amiri',serif;font-size:20px;line-height:1.9;white-space:nowrap}.ba-l .ba-ar{white-space:normal;max-width:45%;text-align:end}.ba-tb{width:100%;border-collapse:collapse;font-size:14px}.ba-tb td{padding:7px 4px;border-top:1px solid var(--bordure,#eee);vertical-align:top}</style>
-    <p style="margin:0">L'essentiel à connaître pour pratiquer. Touchez un thème pour l'ouvrir.</p><div id="ba-z" style="display:grid;gap:10px"></div>
+  const w = ecran("Les bases", ["livres"], `${STYLE_BASES}
+    <button class="btn" id="ba-es" style="width:100%;margin:0 0 10px">🎓 Apprendre pas à pas, avec quiz</button><p style="margin:0">L'essentiel à connaître pour pratiquer. Touchez un thème pour l'ouvrir.</p><div id="ba-z" style="display:grid;gap:10px"></div>
     <div style="display:grid;gap:8px;margin-top:14px"><button class="btn-outline" id="ba-inv" style="margin:0">🤲 Invocations de tous les jours</button><button class="btn-outline" id="ba-az" style="margin:0">🌅🌙 Azkar du matin et du soir</button><button class="btn-outline" id="ba-pr" style="margin:0">🧭 Heures de prière et Qibla</button><button class="btn-outline" id="ba-ak" style="margin:0">📗 Lire le livre d'Al-Akhdari</button></div>
     <p style="font-size:12px;text-align:center;margin-top:14px">École malikite : d'après le « Mukhtasar » d'Al-Akhdari et la « Risala » d'Ibn Abi Zayd. Pour un cas particulier, demandez à un savant.</p>`);
   const z = w.querySelector("#ba-z");
@@ -6863,7 +7002,7 @@ function vueBases() {
     titres.forEach(titre => {
     const i = BASES.findIndex(x => x.titre === titre), b = BASES[i]; if (!b) return;
     const el = document.createElement("div"); el.className = "ba-s";
-    el.innerHTML = `<button type="button" class="ba-h" aria-expanded="false"><span style="font-size:26px" aria-hidden="true">${b.ic}</span><span style="flex:1">${esc(b.titre)}</span><span aria-hidden="true">▾</span></button><div class="ba-c">${b.intro ? `<p style="margin:0">${esc(b.intro)}</p>` : ""}${b.blocs.map(k => `${k.t ? `<div class="ba-t"><span>${esc(k.t)}${k.items ? " (" + k.items.length + ")" : ""}</span>${k.ar ? `<span class="ba-ar" dir="rtl" data-notrad>${esc(k.ar)}</span>` : ""}</div>` : ""}${k.arTexte ? `<p class="ba-ar" dir="rtl" data-notrad style="white-space:normal;font-size:22px;line-height:2;text-align:center;margin:4px 0">${esc(k.arTexte)}</p>` : ""}${k.texte ? `<p style="margin:0">${esc(k.texte)}</p>` : ""}${k.items ? `<ol class="ba-l">${k.items.map(x => `<li><span>${esc(x[0])}</span>${x[1] ? `<b class="ba-ar" dir="rtl" data-notrad>${esc(x[1])}</b>` : ""}</li>`).join("")}</ol>` : ""}${k.paroles ? k.paroles.map(x => `<div style="padding:9px 0;border-top:1px solid var(--bordure,#eee)">${x[0] ? `<b style="font-size:13px">${esc(x[0])}</b>` : ""}${x[1] ? `<p class="ba-ar" dir="rtl" data-notrad style="white-space:normal;font-size:22px;line-height:2.1;margin:2px 0">${esc(x[1])}</p>` : ""}${x[2] ? `<p style="margin:0;font-size:14px">${esc(x[2])}</p>` : ""}</div>`).join("") : ""}${k.tableau ? `<table class="ba-tb">${k.tableau.map(r => `<tr><td><b>${esc(r[0])}</b></td><td>${esc(r[1])}${r[2] ? `<br><small>${esc(r[2])}</small>` : ""}</td><td><small>${esc(r[3])}</small></td></tr>`).join("")}</table>` : ""}`).join("")}${b.source ? `<p style="font-size:12px;margin:12px 0 0;opacity:.8">${esc(b.source)}</p>` : ""}</div>`;
+    el.innerHTML = `<button type="button" class="ba-h" aria-expanded="false"><span style="font-size:26px" aria-hidden="true">${b.ic}</span><span style="flex:1">${esc(b.titre)}</span><span aria-hidden="true">▾</span></button><div class="ba-c">${htmlBaseContenu(b)}</div>`;
     const h = el.querySelector(".ba-h");
     h.onclick = () => { const o = el.classList.toggle("ouv"); h.setAttribute("aria-expanded", o ? "true" : "false"); h.lastElementChild.textContent = o ? "▴" : "▾"; };
     if (etat.params && etat.params.ouvrir != null && +etat.params.ouvrir === i) h.onclick();
@@ -6871,6 +7010,7 @@ function vueBases() {
     });
   });
   w.querySelector("#ba-inv").onclick = () => router("arabe");
+  w.querySelector("#ba-es").onclick = () => router("essentiel");
   w.querySelector("#ba-az").onclick = () => router("azkar");
   w.querySelector("#ba-pr").onclick = () => router("priere");
   w.querySelector("#ba-ak").onclick = () => router("biblio-lire", { id: "akhdari" });
@@ -7923,6 +8063,7 @@ function vueBiblio() {
   const T = [["❓", "Questions", () => router("questions")], ["🪜", "Parcours", () => router("parcours")], ["📚", "Livres", () => router("livres")], ["🤲", "Invocations", () => router("arabe")], ["🕌", "Les bases", () => router("bases")], ["📖", "Coran", () => router("dossier", { cat: "Coran", titre: "Coran" })],
     ["🎓", "Cours", () => router("dossier", { cat: "Cours", titre: "Cours" })], ["🎤", "Conférences", () => router("dossier", { cat: "Conférence", titre: "Conférences" })],
     ["💬", "Rappels", () => router("dossier", { cat: "Rappel", titre: "Rappels" })]];
+  T.unshift(["🎓", "Apprendre l'essentiel", () => router("essentiel")]);
   T.push(["🌙", "Ramadan", () => router("ramadan")], ["🕌", "Mosquées proches", () => router("mosquees")]);
   T.push(["🧸", "Histoires enfants", () => router("dossier", { cat: "Enfants", titre: "Histoires pour enfants" })], ["🎙️", "Patrimoine", () => router("dossier", { cat: "Patrimoine", titre: "Patrimoine" })], ["👥", "Groupes", () => router("groupes")]);
   w.innerHTML = `${enteteApp("Bibliothèque")}<div class="bb-langues" id="lg"></div>${modeEnfants() ? `<button class="bb-enf on" id="enf">🧸 <b>Mode Enfants activé</b><i aria-hidden="true">ON</i></button>` : ""}<div class="bb-grille" id="g"></div><details class="bb-plus"><summary>Plus</summary><div class="bb-grille" id="g2"></div></details><button class="btn-text" id="chlg" style="margin-top:14px">🌐 Changer mes langues</button>`;
