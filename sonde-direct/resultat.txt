@@ -1,12 +1,186 @@
-mecque url https://www.youtube.com/watch?v=IsJTAdC3-Jw id IsJTAdC3-Jw live true
-medine url https://www.youtube.com/channel/UCROKYPep-UuODNwyipe6JMw/live id 27cln-IxOGo live false
-mecque chaine-sandbox ok vidéo t=0.0
-mecque chaine-libre ok vidéo t=0.0
-mecque id-sandbox ok vidéo t=0.0
-mecque id-sandbox-popups ok vidéo t=0.0
-mecque id-libre ok vidéo t=0.0
-medine chaine-sandbox ok vidéo t=0.0
-medine chaine-libre ok vidéo t=0.0
-medine id-sandbox ok vidéo t=0.0
-medine id-sandbox-popups ok vidéo t=0.0
-medine id-libre ok vidéo t=0.0
+=== https://api3.islamhouse.com/v3/paV29H2gm56kvLPy/main/sitecontent/ff/json [404]
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="robots" content="noindex,nofollow" />
+        <style>
+            /* Copyright (c) 2010, Yahoo! Inc. All rights reserved. Code licensed under the BSD License: http://developer.yahoo.com/yui/license.html */
+            html{color:#000;background:#FFF;}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0;}table{border-collapse:collapse;border-spacing:0;}fieldset,img{border:0;}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}li{list-style:none;}caption,th{text-align:left;}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}q:before,q:after{content:'';}abbr,acronym{border:0;font-variant:normal;}sup{vertical-align:text-top;}sub{vertical-align:text-bottom;}input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;}input,textarea,select{*font-size:100%;}legend{color:#000;}
+            html { background: #eee; padding: 10px }
+            img { border: 0; }
+            #sf-resetcontent { width:970px; margin:0 auto; }
+                            body { background-color: #fff; color: #222; font: 16px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; margin: 0; }
+                .container { margin: 30px; max-width: 600px; }
+                h1 { color: #dc3545; font-size: 24px; }
+        </style>
+    </head>
+    <body>
+                        <div class="container">
+                    <h1>Sorry, the page you are looking for could not be found.</h1>
+                </div>
+    <script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a5ec2d97bb46f3c5',t:'MTc5NTM5NTAwOQ=='};var l=window.parent.location,o;try{o=new URL(l.origin).origin}catch(e){try{o=new URL(new URL(l.href).origin).origin}catch(e){o=''}}var u='/cdn-cgi/challenge-platform/scripts/jsd/main.js?ray=a5ec2d97bb46f3c5',a=document.createElement('script');a.src=o?new URL(u,o).href:u;document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListe
+
+=== https://api3.islamhouse.com/v3/paV29H2gm56kvLPy/main/audios/ff/ff/1/5/json [200]
+{"data":[{"id":2829643,"source_id":2829643,"title":"Lewru ndun feccii","type":"audios","add_date":1589325193,"update_date":1786845492,"description":"Lewru koorka ndun feccii","full_description":null,"source_language":"ff","translated_language":"ff","image":null,"num_attachments":1,"importance_level":"normal","api_url":"https:\/\/api3.islamhouse.com\/v3\/paV29H2gm56kvLPy\/main\/get-item\/2829643\/ff\/json","prepared_by":[{"id":8636,"source_id":8636,"title":null,"type":"author","kind":"publisher","description":null,"api_url":"https:\/\/api3.islamhouse.com\/v3\/paV29H2gm56kvLPy\/main\/get-author\/8636\/ff\/json"},{"id":450576,"source_id":450576,"title":"Mouhammed  Cheikh  Sene ","type":"author","kind":"author","description":null,"api_url":"https:\/\/api3.islamhouse.com\/v3\/paV29H2gm56kvLPy\/main\/get-author\/450576\/ff\/json"}],"attachments":[{"order":0,"size":"12.76 MB","extension_type":"MP3","description":"Lewru ndun feccii","url":"https:\/\/d1.islamhouse.com\/data\/fl\/ih_sounds\/single\/fl-lewru-ndun-feccii.mp3"}],"locales":[]},{"id":2829629,"source_id":2829629,"title":"Guede tiiketede ena bonna korka","type":"audios","add_date":1589152481,"update_date":1679311657,"description":"Guede tiiketede ena bonna korka te bonnata","full_description":null,"source_language":"ff","translated_language":"ff","image":null,"num_attachments":1,"importance_level":"normal","api_url":"https:\/\/api3.islamhouse.com\/v3\/paV29H2gm56kvLPy\/main\/get-item\/2829629\/ff\/json","prepared_by":[{"id":8636,"source_id":8636,"title":null,"type":"author","kind":"publisher","description":null,"api_url":"https:\/\/api3.islamhouse.com\/v3\/paV29H2gm56kvLPy\/main\/get-author\/8636\/ff\/json"},{"id":450576,"source_id":450576,"title":"Mouhammed  Cheikh  Sene ","type":"author","kind":"author","description":null,"api_url":"https:\/\/api3.islamhouse.com\/v3\/paV29H2gm56kvLPy\/main\/get-author\/450576\/ff\/json"}],"attachments":[{"order":0,"size":"10.45 MB","extension_type":"MP3","description":"Guede tiiketede ena bonna korka","url":"https:\/\/d1.islamhouse.com\/data\/fl\/ih_sounds\/single\/fl-guede-tiiketede-ena-bonna-korka.mp3"}],"locales":[]},{"id":2829513,"source_id":2829513,"title":"Niawore dieujido niami wala o yari korka","type":"audios","add_date":1588306885,"update_date":1679311721,"description":"niawore dieujido niami wala o yari e nder nialorma korka","full_description":null,"source_language":"ff","translated_language":"ff","image":null,"num_attachments":1,"importance_level":"normal","api_url":"https:\/\/api3.islamhouse.com\/v3\/paV29H2gm56kvLPy\/main\/get-item\/2829513\/ff\/json","prepared_by":[{"id":8636,"source_id":8636,"title":null,"type":"author","kind":"publisher","description":null,"api_url":"https:\/\/api3.islamhouse.com\/v3\/paV29H2gm56kvLPy\/main\/get-author\/8636\/ff\/json"},{"id":450576,"source_id":450576,"title":"Mouhammed  Cheikh  Sene ","type":"author","kind":"author","description":null,"api_url":"https:\/\/api3.islamhouse.com\/v3\/paV29H2gm56kvLPy\/main\/get-author\/450576\/ff\/json"}],"attachments":[{"order":0,"size":"9.07 MB","extension_type":"MP3","description":"Niawore dieujido niami wala o yari korka","url":"https:\/\/d1.islamhouse.com\/data\/fl\/ih_sounds\/single\/fl-niawore-dieujido-niami-wala-yari-korka.mp3"}],"locales":[]},{"id":2829493,"source_id":2829493,"title":"Hono reendirteng korkamen","type":"audios","add_date":1588134683,"update_date":1786845533,"description":"djewte lewrou korka hono reendirteng korkamen","full_description":null,"source_language":"ff","translated_language":"ff","image":null,"num_attachments":1,"importance_level":"normal","api_url":"https:\/\/api3.islamhouse.com\/v3\/paV29H2gm56kvLPy\/main\/get-item\/2829493\/ff\/json","prepared_by":[{"id":8636,"source_id":8636,"title":null,"type":"author","kind":"publisher","description":null,"api_url":"https:\/\/api3.islamhouse.com\/v3\/paV29H2gm56kvLPy\/main\/get-author\/8636\/ff\/json"},{"id":450576,"source_id":450576,"title":"Mouhammed  Cheikh  Sene ","type":"author","
+
+=== https://api3.islamhouse.com/v3/paV29H2gm56kvLPy/main/videos/ff/ff/1/5/json [200]
+{"data":[{"id":2846481,"source_id":2846481,"title":"Fassarol cimooji","type":"videos","add_date":1786979743,"update_date":1786990587,"description":"Fassarol cimooji","full_description":null,"source_language":"ff","translated_language":"ff","image":"https:\/\/d1.islamhouse.com\/data\/ff\/ih_videos\/pic\/pic_index\/2846481.jpg","num_attachments":38,"importance_level":"critical","api_url":"https:\/\/api3.islamhouse.com\/v3\/paV29H2gm56kvLPy\/main\/get-item\/2846481\/ff\/json","prepared_by":[{"id":111670,"source_id":111670,"title":null,"type":"author","kind":"author","description":null,"api_url":"https:\/\/api3.islamhouse.com\/v3\/paV29H2gm56kvLPy\/main\/get-author\/111670\/ff\/json"}],"attachments":[{"order":0,"size":"4.6 MB","extension_type":"MP4","description":"Firo simoore (114) An-naas","url":"https:\/\/d1.islamhouse.com\/data\/ff\/ih_videos\/mp4\/chain\/ff_mushaf_moallim\/2782701.mp4"},{"order":1,"size":"4.21 MB","extension_type":"MP4","description":"Firo simoore (113) Al-Falakh","url":"https:\/\/d1.islamhouse.com\/data\/ff\/ih_videos\/mp4\/chain\/ff_mushaf_moallim\/2782711.mp4"},{"order":2,"size":"2.73 MB","extension_type":"MP4","description":"Firo simoore (112) Al-Iklaas","url":"https:\/\/d1.islamhouse.com\/data\/ff\/ih_videos\/mp4\/chain\/ff_mushaf_moallim\/2782716.mp4"},{"order":3,"size":"4.85 MB","extension_type":"MP4","description":"Firo simoore (111) Al-Masad","url":"https:\/\/d1.islamhouse.com\/data\/ff\/ih_videos\/mp4\/chain\/ff_mushaf_moallim\/2782718.mp4"},{"order":4,"size":"4.47 MB","extension_type":"MP4","description":"Firo simoore (110) An-nasr","url":"https:\/\/d1.islamhouse.com\/data\/ff\/ih_videos\/mp4\/chain\/ff_mushaf_moallim\/2782720.mp4"},{"order":5,"size":"6.22 MB","extension_type":"MP4","description":"Firo simoore (109) Al-kaafiruun","url":"https:\/\/d1.islamhouse.com\/data\/ff\/ih_videos\/mp4\/chain\/ff_mushaf_moallim\/2782728.mp4"},{"order":6,"size":"3.04 MB","extension_type":"MP4","description":"Firo simoore (108) Al-kawtsar","url":"https:\/\/d1.islamhouse.com\/data\/ff\/ih_videos\/mp4\/chain\/ff_mushaf_moallim\/2782733.mp4"},{"order":7,"size":"5.79 MB","extension_type":"MP4","description":"Firo simoore (107) Al-Maa\u2019uun","url":"https:\/\/d1.islamhouse.com\/data\/ff\/ih_videos\/mp4\/chain\/ff_mushaf_moallim\/2782737.mp4"},{"order":8,"size":"4.74 MB","extension_type":"MP4","description":"Firo simoore (106) Quraysh","url":"https:\/\/d1.islamhouse.com\/data\/ff\/ih_videos\/mp4\/chain\/ff_mushaf_moallim\/2782758.mp4"},{"order":9,"size":"5.18 MB","extension_type":"MP4","description":"Firo simoore (105) Al-Fiil","url":"https:\/\/d1.islamhouse.com\/data\/ff\/ih_videos\/mp4\/chain\/ff_mushaf_moallim\/2782760.mp4"}],"locales":[]},{"id":2846480,"source_id":2846480,"title":"Nguurndam Annabi","type":"videos","add_date":1786940271,"update_date":1786951071,"description":"Nguurndam Annabi","full_description":null,"source_language":"ff","translated_language":"ff","image":"https:\/\/d1.islamhouse.com\/data\/ff\/ih_videos\/pic\/pic_
+
+=== https://api3.islamhouse.com/v3/paV29H2gm56kvLPy/main/audios/fr/fr/1/3/json [200]
+{"data":[{"id":2844997,"source_id":2844997,"title":"Traduction audio du sens des versets du Saint-Coran en langue fran\u00e7aise","type":"audios","add_date":1782059232,"update_date":1792074559,"description":"Lecture audio en langue fran\u00e7aise des sens du Noble Coran, int\u00e9grale, de la sourate Al-Fatiha \u00e0 la sourate An-Nas, accompagn\u00e9e de la r\u00e9citation du r\u00e9citateur Mohamed Ayoub - qu'Allah lui fasse mis\u00e9ricorde -.","full_description":null,"source_language":"fr","translated_language":"fr","image":null,"num_attachments":114,"importance_level":"exceptional","api_url":"https:\/\/api3.islamhouse.com\/v3\/paV29H2gm56kvLPy\/main\/get-item\/2844997\/fr\/json","prepared_by":[{"id":109864,"source_id":109864,"title":"Muhammad Ayyub","type":"author","kind":"author","description":null,"api_url":"https:\/\/api3.islamhouse.com\/v3\/paV29H2gm56kvLPy\/main\/get-author\/109864\/fr\/json"},{"id":2828549,"source_id":2828549,"title":"Ali Ezzairy","type":"author","kind":"author","description":null,"api_url":"https:\/\/api3.islamhouse.com\/v3\/paV29H2gm56kvLPy\/main\/get-author\/2828549\/fr\/json"},{"id":2828549,"source_id":2828549,"title":"Ali Ezzairy","type":"author","kind":"translator","description":null,"api_url":"https:\/\/api3.islamhouse.com\/v3\/paV29H2gm56kvLPy\/main\/get-author\/2828549\/fr\/json"},{"id":2828681,"source_id":2828681,"title":null,"type":"source","kind":"source","description":null,"api_url":"https:\/\/api3.islamhouse.com\/v3\/paV29H2gm56kvLPy\/main\/get-author\/2828681\/fr\/json"}],"attachments":[{"order":0,"size":"1.85 MB","extension_type":"MP3","description":"Al F\u00e2tiha","url":"https:\/\/d1.islamhouse.com\/data\/audio\/french_rashid_merged\/fr-001.mp3"},{"order":1,"size":"196.17 MB","extension_type":"MP3","description":"Al Baqarah","url":"https:\/\/d1.islamhouse.com\/data\/audio\/french_rashid_merged\/fr-002.mp3"},{"order":2,"size":"119.82 MB","extension_type":"MP3","description":"Al 'Imran","url":"https:\/\/d1.islamhouse.com\/data\/audio\/french_rashid_merged\/fr-003.mp3"},{"order":3,"size":"112.71 MB","extension_type":"MP3","description":"An Nis\u00e2'","url":"https:\/\/d1.islamhouse.com\/data\/audio\/french_rashid_merged\/fr-004.mp3"},{"order":4,"size":"89.41 MB","extension_type":"MP3","description":"Al M\u00e2'idah","url":"https:\/\/d1.islamhouse.com\/data\/audio\/french_rashid_merged\/fr-005.mp3"},{"order":5,"size":"104.36 MB","extension_type":"MP3","description":"Al An'am","url":"https:\/\/d1.islamhouse.com\/dat
+
+=== https://islamhouse.com/fr/ [200]
+
+
+
+
+
+
+<!DOCTYPE html>
+<html dir="ltr" lang="fr">
+
+<head>
+  <title>Islamhouse.com » Langues</title>
+<base href="/fr/">
+<meta charset="UTF-8" />
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<m
+
+=== https://islamhouse.com/fr/main/copyright [404]
+<!DOCTYPE html>
+<html dir="ltr" lang="fr">
+<head>
+  <title>Error : 404</title>
+<base href="/fr/">
+<meta charset="UTF-8" />
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="title" content="Error : 404" />
+<meta name="keywords"
+  content="islam,Français,quran,books,articles,categories,pdf,doc,docx,mp3,mp4" />
+<meta name="headline" content="Error : 404" />
+<meta name="description" content="Islamhouse est le plus grand site islamique international. Il contient des ressources gratuites en plus de 100 langues, notamment: des livres, audio, vidéos, posters, applis islamiques, etc." />
+<meta name="author" content="">
+<meta name='HandheldFriendly' content='true'>
+<meta name="robots" content="index,follow" />
+<meta name="googlebot" content="index, follow" />
+<meta name='identifier-URL' content='https://islamhouse.com'>
+<meta name='url' content='https://islamhouse.com'>
+
+<meta property="og:title" content="Error : 404" />
+<meta property="og:type" content="article" />
+<meta property="og:url"
+  content="https://islamhouse.com/fr/" />
+<meta property="og:description" content="Islamhouse est le plus grand site islamique international. Il contient des ressources gratuites en plus de 100 langues, notamment: des livres, audio, vidéos, posters, applis islamiques, etc." />
+<meta property="og:site_name" content="Islamhouse.com" />
+<meta property="og:image" content="https://islamhouse.com/logo_IslamHouse.png" />
+
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="Islamhouse.com" />
+<meta name="twitter:title" content="Error : 404" />
+<meta name="twitter:description" content="Islamhouse est le plus grand site islamique international. Il contient des ressources gratuites en plus de 100 langues, notamment: des livres, audio, vidéos, posters, applis islamiques, etc." />
+<meta name="twitter:image" content="https://islamhouse.com/logo_IslamHouse.png" />
+<meta name="twitter:url"
+  content="https://islamhouse.com/fr/" />
+
+
+
+<link rel="canonical"
+  href="https://islamhouse.com/fr/">
+<link rel="alternate"
+  href="https://islamhouse.com/RSS/IslamHouse-all-FR-FR.xml"
+  type="application/rss+xml"
+  title="Tous - Français">
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="robots" content="index, follow">
+<meta name="googlebot" content="index, follow">
+<meta name="bingbot" content="index, follow">
+
+<meta name="csrf-token" content="">
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144"
+  href="https://islamhouse.com/assets/images/apple-touch-icon-114-precomposed.png" />
+<link rel="apple-touch-icon-precomposed" sizes="114x114"
+  href="https://islamhouse.com/assets/images/apple-touch-icon-144-precomposed.png" />
+<link rel="apple-touch-icon-precomposed" sizes="72x72"
+  href="https://islamhouse.com/assets/images/apple-touch-icon-72-precomposed.png" />
+<link rel="apple-touch-icon-precomposed" href="https://islamhouse.com/assets/images/appl
+
+=== https://hadeethenc.com/api/v1/languages [200]
+[{"code":"ar","native":"\u0627\u0644\u0639\u0631\u0628\u064a\u0629"},{"code":"en","native":"English"},{"code":"ur","native":"\u0627\u0631\u062f\u0648"},{"code":"es","native":"Espa\u00f1ol"},{"code":"id","native":"Indonesia"},{"code":"ug","native":"\u0626\u06c7\u064a\u063a\u06c7\u0631\u0686\u06d5"},{"code":"bn","native":"\u09ac\u09be\u0982\u09b2\u09be"},{"code":"fr","native":"Fran\u00e7ais"},{"code":"tr","native":"T\u00fcrk\u00e7e"},{"code":"ru","native":"\u0420\u0443\u0441\u0441\u043a\u0438\u0439"},{"code":"bs","native":"Bosanski"},{"code":"si","native":"\u0dc3\u0dd2\u0d82\u0dc4\u0dbd"},{"code":"hi","native":"\u0939\u093f\u0928\u094d\u0926\u0940"},{"code":"zh","native":"\u4e2d\u6587"},{"code":"fa","native":"\u0641\u0627\u0631\u0633\u06cc"},{"code":"vi","native":"Ti\u1ebfng Vi\u1ec7t"},{"code":"tl","native":"Tagalog"},{"code":"ku","native":"Kurd\u00ee"},{"code":"ha","native":"Hausa"},{"code":"pt","native":"Portugu\u00eas"},{"code":"ml","native":"\u0d2e\u0d32\u0d2f\u0d3e\u0d33\u0d02"},{"code":"te","native":"\u0c24\u0c46\u0c32\u0c41\u0c17\u0c41"},{"code":"sw","native":"Kiswahili"},{"code":"ta","native":"\u0ba4\u0bae\u0bbf\u0bb4\u0bcd"},{"code":"my","native":"\u1019\u103c\u1014\u103a\u1019\u102c"},{"code":"th","native":"\u0e44\u0e17\u0e22"},{"code":"de","native":"Deutsch"},{"code":"ja","native":"\u65e5\u672c\u8a9e"},{"code":"ps","native":"\u067e\u069a\u062a\u0648"},{"code":"as","native":"\u0985\u09b8\u09ae\u09c0\u09af\u09bc\u09be"},{"code":"sq","native":"Shqip"},{"code":"sv","nat
+
+=== https://hadeethenc.com/api/v1/categories/roots/?language=ff [200]
+[{"id":"1","title":"Quraana teddu\u0257a egannde mum.","hadeeths_count":"16","parent_id":null},{"id":"2","title":"Hadiis e gannde mum.","hadeeths_count":"2","parent_id":null},{"id":"3","title":"Fi\u0253nde.","hadeeths_count":"73","parent_id":null},{"id":"4","title":"Fiqhu e asli mum.","hadeeths_count":"40","parent_id":null},{"id":"5","title":"\u0181ure e neediiji mum.","hadeeths_count":"89","parent_id":null},{"id":"6","title":"Noddude e hasbaade.","hadeeths_count":"8","parent_id":null},{"id":"7","title":"Siira e Taariik.","hadeeths_count":"4","parent_id":null}]
+
+=== https://hadeethenc.com/api/v1/hadeeths/list/?language=fr&category_id=1&page=1&per_page=2 [200]
+{"data":[{"id":"5907","title":"Soyez assidus \u00e0 ce Coran car, par Celui qui d\u00e9tient l\u2019\u00e2me de Mou\u1e25ammad en Sa main, il s\u2019\u00e9chappe encore plus vite que le chameau lorsqu\u2019il se d\u00e9tache de ses liens !","translations":["ar","bn","bs","en","es","fa","fr","id","ru","tl","tr","ur","zh","hi","ug","ku","ha","pt","ml","te","sw","my","th","de","ja","ps","vi","as","sq","sv","cs","gu","yo","nl","si","ta","prs","hu","kn","ky","lt","mg","ro","rw","ne","sr","wo","so","mos","uk","bg","az","mr","ka","tg","bm","mk","am","om","km","pa","it","uz","ff","kmr","yao"]},{"id":"5913","title":"Le meilleur d'entre vous est celui qui a appris le Coran et l'a enseign\u00e9.","translations":["ar","bn","bs","en","es","fa","fr","id","ru","tl","tr","ur","zh","hi","ug","ku","ha","pt","ml","te","sw","my","th","de","ja","ps","vi","as","sq","sv","cs","gu","yo","nl","si","ta","prs","hu","kn","ky","lt","mg","ro","rw","ne","sr","wo","so","mos","uk","bg","az","ka","tg","bm","mk","am","om","km","mr","pa","it","uz","ff","kmr","yao"]}],"meta":{"current_page":"1","last_page":28,"total_items":55,"per_page":"2"}}
+
+=== https://hadeethenc.com/fr/home/terms [404]
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>404 Page Not Found</title>
+<style type="text/css">
+
+::selection { background-color: #E13300; color: white; }
+::-moz-selection { background-color: #E13300; color: white; }
+
+body {
+	background-color: #fff;
+	margin: 40px;
+	font: 13px/20px normal Helvetica, Arial, sans-serif;
+	color: #4F5155;
+}
+
+a {
+	color: #003399;
+	background-color: transparent;
+	font-weight: normal;
+}
+
+h1 {
+	color: #444;
+	background-color: transparent;
+	border-bottom: 1px solid #D0D0D0;
+	font-size: 19px;
+	font-weight: normal;
+	margin: 0 0 14px 0;
+	padding: 14px 15px 10px 15px;
+}
+
+code {
+	font-family: Consolas, Monaco, Courier New, Courier, monospace;
+	font-size: 12px;
+	background-color: #f9f9f9;
+	border: 1px solid #D0D0D0;
+	color: #002166;
+	display: block;
+	margin: 14px 0 14px 0;
+	padding: 12px 10px 12px 10px;
+}
+
+#container {
+	margin: 10px;
+	border: 1px solid #D0D0D0;
+	box-shadow: 0 0 8px #D0D0D0;
+}
+
+p {
+	margin: 12px 15px 12px 15px;
+}
+</style>
+</head>
+<body>
+	<div id="container">
+		<h1>404 Page Not Found</h1>
+		<p>The page you requested was not found.</p>	</div>
+</body>
+</html>
