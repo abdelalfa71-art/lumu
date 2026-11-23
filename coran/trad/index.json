@@ -1,0 +1,34 @@
+{
+ "source": "QuranEnc.com",
+ "maj": "2026-11-23",
+ "traductions": [
+  {
+   "key": "french_rashid",
+   "langue": "fr",
+   "titre": "French Translation - Rachid Maach",
+   "version": "1.0.3",
+   "description": "Translated by Rashid Ma’ash"
+  },
+  {
+   "key": "french_montada",
+   "langue": "fr",
+   "titre": "French translation - Noor International Center",
+   "version": "1.0.0",
+   "description": "Translated by Dr. Nabil Rudwan - issued by Noor International Center"
+  },
+  {
+   "key": "fulani_rwwad",
+   "langue": "ff",
+   "titre": "Fulani Translation - Rowwad Translation Center",
+   "version": "1.0.2",
+   "description": "Translated by the team of the Rowwad Translation Center, in cooperation with the Rabwah Dawah Association, the Islamic Content Service Association in Languages, and the IslamHouse.com website."
+  },
+  {
+   "key": "hausa_gummi",
+   "langue": "ha",
+   "titre": "Hausa Translation - Abu Bakr Jumi",
+   "version": "1.2.2",
+   "description": "Translated by Abu Bakr Mahmoud Jumi, developed under the supervision of the Rowwad Translation Center. The original translation is available for the purpose of expressing opinion, evaluation, and continuous development."
+  }
+ ]
+}
