@@ -6195,17 +6195,31 @@ async function vueMosquees() {
   } catch (e) { const c = w.querySelector("#mq-carte"); if (c) c.remove(); }
 }
 /* ---------- Khatma en groupe : 30 juz partagés ---------- */
+/* Petit formulaire dans l'application (remplace la fenêtre système du téléphone) */
+function formulaire(titre, champs, bouton) {
+  return new Promise(ok => {
+    let fait = false;
+    ouvrirFeuille(titre, champs.map((c, i) => `<label style="display:block;margin-bottom:10px">${esc(c.label)}<input class="champ" data-i="${i}" maxlength="${c.max || 80}" placeholder="${esc(c.exemple || "")}" value="${esc(c.valeur || "")}"></label>`).join("") + `<button class="btn" id="fm-ok" style="width:100%">${esc(bouton || "Valider")}</button>`, (c, fermer) => {
+      const ins = [...c.querySelectorAll("input")];
+      const valider = () => { const v = ins.map(x => x.value.trim()); const manque = champs.findIndex((ch, i) => ch.requis && !v[i]); if (manque >= 0) { ins[manque].focus(); ins[manque].style.borderColor = "#d93025"; return; } fait = true; fermer(); ok(v); };
+      c.querySelector("#fm-ok").onclick = valider;
+      ins.forEach(x => x.onkeydown = e => { if (e.key === "Enter") valider(); });
+      setTimeout(() => { try { ins[0].focus(); } catch (e) {} }, 200);
+    }, () => { if (!fait) ok(null); });
+  });
+}
 const pseudoKhatma = () => (etat.profil && etat.profil.full_name) || chargerLocal("khatma_pseudo", "") || "";
 async function vueKhatma() {
   if (!etat.parentId) { router("connexion", { message: "Connectez-vous pour lire le Coran en groupe." }); return; }
   const w = ecran("Khatma en groupe", null, `<p style="margin:0 0 12px;opacity:.8">Lisez le Coran à plusieurs : chacun prend un ou plusieurs juz, et tout le monde voit l'avancement.</p>
     <button class="btn" id="kh-new" style="width:100%">➕ Créer une khatma</button>
-    <div style="display:flex;gap:8px;margin:10px 0 16px"><input class="champ" id="kh-code" placeholder="Code reçu (ex. 4JXGTH)" maxlength="6" style="margin:0;text-transform:uppercase"><button class="btn-outline" id="kh-join" style="margin:0">Rejoindre</button></div>
+    <div style="display:flex;gap:8px;margin:10px 0 16px"><input class="champ" id="kh-code" placeholder="Code reçu" maxlength="6" style="margin:0;text-transform:uppercase"><button class="btn-outline" id="kh-join" style="margin:0">Rejoindre</button></div>
     <div class="ec-tit">Mes khatmas</div><div id="kh-l"><div class="centre"><div class="spin"></div></div></div>`);
-  const pseudo = async () => { let p = pseudoKhatma(); if (!p) { p = (prompt("Votre prénom (visible par le groupe) :") || "").trim().slice(0, 60); if (p) sauverLocal("khatma_pseudo", p); } return p; };
+  const pseudo = async () => { let p = pseudoKhatma(); if (!p) { const v = await formulaire("Votre prénom", [{ label: "Prénom visible par le groupe", exemple: "Ex. Aïcha", max: 60, requis: true }], "Continuer"); p = v ? v[0].slice(0, 60) : ""; if (p) sauverLocal("khatma_pseudo", p); } return p; };
   w.querySelector("#kh-new").onclick = async () => {
-    const nom = (prompt("Nom de la khatma (ex. Famille Diallo · Ramadan) :") || "").trim(); if (!nom) return;
-    const { data, error } = await sb.rpc("yt_khatma_creer", { p_nom: nom, p_pseudo: await pseudo() });
+    const v = await formulaire("Créer une khatma", [{ label: "Nom de la khatma", exemple: "Ex. Famille Diallo · Ramadan", requis: true }, ...(pseudoKhatma() ? [] : [{ label: "Votre prénom (visible par le groupe)", exemple: "Ex. Aïcha", max: 60, requis: true }])], "Créer");
+    if (!v) return; const nom = v[0]; if (v[1]) sauverLocal("khatma_pseudo", v[1].slice(0, 60));
+    const { data, error } = await sb.rpc("yt_khatma_creer", { p_nom: nom, p_pseudo: pseudoKhatma() });
     if (error || !data) { toast("Création impossible : " + ((error && error.message) || "réessayez")); return; }
     router("khatma-voir", { id: data.id });
   };
