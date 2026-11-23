@@ -4410,7 +4410,7 @@ const AUD = {
       this.progres();
     });
     a.addEventListener("seeking", () => { this.dernier = null; });
-    a.addEventListener("loadedmetadata", () => this.progres());
+    a.addEventListener("loadedmetadata", () => { this.progres(); try { if (this.c && this.c.externe && isFinite(a.duration) && a.duration > 0) { sauverLocal("dur_" + this.c.id, Math.round(a.duration)); this.c.duration_seconds = Math.round(a.duration); } } catch (e) {} });
     a.addEventListener("error", () => {
       if (!(a instanceof NatifAudio) && this.srcOrig && this.c && this.c.type !== "video") { this.basculeNatif(); return; }
       afficherErreurAudio();
@@ -6922,7 +6922,19 @@ const BASES_ORDRE = [
   ["La vie du musulman", ["Le sacrifice et la ‘aqiqa", "Nourriture et abattage", "Serments et vœux", "Le mariage", "Les bonnes manières"]]
 ];
 /* ---------- IslamHouse : audios et vidéos (foulfouldé, français, haoussa), lus depuis leur serveur ---------- */
-const IH = { _c: {}, charger(lg) { if (this._c[lg]) return this._c[lg]; return (this._c[lg] = fetch("https://raw.githubusercontent.com/abdelalfa71-art/lumu/main/maj/islamhouse/" + lg + ".json?t=" + Math.floor(Date.now() / 864e5)).then(r => r.json()).then(j => { try { sauverLocal("ih_" + lg, j); } catch (e) {} return j; }).catch(() => { delete this._c[lg]; const j = chargerLocal("ih_" + lg, null); if (j) return j; throw new Error("x"); })); } };
+const IH = { _c: {}, d: {}, charger(lg) { if (this._c[lg]) return this._c[lg]; return (this._c[lg] = fetch("https://raw.githubusercontent.com/abdelalfa71-art/lumu/main/maj/islamhouse/" + lg + ".json?t=" + Math.floor(Date.now() / 864e5)).then(r => r.json()).then(j => { try { sauverLocal("ih_" + lg, j); } catch (e) {} return (this.d[lg] = j); }).catch(() => { delete this._c[lg]; const j = chargerLocal("ih_" + lg, null); if (j) return (this.d[lg] = j); throw new Error("x"); })); },
+  /* Audios IslamHouse présentés comme ceux de Lumu (une ligne par partie), vues comptées dans Lumu */
+  contenus(lg) {
+    const cat = this.d[lg]; if (!cat) return null;
+    const l = [];
+    (cat.audios || []).forEach(it => it.att.forEach((a, k) => {
+      const id = "ih-" + it.id + "-" + k, titre = it.att.length > 1 ? (a[0] && a[0] !== it.t ? a[0] : it.t + " (" + (k + 1) + ")") : it.t;
+      l.push({ id, type: "audio", externe: true, title: titre, fichier_path: a[1], source_nom: it.a[0] || "IslamHouse", yt_channels: { name: it.a[0] || "IslamHouse" }, auteur: it.a.join(", "), duration_seconds: +a[3] || +chargerLocal("dur_" + id, 0) || null, views_count: IH_VUES[id], published_at: it.date ? new Date(it.date * 1000).toISOString() : null, description: it.d });
+    }));
+    return l.sort((a, b) => String(b.published_at || "").localeCompare(String(a.published_at || "")));
+  }
+};
+let IH_VUES = {};
 function jouerIH(it, k) {
   const fait = i => ({ id: "ih-" + it.id + "-" + i, type: "audio", externe: true, title: it.att[i][0] || it.t, fichier_path: it.att[i][1], yt_channels: { name: "IslamHouse" + (it.a.length ? " · " + it.a.join(", ") : "") } });
   const jouer = i => AUD.jouer(fait(i), i + 1 < it.att.length ? () => jouer(i + 1) : null, i > 0 ? () => jouer(i - 1) : null);
@@ -7915,19 +7927,6 @@ async function vueEcouter() {
     z.innerHTML = [["lumu", "Foulfouldé"], ["ff", "Pular"], ["fr", "Français"], ["ha", "Hausa"]].map(([k, t]) => `<button type="button" data-src="${k}" style="padding:10px 2px;border-radius:20px;border:1px solid #1b6b5c;font:inherit;font-size:13px;font-weight:700;white-space:nowrap;background:${k === SOURCE ? "#1b6b5c" : "transparent"};color:${k === SOURCE ? "#fff" : "inherit"}">${t}</button>`).join("");
     z.querySelectorAll("[data-src]").forEach(b => b.onclick = () => { SOURCE = b.dataset.src; sauverLocal("ec_source", SOURCE); dessinerSources(); lignes(); });
   };
-  async function listeIHEcoute(lg) {
-    if (lignes.obs) { lignes.obs.disconnect(); lignes.obs = null; }
-    liste.innerHTML = squelettes(3);
-    let cat; try { cat = await IH.charger(lg); } catch (e) { liste.innerHTML = `<p class="centre">Connexion nécessaire pour charger ces audios.</p>`; return; }
-    if (!w.isConnected || SOURCE !== lg) return;
-    const l = (cat.audios || []).slice().sort((a, b) => (b.date || 0) - (a.date || 0));
-    liste.innerHTML = l.map((x, i) => `<button type="button" class="ec-row" data-i="${i}" style="display:flex;align-items:center;gap:12px;width:calc(100% - 32px);margin:0 16px 10px;padding:12px;border-radius:18px;background:var(--surface,#fff);color:var(--texte,#14201b);font:inherit;text-align:start"><span style="width:52px;height:52px;flex:none;border-radius:12px;background:#1b6b5c;color:#fff;display:flex;align-items:center;justify-content:center;font-size:22px">🎧</span><span style="flex:1;min-width:0"><b dir="auto" data-notrad style="display:block">${esc(x.t)}</b><small dir="auto" data-notrad style="opacity:.7">${esc(x.a.join(", ") || "IslamHouse")}${x.att.length > 1 ? " · " + x.att.length + " parties" : ""}</small></span><span style="color:#1b6b5c;font-size:22px">▶</span></button>`).join("") + `<p style="font-size:12px;opacity:.7;text-align:center;margin:6px 16px 16px">Audios d'IslamHouse.com, lus depuis leur site.</p>`;
-    liste.querySelectorAll("[data-i]").forEach(b => b.onclick = () => {
-      const it = l[+b.dataset.i];
-      if (it.att.length === 1) { jouerIH(it, 0); return; }
-      ouvrirFeuille(it.t, it.att.map((a, k) => `<button type="button" data-k="${k}" style="display:flex;align-items:center;gap:10px;width:100%;margin:0 0 6px;padding:10px 12px;border-radius:12px;border:1px solid var(--bordure,#e3dccb);background:transparent;color:inherit;font:inherit;text-align:start"><span>▶</span><span dir="auto" data-notrad style="flex:1">${esc(a[0])}</span><small style="opacity:.6">${esc(a[2])}</small></button>`).join("") + `<p style="font-size:12px;opacity:.7;margin:10px 0 0">${esc(it.a.join(", "))} · Source : IslamHouse.com</p>`, (c, fermer) => { c.querySelectorAll("[data-k]").forEach(bt => bt.onclick = () => { fermer(); jouerIH(it, +bt.dataset.k); }); });
-    });
-  }
   dessinerSources();
   const joue = c => !!(AUD.c && AUD.c.id === c.id && AUD.a && !AUD.a.paused);
   /* Temps écoulé / durée d'un audio (en direct pour celui qui joue) */
@@ -7957,7 +7956,11 @@ async function vueEcouter() {
   document.addEventListener("file-maj", function surFile() { if (!w.isConnected) { document.removeEventListener("file-maj", surFile); return; } lignes(); });
   document.addEventListener("epingles-maj", function surEp() { if (!w.isConnected) { document.removeEventListener("epingles-maj", surEp); return; } lignes(); });
   function lignes() {
-    if (SOURCE !== "lumu" && !rech) { listeIHEcoute(SOURCE); return; }
+    let lIH = null;
+    if (SOURCE !== "lumu" && !rech) {
+      lIH = IH.contenus(SOURCE);
+      if (!lIH) { if (lignes.obs) { lignes.obs.disconnect(); lignes.obs = null; } liste.innerHTML = squelettes(3); const src = SOURCE; IH.charger(src).then(() => { if (w.isConnected && SOURCE === src) lignes(); }, () => { if (SOURCE === src) liste.innerHTML = `<p class="centre">Connexion nécessaire pour charger ces audios.</p>`; }); return; }
+    }
     const re = (CH.find(x => x[0] === filtre) || [])[2];
     w.classList.toggle("ec-cherche", !!rech);
     let l;
@@ -7971,6 +7974,7 @@ async function vueEcouter() {
       l = tous.filter(c => !re || re.test(c.category || "") || re.test(c.title || ""));
       l = [...l.filter(neuf), ...l.filter(c => !neuf(c)).sort((a, b) => alea(a) - alea(b))];
     }
+    if (lIH) l = lIH;
     { const ep = chargerLocal(EPING_CLE, []); l = [...l.filter(c => ep.includes(c.id)), ...l.filter(c => !ep.includes(c.id))]; }
     liste.innerHTML = l.length ? "" : `<p class="ec-vide">${rech ? "Aucun résultat." : (ecCharge ? "Aucun audio pour l'instant." : "Veuillez patienter…")}</p>`;
     if (!rech && fileAttente().length) {
@@ -7986,10 +7990,10 @@ async function vueEcouter() {
       const cover = c.cover_path ? urlMedia(c.cover_path) : "";
       const el = document.createElement("div");
       el.className = "ec-row"; el._c = c; el.tabIndex = 0; el.setAttribute("role", "button");
-      appuiLong(el, (x, y) => ouvrirMenuContenu(c, el, x, y));
+      if (!c.externe) appuiLong(el, (x, y) => ouvrirMenuContenu(c, el, x, y));
       el.innerHTML = `<span class="ec-cv">${cover ? `<img src="${esc(cover)}" alt="" loading="lazy">` : `<img class="ec-logo-ph" src="icon-192.png" alt="" loading="lazy">`}</span>
-        <div class="ec-tx"><span class="ec-imam" data-notrad dir="auto">${estEpingle(c.id) ? "📌 " : ""}${c.published_at && Date.now() - new Date(c.published_at) < 48 * 3600e3 ? '<em style="background:#c9a227;color:#fff;border-radius:6px;padding:0 6px;font-size:11px;font-style:normal;margin-right:4px">Nouveau</em>' : ""}@${esc(nom || "Imam")}</span><b dir="auto" data-notrad>${esc(c.title)}</b><small dir="auto" data-notrad>👁 ${esc(fmtNb(c.views_count))} · <span class="ec-tp">${esc(tempsRow(c))}</span>${chargerLocal("fini_" + c.id, 0) ? " · ✔" : ""}</small>${(() => { const q = chargerLocal("pos_" + c.id, 0), d = c.duration_seconds || 0; return d ? `<span class="ec-barz" style="display:block;padding:8px 0 6px;margin-bottom:-6px;cursor:pointer"><i class="ec-bar" style="margin-top:0;height:6px"><u style="width:${Math.min(100, Math.round(100 * q / d))}%"></u></i></span>` : ""; })()}</div>
-        ${c.fichier_path ? `<button class="ec-dl" aria-label="Télécharger"></button>` : ""}<button class="ec-pl" aria-label="Lecture">${ico("play", 26, true)}</button>`;
+        <div class="ec-tx"><span class="ec-imam" data-notrad dir="auto">${estEpingle(c.id) ? "📌 " : ""}${c.published_at && Date.now() - new Date(c.published_at) < 48 * 3600e3 ? '<em style="background:#c9a227;color:#fff;border-radius:6px;padding:0 6px;font-size:11px;font-style:normal;margin-right:4px">Nouveau</em>' : ""}@${esc(nom || "Imam")}</span><b dir="auto" data-notrad>${esc(c.title)}</b><small dir="auto" data-notrad>${c.externe && c.views_count == null ? "" : "👁 " + esc(fmtNb(c.views_count)) + " · "}<span class="ec-tp">${esc(tempsRow(c))}</span>${chargerLocal("fini_" + c.id, 0) ? " · ✔" : ""}</small>${(() => { const q = chargerLocal("pos_" + c.id, 0), d = c.duration_seconds || 0; return d ? `<span class="ec-barz" style="display:block;padding:8px 0 6px;margin-bottom:-6px;cursor:pointer"><i class="ec-bar" style="margin-top:0;height:6px"><u style="width:${Math.min(100, Math.round(100 * q / d))}%"></u></i></span>` : ""; })()}</div>
+        ${c.fichier_path && !c.externe ? `<button class="ec-dl" aria-label="Télécharger"></button>` : ""}<button class="ec-pl" aria-label="Lecture">${ico("play", 26, true)}</button>`;
       { const chId = c.channel_id || (c.yt_channels && c.yt_channels.id), im = el.querySelector(".ec-imam"); if (im && chId) im.onclick = ev => { ev.stopPropagation(); router("chaine", { id: chId }); }; }
       const bz = el.querySelector(".ec-barz");
       if (bz) bz.onclick = ev => {

@@ -11,12 +11,13 @@ permissions:
 jobs:
   maj:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 120
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - run: sudo apt-get install -y -qq ffmpeg >/dev/null
       - run: node import-coran/islamhouse.mjs
       - name: Enregistrer
         run: |
