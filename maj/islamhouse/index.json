@@ -1,0 +1,21 @@
+{
+ "source": "IslamHouse.com",
+ "maj": "2026-11-23",
+ "langues": {
+  "ff": {
+   "audios": 116,
+   "videos": 81,
+   "fichiers": 313
+  },
+  "fr": {
+   "audios": 621,
+   "videos": 483,
+   "fichiers": 2495
+  },
+  "ha": {
+   "audios": 155,
+   "videos": 799,
+   "fichiers": 1817
+  }
+ }
+}
