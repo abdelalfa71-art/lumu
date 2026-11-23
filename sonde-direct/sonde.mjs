@@ -2,9 +2,10 @@
 import fs from "node:fs";
 const out = [], vus = new Map();
 const UA = { "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/124 Safari/537.36", "accept-language": "fr-FR,fr;q=0.9" };
-const req = ["Mouhamed Ali Dewa", "Mohammed Ali Dewa", "Muhammad Ali Dewa", "Ali Dewa tafsir", "Ali Dewa fulfulde", "oustaz Ali Dewa", "cheikh Ali Dewa", "Ali Dewa wazou", "محمد علي ديوا", "Ali Dewa bouhari", "Ali Dewa loubabou", "Ali Diwa fulfulde", "Mallam Ali Dewa", "Ali Dewa Ngaoundéré", "Ali Dewa Garoua"];
+const req = ["Mougaddima loubabou taawil", "loubabou taawil Ali Dewa", "Tafsir abgara mahamed Ali dewa", "Kitabo bouhari Ali dewa", "Modibbo Mohamed Ali Dewa", "Mahamed Ali Dewa", "Mohamed Ali Dewa rahimahoullah", "Mohamed Ali Dewa tafsir", "Mohamed Ali Dewa hala", "Mohamed Ali Dewa wazou", "Cheick Mohamed Ali Dewa", "Mohamed Aly Dewa", "Ali Dewa Ngaoundéré", "Ali Dewa loubabou", "Mallam Ali Dewa", "Mohamed Ali Dewa ramadan", "Mohamed Ali Dewa fulfulde wazou", "Mohamed Ali Dewa audio"];
 function marcher(o, f) { if (Array.isArray(o)) o.forEach(x => marcher(x, f)); else if (o && typeof o === "object") { f(o); for (const k in o) marcher(o[k], f); } }
 for (const q of req) {
+  await new Promise(r => setTimeout(r, 2500));
   try {
     const t = await (await fetch("https://www.youtube.com/results?search_query=" + encodeURIComponent(q) + "&sp=EgIQAQ%253D%253D", { headers: UA })).text();
     const m = t.match(/var ytInitialData = (\{.*?\});<\/script>/s); if (!m) { out.push("YT " + q + " : pas de données"); continue; }
@@ -15,20 +16,11 @@ for (const q of req) {
     out.push("YT " + q + " : " + n);
   } catch (e) { out.push("YT " + q + " erreur " + e.message); }
 }
-const pert = [...vus].filter(([, v]) => /d[eé]wa|diwa|ديوا/i.test(v.titre + " " + v.chaine));
+const pert = [...vus].filter(([, v]) => /d[eé]wa|diwa|ديوا|loubabou|lubab/i.test(v.titre) && !/DEWA\)/.test(v.chaine));
 out.push("\n=== VIDEOS PERTINENTES (" + pert.length + " / " + vus.size + ") ===");
 for (const [id, v] of pert) out.push(`${id}\t${v.duree}\t${v.vues}\t${v.chaine} (${v.chId})\t${v.titre}`);
 const chaines = {}; for (const [, v] of pert) chaines[v.chaine + " " + v.chId] = (chaines[v.chaine + " " + v.chId] || 0) + 1;
 out.push("\n=== CHAINES ===\n" + Object.entries(chaines).sort((a, b) => b[1] - a[1]).map(x => x[1] + "\t" + x[0]).join("\n"));
 out.push("\n=== AUTRES (titres sans Dewa) ===");
-for (const [id, v] of [...vus].filter(([, v]) => !/d[eé]wa|diwa|ديوا/i.test(v.titre + " " + v.chaine)).slice(0, 60)) out.push(`${id}\t${v.chaine}\t${v.titre}`);
-for (const q of ["dewa", "\"ali dewa\"", "diwa fulfulde"]) {
-  try { const j = await (await fetch("https://archive.org/advancedsearch.php?q=" + encodeURIComponent(q) + "&fl[]=identifier&fl[]=title&fl[]=mediatype&fl[]=licenseurl&rows=50&output=json", { headers: UA })).json();
-    out.push("\n=== archive.org " + q + " : " + j.response.numFound); for (const d of j.response.docs) out.push(d.identifier + "\t" + d.mediatype + "\t" + (d.licenseurl || "") + "\t" + d.title);
-  } catch (e) { out.push("archive " + e.message); }
-}
-for (const q of ["ali dewa", "dewa fulfulde"]) {
-  try { const t = await (await fetch("https://audiomack.com/search?q=" + encodeURIComponent(q), { headers: UA })).text();
-    out.push("\n=== audiomack " + q + " : " + ((t.match(/"title":"[^"]*"/g) || []).slice(0, 20).join(" | "))); } catch (e) { out.push("audiomack " + e.message); }
-}
+for (const [id, v] of [...vus].filter(([, v]) => !/d[eé]wa|diwa|ديوا/i.test(v.titre + " " + v.chaine) && v.chaine !== "Dubai Electricity and Water Authority (DEWA)").slice(0, 60)) out.push(`${id}\t${v.chaine}\t${v.titre}`);
 fs.writeFileSync("sonde-direct/resultat.txt", out.join("\n"));
