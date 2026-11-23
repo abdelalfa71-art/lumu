@@ -2,7 +2,9 @@
 import fs from "node:fs";
 import { execFile } from "node:child_process";
 const mesurer = url => new Promise(ok => execFile("ffprobe", ["-v", "error", "-show_entries", "format=duration", "-of", "default=nw=1:nk=1", url], { timeout: 60000 }, (e, out) => ok(e ? 0 : Math.round(parseFloat(out) || 0))));
-const PODCASTS = [{ slug: "jaafar", langue: "ha", auteur: "Ja'afar Mahmud Adam", source: "Quran Central", rss: "https://rss.qurancentral.com/jaafar-mahmud-adam.rss" }];
+const PODCASTS = [
+  { slug: "jaafar", langue: "ha", auteur: "Ja'afar Mahmud Adam", source: "Quran Central", rss: "https://rss.qurancentral.com/jaafar-mahmud-adam.rss" },
+  { slug: "jaafar-tafsir", langue: "ha", auteur: "Ja'afar Mahmud Adam", source: "Podcast « Tafsirin al-Qurani »", rss: "https://anchor.fm/s/10dcf4d84/podcast/rss" }];
 const dec = s => String(s || "").replace(/<!\[CDATA\[|\]\]>/g, "").replace(/&#8217;/g, "’").replace(/&#8211;/g, "–").replace(/&amp;/g, "&").replace(/&quot;/g, '"').replace(/&#039;|&#39;/g, "'").replace(/&#x?[0-9a-f]+;/gi, "").trim();
 const sec = d => { if (!d) return 0; if (/^\d+$/.test(d)) return +d; return d.split(":").reverse().reduce((t, x, i) => t + (+x || 0) * 60 ** i, 0); };
 fs.mkdirSync("maj/podcasts", { recursive: true });
