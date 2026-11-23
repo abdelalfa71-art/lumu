@@ -1,0 +1,25 @@
+name: Hadiths (HadeethEnc)
+on:
+  schedule:
+    - cron: "17 5 3 * *"
+  workflow_dispatch:
+  push:
+    paths:
+      - "import-coran/hadiths.mjs"
+permissions:
+  contents: write
+jobs:
+  maj:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node import-coran/hadiths.mjs
+      - name: Enregistrer
+        run: |
+          git config user.name "github-actions[bot]"; git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add maj/hadiths
+          git commit -q -m "Hadiths HadeethEnc : mise à jour [skip ci]" && git pull --rebase -q && git push -q || true
