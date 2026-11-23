@@ -22,7 +22,9 @@ for (const lg of LANGUES) {
     fs.writeFileSync(F, JSON.stringify({ id: h.id, titre: h.title, hadith: h.hadeeth, attribution: h.attribution || "", grade: h.grade || "", explication: h.explanation || "", benefices: h.hints || [], mots: h.words_meanings || [], reference: h.reference || "", ar: h.hadeeth_ar || "" }));
     n++;
   });
-  const garde = [...liste.values()].filter(x => fs.existsSync(`${dir}/${x.id}.json`));
+  /* Seuls les hadiths authentiques ou bons sont gardés : un hadith jugé faible est écarté */
+  const FAIBLE = /ضعيف|faible|rauni|weak|da.?if/i;
+  const garde = [...liste.values()].filter(x => { const F = `${dir}/${x.id}.json`; if (!fs.existsSync(F)) return false; if (FAIBLE.test(JSON.parse(fs.readFileSync(F, "utf8")).grade || "")) { fs.unlinkSync(F); return false; } return true; });
   fs.writeFileSync(`${dir}/index.json`, JSON.stringify({ source: "HadeethEnc.com", langue: lg, maj: new Date().toISOString().slice(0, 10), categories: cats.map(c => ({ id: c.id, t: c.title, n: garde.filter(x => x.c.includes(c.id)).length })), hadiths: garde }));
   console.log(lg, "catégories", cats.length, "hadiths", garde.length, "nouveaux", n);
 }
