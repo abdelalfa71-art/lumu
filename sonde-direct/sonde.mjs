@@ -1,9 +1,15 @@
-// Sonde : audios de Mouhammad Ali Dewa (Cameroun, foulfouldé) — podcasts publics, IslamHouse, archive.org.
+// Sonde : chaîne Telegram publique @MOHAMMEDALIDEW (aperçu web t.me/s).
 import fs from "node:fs";
 const out = [];
-for (const q of ["Mouhammed Ali Dewa", "Muhammad Ali Dewa", "Mohamed Ali Dewa", "Ali Dewa", "Dewa fulfulde", "Mouhammad Aliyu Dewa", "tafsir fulfulde Cameroun"]) {
-  try { const j = await (await fetch("https://itunes.apple.com/search?media=podcast&limit=15&term=" + encodeURIComponent(q))).json(); j.results.forEach(r => out.push(["PODCAST", q, r.collectionName, r.artistName, r.trackCount, r.feedUrl].join(" | "))); } catch (e) { out.push(q + " " + e.message); }
-  try { const j = await (await fetch("https://archive.org/advancedsearch.php?rows=15&output=json&fl[]=identifier&fl[]=title&fl[]=creator&fl[]=licenseurl&q=" + encodeURIComponent(q))).json(); (j.response.docs || []).forEach(d => out.push(["ARCHIVE", q, d.identifier, d.title, d.creator, d.licenseurl || ""].join(" | "))); } catch (e) {}
+for (const nom of ["MOHAMMEDALIDEW", "mohammedalidewa", "MohammedAliDewa"]) {
+  try {
+    const r = await fetch("https://t.me/s/" + nom, { headers: { "user-agent": "Mozilla/5.0" } }); const t = await r.text();
+    const titre = (t.match(/<meta property="og:title" content="([^"]*)/) || [])[1] || "", desc = (t.match(/<meta property="og:description" content="([^"]*)/) || [])[1] || "";
+    const abonnes = (t.match(/tgme_channel_info_counter"><span class="counter_value">([^<]*)<\/span> <span class="counter_type">([^<]*)/g) || []).join(" ; ");
+    const audios = (t.match(/<audio[^>]*src="([^"]+)"/g) || []).length, docs = (t.match(/tgme_widget_message_document_title[^>]*>([^<]*)/g) || []).slice(0, 15).map(x => x.replace(/.*>/, ""));
+    const posts = (t.match(/data-post="([^"]+)"/g) || []).slice(-3);
+    out.push(`=== ${nom} [${r.status}] titre=${titre} | desc=${desc.slice(0, 200)} | ${abonnes.replace(/<[^>]+>/g, "")}\n audios=${audios} | documents: ${docs.join(" | ")}\n derniers posts: ${posts.join(" ")}`);
+    const voix = (t.match(/tgme_widget_message_voice[^"]*"/g) || []).length; out.push(" voix=" + voix);
+  } catch (e) { out.push(nom + " " + e.message); }
 }
-for (const lg of ["ff"]) for (const f of ["audios", "videos"]) { try { const d = JSON.parse(fs.readFileSync(`maj/islamhouse/${lg}.json`, "utf8")); d[f].filter(x => /dewa|dewwa/i.test(x.a.join(" ") + x.t)).forEach(x => out.push(["ISLAMHOUSE", f, x.t, x.a.join(", ")].join(" | "))); } catch (e) {} }
-fs.writeFileSync("sonde-direct/resultat.txt", [...new Set(out)].join("\n"));
+fs.writeFileSync("sonde-direct/resultat.txt", out.join("\n"));
