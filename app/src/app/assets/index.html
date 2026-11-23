@@ -7367,6 +7367,46 @@ const VERSETS = {
   /* Coordonnées des repères → fraction de l'image de page (réglé sur nos 604 images) */
   frac(page, x, y) { return page <= 2 ? [0.1635 + 0.002873 * x, 0.2395 + 0.0022 * y] : [0.090 + 0.00240 * x, 0.085 + 0.00150 * y]; }
 };
+/* ---------- Traduction du sens du Coran (QuranEnc.com, sans modification, version indiquée) ---------- */
+const TRADC = {
+  BASE: "https://raw.githubusercontent.com/abdelalfa71-art/lumu/main/coran/trad/",
+  NOMS: { fr: "Français", ff: "Fulfulde (Pular)", ha: "Hausa" },
+  _i: null, _c: {},
+  index() {
+    if (this._i) return this._i;
+    return (this._i = fetch(this.BASE + "index.json?t=" + Math.floor(Date.now() / 864e5)).then(r => r.json()).then(j => { sauverLocal("trad_index", j); return j; })
+      .catch(() => { this._i = null; const j = chargerLocal("trad_index", null); if (j) return j; throw new Error("hors ligne"); }));
+  },
+  async charger(key, version) {
+    if (this._c[key]) return this._c[key];
+    const url = this.BASE + key + ".json?v=" + version, ca = await caches.open("lumu-coran-trad").catch(() => null);
+    let r = ca ? await ca.match(url) : null;
+    if (!r) { r = await fetch(url); if (!r.ok) throw new Error("trad"); if (ca) { try { for (const k of await ca.keys()) if (k.url.includes("/" + key + ".json")) await ca.delete(k); await ca.put(url, r.clone()); } catch (e) {} } }
+    return (this._c[key] = await r.json());
+  },
+  choix() { return chargerLocal("trad_choix", (mesLangues() || [])[0] === "ff" ? "fulani_rwwad" : "french_rashid"); }
+};
+async function feuilleTraduction(page) {
+  ouvrirFeuille("🌍 Traduction · page " + page, `<div id="tr-z"><div class="centre"><div class="spin"></div></div></div>`, async corps => {
+    const z = corps.querySelector("#tr-z");
+    try {
+      const [idx, g] = await Promise.all([TRADC.index(), VERSETS.json("versets")]);
+      let key = TRADC.choix(); if (!idx.traductions.some(t => t.key === key)) key = idx.traductions[0].key;
+      const dessiner = async () => {
+        const t = idx.traductions.find(x => x.key === key);
+        z.innerHTML = `<select class="champ" id="tr-k" style="margin:0 0 12px">${idx.traductions.map(x => `<option value="${x.key}"${x.key === key ? " selected" : ""}>${esc(TRADC.NOMS[x.langue] || x.langue)} · ${esc(x.titre.replace(/^\w+ [Tt]ranslation - /, ""))}</option>`).join("")}</select><div id="tr-l"><div class="centre"><div class="spin"></div></div></div>`;
+        z.querySelector("#tr-k").onchange = e => { key = e.target.value; sauverLocal("trad_choix", key); dessiner(); };
+        const d = await TRADC.charger(t.key, t.version), l = [];
+        for (let s = 1; s <= 114; s++) (g[s] || []).forEach((v, i) => { if (v[0] === page) l.push([s, i + 1]); });
+        let sAv = 0;
+        z.querySelector("#tr-l").innerHTML = l.map(([s, a]) => { const v = (d.s[s] || [])[a - 1] || [a, "", ""]; const h = s !== sAv ? `<h3 style="margin:14px 0 6px;color:#1b6b5c">${s}. ${esc(CORAN.NOMS[s - 1])} · <span dir="rtl" data-notrad>${esc(CORAN.NOMS_AR[s - 1])}</span></h3>` : ""; sAv = s;
+          return h + `<div style="padding:8px 0;border-top:1px solid var(--bordure,#eee)" dir="auto" data-notrad><b style="color:#c9a227">(${a})</b> ${esc(v[1])}${v[2] ? `<details style="margin-top:4px;font-size:13px;opacity:.85"><summary>Notes</summary><div style="white-space:pre-line">${esc(v[2])}</div></details>` : ""}</div>`; }).join("") +
+          `<p style="font-size:12px;opacity:.75;margin:14px 0 0">${esc(t.titre)} · version ${esc(String(t.version))} · ${esc(t.description || "")} — Source : QuranEnc.com. Traduction du sens, reproduite sans modification.</p>`;
+      };
+      await dessiner();
+    } catch (e) { z.innerHTML = `<p class="centre">Traduction indisponible sans connexion pour l'instant. Ouvrez-la une fois avec Internet : elle restera ensuite disponible hors ligne.</p>`; }
+  });
+}
 /* ---------- Mémorisation (hifz) : répétition verset par verset avec la voix d'un récitateur ---------- */
 const HIFZ_LECTEURS = [["mahmoud-khalil-al-husary", "Mahmoud Khalil Al-Husary"], ["muhammad-siddiq-al-minshawi", "Muhammad Siddiq Al-Minshawi"], ["mishary-al-afasy", "Mishary Al-Afasy"], ["abdurrahman-as-sudais", "Abdurrahman As-Sudais"], ["saad-al-ghamidi", "Saad Al-Ghamidi"], ["abdul-basit-abdus-samad", "Abdul Basit Abdus-Samad"], ["saud-ash-shuraim", "Saud Ash-Shuraim"], ["ahmed-al-ajmi", "Ahmed Al-Ajmi"], ["abu-bakr-ash-shatri", "Abu Bakr Ash-Shatri"], ["yasser-al-dosari", "Yasser Al-Dosari"]];
 const HIFZ = {
@@ -7450,6 +7490,7 @@ async function vueCoran() {
       <button class="co-it" id="co-som">${coIt("☰", "Sourates")}</button>
       <button class="co-it" id="co-juz">${coIt("◔", "Juz")}</button>
       <button class="co-it" id="co-aller">${coIt("⌕", "Aller à une page")}</button>
+      <button class="co-it" id="co-trad">${coIt("🌍", "Traduction de la page")}</button>
       <button class="co-it" id="co-hifz">${coIt("🧠", "Mémoriser (répéter des versets)")}</button>
       <button class="co-it" id="co-mq"></button>
       <button class="co-it" id="co-mqs">${coIt("📑", "Mes marque-pages")}</button>
@@ -7650,6 +7691,7 @@ async function vueCoran() {
   zone.addEventListener("click", () => {
     w.classList.toggle("co-cache");
   });
+  $("#co-trad").onclick = () => feuilleTraduction(p);
   $("#co-hifz").onclick = () => { const l = CORAN.sourates(p) || [0]; feuilleHifz((l[l.length - 1] || 0) + 1, async o => { const pg = CORAN.DEBUTS[o.s - 1]; if (pg && pg !== p) aff(pg); await HIFZ.lancer(o); }); };
   if (etat.params.hifz) setTimeout(async () => {
     const o = { ...etat.params.hifz }; if (!w.isConnected || !o.s) return;
