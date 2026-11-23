@@ -1417,7 +1417,7 @@ const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 const CACHE_API = (() => {
   const m = new Map(), enCours = new Map(), VIEUX = 7 * 864e5, MAX = 400, GROS = 2.5e6;
   const frais = url => /category\.eq\.Coran|yt_channels\?|yt_savants|yt_categories/.test(url) ? 6 * 3600e3 : 10 * 60e3;
-  const jamais = /^(yt_khatmas|yt_khatma_parts|yt_khatma_membres|yt_khatma_creer|yt_khatma_rejoindre|yt_notifications|yt_dm|yt_lives|yt_statuts|yt_mes_conversations|yt_demandes_en_attente|yt_chercher_personnes|push_.*|yt_vue|yt_temps_vu|yt_assurer_profil|yt_dm_marquer_lu)$/;
+  const jamais = /^(yt_vue_externe|yt_khatma_parts|yt_khatma_membres|yt_khatma_creer|yt_khatma_rejoindre|yt_notifications|yt_dm|yt_lives|yt_statuts|yt_mes_conversations|yt_demandes_en_attente|yt_chercher_personnes|push_.*|yt_vue|yt_temps_vu|yt_assurer_profil|yt_dm_marquer_lu)$/;
   const rpcLecture = /^(yt_recommandations|yt_suggestions|yt_rechercher|yt_rechercher_questions|yt_commentaires|yt_groupe_noms|yt_personne|yt_progression|yt_sondage_resultats|yt_stats_createur|yt_qualite|yt_ma_chaine)$/;
   /* Stockage durable (IndexedDB) */
   let db = null;
@@ -4439,6 +4439,7 @@ const AUD = {
   },
   jouer(c, suiv, prec) {
     this.init();
+    if (c && c.externe && /^ih-\d+-\d+$/.test(c.id)) { try { const k = "vu_" + c.id; if (!sessionStorage.getItem(k)) { sessionStorage.setItem(k, "1"); sb.rpc("yt_vue_externe", { p_id: c.id }).then(() => {}, () => {}); IH_VUES[c.id] = (IH_VUES[c.id] || 0) + 1; c.views_count = IH_VUES[c.id]; } } catch (e) {} }
     this.suiv = suiv || null; this.prec = prec || null;
     if (this.c && this.c.id === c.id) { if (this.a.paused) this.lire(); this.sessionMedia(); this.maj(); return; }
     this.envoyer(); this.acc = 0; this.dernier = null;
@@ -6934,7 +6935,17 @@ const IH = { _c: {}, d: {}, charger(lg) { if (this._c[lg]) return this._c[lg]; r
     return l.sort((a, b) => String(b.published_at || "").localeCompare(String(a.published_at || "")));
   }
 };
-let IH_VUES = {};
+let IH_VUES = {}, IH_VUES_T = 0;
+/* Compteurs d'écoutes des audios IslamHouse (table yt_vues_externes) */
+async function chargerVuesIH() {
+  if (Date.now() - IH_VUES_T < 5 * 60e3) return false;
+  IH_VUES_T = Date.now();
+  try {
+    const m = {}; let de = 0;
+    for (;;) { const { data, error } = await sb.from("yt_vues_externes").select("id,vues").gt("vues", 0).range(de, de + 999); if (error || !data) break; data.forEach(x => { m[x.id] = x.vues; }); if (data.length < 1000) break; de += 1000; }
+    IH_VUES = m; return true;
+  } catch (e) { return false; }
+}
 function jouerIH(it, k) {
   const fait = i => ({ id: "ih-" + it.id + "-" + i, type: "audio", externe: true, title: it.att[i][0] || it.t, fichier_path: it.att[i][1], yt_channels: { name: "IslamHouse" + (it.a.length ? " · " + it.a.join(", ") : "") } });
   const jouer = i => AUD.jouer(fait(i), i + 1 < it.att.length ? () => jouer(i + 1) : null, i > 0 ? () => jouer(i - 1) : null);
@@ -7959,6 +7970,7 @@ async function vueEcouter() {
     let lIH = null;
     if (SOURCE !== "lumu" && !rech) {
       lIH = IH.contenus(SOURCE);
+      if (lIH && Date.now() - IH_VUES_T > 5 * 60e3) chargerVuesIH().then(ok => { if (ok && w.isConnected && SOURCE !== "lumu") lignes(); });
       if (!lIH) { if (lignes.obs) { lignes.obs.disconnect(); lignes.obs = null; } liste.innerHTML = squelettes(3); const src = SOURCE; IH.charger(src).then(() => { if (w.isConnected && SOURCE === src) lignes(); }, () => { if (SOURCE === src) liste.innerHTML = `<p class="centre">Connexion nécessaire pour charger ces audios.</p>`; }); return; }
     }
     const re = (CH.find(x => x[0] === filtre) || [])[2];
@@ -7992,7 +8004,7 @@ async function vueEcouter() {
       el.className = "ec-row"; el._c = c; el.tabIndex = 0; el.setAttribute("role", "button");
       if (!c.externe) appuiLong(el, (x, y) => ouvrirMenuContenu(c, el, x, y));
       el.innerHTML = `<span class="ec-cv">${cover ? `<img src="${esc(cover)}" alt="" loading="lazy">` : `<img class="ec-logo-ph" src="icon-192.png" alt="" loading="lazy">`}</span>
-        <div class="ec-tx"><span class="ec-imam" data-notrad dir="auto">${estEpingle(c.id) ? "📌 " : ""}${c.published_at && Date.now() - new Date(c.published_at) < 48 * 3600e3 ? '<em style="background:#c9a227;color:#fff;border-radius:6px;padding:0 6px;font-size:11px;font-style:normal;margin-right:4px">Nouveau</em>' : ""}@${esc(nom || "Imam")}</span><b dir="auto" data-notrad>${esc(c.title)}</b><small dir="auto" data-notrad>${c.externe && c.views_count == null ? "" : "👁 " + esc(fmtNb(c.views_count)) + " · "}<span class="ec-tp">${esc(tempsRow(c))}</span>${chargerLocal("fini_" + c.id, 0) ? " · ✔" : ""}</small>${(() => { const q = chargerLocal("pos_" + c.id, 0), d = c.duration_seconds || 0; return d ? `<span class="ec-barz" style="display:block;padding:8px 0 6px;margin-bottom:-6px;cursor:pointer"><i class="ec-bar" style="margin-top:0;height:6px"><u style="width:${Math.min(100, Math.round(100 * q / d))}%"></u></i></span>` : ""; })()}</div>
+        <div class="ec-tx"><span class="ec-imam" data-notrad dir="auto">${estEpingle(c.id) ? "📌 " : ""}${c.published_at && Date.now() - new Date(c.published_at) < 48 * 3600e3 ? '<em style="background:#c9a227;color:#fff;border-radius:6px;padding:0 6px;font-size:11px;font-style:normal;margin-right:4px">Nouveau</em>' : ""}@${esc(nom || "Imam")}</span><b dir="auto" data-notrad>${esc(c.title)}</b><small dir="auto" data-notrad>👁 ${esc(fmtNb(c.views_count || 0))} · <span class="ec-tp">${esc(tempsRow(c))}</span>${chargerLocal("fini_" + c.id, 0) ? " · ✔" : ""}</small>${(() => { const q = chargerLocal("pos_" + c.id, 0), d = c.duration_seconds || 0; return d ? `<span class="ec-barz" style="display:block;padding:8px 0 6px;margin-bottom:-6px;cursor:pointer"><i class="ec-bar" style="margin-top:0;height:6px"><u style="width:${Math.min(100, Math.round(100 * q / d))}%"></u></i></span>` : ""; })()}</div>
         ${c.fichier_path && !c.externe ? `<button class="ec-dl" aria-label="Télécharger"></button>` : ""}<button class="ec-pl" aria-label="Lecture">${ico("play", 26, true)}</button>`;
       { const chId = c.channel_id || (c.yt_channels && c.yt_channels.id), im = el.querySelector(".ec-imam"); if (im && chId) im.onclick = ev => { ev.stopPropagation(); router("chaine", { id: chId }); }; }
       const bz = el.querySelector(".ec-barz");
