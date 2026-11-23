@@ -6,6 +6,7 @@ on:
   push:
     paths:
       - "import-coran/islamhouse.mjs"
+      - "import-coran/podcasts.mjs"
 permissions:
   contents: write
 jobs:
@@ -18,9 +19,10 @@ jobs:
         with:
           node-version: 22
       - run: sudo apt-get install -y -qq ffmpeg >/dev/null
+      - run: node import-coran/podcasts.mjs
       - run: node import-coran/islamhouse.mjs
       - name: Enregistrer
         run: |
           git config user.name "github-actions[bot]"; git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add maj/islamhouse
+          git add maj/islamhouse maj/podcasts
           git commit -m "Catalogue IslamHouse : mise à jour [skip ci]" && git pull --rebase -q && git push -q || true
