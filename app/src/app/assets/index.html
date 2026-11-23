@@ -2155,7 +2155,7 @@ function render(rafraichi) {
     "mot-de-passe-oublie": vueMotDePasseOublie, "nouveau-mot-de-passe": vueNouveauMotDePasse,
     "changer-mot-de-passe": vueChangerMotDePasse,
     "pin-verrou": vuePinVerrou, "pin-creation": vuePinCreation, "arabe": vueArabe,
-    "presentation": vuePresentation, "tarifs": vueTarifs, "videos": vueFlux, "affiches": vueAffiches, "coran": vueCoran, "coran-accueil": vueCoranAccueil, "radios": vueRadios, "enfants": vueEnfants, "ramadan": vueRamadan, "mosquees": vueMosquees, "aujourdhui": vueAujourdhui, "essentiel": vueEssentiel, "essentiel-etape": vueEssentielEtape, "khatma": vueKhatma, "khatma-voir": vueKhatmaVoir, "questions": vueQuestions, "questions-imam": vueQuestionsImam, "parcours": vueParcours, "parcours-voir": vueParcoursVoir, "passage": vuePassage, "parcours-revoir": vueRevoir, "mes-parcours": vueMesParcours, "parcours-edit": vueParcoursEdit, "passage-edit": vuePassageEdit, "home": vueDecouvrir, "savants": vueSavants, "preches": vuePreches, "priere": vuePriere, "langues-choix": vueLanguesChoix, "tutoriel": vueTutoriel, "biblio": vueBiblio, "dossier": vueDossier, "direct": vueDirect, "chaine-edit": vueChaineEdit, "notifications": vueNotifications, "publier": vuePublier, "je-publie": vueJePublie, "profil": vueProfil, "contenu": vueContenu,
+    "presentation": vuePresentation, "tarifs": vueTarifs, "videos": vueFlux, "affiches": vueAffiches, "coran": vueCoran, "coran-accueil": vueCoranAccueil, "radios": vueRadios, "enfants": vueEnfants, "ramadan": vueRamadan, "mosquees": vueMosquees, "aujourdhui": vueAujourdhui, "essentiel": vueEssentiel, "essentiel-etape": vueEssentielEtape, "islamhouse": vueIslamHouse, "khatma": vueKhatma, "khatma-voir": vueKhatmaVoir, "questions": vueQuestions, "questions-imam": vueQuestionsImam, "parcours": vueParcours, "parcours-voir": vueParcoursVoir, "passage": vuePassage, "parcours-revoir": vueRevoir, "mes-parcours": vueMesParcours, "parcours-edit": vueParcoursEdit, "passage-edit": vuePassageEdit, "home": vueDecouvrir, "savants": vueSavants, "preches": vuePreches, "priere": vuePriere, "langues-choix": vueLanguesChoix, "tutoriel": vueTutoriel, "biblio": vueBiblio, "dossier": vueDossier, "direct": vueDirect, "chaine-edit": vueChaineEdit, "notifications": vueNotifications, "publier": vuePublier, "je-publie": vueJePublie, "profil": vueProfil, "contenu": vueContenu,
     "langue": vueLangue, "fil": vueFlux, "flux": vueEcouter, "radio": vueFlux, "recherche": vueRecherche, "abos": vueAbos, "espace": vueEspace, "importer": vueImport, "reels": vueFlux, "groupes": vueGroupes, "groupe": vueGroupe, "discussions": vueDiscussions, "conv": vueConv, "groupe-nouveau": vueNouveauGroupe, "livres": vueBibliotheque, "regroupements": vueRegroupements, "biblio-lire": vueBiblioLire, "azkar": vueAzkar, "bases": vueBases, "livre": vueLivre, "mes-livres": vueMesLivres, "livre-edition": vueEditeurLivre, "lives": vueLives, "live": vueLive, "live-nouveau": vueNouveauLive, "devenir-createur": vueDevenirCreateur, "admin": vueAdmin, "push-admin": vuePushAdmin, "mes-contenus": vueMesContenus, "legal": vueLegal, "lien": vueLien, "chaine": vueChaine, "playlist": vuePlaylist, "playlists": vuePlaylists, "stats": vueStats, "abonnements": vueAbonnements, "favoris": vueListeUtilisateur, "historique": vueListeUtilisateur, "hors": vueHors
   };
   document.body.classList.toggle("branche-tobi", TOBI_ROUTES.includes(etat.route));
@@ -4384,7 +4384,7 @@ const AUD = {
     m.id = "mini-audio"; m.hidden = true;
     m.innerHTML = `<button class="ma-info" aria-label="Ouvrir la lecture"><img alt=""><span><b dir="auto"></b><small></small></span></button><button class="ma-pp" aria-label="Lecture / pause"></button><button class="ma-x" aria-label="Fermer">✕</button><i class="ma-barre"><b></b></i>`;
     document.body.appendChild(m);
-    m.querySelector(".ma-info").onclick = () => { if (!this.c) return; if (this.c.radio) router("radios"); else router("contenu", { id: this.c.id, c: this.c }); };
+    m.querySelector(".ma-info").onclick = () => { if (!this.c) return; if (this.c.radio) router("radios"); else if (this.c.externe) router("islamhouse"); else router("contenu", { id: this.c.id, c: this.c }); };
     m.querySelector(".ma-pp").onclick = () => this.basculer();
     m.querySelector(".ma-x").onclick = () => this.arreter();
     document.addEventListener("play", ev => { const a = this.a; if (ev.target !== a && ev.target.tagName === "VIDEO" && !a.paused && !(RADIO.actif && ev.target.muted)) a.pause(); }, true);
@@ -4435,7 +4435,7 @@ const AUD = {
     }
   },
   envoyer() {
-    if (this.acc >= 5 && this.c && !this.c.radio) { const sec = Math.round(this.acc); this.acc = 0; sb.rpc("yt_temps_vu", { p_id: this.c.id, p_sec: sec }).then(() => {}, () => {}); }
+    if (this.acc >= 5 && this.c && !this.c.radio && !this.c.externe) { const sec = Math.round(this.acc); this.acc = 0; sb.rpc("yt_temps_vu", { p_id: this.c.id, p_sec: sec }).then(() => {}, () => {}); }
   },
   jouer(c, suiv, prec) {
     this.init();
@@ -4475,7 +4475,7 @@ const AUD = {
   },
   /** 20 dernières écoutes : mémorisation + enregistrement automatique après quelques secondes d'écoute */
   memoriser(c) {
-    if (RADIO.actif || c.type !== "audio" || c.embed_id) return;
+    if (RADIO.actif || c.type !== "audio" || c.embed_id || c.externe) return;
     HORS.noter(c);
     clearTimeout(this.tAuto);
     if (!HORS.auto() || HORS.ids.has(c.id) || navigator.onLine === false) return;
@@ -6921,6 +6921,52 @@ const BASES_ORDRE = [
   ["Jeûne, zakat et pèlerinage", ["Le jeûne du Ramadan", "Jeûnes volontaires et retraite (i‘tikaf)", "L'aumône obligatoire (zakat)", "Le pèlerinage (hajj et ‘umra)"]],
   ["La vie du musulman", ["Le sacrifice et la ‘aqiqa", "Nourriture et abattage", "Serments et vœux", "Le mariage", "Les bonnes manières"]]
 ];
+/* ---------- IslamHouse : audios et vidéos (foulfouldé, français, haoussa), lus depuis leur serveur ---------- */
+const IH = { _c: {}, charger(lg) { if (this._c[lg]) return this._c[lg]; return (this._c[lg] = fetch("https://raw.githubusercontent.com/abdelalfa71-art/lumu/main/maj/islamhouse/" + lg + ".json?t=" + Math.floor(Date.now() / 864e5)).then(r => r.json()).then(j => { try { sauverLocal("ih_" + lg, j); } catch (e) {} return j; }).catch(() => { delete this._c[lg]; const j = chargerLocal("ih_" + lg, null); if (j) return j; throw new Error("x"); })); } };
+function jouerIH(it, k) {
+  const fait = i => ({ id: "ih-" + it.id + "-" + i, type: "audio", externe: true, title: it.att[i][0] || it.t, fichier_path: it.att[i][1], yt_channels: { name: "IslamHouse" + (it.a.length ? " · " + it.a.join(", ") : "") } });
+  const jouer = i => AUD.jouer(fait(i), i + 1 < it.att.length ? () => jouer(i + 1) : null, i > 0 ? () => jouer(i - 1) : null);
+  jouer(k);
+}
+function videoIH(url, titre) {
+  arreterMedias();
+  const o = document.createElement("div"); o.style.cssText = "position:fixed;inset:0;z-index:2147483000;background:#000;display:flex;flex-direction:column";
+  o.innerHTML = `<div style="display:flex;align-items:center;gap:10px;padding:10px 12px;color:#fff"><button aria-label="Fermer" style="width:40px;height:40px;border-radius:50%;border:0;background:rgba(255,255,255,.18);color:#fff;font-size:20px">✕</button><b dir="auto" style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(titre)}</b></div><video src="${esc(url)}" controls autoplay playsinline style="flex:1;width:100%;min-height:0;background:#000"></video><p style="color:#aaa;font-size:12px;text-align:center;margin:6px">Source : IslamHouse.com</p>`;
+  document.body.appendChild(o);
+  const fermer = () => { try { o.querySelector("video").pause(); } catch (e) {} o.remove(); };
+  o.querySelector("button").onclick = fermer;
+}
+async function vueIslamHouse() {
+  let lg = chargerLocal("ih_langue", (mesLangues() || [])[0] === "ff" ? "ff" : (mesLangues() || [])[0] === "ha" ? "ha" : "fr"), ty = chargerLocal("ih_type", "audios"), q = "";
+  const w = ecran("IslamHouse", null, `<p style="margin:0 0 10px;opacity:.8">Cours, rappels et vidéos gratuits en foulfouldé, français et haoussa.</p>
+    <div id="ih-lg" style="display:flex;gap:8px;margin-bottom:8px"></div><div id="ih-ty" style="display:flex;gap:8px;margin-bottom:10px"></div>
+    <input class="champ" id="ih-q" type="search" placeholder="Chercher un titre ou un savant" style="margin:0 0 12px"><div id="ih-l"><div class="centre"><div class="spin"></div></div></div>
+    <p style="font-size:12px;opacity:.7;text-align:center;margin-top:12px">Contenus d'IslamHouse.com, lus depuis leur site. Les auteurs sont indiqués sur chaque élément.</p>`);
+  const pill = (on, t) => `style="flex:1;padding:10px 0;border-radius:20px;border:1px solid #1b6b5c;font:inherit;font-weight:700;background:${on ? "#1b6b5c" : "transparent"};color:${on ? "#fff" : "inherit"}"`;
+  const dessinerFiltres = () => {
+    w.querySelector("#ih-lg").innerHTML = [["ff", "Pular"], ["fr", "Français"], ["ha", "Hausa"]].map(([k, t]) => `<button type="button" data-lg="${k}" ${pill(k === lg)}>${t}</button>`).join("");
+    w.querySelector("#ih-ty").innerHTML = [["audios", "🎧 Audios"], ["videos", "🎬 Vidéos"]].map(([k, t]) => `<button type="button" data-ty="${k}" ${pill(k === ty)}>${t}</button>`).join("");
+    w.querySelectorAll("[data-lg]").forEach(b => b.onclick = () => { lg = b.dataset.lg; sauverLocal("ih_langue", lg); dessinerFiltres(); liste(); });
+    w.querySelectorAll("[data-ty]").forEach(b => b.onclick = () => { ty = b.dataset.ty; sauverLocal("ih_type", ty); dessinerFiltres(); liste(); });
+  };
+  const liste = async () => {
+    const z = w.querySelector("#ih-l"); z.innerHTML = `<div class="centre"><div class="spin"></div></div>`;
+    let cat; try { cat = await IH.charger(lg); } catch (e) { z.innerHTML = `<p class="centre">Connexion nécessaire pour charger la liste.</p>`; return; }
+    if (!w.isConnected) return;
+    const re = q ? new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "i") : null;
+    const l = (cat[ty] || []).filter(x => !re || re.test(x.t) || re.test(x.a.join(" ")) || re.test(x.d)).sort((a, b) => (b.date || 0) - (a.date || 0));
+    z.innerHTML = l.slice(0, 150).map((x, i) => `<button type="button" class="carte" data-i="${i}" style="display:flex;align-items:center;gap:12px;width:100%;text-align:start;margin-bottom:8px;font:inherit;background:var(--surface,#fff);color:var(--texte,#14201b)">${x.img ? `<img src="${esc(x.img)}" alt="" loading="lazy" style="width:56px;height:56px;border-radius:10px;object-fit:cover;flex:none">` : `<span style="width:56px;height:56px;flex:none;border-radius:10px;background:#1b6b5c;color:#fff;display:flex;align-items:center;justify-content:center;font-size:24px">${ty === "videos" ? "🎬" : "🎧"}</span>`}<span style="flex:1;min-width:0"><b dir="auto" data-notrad style="display:block">${esc(x.t)}</b><small dir="auto" data-notrad style="opacity:.7">${esc(x.a.join(", "))}${x.att.length > 1 ? " · " + x.att.length + " parties" : ""}</small></span><span>›</span></button>`).join("") || `<p class="centre">Rien trouvé.</p>`;
+    z.querySelectorAll("[data-i]").forEach(b => b.onclick = () => {
+      const it = l[+b.dataset.i];
+      if (it.att.length === 1) { if (ty === "videos") videoIH(it.att[0][1], it.t); else jouerIH(it, 0); return; }
+      ouvrirFeuille(it.t, `${it.d ? `<p dir="auto" data-notrad style="margin:0 0 10px;opacity:.85">${esc(it.d)}</p>` : ""}${it.att.map((a, k) => `<button type="button" data-k="${k}" style="display:flex;align-items:center;gap:10px;width:100%;margin:0 0 6px;padding:10px 12px;border-radius:12px;border:1px solid var(--bordure,#e3dccb);background:transparent;color:inherit;font:inherit;text-align:start"><span>${ty === "videos" ? "🎬" : "▶"}</span><span dir="auto" data-notrad style="flex:1">${esc(a[0])}</span><small style="opacity:.6">${esc(a[2])}</small></button>`).join("")}<p style="font-size:12px;opacity:.7;margin:10px 0 0">${esc(it.a.join(", "))} · Source : IslamHouse.com</p>`, (c, fermer) => {
+        c.querySelectorAll("[data-k]").forEach(bt => bt.onclick = () => { const k = +bt.dataset.k; if (ty === "videos") { videoIH(it.att[k][1], it.att[k][0]); } else { fermer(); jouerIH(it, k); } });
+      });
+    });
+  };
+  let tq = 0; w.querySelector("#ih-q").oninput = e => { clearTimeout(tq); tq = setTimeout(() => { q = e.target.value.trim(); liste(); }, 250); };
+  dessinerFiltres(); liste();
+}
 /* ---------- Parcours de l'essentiel : apprendre pas à pas (école malikite), avec quiz ---------- */
 const ESSENTIEL = {
   etapes() { const l = []; BASES_ORDRE.forEach(([g, ts]) => ts.forEach(t => { const i = BASES.findIndex(x => x.titre === t); if (i >= 0) l.push({ g, i, b: BASES[i] }); })); return l; },
@@ -7787,7 +7833,7 @@ async function vueEcouter() {
   const w = document.createElement("div");
   w.className = "ecran ec";
   w.innerHTML = `<div class="ec-haut"><span class="ec-logo">${lumuSVG(36)}</span><span class="nom-lumu"><b>Lumu</b><em class="ar-lumu" lang="ar">لومو</em></span><button id="ec-live-h" class="ec-tv" aria-label="Directs de La Mecque et Médine"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="6.5" width="19" height="13" rx="2.5"/><path d="M8 2.5l4 4 4-4"/><circle class="ec-tv-pt" cx="12" cy="13" r="2.2" fill="currentColor" stroke="none"/></svg></button><button id="ec-radio-h" class="ec-tv" aria-label="Radios du Coran"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="8" width="19" height="12" rx="2.5"/><path d="M6 8l11-5"/><circle cx="15.5" cy="14" r="3"/><path d="M6 12.5h4M6 15.5h4"/></svg></button>
-      <button id="ec-mic" aria-label="Parler pour chercher">${ico("mic", 24)}</button><button id="ec-disc" aria-label="Discussions" style="position:relative">${ico("chat", 24)}<span id="ed-n" class="ed-n"></span></button><button id="ec-q" aria-label="Rechercher">${ico("search", 24)}</button><button id="ec-plus" aria-label="Plus d'options" style="font-size:26px;font-weight:800">⋮</button><div class="menu-plus" id="ec-menu" hidden><button id="em-disc">💬 Discussions<span class="em-n" id="em-n"></span></button><button id="em-qr">❓ Questions-réponses</button><button id="em-dormir">🌙 Avant de dormir</button><button id="em-trajet">🚗 Pour le trajet</button><button id="em-imams">👥 Imams</button><button id="em-hors">⬇ Mes téléchargements</button><button id="em-prof">👤 Mon profil</button></div></div>
+      <button id="ec-mic" aria-label="Parler pour chercher">${ico("mic", 24)}</button><button id="ec-disc" aria-label="Discussions" style="position:relative">${ico("chat", 24)}<span id="ed-n" class="ed-n"></span></button><button id="ec-q" aria-label="Rechercher">${ico("search", 24)}</button><button id="ec-plus" aria-label="Plus d'options" style="font-size:26px;font-weight:800">⋮</button><div class="menu-plus" id="ec-menu" hidden><button id="em-disc">💬 Discussions<span class="em-n" id="em-n"></span></button><button id="em-qr">❓ Questions-réponses</button><button id="em-dormir">🌙 Avant de dormir</button><button id="em-trajet">🚗 Pour le trajet</button><button id="em-ih">🌐 IslamHouse (Pular, FR, Hausa)</button><button id="em-imams">👥 Imams</button><button id="em-hors">⬇ Mes téléchargements</button><button id="em-prof">👤 Mon profil</button></div></div>
     <div class="ec-rech" id="ec-rech" hidden><input id="ec-rin" type="search" enterkeyhint="search" autocomplete="off" placeholder="Rechercher un imam, un titre…"><div id="ec-sugg" class="ec-sugg"></div></div>
     <div class="ec-corps">
       <div class="st-row" id="st-row" hidden></div>
@@ -7818,7 +7864,7 @@ async function vueEcouter() {
   const lanceFile = (l, minut) => { if (!l.length) { alert("Aucun audio disponible."); return; } AUD.file = l.slice(1, 15); lireDirect(l[0]); if (minut) sommeilMinutes(minut); };
   w.querySelector("#th-dormir").onclick = () => { const re = CH[3][2]; const l = tous.filter(c => re.test(c.category || "") || re.test(c.title || "")); lanceFile((l.length ? l : tous).slice().sort((a, b) => (a.duration_seconds || 9999) - (b.duration_seconds || 9999)), 30); };
   w.querySelector("#th-trajet").onclick = () => lanceFile(tous.slice(), 0);
-  w.querySelector("#em-dormir").onclick = () => w.querySelector("#th-dormir").onclick(); w.querySelector("#em-trajet").onclick = () => w.querySelector("#th-trajet").onclick();
+  w.querySelector("#em-ih").onclick = () => router("islamhouse"); w.querySelector("#em-dormir").onclick = () => w.querySelector("#th-dormir").onclick(); w.querySelector("#em-trajet").onclick = () => w.querySelector("#th-trajet").onclick();
   w.querySelector("#ec-mic").onclick = () => { try { MICRO.ouvrir(); } catch (e) {} };
   let rech = "", serveur = [], minRech = null;
   w.querySelector("#ec-q").onclick = () => { const z = w.querySelector("#ec-rech"); z.hidden = !z.hidden; if (!z.hidden) setTimeout(() => w.querySelector("#ec-rin").focus(), 30); else { rech = ""; serveur = []; w.querySelector("#ec-rin").value = ""; w.querySelector("#ec-sugg").innerHTML = ""; lignes(); } };
@@ -8105,7 +8151,7 @@ function vueBiblio() {
   const T = [["❓", "Questions", () => router("questions")], ["🪜", "Parcours", () => router("parcours")], ["📚", "Livres", () => router("livres")], ["🤲", "Invocations", () => router("arabe")], ["🕌", "Les bases", () => router("bases")], ["📖", "Coran", () => router("dossier", { cat: "Coran", titre: "Coran" })],
     ["🎓", "Cours", () => router("dossier", { cat: "Cours", titre: "Cours" })], ["🎤", "Conférences", () => router("dossier", { cat: "Conférence", titre: "Conférences" })],
     ["💬", "Rappels", () => router("dossier", { cat: "Rappel", titre: "Rappels" })]];
-  T.unshift(["🎓", "Apprendre l'essentiel", () => router("essentiel")]);
+  T.unshift(["🎓", "Apprendre l'essentiel", () => router("essentiel")], ["🌐", "IslamHouse (Pular, FR, Hausa)", () => router("islamhouse")]);
   T.push(["🌙", "Ramadan", () => router("ramadan")], ["🕌", "Mosquées proches", () => router("mosquees")]);
   T.push(["🧸", "Histoires enfants", () => router("dossier", { cat: "Enfants", titre: "Histoires pour enfants" })], ["🎙️", "Patrimoine", () => router("dossier", { cat: "Patrimoine", titre: "Patrimoine" })], ["👥", "Groupes", () => router("groupes")]);
   w.innerHTML = `${enteteApp("Bibliothèque")}<div class="bb-langues" id="lg"></div>${modeEnfants() ? `<button class="bb-enf on" id="enf">🧸 <b>Mode Enfants activé</b><i aria-hidden="true">ON</i></button>` : ""}<div class="bb-grille" id="g"></div><details class="bb-plus"><summary>Plus</summary><div class="bb-grille" id="g2"></div></details><button class="btn-text" id="chlg" style="margin-top:14px">🌐 Changer mes langues</button>`;
