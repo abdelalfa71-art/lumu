@@ -4858,8 +4858,17 @@ async function vueAuteur() {
   const l = (data || []).filter(c => c.fichier_path || c.embed_id).sort((x, y) => String(x.title || "").localeCompare(String(y.title || ""), "fr", { numeric: true, sensitivity: "base" })), z = w.querySelector("#au-l");
   w.querySelector("#au-nb").textContent = l.length + " prêche" + (l.length > 1 ? "s" : "") + (defunt ? " · qu'Allah lui fasse miséricorde" : "");
   if (!l.length) { z.innerHTML = `<p class="centre">Aucun prêche publié pour l'instant. Publiez-en en indiquant « ${esc(nom)} » comme imam.</p>`; return; }
-  z.innerHTML = l.map((c, i) => `<button type="button" class="carte" data-i="${i}" style="display:flex;align-items:center;gap:12px;width:100%;text-align:start;margin-bottom:8px;font:inherit;background:var(--surface,#fff);color:var(--texte,#14201b)"><img src="icon-192.png" alt="" style="width:52px;height:52px;border-radius:50%;flex:none"><span style="flex:1;min-width:0"><b dir="auto" data-notrad style="display:block">${esc(c.title)}</b><small style="opacity:.7">👁 ${esc(fmtNb(c.views_count || 0))}${c.duration_seconds ? " · " + fmtDuree(c.duration_seconds) : ""}${c.category ? " · " + esc(c.category) : ""}</small></span><span style="color:#1b6b5c;font-size:22px">▶</span></button>`).join("");
-  z.querySelectorAll("[data-i]").forEach(b => b.onclick = () => { const k = +b.dataset.i, c = l[k]; if (c.type === "audio" && c.fichier_path) AUD.jouer(c, l[k + 1] ? () => b.nextElementSibling && b.nextElementSibling.click() : null, l[k - 1] ? () => b.previousElementSibling && b.previousElementSibling.click() : null); else lireDirect(c); });
+  const nA = l.filter(c => !c.embed_id).length, nV = l.length - nA;
+  let filtre = "";
+  const dessiner = () => {
+    const v = l.map((c, i) => [c, i]).filter(([c]) => !filtre || (filtre === "v" ? c.embed_id : !c.embed_id));
+    z.innerHTML = (nA && nV ? `<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">${[["", "Tout (" + l.length + ")"], ["a", "🎧 Audios (" + nA + ")"], ["v", "▶ Vidéos (" + nV + ")"]].map(([k, t]) => `<button type="button" class="pilule${filtre === k ? " actif" : ""}" data-f="${k}" style="padding:7px 14px;border-radius:20px;border:1px solid #1b6b5c;font:inherit;${filtre === k ? "background:#1b6b5c;color:#fff" : "background:transparent;color:inherit"}">${t}</button>`).join("")}</div>` : "") +
+      v.map(([c, i]) => { const mini = c.embed_id ? ytMini(c) : ""; return `<button type="button" class="carte" data-i="${i}" style="display:flex;align-items:center;gap:12px;width:100%;text-align:start;margin-bottom:8px;font:inherit;background:var(--surface,#fff);color:var(--texte,#14201b)"><img src="${esc(mini || "icon-192.png")}" alt="" loading="lazy" style="${mini ? "width:84px;height:48px;border-radius:8px;object-fit:cover" : "width:52px;height:52px;border-radius:50%"};flex:none"><span style="flex:1;min-width:0"><b dir="auto" data-notrad style="display:block">${esc(c.title)}</b><small style="opacity:.7">${c.embed_id ? "▶ YouTube" + (c.source_nom ? " · " + esc(c.source_nom) : "") + " · " : "👁 " + esc(fmtNb(c.views_count || 0)) + " · "}${c.duration_seconds ? fmtDuree(c.duration_seconds) : ""}${c.category ? " · " + esc(c.category) : ""}</small></span><span style="color:#1b6b5c;font-size:22px">▶</span></button>`; }).join("");
+    z.querySelectorAll("[data-f]").forEach(b => b.onclick = () => { filtre = b.dataset.f; dessiner(); });
+    const cartes = [...z.querySelectorAll("[data-i]")];
+    cartes.forEach((b, k) => b.onclick = () => { const c = l[+b.dataset.i]; if (c.type === "audio" && c.fichier_path) AUD.jouer(c, cartes[k + 1] ? () => cartes[k + 1].click() : null, cartes[k - 1] ? () => cartes[k - 1].click() : null); else lireDirect(c); });
+  };
+  dessiner();
 }
 const SERIE_OBJ = {};
 function jouerSerie(sr, i) {
