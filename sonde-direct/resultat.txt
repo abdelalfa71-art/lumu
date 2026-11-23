@@ -1,100 +1,42 @@
-=== https://qurancentral.com/audio/jaafar-mahmud-adam/ [200] https://qurancentral.com/audio/jaafar-mahmud-adam/
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <!-- Fonts: Inter Variable (Latin-only) -->
-    <link
-      rel="preload"
-      hr
-
-FEEDS 
-
-TERMS 
-
-=== https://itunes.apple.com/lookup?id=1546357481 [200] https://itunes.apple.com/lookup?id=1546357481
-
-
-
-{
- "resultCount":1,
- "results": [
-{"wrapperType":"track", "kind":"podcast", "collectionId":1546357481, "trackId":1546357481, "artistName":"Quran Central", "collectionName":"Ja’afar Mahmud Adam", "trackName":"Ja’afar Mahmud Adam", "collectionCensoredName":"Ja’afar Mahmud Adam", "trackCensoredName":"Ja’afar Mahmud Adam", "collectionViewUrl":"https://podcasts.apple.com/us/podcast/jaafar-mahmud-adam/id1546357481?uo=4", "feedUrl":"https://rss.qurancentral.com/jaafar-mahmud-adam.rss", "trackViewUrl":"https://podcasts.apple.com/us/podcast/jaafar-mahmud-adam/id1546357481?uo=4", "artworkUrl30":"https://is1-ssl.mzstatic.com/image/thumb/Podcasts124/v4/aa/74/fb/aa74fbfc-9e35-c58f-84f0-31885eeebd1e/mza_16530513560741373926.jpg/30x30bb.jpg", "artworkUrl60":"https://is1-ssl.mzstatic.com/image/thumb/Podcasts124/v4/aa/74/fb/aa74fbfc-9e35-c58f-84f0-31885eeebd1e/mza_16530513560741373926.jpg/60x60bb.jpg", "artworkUrl100":"https://is1-ssl.mzstatic.com/image/thumb/Podcasts124/v4/aa/74/fb/aa74fbfc-9e35-c58f-84f0-31885eeebd1e/mza_16530513560741373926.jpg/100x100bb.jpg", "collectionPrice":0.00, "trackPrice":0.00, "collectionHdPrice":0, "releaseDate":"2024-03-18T08:42:00Z", "collectionExplicitness":"notExplicit", "trackExplicitness":"cleaned", "trackCount":114, "trackTimeMillis":30, "country":"USA", "currency":"USD", "primaryGenreName":"Islam", "contentAdvisoryRating":"Clean", "artworkUrl600":"https://is1-ssl.mzstatic.com/image/thumb/Podcasts124/v4/aa/74/fb/aa74fbfc-9e35-c58f-84f0-31885eeebd1e/mza_
-
-ITUNES FEED https://rss.qurancentral.com/jaafar-mahmud-adam.rss
-
-=== https://rss.qurancentral.com/jaafar-mahmud-adam.rss [200] https://rss.qurancentral.com/jaafar-mahmud-adam.rss
-<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0"
-	xmlns:content="http://purl.org/rss/1.0/modules/content/"
-	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
-	xmlns:dc="http://purl.org/dc/elements/1.1/"
-	xmlns:atom="http://www.w3.org/2005/Atom"
-	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
-	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
-	xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
-xmlns:podcast="https://podcastindex.org/namespace/1.0"
-xmlns:rawvoice="https://blubrry.com/developer/rawvoice-rss/"
->
-<channel>
-	<title>Ja&#8217;afar Mahmud Adam</title>
-	<atom:link href="https://rss.qurancentral.com/jaafar-mahmud-adam.rss" rel="self" type="application/rss+xml" />
-	<link>https://qurancentral.com/audio/jaafar-mahmud-adam/</link>
-	<description>Ja&#8217;afar Mahmud Adam also spelled Jafar Mahmud Adam or Ja&#8217;afar Mahmoud Adam was a prominent Islamic scholar and Quran reciter from Nigeria.
-
-Born in 1961 in Daura Katsina State Nigeria he was a highly influential figure in Islamic education and da&#8217;wah (preaching) in Nigeria particularly in the northern regions. While primarily known as a scholar and orator he was also a respected reciter of the Holy Quran. He primarily recited in the Hafs &#8216;an Asim narration. Digital Quranic archives feature recordings of his recitations and extensive lectures and Tafsir (exegesis) of the Quran.
-
-Sheikh Ja&#8217;afar Mahmud Adam held degrees in Islamic studies and was known for his vast knowledge and ability to explain complex Islamic concepts in simple terms. He served as an Imam in various mosques and established numerous Islamic schools and centers. His lectures and Tafsir sessions were widely attended and broadcast contributing significantly to Islamic awareness in Nigeria. He was tragically assassinated in 2007 during dawn prayers in Kano leaving a profound impact on the Muslim community in Nigeria.
-
-----------
-
-Support Quran Central and earn ongoing reward.
-
-Donate:
-https://qurancentral.com/donate/
-
-----------</description>
-	<lastBuildDate>Sat, 31 Oct 2026 09:22:14 +0000</lastBuildDate>
-	<language>en-US</language>
-	<sy:updatePeriod>hourly</sy:updatePeriod>
-	<sy:updateFrequency>1</sy:updateFrequency>
-	<podcast:locked owner="podcasts@muslimcentral.com">yes</podcast:locked>
-	<itunes:author>Quran Central</itunes:author>
-	<itunes:explicit>false</itunes:explicit>
-	<itunes:image href="https://artwork.qurancentral.com/jaafar-mahmud-adam.jpg" />
-	<itunes:owner>
-		<itunes:name>Quran Central</itunes:name>
-		<itunes:email>podcasts@muslimcentral.com</itunes:email>
-	</itunes:owner>
-	<copyright>Copyright &#xA9; Quran Central</copyright>
-	<podcast:license>Copyright &#xA9; Quran Central</podcast:license>
-	<podcast:medium>podcast</podcast:medium>
-	<image>
-		<title>Ja&#8217;afar Mahmud Adam</title>
-		<url>https://artwork.qurancentral.com/jaafar-mahmud-adam.jpg</url>
-		<link>https://qurancentral.com/audio/jaafar-mahmud-adam/</link>
-	</image>
-	<itunes:category text="Religion &amp; Spirituality" />
-	<itunes:category text="Religion &amp; Spirituality">
-		<itunes:category text="Islam" />
-	</itunes:category>
-	<itunes:category text="Religion &amp; Spirituality">
-		<itunes:category text="Spirituality" />
-	</itunes:category>
-	<podcast:updateFrequency rrule="FREQ=MONTHLY;INTERVAL=1">Monthly</podcast:updateFrequency>
-	<rawvoice:frequency>Monthly</rawvoice:frequency>
-	<rawvoice:donate href="https://qurancentral.com/donate">Donate to help cover our running costs and future projects</rawvoice:donate>
-	<podcast:funding url="https://qurancentral.com/donate">Donate to help cover our running costs and future projects</podcast:funding>
-	<podcast:guid>113d7f5b-8143-5b85-a6e0-b804ee610096</podcast:guid>
-	<item>
-		<title>001 Al-Fatiha</title>
-		<link>https://qurancentral.com/jaafar-mahmud-adam-001-al-fatiha/</link>
-		<pubDate>Mon, 18 Mar 2024 08:42:04 +0000</pubDate>
-		<guid isPermaLink="false">https://qurancentral.com/jaa
-
-ITEMS 114
-
-COPYRIGHT Copyright &#xA9; Quran Central
+Jaafar Mahmud Adam | Ja’afar Mahmud Adam | Quran Central | 114 | https://rss.qurancentral.com/jaafar-mahmud-adam.rss
+Ja'afar Mahmud Adam | Ja’afar Mahmud Adam | Quran Central | 114 | https://rss.qurancentral.com/jaafar-mahmud-adam.rss
+Sheikh Jafar Mahmud Adam | Sheikh Ja’far Mahmud Adam | Sheikh Ja’far Mahmud Adam | 327 | https://anchor.fm/s/10dcf4d84/podcast/rss
+Jafar Adam Hausa | Arewaworld Waazi & Quran | Arewa world hausa | 128 | https://anchor.fm/s/1cdc1e98/podcast/rss
+Jafar Adam Hausa | Behind the Minbar 🎙️ | Al-Rasool Media | 19 | https://anchor.fm/s/f15f68c8/podcast/rss
+Jafar Adam Hausa | The Zawiya Podcast | TheZawiyaPodcast | 10 | https://anchor.fm/s/108ea8950/podcast/rss
+Jafar Adam Hausa | Crystal Myth Podcast | Crystal Myth | 207 | https://feeds.acast.com/public/shows/623de932ea990800167ced87
+Jafar Adam Hausa | Black Man Spy with Malcolm Nance | Two Squared Media Productions | 52 | https://www.spreaker.com/show/6601394/episodes/feed
+Jafar Adam Hausa | The Audiobook Vault: Catholic Sacred & Classic Voices from the Past | The Audiobook Vault: Catholic | 1000 | https://www.spreaker.com/show/6158906/episodes/feed
+Jafar Adam Hausa | Battletested with Tanya Acker | Tanya Acker | 200 | https://feeds.captivate.fm/the-tanya-acker-show/
+Jafar Adam Hausa | Faith Circle Podcast | Faith Circle | 155 | https://anchor.fm/s/b69b7f60/podcast/rss
+Jafar Adam Hausa | Radio Campus Angers | Radio Campus Angers | 50 | https://www.radiocampusangers.com/?feed=podcast
+Jafar Adam Hausa | Le Sous-Marin | Radio Campus Angers | 50 | https://www.radiocampusangers.com/category/emission/la-redac/le-sous-marin/feed/
+Jafar Adam Hausa | The Inheritors Podcast | Usayd Waris | 60 | https://anchor.fm/s/ff840490/podcast/rss
+Jafar Adam Hausa | U.S. Army in Iraq War 2003-2006 Overview | Various | 148 | https://www.spreaker.com/show/6851583/episodes/feed
+Sheikh Ja'afar tafsir | Quranic Progression (QP) - quranicprogression | Prophetic Guidance | 255 | https://api3.propheticguidance.online/v1/podcast/2
+Sheikh Ja'afar tafsir | Islam with Sheikh Muiz Bukhary | Sheikh Muiz Bukhary | 90 | https://feeds.simplecast.com/_SSAglPr
+Sheikh Ja'afar tafsir | Yusuf Circle Sheffield | Yusuf Circle Sheffield | 524 | https://feeds.soundcloud.com/users/soundcloud:users:280615049/sounds.rss
+Sheikh Ja'afar tafsir | Muiz Bukhary | Muslim Central | 385 | 
+Sheikh Ja'afar tafsir | Science of Hadith [Al Bayquuniyyah] | Masjid Al-Salaam | 35 | https://feeds.acast.com/public/shows/64a992387e96470011b4d7e9
+Sheikh Ja'afar tafsir | Yasir Qadhi | Muslim Central | 2000 | https://rss.muslimcentral.com/yasir-qadhi.rss
+Sheikh Ja'afar tafsir | Isam Rajab | Muslim Central | 135 | 
+Sheikh Ja'afar tafsir | Tim Humble | Muslim Central | 369 | 
+Sheikh Ja'afar tafsir | Monthly Reflections | Abbas Farshori | 30 | https://anchor.fm/s/32585b88/podcast/rss
+Sheikh Ja'afar tafsir | InTheMaktaba | Madinah College | 28 | https://feeds.acast.com/public/shows/6406463b54937500118da28b
+Sheikh Ja'afar tafsir | Quran: A Tafseer for our Lives - Islampodcasts | Islam Podcast | 45 | https://www.islampodcasts.com/category/quran-tafseer/feed/
+Sheikh Ja'afar tafsir | Understanding Islam | Understanding Islam | 577 | https://feeds.soundcloud.com/users/soundcloud:users:720133738/sounds.rss
+Sheikh Ja'afar tafsir | Logical Progression (LP) - logicalprogression | Prophetic Guidance | 454 | https://api3.propheticguidance.online/v1/podcast/1
+Sheikh Ja'afar tafsir | Taha Karaan | Muslim Central | 45 | 
+Sheikh Ja'afar tafsir | Sukoon - A NASIMCO Podcast | NASIMCO | 30 | https://media.rss.com/sukoon-nasimco/feed.xml
+Sheikh Ja'afar tafsir | Sayyed Haydar Al-Musawie | As-Sadiq | 112 | https://anchor.fm/s/45fbd520/podcast/rss
+Sheikh Ja'afar tafsir | Masjid DarusSalam | Masjid DarusSalam | 298 | https://masjidds.org/feed/podcast
+Sheikh Ja'afar tafsir | Waleed Basyouni | Muslim Central | 809 | 
+Sheikh Ja'afar tafsir | Al Madrasatu Al Umariyyah | Islamic Podcast | 1362 | https://rss.libsyn.com/shows/285659/destinations/2197070.xml
+Sheikh Ja'afar tafsir | Muhammad Salah | Muslim Central | 842 | 
+Sheikh Ja'afar tafsir | After Maghrib 🌙 | After Maghrib | 185 | https://anchor.fm/s/a048efa4/podcast/rss
+Sheikh Ja'afar tafsir | Faaik Gamieldien | Muslim Central | 261 | 
+Sheikh Ja'afar tafsir | Adnan Rashid | Muslim Central | 411 | 
+Sheikh Ja'afar tafsir | The Barakah Effect | The Barakah Effect | 115 | https://anchor.fm/s/4bf38a18/podcast/rss
+https://rss.muslimcentral.com/jaafar-mahmud-adam.rss [404] items=0 
+https://feeds.muslimcentral.com/jaafar-mahmud-adam fetch failed
+https://rss.qurancentral.com/jaafar-mahmud-adam-hadith.rss [404] items=0 
