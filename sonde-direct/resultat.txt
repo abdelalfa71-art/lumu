@@ -1,42 +1,22 @@
-Jaafar Mahmud Adam | Ja’afar Mahmud Adam | Quran Central | 114 | https://rss.qurancentral.com/jaafar-mahmud-adam.rss
-Ja'afar Mahmud Adam | Ja’afar Mahmud Adam | Quran Central | 114 | https://rss.qurancentral.com/jaafar-mahmud-adam.rss
-Sheikh Jafar Mahmud Adam | Sheikh Ja’far Mahmud Adam | Sheikh Ja’far Mahmud Adam | 327 | https://anchor.fm/s/10dcf4d84/podcast/rss
-Jafar Adam Hausa | Arewaworld Waazi & Quran | Arewa world hausa | 128 | https://anchor.fm/s/1cdc1e98/podcast/rss
-Jafar Adam Hausa | Behind the Minbar 🎙️ | Al-Rasool Media | 19 | https://anchor.fm/s/f15f68c8/podcast/rss
-Jafar Adam Hausa | The Zawiya Podcast | TheZawiyaPodcast | 10 | https://anchor.fm/s/108ea8950/podcast/rss
-Jafar Adam Hausa | Crystal Myth Podcast | Crystal Myth | 207 | https://feeds.acast.com/public/shows/623de932ea990800167ced87
-Jafar Adam Hausa | Black Man Spy with Malcolm Nance | Two Squared Media Productions | 52 | https://www.spreaker.com/show/6601394/episodes/feed
-Jafar Adam Hausa | The Audiobook Vault: Catholic Sacred & Classic Voices from the Past | The Audiobook Vault: Catholic | 1000 | https://www.spreaker.com/show/6158906/episodes/feed
-Jafar Adam Hausa | Battletested with Tanya Acker | Tanya Acker | 200 | https://feeds.captivate.fm/the-tanya-acker-show/
-Jafar Adam Hausa | Faith Circle Podcast | Faith Circle | 155 | https://anchor.fm/s/b69b7f60/podcast/rss
-Jafar Adam Hausa | Radio Campus Angers | Radio Campus Angers | 50 | https://www.radiocampusangers.com/?feed=podcast
-Jafar Adam Hausa | Le Sous-Marin | Radio Campus Angers | 50 | https://www.radiocampusangers.com/category/emission/la-redac/le-sous-marin/feed/
-Jafar Adam Hausa | The Inheritors Podcast | Usayd Waris | 60 | https://anchor.fm/s/ff840490/podcast/rss
-Jafar Adam Hausa | U.S. Army in Iraq War 2003-2006 Overview | Various | 148 | https://www.spreaker.com/show/6851583/episodes/feed
-Sheikh Ja'afar tafsir | Quranic Progression (QP) - quranicprogression | Prophetic Guidance | 255 | https://api3.propheticguidance.online/v1/podcast/2
-Sheikh Ja'afar tafsir | Islam with Sheikh Muiz Bukhary | Sheikh Muiz Bukhary | 90 | https://feeds.simplecast.com/_SSAglPr
-Sheikh Ja'afar tafsir | Yusuf Circle Sheffield | Yusuf Circle Sheffield | 524 | https://feeds.soundcloud.com/users/soundcloud:users:280615049/sounds.rss
-Sheikh Ja'afar tafsir | Muiz Bukhary | Muslim Central | 385 | 
-Sheikh Ja'afar tafsir | Science of Hadith [Al Bayquuniyyah] | Masjid Al-Salaam | 35 | https://feeds.acast.com/public/shows/64a992387e96470011b4d7e9
-Sheikh Ja'afar tafsir | Yasir Qadhi | Muslim Central | 2000 | https://rss.muslimcentral.com/yasir-qadhi.rss
-Sheikh Ja'afar tafsir | Isam Rajab | Muslim Central | 135 | 
-Sheikh Ja'afar tafsir | Tim Humble | Muslim Central | 369 | 
-Sheikh Ja'afar tafsir | Monthly Reflections | Abbas Farshori | 30 | https://anchor.fm/s/32585b88/podcast/rss
-Sheikh Ja'afar tafsir | InTheMaktaba | Madinah College | 28 | https://feeds.acast.com/public/shows/6406463b54937500118da28b
-Sheikh Ja'afar tafsir | Quran: A Tafseer for our Lives - Islampodcasts | Islam Podcast | 45 | https://www.islampodcasts.com/category/quran-tafseer/feed/
-Sheikh Ja'afar tafsir | Understanding Islam | Understanding Islam | 577 | https://feeds.soundcloud.com/users/soundcloud:users:720133738/sounds.rss
-Sheikh Ja'afar tafsir | Logical Progression (LP) - logicalprogression | Prophetic Guidance | 454 | https://api3.propheticguidance.online/v1/podcast/1
-Sheikh Ja'afar tafsir | Taha Karaan | Muslim Central | 45 | 
-Sheikh Ja'afar tafsir | Sukoon - A NASIMCO Podcast | NASIMCO | 30 | https://media.rss.com/sukoon-nasimco/feed.xml
-Sheikh Ja'afar tafsir | Sayyed Haydar Al-Musawie | As-Sadiq | 112 | https://anchor.fm/s/45fbd520/podcast/rss
-Sheikh Ja'afar tafsir | Masjid DarusSalam | Masjid DarusSalam | 298 | https://masjidds.org/feed/podcast
-Sheikh Ja'afar tafsir | Waleed Basyouni | Muslim Central | 809 | 
-Sheikh Ja'afar tafsir | Al Madrasatu Al Umariyyah | Islamic Podcast | 1362 | https://rss.libsyn.com/shows/285659/destinations/2197070.xml
-Sheikh Ja'afar tafsir | Muhammad Salah | Muslim Central | 842 | 
-Sheikh Ja'afar tafsir | After Maghrib 🌙 | After Maghrib | 185 | https://anchor.fm/s/a048efa4/podcast/rss
-Sheikh Ja'afar tafsir | Faaik Gamieldien | Muslim Central | 261 | 
-Sheikh Ja'afar tafsir | Adnan Rashid | Muslim Central | 411 | 
-Sheikh Ja'afar tafsir | The Barakah Effect | The Barakah Effect | 115 | https://anchor.fm/s/4bf38a18/podcast/rss
-https://rss.muslimcentral.com/jaafar-mahmud-adam.rss [404] items=0 
-https://feeds.muslimcentral.com/jaafar-mahmud-adam fetch failed
-https://rss.qurancentral.com/jaafar-mahmud-adam-hadith.rss [404] items=0 
+TITRE Sheikh Ja’far Mahmud Adam
+AUTEUR Sheikh Ja’far Mahmud Adam
+PROPRIO Sheikh Ja’far Mahmud Adam
+COPYRIGHT 
+DESC Tafsirin al-Qurani
+LIEN https://podcasters.spotify.com/pod/show/safiyya
+ITEMS 327
+- Surah Kauthar — Naas | 01:14:38 | Sat, 17 Jan 2026 13:26:36 GMT
+- Surah Sharh — Ma’un | 01:22:42 | Sat, 17 Jan 2026 13:25:27 GMT
+- Surah Balad — Duha | 01:13:29 | Sat, 17 Jan 2026 13:23:22 GMT
+- Surah Tariq — Fajr | 01:13:09 | Sat, 17 Jan 2026 13:22:32 GMT
+- Surah Mutaffiffeen — Buruj | 01:09:25 | Sat, 17 Jan 2026 13:21:42 GMT
+- Surah Nazi’at — Infitar | 01:11:36 | Sat, 17 Jan 2026 13:20:09 GMT
+- Surah Insaan — Naba | 01:19:36 | Sat, 17 Jan 2026 13:19:10 GMT
+- Surah Muddathir — Insaan | 01:11:37 | Sat, 17 Jan 2026 13:18:07 GMT
+- Surah Muzzammil — Muddathir | 01:07:52 | Sat, 17 Jan 2026 13:17:11 GMT
+- Surah Nuh — Jinn | 01:13:50 | Sat, 17 Jan 2026 13:16:13 GMT
+- Surah Haqqah — Nuh  | 01:17:12 | Sat, 17 Jan 2026 13:06:03 GMT
+- Surah Qalam — Haqqah | 01:14:12 | Sat, 17 Jan 2026 13:05:17 GMT
+- Surah Tahreem — Qalam | 01:21:22 | Sat, 17 Jan 2026 13:04:20 GMT
+- Surah Talaq — Tahreem | 01:02:29 | Sat, 17 Jan 2026 13:03:00 GMT
+- Surah Taghabun — Talaq | 01:12:44 | Sat, 17 Jan 2026 13:02:11 GMT
