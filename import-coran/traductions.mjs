@@ -2,6 +2,7 @@
 // avec le numéro de version (conditions de QuranEnc). Relancé chaque mois pour suivre la dernière version.
 import fs from "node:fs";
 const LANGUES = ["fr", "ff", "ha"];
+fs.mkdirSync("coran/trad", { recursive: true });
 const api = async u => { for (let i = 1; i <= 4; i++) { try { const r = await fetch("https://quranenc.com/api/v1/" + u); if (!r.ok) throw new Error(r.status); return await r.json(); } catch (e) { if (i === 4) throw e; await new Promise(o => setTimeout(o, 2000 * i)); } } };
 const index = [];
 for (const lg of LANGUES) {
