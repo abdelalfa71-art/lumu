@@ -7840,6 +7840,7 @@ async function vueEcouter() {
       <div id="ec-moment"></div>
       <div id="ec-rep"></div>
       <div class="ec-ligne"><button class="ec-radio" id="ec-radio"><span class="ec-rp">${ico("play", 30, true)}</span><span><b>Lumu Radio</b><small>Rappels, Coran, invocations</small></span></button></div>
+      <div id="ec-src" style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:0 16px 12px"></div>
       <div hidden>
       <div class="ec-tit" id="ec-tit">Mes imams</div>
       <div class="ec-imams" id="ec-imams"></div>
@@ -7907,6 +7908,27 @@ async function vueEcouter() {
   /* Ordre aléatoire, tiré une fois par visite (stable quand on change de filtre) */
   const ALEA = new Map(), alea = c => { if (!ALEA.has(c.id)) ALEA.set(c.id, Math.random()); return ALEA.get(c.id); };
   const liste = w.querySelector("#ec-liste");
+  /* Quatre sources : Foulfouldé (les audios de Lumu) et les audios IslamHouse en pular, français et haoussa */
+  let SOURCE = chargerLocal("ec_source", "lumu");
+  const dessinerSources = () => {
+    const z = w.querySelector("#ec-src"); if (!z) return;
+    z.innerHTML = [["lumu", "Foulfouldé"], ["ff", "Pular"], ["fr", "Français"], ["ha", "Hausa"]].map(([k, t]) => `<button type="button" data-src="${k}" style="padding:10px 2px;border-radius:20px;border:1px solid #1b6b5c;font:inherit;font-size:13px;font-weight:700;white-space:nowrap;background:${k === SOURCE ? "#1b6b5c" : "transparent"};color:${k === SOURCE ? "#fff" : "inherit"}">${t}</button>`).join("");
+    z.querySelectorAll("[data-src]").forEach(b => b.onclick = () => { SOURCE = b.dataset.src; sauverLocal("ec_source", SOURCE); dessinerSources(); lignes(); });
+  };
+  async function listeIHEcoute(lg) {
+    if (lignes.obs) { lignes.obs.disconnect(); lignes.obs = null; }
+    liste.innerHTML = squelettes(3);
+    let cat; try { cat = await IH.charger(lg); } catch (e) { liste.innerHTML = `<p class="centre">Connexion nécessaire pour charger ces audios.</p>`; return; }
+    if (!w.isConnected || SOURCE !== lg) return;
+    const l = (cat.audios || []).slice().sort((a, b) => (b.date || 0) - (a.date || 0));
+    liste.innerHTML = l.map((x, i) => `<button type="button" class="ec-row" data-i="${i}" style="display:flex;align-items:center;gap:12px;width:calc(100% - 32px);margin:0 16px 10px;padding:12px;border-radius:18px;background:var(--surface,#fff);color:var(--texte,#14201b);font:inherit;text-align:start"><span style="width:52px;height:52px;flex:none;border-radius:12px;background:#1b6b5c;color:#fff;display:flex;align-items:center;justify-content:center;font-size:22px">🎧</span><span style="flex:1;min-width:0"><b dir="auto" data-notrad style="display:block">${esc(x.t)}</b><small dir="auto" data-notrad style="opacity:.7">${esc(x.a.join(", ") || "IslamHouse")}${x.att.length > 1 ? " · " + x.att.length + " parties" : ""}</small></span><span style="color:#1b6b5c;font-size:22px">▶</span></button>`).join("") + `<p style="font-size:12px;opacity:.7;text-align:center;margin:6px 16px 16px">Audios d'IslamHouse.com, lus depuis leur site.</p>`;
+    liste.querySelectorAll("[data-i]").forEach(b => b.onclick = () => {
+      const it = l[+b.dataset.i];
+      if (it.att.length === 1) { jouerIH(it, 0); return; }
+      ouvrirFeuille(it.t, it.att.map((a, k) => `<button type="button" data-k="${k}" style="display:flex;align-items:center;gap:10px;width:100%;margin:0 0 6px;padding:10px 12px;border-radius:12px;border:1px solid var(--bordure,#e3dccb);background:transparent;color:inherit;font:inherit;text-align:start"><span>▶</span><span dir="auto" data-notrad style="flex:1">${esc(a[0])}</span><small style="opacity:.6">${esc(a[2])}</small></button>`).join("") + `<p style="font-size:12px;opacity:.7;margin:10px 0 0">${esc(it.a.join(", "))} · Source : IslamHouse.com</p>`, (c, fermer) => { c.querySelectorAll("[data-k]").forEach(bt => bt.onclick = () => { fermer(); jouerIH(it, +bt.dataset.k); }); });
+    });
+  }
+  dessinerSources();
   const joue = c => !!(AUD.c && AUD.c.id === c.id && AUD.a && !AUD.a.paused);
   /* Temps écoulé / durée d'un audio (en direct pour celui qui joue) */
   const tempsRow = c => { const moi = AUD.c && AUD.c.id === c.id && AUD.a, q = moi ? AUD.a.currentTime || 0 : chargerLocal("pos_" + c.id, 0), d = c.duration_seconds || (moi && isFinite(AUD.a.duration) ? AUD.a.duration : 0); return d ? fmtDuree(q) + " / " + fmtDuree(d) : fmtDuree(q); };
@@ -7935,6 +7957,7 @@ async function vueEcouter() {
   document.addEventListener("file-maj", function surFile() { if (!w.isConnected) { document.removeEventListener("file-maj", surFile); return; } lignes(); });
   document.addEventListener("epingles-maj", function surEp() { if (!w.isConnected) { document.removeEventListener("epingles-maj", surEp); return; } lignes(); });
   function lignes() {
+    if (SOURCE !== "lumu" && !rech) { listeIHEcoute(SOURCE); return; }
     const re = (CH.find(x => x[0] === filtre) || [])[2];
     w.classList.toggle("ec-cherche", !!rech);
     let l;
