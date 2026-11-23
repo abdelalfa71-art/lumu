@@ -4462,7 +4462,7 @@ const AUD = {
   },
   jouer(c, suiv, prec) {
     this.init();
-    if (c && c.externe && /^ih-\d+-\d+$/.test(c.id)) { try { const k = "vu_" + c.id; if (!sessionStorage.getItem(k)) { sessionStorage.setItem(k, "1"); sb.rpc("yt_vue_externe", { p_id: c.id }).then(() => {}, () => {}); IH_VUES[c.id] = (IH_VUES[c.id] || 0) + 1; c.views_count = IH_VUES[c.id]; } } catch (e) {} }
+    if (c && c.externe && /^(ih-\d+-\d+|qc-[a-z0-9-]+-\d+)$/.test(c.id)) { try { const k = "vu_" + c.id; if (!sessionStorage.getItem(k)) { sessionStorage.setItem(k, "1"); sb.rpc("yt_vue_externe", { p_id: c.id }).then(() => {}, () => {}); IH_VUES[c.id] = (IH_VUES[c.id] || 0) + 1; c.views_count = IH_VUES[c.id]; } } catch (e) {} }
     this.suiv = suiv || null; this.prec = prec || null;
     if (this.c && this.c.id === c.id) { if (this.a.paused) this.lire(); this.sessionMedia(); this.maj(); return; }
     this.envoyer(); this.acc = 0; this.dernier = null;
@@ -6995,7 +6995,10 @@ async function vueHadith() {
   z.querySelector("#hd-p").onclick = () => partagerLien("Hadith", (h.hadith || "").slice(0, 600) + "\n\n— HadeethEnc.com · via Lumu", SITE);
 }
 /* ---------- IslamHouse : audios et vidéos (foulfouldé, français, haoussa), lus depuis leur serveur ---------- */
-const IH = { _c: {}, d: {}, charger(lg) { if (this._c[lg]) return this._c[lg]; return (this._c[lg] = fetch("https://raw.githubusercontent.com/abdelalfa71-art/lumu/main/maj/islamhouse/" + lg + ".json?t=" + Math.floor(Date.now() / 864e5)).then(r => r.json()).then(j => { try { sauverLocal("ih_" + lg, j); } catch (e) {} return (this.d[lg] = j); }).catch(() => { delete this._c[lg]; const j = chargerLocal("ih_" + lg, null); if (j) return (this.d[lg] = j); throw new Error("x"); })); },
+const IH = { _c: {}, d: {}, p: {}, charger(lg) { if (this._c[lg]) return this._c[lg];
+    /* Podcasts publics de la même langue (ex. Cheikh Ja'afar en haoussa), chargés à côté */
+    const pp = fetch("https://raw.githubusercontent.com/abdelalfa71-art/lumu/main/maj/podcasts/" + lg + ".json?t=" + Math.floor(Date.now() / 864e5)).then(r => r.ok ? r.json() : null).then(j => { if (j) { this.p[lg] = j; try { sauverLocal("pc_" + lg, j); } catch (e) {} } }).catch(() => { this.p[lg] = chargerLocal("pc_" + lg, null); });
+    return (this._c[lg] = pp.then(() => fetch("https://raw.githubusercontent.com/abdelalfa71-art/lumu/main/maj/islamhouse/" + lg + ".json?t=" + Math.floor(Date.now() / 864e5)).then(r => r.json())).then(j => { try { sauverLocal("ih_" + lg, j); } catch (e) {} return (this.d[lg] = j); }).catch(() => { delete this._c[lg]; const j = chargerLocal("ih_" + lg, null); if (j) return (this.d[lg] = j); throw new Error("x"); })); },
   /* Audios IslamHouse présentés comme ceux de Lumu (une ligne par partie), vues comptées dans Lumu */
   contenus(lg) {
     const cat = this.d[lg]; if (!cat) return null;
@@ -7004,7 +7007,10 @@ const IH = { _c: {}, d: {}, charger(lg) { if (this._c[lg]) return this._c[lg]; r
       const id = "ih-" + it.id + "-" + k, titre = it.att.length > 1 ? (a[0] && a[0] !== it.t ? a[0] : it.t + " (" + (k + 1) + ")") : it.t;
       l.push({ id, type: "audio", externe: true, title: titre, fichier_path: a[1], source_nom: it.a[0] || "IslamHouse", yt_channels: { name: it.a[0] || "IslamHouse" }, auteur: it.a.join(", "), duration_seconds: +a[3] || +chargerLocal("dur_" + id, 0) || null, views_count: IH_VUES[id], published_at: it.date ? new Date(it.date * 1000).toISOString() : null, description: it.d });
     }));
-    return l.sort((a, b) => String(b.published_at || "").localeCompare(String(a.published_at || "")));
+    l.sort((a, b) => String(b.published_at || "").localeCompare(String(a.published_at || "")));
+    const pc = this.p[lg] || chargerLocal("pc_" + lg, null), tete = [];
+    ((pc && pc.podcasts) || []).forEach(p => p.items.forEach(e => tete.push({ id: e.id, type: "audio", externe: true, title: e.t, fichier_path: e.url, source_nom: p.auteur, yt_channels: { name: p.auteur }, auteur: p.auteur + " · " + p.source, duration_seconds: +chargerLocal("dur_" + e.id, 0) || e.dur || null, views_count: IH_VUES[e.id], published_at: null })));
+    return [...tete, ...l];
   }
 };
 let IH_VUES = {}, IH_VUES_T = 0;

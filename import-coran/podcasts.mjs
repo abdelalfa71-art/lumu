@@ -17,7 +17,7 @@ for (const p of PODCASTS) {
   items.forEach((e, i) => { e.id = `qc-${p.slug}-${num(e) || 10000 + i}`; });
   const F = `maj/podcasts/${p.langue}.json`, connu = new Map();
   if (fs.existsSync(F)) JSON.parse(fs.readFileSync(F, "utf8")).podcasts.forEach(q => q.items.forEach(e => { if (e.mes) connu.set(e.url, e.dur); }));
-  for (const e of items) { if (connu.has(e.url)) { e.dur = connu.get(e.url); e.mes = 1; continue; } const d = await mesurer(e.url); if (d) { e.dur = d; e.mes = 1; } }
+  for (const e of items) { if (connu.has(e.url)) { e.dur = connu.get(e.url); e.mes = 1; continue; } if (e.dur > 60) continue; const d = await mesurer(e.url); if (d) { e.dur = d; e.mes = 1; } }
   (parLangue[p.langue] = parLangue[p.langue] || []).push({ ...p, items });
   console.log(p.slug, items.length, "épisodes");
 }
