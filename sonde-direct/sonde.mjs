@@ -1,18 +1,11 @@
-// Sonde : catalogue IslamHouse (foulfouldé / français) et HadeethEnc, et conditions d'utilisation.
+// Sonde : flux podcast officiel de Quran Central pour le Cheikh Ja'afar Mahmud Adam.
 import fs from "node:fs";
 const out = [];
-const get = async (u, n = 1500) => { try { const r = await fetch(u, { headers: { "user-agent": "Mozilla/5.0" } }); const t = await r.text(); out.push(`=== ${u} [${r.status}]\n${t.slice(0, n)}`); return t; } catch (e) { out.push(`=== ${u} : ${e.message}`); return ""; } };
-const K = "paV29H2gm56kvLPy";
-await get(`https://api3.islamhouse.com/v3/${K}/main/sitecontent/ff/json`, 2500);
-await get(`https://api3.islamhouse.com/v3/${K}/main/audios/ff/ff/1/5/json`, 4000);
-await get(`https://api3.islamhouse.com/v3/${K}/main/videos/ff/ff/1/5/json`, 3000);
-await get(`https://api3.islamhouse.com/v3/${K}/main/audios/fr/fr/1/3/json`, 2500);
-const h = await get("https://islamhouse.com/fr/", 200);
-const lien = (h.match(/href="([^"]*(?:terms|conditions|copyright|droits|privacy)[^"]*)"/i) || [])[1];
-if (lien) await get(lien.startsWith("http") ? lien : "https://islamhouse.com" + lien, 3000);
-await get("https://islamhouse.com/fr/main/copyright", 3000);
-await get("https://hadeethenc.com/api/v1/languages", 1500);
-await get("https://hadeethenc.com/api/v1/categories/roots/?language=ff", 1500);
-await get("https://hadeethenc.com/api/v1/hadeeths/list/?language=fr&category_id=1&page=1&per_page=2", 1500);
-await get("https://hadeethenc.com/fr/home/terms", 3000);
+const get = async (u, n = 2500) => { try { const r = await fetch(u, { headers: { "user-agent": "Mozilla/5.0" }, redirect: "follow" }); const t = await r.text(); out.push(`=== ${u} [${r.status}] ${r.url}\n${t.slice(0, n)}`); return t; } catch (e) { out.push(`=== ${u} : ${e.message}`); return ""; } };
+const h = await get("https://qurancentral.com/audio/jaafar-mahmud-adam/", 300);
+const feeds = [...new Set((h.match(/https?:\/\/[^"' ]*(feed|rss)[^"' ]*/gi) || []))].slice(0, 10);
+out.push("FEEDS " + feeds.join(" | "));
+const terms = (h.match(/[^.]{0,200}(copyright|permission|droits)[^.]{0,200}/gi) || []).slice(0, 5); out.push("TERMS " + terms.join(" || "));
+const it = await get("https://itunes.apple.com/lookup?id=1546357481", 1500);
+try { const f = JSON.parse(it).results[0].feedUrl; out.push("ITUNES FEED " + f); const x = await get(f, 4000); const items = (x.match(/<item>/g) || []).length; out.push("ITEMS " + items); out.push("COPYRIGHT " + ((x.match(/<copyright>([^<]*)/) || [])[1] || "")); } catch (e) { out.push("lookup " + e.message); }
 fs.writeFileSync("sonde-direct/resultat.txt", out.join("\n\n"));
