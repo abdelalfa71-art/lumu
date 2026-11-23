@@ -1,22 +1,69 @@
-TITRE Sheikh Ja’far Mahmud Adam
-AUTEUR Sheikh Ja’far Mahmud Adam
-PROPRIO Sheikh Ja’far Mahmud Adam
-COPYRIGHT 
-DESC Tafsirin al-Qurani
-LIEN https://podcasters.spotify.com/pod/show/safiyya
-ITEMS 327
-- Surah Kauthar — Naas | 01:14:38 | Sat, 17 Jan 2026 13:26:36 GMT
-- Surah Sharh — Ma’un | 01:22:42 | Sat, 17 Jan 2026 13:25:27 GMT
-- Surah Balad — Duha | 01:13:29 | Sat, 17 Jan 2026 13:23:22 GMT
-- Surah Tariq — Fajr | 01:13:09 | Sat, 17 Jan 2026 13:22:32 GMT
-- Surah Mutaffiffeen — Buruj | 01:09:25 | Sat, 17 Jan 2026 13:21:42 GMT
-- Surah Nazi’at — Infitar | 01:11:36 | Sat, 17 Jan 2026 13:20:09 GMT
-- Surah Insaan — Naba | 01:19:36 | Sat, 17 Jan 2026 13:19:10 GMT
-- Surah Muddathir — Insaan | 01:11:37 | Sat, 17 Jan 2026 13:18:07 GMT
-- Surah Muzzammil — Muddathir | 01:07:52 | Sat, 17 Jan 2026 13:17:11 GMT
-- Surah Nuh — Jinn | 01:13:50 | Sat, 17 Jan 2026 13:16:13 GMT
-- Surah Haqqah — Nuh  | 01:17:12 | Sat, 17 Jan 2026 13:06:03 GMT
-- Surah Qalam — Haqqah | 01:14:12 | Sat, 17 Jan 2026 13:05:17 GMT
-- Surah Tahreem — Qalam | 01:21:22 | Sat, 17 Jan 2026 13:04:20 GMT
-- Surah Talaq — Tahreem | 01:02:29 | Sat, 17 Jan 2026 13:03:00 GMT
-- Surah Taghabun — Talaq | 01:12:44 | Sat, 17 Jan 2026 13:02:11 GMT
+PODCAST | Muhammad Ali Dewa | Ring Gang Radio Podcasts | Ring Gang Radio | 1360 | https://anchor.fm/s/19b6b958/podcast/rss
+PODCAST | Muhammad Ali Dewa | The H Files with Kevin Hillier | Kevin Hillier | 47 | https://www.omnycontent.com/d/playlist/4c3a5d57-6c37-4d48-9f93-abc900480ba0/0795e2c6-b5cd-4bec-afd5-b1de002ff4ee/940a5727-f1e4-4993-823b-b1de009d17ce/podcast.rss
+PODCAST | Muhammad Ali Dewa | Punch Touch | Coach T | 87 | https://anchor.fm/s/502174ec/podcast/rss
+PODCAST | Muhammad Ali Dewa | FarTaha Theory | FarTaha Theory | 23 | https://media.rss.com/fartahatheory/feed.xml
+PODCAST | Muhammad Ali Dewa | The Cellus Cut | Marcellus | 57 | https://rss.buzzsprout.com/2062705.rss
+PODCAST | Muhammad Ali Dewa | Muppeturgy: A "The Muppet Show" Rewatch Podcast | Muppeturgy | 141 | https://www.muppeturgy.com/episodes?format=rss
+PODCAST | Muhammad Ali Dewa | Backdoor Cut | Backdoor Cut | 1 | https://feeds.soundcloud.com/users/soundcloud:users:427999614/sounds.rss
+PODCAST | Muhammad Ali Dewa | Talkin Boxing | Bill Calogero | 211 | https://feeds.captivate.fm/talkinboxing/
+PODCAST | Muhammad Ali Dewa | Lawgical with Ludmila | Ludmila Yamalova | 25 | https://feeds.castos.com/9qk3x
+PODCAST | Muhammad Ali Dewa | The JB and Sandy Show | Sandy McIlree | 1000 | https://www.spreaker.com/show/6230346/episodes/feed
+PODCAST | Muhammad Ali Dewa | Ahmad Saleem | Muslim Central | 289 | 
+PODCAST | Muhammad Ali Dewa | Indo Sport | Irish Independent | 865 | https://www.omnycontent.com/d/playlist/fdd7ab40-270d-4a1e-a257-acd200da1324/f0ca63a8-10ed-4a5a-9ebc-b1f401219d7d/edcb9e4c-b1e5-4f59-8680-b1f40121a018/podcast.rss
+PODCAST | Muhammad Ali Dewa | Screen Facts with Jason Davis | Jason Davis | 143 | https://feed.podbean.com/ScreenFacts/feed.xml
+PODCAST | Muhammad Ali Dewa | Fierce Rivalries | Sony Music Entertainment | 25 | https://feeds.megaphone.fm/rivalspod
+PODCAST | Muhammad Ali Dewa | The Volume | iHeartPodcasts and The Volume | 2001 | https://rss.pdrl.fm/531db3/www.omnycontent.com/d/playlist/e73c998e-6e60-432f-8610-ae210140c5b1/93d54235-c727-4011-8e89-ae33003468ec/941eddeb-303f-409f-a1ae-ae3300346908/podcast.rss
+ARCHIVE | Muhammad Ali Dewa | DaSokalayTaroon21-06-2013NurseryTrendInFata | Da Sokalay Taroon, 21-06-2013, Nursery trend in FATA | Zeenat | 
+ARCHIVE | Muhammad Ali Dewa | 99-nam-asma-un-nabi-rasulullaah-sallallaaho-alayhe-v-aalhi-vsallim-ni-fazilat-gu | 99 NAM ASMA UN NABI RASULULLAAH SALLALLAAHO ALAYHE V AALHI VSALLIM NI FAZILAT GUJARATI | MAKHDUM JAHANIYA BUKHARI QADRI SUHRAWARDI | 
+ARCHIVE | Muhammad Ali Dewa | salwat-durood-sharif-hindi-3-6-23 | SALWAT DUROOD SHARIF Hindi 3, 6, 23 | Sayyad Makhdum Jalaluddin Hussain Jahaniya BUKHARI | 
+ARCHIVE | Muhammad Ali Dewa | shajara-sarkar-shah-alam-bukhari-ahmedabad-jpg | SHAJARA Sarkar SHAH ALAM BUKHARI AHMEDABAD JPG | A.M. | 
+ARCHIVE | Muhammad Ali Dewa | durood-makhdumiyyah-makhdum-jahaniya-bukhari-hindi | DUROOD MAKHDUMIYYAH MAKHDUM JAHANIYA BUKHARI HINDI | SAYYAD MAKHDUM JAHANIYA JAHANGASHT JALALUDDIN HUSSAIN BUKHARI UNCHI RAHAMATULLAH TALA | 
+ARCHIVE | Muhammad Ali Dewa | 15-01-2019SabawoonJargaMaraka | 15-01-2019 Sabawoon Jarga Maraka | Center for Research and Security Studies | 
+ARCHIVE | Muhammad Ali Dewa | irfan-haq-waris-dewa-life-urdu.-pdf | IRFAN HAQ WARIS DEWA LIFE URDU. PDF |  | 
+ARCHIVE | Muhammad Ali Dewa | durood-sharif-dalayalul-khayarat-83-hindi-doc | DUROOD SHARIF DALAYALUL KHAYARAT 83 Hindi Doc |  | 
+ARCHIVE | Muhammad Ali Dewa | darood-e-ghousiya | DAROOD E GHOUSIYA | WARISI BUKHARI | 
+ARCHIVE | Muhammad Ali Dewa | sayyad-pir-haji-akbar-miya-bawa-bapu-sahab-bukhari-dhoraji-gujarat-india | SAYYAD PIR HAJI AKBAR MIYA BAWA BAPU SAHAB BUKHARI DHORAJI GUJARAT INDIA |  | 
+ARCHIVE | Muhammad Ali Dewa | durood-taj-durood-darud-salwat-salwaat-taj-8x-12-mate-dua-gujarati-8x-12-mate-1-copy | DUROOD TAJ DUROOD DARUD SALWAT SALWAAT TAJ 8x 12 MATE DUA GUJARATI 8x 12 Mate 1 Copy | SAYYAD | 
+ARCHIVE | Muhammad Ali Dewa | fatima-bint-muhammad-madina-jannat-baki | Fatima Bint Muhammad Madina Jannat Baki | NAZAR KARAM JALIL SHAH BAWA | 
+ARCHIVE | Muhammad Ali Dewa | madrotter-treasure-hunt-full-archive | (Blogger) madrotter-treasure-hunt Full Archive | madrotter-treasure-hunt | 
+ARCHIVE | Muhammad Ali Dewa | durood-sharif-dalayalul-khayarat-83-hindi-image | DUROOD SHARIF DALAYALUL KHAYARAT 83 Hindi Image |  | 
+ARCHIVE | Muhammad Ali Dewa | taj-durood-darud-salwat-salwaat-taj-8x-12-mate-dua-ya-hafizu-ya-salamu-ya-hussai | TAJ DUROOD DARUD SALWAT SALWAAT TAJ 8x 12 MATE DUA YA HAFIZU YA SALAMU YA HUSSAINO ALAYHISSALAAMO GUJARATI | SAYYAD | 
+PODCAST | Mohamed Ali Dewa | Néo Géo Nova | Bintou Simporé | 232 | https://feeds.audiomeans.fr/feed/45e48d89-45c1-4b21-90f7-0f96fe0e29cb.xml
+PODCAST | Mohamed Ali Dewa | Daybreak Hitz | Multimedia Ghana | 837 | https://atunwadigital-rss.streamguys1.com/content/hitzfm/daybreakhitz.xml
+PODCAST | Mohamed Ali Dewa | Kitch and Neeil. Talking sport and business across the UAE. | TALK 100.3 | 597 | https://feeds.acast.com/public/shows/62e943767afa5c00126257fb
+PODCAST | Mohamed Ali Dewa | RÁDIO CAFÉ | Leonardo Dias | 563 | https://api.substack.com/feed/podcast/1071928.rss
+PODCAST | Mohamed Ali Dewa | Laptop Sambal Sonnenhut - Der Indonesien-Podcast | Gunda & Katha | 84 | https://anchor.fm/s/1092b4aa8/podcast/rss
+PODCAST | Mohamed Ali Dewa | Taking Care of Business | Allsopp & Allsopp Group | 241 | https://feeds.acast.com/public/shows/635669afd377b100119ea7ba
+PODCAST | Mohamed Ali Dewa | AnimEmperor | AnimEmperor | 10 | https://www.spreaker.com/show/4561494/episodes/feed
+PODCAST | Mohamed Ali Dewa | The Agenda | Dubai Eye 103.8 | 100 | https://omny.fm/shows/the-agenda-with-georgia-tolley/playlists/podcast.rss
+ARCHIVE | Mohamed Ali Dewa | madrotter-treasure-hunt-full-archive | (Blogger) madrotter-treasure-hunt Full Archive | madrotter-treasure-hunt | 
+PODCAST | Ali Dewa | FarTaha Theory | FarTaha Theory | 23 | https://media.rss.com/fartahatheory/feed.xml
+PODCAST | Ali Dewa | Kitch and Neeil. Talking sport and business across the UAE. | TALK 100.3 | 597 | https://feeds.acast.com/public/shows/62e943767afa5c00126257fb
+PODCAST | Ali Dewa | Teligacast | Teligacast | 22 | https://anchor.fm/s/fa0ee4e4/podcast/rss
+PODCAST | Ali Dewa | Kizuna Jp | Patricia Katagiri | 10 | https://anchor.fm/s/112a92f0/podcast/rss
+PODCAST | Ali Dewa | ÉGUA DO PODCAST | ÉGUA DO PODCAST | 232 | https://anchor.fm/s/819c5b7c/podcast/rss
+PODCAST | Ali Dewa | Pensando o Japão | Pensando o Japão | 204 | https://anchor.fm/s/22190b28/podcast/rss
+PODCAST | Ali Dewa | Rede Geek Podcasts | Rede Geek Podcasts | 1428 | https://www.omnycontent.com/d/playlist/4dc4c11a-5a07-47d5-a5d5-b3b50010fd77/46b4fcd9-53ea-4bf8-998e-b4ea013d95ac/0f201264-005f-4a08-aa46-b4ea013d9a0f/podcast.rss
+PODCAST | Ali Dewa | CONVERSA COM GIGANTES | Rede Geek | 94 | https://www.omnycontent.com/d/playlist/4dc4c11a-5a07-47d5-a5d5-b3b50010fd77/36eb32fa-1bfd-41be-9597-b4e9016d7bb5/9e36a099-504a-4b2a-9f0c-b4e9016d7bc5/podcast.rss
+PODCAST | Ali Dewa | The Lovin Dubai Show | Augustus Media | 1683 | https://media.podeo.co/rss/MTI0
+PODCAST | Ali Dewa | MUDANÇA DE MENTE | Emerson Jacques de Oliveira | 337 | https://anchor.fm/s/392634d0/podcast/rss
+PODCAST | Ali Dewa | Vaguely Familiar | M. Nazar Syed and Ahmed Bashaar Syed | 64 | https://anchor.fm/s/6cd4102c/podcast/rss
+PODCAST | Ali Dewa | Night School | BFM Media | 325 | https://www.omnycontent.com/d/playlist/de62ff84-6498-49d0-a266-a9d50120c712/0349f367-560b-4bed-bcbd-ab09005b30a5/4b9f793d-eb12-497d-9534-ab09005b30aa/podcast.rss
+PODCAST | Ali Dewa | The Big Breakfast Podcast with Nats and Joey | Dubai 92 | 100 | https://www.omnycontent.com/d/playlist/4f310486-9d11-45c6-91e3-a471009b957c/f5432298-bccf-4334-9b8a-a74b00b19a42/b000e0f3-00f1-4807-862d-afa500a29be6/podcast.rss
+PODCAST | Ali Dewa | Radio Islam | Radio Islam | 552 | https://feeds.soundcloud.com/users/soundcloud:users:43909738/sounds.rss
+PODCAST | Ali Dewa | Bitesize Business Breakfast Podcast | Dubai Eye 103.8 | 110 | https://www.omnycontent.com/d/playlist/4f310486-9d11-45c6-91e3-a471009b957c/41c60782-58c7-48e1-bba6-ab1d0086f785/90de34a8-e091-4227-a529-ab1d008b27e5/podcast.rss
+ARCHIVE | Ali Dewa | sayyad-pir-haji-akbar-miya-bawa-bapu-sahab-bukhari-dhoraji-gujarat-india | SAYYAD PIR HAJI AKBAR MIYA BAWA BAPU SAHAB BUKHARI DHORAJI GUJARAT INDIA |  | 
+ARCHIVE | Ali Dewa | tohfa-e-warsiya | Tohfa E Warsiya |  | 
+ARCHIVE | Ali Dewa | warisdarsayyidulwarisin | warisdarsayyidulwarisin |  | 
+ARCHIVE | Ali Dewa | durood-ibrahim-salwat-salwaat-sharif-sholawat-number-1-the-most-special-sholawat-ibrahimiyah | DUROOD IBRAHIM SALWAT SALWAAT SHARIF Sholawat Number 1 & The Most Special Sholawat Ibrahimiyah |  | 
+ARCHIVE | Ali Dewa | 12-story-of-hazrat-mujaddid-alf-sani-tasawwuf-and-islahe-salateen-19-12-2012-whi | 1434 H- سيرة الأولياء "Seeratul Awliya" ALLAH ke Waliyon ki Zindagi (Hissa- 11 to 20) by Allama Mukhatar Shah Ashrafi Sahab @ Whitestone786 on YouTube @ maktabatzeenatfatima.wordpress.com | https://maktabatzeenatfatima.wordpress.com/ | http://creativecommons.org/publicdomain/mark/1.0/
+ARCHIVE | Ali Dewa | 99-nam-asma-un-nabi-rasulullaah-sallallaaho-alayhe-v-aalhi-vsallim-ni-fazilat-gu | 99 NAM ASMA UN NABI RASULULLAAH SALLALLAAHO ALAYHE V AALHI VSALLIM NI FAZILAT GUJARATI | MAKHDUM JAHANIYA BUKHARI QADRI SUHRAWARDI | 
+ARCHIVE | Ali Dewa | radio-ceylon-08-09-2022-thursday- | Radio Ceylon 08-09-2022~ Thursday~ | Ashwani Kumar | 
+ARCHIVE | Ali Dewa | shah-alam-shajara-pdf-11-10-2025 | Shah Alam Shajara Pdf 11 10 2025 | gulam yasin | 
+ARCHIVE | Ali Dewa | waris-ali-dewa-sharif-kalma-tayyaba-hindi | Waris Ali Dewa Sharif Kalma Tayyaba Hindi |  | 
+ARCHIVE | Ali Dewa | salwat-durood-sharif-hindi-3-6-23 | SALWAT DUROOD SHARIF Hindi 3, 6, 23 | Sayyad Makhdum Jalaluddin Hussain Jahaniya BUKHARI | 
+ARCHIVE | Ali Dewa | shajara-sarkar-shah-alam-bukhari-ahmedabad-jpg | SHAJARA Sarkar SHAH ALAM BUKHARI AHMEDABAD JPG | A.M. | 
+ARCHIVE | Ali Dewa | radio-ceylon-20-10-2025-monday- | Radio Ceylon 20-10-2025~ Monday~ | Ashwani Kumar | 
+ARCHIVE | Ali Dewa | KhairUlWariseen | Khair Ul Wariseen | Miyan Ata Ullah Sagar Warsi R.A | 
+ARCHIVE | Ali Dewa | durood-makhdumiyyah-makhdum-jahaniya-bukhari-hindi | DUROOD MAKHDUMIYYAH MAKHDUM JAHANIYA BUKHARI HINDI | SAYYAD MAKHDUM JAHANIYA JAHANGASHT JALALUDDIN HUSSAIN BUKHARI UNCHI RAHAMATULLAH TALA | 
+ARCHIVE | Ali Dewa | imam-hasan-imam-hussain-karbala-3-d-image | IMAM HASAN IMAM HUSSAIN KARBALA 3D IMAGE |  | 
