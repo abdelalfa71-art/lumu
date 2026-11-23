@@ -7965,6 +7965,7 @@ function carteMoment(w) {
     z.hidden = false; i.value = m.q; i.dispatchEvent(new Event("input"));
   };
 }
+const EC_MEM = { t: 0, brut: [], enCours: false };
 async function vueEcouter() {
   const w = document.createElement("div");
   w.className = "ecran ec";
@@ -8196,27 +8197,34 @@ async function vueEcouter() {
       abos = imams.length > 0;
     }
   } catch (e) {}
+  /* Liste gardée en mémoire : au retour sur Écouter, affichage immédiat sans rien recharger */
+  const appliquer = brut => {
+    tous = brut.filter(c => c.fichier_path && !c.embed_id && langOk(c)); ecCharge = true;
+    if (!abos) { const vus = new Map(); tous.forEach(c => { const ch = c.yt_channels; if (ch && ch.id && !vus.has(ch.id)) vus.set(ch.id, ch); }); imams = [...vus.values()]; }
+    if (w.isConnected) { dessinerImams(); lignes(); }
+  };
+  if (EC_MEM.brut.length) { appliquer(EC_MEM.brut); if (Date.now() - EC_MEM.t < 15 * 60e3 || EC_MEM.enCours) return; }
   try {
-    /* Tous les audios publiés, par pages de 200 (plus de limite à 60) */
-    const brut = [];
+    /* Tous les audios publiés, par pages de 200 : la 1re page s'affiche dès réception, la suite arrive en fond */
+    EC_MEM.enCours = true;
+    const brut = [], dejaAffiche = EC_MEM.brut.length > 0;
     for (let debut = 0; debut < 5000; debut += 200) {
       const pg = await sb.from("yt_contenus").select(CHAMPS_CONTENU).eq("status", "published").eq("type", "audio").order("published_at", { ascending: false }).range(debut, debut + 199);
       if (pg.error) throw pg.error;
       brut.push(...(pg.data || []));
+      if (debut === 0 && !dejaAffiche && brut.length) { ec_notice(w, ""); appliquer(brut.slice()); }
       if (!pg.data || pg.data.length < 200) break;
     }
-    const r = { data: brut };
-    tous = brut.filter(c => c.fichier_path && !c.embed_id && langOk(c));
-    ecCharge = true;
+    const avant = EC_MEM.brut.length;
+    EC_MEM.brut = brut; EC_MEM.t = Date.now(); EC_MEM.enCours = false;
     if (brut.length) cacheLocal("cache_ecoute", brut.slice(0, 60));
     ec_notice(w, "");
     if (!w.isConnected) return;
-    if (!abos) {
-      const vus = new Map(); tous.forEach(c => { const ch = c.yt_channels; if (ch && ch.id && !vus.has(ch.id)) vus.set(ch.id, ch); });
-      imams = [...vus.values()];
-    }
-    dessinerImams(); lignes();
+    /* Rafraîchissement silencieux : on ne redessine que si le nombre a changé (pas de saut pendant la lecture) */
+    if (!dejaAffiche || brut.length !== avant) appliquer(brut);
   } catch (e) {
+    EC_MEM.enCours = false;
+    if (EC_MEM.brut.length) return;
     /* Hors connexion : on affiche la dernière liste enregistrée, comme WhatsApp */
     const cache = lireCacheLocal("cache_ecoute");
     if (cache && w.isConnected) {
