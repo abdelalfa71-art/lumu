@@ -2178,7 +2178,7 @@ function render(rafraichi) {
     "mot-de-passe-oublie": vueMotDePasseOublie, "nouveau-mot-de-passe": vueNouveauMotDePasse,
     "changer-mot-de-passe": vueChangerMotDePasse,
     "pin-verrou": vuePinVerrou, "pin-creation": vuePinCreation, "arabe": vueArabe,
-    "presentation": vuePresentation, "tarifs": vueTarifs, "videos": vueFlux, "affiches": vueAffiches, "coran": vueCoran, "coran-accueil": vueCoranAccueil, "radios": vueRadios, "enfants": vueEnfants, "ramadan": vueRamadan, "mosquees": vueMosquees, "aujourdhui": vueAujourdhui, "essentiel": vueEssentiel, "essentiel-etape": vueEssentielEtape, "islamhouse": vueIslamHouse, "hadiths": vueHadiths, "hadith": vueHadith, "khatma": vueKhatma, "khatma-voir": vueKhatmaVoir, "questions": vueQuestions, "questions-imam": vueQuestionsImam, "parcours": vueParcours, "parcours-voir": vueParcoursVoir, "passage": vuePassage, "parcours-revoir": vueRevoir, "mes-parcours": vueMesParcours, "parcours-edit": vueParcoursEdit, "passage-edit": vuePassageEdit, "home": vueDecouvrir, "savants": vueSavants, "preches": vuePreches, "priere": vuePriere, "langues-choix": vueLanguesChoix, "tutoriel": vueTutoriel, "biblio": vueBiblio, "dossier": vueDossier, "direct": vueDirect, "chaine-edit": vueChaineEdit, "notifications": vueNotifications, "publier": vuePublier, "je-publie": vueJePublie, "profil": vueProfil, "contenu": vueContenu,
+    "presentation": vuePresentation, "tarifs": vueTarifs, "videos": vueFlux, "affiches": vueAffiches, "coran": vueCoran, "coran-accueil": vueCoranAccueil, "radios": vueRadios, "enfants": vueEnfants, "ramadan": vueRamadan, "mosquees": vueMosquees, "aujourdhui": vueAujourdhui, "essentiel": vueEssentiel, "essentiel-etape": vueEssentielEtape, "islamhouse": vueIslamHouse, "hadiths": vueHadiths, "hadith": vueHadith, "auteur": vueAuteur, "khatma": vueKhatma, "khatma-voir": vueKhatmaVoir, "questions": vueQuestions, "questions-imam": vueQuestionsImam, "parcours": vueParcours, "parcours-voir": vueParcoursVoir, "passage": vuePassage, "parcours-revoir": vueRevoir, "mes-parcours": vueMesParcours, "parcours-edit": vueParcoursEdit, "passage-edit": vuePassageEdit, "home": vueDecouvrir, "savants": vueSavants, "preches": vuePreches, "priere": vuePriere, "langues-choix": vueLanguesChoix, "tutoriel": vueTutoriel, "biblio": vueBiblio, "dossier": vueDossier, "direct": vueDirect, "chaine-edit": vueChaineEdit, "notifications": vueNotifications, "publier": vuePublier, "je-publie": vueJePublie, "profil": vueProfil, "contenu": vueContenu,
     "langue": vueLangue, "fil": vueFlux, "flux": vueEcouter, "radio": vueFlux, "recherche": vueRecherche, "abos": vueAbos, "espace": vueEspace, "importer": vueImport, "reels": vueFlux, "groupes": vueGroupes, "groupe": vueGroupe, "discussions": vueDiscussions, "conv": vueConv, "groupe-nouveau": vueNouveauGroupe, "livres": vueBibliotheque, "regroupements": vueRegroupements, "biblio-lire": vueBiblioLire, "azkar": vueAzkar, "bases": vueBases, "livre": vueLivre, "mes-livres": vueMesLivres, "livre-edition": vueEditeurLivre, "lives": vueLives, "live": vueLive, "live-nouveau": vueNouveauLive, "devenir-createur": vueDevenirCreateur, "admin": vueAdmin, "push-admin": vuePushAdmin, "mes-contenus": vueMesContenus, "legal": vueLegal, "lien": vueLien, "chaine": vueChaine, "playlist": vuePlaylist, "playlists": vuePlaylists, "stats": vueStats, "abonnements": vueAbonnements, "favoris": vueListeUtilisateur, "historique": vueListeUtilisateur, "hors": vueHors
   };
   document.body.classList.toggle("branche-tobi", TOBI_ROUTES.includes(etat.route));
@@ -4844,6 +4844,22 @@ async function banniereDirect(b) {
   else if (j === 5 && h >= 11.5 && h < 13.5) titre = "Prière du vendredi en direct";
   else if (hj.m === 9 && (h >= 19.5 || h < 1)) titre = "Tarawih en direct";
   b.classList.add("vivant"); b.title = titre; b.setAttribute("aria-label", titre);
+}
+/* Imams dont les prêches sont rassemblés dans Lumu (page dédiée, même si publiés par différentes personnes) */
+const IMAMS_CONNUS = ["Cheikh Mouhammad Ali Dewa"];
+const IMAMS_DEFUNTS = /mouhammad ali dewa|mohammed ali dewa|mohamed ali dewa|ja'?afar mahmud adam/i;
+async function vueAuteur() {
+  const nom = etat.params.nom; if (!nom) { router("flux"); return; }
+  const defunt = IMAMS_DEFUNTS.test(nom);
+  const w = ecran("", ["flux"], `<div style="text-align:center;margin:4px 0 14px"><div style="width:84px;height:84px;margin:0 auto 8px;border-radius:50%;background:hsl(${teinte(nom)} 45% 32%);color:#fff;display:flex;align-items:center;justify-content:center;font-size:34px;font-weight:800">${esc(avatarLettre(nom.replace(/^cheikh /i, "")))}</div>
+    <h1 dir="auto" style="margin:0;font-size:24px">${esc(nom)}</h1>${defunt ? `<p dir="rtl" data-notrad style="margin:4px 0 0;font-family:'Amiri',serif;font-size:20px;color:#1b6b5c">رَحِمَهُ اللَّهُ</p>` : ""}<p id="au-nb" style="margin:6px 0 0;opacity:.75"></p></div><div id="au-l"><div class="centre"><div class="spin"></div></div></div>`);
+  const { data } = await sb.from("yt_contenus").select(CHAMPS_CONTENU).eq("status", "published").ilike("auteur", nom).order("published_at", { ascending: false }).limit(1000);
+  if (!w.isConnected) return;
+  const l = (data || []).filter(c => c.fichier_path || c.embed_id), z = w.querySelector("#au-l");
+  w.querySelector("#au-nb").textContent = l.length + " prêche" + (l.length > 1 ? "s" : "") + (defunt ? " · qu'Allah lui fasse miséricorde" : "");
+  if (!l.length) { z.innerHTML = `<p class="centre">Aucun prêche publié pour l'instant. Publiez-en en indiquant « ${esc(nom)} » comme imam.</p>`; return; }
+  z.innerHTML = l.map((c, i) => `<button type="button" class="carte" data-i="${i}" style="display:flex;align-items:center;gap:12px;width:100%;text-align:start;margin-bottom:8px;font:inherit;background:var(--surface,#fff);color:var(--texte,#14201b)"><img src="icon-192.png" alt="" style="width:52px;height:52px;border-radius:50%;flex:none"><span style="flex:1;min-width:0"><b dir="auto" data-notrad style="display:block">${esc(c.title)}</b><small style="opacity:.7">👁 ${esc(fmtNb(c.views_count || 0))}${c.duration_seconds ? " · " + fmtDuree(c.duration_seconds) : ""}${c.category ? " · " + esc(c.category) : ""}</small></span><span style="color:#1b6b5c;font-size:22px">▶</span></button>`).join("");
+  z.querySelectorAll("[data-i]").forEach(b => b.onclick = () => { const k = +b.dataset.i, c = l[k]; if (c.type === "audio" && c.fichier_path) AUD.jouer(c, l[k + 1] ? () => b.nextElementSibling && b.nextElementSibling.click() : null, l[k - 1] ? () => b.previousElementSibling && b.previousElementSibling.click() : null); else lireDirect(c); });
 }
 const SERIE_OBJ = {};
 function jouerSerie(sr, i) {
@@ -7944,7 +7960,7 @@ async function vueEcouter() {
   const w = document.createElement("div");
   w.className = "ecran ec";
   w.innerHTML = `<div class="ec-haut"><span class="ec-logo">${lumuSVG(36)}</span><span class="nom-lumu"><b>Lumu</b><em class="ar-lumu" lang="ar">لومو</em></span><button id="ec-live-h" class="ec-tv" aria-label="Directs de La Mecque et Médine"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="6.5" width="19" height="13" rx="2.5"/><path d="M8 2.5l4 4 4-4"/><circle class="ec-tv-pt" cx="12" cy="13" r="2.2" fill="currentColor" stroke="none"/></svg></button><button id="ec-radio-h" class="ec-tv" aria-label="Radios du Coran"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="8" width="19" height="12" rx="2.5"/><path d="M6 8l11-5"/><circle cx="15.5" cy="14" r="3"/><path d="M6 12.5h4M6 15.5h4"/></svg></button>
-      <button id="ec-mic" aria-label="Parler pour chercher">${ico("mic", 24)}</button><button id="ec-disc" aria-label="Discussions" style="position:relative">${ico("chat", 24)}<span id="ed-n" class="ed-n"></span></button><button id="ec-q" aria-label="Rechercher">${ico("search", 24)}</button><button id="ec-plus" aria-label="Plus d'options" style="font-size:26px;font-weight:800">⋮</button><div class="menu-plus" id="ec-menu" hidden><button id="em-disc">💬 Discussions<span class="em-n" id="em-n"></span></button><button id="em-qr">❓ Questions-réponses</button><button id="em-dormir">🌙 Avant de dormir</button><button id="em-trajet">🚗 Pour le trajet</button><button id="em-ih">🌐 IslamHouse (Pular, FR, Hausa)</button><button id="em-had">📜 Hadiths expliqués</button><button id="em-imams">👥 Imams</button><button id="em-hors">⬇ Mes téléchargements</button><button id="em-prof">👤 Mon profil</button></div></div>
+      <button id="ec-mic" aria-label="Parler pour chercher">${ico("mic", 24)}</button><button id="ec-disc" aria-label="Discussions" style="position:relative">${ico("chat", 24)}<span id="ed-n" class="ed-n"></span></button><button id="ec-q" aria-label="Rechercher">${ico("search", 24)}</button><button id="ec-plus" aria-label="Plus d'options" style="font-size:26px;font-weight:800">⋮</button><div class="menu-plus" id="ec-menu" hidden><button id="em-disc">💬 Discussions<span class="em-n" id="em-n"></span></button><button id="em-qr">❓ Questions-réponses</button><button id="em-dormir">🌙 Avant de dormir</button><button id="em-trajet">🚗 Pour le trajet</button><button id="em-ih">🌐 IslamHouse (Pular, FR, Hausa)</button><button id="em-had">📜 Hadiths expliqués</button><button id="em-dewa">🎙️ Cheikh Mouhammad Ali Dewa</button><button id="em-imams">👥 Imams</button><button id="em-hors">⬇ Mes téléchargements</button><button id="em-prof">👤 Mon profil</button></div></div>
     <div class="ec-rech" id="ec-rech" hidden><input id="ec-rin" type="search" enterkeyhint="search" autocomplete="off" placeholder="Rechercher un imam, un titre…"><div id="ec-sugg" class="ec-sugg"></div></div>
     <div class="ec-corps">
       <div class="st-row" id="st-row" hidden></div>
@@ -7976,7 +7992,7 @@ async function vueEcouter() {
   const lanceFile = (l, minut) => { if (!l.length) { alert("Aucun audio disponible."); return; } AUD.file = l.slice(1, 15); lireDirect(l[0]); if (minut) sommeilMinutes(minut); };
   w.querySelector("#th-dormir").onclick = () => { const re = CH[3][2]; const l = tous.filter(c => re.test(c.category || "") || re.test(c.title || "")); lanceFile((l.length ? l : tous).slice().sort((a, b) => (a.duration_seconds || 9999) - (b.duration_seconds || 9999)), 30); };
   w.querySelector("#th-trajet").onclick = () => lanceFile(tous.slice(), 0);
-  w.querySelector("#em-ih").onclick = () => router("islamhouse"); w.querySelector("#em-had").onclick = () => router("hadiths"); w.querySelector("#em-dormir").onclick = () => w.querySelector("#th-dormir").onclick(); w.querySelector("#em-trajet").onclick = () => w.querySelector("#th-trajet").onclick();
+  w.querySelector("#em-ih").onclick = () => router("islamhouse"); w.querySelector("#em-had").onclick = () => router("hadiths"); w.querySelector("#em-dewa").onclick = () => router("auteur", { nom: "Cheikh Mouhammad Ali Dewa" }); w.querySelector("#em-dormir").onclick = () => w.querySelector("#th-dormir").onclick(); w.querySelector("#em-trajet").onclick = () => w.querySelector("#th-trajet").onclick();
   w.querySelector("#ec-mic").onclick = () => { try { MICRO.ouvrir(); } catch (e) {} };
   let rech = "", serveur = [], minRech = null;
   w.querySelector("#ec-q").onclick = () => { const z = w.querySelector("#ec-rech"); z.hidden = !z.hidden; if (!z.hidden) setTimeout(() => w.querySelector("#ec-rin").focus(), 30); else { rech = ""; serveur = []; w.querySelector("#ec-rin").value = ""; w.querySelector("#ec-sugg").innerHTML = ""; lignes(); } };
@@ -8086,7 +8102,8 @@ async function vueEcouter() {
       liste.appendChild(d);
     }
     const ajouter = c => {
-      const nom = c.source_nom || (c.yt_channels && c.yt_channels.name) || c.auteur || "";
+      const imamPage = c.auteur && IMAMS_CONNUS.some(n => n.toLowerCase() === String(c.auteur).toLowerCase());
+      const nom = imamPage ? c.auteur : c.source_nom || (c.yt_channels && c.yt_channels.name) || c.auteur || "";
       const cover = c.cover_path ? urlMedia(c.cover_path) : "";
       const el = document.createElement("div");
       el.className = "ec-row"; el._c = c; el.tabIndex = 0; el.setAttribute("role", "button");
@@ -8094,7 +8111,7 @@ async function vueEcouter() {
       el.innerHTML = `<span class="ec-cv">${cover ? `<img src="${esc(cover)}" alt="" loading="lazy">` : `<img class="ec-logo-ph" src="icon-192.png" alt="" loading="lazy">`}</span>
         <div class="ec-tx"><span class="ec-imam" data-notrad dir="auto">${estEpingle(c.id) ? "📌 " : ""}${c.published_at && Date.now() - new Date(c.published_at) < 48 * 3600e3 ? '<em style="background:#c9a227;color:#fff;border-radius:6px;padding:0 6px;font-size:11px;font-style:normal;margin-right:4px">Nouveau</em>' : ""}@${esc(nom || "Imam")}</span><b dir="auto" data-notrad>${esc(c.title)}</b><small dir="auto" data-notrad>👁 ${esc(fmtNb(c.views_count || 0))} · <span class="ec-tp">${esc(tempsRow(c))}</span>${chargerLocal("fini_" + c.id, 0) ? " · ✔" : ""}</small>${(() => { const q = chargerLocal("pos_" + c.id, 0), d = c.duration_seconds || 0; return d ? `<span class="ec-barz" style="display:block;padding:8px 0 6px;margin-bottom:-6px;cursor:pointer"><i class="ec-bar" style="margin-top:0;height:6px"><u style="width:${Math.min(100, Math.round(100 * q / d))}%"></u></i></span>` : ""; })()}</div>
         ${c.fichier_path && !c.externe ? `<button class="ec-dl" aria-label="Télécharger"></button>` : ""}<button class="ec-pl" aria-label="Lecture">${ico("play", 26, true)}</button>`;
-      { const chId = c.channel_id || (c.yt_channels && c.yt_channels.id), im = el.querySelector(".ec-imam"); if (im && chId) im.onclick = ev => { ev.stopPropagation(); router("chaine", { id: chId }); }; }
+      { const chId = c.channel_id || (c.yt_channels && c.yt_channels.id), im = el.querySelector(".ec-imam"); if (im && imamPage) im.onclick = ev => { ev.stopPropagation(); router("auteur", { nom: c.auteur }); }; else if (im && chId) im.onclick = ev => { ev.stopPropagation(); router("chaine", { id: chId }); }; }
       const bz = el.querySelector(".ec-barz");
       if (bz) bz.onclick = ev => {
         ev.stopPropagation();
@@ -9685,7 +9702,7 @@ async function importerUn(it, commun, maj) {
   coverOk = await coverP;
   const titre = (it.titre && it.titre.trim().slice(0, 150)) || titreParDefaut(f);
   const { data, error } = await sb.from("yt_contenus").insert({
-    channel_id: etat.chaine.id, title: titre, category: commun.cat || "Autre", type, fichier_path: chemin, cover_path: coverOk ? cheminCover : null,
+    channel_id: etat.chaine.id, title: titre, category: commun.cat || "Autre", type, fichier_path: chemin, cover_path: coverOk ? cheminCover : null, auteur: commun.imam || undefined,
     duration_seconds: meta.duree ? Math.round(meta.duree) : null, taille_octets: f.size, mime, status: "published", published_at: new Date().toISOString()
   }).select("id").single();
   if (error) { await sb.storage.from("yt-media").remove([chemin, ...(coverOk ? [cheminCover] : [])]).catch(() => {}); throw error; }
@@ -9708,6 +9725,7 @@ function vueImport() {
       <button class="btn-outline" id="choisir" ${enCours ? "disabled" : ""}>＋ Choisir des fichiers</button>
       <input type="file" id="fichiers" multiple hidden>
       <select class="champ" id="cat" style="margin:0" aria-label="Catégorie" ${enCours ? "disabled" : ""}>${CATEGORIES.map(c => `<option ${c === cat ? "selected" : ""}>${esc(c)}</option>`).join("")}</select>
+      <input class="champ" id="imam" list="imams-connus" style="margin:0" placeholder="Imam (si ce n'est pas vous) · facultatif" aria-label="Imam" value="${esc(chargerLocal("import_imam", ""))}" ${enCours ? "disabled" : ""}><datalist id="imams-connus">${IMAMS_CONNUS.map(n => `<option value="${esc(n)}">`).join("")}</datalist>
       ${groupes.length ? `<select class="champ" id="groupe" style="margin:0" aria-label="Groupe" ${enCours ? "disabled" : ""}><option value="">Publier aussi dans un groupe (facultatif)</option>${groupes.map(g => `<option value="${esc(g.id)}" ${g.id === gr ? "selected" : ""}>${esc(g.nom)}</option>`).join("")}</select>` : ""}
       <div id="liste" class="liste-contenus"></div>
       ${items.length ? (enCours ? `<div class="imp-prog"><b>Envoi ${items.filter(i => i.statut === "ok").length}/${items.length} · ${items.filter(i => i.statut === "cours").length} en cours</b><progress max="${items.length}" value="${items.filter(i => i.statut === "ok").length}"></progress></div><button class="btn-outline" id="stop">Arrêter</button>` : `<button class="btn" id="go" ${attente ? "" : "disabled"}>${items.some(i => i.statut === "erreur") ? "Réessayer / continuer" : "Tout publier"} (${attente})</button>`) : ""}
@@ -9759,7 +9777,8 @@ function vueImport() {
     else lancer([it]);
   }
   async function lancer(choix) {
-    const commun = { cat: w.querySelector("#cat").value, groupe: (w.querySelector("#groupe") || {}).value || "" };
+    const commun = { cat: w.querySelector("#cat").value, groupe: (w.querySelector("#groupe") || {}).value || "", imam: ((w.querySelector("#imam") || {}).value || "").trim().slice(0, 80) };
+    sauverLocal("import_imam", commun.imam);
     enCours = true; stop = false;
     garderEveille(true);
     const lot = (choix || items).filter(i => i.statut !== "ok");
