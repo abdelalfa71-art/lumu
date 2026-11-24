@@ -1318,6 +1318,33 @@ body:not(.branche-tobi) .nav-btn svg { width: 30px; height: 30px; }
 .bb-tuile span { font-size: 54px; } .r-now { font-size: 24px; }
 .pr-actif { font-size: 0 !important; padding: 0 !important; background: none !important; gap: 0; flex-shrink: 0; } .pr-actif::before { width: 14px !important; height: 14px !important; }
 .pr-l1 b .pr-nom { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* ===== Simplification de l'accueil (v221) ===== */
+.ec-haut #ec-radio-h, .ec-haut #ec-mic, .ec-haut #ec-disc { display: none !important; }
+#ec-plus { position: relative; } #ec-plus.pt-nl::after { content: ""; position: absolute; top: 6px; right: 6px; width: 9px; height: 9px; border-radius: 50%; background: #ff3b30; }
+.ec-bande-t { margin: 8px 16px 6px; font-size: 13px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; color: var(--texte-doux, #6b6557); }
+.ec-bande { display: flex; gap: 10px; overflow-x: auto; padding: 2px 16px 12px; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+.ec-bande::-webkit-scrollbar { display: none; }
+.ec-bande > #ec-moment, .ec-bande > #ec-rep, .ec-bande > .ec-ligne, .ec-bande > #ec-hn { display: contents; }
+.ec-bande button.ec-radio, .ec-bande #ec-moment > button, .ec-bande #ec-rep > button {
+  flex: 0 0 74% !important; max-width: 290px !important; width: auto !important; margin: 0 !important; min-height: 78px; padding: 12px 14px !important;
+  border-radius: 16px !important; border: 1px solid var(--bordure, #dfe7e2) !important; background: var(--surface, #fff) !important; color: var(--texte, #2C2A26) !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,.06) !important; scroll-snap-align: start; display: flex !important; flex-direction: row !important; align-items: center !important; gap: 12px !important;
+  text-align: start !important; font-size: inherit !important; overflow: hidden; animation: none !important; }
+.ec-bande #ec-rep > button { order: -2; } .ec-bande button.ec-radio { order: -1; }
+.ec-bande button::after { display: none !important; }
+.ec-bande button b { color: inherit !important; font-size: 15px !important; display: -webkit-box !important; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.ec-bande button span span, .ec-bande button small { color: var(--texte-doux, #6b6557) !important; opacity: 1 !important; font-size: 12.5px !important; display: -webkit-box !important; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.ec-bande button .ec-tx small { color: #0F7B6C !important; }
+.ec-bande button > span:first-child { font-size: 26px !important; flex: none; }
+.ec-bande .ec-rp { width: 44px !important; height: 44px !important; flex: none; border-radius: 50%; background: #0F7B6C !important; color: #fff !important; display: grid !important; place-items: center; }
+.ec-bande .ec-cv img { width: 48px !important; height: 48px !important; border-radius: 12px; object-fit: cover; }
+.ec-bande .ec-pl { display: none !important; }
+.ec-cherche .ec-bande, .ec-cherche .ec-bande-t { display: none !important; }
+/* Micro flottant : plus petit, caché pendant le défilement */
+#micro-fab, .ec-simple ~ #micro-fab { width: 52px !important; height: 52px !important; box-shadow: 0 4px 12px rgba(0,0,0,.22); transition: transform .25s, opacity .25s; }
+#micro-fab svg { width: 24px !important; height: 24px !important; }
+body.defile #micro-fab { transform: translateY(140%) scale(.6); opacity: 0; pointer-events: none; }
 </style>
 </head>
 <body>
@@ -5860,6 +5887,7 @@ function chercheVocale(txt) {
   if (dua || cat) { router("arabe", { onglet: "duas", categorie: cat || null, q: cat ? "" : n.replace(DUA_MOT, "").replace(/\b(pour|de|du|la|le|les|des|l|d|a|an|ga|ka)\b/g, " ").trim() }); return; }
   router("recherche", { q: txt.trim() });
 }
+{ let tmDef = null, yDef = 0; window.addEventListener("scroll", () => { const y = window.scrollY; if (Math.abs(y - yDef) > 6) document.body.classList.add("defile"); yDef = y; clearTimeout(tmDef); tmDef = setTimeout(() => document.body.classList.remove("defile"), 900); }, { passive: true }); }
 const MICRO = {
   ouvrir() {
     const R = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -7970,13 +7998,14 @@ async function vueEcouter() {
   const w = document.createElement("div");
   w.className = "ecran ec";
   w.innerHTML = `<div class="ec-haut"><span class="ec-logo">${lumuSVG(36)}</span><span class="nom-lumu"><b>Lumu</b><em class="ar-lumu" lang="ar">لومو</em></span><button id="ec-live-h" class="ec-tv" aria-label="Directs de La Mecque et Médine"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="6.5" width="19" height="13" rx="2.5"/><path d="M8 2.5l4 4 4-4"/><circle class="ec-tv-pt" cx="12" cy="13" r="2.2" fill="currentColor" stroke="none"/></svg></button><button id="ec-radio-h" class="ec-tv" aria-label="Radios du Coran"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="8" width="19" height="12" rx="2.5"/><path d="M6 8l11-5"/><circle cx="15.5" cy="14" r="3"/><path d="M6 12.5h4M6 15.5h4"/></svg></button>
-      <button id="ec-mic" aria-label="Parler pour chercher">${ico("mic", 24)}</button><button id="ec-disc" aria-label="Discussions" style="position:relative">${ico("chat", 24)}<span id="ed-n" class="ed-n"></span></button><button id="ec-q" aria-label="Rechercher">${ico("search", 24)}</button><button id="ec-plus" aria-label="Plus d'options" style="font-size:26px;font-weight:800">⋮</button><div class="menu-plus" id="ec-menu" hidden><button id="em-disc">💬 Discussions<span class="em-n" id="em-n"></span></button><button id="em-qr">❓ Questions-réponses</button><button id="em-dormir">🌙 Avant de dormir</button><button id="em-trajet">🚗 Pour le trajet</button><button id="em-ih">🌐 IslamHouse (Pular, FR, Hausa)</button><button id="em-had">📜 Hadiths expliqués</button>${IMAMS_CONNUS.map((n, i) => `<button class="em-imam" data-n="${i}">🎙️ ${esc(n)}</button>`).join("")}<button id="em-imams">👥 Imams</button><button id="em-hors">⬇ Mes téléchargements</button><button id="em-prof">👤 Mon profil</button></div></div>
+      <button id="ec-mic" aria-label="Parler pour chercher">${ico("mic", 24)}</button><button id="ec-disc" aria-label="Discussions" style="position:relative">${ico("chat", 24)}<span id="ed-n" class="ed-n"></span></button><button id="ec-q" aria-label="Rechercher">${ico("search", 24)}</button><button id="ec-plus" aria-label="Plus d'options" style="font-size:26px;font-weight:800">⋮</button><div class="menu-plus" id="ec-menu" hidden><button id="em-disc">💬 Discussions<span class="em-n" id="em-n"></span></button><button id="em-qr">❓ Questions-réponses</button><button id="em-dormir">🌙 Avant de dormir</button><button id="em-trajet">🚗 Pour le trajet</button><button id="em-radios">📻 Radios du Coran</button><button id="em-ih">🌐 IslamHouse (Pular, FR, Hausa)</button><button id="em-had">📜 Hadiths expliqués</button>${IMAMS_CONNUS.map((n, i) => `<button class="em-imam" data-n="${i}">🎙️ ${esc(n)}</button>`).join("")}<button id="em-imams">👥 Imams</button><button id="em-hors">⬇ Mes téléchargements</button><button id="em-prof">👤 Mon profil</button></div></div>
     <div class="ec-rech" id="ec-rech" hidden><input id="ec-rin" type="search" enterkeyhint="search" autocomplete="off" placeholder="Rechercher un imam, un titre…"><div id="ec-sugg" class="ec-sugg"></div></div>
     <div class="ec-corps">
       <div class="st-row" id="st-row" hidden></div>
-      <div id="ec-moment"></div>
+      <div class="ec-bande-t">Aujourd'hui</div>
+      <div class="ec-bande" id="ec-bande"><div id="ec-moment"></div>
       <div id="ec-rep"></div>
-      <div class="ec-ligne"><button class="ec-radio" id="ec-radio"><span class="ec-rp">${ico("play", 30, true)}</span><span><b>Lumu Radio</b><small>Rappels, Coran, invocations</small></span></button></div>
+      <div class="ec-ligne"><button class="ec-radio" id="ec-radio"><span class="ec-rp">${ico("play", 30, true)}</span><span><b>Lumu Radio</b><small>Rappels, Coran, invocations</small></span></button></div></div>
       <div id="ec-src" style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:0 16px 12px"></div>
       <div hidden>
       <div class="ec-tit" id="ec-tit">Mes imams</div>
@@ -7996,7 +8025,7 @@ async function vueEcouter() {
   try { const cn = navigator.connection; if (cn && /2g/.test(cn.effectiveType || "")) w.querySelector("#ec-radio").insertAdjacentHTML("beforebegin", `<button class="ec-lent" id="ec-lent">📶 Connexion lente. Touchez pour télécharger vos audios et écouter sans coupure.</button>`); const bl = w.querySelector("#ec-lent"); if (bl) bl.onclick = () => router("hors"); } catch (e) {}
   { const bp = w.querySelector("#ec-plus"), mn = w.querySelector("#ec-menu"); bp.onclick = ev => { ev.stopPropagation(); mn.hidden = !mn.hidden; }; mn.onclick = () => { setTimeout(() => { mn.hidden = true; }, 120); };
     const fer = () => { if (!w.isConnected) { document.removeEventListener("click", fer); return; } mn.hidden = true; }; document.addEventListener("click", fer);
-    w.querySelector("#em-disc").onclick = () => router("discussions"); w.querySelector("#em-qr").onclick = () => router("questions"); w.querySelector("#ec-disc").onclick = () => router("discussions"); try { if (NBNL.v > 0) w.querySelector("#ed-n").textContent = NBNL.v > 9 ? "9+" : NBNL.v; } catch (e) {} try { if (NBNL.v > 0) w.querySelector("#em-n").textContent = NBNL.v; else if (etat.parentId) sb.rpc("yt_mes_conversations").then(r => { const n = (r && !r.error ? (r.data || []) : []).reduce((a, x) => a + (Number(x.non_lus) || 0), 0); NBNL.v = n; NBNL.t = Date.now(); const e = w.querySelector("#em-n"); if (e && n) e.textContent = n; }, () => {}); } catch (e) {}
+    w.querySelector("#em-disc").onclick = () => router("discussions"); w.querySelector("#em-qr").onclick = () => router("questions"); w.querySelector("#ec-disc").onclick = () => router("discussions"); try { if (NBNL.v > 0) w.querySelector("#ec-plus").classList.add("pt-nl"); } catch (e) {} try { if (NBNL.v > 0) w.querySelector("#ed-n").textContent = NBNL.v > 9 ? "9+" : NBNL.v; } catch (e) {} try { if (NBNL.v > 0) w.querySelector("#em-n").textContent = NBNL.v; else if (etat.parentId) sb.rpc("yt_mes_conversations").then(r => { const n = (r && !r.error ? (r.data || []) : []).reduce((a, x) => a + (Number(x.non_lus) || 0), 0); NBNL.v = n; NBNL.t = Date.now(); const e = w.querySelector("#em-n"); if (e && n) e.textContent = n; }, () => {}); } catch (e) {}
   w.querySelector("#em-imams").onclick = () => router("preches"); w.querySelector("#em-hors").onclick = () => router("hors"); w.querySelector("#em-prof").onclick = () => router("profil"); }
 
   const lanceFile = (l, minut) => { if (!l.length) { alert("Aucun audio disponible."); return; } AUD.file = l.slice(1, 15); lireDirect(l[0]); if (minut) sommeilMinutes(minut); };
@@ -8036,7 +8065,7 @@ async function vueEcouter() {
     minRech = setTimeout(chercheEcoute, 300);
   };
   microChamp(w.querySelector("#ec-rin"));
-  w.querySelector("#ec-radio-h").onclick = () => router("radios");
+  w.querySelector("#ec-radio-h").onclick = () => router("radios"); w.querySelector("#em-radios").onclick = () => router("radios");
   banniereDirect(w.querySelector("#ec-live-h"));
   w.querySelector("#ec-radio").onclick = () => { router("radio"); setTimeout(() => { try { RADIO.demarrer(); } catch (e) {} }, 700); };
   const CH = [["", "Tout", null], ["coran", "Coran", /coran|quran|r[ée]citation/i], ["cours", "Cours", /cours|conf[ée]rence|[ée]ducation|pr[eê]che/i], ["rappels", "Rappels", /rappel|invocation|dou?a|dhikr/i]];
