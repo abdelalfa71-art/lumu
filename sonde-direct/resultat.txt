@@ -1,328 +1,296 @@
 
-=== language:(hau OR hausa) AND mediatype:audio : 231
-narambada	7273	108Mo	Wakokin Dauri	http://creativecommons.org/licenses/by-nc-nd/3.0/	Narambada
-ttall	6143	1654Mo	Bukar Usman OON	http://creativecommons.org/licenses/by-nc-nd/3.0/	Kammalallen Taskar Tatsuniyoyi
-sunna4u.com_Sudais	5878	536Mo	sunna4u.com		Sheikh AbdurRahman Sudais Complete Quran Mp3
-18-gwani-isa	5748	1457Mo	Gwani Isa		18 Gwani Isa
-marainiya	5140	171Mo	Bukar Usman OON	http://creativecommons.org/licenses/by-nc-nd/3.0/	Littafi na Daya - Marainiya
-sheikjafarmahmudadam	4800	197Mo	Mamtech	https://creativecommons.org/licenses/by-nc-nd/4.0/	Recitation of the Holy Quran by Sheikh Jafar Mahmud Adam, Nigeria
-Muslim1_201403	4669	146Mo	Almadina		Sahih Muslim 1(Hausa)
-tafsirin_al_quran_sunna4u	3010	815Mo	sunna4u.blogspot.com		Tafsirin Al Qur'ani Mai Girma wanda Sheikh Abubakar Maikano ke gabatarwa a babban Masjeed 
-Al.adabul.mufrad_sunna4u	2908	1093Mo	sunna4u.blogspot.com		Karatun Littafin Al Adabul Mufrad by Sheikh Abubakr Maikano @ Sunna4u.blogspot.com (1439-2
-muhadarori	2768	860Mo	Mamtech	https://creativecommons.org/licenses/by-nc-nd/4.0/	Lectures of the Late Sheikh Jafar Mahmud Adam (RA) (Muhadarorin)
-riyadus_swalihin_sunna4u	2616	1098Mo	sunna4u.net		Karatun Littafin Riyadus Swalihin - Sheikh Bature Dauda Tsagero
-ya-abun-ambato-rabil-jos	2089	16Mo			Ya Abun Ambato Rabil Jos
-ya-abun-ambato-rabil-jos_202104	1762	7Mo			Ya Abun Ambato Rabil Jos
-BabakMafiBaroon320	1593	114Mo			Babak Mafi Baroon [ 320]
-muguwa	1535	75Mo	Bukar Usman OON	http://creativecommons.org/licenses/by-nc-nd/3.0/	Littafi na sha hudu - Muguwar Kishiya
-yargata	1440	88Mo	Bukar Usman OON	http://creativecommons.org/licenses/by-nc-nd/3.0/	Littafi na sha biyu -'Yar Gata
-alajabi	1388	93Mo	Bukar Usman OON	http://creativecommons.org/licenses/by-nc-nd/3.0/	Littafi na Sha Daya - Alajabi
-IMAM_MALIK_FOUNDATION_TSAGERO	1367	123Mo	SUNNA4U@OUTLOOK.COM		Wa'azozin Imam Malik Foundation Katsina, Tsagero Branch, Sunna4u
-ranarmawaka	1241	717Mo	Ranar Mawakan Hausa	http://creativecommons.org/licenses/by-nc-nd/3.0/	Ranar Mawaka
-ya-kashiful-ummati-rabil-jos	1235	3Mo			Ya Kashiful Ummati Rabil Jos
-jaruminsarki	1192	119Mo	Bukar Usman OON	http://creativecommons.org/licenses/by-nc-nd/3.0/	Littafi na Biyu - Jarumin Sarki
-lp_folk-music-of-the-ssr-middle-east_various	1167	1241Mo	Various		Folk Music Of The S.S.R. Middle East
-karatun_muwadda_malik	1103	1043Mo	Sunna4u		Karatun Muwadda Malik
-sandararziki	1010	141Mo	Bukar Usman OON	http://creativecommons.org/licenses/by-nc-nd/3.0/	Littafi na Biyar - Sandar Arziki
-tsohuwa	973	110Mo	Bukar Usman OON	http://creativecommons.org/licenses/by-nc-nd/3.0/	Littafi na Tara - Tsohuwa da 'yanmata uku
-011M.Y.CDTAWALIUACIKINSALLA	958	808Mo			sheikh Abdulrazaq Haifan
-yarimadalabbi	884	103Mo	Bukar Usman OON	http://creativecommons.org/licenses/by-nc-nd/3.0/	Littafi na Uku - Yarima da Labbi
-dankutungayya_201506	874	121Mo	Bukar Usman OON	http://creativecommons.org/licenses/by-nc-nd/3.0/	Littafi na Shida - Dankutungayya
-tsurondi	865	164Mo	Bukar Usman OON	http://creativecommons.org/licenses/by-nc-nd/3.0/	Littafi na Hudu - Tsurondi
-gwaidayara	839	117Mo	Bukar Usman OON	http://creativecommons.org/licenses/by-nd/3.0/	Littafi na Bakwai - Gwaidayara
-dugulidanbajinta	836	116Mo	Bukar Usman OON	http://creativecommons.org/licenses/by-nc-nd/3.0/	Littafin na sha uku - Duguli dan Bajinta
-oststjcin	816	17Mo			oststjcin
-FANNUTAAMUL01	813	67Mo			FANNU TA AMUL
-wakargarinbiu	795	42Mo	Bukar Usman OON		Wakar Garin Biu
-jumuat_khutbah_mal_bature_dauda	742	214Mo	sunna4u.blogspot.com		Jumuat Khutbah Mal. Bature Dauda Tsagero Sunna4u
-tafseerussaadiy	737	748Mo	Shaykh Muhammad Kabir Lawal Garba	https://creativecommons.org/licenses/by-nc-nd/4.0/	Tafseerin Shaykh Abdurrahman Naasir As-Sa'ady
-wakokinbukar	681	168Mo		http://creativecommons.org/licenses/by-nc-sa/3.0/	Wakokin Dakta Bukar Usman OON
-65KareDaKuraDAWasuKyawawa	676	137Mo	Bukar Usman OON	http://creativecommons.org/licenses/by-nc-nd/3.0/	Littafi na Goma - Dankucaka
-lp_new-folk-dances-of-israel_uri-hodorov	608	1634Mo	Uri Hodorov		New Folk Dances Of Israel
-wakokin-farfesoshi	592	198Mo	Saidu Muhammad Gusau		Wakokin Emiratus da Farfesoshi
-ya-abul-futuhatinah-rabil-jos	561	3Mo			Ya Abul Futuhatinah Rabil Jos
-danagwai	513	96Mo	Bukar Usman OON	http://creativecommons.org/licenses/by-nc-nd/3.0/	Littafi na Takwas - Dan Agwai
-kitabul_akhdari_shiakh_abubakar_gumi	512	379Mo	Ibrahim ahmad annigeri		Kitaboul Akhdari (Audio files)
-fatawoyin-rahama	497	900Mo	African Ulamas Project - Archives of Mul	https://creativecommons.org/licenses/by-nc-nd/4.0/	Fatawowin Rahama Radio Programmes 2012-Date
-UmdatulAhkam004	483	6Mo		http://creativecommons.org/publicdomain/mark/1.0/	Umdatul Ahkam 004 Sheikh Muhammad Mustapha Albarnawi
-AzuminSittaShawwalSunnaCeIShkmodumustafa.mp	477	16Mo		http://creativecommons.org/publicdomain/mark/1.0/	Azumin Sitta Shawwal Sunna Ce I Shkmodumustafa
-BBCWSHausa17.885MHz16SEP131930Z	465	30Mo	SWLing.com	http://creativecommons.org/licenses/by-nc-sa/3.0/	BBCWSHausa 17.885 MHz 16 SEP 13 1930 Z
-sharhinbaikuniyyah	459	641Mo	Shaykh Muhammad Kabir Lawal Garba	https://creativecommons.org/licenses/by-nc-nd/4.0/	Sharhin Baiƙuniyyah
-bashir-aliyu-umar	456	202Mo	African Ulamas Project	http://creativecommons.org/publicdomain/mark/1.0/	Weekly Friday Sermons by Dr. Bashir Aliyu Umar
-NasihaGaMata20Ramadan2019r.mp3c	430	20Mo		http://creativecommons.org/publicdomain/mark/1.0/	Nasiha Ga Mata 20 Ramadan 2019
-TSAGERO_WAAZIN_MATA_RAMADHAN_1438_SUNNA4U	415	104Mo	sunna4u.blogspot.com		TSAGERO WA'AZIN MATA RAMADHAN 1438 BY SUNNA4U
-GarinBiu	405	199Mo	Taskar Bukar Usman OON	http://creativecommons.org/licenses/by-nc-sa/3.0/	Garin Biu
-AaliyaAwwalTafseer2016-2017	399	226Mo			Aaliya (Awwal) Tafseer 2016-2017
-gwani-abdulbasid-fagge	388	1164Mo	Goni Abdulbasid Goni Rabi'u Fagge		Goni Abdulbasid Goni Rabi'u Fagge - Karatun Al-Qur'ani (Hizb 60)
-UmdatulAhkam005	363	5Mo		http://creativecommons.org/publicdomain/mark/1.0/	Umdatul Ahkam 005 Shk Modu Mustafa
-Tafsirkanuri01	353	25Mo	@ShkModuMustafa	http://creativecommons.org/publicdomain/mark/1.0/	Tafsir kanuri ye 01 Ramadan
-ramadan_1439ah_tafsir_shk_abubakar_maikano	352	476Mo	Sunna4u.blogspot.com		TSAGERO RAMADAN 1439 AH Tafsir. sheikh Abubakr Maikano Katsina (Sunna4u.Blogspot.Com)
-DAGASH26	329	30Mo	@ShkModuMustafa		Ramadan Tafsir 26 (1440) (2019) | Sheikh Muhammad Mustapha Albarnawi
-aud20191018wa0044	328	18Mo	Muhdalbarnawi.com	http://creativecommons.org/publicdomain/mark/1.0/	Alamun tashin qiyama
-muhammad-sani-umar-rlemo	319	313Mo	African Ulamas Project - Archives of Mul	https://creativecommons.org/licenses/by-nc-nd/4.0/	Ramadan Tafsir 27th May, 2017 (1438 AH) by Dr. Muhammad Sani Umar Rijiyar Lemo
-UmdatulAhkam007	305	6Mo		http://creativecommons.org/publicdomain/mark/1.0/	umdatul ahkam 007 Sheikh Muhammad Mustapha
-01RamadanHausaTafsirShkModuMustafa	291	30Mo		http://creativecommons.org/publicdomain/mark/1.0/	01 Ramadan Hausa Tafsir Sheikh Muhammad Mustapha
-aud_042819112731	264	30Mo		http://creativecommons.org/publicdomain/mark/1.0/	Babban Guzuri Kan Ramadan |Sheikh Muhammad Mustapha
-RamadanMubarak26	261	28Mo	@ShkModuMustafa		Ramadan Mubarak 26 (1440) (2019)
-babban-guzuri002	257	51Mo		http://creativecommons.org/publicdomain/mark/1.0/	Babban guzuri | Sheikh Muhammad Mustapha
-ajilo	253	45Mo	Ranar Mawakan Hausa	http://creativecommons.org/licenses/by-nc-nd/3.0/	Ajilon Waka
-RayuwanMusulmaiBayanRamadan	245	25Mo	Engr Abba Goni Kumshe		Rayuwan Musulmi Bayan Ramadan| Sheikh Muhammad Mustapha
-hamisu-breaker-raayi-official-audio-2025-256k	240	4Mo	Muawiya muzzy		Hamisu Breaker 1
-UmdatulAhkam006	236	7Mo		http://creativecommons.org/publicdomain/mark/1.0/	Umdatul Ahkam 006 Sheikh Muhammad Mustapha
-SheikhMuhammadMustapha09	231	242Mo	Engr Abba Goni		Sheikh Muhammad Mustapha 09
-albani_zaria_risaalah	231	227Mo	Ahamayed Moussa Aboubacar	https://creativecommons.org/licenses/by-nc-nd/4.0/	Karatun littafin Ar Risaalah - Shaikh Muhammadul Awwal Adam Albani Zaria
-BBCWS9.87MHz08FEB140630Z	215	32Mo	SWLing.com	http://creativecommons.org/licenses/by-nc-sa/3.0/	BBCWS 9.87 MHz 08 FEB 14 0630 Z
-AUD20190407WA0057	196	5Mo			umdatul Ahkam | Babin Cinikayya 04
-saeedsinger	196	64Mo	Saeed Singer	http://creativecommons.org/licenses/by-nc-nd/3.0/	Saeed Singer
-sahihalbukhari1_202001	195	102Mo	Masjid Ibn Baz Ghana		Sahīh Al Bukhāri Lesson 1
-AUD20190526WA0024	191	30Mo			Ramadan Tafsir 21 Hausa | Sheikh Muhammad Mustapha
-wakokin-bukar-na-ala-da-dankwairo	189	148Mo	Bukar Usman		Wakokin Bukar Usman Daga Ala da Dankwairon Biu
-Nurul.islam.Tsagero.1439	182	93Mo	sunna4u.blogspot.com		NURUL ISLAM TSAGERO MALAM ABUBAKAR MAIKANO RAMADAN 1439 (09023455501 SUNNA4U.BLOGSPOT.COM)
-alimakahoallahkayimanasauki	181	23Mo	Alhaji Ali Makaho		Ali Makaho( Allah Kayi Mana Sauki)
-RamadanMubarak29	176	33Mo	Engr Abba Goni Kumshe		Ramadan Mubarak 29(1440) (2019) | Sheikh Modu Mustapha Albarnawi
+=== aldjayi OR aldjai OR "al djayi" OR aljayi OR "al-jayi" OR aldjaii OR djayi : 0
 
-=== (tafsir OR tafseer OR wa'azi OR karatun) AND hausa AND mediatype:audio : 483
-0025SheikhJaafarTafseer	186558	9377Mo	The Light Of Islam		Sheikh Jaafar Complete Tafseer
-internet2sheikhalbanizaria	73474	1760Mo	Lightofislam.com.ng		Sheikh Albani Zaria Archive
-ramadan-tafseer-by-sheikh-jaafar-2005	43640	334Mo	Lightofislam.com.ng		2005 Complete Ramadan Tafseer By Sheikh Ja'afar
-001RamadanTafseerByDr.IsaAliPantami2019	29961	737Mo	The Light Of Islam		2019 Ramadan Tafseer By Dr. Isa Ali Pantami
-RamadanTafseerByDr.SaniUmar2019	29860	795Mo	The Light Of Islam		2019 Ramadan Tafseer By Dr. Sani Umar
-002AlBaqaraSheikhJaafar_20190131	27714	1079Mo	The Light Of Islam		Karatun Qur'ani - Sheikh Ja'afar Mahmud Adam
-RamadanTafseerBySheikhAhmadTijjaniGuruntum2019	20449	332Mo	The Light Of Islam		2019 Ramadan Tafseer By Sheikh Ahmad Tijjani Yusuf Guruntum
-002-tafseer-by-sheikh-albani-zaria-2008	17114	364Mo	Lightofislam.com.ng		Tafseer By Sheikh Albani Zaria 2008
-RamadanTafseerBySheikhAbdurrazaqYahyaHaifan2019	15503	772Mo	The Light Of Islam		Ramadan Tafseer By Sheikh Abdurrazaq Yahya Haifan 2019
-duniyarjinnudashaidanusheikhalbanizaria	12765	301Mo	Lightofislam.com.ng		Duniyar Jinnu Da Shaidanu Sheikh Albani Zaria
-ramadan-tafseer-by-sheikh-ahmad-tijjani-guruntum-2020	11797	333Mo	Lightofislam.com.ng		Ramadan Tafseer By Sheikh Ahmad Tijjani Guruntum 2020
-001-ramadan-tafseer-by-sheikh-abdurrazaq-yahya-haifan-2020	9734	549Mo	Lightofislam.com.ng		Ramadan Tafseer By Sheikh Abdurrazaq Yahya Haifan 2020
-ramadan-tafseer-by-dr.-sani-umar-2008	9510	322Mo	Lightofislam.com.ng		Ramadan Tafseer By Dr. Sani Umar 2008
-sheikhahmadtijjaniguruntum	8696	287Mo	Lightofislam.com.ng		Sheikh Ahmad Tijjani Yusuf Guruntum
-166WeeklyTafseerDr.SaniUmar	7738	1335Mo	The Light Of Islam		Weekly Tafseer By Dr. Muhammad Sani Umar
-004abaunahadithsbysheikhabdurrazakyahyahaifan	7627	1579Mo	Lightofislam.com.ng		Aba'una Hadiths By Sheikh Abdurrazak Yahya Haifan
-NightRamadanTafseerBySheikhMusaAsadussunnah2019	7172	472Mo	The Light Of Islam		2019 Night Ramadan Tafseer By Sheikh Musa Asadussunnah
-ramadan-tafseer-by-sheikh-isa-ali-pantami-2020	6322	421Mo	Lightofislam.com.ng		Ramadan Tafseer By Sheikh Isa Ali Pantami 2020
-003maidugurisheikhalbanizaria	6280	178Mo	Lightofislam.com.ng		Maiduguri by Sheikh Albani Zaria
-001-ramadan-tafseer-by-sheikh-kabiru-gombe	6162	560Mo	Lightofislam.com.ng		Ramadan Tafseer By Sheikh Kabiru Gombe 2020
-Khudubobindrabubakarsanibirninkudu	6060	223Mo	The Light Of Islam		Dr. Abubakar Sani Birnin Kudu Archive
-01RamadanTafseer2018ByDr.SaniUmar	5811	30Mo	Nibras's Blog		01 Ramadan Tafseer 2018 By Dr. Sani Umar
-18-gwani-isa	5748	1457Mo	Gwani Isa		18 Gwani Isa
-adabulmufradsheikhabdurrazaqyahyahaifan	5512	254Mo	Lightofislam.com.ng		Adabul Mufrad by Sheikh Abdurrazaq Yahya Haifan
-02RamadanTafseer2018ByDr.SaniUmar	5174	31Mo	Nibras's Blog		02 Ramadan Tafseer 2018 By Dr. Sani Umar
-TafsirSheikhJaafar	5104	2061Mo	AbdulQadir Muhammad Bello (ambgombe@gmai		COMPLETE TAFSIR SHEIKH JA'AFAR MAHMUD ADAM
-lalacewartarbiyyahsheikhalbanizaria	4942	65Mo	Lightofislam.com.ng		Lalacewar Tarbiyyah by Sheikh Albani Zaria
-sheikhmusaasadussunnah	4566	762Mo	Lightofislam.com.ng		Sheikh Musa Yusuf Asadussunnah
-sharhusulilimanbysheikhjaafarmahmudadam	4513	147Mo	Lightofislam.com.ng		Sharh Usulil Iman By Sheikh Ja'afar Mahmud Adam
-amadanTafseerBySheikhMusaAsadussunnah2019	4435	347Mo	The Light Of Islam		2019 Evening Ramadan Tafseer By Sheikh Musa Asadussunnah
-001-ramadan-tafseer-by-dr.-sani-umar-2020	4422	232Mo	Lightofislam.com.ng		Ramadan Tafseer By Dr. Sani Umar 2020
-ramadan-tafseer-by-dr.-abdallah-usman-gadon-kaya-2020	4272	242Mo	Lightofislam.com.ng		Ramadan Tafseer By Dr. Abdallah Usman Gadon Kaya 2020
-03RamadanTafseer2018ByDr.SaniUmar	4267	32Mo	Nibras's Blog		03 Ramadan Tafseer 2018 By Dr. Sani Umar
-01Sh.AbdurrazaqYahyaHaifan2018RamadanTafseer	4087	34Mo	Nibras's Blog		01 Sh. Abdurrazaq Yahya Haifan 2018 Ramadan Tafseer
-hausa-ramadan-tafseer-2024-sheikh-muhammad-bin-uthman-kano	4041	287Mo			Hausa Ramadan Tafseer 2024 Sheikh Muhammad Bin Uthman Kano
-rayuwarauredr.saniumar	4001	475Mo	The Light Of Islam		Dr. Sani Umar Archive
-04RamadanTafseer2018ByDr.SaniUmar	3927	30Mo	Nibras's Blog		04 Ramadan Tafseer 2018 By Dr. Sani Umar
-shamailmuhammadiyyash.isaaliyupantami	3838	863Mo	Lightofislam.com.ng		Shama'ilul Muhammadiyya by Sheikh Isa Aliyu Pantami
-RamadanTafseerByBinUthmanKano2019	3770	129Mo	The Light Of Islam		Ramadan Tafseer By Bin Uthman Kano 2019
-05RamadanTafseer2018ByDr.SaniUmar	3739	30Mo	Nibras's Blog		05 Ramadan Tafseer 2018 By Dr. Sani Umar
-07RamadanTafseer2018ByDr.SaniUmar	3591	31Mo	Nibras's Blog		07 Ramadan Tafseer 2018 By Dr. Sani Umar
-06RamadanTafseer2018ByDr.SaniUmar	3555	30Mo	Nibras's Blog		06 Ramadan Tafseer 2018 By Dr. Sani Umar
-08RamadanTafseer2018ByDr.SaniUmar	3530	31Mo	Nibras's Blog		08 Ramadan Tafseer 2018 By Dr. Sani Umar
-001-ramadan-tafseer-by-sheikh-bin-uthman-kano-hausa-2020	3509	235Mo	Lightofislam.com.ng		Ramadan Tafseer By Sheikh Bin Uthman Kano Hausa 2020
-02Sh.AbdurrazaqYahyaHaifan2018RamadanTafseer	3487	34Mo	Nibras's Blog		02 Sh. Abdurrazaq Yahya Haifan 2018 Ramadan Tafseer
-001wasiyoyigomasheikhahmadtijjaniguruntum	3427	289Mo	Lightofislam.com.ng		Sheikh Ahmad Tijjani Guruntum Archive
-001-ramadan-tafseer-by-dr.-mansur-isa-yelwa-2020	3416	419Mo	Lightofislam.com.ng		Ramadan Tafseer By Dr. Mansur Isa Yelwa 2020
-RamadanTafseerByDr.MansurSokoto2019	3408	386Mo	The Light Of Islam		2019 Ramadan Tafseer By Dr. Mansur Sokoto
-RamadanTafseerByDr.AbubakarMhdSaniBKudu2019	3346	619Mo	The Light Of Islam		Ramadan Tafseer By Dr. Abubakar Mhd Sani B Kudu 2019
-01RamadanTafseer2018ByDr.AhmadGumi	3070	21Mo	Nibras's Blog		01 Ramadan Tafseer 2018 By Dr. Ahmad Gumi
-weeklytafseerbydr.idrisbauchi01november2019	2988	420Mo	Lightofislam.com.ng		Weekly Tafseer By Dr. Idris Abdul-Azeez Bauchi
-03Sh.AbdurrazaqYahyaHaifan2018RamadanTafseer	2919	36Mo	Nibras's Blog		03 Sh. Abdurrazaq Yahya Haifan 2018 Ramadan Tafseer
-04Sh.AbdurrazaqYahyaHaifan2018RamadanTafseer	2902	34Mo	Nibras's Blog		04 Sh. Abdurrazaq Yahya Haifan 2018 Ramadan Tafseer
-01Dr.IsaAliPantamiRamadanTafseer2018	2812	33Mo	Nibras's Blog		01 Dr. Isa Ali Pantami Ramadan Tafseer 2018
-khudubarjumaadr.idrisabdulazeezbauchi01112019	2765	445Mo	Lightofislam.com.ng		Hudubobin Juma'ah by Sheikh Idris Abdul-Azeez Bauchi
-01SheikhBinUthmanKanoRamadanTafseer2018	2691	49Mo	Nibras's Blog		01 Sheikh Bin Uthman Kano Ramadan Tafseer 2018
-suratulqalamsh.ahmadtijjaniyusufguruntum	2655	146Mo	Lightofislam.com.ng		Tafseer Suratul Qalam Sh. Ahmad Tijjani Yusuf Guruntum
-dr.abdallahusmangadonkayaarchive	2652	261Mo	Lightofislam.com.ng		Dr. Abdallah Usman Gadon Kaya Archive
-talkhissifatusalatsheikhalbanizaria	2637	225Mo	Lightofislam.com.ng		Talkhis Sifatu Salatinnabiy by Sheikh Albani Zaria
-Hudubahbybinuthman	2598	224Mo	Lightofislam.com.ng		Sheikh Bin Uthman Kano Archive
-hanyoyintsiradr.mansursokoto	2527	254Mo	The Light Of Islam		Dr. Mansur Sokoto Archive
-05Sh.AbdurrazaqYahyaHaifan2018RamadanTafseer	2465	31Mo	Nibras's Blog		05 Sh. Abdurrazaq Yahya Haifan 2018 Ramadan Tafseer
-lamiyyatuibntaimiyyahsheikhjaafar	2434	61Mo	Lightofislam.com.ng		Lamiyyatu Ibn Taimiyyah Sheikh Ja'afar
-Lightofislam-podcast	2408	58Mo	Lightofislam.com.ng		Lightofislam.com.ng Podcast
-ramadan-tafseer-by-dr.-bashir-aliyu-umar-2020	2365	406Mo	Lightofislam.com.ng		Ramadan Tafseer By Dr. Bashir Aliyu Umar 2020
-01RamadanTafseer2018BySheikAhmadTijjaniGuruntum	2336	31Mo	Nibras's Blog		01 Ramadan Tafseer 2018 By Sheik Ahmad Tijjani Guruntum
-011Sh.AbdurrazaqYahyaHaifan2018RamadanTafseer	2333	37Mo	Nibras's Blog		011 Sh. Abdurrazaq Yahya Haifan 2018 Ramadan Tafseer
-ramadan-tafseer-by-dr.-ahmad-buk-2010	2328	241Mo	Lightofislam.com.ng		Ramadan Tafseer By Dr. Ahmad Buk 2010
-018Sh.AbdurrazaqYahyaHaifan2018RamadanTafseer	2326	36Mo	Nibras's Blog		018 Sh. Abdurrazaq Yahya Haifan 2018 Ramadan Tafseer
-06Sh.AbdurrazaqYahyaHaifan2018RamadanTafseer	2305	32Mo	Nibras's Blog		06 Sh. Abdurrazaq Yahya Haifan 2018 Ramadan Tafseer
-027RamadanTafseer2018ByDr.SaniUmar	2274	28Mo	Nibras's Blog		027 Ramadan Tafseer 2018 By Dr. Sani Umar
-09Sh.AbdurrazaqYahyaHaifan2018RamadanTafseer	2208	38Mo	Nibras's Blog		09 Sh. Abdurrazaq Yahya Haifan 2018 Ramadan Tafseer
-08Sh.AbdurrazaqYahyaHaifan2018RamadanTafseer	2124	36Mo	Nibras's Blog		08 Sh. Abdurrazaq Yahya Haifan 2018 Ramadan Tafseer
-07Sh.AbdurrazaqYahyaHaifan2018RamadanTafseer	2094	37Mo	Nibras's Blog		07 Sh. Abdurrazaq Yahya Haifan 2018 Ramadan Tafseer
-010Sh.AbdurrazaqYahyaHaifan2018RamadanTafseer	2045	28Mo	Nibras's Blog		010 Sh. Abdurrazaq Yahya Haifan 2018 Ramadan Tafseer
-001-ramadan-tafseer-by-sheikh-musa-asadussunnah-2020	2036	237Mo	Lightofislam.com.ng		Ramadan Tafseer By Sheikh Musa Asadussunnah 2020
-RamadanTafseerByDr.AbdallahGKaya	2004	290Mo	The Light Of Islam		2019 Ramadan Tafseer By Dr. Abdallah G Kaya
-001-ramadan-tafseer-by-dr.-mansur-sokoto-2020	2002	220Mo	Lightofislam.com.ng		Ramadan Tafseer By Dr. Mansur Sokoto 2020
-002RamadanTafseerByDr.IbrahimJalo2019	1970	253Mo	The Light Of Islam		2019 Ramadan Tafseer By Dr. Ibrahim Jalo Jalingo
-027Sh.AbdurrazaqYahyaHaifan2018RamadanTafseer	1945	36Mo	Nibras's Blog		027 Sh. Abdurrazaq Yahya Haifan 2018 Ramadan Tafseer
+=== "moussa garoua" OR "musa garoua" OR "moussa garwa" : 0
 
-=== (jaafar OR "ja'afar" OR albani zaria OR daurawa OR pantami OR gumi OR rijiyar) AND mediatype:audio : 520
-0025SheikhJaafarTafseer	186558	9377Mo	The Light Of Islam		Sheikh Jaafar Complete Tafseer
-Mishary_Al-Afasy_1424_uploaded-by_Abu-Ahmad-S-A	115948	962Mo	أبو أحمد السلفي الأثري		مشاري العفاسي. المصحف المرتل كاملا
-06_20210313	115399	240Mo			Mudzidzi asingadi
-internet2sheikhalbanizaria	73474	1760Mo	Lightofislam.com.ng		Sheikh Albani Zaria Archive
-ramadan-tafseer-by-sheikh-jaafar-2005	43640	334Mo	Lightofislam.com.ng		2005 Complete Ramadan Tafseer By Sheikh Ja'afar
-001RamadanTafseerByDr.IsaAliPantami2019	29961	737Mo	The Light Of Islam		2019 Ramadan Tafseer By Dr. Isa Ali Pantami
-002AlBaqaraSheikhJaafar_20190131	27714	1079Mo	The Light Of Islam		Karatun Qur'ani - Sheikh Ja'afar Mahmud Adam
-kalifornia-320kb-mshary-al3afasy-quran-high-quality	19665	9188Mo			العفاسي ختمة كاليفورنيا 1430
-Ahmed-Alnufais	17784	1182Mo	koonoz.info		المصحف المرتل بصوت القاريء أحمد النفيس
-002-tafseer-by-sheikh-albani-zaria-2008	17114	364Mo	Lightofislam.com.ng		Tafseer By Sheikh Albani Zaria 2008
-duniyarjinnudashaidanusheikhalbanizaria	12765	301Mo	Lightofislam.com.ng		Duniyar Jinnu Da Shaidanu Sheikh Albani Zaria
-015MukhtasaruSiratirRasoulSheikhJaafar	10208	1105Mo	The Light Of Islam		Mukhtasaru Siratir Rasoul Sheikh Ja'afar
-001-ramadan-tafseer-2024-sheikh-isa-ali-pantami_20240311	9400	360Mo			Ramadan Tafseer 2024 Sheikh Isa Ali Pantami
-ramadan-tafseer-2024-dr.-muhammad-sani-umar-rijiyar-lemo	7891	404Mo			Ramadan Tafseer 2024 Dr. Muhammad Sani Umar Rijiyar Lemo
-sheikh-jaafar-mahmud-adam	6891	215Mo	Lightofislam.com.ng		Sheikh Ja'afar Mahmud Adam Archive
-FatawowinRahamaByDr.Sani15022019	6565	2279Mo	The Light Of Islam		Fatawowin Rahama By Dr. Sani Umar Rijiyar Lemu
-ramadan-tafseer-by-sheikh-isa-ali-pantami-2020	6322	421Mo	Lightofislam.com.ng		Ramadan Tafseer By Sheikh Isa Ali Pantami 2020
-003maidugurisheikhalbanizaria	6280	178Mo	Lightofislam.com.ng		Maiduguri by Sheikh Albani Zaria
-19-02-po-sledu-zverya	6245	500Mo			Pamugwagwa wechikara
-TafsirSheikhJaafar	5104	2061Mo	AbdulQadir Muhammad Bello (ambgombe@gmai		COMPLETE TAFSIR SHEIKH JA'AFAR MAHMUD ADAM
-ebngmazwebnwerdananabygaafer	4973	355Mo			جمع رواية ابن جماز و رواية ابن وردان عن ابوجعفر *** جمع روايتي ابو جعفر *** للشيخ محمود عط
-lalacewartarbiyyahsheikhalbanizaria	4942	65Mo	Lightofislam.com.ng		Lalacewar Tarbiyyah by Sheikh Albani Zaria
-sheikh-jaafar-mahmud-adam_202006	4830	125Mo	lightofislam.com.ng		Muhadarorin Sheikh Ja'afar Mahmud Adam
-sharhusulilimanbysheikhjaafarmahmudadam	4513	147Mo	Lightofislam.com.ng		Sharh Usulil Iman By Sheikh Ja'afar Mahmud Adam
-WheatonPermaculture136GaiasGardenChapter9	4484	43Mo	Paul Wheaton	http://creativecommons.org/licenses/by-nc-nd/3.0/	Wheaton permaculture 136 gaia's garden chapter 9
-16-greis	3948	709Mo			kuvhima kwemusango
-shamailmuhammadiyyash.isaaliyupantami	3838	863Mo	Lightofislam.com.ng		Shama'ilul Muhammadiyya by Sheikh Isa Aliyu Pantami
-ghost-and-pals-music-archive	3435	8872Mo	GHOST and Pals	https://creativecommons.org/licenses/by-nc-nd/4.0/	GHOST and Pals - Music Archive
-06.-twelve-winged-dark-seraphim-super-gen-boga-1	3423	1824Mo			Gumi neMapapiro Akasviba Seraphim - Super Gene raMwari 1
-matsalolinauredamaauratasheikhaminuibrahimdaurawa	3235	353Mo	Lightofislam.com.ng		Sheikh Aminu Ibrahim Daurawa Archive
-01RamadanTafseer2018ByDr.AhmadGumi	3070	21Mo	Nibras's Blog		01 Ramadan Tafseer 2018 By Dr. Ahmad Gumi
-way2sona_20151222_2035	2845	2633Mo			المصحف المرتل برواية خلف عن حمزة للقارئ عبد الرشيد بن شيخ علي صوفي
-01Dr.IsaAliPantamiRamadanTafseer2018	2812	33Mo	Nibras's Blog		01 Dr. Isa Ali Pantami Ramadan Tafseer 2018
-Mishary_Al-afasy_Khatma_Mounaa_2017	2682	3255Mo			الختمة المنوعة - مشاري العفاسي - ١٤٣٨هـ - ٢٠١٧م - جودة عالية
-talkhissifatusalatsheikhalbanizaria	2637	225Mo	Lightofislam.com.ng		Talkhis Sifatu Salatinnabiy by Sheikh Albani Zaria
-003-ramadan-tafseer-by-sheikh-jaafar-2005	2633	13Mo			003 Ramadan Tafseer By Sheikh Ja'afar 2005
-lamiyyatuibntaimiyyahsheikhjaafar	2434	61Mo	Lightofislam.com.ng		Lamiyyatu Ibn Taimiyyah Sheikh Ja'afar
-nws.bpm0179	2403	558Mo	mb3		[nws.bpm0179] who the Fred is Fuck?
-KashfuShubuhatbySheikhJaafar	2372	114Mo	The Light Of Islam		Kashfu Shubuhat By Sheikh Ja'afar
-ahkamuljanaizbysheikhjaafarmahmudadam	2372	207Mo	Lightofislam.com.ng		Ahkamul Jana'iz By Sheikh Ja'afar Mahmud Adam
-01._20211011	2348	408Mo	くるりんご (Kururingo)		[LOSSLESS] Kururingo (くるりんご) - Kurukuru Ringo (くるくるりんご)
-01-rubi-govorila	2239	425Mo			Kufungidzira vasikana
-Alqatami_00	2211	1279Mo			ناصر القطامي
-ramadan-tafseer-2024-sheikh-aminu-ibrahim-daurawa	2145	278Mo			Ramadan Tafseer 2024 Sheikh Aminu Ibrahim Daurawa
-VocaloidDubstepFatalForceCrusherWildfireGumiEnglish	2032	14Mo			▶ Vocaloid Dubstep ★ Fatal Force Crusher Wildfire ( Gumi English)
-Jaafar_Mahmoud_Adam_uP_bY_mUSLEm_623	2005	2638Mo	تم رفع هذه المادة بواسطة مُسلم التونسي_u		المصحف المرتل للقارئ جعفر محمود آدم
-01_20211011_20211011	1961	341Mo	くるりんご (Kururingo)		[LOSSLESS] Kururingo (くるりんご) - Fuwafuwa Ringo (ふわふわりんご)
-ramadan-tafseer-by-sheikh-aminu-ibrahim-daurawa-2020	1786	30Mo	Lightofislam.com.ng		Ramadan Tafseer By Sheikh Aminu Ibrahim Daurawa 2020
-KashfuShubuhatSheikhJaafar	1727	11Mo	The Light Of Islam		Kashfu Shubuhat-Sheikh Ja'afar
-02Dr.IsaAliPantamiRamadanTafseer2018	1659	36Mo	Nibras's Blog		02 Dr. Isa Ali Pantami Ramadan Tafseer 2018
-08Dr.IsaAliPantamiRamadanTafseer2018	1658	35Mo	Nibras's Blog		08 Dr. Isa Ali Pantami Ramadan Tafseer 2018
-dr.rabiurijiyarlemuarchive	1638	101Mo	Lightofislam.com.ng		Dr. Muhammad Rabi'u Rijiyar Lemu Archive
-fatawoyin-rahama-by-dr.-sani-umar-rijiyar-lemo-13th-january-2024	1630	155Mo			Fatawoyin Rahama By Dr. Sani Umar Rijiyar Lemo 2024
-09Dr.IsaAliPantamiRamadanTafseer2018	1607	35Mo	Nibras's Blog		09 Dr. Isa Ali Pantami Ramadan Tafseer 2018
-Vocaloid-Best-Blue	1589	727Mo	Sony Music		VOCALOID BEST from Nico Nico Douga 【Blue】
-CyberDivaBlankSpacebyV3xman2	1553	46Mo			Vocaloid covers of pop songs
-PISSSPEARS-Melanie	1497	679Mo			PISS SPEARS - Melanie is just an innocent teenage girl who really likes Gumi but not like 
-hudubahbysheikhjaafarmahmudadam	1470	1241Mo	Lightofislam.com.ng		Hudubobin Sheikh Ja'afar Mahmud Adam
-Vocaloid-Best-Red	1456	712Mo	Sony Music		VOCALOID BEST from Nico Nico Douga【Red】
-03Dr.IsaAliPantamiRamadanTafseer2018	1454	35Mo	Nibras's Blog		03 Dr. Isa Ali Pantami Ramadan Tafseer 2018
-012Dr.IsaAliPantamiRamadanTafseer2018	1449	34Mo	Nibras's Blog		012 Dr. Isa Ali Pantami Ramadan Tafseer 2018
-010Dr.IsaAliPantamiRamadanTafseer2018	1437	35Mo	Nibras's Blog		010 Dr. Isa Ali Pantami Ramadan Tafseer 2018
-agenda_baru	1419	1Mo			agenda baru
-Jaafar_Mahmoud_Adam_uP_bY_mUSLEm	1411	1675Mo	uP_bY_mUSLEm		Jaafar_Mahmoud_Adam_uP_bY_mUSLEm
-Ibn_gamaz_ibi_jaafar	1410	2570Mo	Moftah Elsaltany		القران الكريم برواية ابن جماز عن ابي جعفر - القارئ مفتاح السلطني
-011Dr.IsaAliPantamiRamadanTafseer2018	1387	36Mo	Nibras's Blog		011 Dr. Isa Ali Pantami Ramadan Tafseer 2018
-cikajisheikhalbanizaria	1385	184Mo	Lightofislam.com.ng		Bazasu gushe ba suna yakarku - Sheikh Albani Zaria
-ramadan-tafseer-2023-sheikh-isa-ali-pantami	1371	237Mo			Ramadan Tafseer 2023 Sheikh Isa Ali Pantami
-04Dr.IsaAliPantamiRamadanTafseer2018	1364	26Mo	Nibras's Blog		04 Dr. Isa Ali Pantami Ramadan Tafseer 2018
-05Dr.IsaAliPantamiRamadanTafseer2018	1332	36Mo	Nibras's Blog		05 Dr. Isa Ali Pantami Ramadan Tafseer 2018
-Jaafar_Adam_uP_bY_mUSLEm	1329	1675Mo	تم رفع هذه المادة بواسطة مُسلم التونسي_u		المصحف المرتل للقارئ جعفر محمود آدم
-addini-da-rayuwa-sheikh-aminu-ibrahim-daurawa	1309	32Mo	Lightofislam.com.ng		Addini Da Rayuwa Sheikh Aminu Ibrahim Daurawa
-06Dr.IsaAliPantamiRamadanTafseer2018	1287	45Mo	Nibras's Blog		06 Dr. Isa Ali Pantami Ramadan Tafseer 2018
-013Dr.IsaAliPantamiRamadanTafseer2018	1273	34Mo	Nibras's Blog		013 Dr. Isa Ali Pantami Ramadan Tafseer 2018
-01_20211011_20211011_2024	1234	388Mo	くるりんご (Kururingo)		[LOSSLESS] Kururingo (くるりんご) - Kirakira Ringo (きらきらりんご)
-018Dr.IsaAliPantamiRamadanTafseer2018	1233	35Mo	Nibras's Blog		018 Dr. Isa Ali Pantami Ramadan Tafseer 2018
-07Dr.IsaAliPantamiRamadanTafseer2018	1232	35Mo	Nibras's Blog		07 Dr. Isa Ali Pantami Ramadan Tafseer 2018
-020Dr.IsaAliPantamiRamadanTafseer2018	1212	33Mo	Nibras's Blog		020 Dr. Isa Ali Pantami Ramadan Tafseer 2018
-025Dr.IsaAliPantamiRamadanTafseer2018	1205	29Mo	Nibras's Blog		025 Dr. Isa Ali Pantami Ramadan Tafseer 2018
-015Dr.IsaAliPantamiRamadanTafseer2018	1178	35Mo	Nibras's Blog		015 Dr. Isa Ali Pantami Ramadan Tafseer 2018
+=== (fulfulde OR foulfoulde OR fulfude OR foulfouldé OR fulbe OR peul) AND mediatype:audio : 5192
+rabiea3568356835683568865	audio	19486370	1942Mo		مصحف بندر بليلة مقسم صفحات
+rabieaaa22472437243724327447	audio	5318811	2978Mo		مصحف محمد سايد رواية ورش مقسم صفحات
+quran-full-114-sorah---by-abd-alrahman-gamal-al3ousy-high-quality-224kb-----mp3	audio	5236628	3791Mo		القران كاملا ل عبد الرحمن جمال العوسي - جودة رهيبة جداا
+rabieaaa2018_yahoo_18544333565	audio	2770397	946Mo		مصحف سعد الغامدى مقسم أجزاء حجم صغير
+483568356837_gmail_001	audio	2295295	2565Mo		فارس عباد mp3
+rabieaaa2039_57777777	audio	2250616	2604Mo		quran full mp3 pages 604 part by yaser alqorashy by rewayt sho3bah 3n 3asem
+rabieaaa2001453723457247247	audio	1861354	2319Mo		مصحف المعصراوي مقسم صفحات
+rabiea1235123512512351235	audio	856286	3279Mo		مشاري العفاسي
+rabieaaa3248324823482438324	audio	781989	1210Mo		محمد اللحيدان مصحف مقسم صفحات
+rabieaaa2019_yahoo_002458947	audio	541108	3085Mo		مصحف أيمن رشدي سويد 114 سورة
+rabieaaa2017_yahoo_5496566666666666666	audio	361968	1186Mo		مصحف القران مقسم صفحات المصحف تلاوة ياسين الجزائري رواية ورش عن نافع
+rabieaaa2474257457457485243572457247	audio	278630	2925Mo		مصحف الحصري نسخة الإذاعة مرتل قصر المنفصل مقسم صفحات
+rabieaaa2018_yahoo_002236352	audio	175033	1998Mo		عبد الباسط عبد الصمد مصحف مجود نسخة الاذاعة بدون صدى
+rabieaaa2017_yahoo_5335455898	audio	151417	1588Mo		مصحف الحصري رواية ورش مقسم صفحات
+6835683568356853gmail_001	audio	151050	2656Mo		طارق عبد الغني دعوب مصحف رواية قالون مقسم صفحات
+rabieaaa2018_yahoo_00234784537856	audio	149593	3563Mo		مصحف ماهر المعيقلي بجودة خيالية 256 ك 114 سورة
+rabieaaa2018_yahoo_00132463266	audio	145933	1403Mo		محمد صديق المنشاوي المصحف المجود الحفلات و التسجيلات الخارجية 73 حفله تلاوات خاشعة mp3
+MRf3at2335683568356835683586	audio	121686	570Mo		محمد رفعت المصحف المجود 52 تلاوات خاشعة رهيبة من موقع اسلام ويب mp3
+rabieaaa2018_yahoo_017132462364	audio	113496	576Mo		محمود على البنا مصحف حفلات مجودة تسجيلات خارجية صوتية mp3
+rabieaaa2016_yahoo_232366002_201505	audio	102557	6503Mo		مصحف محمود خليل الحصري رواية قالون معلم ترديد الاطفال 114 سورة بجودة عالية
+rabieaaa2015_yahoo_002132432	audio	97803	1598Mo		مصحف فاتح تشولاك التركي 114 سورة برابط واحد
+853685368356853683568356853683568	audio	97749	2040Mo		مصحف احمد محمد طاهر السوداني 114 سورة كاملا المصحف المرتل رواية حفص عن عاصم جودة عالية من 
+rabieaaa2018_yahoo_28888586	audio	96077	2302Mo		مصحف العجمى مقسم أجزاء جوده رهيبه
+72474274204_yahoo_002	audio	89072	4190Mo		مصحف محمود خليل الحصري مرتل المصحف المرتل برواية و قراءة حفص عن عاصم مع قصر المد المنفصل م
+002AlBa2472457247687472472724247247247247247	audio	86100	3963Mo		مصحف عبد الرحمن السديس المصحف المرتل الكامل 114 سورة بجودة رهيبة 320 ك ب نسخة جديدة اصدار 
+roqya--____--_____---113	audio	81944	9084Mo	شبكة ربيع الفردوس الاعلى	الرقية الشرعية 113 اصدار لاجمل الاصوات رقية شرعية من السحر و العين و المس و الحسد - اضغط ع
+245742574574274224574254201	audio	80182	2604Mo		مصحف ياسر القرشي ب رواية شعبة مقسم صفحات
+rabieaaa2019_yaho125125o_23	audio	74472	5606Mo		عبد الباسط مجود مصحف مقسم أجزاء بجودة رهيبة
+rabiea12512512451245154231	audio	68420	954Mo		تلاوات خاشعة 110 تلاوه
+rabieaaa2017_yahoo_22178787666666666666	audio	67076	2349Mo		مصحف القران مقسم صفحات المصحف تلاوة محمد عبد الكريم
+rabieaaa2043_gmail_01346134613461346134601	audio	66823	2381Mo		مصحف يوسف نوح أحمد رواية شعبة مقسم صفحات mp3
+rabieaaa2017_yahoo_12389	audio	65240	2733Mo		مصحف القران مقسم صفحات المصحف تلاوة محمود خليل الحصري رواية قالون عن نافع
+rabieaaa2018_yahoo_00223525	audio	57628	2619Mo		المنشاوى المصحف المرتل نسخة راديو الإذاعة المصرية بدون صدى 114 سورة جودة خيالية
+rabieaaa2017_yahoo_581555556	audio	56567	2104Mo		مصحف القران مقسم صفحات الحصري مجود
+rabieaaa2016_yahoo_01688	audio	55824	12Mo		احمد ابو طالب السوهاجي المصحف المجود سورتان الحجر و النحل
+rabieaaa20443643146134613463146346364346134613465_yahoo_00113	audio	54836	2423Mo		محمد صفا برواية ورش عن نافع مصحف القرآن المصحف المرتل مجزأ مقسم صفحات كامل 604 صفحة على طب
+rabieaaa2015_yahoo_1355	audio	52538	1616Mo		مصحف محمد سايد رواية ورش من طريق الازرق مقسم احزاب كامل 60 حزب
+rabi23462363265eaaa2020_yahoo_65	audio	49809	1873Mo		قصص الانبياء محمد عبد الملك 77 مقطع mp3
+rabieaaa2015_yahoo_144646	audio	49716	20057Mo		عبد الباسط تلاوات خاشعة حفلات مجودة 547 تلاوة و حفلة
+rabie4327347aaa2028_yahoo_001	audio	45822	1940Mo		مصحف بندر بليلة امام الحرم المكي مقسم صفحات على طبعة المدينة كامل 604 صفحة جودة عالية mp3
+2435724525242002_yahoo_001	audio	43530	2717Mo		مصحف محمد عبد الكريم رواية ورش عن نافع من طريق الأصبهاني مقسم صفحات 604 صفحة كامل طبعة الم
+1346134613461346341_gmail_001	audio	40193	3171Mo		مصحف الحصري مرتل مقسم ارباع بجودة رهيبة mp3
+rabieaa23462362635235623656352	audio	39523	1986Mo		مصحف عبدالرزاق الدليمي المصحف المجود مقسم صفحات 604 صفحة طبعة المدينة بجودة رهيبة
+rabieaaa2019_yahoo_0022435724357_201505	audio	39371	1480Mo		مصحف احمد عيسى المعصراوي 114 سورة
+213562a2004_yahoo_001	audio	38542	3199Mo		عبد العزيز صالح الزهراني مصحف القرآن المصحف المرتل مقسم صفحات كامل 604 صفحة طبعة المدينة ج
+5478056804687070	audio	38245	682Mo		مصحف تراويح الحرم النبوى المدنى 2015 عام 1436 رمضان 114 سورة حجم صغير متجدد mp3
+rabieaaa2017_yahoo_001899999	audio	36531	2175Mo		مصحف عبد الله خياط مقسم صفحات بجودة رهيبة 128 ك
+1234621346213461234613461346	audio	35611	17992Mo		صوتي جميع مصاحف و تلاوات و ادعية خاشعة من رمضان 1436 عام 2015 لكل قراء العالم mp3
+rabieaaa2019_y46246426ahoo_23	audio	34151	985Mo		عبدالله بصفر مصحف مرتل مقسم أجزاء
+rabieaaa2019_yahoo_0023264375	audio	33693	1876Mo		مصحف الحصري مرتل و مسرع حدر لسهولة الحفظ و المراجعة 114 سورة
+rabieaaa2017_yahoo_00178777777	audio	32893	3171Mo		مصحف احمد اللحدان الدوسري مقسم صفحات بجودة رهيبة 128 ك
+742372434272432002_yahoo_001	audio	32732	2319Mo		مصحف احمد عيسى المعصراوي مقسم صفحات mp3
+rab404794594794599	audio	32077	2765Mo		مصحف محمد عمر الجناينى رواية قالون عن نافع مقسم صفحات بجودة عالية على طبعة المدينة 599 صفح
+24724724742701_201603	audio	31704	2764Mo		عبد الكريم الدغوش مصحف كامل مقسم صفحات 604 صفحة طبعة المدينة جودة رهيبة 128 ك ب قراءة و رو
+rabieaaa2017_yahoo_00144545	audio	31424	3517Mo		مصحف يوسف نوح احمد رواية البزي عن ابن كثير مقسم صفحات بجودة رهيبة 128 ك
+32586356835683568938563856858656845845	audio	31261	1539Mo		مصحف الحرم المكي 1436 النسخة الاصلية انتاج رئاسة الحرمين بالتعان مع مؤسسة أثير الحجاز للصو
+rabieaa2362363263663	audio	30548	3134Mo		ياسر سلامه مصحف مرتل بجودة رهيبة مقسم صفحات 604 صفحة طبعة المدينة كامل بطريقة الترتيل وليس
+2578773783443834784387	audio	30496	1260Mo		محمد ايت الحسن اوعلي مصحف رواية ورش 114 سورة بجودة رهيبة برابط واحد نسخة موقع طريق الاسلام
+rabieaaa2017_yahoo_0787877777777777	audio	29623	105Mo		عبد الله بصفر مصحف معلم جزء عم
+rabiea243572457245724357275	audio	29580	2758Mo		جمال شاكر عبدالله مصحف مقسم صفحات جودة رهيبة كامل 604 صفحة طبعة المدينة mp3
+rabieaaa2030_yahoo_3346346346001	audio	29284	2844Mo		عبد الباسط عبد الصمد المصحف المرتل نسخة الإذاعة السعودية مقسم صفحات mp3
+rabieaaa243572437247247	audio	28523	1226Mo		محمد اللحيدان
+rabieaaa2017_yahoo_0018999999999	audio	28252	2238Mo		مصحف عبد المحسن القاسم مقسم صفحات بجودة رهيبة 128 ك
+rabieaaa2016_yahoo_002_201503	audio	28064	6483Mo		الحصري رواية قالون المصحف المعلم ترديد الاطفال مقسم سور 114 سورة بجودة رهيبة
+rabieaaa201923457234574_yahoo_02	audio	27785	7687Mo		عبد الباسط مصحف معلم ترديد الاطفال جودة رهيبة الا الفاتحة ل بصفر
+568356835683yahoo_001	audio	27015	2249Mo		عادل الكلبانى المصحف المرتل مجزأ مقسم صفحات 604 صفحة كامل طبعة المدينة جودة رهيبة mp3
+rabieaaa2015_yahoo_S002888	audio	26932	1949Mo		مصحف أدم بوصخرة رواية ورش عن نافع 113 سوره
+rabieaaa257575555002_yahoo_001	audio	26930	2319Mo		مصحف أحمد عيسى المعصراوي مقسم صفحات 604 صفحة طبعة المدينة رواية حفص عن عاصم المصحف المرتل 
+572472474204_yahoo_001	audio	26920	2777Mo		مصحف عبد الرحمن جمال العوسي مقسم صفحات طبعة المدينة كامل 604 صفحة جودة رهيبة mp3
+AyatV1.24357234724733247	audio	26599	2196Mo		برنامج آيات المصحف الإلكتروني المعلم صوت و صورة
+rabieaaa2019_yahoo_0473783568	audio	26094	239Mo		مصحف نايف سعد الفيصل 38 سورة جودة عالية نسخة طريق الاسلام
+rabieaaa2017_yahoo_012788888888	audio	25365	61Mo		محمد جبريل المصحف المجود 8 تلاوات خاشعة
+rabieaaa20247247247247457	audio	25068	2695Mo		مصحف محمد سايد رواية ورش مقسم صفحات كامل 604 صفحة طبعة المدينة جودة رهيبة mp3
+5683568356837_yahoo_001	audio	23749	1561Mo		مصحف يوسف نوح احمد رواية قالون عن نافع القرآن مجزأ مقسم صفحات كامل 604 صفحة طبعة المدينة ج
+rabieaaa2019_347347ahoo_002	audio	23653	1005Mo		المنشاوي المصحف المرتل مسرع حدر نسخة مسرعه مصحف الحدر الالكتروني 114 سورة
+rabieaaa2017_yahoo_0016777765	audio	23171	2827Mo		مصحف نادر القلاوي مقسم صفحات بجودة رهيبة 128 ك
+rabieaaa2015_yahoo_02443276	audio	23066	211Mo		مصحف القارئ الشيخ محمد يوسف 47 سورة و تلاوات خاشعة برابط واحد
+rabieaaa200356835636583563566538	audio	21672	2283Mo		مصحف التراويح تراويح الحرم المكي رمضان صلاة القيام عام 1436 هجري 2015 ميلادي المصحف مقسم م
+rabieaaa2016_yahoo_0169	audio	21215	619Mo		مصحف احمد صابر العايدي 42 سورة برابط واحد
+rabie2347243742747aa2027_yahoo_125	audio	20837	1944Mo		الحصري المصحف المعلم بدون ترديد الاطفال مقسم صفحات طبعة المدينة 604 صفحة كامل
 
-=== subject:(hausa) AND mediatype:audio : 784
-0025SheikhJaafarTafseer	186558	9377Mo	The Light Of Islam		Sheikh Jaafar Complete Tafseer
-internet2sheikhalbanizaria	73474	1760Mo	Lightofislam.com.ng		Sheikh Albani Zaria Archive
-ramadan-tafseer-by-sheikh-jaafar-2005	43640	334Mo	Lightofislam.com.ng		2005 Complete Ramadan Tafseer By Sheikh Ja'afar
-001RamadanTafseerByDr.IsaAliPantami2019	29961	737Mo	The Light Of Islam		2019 Ramadan Tafseer By Dr. Isa Ali Pantami
-RamadanTafseerByDr.SaniUmar2019	29860	795Mo	The Light Of Islam		2019 Ramadan Tafseer By Dr. Sani Umar
-002AlBaqaraSheikhJaafar_20190131	27714	1079Mo	The Light Of Islam		Karatun Qur'ani - Sheikh Ja'afar Mahmud Adam
-iliyah-dan-mai-karfi	24409	23Mo			ILiyah Dan Mai Karfi
-ruwan-bagaja-complete	23517	24Mo			Ruwan Bagaja Complete
-HausaSongs33	23120	106Mo			Hausa Songs 33
-blackfolktales_2401_librivox	22527	159Mo	Erick Berry		Black Folk Tales
-RamadanTafseerBySheikhAhmadTijjaniGuruntum2019	20449	332Mo	The Light Of Islam		2019 Ramadan Tafseer By Sheikh Ahmad Tijjani Yusuf Guruntum
-002-tafseer-by-sheikh-albani-zaria-2008	17114	364Mo	Lightofislam.com.ng		Tafseer By Sheikh Albani Zaria 2008
-RamadanTafseerBySheikhAbdurrazaqYahyaHaifan2019	15503	772Mo	The Light Of Islam		Ramadan Tafseer By Sheikh Abdurrazaq Yahya Haifan 2019
-MamanShata-HausaMusic	14724	190Mo	traditional		MamanShata-HausaMusic
-duniyarjinnudashaidanusheikhalbanizaria	12765	301Mo	Lightofislam.com.ng		Duniyar Jinnu Da Shaidanu Sheikh Albani Zaria
-KadaKuyiBarnaABayanKasaDr.SaniUmar	12242	504Mo	The Light Of Islam		Hudubobin Dr. Sani Umar
-ramadan-tafseer-by-sheikh-ahmad-tijjani-guruntum-2020	11797	333Mo	Lightofislam.com.ng		Ramadan Tafseer By Sheikh Ahmad Tijjani Guruntum 2020
-015MukhtasaruSiratirRasoulSheikhJaafar	10208	1105Mo	The Light Of Islam		Mukhtasaru Siratir Rasoul Sheikh Ja'afar
-001-ramadan-tafseer-by-sheikh-abdurrazaq-yahya-haifan-2020	9734	549Mo	Lightofislam.com.ng		Ramadan Tafseer By Sheikh Abdurrazaq Yahya Haifan 2020
-ramadan-tafseer-by-dr.-sani-umar-2008	9510	322Mo	Lightofislam.com.ng		Ramadan Tafseer By Dr. Sani Umar 2008
-sheikhahmadtijjaniguruntum	8696	287Mo	Lightofislam.com.ng		Sheikh Ahmad Tijjani Yusuf Guruntum
-166WeeklyTafseerDr.SaniUmar	7738	1335Mo	The Light Of Islam		Weekly Tafseer By Dr. Muhammad Sani Umar
-004abaunahadithsbysheikhabdurrazakyahyahaifan	7627	1579Mo	Lightofislam.com.ng		Aba'una Hadiths By Sheikh Abdurrazak Yahya Haifan
-hausatrapprodbycreamzviainstrumentals.com.ng	7482	8Mo			Hausa Trap Prod By CREa Mz Via Instrumentals.com.ng
-narambada	7273	108Mo	Wakokin Dauri	http://creativecommons.org/licenses/by-nc-nd/3.0/	Narambada
-NightRamadanTafseerBySheikhMusaAsadussunnah2019	7172	472Mo	The Light Of Islam		2019 Night Ramadan Tafseer By Sheikh Musa Asadussunnah
-036SunanuDdarimiDr.AhmadBuk	6853	1829Mo	The Light Of Islam		Sharhin Sunanu-ddarimi By Dr. Ahmad Buk
-FatawowinRahamaByDr.Sani15022019	6565	2279Mo	The Light Of Islam		Fatawowin Rahama By Dr. Sani Umar Rijiyar Lemu
-ramadan-tafseer-by-sheikh-isa-ali-pantami-2020	6322	421Mo	Lightofislam.com.ng		Ramadan Tafseer By Sheikh Isa Ali Pantami 2020
-003maidugurisheikhalbanizaria	6280	178Mo	Lightofislam.com.ng		Maiduguri by Sheikh Albani Zaria
-tafiya-mabudin-ilimi-05	6269	38Mo			Tafiya Mabuɗin Ilimi 05
-wakokin-shata-mamman	6203	10Mo			Wakokin Shata Mamman
-001-ramadan-tafseer-by-sheikh-kabiru-gombe	6162	560Mo	Lightofislam.com.ng		Ramadan Tafseer By Sheikh Kabiru Gombe 2020
-Khudubobindrabubakarsanibirninkudu	6060	223Mo	The Light Of Islam		Dr. Abubakar Sani Birnin Kudu Archive
-01RamadanTafseer2018ByDr.SaniUmar	5811	30Mo	Nibras's Blog		01 Ramadan Tafseer 2018 By Dr. Sani Umar
-18-gwani-isa	5748	1457Mo	Gwani Isa		18 Gwani Isa
-Hausa	5725	924Mo	Foreign Service Institute	http://creativecommons.org/publicdomain/mark/1.0/	Hausa course
-026AlWasiyyatulKuburaByDr.SaniUmar	5604	1295Mo	The Light Of Islam		Al Wasiyyatul Kubura By Dr. Sani Umar
-adabulmufradsheikhabdurrazaqyahyahaifan	5512	254Mo	Lightofislam.com.ng		Adabul Mufrad by Sheikh Abdurrazaq Yahya Haifan
-02RamadanTafseer2018ByDr.SaniUmar	5174	31Mo	Nibras's Blog		02 Ramadan Tafseer 2018 By Dr. Sani Umar
-esther-osaji-taimake-ni	5147	5Mo			Esther Osaji Taimake Ni
-TafsirSheikhJaafar	5104	2061Mo	AbdulQadir Muhammad Bello (ambgombe@gmai		COMPLETE TAFSIR SHEIKH JA'AFAR MAHMUD ADAM
-rabiubaba	5045	124Mo	Ranar Mawakan Hausa	http://creativecommons.org/licenses/by-nc-nd/3.0/	Rabiu Usman Baba
-001SunanDarimiByDrAhmadBuk	4993	368Mo			Sunan Darimi By Dr Ahmad Buk
-lalacewartarbiyyahsheikhalbanizaria	4942	65Mo	Lightofislam.com.ng		Lalacewar Tarbiyyah by Sheikh Albani Zaria
-sheikh-jaafar-mahmud-adam_202006	4830	125Mo	lightofislam.com.ng		Muhadarorin Sheikh Ja'afar Mahmud Adam
-sacrificed-myself-for-the-caliphate_20250217_1716	4795	1117Mo			Rare Nasheeds [Remake]
-karshenwahala1	4791	323Mo			Karshen Wahala 1
-rana-daya-episode-02-hausa-novels-128k	4767	37Mo			RANA DAYA Episode 02 || Hausa Novels( 128k)
-Muslim1_201403	4669	146Mo	Almadina		Sahih Muslim 1(Hausa)
-sheikhmusaasadussunnah	4566	762Mo	Lightofislam.com.ng		Sheikh Musa Yusuf Asadussunnah
-sharhusulilimanbysheikhjaafarmahmudadam	4513	147Mo	Lightofislam.com.ng		Sharh Usulil Iman By Sheikh Ja'afar Mahmud Adam
-amadanTafseerBySheikhMusaAsadussunnah2019	4435	347Mo	The Light Of Islam		2019 Evening Ramadan Tafseer By Sheikh Musa Asadussunnah
-001-ramadan-tafseer-by-dr.-sani-umar-2020	4422	232Mo	Lightofislam.com.ng		Ramadan Tafseer By Dr. Sani Umar 2020
-ramadan-tafseer-by-dr.-abdallah-usman-gadon-kaya-2020	4272	242Mo	Lightofislam.com.ng		Ramadan Tafseer By Dr. Abdallah Usman Gadon Kaya 2020
-03RamadanTafseer2018ByDr.SaniUmar	4267	32Mo	Nibras's Blog		03 Ramadan Tafseer 2018 By Dr. Sani Umar
-RadioNaija1989	4233	203Mo	It was not me-oh!	http://creativecommons.org/licenses/publicdomain/	Radio Naija 1989
-01Sh.AbdurrazaqYahyaHaifan2018RamadanTafseer	4087	34Mo	Nibras's Blog		01 Sh. Abdurrazaq Yahya Haifan 2018 Ramadan Tafseer
-rayuwarauredr.saniumar	4001	475Mo	The Light Of Islam		Dr. Sani Umar Archive
-04RamadanTafseer2018ByDr.SaniUmar	3927	30Mo	Nibras's Blog		04 Ramadan Tafseer 2018 By Dr. Sani Umar
-118BAddauWaddawaDr.SaniUmar	3892	512Mo	https://lightofislam.com.ng/		Sharhin littafin Adda'u Waddawa Dr. Sani Umar
-RamadanTafsserByDr.BashirAliyu2019	3886	1080Mo	The Light Of Islam		2019 Ramadan Tafsser By Dr. Bashir Aliyu
-shamailmuhammadiyyash.isaaliyupantami	3838	863Mo	Lightofislam.com.ng		Shama'ilul Muhammadiyya by Sheikh Isa Aliyu Pantami
-RamadanTafseerByBinUthmanKano2019	3770	129Mo	The Light Of Islam		Ramadan Tafseer By Bin Uthman Kano 2019
-05RamadanTafseer2018ByDr.SaniUmar	3739	30Mo	Nibras's Blog		05 Ramadan Tafseer 2018 By Dr. Sani Umar
-15.Sarimwww.shamsuddeen.com	3718	25Mo			15. Sarim(www.shamsuddeen.com)
-07RamadanTafseer2018ByDr.SaniUmar	3591	31Mo	Nibras's Blog		07 Ramadan Tafseer 2018 By Dr. Sani Umar
-06RamadanTafseer2018ByDr.SaniUmar	3555	30Mo	Nibras's Blog		06 Ramadan Tafseer 2018 By Dr. Sani Umar
-08RamadanTafseer2018ByDr.SaniUmar	3530	31Mo	Nibras's Blog		08 Ramadan Tafseer 2018 By Dr. Sani Umar
-001-ramadan-tafseer-by-sheikh-bin-uthman-kano-hausa-2020	3509	235Mo	Lightofislam.com.ng		Ramadan Tafseer By Sheikh Bin Uthman Kano Hausa 2020
-02Sh.AbdurrazaqYahyaHaifan2018RamadanTafseer	3487	34Mo	Nibras's Blog		02 Sh. Abdurrazaq Yahya Haifan 2018 Ramadan Tafseer
-001wasiyoyigomasheikhahmadtijjaniguruntum	3427	289Mo	Lightofislam.com.ng		Sheikh Ahmad Tijjani Guruntum Archive
-001-ramadan-tafseer-by-dr.-mansur-isa-yelwa-2020	3416	419Mo	Lightofislam.com.ng		Ramadan Tafseer By Dr. Mansur Isa Yelwa 2020
-RamadanTafseerByDr.MansurSokoto2019	3408	386Mo	The Light Of Islam		2019 Ramadan Tafseer By Dr. Mansur Sokoto
-interview-with-dr-alhaji-mamman-shata-katsina-1960s	3368	11Mo			Interview With Dr Alhaji Mamman Shata Katsina 1960s
-RamadanTafseerByDr.AbubakarMhdSaniBKudu2019	3346	619Mo	The Light Of Islam		Ramadan Tafseer By Dr. Abubakar Mhd Sani B Kudu 2019
-115AlwabilussayyibDr.SaniUmar	3277	752Mo	The Light Of Islam		Sharhin Alwabilussayyib By Dr. Sani Umar
-matsalolinauredamaauratasheikhaminuibrahimdaurawa	3235	353Mo	Lightofislam.com.ng		Sheikh Aminu Ibrahim Daurawa Archive
-baban-zara-rabil-jos	3207	4Mo			Baban Zara Rabil Jos
-jankidi	3166	70Mo		http://creativecommons.org/licenses/by-nc-nd/3.0/	Salihu Jankidi
+=== language:(ful OR fuf OR fub OR ff) AND mediatype:audio : 92
+taali_men	audio	4668	112Mo	Urs Niggli	Taali_men
+amaana-keso	audio	883	815Mo		Amaana Keso
+radio-koode-international-20190210-1920-7265	audio	795	17Mo	EB1TR	radio-koode-international-20190210-1920-7265
+B0126MatthieuN2FUCBSS	audio	753	621Mo		Linnjiila Iisaa - Aadi Keso
+ffm-bf-gen	audio	422	34Mo	SIM International	Fulfulde Burkina Fuɗɗoode (audio)
+dieuaparle-fuuta-jalon-audio	audio	364	5612Mo	dieuaparle.com	Fuuta Jalon - Audio
+Tawheed-AlHaaiyah	audio	327	1220Mo	Gandaldina	Tawheed-AlHaaiyah
+Alhaaiyah-Ibn-Daoud	audio	216	1220Mo	Gandaldina	Alhaaiyah-Ibn-Daoud
+naiaraazevedoftdjnildomixmaesolteiraremix2020	audio	207	8Mo	DJ NILDO MIX	NAIARA AZEVEDO FT DJ NILDO MIX (MAE SOLTEIRA REMIX 2020)
+LaawolPeewal26-50	audio	178	616Mo		Laawol Peewal 26 - 50
+dieuaparle-pulaar-fulakunda-1pulaar-fulakunda-2-gb-master-audio	audio	160	1178Mo	dieuaparle.com	Pulaar Fulakunda - 1Pulaar Fulakunda 2 GB MASTER
+salamul-wusul	audio	142	361Mo		Tawheed-SulamulWusul
+ffm-latn-bf-exo	audio	142	116Mo	SIM International	Fulfulde Burkina Wurtagol (Audio)
+dieuaparle-pulaar-fulakunda-aadi-heyri-ndii-audio	audio	135	805Mo	dieuaparle.com	Pulaar Fulakunda - Aadi_Heyri_Ndii
+matta_202312	audio	103	106Mo		Matta
+jannde-piyer-ar	audio	98	169Mo	Haala Alla	Jannde Piyer Arandeehi
+luka_20231204	audio	97	103Mo		Luka
+004MaandeejiJeedidiMuusa	audio	90	493Mo		Maandeeji Jeeɗiɗi Ɓurɗi Teeŋtude e nder Alkuraan
+dieuaparle-fuuta-jalon-pular-audio	audio	89	223Mo	dieuaparle.com	Fuuta Jalon - Pular
+dieuaparle-pulaar-fulakunda-pulaar-good-news-a33440-audio	audio	82	66Mo	dieuaparle.com	Pulaar Fulakunda - Pulaar Good News A33440
+JubbanndePinalPulaaguLefol	audio	78	85Mo		Jubbannde Pinal Pulaagu Lefol
+voice-of-nigeria-off-frequency-should-be-7255-k-hz.-hausa-fulfulde-english.-t.-2	audio	74	257Mo	J. Christie	Voice Of Nigeria, off frequency. Should Be 7255 kHz. Hausa, Fula, English. T. 2024-05-14 T
+yahaaya_202312	audio	70	78Mo		Yahaaya
+WonnooDoo	audio	66	247Mo		Wonnoo Doo
+dieuaparle-fuuta-jalon-05-pular-laawol-peewal-ngol-le-chemin-de-la-justice-audio	audio	64	716Mo	dieuaparle.com	Fuuta Jalon - 05_Pular_Laawol Peewal Ngol_Le Chemin de la Justice
+DaarolAladiin_201802	audio	64	592Mo		Daarol Aladiin
+2013-07-15-stop-right-there	audio	64	152Mo	Doords	2013 07 15 STOP RIGHT THERE
+AmNguurndamLefol_201712	audio	61	278Mo		Ɗam Nguurndam Lefol
+Fusko	audio	56	4Mo	qqmuk	Fusko
+PulaareejeLefol	audio	55	54Mo		Pulaareeje Lefol
+dieuaparle-pulaar-fulakunda-pulaar-fulacunda-lll-1-beginning-with-god-a816-audio	audio	55	31Mo	dieuaparle.com	Pulaar Fulakunda - Pulaar Fulacunda LLL 1 Beginning with GOD A81683
+FrancaisPulaarLefol	audio	52	111Mo		Francais Pulaar Lefol
+JandePulaarLefol	audio	52	108Mo		Jande Pulaar Lefol
+LisonLePulaarLefol	audio	52	50Mo		Lison Le Pulaar Lefol
+cherif-sagale-12	audio	50	242Mo		Cherif Abdoul Majid Sagale
+Ndimaagu_201703	audio	50	86Mo		Ndimaagu
+BoneFiccatLaaciMp3	audio	49	8Mo		Bone Ficcat Laaci Mp 3
+JubbanndeENguurndamSaykuUmaar	audio	49	138Mo		Jubbannde E Nguurndam Sayku Umaar
+HoddiroAllaTonngoodeDimmereLefol	audio	48	113Mo		Hoddiro Alla Tonngoode Dimmere Lefol
+dieuaparle-fuuta-jalon-03-pular-ahadi-heyri-ndin-nouveau-testament-audio	audio	47	605Mo	dieuaparle.com	Fuuta Jalon - 03_Pular_AHADI HEYRI NDIN_Nouveau Testament
+markus_202312	audio	45	64Mo		Markus
+dieuaparle-fuuta-jalon-01-pular-fuddhoode-genese-audio	audio	44	133Mo	dieuaparle.com	Fuuta Jalon - 01_Pular_Fuddhoode_Genèse
+CadeeleFulbeENderMali	audio	44	27Mo		Cadeele Fulbe E Nder Mali
+DaarolEJime....Lefol	audio	42	52Mo		Daarol E Jime .... Lefol
+TijjaaniAanLefol_201712	audio	41	25Mo		Tijjaani Aan Lefol
+dieuaparle-pulaar-fulakunda-pulaar-fulacunda-lll-6-jesus---teacher-healer--audio	audio	41	27Mo	dieuaparle.com	Pulaar Fulakunda - Pulaar Fulacunda LLL 6 JESUS - Teacher Healer A81688
+DaarolAladiinHello1Haa33	audio	40	208Mo		Daarol Aladiin Hello 1 Haa 33
+NaamneTatiLefol	audio	40	26Mo		Naamne Tati Lefol
+TinndolCofelGertogalLefol	audio	40	18Mo		Tinndol Cofel Gertogal Lefol
+GeloodoSappoEJeedidiLefol	audio	40	42Mo		Geloodo Sappo E Jeedidi Lefol
+IisaaAlmasiihuHaaliTinndiAudio	audio	40	50Mo		Iisaa Almasiihu Haali Tinndi Audio
+AnnabiMuusaLefol	audio	39	132Mo		Annabi Muusa Lefol
+HoddiroAllaInaHeewiSababuujiLefol	audio	38	229Mo		Hoddiro Alla Ina Heewi Sababuuji Lefol
+DoomburuLefol_201712	audio	38	20Mo		Doomburu Lefol
+dieuaparle-pulaar-fulakunda-pulaar-fulacunda-lll-5-on-trial-for-god-a81687-audio	audio	37	34Mo	dieuaparle.com	Pulaar Fulakunda - Pulaar Fulacunda LLL 5 On Trial for GOD A81687
+DameAlijannaLefol	audio	37	10Mo		Dame Alijanna Lefol
+NaamdoDiineMa	audio	36	62Mo	Abdoulayesall	Audio En Poulaar Fulla 9
+HammadiEPuccelMumNjamndiLefol_201712	audio	36	13Mo		Hammadi E Puccel Mum Njamndi Lefol
+dieuaparle-fuuta-jalon-04-pular-bonne-nouvelle-33840-audio	audio	35	69Mo	dieuaparle.com	Fuuta Jalon - 04_Pular_Bonne Nouvelle 33840
+ph00312r	audio	34	1Mo		ph00312rz
+NjanngenFarayseLefol	audio	34	53Mo		Njanngen Farayse Lefol
+DaarolAladiinHello67Haa100	audio	33	188Mo		Daarol Aladiin Hello 67 Haa 100
+DaarolAladiinHello34Haa66	audio	32	199Mo		Daarol Aladiin Hello 34 Haa 66
+dieuaparle-pulaar-fulakunda-pulaar-fulacunda-lll-8-acts-of-the-holy-spirit-audio	audio	32	31Mo	dieuaparle.com	Pulaar Fulakunda - Pulaar Fulacunda LLL 8 Acts of the HOLY SPIRIT A81690
+YuurmeendeLefol_201712	audio	31	43Mo		Yuurmeende Lefol
+diarore-nabbiyoun-azimul-kulqi	audio	31	92Mo		Muhiibi Djaaroorê Fouta Djallon
+AamaduHampaateBahLefol	audio	31	93Mo		Aamadu Hampaate Bah Lefol
+GooingolIsmaailLefol_201712	audio	30	314Mo		Gooŋɗingol Ismaa’il Lefol
+WaajuAudio	audio	30	42Mo		Iisaa Almasihu Haali Waaju Audio
+dieuaparle-pulaar-fulakunda-pulaar-fulacunda-lll-3-victory-through-god-a81-audio	audio	30	32Mo	dieuaparle.com	Pulaar Fulakunda - Pulaar Fulacunda LLL 3 Victory through GOD A81685
+UjunereJammaLefol	audio	30	119Mo		Ujunere Jamma Lefol
+dieuaparle-pulaar-fulakunda-pulaar-fulacunda-lll-2-mighty-men-of-god-a8168-audio	audio	29	32Mo	dieuaparle.com	Pulaar Fulakunda - Pulaar Fulacunda LLL 2 Mighty Men of GOD A81684
+MbaadiijiFulbeENderMali	audio	28	21Mo		Mbaadiiji Fulbe E Nder Mali
+dieuaparle-pulaar-fulakunda-pulaar-fulacunda-lll-4-servants-of-god-a81686-audio	audio	28	37Mo	dieuaparle.com	Pulaar Fulakunda - Pulaar Fulacunda LLL 4 Servants of GOD A81686
+FaayiidaLayya_201703	audio	27	56Mo		Faayiida Layya
+dieuaparle-pulaar-fulakunda-pulaar-fulacunda-lll-7-jesus---lord-saviour-a8-audio	audio	27	31Mo	dieuaparle.com	Pulaar Fulakunda - Pulaar Fulacunda LLL 7 JESUS - Lord Saviour A81689
+AadamaHaaJooniLefol	audio	26	144Mo		Aadama Haa Jooni Lefol
+AnnabiYuusufaAudio	audio	25	29Mo		Yuusufa Fr-Pu
+dieuaparle-pulaar-fulakunda-jibbi-kesi-jimanteedi-alla-audio	audio	25	85Mo	dieuaparle.com	Pulaar Fulakunda - Jibbi Kesi Jimanteedi Alla
+dieuaparle-pulaar-fulakunda-pulaar-fulacunda-words-of-life-a01391-audio	audio	23	33Mo	dieuaparle.com	Pulaar Fulakunda - Pulaar Fulacunda Words of Life A01391
+
+=== (dewa OR "mahmoud goni" OR "moussa souleymane" OR wazou OR waazu) AND mediatype:audio : 329
+LaguDewa19Lengkap	audio	450995	226Mo		Lagu Dewa 19 Lengkap
+FullAlbumDewa19	audio	74361	56Mo	JMercia Studio	DEWA 19 Full Album "Dewa 19" (1992)
+DewaElangOSTAnakLangit	audio	73554	7Mo		Dewa Elang ( OST Anak Langit )
+FullAlbumTheBestofDewa19	audio	64585	81Mo	JMercia Studio	DEWA 19 Full Album "The Best of Dewa 19" (1999)
+FullAlbumBintangLima	audio	64158	79Mo	JMercia Studio	DEWA 19 Full Album "Bintang Lima" (2000)
+FullAlbumLaskarCinta	audio	60746	90Mo	JMercia Studio	DEWA 19 Full Album "Laskar Cinta" (2004)
+05-17_20211221	audio	58721	649Mo		Sétan sareng pasukan maot
+dewa19_201909	audio	49494	786Mo	JpnMuslim	Dewa 19
+FullAlbumTerbaikTerbaik	audio	47344	85Mo	JMercia Studio	DEWA 19 Full Album "Terbaik Terbaik" (1995)
+AlbumFormatMasaDepan	audio	45671	85Mo	JMercia Studio	DEWA 19 Full Album "Format Masa Depan" (1994)
+FullAlbumCintailahCinta	audio	44761	90Mo	JMercia Studio	DEWA 19 Full Album "Cintailah Cinta" (2002)
+FullAlbumPandawaLima	audio	43370	88Mo	JMercia Studio	DEWA 19 Full Album "Pandawa Lima" (1997)
+FullAlbumTheGreatestHits	audio	31127	116Mo	JMercia Studio	DEWA 19 Full Album "The Greatest Hits" (2013)
+madrotter-treasure-hunt-full-archive	audio	27581	286537Mo	madrotter-treasure-hunt	(Blogger) madrotter-treasure-hunt Full Archive
+FullAlbumKerajaanCinta	audio	26071	106Mo	JMercia Studio	DEWA 19 Full Album "Kerajaan Cinta" (2007)
+dewa19_201910	audio	25731	839Mo		Dewa 19
+FullAlbumAtasNamaCintaI	audio	23201	97Mo	JMercia Studio	DEWA 19 Full Album "Atas Nama Cinta I" (2004)
+ipulcaem84_gmail_DEWA_20170617_0933	audio	23100	277Mo	DEWA	DEWA
+Dewa19-BintangLima	audio	21720	64Mo	Dewa 19	Dewa 19 - Bintang Lima
+FullAlbumRepublikCinta	audio	21177	80Mo	JMercia Studio	DEWA 19 Full Album "Republik Cinta" (2006)
+Dewa19_201703	audio	20413	325Mo		Dewa 19
+IwanFalsFullAlbumMataDewa	audio	19493	85Mo	JMercia Studio	Iwan Fals Full Album “Mata Dewa” (1989)
+IwanFalsFullAlbumManusiaSetengahDewa	audio	17820	95Mo	JMercia Studio	Iwan Fals Full Album “Manusia Setengah Dewa” (2004)
+002_20200314	audio	16689	1136Mo		kristal
+DEWA19-5	audio	15402	1010Mo		DEWA 19 - 5
+1128_20210126	audio	14960	513Mo		Hati naga. Buku 12
+FullAlbumAtasNamaCintaII	audio	14472	88Mo	JMercia Studio	DEWA 19 Full Album "Atas Nama Cinta II" (2006)
+IwanFalsFullAlbumInCollaborationWith	audio	13530	93Mo	JMercia Studio	Iwan Fals Full Album “In Collaboration With” (2003)
+Dewa19-LaskarCinta	audio	12989	86Mo	Dewa 19	Dewa 19 - Laskar Cinta
+tak-kan-ada-cinta-yang-lain	audio	11924	43Mo	Fujita Odile	Dewa 19
+Dewa19-PandawaLima	audio	10338	88Mo	Dewa 19	Dewa 19 - Pandawa Lima
+05._20220911	audio	8755	370Mo		Nalika dewa
+OSTAnakJalananDewaCintaGila	audio	8366	10Mo		OST Anak Jalanan Dewa Cinta Gila
+dewa19sembilanharilibertymedley	audio	7984	334Mo		Dewa 19 Sembilan Hari + Liberty ( Medley)
+Dewa19-CintailahCinta	audio	7297	71Mo	Dewa 19	Dewa 19 - Cintailah Cinta
+Dewa19_20170613_1519	audio	6995	55Mo	Dewa 19	Dewa 19
+04-4_20210117	audio	6799	711Mo		Perang Baheula Buku 1: Sumur Kalanggengan
+Dewa19Kangen	audio	6753	40Mo		Dewa 19 Kangen
+Dewa19RomanPicisanOstRomanPicisanRCTI	audio	6631	20Mo		Dewa 19 Roman Picisan ( Ost Roman Picisan RCTI)
+SambandhaTodiyoJuniJunikoLagiSabdaSurajThapaMagarLayaRabinPariyarSworDewaSomareMagarRabinPariyar	audio	5907	28Mo		Sambandha Todiyo Juni Juniko Lagi Sabda Suraj Thapa Magar Laya Rabin Pariyar Swor Dewa Som
+02.42	audio	5879	334Mo		Bajingan
+One_Dewa__DeaLoVa	audio	5618	10Mo		One Dewa - DeaLoVa
+DEWA19-4	audio	5570	944Mo		DEWA 19 - 4
+titidj-bahasakalbu1999	audio	5426	65Mo	Aquarius Musikindo	Titi DJ - Bahasa Kalbu (1999)
+02.2_20200315	audio	5405	240Mo		Pengantin baru
+dewa19_202002	audio	5313	210Mo		Dewa 19 Terbaik
+Dewa19-1	audio	4821	956Mo		Dewa 19 -1
+DEWA19-7	audio	4810	773Mo		DEWA 19 - 7
+partodewa13	audio	4307	729Mo		Parto Dewa
+DEWA19-8	audio	4157	923Mo		DEWA 19-8
+01.-1_202105	audio	4149	304Mo		Persiapan
+dewa19_201805	audio	3955	46Mo		lagu dewa 19
+DEWA19-3FIX	audio	3912	890Mo		DEWA 19 - 3FIX
+dewa-19-kangen-karoeke	audio	3826	597Mo	Dittos	Dewa 19
+03_20220610	audio	3761	356Mo		Naiad panon
+KANGENDEWA19	audio	3679	32Mo		KANGEN DEWA 19
+nws.bpm0129	audio	3356	601Mo	indip	[nws.bpm0129] not here to please
+40IwanFals---2004ManusiaSetengahDewa	audio	3302	95Mo		40 Iwan Fals --- (2004) Manusia Setengah Dewa
+01.-.-1-5	audio	3279	64Mo		Ni Cang Tian yaiku Dewa Penyembelihan. 1-5
+060501_201910	audio	3103	977Mo		Kanker Li-Outlook di Kerajaan fiery RA.
+DEWA19-6	audio	3011	932Mo		DEWA 19 - 6
+ki-h-anom-soeroto-wasi-jaladara	audio	2844	3562Mo	Ki H. Anom Soeroto	Ki H. Anom Soeroto "Wasi Jaladara"
+Dewa19_20170613_1517	audio	2663	6Mo	Dewa 19	Dewa 19
+Ajaibpermainanitutidakadayangtahu	audio	2612	586Mo		Ajaib karena permainan itu tidak ada yang tahu
+fsc029	audio	2549	30Mo	Y-DRA	Y-DRA - Kidung Wahyu Kolosebo (ft. Silir Pujiwati)
+05-01_202301	audio	2539	436Mo		Keinginan Rahsia Dewa-Dewa (Kehausan Yang Sangat Untuk Dewa-Dewa) / Kamigami no Fukaki Yok
+006-v-22-06	audio	2480	1049Mo		jiwa
+MnitareyPlaylistLaguPop-Dewa19	audio	2429	103Mo		Mnitarey Playlist Lagu Pop - Dewa 19
+TFR548-Hellraizer-TranscendentTransformation	audio	2428	167Mo	Hellraizer	TFR548 - Hellraizer - Transcendent Transformation
+RadioMuslim14380803RaehanulBahraenMungkinkahKuSelaluBersamamu	audio	2309	104Mo		Radio Muslim 14380803 Raehanul Bahraen Mungkinkah Ku Selalu Bersamamu
+Dewa19-FormatMasaDepan	audio	2136	82Mo		Dewa 19 - Format Masa Depan
+16.-risalah-hati-dewa-19	audio	2071	109Mo		16. RISALAH HATI DEWA 19
+Dewa19_201905	audio	1941	234Mo		Dewa 19
+Dewa19Larut	audio	1928	9Mo		Dewa 19 Larut
+dewa19satuhatiofficialvideo	audio	1899	301Mo		Dewa 19
+DewaDuaSejoli	audio	1738	240Mo		Dewa Dua Sejoli
+DEWA19-2FIX	audio	1737	841Mo		DEWA 19 -2FIX
+dewa-19-musik	audio	1732	59Mo	senseek	Dewa 19 Musik
+01.-.-16	audio	1690	320Mo		Nam Hee Sunga - Patung Sinar Sinar Bulan. Jilid 16
+ipulcaem84_gmail_DEWA_20170616	audio	1666	277Mo	DEWA	DEWA
+
+=== podcasts aldjayi : 0
+
+=== podcasts moussa aldjayi : 0
+
+=== podcasts fulfulde wazou : 0
+
+=== podcasts foulfoulde islam : 0
+
+=== podcasts fulfulde tafsir : 3
+Abdullah Hakim Quick — Muslim Central (585) undefined
+Abdal Hakim Murad — Muslim Central (145) https://rss.muslimcentral.com/abdal-hakim-murad.rss
+The Zawiya Podcast — TheZawiyaPodcast (10) https://anchor.fm/s/108ea8950/podcast/rss
+
+=== podcasts wazou fulfulde : 0
+
+=== podcasts pulaar wazou : 0
+
+=== podcasts fulfulde islamic : 25
+The Majlis — The Majlis (325) https://feeds.soundcloud.com/users/soundcloud:users:151267868/sounds.rss
+Pray for the 31 — Various Artists (75) https://rss.buzzsprout.com/1936278.rss
+Akbar's Chamber - Experts Talk Islam — akbarschamber (86) https://feed.podbean.com/akbarschamber/feed.xml
+Abdal Hakim Murad — Muslim Central (145) https://rss.muslimcentral.com/abdal-hakim-murad.rss
+The Zawiya Podcast — TheZawiyaPodcast (10) https://anchor.fm/s/108ea8950/podcast/rss
+Abdullah Hakim Quick — Muslim Central (585) undefined
+The AskHistorians Podcast — The AskHistorians Mod Team (279) https://rss.libsyn.com/shows/49734/destinations/172941.xml
+Africa Past & Present » Afripod — Africa Past and Present (144) https://afripod.aodl.org/podcast.xml
+Africa Past & Present » Afripod — Africa Past and Present (144) https://afripod.aodl.org/podcast.xml
+New Books in Biography & Memoir — Marshall Poe (603) https://feeds.simplecast.com/kcllBJDV
+Focus on Africa — BBC World Service (1097) https://podcasts.files.bbci.co.uk/p00gbjvb.rss
+Kingdom-Word Ministries - Audio Messages — Pastor Bankie (300) https://pastor.ng/feed/audio
+Sermon of the Week — BETHEL ATLANTA (300) https://feeds.captivate.fm/sermon-of-the-week/
+Nations of the World — Lois Evelyn (73) https://feeds.captivate.fm/nations-of-the-world/
+FBC Prineville — FBC Prineville (100) https://feed.podbean.com/fbcprineville/feed.xml
+Journal Afrique — RFI (43) https://apis.rfi.fr/products/get_product/fov-rfi-fr-get-journaux-podcast-v2-afrique?token_application=975d23b8-7a07-11e8-9f62-005056a90194
+SERMONS — La Palma Christian Center: La Palma, CA (629) https://www.lpcc.org/feeds/sermons
+Sermon Audio — Bethany Baptist (273) https://www.bethanybaptist.bc.ca/xml/sb_bethanybaptist/sb_chan1.xml
+Les Grandes Figures de l'Islam — Editions Albouraq (23) https://feeds.redcircle.com/6b12560a-f803-400e-bb6e-4b5fe8425b96
+Reisewarnung - mit missio München unterwegs — missio München / Michaelsbund (139) https://reisewarnung.podigee.io/feed/mp3
+The Christian Science Monitor — Aftersight (158) https://feeds.transistor.fm/aftersight-presents-the-christian-science-monitor
+African News Review — Adesoji Iginla with Milton Allimadi & Aya Fubara Eneli, Esq. (147) https://rss.buzzsprout.com/2279640.rss
+Jayfm Podcast — JAY 101.9 FM (1691) https://anchor.fm/s/3cff9ed4/podcast/rss
+Brooklyn, USA — BRIC RADIO (78) https://feeds.transistor.fm/brooklyn-usa
+Accents du monde — RFI (24) https://apis.rfi.fr/products/get_product/rfi_getpodcast_by_nid?token_application=975d23b8-7a07-11e8-9f62-005056a90194&program.entrepriseId=WB955918-RFI-FR-20130510
+
+=== podcasts garoua wazou : 0
