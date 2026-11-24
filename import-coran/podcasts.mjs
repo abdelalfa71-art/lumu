@@ -23,7 +23,6 @@ const PODCASTS = [
   { slug: "ha-pantami-hisn", langue: "ha", ordre: "date", auteur: "Isa Ali Ibrahim Pantami", source: "Podcast « Hisnul Muslim »", rss: "https://anchor.fm/s/f148c258/podcast/rss" },
   { slug: "ha-pantami-silat", langue: "ha", ordre: "date", auteur: "Isa Ali Ibrahim Pantami", source: "Podcast « Silatul Arham »", rss: "https://anchor.fm/s/10099a72c/podcast/rss" },
   { slug: "ha-pantami-birr", langue: "ha", ordre: "date", auteur: "Isa Ali Ibrahim Pantami", source: "Podcast « Birrul Walidain »", rss: "https://anchor.fm/s/fd31bd68/podcast/rss" },
-  { slug: "ha-arewa", langue: "ha", ordre: "date", auteur: "Arewaworld Waazi", source: "Podcast « Arewaworld Waazi & Quran »", rss: "https://anchor.fm/s/1cdc1e98/podcast/rss" },
   { slug: "fr-sira", langue: "fr", ordre: "date", auteur: "Islamkheir", source: "Podcast « Récits de la Vie du Prophète ﷺ »", rss: "https://anchor.fm/s/10d1ec6e4/podcast/rss" }];
 /* Identifiant stable tiré de l'adresse du fichier (pour les podcasts sans numérotation fiable) */
 const hacher = s => { let h = 2166136261; for (const c of s) { h ^= c.charCodeAt(0); h = Math.imul(h, 16777619); } return (h >>> 0).toString(36); };
