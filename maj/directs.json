@@ -1,11 +1,13 @@
 {
- "maj": "2026-11-23T12:30:11.209Z",
+ "maj": "2026-11-24T02:11:23.718Z",
  "mecque": {
   "id": "IsJTAdC3-Jw",
   "direct": true,
-  "vu": "2026-11-23T12:30:11.209Z"
+  "vu": "2026-11-24T02:11:23.718Z"
  },
  "medine": {
-  "direct": false
+  "id": "DLnqQHiDbaI",
+  "direct": true,
+  "vu": "2026-11-24T02:11:23.718Z"
  }
 }
