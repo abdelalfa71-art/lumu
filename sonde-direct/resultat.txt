@@ -1,342 +1,328 @@
-=== 169 podcasts ===
-ADPlusHausa | Podcast — ADPlusHausa | Podcast [Social Sciences/Podcasts/Science] (85, 2026-11-18)
-  https://anchor.fm/s/bd496a70/podcast/rss
-  items=85 | ©<![CDATA[ADPlusHausa | Podcast]]> | GWANI PODCAST | KASHI NA 02 | GWANI MUHAMMAD KABIR YAQUB ; GWANI PODCAST | KASHI NA 01 | ALARAMMA AHMAD IBRAHIM SULAIMA ; 57 | SHIN AURE MAKABATAR SOYAYYA NE? | MAL. LAWAN ADAM GIGIN | Sashen podcast na Afrika 🎙
-Fagen tattaunawa…Batutuwa da suka shafi al'adu… Muna bawa mazauna Afrika masu magana da harshen Hausa muhimmanci a dukkan lamuran ra
-PROF.ISAH ALI IBRAHIM PANTAMI - RAMADAN TAFSIR 1446/2025 — PROF.ISAH ALI IBRAHIM PANTAMI Majidaɗin Daular Uthmaniyya, CON, PhD [Islam/Podcasts/Religion & Spirituality] (25, 2025-03-25)
-  https://anchor.fm/s/101e1b3a4/podcast/rss
-  items=25 | ©<![CDATA[ PROF.ISAH ALI IBRAHIM PANTAMI  | Tafseer - 025 ; Tafseer - 024 ; Tafseer - 023 | RAMADAN TAFSIR 1446/2025 
-BY 
-PR0F.ISAH ALI IBRAHIM PANTAMI (HAFIZAHULLAH)
-Suratu Al'Imran
 
-Annoor Juma'at Masjid
+=== language:(hau OR hausa) AND mediatype:audio : 231
+narambada	7273	108Mo	Wakokin Dauri	http://creativecommons.org/licenses/by-nc-nd/3.0/	Narambada
+ttall	6143	1654Mo	Bukar Usman OON	http://creativecommons.org/licenses/by-nc-nd/3.0/	Kammalallen Taskar Tatsuniyoyi
+sunna4u.com_Sudais	5878	536Mo	sunna4u.com		Sheikh AbdurRahman Sudais Complete Quran Mp3
+18-gwani-isa	5748	1457Mo	Gwani Isa		18 Gwani Isa
+marainiya	5140	171Mo	Bukar Usman OON	http://creativecommons.org/licenses/by-nc-nd/3.0/	Littafi na Daya - Marainiya
+sheikjafarmahmudadam	4800	197Mo	Mamtech	https://creativecommons.org/licenses/by-nc-nd/4.0/	Recitation of the Holy Quran by Sheikh Jafar Mahmud Adam, Nigeria
+Muslim1_201403	4669	146Mo	Almadina		Sahih Muslim 1(Hausa)
+tafsirin_al_quran_sunna4u	3010	815Mo	sunna4u.blogspot.com		Tafsirin Al Qur'ani Mai Girma wanda Sheikh Abubakar Maikano ke gabatarwa a babban Masjeed 
+Al.adabul.mufrad_sunna4u	2908	1093Mo	sunna4u.blogspot.com		Karatun Littafin Al Adabul Mufrad by Sheikh Abubakr Maikano @ Sunna4u.blogspot.com (1439-2
+muhadarori	2768	860Mo	Mamtech	https://creativecommons.org/licenses/by-nc-nd/4.0/	Lectures of the Late Sheikh Jafar Mahmud Adam (RA) (Muhadarorin)
+riyadus_swalihin_sunna4u	2616	1098Mo	sunna4u.net		Karatun Littafin Riyadus Swalihin - Sheikh Bature Dauda Tsagero
+ya-abun-ambato-rabil-jos	2089	16Mo			Ya Abun Ambato Rabil Jos
+ya-abun-ambato-rabil-jos_202104	1762	7Mo			Ya Abun Ambato Rabil Jos
+BabakMafiBaroon320	1593	114Mo			Babak Mafi Baroon [ 320]
+muguwa	1535	75Mo	Bukar Usman OON	http://creativecommons.org/licenses/by-nc-nd/3.0/	Littafi na sha hudu - Muguwar Kishiya
+yargata	1440	88Mo	Bukar Usman OON	http://creativecommons.org/licenses/by-nc-nd/3.0/	Littafi na sha biyu -'Yar Gata
+alajabi	1388	93Mo	Bukar Usman OON	http://creativecommons.org/licenses/by-nc-nd/3.0/	Littafi na Sha Daya - Alajabi
+IMAM_MALIK_FOUNDATION_TSAGERO	1367	123Mo	SUNNA4U@OUTLOOK.COM		Wa'azozin Imam Malik Foundation Katsina, Tsagero Branch, Sunna4u
+ranarmawaka	1241	717Mo	Ranar Mawakan Hausa	http://creativecommons.org/licenses/by-nc-nd/3.0/	Ranar Mawaka
+ya-kashiful-ummati-rabil-jos	1235	3Mo			Ya Kashiful Ummati Rabil Jos
+jaruminsarki	1192	119Mo	Bukar Usman OON	http://creativecommons.org/licenses/by-nc-nd/3.0/	Littafi na Biyu - Jarumin Sarki
+lp_folk-music-of-the-ssr-middle-east_various	1167	1241Mo	Various		Folk Music Of The S.S.R. Middle East
+karatun_muwadda_malik	1103	1043Mo	Sunna4u		Karatun Muwadda Malik
+sandararziki	1010	141Mo	Bukar Usman OON	http://creativecommons.org/licenses/by-nc-nd/3.0/	Littafi na Biyar - Sandar Arziki
+tsohuwa	973	110Mo	Bukar Usman OON	http://creativecommons.org/licenses/by-nc-nd/3.0/	Littafi na Tara - Tsohuwa da 'yanmata uku
+011M.Y.CDTAWALIUACIKINSALLA	958	808Mo			sheikh Abdulrazaq Haifan
+yarimadalabbi	884	103Mo	Bukar Usman OON	http://creativecommons.org/licenses/by-nc-nd/3.0/	Littafi na Uku - Yarima da Labbi
+dankutungayya_201506	874	121Mo	Bukar Usman OON	http://creativecommons.org/licenses/by-nc-nd/3.0/	Littafi na Shida - Dankutungayya
+tsurondi	865	164Mo	Bukar Usman OON	http://creativecommons.org/licenses/by-nc-nd/3.0/	Littafi na Hudu - Tsurondi
+gwaidayara	839	117Mo	Bukar Usman OON	http://creativecommons.org/licenses/by-nd/3.0/	Littafi na Bakwai - Gwaidayara
+dugulidanbajinta	836	116Mo	Bukar Usman OON	http://creativecommons.org/licenses/by-nc-nd/3.0/	Littafin na sha uku - Duguli dan Bajinta
+oststjcin	816	17Mo			oststjcin
+FANNUTAAMUL01	813	67Mo			FANNU TA AMUL
+wakargarinbiu	795	42Mo	Bukar Usman OON		Wakar Garin Biu
+jumuat_khutbah_mal_bature_dauda	742	214Mo	sunna4u.blogspot.com		Jumuat Khutbah Mal. Bature Dauda Tsagero Sunna4u
+tafseerussaadiy	737	748Mo	Shaykh Muhammad Kabir Lawal Garba	https://creativecommons.org/licenses/by-nc-nd/4.0/	Tafseerin Shaykh Abdurrahman Naasir As-Sa'ady
+wakokinbukar	681	168Mo		http://creativecommons.org/licenses/by-nc-sa/3.0/	Wakokin Dakta Bukar Usman OON
+65KareDaKuraDAWasuKyawawa	676	137Mo	Bukar Usman OON	http://creativecommons.org/licenses/by-nc-nd/3.0/	Littafi na Goma - Dankucaka
+lp_new-folk-dances-of-israel_uri-hodorov	608	1634Mo	Uri Hodorov		New Folk Dances Of Israel
+wakokin-farfesoshi	592	198Mo	Saidu Muhammad Gusau		Wakokin Emiratus da Farfesoshi
+ya-abul-futuhatinah-rabil-jos	561	3Mo			Ya Abul Futuhatinah Rabil Jos
+danagwai	513	96Mo	Bukar Usman OON	http://creativecommons.org/licenses/by-nc-nd/3.0/	Littafi na Takwas - Dan Agwai
+kitabul_akhdari_shiakh_abubakar_gumi	512	379Mo	Ibrahim ahmad annigeri		Kitaboul Akhdari (Audio files)
+fatawoyin-rahama	497	900Mo	African Ulamas Project - Archives of Mul	https://creativecommons.org/licenses/by-nc-nd/4.0/	Fatawowin Rahama Radio Programmes 2012-Date
+UmdatulAhkam004	483	6Mo		http://creativecommons.org/publicdomain/mark/1.0/	Umdatul Ahkam 004 Sheikh Muhammad Mustapha Albarnawi
+AzuminSittaShawwalSunnaCeIShkmodumustafa.mp	477	16Mo		http://creativecommons.org/publicdomain/mark/1.0/	Azumin Sitta Shawwal Sunna Ce I Shkmodumustafa
+BBCWSHausa17.885MHz16SEP131930Z	465	30Mo	SWLing.com	http://creativecommons.org/licenses/by-nc-sa/3.0/	BBCWSHausa 17.885 MHz 16 SEP 13 1930 Z
+sharhinbaikuniyyah	459	641Mo	Shaykh Muhammad Kabir Lawal Garba	https://creativecommons.org/licenses/by-nc-nd/4.0/	Sharhin Baiƙuniyyah
+bashir-aliyu-umar	456	202Mo	African Ulamas Project	http://creativecommons.org/publicdomain/mark/1.0/	Weekly Friday Sermons by Dr. Bashir Aliyu Umar
+NasihaGaMata20Ramadan2019r.mp3c	430	20Mo		http://creativecommons.org/publicdomain/mark/1.0/	Nasiha Ga Mata 20 Ramadan 2019
+TSAGERO_WAAZIN_MATA_RAMADHAN_1438_SUNNA4U	415	104Mo	sunna4u.blogspot.com		TSAGERO WA'AZIN MATA RAMADHAN 1438 BY SUNNA4U
+GarinBiu	405	199Mo	Taskar Bukar Usman OON	http://creativecommons.org/licenses/by-nc-sa/3.0/	Garin Biu
+AaliyaAwwalTafseer2016-2017	399	226Mo			Aaliya (Awwal) Tafseer 2016-2017
+gwani-abdulbasid-fagge	388	1164Mo	Goni Abdulbasid Goni Rabi'u Fagge		Goni Abdulbasid Goni Rabi'u Fagge - Karatun Al-Qur'ani (Hizb 60)
+UmdatulAhkam005	363	5Mo		http://creativecommons.org/publicdomain/mark/1.0/	Umdatul Ahkam 005 Shk Modu Mustafa
+Tafsirkanuri01	353	25Mo	@ShkModuMustafa	http://creativecommons.org/publicdomain/mark/1.0/	Tafsir kanuri ye 01 Ramadan
+ramadan_1439ah_tafsir_shk_abubakar_maikano	352	476Mo	Sunna4u.blogspot.com		TSAGERO RAMADAN 1439 AH Tafsir. sheikh Abubakr Maikano Katsina (Sunna4u.Blogspot.Com)
+DAGASH26	329	30Mo	@ShkModuMustafa		Ramadan Tafsir 26 (1440) (2019) | Sheikh Muhammad Mustapha Albarnawi
+aud20191018wa0044	328	18Mo	Muhdalbarnawi.com	http://creativecommons.org/publicdomain/mark/1.0/	Alamun tashin qiyama
+muhammad-sani-umar-rlemo	319	313Mo	African Ulamas Project - Archives of Mul	https://creativecommons.org/licenses/by-nc-nd/4.0/	Ramadan Tafsir 27th May, 2017 (1438 AH) by Dr. Muhammad Sani Umar Rijiyar Lemo
+UmdatulAhkam007	305	6Mo		http://creativecommons.org/publicdomain/mark/1.0/	umdatul ahkam 007 Sheikh Muhammad Mustapha
+01RamadanHausaTafsirShkModuMustafa	291	30Mo		http://creativecommons.org/publicdomain/mark/1.0/	01 Ramadan Hausa Tafsir Sheikh Muhammad Mustapha
+aud_042819112731	264	30Mo		http://creativecommons.org/publicdomain/mark/1.0/	Babban Guzuri Kan Ramadan |Sheikh Muhammad Mustapha
+RamadanMubarak26	261	28Mo	@ShkModuMustafa		Ramadan Mubarak 26 (1440) (2019)
+babban-guzuri002	257	51Mo		http://creativecommons.org/publicdomain/mark/1.0/	Babban guzuri | Sheikh Muhammad Mustapha
+ajilo	253	45Mo	Ranar Mawakan Hausa	http://creativecommons.org/licenses/by-nc-nd/3.0/	Ajilon Waka
+RayuwanMusulmaiBayanRamadan	245	25Mo	Engr Abba Goni Kumshe		Rayuwan Musulmi Bayan Ramadan| Sheikh Muhammad Mustapha
+hamisu-breaker-raayi-official-audio-2025-256k	240	4Mo	Muawiya muzzy		Hamisu Breaker 1
+UmdatulAhkam006	236	7Mo		http://creativecommons.org/publicdomain/mark/1.0/	Umdatul Ahkam 006 Sheikh Muhammad Mustapha
+SheikhMuhammadMustapha09	231	242Mo	Engr Abba Goni		Sheikh Muhammad Mustapha 09
+albani_zaria_risaalah	231	227Mo	Ahamayed Moussa Aboubacar	https://creativecommons.org/licenses/by-nc-nd/4.0/	Karatun littafin Ar Risaalah - Shaikh Muhammadul Awwal Adam Albani Zaria
+BBCWS9.87MHz08FEB140630Z	215	32Mo	SWLing.com	http://creativecommons.org/licenses/by-nc-sa/3.0/	BBCWS 9.87 MHz 08 FEB 14 0630 Z
+AUD20190407WA0057	196	5Mo			umdatul Ahkam | Babin Cinikayya 04
+saeedsinger	196	64Mo	Saeed Singer	http://creativecommons.org/licenses/by-nc-nd/3.0/	Saeed Singer
+sahihalbukhari1_202001	195	102Mo	Masjid Ibn Baz Ghana		Sahīh Al Bukhāri Lesson 1
+AUD20190526WA0024	191	30Mo			Ramadan Tafsir 21 Hausa | Sheikh Muhammad Mustapha
+wakokin-bukar-na-ala-da-dankwairo	189	148Mo	Bukar Usman		Wakokin Bukar Usman Daga Ala da Dankwairon Biu
+Nurul.islam.Tsagero.1439	182	93Mo	sunna4u.blogspot.com		NURUL ISLAM TSAGERO MALAM ABUBAKAR MAIKANO RAMADAN 1439 (09023455501 SUNNA4U.BLOGSPOT.COM)
+alimakahoallahkayimanasauki	181	23Mo	Alhaji Ali Makaho		Ali Makaho( Allah Kayi Mana Sauki)
+RamadanMubarak29	176	33Mo	Engr Abba Goni Kumshe		Ramadan Mubarak 29(1440) (2019) | Sheikh Modu Mustapha Albarnawi
 
-Wuse II, FCT Abuja 🇳🇬.
-PR0F.ISAH ALI IBRAHIM PANTAMI - RAMADAN TAFSIR 1447/2026 — Ibrahim [Islam/Podcasts/Religion & Spirituality] (23, 2026-03-11)
-  https://anchor.fm/s/10f214c78/podcast/rss
-  items=23 | ©<![CDATA[Ibrahim]]> | Tafseer - 023 ; Tafseer - 022 ; Tafseer - 021 | Ramadan Tafsir 1447 / 2026 by Prof. Isah Ali Ibrahim Pantami (Hafizahullah).
- A detailed explanation of Surah Aal-Imran, delivered live from Annoor Juma’at Masj
-The Inheritors Podcast — Usayd Waris [Religion & Spirituality/Podcasts] (60, 2026-11-10)
-  https://anchor.fm/s/ff840490/podcast/rss
-  items=60 | ©<![CDATA[Usayd Waris]]> | Bridging Madrasah Tradition & Political Advocacy | Imam Abdu ; Leaving Corporate America for Madrasah | Shaykh Umer Ansari  ; From Singer to Qari | Qari Muaviah Bin Khalid | The Inherito | Exploring the prophetic inheritance of knowledge, one story at a time. 🖋️
-You can also find us on Youtube!
-The Christian Post Daily — The Christian Post [Christianity/Podcasts/Religion & Spirituality/News] (1184, 2026-11-24)
-  https://feeds.transistor.fm/tcpdaily
-  items=1184 | ©© 2026 The Christian Post | Life Surge Attendance Drops, Worst States for Religious Free ; Judge Rules Against USDA Chief's Christmas Emails, Michael T ; Muslims to Outnumber Christians by 2035, Huckabee Calls Jeru | CP Daily distills the most essential Christian news of the day, recapping compelling headlines and important stories. The show, which runs weekday mornings, off
-Shaare Mussar — Shaare Mussar [Religion & Spirituality/Podcasts] (410, 2024-04-08)
-  https://anchor.fm/s/10038eb80/podcast/rss
-  items=410 | ©<![CDATA[Shaare Mussar]]> | Mesilat Yesharim Perek 19 Part 2 - Examples Of  Being A Chas ; Mesilat Yesharim Perek 18 - Going Above And Beyond ; Mesilat Yesharim Perek 19 Part 1 - Going The Extra Mile For  | Podcast by Shaare Mussar
-Una Sola Nación — Una Sola Nación [Religion & Spirituality/Podcasts] (14, 2023-04-07)
-  https://anchor.fm/s/121fe674/podcast/rss
-  items=14 | ©<![CDATA[Una Sola Nación]]> | Sefirat Haomer - La Cuenta del Omer ; ¿Bikurim u Omer Reshit? ; Rosh Jodesh | El propósito de este proyecto es la búsqueda de la reconciliación entre los creyentes de las raíces hebreas con el pueblo judío.
-Latest shiurim from Boca Raton Synagogue — YUTORAH.org [Judaism/Podcasts/Religion & Spirituality] (30, 2026-11-24)
-  https://classic.yutorah.org/search/podcast.cfm?q=&f=&s=shiurdate%20desc&organizationID=348
-  items=30 | © | Arachin 6 ; Arachin 7 ; Arachin 5 | Latest shiurim from Boca Raton Synagogue
-Sycamore Church Podcast — Sycamore Church [Religion/Podcasts/Religion & Spirituality] (437, 2026-11-15)
-  https://anchor.fm/s/436d7c3c/podcast/rss
-  items=437 | ©<![CDATA[Sycamore Church]]> | We're Outside | Jesus Tells Stories (Week 3) | Tolulope Mood ; Foolish To Death | Jesus Tells Stories (Week 2) | Tolulope M ; Sermon Rewind | Foolish To Death | Sycamore Church, Ibadan, Nigeria
+=== (tafsir OR tafseer OR wa'azi OR karatun) AND hausa AND mediatype:audio : 483
+0025SheikhJaafarTafseer	186558	9377Mo	The Light Of Islam		Sheikh Jaafar Complete Tafseer
+internet2sheikhalbanizaria	73474	1760Mo	Lightofislam.com.ng		Sheikh Albani Zaria Archive
+ramadan-tafseer-by-sheikh-jaafar-2005	43640	334Mo	Lightofislam.com.ng		2005 Complete Ramadan Tafseer By Sheikh Ja'afar
+001RamadanTafseerByDr.IsaAliPantami2019	29961	737Mo	The Light Of Islam		2019 Ramadan Tafseer By Dr. Isa Ali Pantami
+RamadanTafseerByDr.SaniUmar2019	29860	795Mo	The Light Of Islam		2019 Ramadan Tafseer By Dr. Sani Umar
+002AlBaqaraSheikhJaafar_20190131	27714	1079Mo	The Light Of Islam		Karatun Qur'ani - Sheikh Ja'afar Mahmud Adam
+RamadanTafseerBySheikhAhmadTijjaniGuruntum2019	20449	332Mo	The Light Of Islam		2019 Ramadan Tafseer By Sheikh Ahmad Tijjani Yusuf Guruntum
+002-tafseer-by-sheikh-albani-zaria-2008	17114	364Mo	Lightofislam.com.ng		Tafseer By Sheikh Albani Zaria 2008
+RamadanTafseerBySheikhAbdurrazaqYahyaHaifan2019	15503	772Mo	The Light Of Islam		Ramadan Tafseer By Sheikh Abdurrazaq Yahya Haifan 2019
+duniyarjinnudashaidanusheikhalbanizaria	12765	301Mo	Lightofislam.com.ng		Duniyar Jinnu Da Shaidanu Sheikh Albani Zaria
+ramadan-tafseer-by-sheikh-ahmad-tijjani-guruntum-2020	11797	333Mo	Lightofislam.com.ng		Ramadan Tafseer By Sheikh Ahmad Tijjani Guruntum 2020
+001-ramadan-tafseer-by-sheikh-abdurrazaq-yahya-haifan-2020	9734	549Mo	Lightofislam.com.ng		Ramadan Tafseer By Sheikh Abdurrazaq Yahya Haifan 2020
+ramadan-tafseer-by-dr.-sani-umar-2008	9510	322Mo	Lightofislam.com.ng		Ramadan Tafseer By Dr. Sani Umar 2008
+sheikhahmadtijjaniguruntum	8696	287Mo	Lightofislam.com.ng		Sheikh Ahmad Tijjani Yusuf Guruntum
+166WeeklyTafseerDr.SaniUmar	7738	1335Mo	The Light Of Islam		Weekly Tafseer By Dr. Muhammad Sani Umar
+004abaunahadithsbysheikhabdurrazakyahyahaifan	7627	1579Mo	Lightofislam.com.ng		Aba'una Hadiths By Sheikh Abdurrazak Yahya Haifan
+NightRamadanTafseerBySheikhMusaAsadussunnah2019	7172	472Mo	The Light Of Islam		2019 Night Ramadan Tafseer By Sheikh Musa Asadussunnah
+ramadan-tafseer-by-sheikh-isa-ali-pantami-2020	6322	421Mo	Lightofislam.com.ng		Ramadan Tafseer By Sheikh Isa Ali Pantami 2020
+003maidugurisheikhalbanizaria	6280	178Mo	Lightofislam.com.ng		Maiduguri by Sheikh Albani Zaria
+001-ramadan-tafseer-by-sheikh-kabiru-gombe	6162	560Mo	Lightofislam.com.ng		Ramadan Tafseer By Sheikh Kabiru Gombe 2020
+Khudubobindrabubakarsanibirninkudu	6060	223Mo	The Light Of Islam		Dr. Abubakar Sani Birnin Kudu Archive
+01RamadanTafseer2018ByDr.SaniUmar	5811	30Mo	Nibras's Blog		01 Ramadan Tafseer 2018 By Dr. Sani Umar
+18-gwani-isa	5748	1457Mo	Gwani Isa		18 Gwani Isa
+adabulmufradsheikhabdurrazaqyahyahaifan	5512	254Mo	Lightofislam.com.ng		Adabul Mufrad by Sheikh Abdurrazaq Yahya Haifan
+02RamadanTafseer2018ByDr.SaniUmar	5174	31Mo	Nibras's Blog		02 Ramadan Tafseer 2018 By Dr. Sani Umar
+TafsirSheikhJaafar	5104	2061Mo	AbdulQadir Muhammad Bello (ambgombe@gmai		COMPLETE TAFSIR SHEIKH JA'AFAR MAHMUD ADAM
+lalacewartarbiyyahsheikhalbanizaria	4942	65Mo	Lightofislam.com.ng		Lalacewar Tarbiyyah by Sheikh Albani Zaria
+sheikhmusaasadussunnah	4566	762Mo	Lightofislam.com.ng		Sheikh Musa Yusuf Asadussunnah
+sharhusulilimanbysheikhjaafarmahmudadam	4513	147Mo	Lightofislam.com.ng		Sharh Usulil Iman By Sheikh Ja'afar Mahmud Adam
+amadanTafseerBySheikhMusaAsadussunnah2019	4435	347Mo	The Light Of Islam		2019 Evening Ramadan Tafseer By Sheikh Musa Asadussunnah
+001-ramadan-tafseer-by-dr.-sani-umar-2020	4422	232Mo	Lightofislam.com.ng		Ramadan Tafseer By Dr. Sani Umar 2020
+ramadan-tafseer-by-dr.-abdallah-usman-gadon-kaya-2020	4272	242Mo	Lightofislam.com.ng		Ramadan Tafseer By Dr. Abdallah Usman Gadon Kaya 2020
+03RamadanTafseer2018ByDr.SaniUmar	4267	32Mo	Nibras's Blog		03 Ramadan Tafseer 2018 By Dr. Sani Umar
+01Sh.AbdurrazaqYahyaHaifan2018RamadanTafseer	4087	34Mo	Nibras's Blog		01 Sh. Abdurrazaq Yahya Haifan 2018 Ramadan Tafseer
+hausa-ramadan-tafseer-2024-sheikh-muhammad-bin-uthman-kano	4041	287Mo			Hausa Ramadan Tafseer 2024 Sheikh Muhammad Bin Uthman Kano
+rayuwarauredr.saniumar	4001	475Mo	The Light Of Islam		Dr. Sani Umar Archive
+04RamadanTafseer2018ByDr.SaniUmar	3927	30Mo	Nibras's Blog		04 Ramadan Tafseer 2018 By Dr. Sani Umar
+shamailmuhammadiyyash.isaaliyupantami	3838	863Mo	Lightofislam.com.ng		Shama'ilul Muhammadiyya by Sheikh Isa Aliyu Pantami
+RamadanTafseerByBinUthmanKano2019	3770	129Mo	The Light Of Islam		Ramadan Tafseer By Bin Uthman Kano 2019
+05RamadanTafseer2018ByDr.SaniUmar	3739	30Mo	Nibras's Blog		05 Ramadan Tafseer 2018 By Dr. Sani Umar
+07RamadanTafseer2018ByDr.SaniUmar	3591	31Mo	Nibras's Blog		07 Ramadan Tafseer 2018 By Dr. Sani Umar
+06RamadanTafseer2018ByDr.SaniUmar	3555	30Mo	Nibras's Blog		06 Ramadan Tafseer 2018 By Dr. Sani Umar
+08RamadanTafseer2018ByDr.SaniUmar	3530	31Mo	Nibras's Blog		08 Ramadan Tafseer 2018 By Dr. Sani Umar
+001-ramadan-tafseer-by-sheikh-bin-uthman-kano-hausa-2020	3509	235Mo	Lightofislam.com.ng		Ramadan Tafseer By Sheikh Bin Uthman Kano Hausa 2020
+02Sh.AbdurrazaqYahyaHaifan2018RamadanTafseer	3487	34Mo	Nibras's Blog		02 Sh. Abdurrazaq Yahya Haifan 2018 Ramadan Tafseer
+001wasiyoyigomasheikhahmadtijjaniguruntum	3427	289Mo	Lightofislam.com.ng		Sheikh Ahmad Tijjani Guruntum Archive
+001-ramadan-tafseer-by-dr.-mansur-isa-yelwa-2020	3416	419Mo	Lightofislam.com.ng		Ramadan Tafseer By Dr. Mansur Isa Yelwa 2020
+RamadanTafseerByDr.MansurSokoto2019	3408	386Mo	The Light Of Islam		2019 Ramadan Tafseer By Dr. Mansur Sokoto
+RamadanTafseerByDr.AbubakarMhdSaniBKudu2019	3346	619Mo	The Light Of Islam		Ramadan Tafseer By Dr. Abubakar Mhd Sani B Kudu 2019
+01RamadanTafseer2018ByDr.AhmadGumi	3070	21Mo	Nibras's Blog		01 Ramadan Tafseer 2018 By Dr. Ahmad Gumi
+weeklytafseerbydr.idrisbauchi01november2019	2988	420Mo	Lightofislam.com.ng		Weekly Tafseer By Dr. Idris Abdul-Azeez Bauchi
+03Sh.AbdurrazaqYahyaHaifan2018RamadanTafseer	2919	36Mo	Nibras's Blog		03 Sh. Abdurrazaq Yahya Haifan 2018 Ramadan Tafseer
+04Sh.AbdurrazaqYahyaHaifan2018RamadanTafseer	2902	34Mo	Nibras's Blog		04 Sh. Abdurrazaq Yahya Haifan 2018 Ramadan Tafseer
+01Dr.IsaAliPantamiRamadanTafseer2018	2812	33Mo	Nibras's Blog		01 Dr. Isa Ali Pantami Ramadan Tafseer 2018
+khudubarjumaadr.idrisabdulazeezbauchi01112019	2765	445Mo	Lightofislam.com.ng		Hudubobin Juma'ah by Sheikh Idris Abdul-Azeez Bauchi
+01SheikhBinUthmanKanoRamadanTafseer2018	2691	49Mo	Nibras's Blog		01 Sheikh Bin Uthman Kano Ramadan Tafseer 2018
+suratulqalamsh.ahmadtijjaniyusufguruntum	2655	146Mo	Lightofislam.com.ng		Tafseer Suratul Qalam Sh. Ahmad Tijjani Yusuf Guruntum
+dr.abdallahusmangadonkayaarchive	2652	261Mo	Lightofislam.com.ng		Dr. Abdallah Usman Gadon Kaya Archive
+talkhissifatusalatsheikhalbanizaria	2637	225Mo	Lightofislam.com.ng		Talkhis Sifatu Salatinnabiy by Sheikh Albani Zaria
+Hudubahbybinuthman	2598	224Mo	Lightofislam.com.ng		Sheikh Bin Uthman Kano Archive
+hanyoyintsiradr.mansursokoto	2527	254Mo	The Light Of Islam		Dr. Mansur Sokoto Archive
+05Sh.AbdurrazaqYahyaHaifan2018RamadanTafseer	2465	31Mo	Nibras's Blog		05 Sh. Abdurrazaq Yahya Haifan 2018 Ramadan Tafseer
+lamiyyatuibntaimiyyahsheikhjaafar	2434	61Mo	Lightofislam.com.ng		Lamiyyatu Ibn Taimiyyah Sheikh Ja'afar
+Lightofislam-podcast	2408	58Mo	Lightofislam.com.ng		Lightofislam.com.ng Podcast
+ramadan-tafseer-by-dr.-bashir-aliyu-umar-2020	2365	406Mo	Lightofislam.com.ng		Ramadan Tafseer By Dr. Bashir Aliyu Umar 2020
+01RamadanTafseer2018BySheikAhmadTijjaniGuruntum	2336	31Mo	Nibras's Blog		01 Ramadan Tafseer 2018 By Sheik Ahmad Tijjani Guruntum
+011Sh.AbdurrazaqYahyaHaifan2018RamadanTafseer	2333	37Mo	Nibras's Blog		011 Sh. Abdurrazaq Yahya Haifan 2018 Ramadan Tafseer
+ramadan-tafseer-by-dr.-ahmad-buk-2010	2328	241Mo	Lightofislam.com.ng		Ramadan Tafseer By Dr. Ahmad Buk 2010
+018Sh.AbdurrazaqYahyaHaifan2018RamadanTafseer	2326	36Mo	Nibras's Blog		018 Sh. Abdurrazaq Yahya Haifan 2018 Ramadan Tafseer
+06Sh.AbdurrazaqYahyaHaifan2018RamadanTafseer	2305	32Mo	Nibras's Blog		06 Sh. Abdurrazaq Yahya Haifan 2018 Ramadan Tafseer
+027RamadanTafseer2018ByDr.SaniUmar	2274	28Mo	Nibras's Blog		027 Ramadan Tafseer 2018 By Dr. Sani Umar
+09Sh.AbdurrazaqYahyaHaifan2018RamadanTafseer	2208	38Mo	Nibras's Blog		09 Sh. Abdurrazaq Yahya Haifan 2018 Ramadan Tafseer
+08Sh.AbdurrazaqYahyaHaifan2018RamadanTafseer	2124	36Mo	Nibras's Blog		08 Sh. Abdurrazaq Yahya Haifan 2018 Ramadan Tafseer
+07Sh.AbdurrazaqYahyaHaifan2018RamadanTafseer	2094	37Mo	Nibras's Blog		07 Sh. Abdurrazaq Yahya Haifan 2018 Ramadan Tafseer
+010Sh.AbdurrazaqYahyaHaifan2018RamadanTafseer	2045	28Mo	Nibras's Blog		010 Sh. Abdurrazaq Yahya Haifan 2018 Ramadan Tafseer
+001-ramadan-tafseer-by-sheikh-musa-asadussunnah-2020	2036	237Mo	Lightofislam.com.ng		Ramadan Tafseer By Sheikh Musa Asadussunnah 2020
+RamadanTafseerByDr.AbdallahGKaya	2004	290Mo	The Light Of Islam		2019 Ramadan Tafseer By Dr. Abdallah G Kaya
+001-ramadan-tafseer-by-dr.-mansur-sokoto-2020	2002	220Mo	Lightofislam.com.ng		Ramadan Tafseer By Dr. Mansur Sokoto 2020
+002RamadanTafseerByDr.IbrahimJalo2019	1970	253Mo	The Light Of Islam		2019 Ramadan Tafseer By Dr. Ibrahim Jalo Jalingo
+027Sh.AbdurrazaqYahyaHaifan2018RamadanTafseer	1945	36Mo	Nibras's Blog		027 Sh. Abdurrazaq Yahya Haifan 2018 Ramadan Tafseer
 
-Elevated to see Jesus; Transformed by His Life.
-Sami Hamdi — Muslim Central [Islam/Podcasts/Religion & Spirituality/Society & Culture] (32, 2025-09-29)
-  https://rss.muslimcentral.com/sami-hamdi.rss
-  items=32 | ©Copyright &#xA9; Muslim Central | 2 Years of Occupation &amp; Genocide ; Feeling Hopeless This Is What The Quran Says To Do ; Ummah in Motion - Cape Town July 2025 | Sami Hamdi is a well-known political analyst and commentator with a deep understanding of Middle Eastern and North African affairs. He is the Managing Director 
-Masjid DarusSalam — Masjid DarusSalam [Islam/Podcasts/Religion & Spirituality] (298, 2026-11-16)
-  https://masjidds.org/feed/podcast
-  items=0 | © |  | 
-Najam Institute — Samir Wahid [Islam/Podcasts/Religion & Spirituality] (580, 2026-10-29)
-  https://anchor.fm/s/f10f6fbc/podcast/rss
-  items=580 | ©<![CDATA[Samir Wahid]]> | Navigating Faith on Campus | Shaykh Fayaz ; Navigating Faith on Campus | Shaykh Faizan Wahid ; United for Palestine | Shaykh Fayaz | “It is He Who makes the stars [as beacons] for you; so that you may guide yourselves, with their help, through the dark spaces of the land and the sea: We have 
-The Zawiya Podcast — TheZawiyaPodcast [Religion & Spirituality/Podcasts] (10, 2026-06-20)
-  https://anchor.fm/s/108ea8950/podcast/rss
-  items=10 | ©<![CDATA[TheZawiyaPodcast]]> | S02 E01 - What is the Nafs? | With Shaykh Abdulrahman Zyka ; Ishq: Love in Islamic History, Poetry, and the Languages of  ; Understanding Suluk: The Spiritual Journey to Allah ﷻ — Shay | @TheZawiyaPodcast
-Islamic spirituality | Tasawwuf
-Recorded from the Zaylai Zawiya
-🎙️ For all seekers
-Radio Islam — Radio Islam [Education/Podcasts] (552, 2026-11-24)
-  https://feeds.soundcloud.com/users/soundcloud:users:43909738/sounds.rss
-  items=500 | ©All rights reserved | Gauteng coalition talks remain uncertain ; COP31 deadlock raises concerns over Africa’s climate priorit ; Nurturing Values and Virtue: Mua'llimah Aziza Hathurani | This is the official account of Radio Islam International. Follow us for latest uploads.
-OneWayToParadise — UnknownSeekerOfKnowledge [Islam/Podcasts/Religion & Spirituality] (222, 2026-11-17)
-  https://www.spreaker.com/show/6743501/episodes/feed
-  items=222 | ©Copyright UnknownSeekerOfKnowledge | #19 Zaad Al-Ma'aad by Imaam Ibn Al-Qayyim رحمه الله | Abu Mu ; #3 At-Taghaabun | Aayat 11 - 18 | Abu Mussab Wajdi Akkari ; #1 At-Taghaabun | Aayat 1 - 6 | Abu Mussab Wajdi Akkari | Unnoficial podcast channel. See Youtube channel for original content.Fundamentally, it's a spiritual establishment for souls. Founded at the time when the first
-Ustadh Abdulrahman Hassan — UnknownSeekerOfKnowledge [Islam/Podcasts/Religion & Spirituality] (195, 2026-11-17)
-  https://www.spreaker.com/show/6059227/episodes/feed
-  items=195 | ©Copyright UnknownSeekerOfKnowledge | Fighting Depression Through The Remembrance Of Allah || Usta ; Know What You Believe: al-Zanjani’s Rāʾiyya || Ustadh AbdulR ; Tafseer of the Quran - Detailed Description of Hur Al Ayn |  | Ustadh Abdulrahman is uniquely positioned as an individual who combines the experience of traditional Islamic scholarship from the East, as well as the knowledg
-Ustadh Muhammad Tim Humble — UnknownSeekerOfKnowledge [Islam/Podcasts/Religion & Spirituality] (85, 2026-11-14)
-  https://www.spreaker.com/show/6602336/episodes/feed
-  items=85 | ©Copyright UnknownSeekerOfKnowledge | The Day Allah Reveals Every Hidden Secret | Tafseer Juz Amma ; Why Isn't Allah Giving Victory to the Muslims? | #13 Allah’s ; Why Knowing the Truth Isn't Enough | #12 Al-Hadi | Allah's N | Unnoficial podcast dedicated to lectures done by our dear Ustadh Muhammad Tim Humble.For inquiries: unknownseekerofknowledge@gmail.com
-Fatima Lette — Muslim Central [Islam/Podcasts/Religion & Spirituality/Society & Culture] (90, 2026-10-12)
-  https://rss.muslimcentral.com/fatima-lette.rss
-  items=90 | ©Copyright &#xA9; Muslim Central | Dua For Every Need #06 The Dua That Brought Him Out Of Darkn ; Dua For Every Need #05 When The Task Feels Too Heavy ; Dua For Every Need #04 When Your Dua Feels Unheard | Ustadha Fatima Lette is an accomplished Islamic scholar and educator, serving as a faculty member at the Qalam Seminary, where she teaches Ulum Al Quran, Usul A
-Understanding Islam — Understanding Islam [Religion & Spirituality/Podcasts] (577, 2026-11-22)
-  https://feeds.soundcloud.com/users/soundcloud:users:720133738/sounds.rss
-  items=500 | ©All rights reserved | tfsrQWTP#271 - Tafseer Sa'di - 057 - Soorah Al-Hadid- Aayat  ; tfsrQWTP#273 - Tafseer Sa'di - 057 - Soorah Al-Hadid- Aayat  ; tfsrQWTP#269 - Tafseer Sa'di - 057 - Soorah Al-Hadid- Aayat  | Islam is to believe in and to worship The One True God (“Allah” in Arabic) alone, and to accept Prophet Muhammad (peace be upon him) as His final Messenger. Thi
-Let's Talk With IMAH — Let's Talk With Imah Official [Religion & Spirituality/Podcasts] (17, 2021-03-16)
-  https://anchor.fm/s/46ad0674/podcast/rss
-  items=17 | ©<![CDATA[Let's Talk With Imah Official]] | S2 EP.07 - LGBTQ+ ; S2 EP.06 - Sects In Islam ; S2 EP.05 - Practising Islam | 'Let's Talk with IMAH' podcast features in-depth conversations with interesting and inspiring individuals about everyday issues.
-French Friday Sermon by Head of Ahmadiyya Muslim Community — Alislam.org [Islam/Podcasts/Religion & Spirituality] (101, 2026-11-13)
-  https://files.alislam.cloud/podcast/fs-fr.rss
-  items=100 | ©&#x2117; &amp; &#xA9; 2026 Ahmadiyya Mus | The Promised Messiah (as): A Life of Simple Ways and Hard Wo ; The Promised Messiah (as): Walking the Master&#039;s(sa) Pat ; Tahrik-e-Jadid 2026: Spend What You Treasure | French Translation of Friday Sermon delivered by Khalifatul Masih
-Vrijdagpreken | Hazrat Mirza Masroor Ahmad (aba) — Ahmadiyya Moslim Gemeenschap België [Islam/Podcasts/Religion & Spirituality] (99, 2026-05-13)
-  https://anchor.fm/s/ed0ce14c/podcast/rss
-  items=99 | ©<![CDATA[Ahmadiyya Moslim Gemeenschap Be | Vrijdagpreek 8 Mei 2026 | Oprechtheid in het leven van de Be ; Vrijdagpreek 01 Mei 2026 | Oprechtheid in het leven van de B ; Vrijdagpreek 24 April 2026 | De Heilige Profeet (sa) : Het H | Luister hier naar de Nederlandse vertaling van de Vrijdagpreken door Hazrat Mirza Masroor Ahmad (aba), het wereldhoofd van de Ahmadiyya Moslim Gemeenschap. 
-De 
-Seerah of Prophet Muhammad ﷺ — Ustadh AbdulRahman Hassan [Islam/Podcasts/Religion & Spirituality/History] (77, 2026-05-09)
-  https://www.spreaker.com/show/5924406/episodes/feed
-  items=77 | ©All rights to Al Madrasatu Al Umariyyah | #1 - Introduction ; #2 - The History of Arabs ; #3 - Civilisation and Religion of the Arabs | The Story of The Greatest Men That Ever Lived. The life of the Prophet Muhammad PBUH, the last Prophet of Allah SWT in great detail: A source of inspiration for
-Learn About Islam — Learn About Islam [Religion & Spirituality/Podcasts] (500, 2026-10-21)
-  https://feeds.soundcloud.com/users/soundcloud:users:130467447/sounds.rss
-  items=500 | ©All rights reserved | Khuṭbah: Make the Most of the Last Ten Nights – Ustādh Abdul ; Taqwā – Shaykh Abu Idrees Muhammad Khan ; Hold Fast to the Rope of Allāh Altogether and Do Not Become  | Calling the People to the Quran and the Sunnah upon the understanding of the Sahaba.
-Al Madrasatu Al Umariyyah — Islamic Podcast [Islam/Podcasts/Religion & Spirituality] (1368, 2026-11-24)
-  https://rss.libsyn.com/shows/285659/destinations/2197070.xml
-  items=1372 | ©<![CDATA[]]> | Feel Like You Missed Your Chance to Seek Knowledge? | #3 Fal ; Are You Studying Islam the Wrong Way? | #6 Majalis Ilmiyyah  ; The Day Allah Reveals Every Hidden Secret | Tafseer Juz Amma | Al Madrasatu Al Umariyyah is a media outlet dedicated to uncovering Islamic works from the past for English speakers in the present. We upload videos daily on Y
-Tafsir Juzu Amma’ - Faris Al Hammadi — Faris Al Hammadi [Islam/Podcasts/Religion & Spirituality] (18, 2025-10-07)
-  https://www.spreaker.com/show/6670982/episodes/feed
-  items=18 | ©All rights to Faris Al Hammadi | 1 - Tafsir Surat Al Fatiha ; 2 - Tafsir Surah Al Naba 1/2 ; 3 - Tafsir Surah Al Naba 2/2 | Tafsir of Juzu Amma’ by Ustadh Faris Al Hammadi
-Shaykh Faisal Hamid Abdur-Razak — Shaykh Faisal [Islam/Podcasts/Religion & Spirituality] (392, 2021-06-12)
-  https://anchor.fm/s/12d6dbf4/podcast/rss
-  items=392 | ©<![CDATA[Shaykh Faisal ]]> | AUDIO BROADCAST ~ 10th of Sha`bān~ Dhikr, Du`aa and Lecture  ; AUDIO BROADCAST ~ 9th of Sha`bān~ Dhikr, Du`aa and Lecture ~ ; AUDIO BROADCAST ~ 8th of Sha`bān~ Dhikr, Du`aa and Lecture ~ | Shaykh Faisal Hamid Abdur-Razak is an Internationally Renowned Scholar of Islam. Ameer (Spiritual Leader) of the Ahlus Sunnah Council of Canada (CCAS). Spiritua
-Refuting "Islamic" Sects — Faris Al Hammadi [Islam/Podcasts/Religion & Spirituality] (34, 2026-11-12)
-  https://www.spreaker.com/show/6531818/episodes/feed
-  items=34 | ©All rights to Faris Al Hammadi | Mazen calls for WW3! ; Saifullah: Khariji or Paid Agent?! ; What's a Muslim Country: A reply to Sneako's Blunder! | List of videos that Ustadh Faris al Hammadi did on the shubuhaat of the khawarij and many others.Unnoficial podcast, contact unknownseekerofknowledge@gmail.com 
-ٱلدَّاءُ وَٱلدَّوَاءُ  {Diseases of the Heart and Their Cure} — Ustadh Abdul Rahman Hassan [Islam/Podcasts/Religion & Spirituality] (17, 2025-05-06)
-  https://anchor.fm/s/fbc98c6c/podcast/rss
-  items=17 | ©<![CDATA[Ustadh Abdul Rahman Hassan]]> | Lesson 17 ; Lesson 16 ; Lesson 15 | Diseases of the Heart and Their Cure
-by Ibn Qayyim
-The Hot Seat — Islamic Podcast [Islam/Podcasts/Religion & Spirituality] (31, 2020-12-17)
-  https://rss.libsyn.com/shows/181691/destinations/1240460.xml
-  items=31 | ©<![CDATA[]]> | Quick but important message ; Is Music Allowed in Islam? #Halal #Haram #Music #Islam ; ROUND 2: #Asharis vs #Salafis - Understanding Allah's Names  | The Hot Seat is an interactive Islamic podcast that aims to deal with contemporary issues by using classical solutions from the past. Atheism. Feminism. Politic
-Yasir Qadhi — Muslim Central [Islam/Podcasts/Religion & Spirituality/Society & Culture] (2000, 2026-11-22)
-  https://rss.muslimcentral.com/yasir-qadhi.rss
-  items=2555 | ©Copyright &#xA9; Muslim Central | Beyond Results - The True Value of Your Efforts ; 10 Life-Changing Lessons From The Prophets #03 Most Difficul ; Your Attention Is Under Attack | Yasir Qadhi was born in Houston, Texas and completed his primary and secondary education in Jeddah, Saudi Arabia. He graduated with a B.Sc. in Chemical Engineer
-Ibn Adem's Podcast — Ibn Adem [Islam/Podcasts/Religion & Spirituality] (2, 2014-02-16)
-  https://umitvsserife.podomatic.com/rss2.xml
-  items=2 | © | Hatim Abou Abdilleh - Il n'y a rien de bon dans un oeil qui  ; Hatim Abou Abdillah - Rends heureux ton fr&#232;re | 
-La croyance musulmane — L'islam simplement [Religion & Spirituality/Podcasts] (79, 2025-11-20)
-  https://anchor.fm/s/102aeb3b8/podcast/rss
-  items=79 | ©<![CDATA[L'islam simplement]]> | 01/ L'importance d'apprendre l'Islam ; 02/ Comment entrer en Islam ; 03/ Qui est Allâh | Ce chapitre comporte la croyance indispensable que doit avoir le musulman
+=== (jaafar OR "ja'afar" OR albani zaria OR daurawa OR pantami OR gumi OR rijiyar) AND mediatype:audio : 520
+0025SheikhJaafarTafseer	186558	9377Mo	The Light Of Islam		Sheikh Jaafar Complete Tafseer
+Mishary_Al-Afasy_1424_uploaded-by_Abu-Ahmad-S-A	115948	962Mo	أبو أحمد السلفي الأثري		مشاري العفاسي. المصحف المرتل كاملا
+06_20210313	115399	240Mo			Mudzidzi asingadi
+internet2sheikhalbanizaria	73474	1760Mo	Lightofislam.com.ng		Sheikh Albani Zaria Archive
+ramadan-tafseer-by-sheikh-jaafar-2005	43640	334Mo	Lightofislam.com.ng		2005 Complete Ramadan Tafseer By Sheikh Ja'afar
+001RamadanTafseerByDr.IsaAliPantami2019	29961	737Mo	The Light Of Islam		2019 Ramadan Tafseer By Dr. Isa Ali Pantami
+002AlBaqaraSheikhJaafar_20190131	27714	1079Mo	The Light Of Islam		Karatun Qur'ani - Sheikh Ja'afar Mahmud Adam
+kalifornia-320kb-mshary-al3afasy-quran-high-quality	19665	9188Mo			العفاسي ختمة كاليفورنيا 1430
+Ahmed-Alnufais	17784	1182Mo	koonoz.info		المصحف المرتل بصوت القاريء أحمد النفيس
+002-tafseer-by-sheikh-albani-zaria-2008	17114	364Mo	Lightofislam.com.ng		Tafseer By Sheikh Albani Zaria 2008
+duniyarjinnudashaidanusheikhalbanizaria	12765	301Mo	Lightofislam.com.ng		Duniyar Jinnu Da Shaidanu Sheikh Albani Zaria
+015MukhtasaruSiratirRasoulSheikhJaafar	10208	1105Mo	The Light Of Islam		Mukhtasaru Siratir Rasoul Sheikh Ja'afar
+001-ramadan-tafseer-2024-sheikh-isa-ali-pantami_20240311	9400	360Mo			Ramadan Tafseer 2024 Sheikh Isa Ali Pantami
+ramadan-tafseer-2024-dr.-muhammad-sani-umar-rijiyar-lemo	7891	404Mo			Ramadan Tafseer 2024 Dr. Muhammad Sani Umar Rijiyar Lemo
+sheikh-jaafar-mahmud-adam	6891	215Mo	Lightofislam.com.ng		Sheikh Ja'afar Mahmud Adam Archive
+FatawowinRahamaByDr.Sani15022019	6565	2279Mo	The Light Of Islam		Fatawowin Rahama By Dr. Sani Umar Rijiyar Lemu
+ramadan-tafseer-by-sheikh-isa-ali-pantami-2020	6322	421Mo	Lightofislam.com.ng		Ramadan Tafseer By Sheikh Isa Ali Pantami 2020
+003maidugurisheikhalbanizaria	6280	178Mo	Lightofislam.com.ng		Maiduguri by Sheikh Albani Zaria
+19-02-po-sledu-zverya	6245	500Mo			Pamugwagwa wechikara
+TafsirSheikhJaafar	5104	2061Mo	AbdulQadir Muhammad Bello (ambgombe@gmai		COMPLETE TAFSIR SHEIKH JA'AFAR MAHMUD ADAM
+ebngmazwebnwerdananabygaafer	4973	355Mo			جمع رواية ابن جماز و رواية ابن وردان عن ابوجعفر *** جمع روايتي ابو جعفر *** للشيخ محمود عط
+lalacewartarbiyyahsheikhalbanizaria	4942	65Mo	Lightofislam.com.ng		Lalacewar Tarbiyyah by Sheikh Albani Zaria
+sheikh-jaafar-mahmud-adam_202006	4830	125Mo	lightofislam.com.ng		Muhadarorin Sheikh Ja'afar Mahmud Adam
+sharhusulilimanbysheikhjaafarmahmudadam	4513	147Mo	Lightofislam.com.ng		Sharh Usulil Iman By Sheikh Ja'afar Mahmud Adam
+WheatonPermaculture136GaiasGardenChapter9	4484	43Mo	Paul Wheaton	http://creativecommons.org/licenses/by-nc-nd/3.0/	Wheaton permaculture 136 gaia's garden chapter 9
+16-greis	3948	709Mo			kuvhima kwemusango
+shamailmuhammadiyyash.isaaliyupantami	3838	863Mo	Lightofislam.com.ng		Shama'ilul Muhammadiyya by Sheikh Isa Aliyu Pantami
+ghost-and-pals-music-archive	3435	8872Mo	GHOST and Pals	https://creativecommons.org/licenses/by-nc-nd/4.0/	GHOST and Pals - Music Archive
+06.-twelve-winged-dark-seraphim-super-gen-boga-1	3423	1824Mo			Gumi neMapapiro Akasviba Seraphim - Super Gene raMwari 1
+matsalolinauredamaauratasheikhaminuibrahimdaurawa	3235	353Mo	Lightofislam.com.ng		Sheikh Aminu Ibrahim Daurawa Archive
+01RamadanTafseer2018ByDr.AhmadGumi	3070	21Mo	Nibras's Blog		01 Ramadan Tafseer 2018 By Dr. Ahmad Gumi
+way2sona_20151222_2035	2845	2633Mo			المصحف المرتل برواية خلف عن حمزة للقارئ عبد الرشيد بن شيخ علي صوفي
+01Dr.IsaAliPantamiRamadanTafseer2018	2812	33Mo	Nibras's Blog		01 Dr. Isa Ali Pantami Ramadan Tafseer 2018
+Mishary_Al-afasy_Khatma_Mounaa_2017	2682	3255Mo			الختمة المنوعة - مشاري العفاسي - ١٤٣٨هـ - ٢٠١٧م - جودة عالية
+talkhissifatusalatsheikhalbanizaria	2637	225Mo	Lightofislam.com.ng		Talkhis Sifatu Salatinnabiy by Sheikh Albani Zaria
+003-ramadan-tafseer-by-sheikh-jaafar-2005	2633	13Mo			003 Ramadan Tafseer By Sheikh Ja'afar 2005
+lamiyyatuibntaimiyyahsheikhjaafar	2434	61Mo	Lightofislam.com.ng		Lamiyyatu Ibn Taimiyyah Sheikh Ja'afar
+nws.bpm0179	2403	558Mo	mb3		[nws.bpm0179] who the Fred is Fuck?
+KashfuShubuhatbySheikhJaafar	2372	114Mo	The Light Of Islam		Kashfu Shubuhat By Sheikh Ja'afar
+ahkamuljanaizbysheikhjaafarmahmudadam	2372	207Mo	Lightofislam.com.ng		Ahkamul Jana'iz By Sheikh Ja'afar Mahmud Adam
+01._20211011	2348	408Mo	くるりんご (Kururingo)		[LOSSLESS] Kururingo (くるりんご) - Kurukuru Ringo (くるくるりんご)
+01-rubi-govorila	2239	425Mo			Kufungidzira vasikana
+Alqatami_00	2211	1279Mo			ناصر القطامي
+ramadan-tafseer-2024-sheikh-aminu-ibrahim-daurawa	2145	278Mo			Ramadan Tafseer 2024 Sheikh Aminu Ibrahim Daurawa
+VocaloidDubstepFatalForceCrusherWildfireGumiEnglish	2032	14Mo			▶ Vocaloid Dubstep ★ Fatal Force Crusher Wildfire ( Gumi English)
+Jaafar_Mahmoud_Adam_uP_bY_mUSLEm_623	2005	2638Mo	تم رفع هذه المادة بواسطة مُسلم التونسي_u		المصحف المرتل للقارئ جعفر محمود آدم
+01_20211011_20211011	1961	341Mo	くるりんご (Kururingo)		[LOSSLESS] Kururingo (くるりんご) - Fuwafuwa Ringo (ふわふわりんご)
+ramadan-tafseer-by-sheikh-aminu-ibrahim-daurawa-2020	1786	30Mo	Lightofislam.com.ng		Ramadan Tafseer By Sheikh Aminu Ibrahim Daurawa 2020
+KashfuShubuhatSheikhJaafar	1727	11Mo	The Light Of Islam		Kashfu Shubuhat-Sheikh Ja'afar
+02Dr.IsaAliPantamiRamadanTafseer2018	1659	36Mo	Nibras's Blog		02 Dr. Isa Ali Pantami Ramadan Tafseer 2018
+08Dr.IsaAliPantamiRamadanTafseer2018	1658	35Mo	Nibras's Blog		08 Dr. Isa Ali Pantami Ramadan Tafseer 2018
+dr.rabiurijiyarlemuarchive	1638	101Mo	Lightofislam.com.ng		Dr. Muhammad Rabi'u Rijiyar Lemu Archive
+fatawoyin-rahama-by-dr.-sani-umar-rijiyar-lemo-13th-january-2024	1630	155Mo			Fatawoyin Rahama By Dr. Sani Umar Rijiyar Lemo 2024
+09Dr.IsaAliPantamiRamadanTafseer2018	1607	35Mo	Nibras's Blog		09 Dr. Isa Ali Pantami Ramadan Tafseer 2018
+Vocaloid-Best-Blue	1589	727Mo	Sony Music		VOCALOID BEST from Nico Nico Douga 【Blue】
+CyberDivaBlankSpacebyV3xman2	1553	46Mo			Vocaloid covers of pop songs
+PISSSPEARS-Melanie	1497	679Mo			PISS SPEARS - Melanie is just an innocent teenage girl who really likes Gumi but not like 
+hudubahbysheikhjaafarmahmudadam	1470	1241Mo	Lightofislam.com.ng		Hudubobin Sheikh Ja'afar Mahmud Adam
+Vocaloid-Best-Red	1456	712Mo	Sony Music		VOCALOID BEST from Nico Nico Douga【Red】
+03Dr.IsaAliPantamiRamadanTafseer2018	1454	35Mo	Nibras's Blog		03 Dr. Isa Ali Pantami Ramadan Tafseer 2018
+012Dr.IsaAliPantamiRamadanTafseer2018	1449	34Mo	Nibras's Blog		012 Dr. Isa Ali Pantami Ramadan Tafseer 2018
+010Dr.IsaAliPantamiRamadanTafseer2018	1437	35Mo	Nibras's Blog		010 Dr. Isa Ali Pantami Ramadan Tafseer 2018
+agenda_baru	1419	1Mo			agenda baru
+Jaafar_Mahmoud_Adam_uP_bY_mUSLEm	1411	1675Mo	uP_bY_mUSLEm		Jaafar_Mahmoud_Adam_uP_bY_mUSLEm
+Ibn_gamaz_ibi_jaafar	1410	2570Mo	Moftah Elsaltany		القران الكريم برواية ابن جماز عن ابي جعفر - القارئ مفتاح السلطني
+011Dr.IsaAliPantamiRamadanTafseer2018	1387	36Mo	Nibras's Blog		011 Dr. Isa Ali Pantami Ramadan Tafseer 2018
+cikajisheikhalbanizaria	1385	184Mo	Lightofislam.com.ng		Bazasu gushe ba suna yakarku - Sheikh Albani Zaria
+ramadan-tafseer-2023-sheikh-isa-ali-pantami	1371	237Mo			Ramadan Tafseer 2023 Sheikh Isa Ali Pantami
+04Dr.IsaAliPantamiRamadanTafseer2018	1364	26Mo	Nibras's Blog		04 Dr. Isa Ali Pantami Ramadan Tafseer 2018
+05Dr.IsaAliPantamiRamadanTafseer2018	1332	36Mo	Nibras's Blog		05 Dr. Isa Ali Pantami Ramadan Tafseer 2018
+Jaafar_Adam_uP_bY_mUSLEm	1329	1675Mo	تم رفع هذه المادة بواسطة مُسلم التونسي_u		المصحف المرتل للقارئ جعفر محمود آدم
+addini-da-rayuwa-sheikh-aminu-ibrahim-daurawa	1309	32Mo	Lightofislam.com.ng		Addini Da Rayuwa Sheikh Aminu Ibrahim Daurawa
+06Dr.IsaAliPantamiRamadanTafseer2018	1287	45Mo	Nibras's Blog		06 Dr. Isa Ali Pantami Ramadan Tafseer 2018
+013Dr.IsaAliPantamiRamadanTafseer2018	1273	34Mo	Nibras's Blog		013 Dr. Isa Ali Pantami Ramadan Tafseer 2018
+01_20211011_20211011_2024	1234	388Mo	くるりんご (Kururingo)		[LOSSLESS] Kururingo (くるりんご) - Kirakira Ringo (きらきらりんご)
+018Dr.IsaAliPantamiRamadanTafseer2018	1233	35Mo	Nibras's Blog		018 Dr. Isa Ali Pantami Ramadan Tafseer 2018
+07Dr.IsaAliPantamiRamadanTafseer2018	1232	35Mo	Nibras's Blog		07 Dr. Isa Ali Pantami Ramadan Tafseer 2018
+020Dr.IsaAliPantamiRamadanTafseer2018	1212	33Mo	Nibras's Blog		020 Dr. Isa Ali Pantami Ramadan Tafseer 2018
+025Dr.IsaAliPantamiRamadanTafseer2018	1205	29Mo	Nibras's Blog		025 Dr. Isa Ali Pantami Ramadan Tafseer 2018
+015Dr.IsaAliPantamiRamadanTafseer2018	1178	35Mo	Nibras's Blog		015 Dr. Isa Ali Pantami Ramadan Tafseer 2018
 
-✅ Pour recevoir sur WhatsApp le lien des cours en LIVE quelques minutes avant, indiqu
-Seminars with a Spiritual Master — Sheikh Babikir [Islam/Podcasts/Religion & Spirituality] (100, 2026-11-13)
-  https://feed.podbean.com/akefq/feed.xml
-  items=100 | ©Copyright 2025 All rights reserved. | Sheikh Babikir Friday Sermon (16 Oct 26): fulfilling the com ; Sheikh Babikir Friday Sermon (6 Nov 26): the importance of d ; Sheikh Babikir Friday Sermon (4 Sep 26): our responsibilitie | Sheikh Babikir is an Islamic Scholar, teacher, and spiritual guide with a profound understanding of traditional Islamic teachings and Sufism. Known for his wisd
-The Majlis — The Majlis [Religion & Spirituality/Podcasts] (325, 2024-11-05)
-  https://feeds.soundcloud.com/users/soundcloud:users:151267868/sounds.rss
-  items=325 | ©All rights reserved | Refinement of Character - 04 ; Refinement of Character - 01 ; Refinement of Character - 03 | The Majlis is a non-profit based in Southern California that seeks to develop and nurture safe community spaces where people can learn and live Islam, based on 
-SeekersGuidance Podcast - Islam, Islamic Knowledge, Quran, and the guidance of the Prophet Muhammad — SeekersGuidance.org [Islam/Podcasts/Religion & Spirituality] (286, 2020-05-10)
-  https://seekersguidance.org/feed/podcast/
-  items=0 | © |  | 
-NYU Islamic Center Podcasts — NYU Islamic Center [Spirituality/Podcasts/Religion & Spirituality/Islam] (600, 2026-04-03)
-  https://feeds.simplecast.com/jN96HJ_W
-  items=600 | ©All rights reserved | A few descriptions of Jannah | Jummah Khutbah by Tamim Islam ; Reflections from Sura Al Isra Chapter 17 of the Quran | Kutb ; What Have I Sacrificed for the Sake of Allah SWT | Kutbah by | NYU Islamic Center Podcasts cover a range of topics from spiritual knowledge to current events.
-Talking With Teachers With Dr. Abdullah bin Hamid Ali — Lamppost Education Initiative [Islam/Podcasts/Religion & Spirituality] (74, 2026-10-03)
-  https://anchor.fm/s/f00669a4/podcast/rss
-  items=74 | ©<![CDATA[Lamppost Education Initiative]] | Talking With Teachers Season 7 Episode 5-Dr. Yannis Mahil ; Medicine, Muslim Education & the Future of Knowledge — Dr. A ; Mufti Abdul-Wahab Waheed: Islamic Knowledge, Da‘wah & Muslim | The ‘Talking With Teachers’ Podcast will provide revealing insights into the unique contributions of famous and less-known scholars and teachers. Hosted by Dr. 
-Faith Circle Podcast — Faith Circle [Islam/Podcasts/Religion & Spirituality] (155, 2026-11-15)
-  https://anchor.fm/s/b69b7f60/podcast/rss
-  items=155 | ©<![CDATA[Faith Circle ]]> | Al-Ghazali & Ibn Hazm on the Issue of Music | Swipe & Scroll ; The Need for Rifq l Dr. Zohair Abdul-Rahman ; Etiquettes of the Gaze | Swipe & Scroll (8) | Dr. Zohair Abd | Faith Circle offers a space to explore Islam that’s engaging, inclusive, and grounded in scholarship. Our mission is to connect hearts to Allah ﷻ through knowle
-="Kalmomin Rayuwa","Bishara","Waƙoƙin Linjila" - A Najeriya, Waɗannan Mutanen sun gaskata da Kabilanci ko Musulunci Addini — Federal Republic of Nigeria Words of Life 4 [Religion & Spirituality/Podcasts] (137, 2022-12-27)
-  https://tjliu2188127.podomatic.com/rss2.xml
-  items=197 | ©Copyright 2025 Federal Republic of Niger | [62]. Mutanen Fali, Bana - &quot;Gayyatar Sanin Yesu Da Kans ; Hausa(&#1581;&#1614;&#1608;&#1618;&#1587;&#1614;) - &quot;Ye ; Hausa(&#1581;&#1614;&#1608;&#1618;&#1587;&#1614;) - Yesu: Ma | ====="Kalmomin Rai", "Bishara", "Waƙoƙin Bishara" - Harsunan da ake Magana a Nigeria Inda Kiristoci 'yan tsiraru ne (Lamba 62 zuwa Na 99) =====
-(Hausa, Fali(Ba
-Women’s Entrepreneur Exchange — Sayyida IH [Business/Podcasts/Religion & Spirituality] (5, 2026-11-17)
-  https://media.rss.com/women-s-entrepreneur-exchange/feed.xml
-  items=5 | ©<![CDATA[Sayyida IH 2023]]> | The Seekcess Series with Ameeratulqulub ; The Seekcess Series with Umm Muhammad ; The Seekcess Series with Eeman Nasko | Women’s Entrepreneur Exchange (WEE Club) is a community where muslimah entrepreneurs meet, connect and learn from one another.Tune into ‘the seekcess series’ wh
-The Women's Mosque of America — Women of America [Spirituality/Podcasts/Religion & Spirituality] (245, 2022-02-17)
-  https://feed.podbean.com/womensmosque/feed.xml
-  items=245 | ©Copyright 2016  . All rights reserved. | Q&amp;A with Hajjah Abrafi S. Sanyika (6/25/21) ; Islam &amp; Juneteenth: Liberating Slaves as a Mandate - Khu ; Adthan by Medina Tenour Whiteman (6/25/21) | Welcome to the Women's Mosque of America. This is the offical Women's Mosque of America podcast.
-The Making of the Islamic World — Ottoman History Podcast [History/Podcasts/News/Politics] (11, 2021-01-17)
-  https://feeds.feedburner.com/ottomanhistorypodcast/mPNW
-  items=11 | ©All Rights Reserved | Architecture and Environment in the Medieval Maghreb ; The Early Modern Islamic World ; Islam at a Crossroads in West Africa | A podcast series about the history of Muslim societies between the 7th and 17th century. Intended for students and enthusiasts alike. Brought to you by the Otto
-The Thinking Muslim — Muhammad Jalal [Islam/Podcasts/Religion & Spirituality/Spirituality] (345, 2026-11-20)
-  https://feeds.acast.com/public/shows/64fc8470defa1f0011d1a4d6
-  items=345 | ©Muhammad Jalal 693942 | Unlearning Decline: How the West Rewrote Muslim History | Ah ; The New Guantánamo No One Knows About | Clive Stafford Smith ; Abdul El-Sayed's Victory: Has Israel Lost America? | Sami Ha | A platform for the elevation of thinking and a call to enlightened action.Linktreehttps://linktr.ee/thinkingmuslimpodcastSupport Our WorkBecome a member: Sustai
-Behind the Minbar 🎙️ — Al-Rasool Media [Islam/Podcasts/Religion & Spirituality] (19, 2026-10-26)
-  https://anchor.fm/s/f15f68c8/podcast/rss
-  items=19 | ©<![CDATA[Al-Rasool Media]]> | The Land of Fadak (with Sheikh Shabbar Mehdi) | Behind the M ; What is a successful community? (with Dr. Sayed Moustafa Qaz ; The Messenger of Allah (with Shaykh Azhar Nasser) | Behind t | Tune into Behind the Minbar where we discuss all the juiciest topics and pertinent issues to the Shi'i world! 
-
-You'll also get a sneak peek at the behind-the-s
-Abdal Hakim Murad — Muslim Central [Islam/Podcasts/Religion & Spirituality/Society & Culture] (145, 2026-03-14)
-  https://rss.muslimcentral.com/abdal-hakim-murad.rss
-  items=145 | ©Copyright &#xA9; Muslim Central | Ramadan Moments 2026 - 4-4 ; Ramadan Moments 2026 - 3-4 ; Ramadan Moments 2026 - 2-4 | Abdal Hakim Murad, also known as Timothy Winter, is a distinguished Islamic scholar and intellectual, holding the position of Shaykh Zayed Lecturer in Islamic S
-Young Smirks — John Fontain [Islam/Podcasts/Religion & Spirituality] (112, 2022-12-30)
-  https://anchor.fm/s/1a5edf70/podcast/rss
-  items=112 | ©<![CDATA[John Fontain]]> | EP115 - Sheikh Suhaib Hassan | Sheikh Bin Baz sends Sheikh S ; EP114 - The Muslim Cowboy | Sexual Abuse, Shahada on death b ; EP113 - Sheikh Suhaib Hassan | Sheikh Suhaib's Time in Kenya | The Young Smirks podcast invites guests to speak about current Islamic issues and affairs. Hosted by John Fontain, Young Smirks has lived as a video podcast You
-Seerah for Today — Islam Podcast [Islam/Podcasts/Religion & Spirituality] (3, 2024-08-02)
-  https://www.islampodcasts.com/category/seerah-for-today/feed/
-  flux illisible The operation was aborted due to timeout
-Taraweeh Reflections — Islam Podcast [Islam/Podcasts/Religion & Spirituality] (151, 2026-03-19)
-  https://www.islampodcasts.com/category/taraweeh-reflections/feed/
-  flux illisible The operation was aborted due to timeout
-Quran: A Tafseer for our Lives - Islampodcasts — Islam Podcast [Islam/Podcasts/Religion & Spirituality] (45, 2026-05-11)
-  https://www.islampodcasts.com/category/quran-tafseer/feed/
-  flux illisible The operation was aborted due to timeout
-Monthly Reflections — Abbas Farshori [Islam/Podcasts/Religion & Spirituality] (30, 2022-04-19)
-  https://anchor.fm/s/32585b88/podcast/rss
-  items=30 | ©<![CDATA[Abbas Farshori]]> | Mental wellbeing in the Holy Month: Farzana Hirji [MR Ramadh ; Good Friday, even better story: Bilal Muhammad [MR Ramadhan  ; The pain and joys of personal growth: Sheikh Faiyaz Jaffer [ | Series of thematic discussions regarding the outstanding day of Ashura and eternal movement of Arbaeen
-Umm Aaminah's Majlis List — Umm Aaminah [Islam/Podcasts/Religion & Spirituality] (174, 2026-07-19)
-  https://anchor.fm/s/2811db54/podcast/rss
-  items=174 | ©<![CDATA[Umm Aaminah]]> | 13 - The Sstones of Aqsa Bled for Imam Hussain (as) - Sh Moh ; 12 - Yazid & Netanyahu, A Match Made in Hell - Sh Mohammed A ; 11 - Allah is in the Arena - Sh Mohammed Al-Sheraa | Selection of majalis
-Progeny Podcast — Progeny [Islam/Podcasts/Religion & Spirituality] (53, 2023-09-04)
-  https://anchor.fm/s/c7f62f8/podcast/rss
-  items=53 | ©<![CDATA[Progeny]]> | Brother Talib | Progeny Podcast #54 ; Dr. Shabbir Tejani | Progeny Podcast #53 ; Haraka Tours | Progeny Podcast #52 | Here to have a conversation on all that is happening surrounding the Muslim community.
-Ahmed Deedat — Muslim Central [Islam/Podcasts/Religion & Spirituality/Society & Culture] (122, 2015-11-16)
-  https://rss.muslimcentral.com/ahmed-hoosen-deedat.rss
-  items=122 | ©Copyright &#xA9; Muslim Central | GOLDEN YEARS ; What The Bible Says About Muhammad ; What The Bible Says About Muhammad in Abu Dhabi | Ahmed Deedat was a prominent South African Islamic preacher, writer, and public speaker known for his work in the field of comparative religion. Born on July 1,
-Authentische Hadithe des Propheten ﷺ – Auszüge aus Riyadus-Salihin als deutsches Hörbuch — dawaboost [Islam/Podcasts/Religion & Spirituality] (26, 2025-05-01)
-  https://anchor.fm/s/1045387c0/podcast/rss
-  items=26 | ©<![CDATA[dawaboost]]> | [#26] Reue, Vergebung und das Versprechen des Paradieses ; [#25] Tag der Auferstehung, göttliche Gerechtigkeit und die  ; [#24] Warnung vor schädlichem Verhalten – Was der Islam verb | Dieses Hörbuch enthält eine Auswahl authentischer Hadithe aus dem Werk Riyadus-Salihin von Imam an-Nawawi – sinngemäß ins Deutsche übersetzt 📖.
-
-Die Überliefer
-Arewaworld Waazi & Quran — Arewa world hausa [Islam/Podcasts/Religion & Spirituality] (128, 2020-05-08)
-  https://anchor.fm/s/1cdc1e98/podcast/rss
-  items=128 | ©<![CDATA[Arewa world hausa]]> | Seerah 12 ; The Cave of Hira ; Story of Zaid Bn Haritha | Its a segment about hausa and Quran recitations
-The Chapel of Faith Podcast — The Chapel of Faith [Christianity/Podcasts/Religion & Spirituality] (133, 2026-11-08)
-  https://anchor.fm/s/da5c7a44/podcast/rss
-  items=133 | ©<![CDATA[The Chapel of Faith]]> | Women's Day ; Be Not Ignorant ; The Coming Of Christ: Watching And Waiting | Join us as we share God's word to strengthen our faith in Jesus Christ.
-Midweek Meditations — Salem Sessions [Religion & Spirituality/Podcasts] (9, 2020-07-08)
-  https://www.spreaker.com/show/4300607/episodes/feed
-  items=9 | ©Copyright Salem Sessions | Can Believers Fall In Love? ; My name is… Rapist ; "White" Jesus and Justice | A time dedicated to keeping our hearts and minds close to God during the global quarantine
-AffinityXtra — AffinityXtra [Religion & Spirituality/Podcasts] (500, 2026-11-24)
-  https://feeds.soundcloud.com/users/soundcloud:users:462297/sounds.rss
-  items=500 | ©All rights reserved | Spending £10,000 at Apple! 🍏 iPhone 18 Pro Max, Duo &amp; M ; Black Friday Tech Traps! 🚨 SD Cards, SSDs &amp; Mic Mistake ; Tech Xtra 28 | Affinity Xtra is a Brand New Radio station dedicated to Gospel Music of Black Origin, it is a station which is broadcasting 24/7.
-Spanish Friday Sermon by Head of Ahmadiyya Muslim Community — Alislam.org [Islam/Podcasts/Religion & Spirituality] (98, 2022-01-28)
-  https://files.alislam.cloud/podcast/fs-es.rss
-  items=100 | ©&#x2117; &amp; &#xA9; 2026 Ahmadiyya Mus | Men of Excellence: Hazrat Abu Bakr (ra) ; Men of Excellence : Hazrat Umar ibn al-Khaṭṭāb (ra) ; Men of Excellence : Hazrat Umar ibn al-Khaṭṭāb (ra) | Spanish Translation of Friday Sermon delivered by Khalifatul Masih
-Blessed Sacrament Roman Catholic Parish Podcast — Blessed Sacrament Roman Catholic Parish [Christianity/Podcasts/Religion & Spirituality] (152, 2025-08-04)
-  https://feeds.simplecast.com/A2_lCeIR
-  items=152 | © | Homily 18th Sunday in Ordinary Time Fr. Samuel Aliba ; Homily 18th Sunday in Ordinary Time Fr. Doug Spina Vigil Mas ; Homily 17th Sunday in Ordinary Time Fr. Doug Spina | Blessed Sacrament Podcasts
-Blessed Sacrament Roman Catholic Parish is expanding the ways we evangelize. Our inspired team of clergy help, encourage and offer ho
-CrossWind Church Podcast — CrossWind Church [Christianity/Podcasts/Religion & Spirituality] (1183, 2026-11-09)
-  https://rss.buzzsprout.com/7343.rss
-  items=1183 | ©© 2026 CrossWind Church Podcast | The Generous Life Part I: Giving, Chris Buskirk ; The Generous Life Part II: How - Chris Buskirk ; Pray Like This Part VI: I Got This - Jody Earley | Weekly Messages from CrossWind Church in Broken Arrow Oklahoma. To learn more visit us online at CrossWindOK.org.
-APOSTLE GOODHEART O. EKWUEME — HORM [Christianity/Podcasts/Religion & Spirituality] (386, 2026-04-14)
-  https://anchor.fm/s/13b702c4/podcast/rss
-  items=386 | ©<![CDATA[HORM]]> | The Mystery and the Miracle of Open Heaven Pt2 ; The Mystery and the Miracle of Open Heaven Pt1 ; The Real Jesus Pt.3 | Welcome to the weekly Podcast of Apostle Goodheart O. Ekwueme. 
-
-Apostle Goodheart O. Ekwueme is the Apostolic Lead of Horn of Revival Ministry (HORM), a global
-God's Lighthouse — Ita Udoh [Christianity/Podcasts/Religion & Spirituality] (980, 2026-11-16)
-  https://anchor.fm/s/26698734/podcast/rss
-  items=980 | ©<![CDATA[Ita Udoh]]> | Jerusalem's Future [Part 3]: Security in Last Day Battles (S ; Jerusalem's Future [Part 2]: Kingdom Entrepreneurs in the Da ; Jerusalem's Future [Part 1]: Security in the Future Shakings | This podcast will seek to provide biblical teachings and answers on multiple issues that cause sincere seekers to stumble due to ignorant teaching and false pro
-Fellowship Church Louisville — Fellowship Church Louisville [Christianity/Podcasts/Religion & Spirituality] (255, 2026-11-22)
-  https://fellowship-church-louisville-216.thechurchco.site/feeds/channel/sermons
-  items=255 | ©<![CDATA[2026]]> | God's Good Design for Singleness ; Children in the Kingdom ; God's Good Design for Flourishing Men and Women | Resources from Fellowship Church in Louisville, KY. Visit us at www.fellowshiplouisville.org. Fellowship Church exists to know Christ and to make him known.
-YouthVibes — ECWA Plateau Church Youth Ministry [Christianity/Podcasts/Religion & Spirituality] (247, 2026-11-12)
-  https://anchor.fm/s/6094a4fc/podcast/rss
-  items=247 | ©<![CDATA[ECWA Plateau Church Youth Minis | Dealing with Anxiety ; Music Review ; Always the Strong One | Real Faith. Real Youth. Real Talks.
-Grace Covenant Church — Grace Covenant Church [Christianity/Podcasts/Religion & Spirituality] (497, 2026-11-15)
-  https://rss.buzzsprout.com/21834.rss
-  items=497 | ©© 2026 Grace Covenant Church  | John 20:19-31 | I Am Sending You | Michael Wilkes ; John 20:1-18 | Why Are You Weeping? | Michael Wilkes ; John 19:16-42 | It Is Finished | Michael Wilkes | Thanks for tuning in! You're listening to our weekly Sunday sermon podcast. A podcast of God's word being taught and applied in everyday life.
-Project on Shi'ism and Global Affairs - Harvard — Project on Shi'ism and Global Affairs - Harvard [Religion & Spirituality/Podcasts] (2, 2020-12-14)
-  https://feeds.soundcloud.com/users/soundcloud:users:713558980/sounds.rss
-  items=2 | ©All rights reserved | A World of Faith: Audrey Kitagawa, and Sayed Ali Abbas Razaw ; A World of Faith: Cole Durham, Jim Christie, and Sayed Ali A | Harvard University’s leading initiative for producing advanced knowledge on the universal, transnational, and global dimensions of the Shi’a Islamic revival fro
-Michael Easley Sermons — Michael Easley [Christianity/Podcasts/Religion & Spirituality] (212, 2026-11-16)
-  https://feeds.megaphone.fm/michaeleasleysermons
-  items=212 | ©All rights reserved | The Marks of a Growing Christian (2 Peter 1:5-7) ; The Sufficiency of Christ (2 Peter 1:3-4) ; Grow in Truth, Stand Against Deception (2 Peter 1:1-2) | Verse by Verse Bible teaching from Dr. Michael Easley. From the ministry of Michael Easley inContext.
-Apostle Joshua selman Messages — Apostle Joshua Selman Messages [Christianity/Podcasts/Religion & Spirituality] (1000, 2026-11-24)
-  https://www.spreaker.com/show/6508845/episodes/feed
-  items=1000 | ©Copyright Apostle Joshua Selman Messages | WELCOME NOTE WITH MIN. GBENGA OSEKE ; YOU DON T LOOK LIKE IT NOW with Apostle Joshua ; WELCOME NOTE WITH MIN. GBENGA OSEKE (1) | Apostle Joshua Selman is a Nigerian Gospel minister and founder of Eternity Network International (ENI). He's known for his powerful sermons on the Holy Spirit,
-Fountain of the Living Word Church Sermons — Fountain of the Living Word Church [Christianity/Podcasts/Religion & Spirituality] (299, 2026-04-26)
-  https://new.ftlw.org/feed/podcast/
-  items=0 | © |  | 
-Michael Easley inContext — Michael Easley [Christianity/Podcasts/Religion & Spirituality] (643, 2026-11-24)
-  https://feeds.megaphone.fm/BGL1366338717
-  items=643 | ©All rights reserved | What is a Woman? With Mary Kassian ; Abortion, Forgiveness, and Finding Healing in Christ With Vi ; How Should Christians Engage in Politics? With Jeff Samelson | Michael Easley inContext is designed to help you form a Biblical worldview through sound Biblical exposition and real-life insights.
-The Big Book: Cover to Cover — Michael Easley [Christianity/Podcasts/Religion & Spirituality] (113, 2023-02-09)
-  https://feeds.megaphone.fm/thebigbookcovertocover
-  items=113 | ©All rights reserved | A final recap of The Big Book: Cover to Cover with special g ; Revelation Bonus with Dr. Mark Hitchock ; Revelation | Dr. Michael Easley teaches from Genesis to Revelation, 1 sermon per book, to help listeners gain a deeper understanding of the big picture of scripture. Plus 48
-Messages by Desiring God — Desiring God [Christianity/Podcasts/Religion & Spirituality] (909, 2026-11-21)
-  https://feed.desiringgod.org/messages-by-desiring-god.rss
-  items=909 | ©© 2026 Desiring God | You Really Can Know Jesus ; How to Commune with Christ ; ‘Young Man, You Look Miserable’ | Messages from the Teaching Team at Desiring God.
-="Kalmomin Rai","Bishara","Waƙoƙin Bishara"-Harsunan da ake Magana a Nigeria Inda Kiristoci 'yan tsiraru ne (Lamba167-199) — Federal Republic of Nigeria Words of Life 7 [Religion & Spirituality/Podcasts] (49, 2022-12-31)
-  https://tjliu24.podomatic.com/rss2.xml
-  items=115 | ©Copyright 2025 Federal Republic of Niger | Hausa - Bisharar Matiyu - 27:1 -31.mp4 ; Hausa - Bisharar Matiyu -27:32 - 28:20.mp4 ; Bisharar Hausa Waka - &quot;Yesu Yana Jin Addu'a Dave Riman& | ====="Kalmomin Rai", "Bishara", "Waƙoƙin Bishara" - Harsunan da ake Magana a Nigeria Inda Kiristoci 'yan tsiraru ne (Lamba167 zuwa Na 199) =====
-(Hausa, Munga(
-قناة الدعوة الإسلامية Islamic Teachings Gh — HAKEEM FAZIL [Investing/Podcasts/Business] (229, 2026-11-22)
-  https://anchor.fm/s/dc25ce0c/podcast/rss
-  items=229 | ©<![CDATA[HAKEEM FAZIL]]> | funny mom praying ; MALLAM KABIRU GOMBE RAYUWAR AURE ; MALLAM KABIRU GOMBE baguam asɛnka | We Teach The Words Of Allah
-Islamic Preaching — Abdul Hakeem Fazil [Islam/Podcasts/Religion & Spirituality] (268, 2026-11-20)
-  https://www.spreaker.com/show/5782400/episodes/feed
-  items=277 | ©Copyright Abdul Hakeem Fazil | funny mom praying ; MALLAM KABIRU GOMBE RAYUWAR AURE ; MALLAM KABIRU GOMBE baguam asɛnka | We Preach The Words Of AllahBecome a supporter of this podcast: https://www.spreaker.com/podcast/islamic-preaching--5782400/support.
-The Islamic Guardian — Hakeem Fazil [Islam/Podcasts/Religion & Spirituality] (25, 2026-03-01)
-  https://anchor.fm/s/fe1c1f5c/podcast/rss
-  items=25 | ©<![CDATA[Hakeem Fazil ]]> | HAUSA TAFSEER RAMADAN ; RAMADAN DUA RECITATION ; HAUSA RAMADAN TAFSEER | The Guardian of the Quran 
-https://youtube.com/@babatundehakmann
-Jaffari Community Centre — Jaffari Community Centre [Islam/Podcasts/Religion & Spirituality] (595, 2026-10-02)
-  https://anchor.fm/s/10555e14/podcast/rss
-  items=595 | ©<![CDATA[Jaffari Community Centre]]> | Teaching Faith, Demanding Justice: Lessons from Lady Fatimah ; Pride or Shame? What Imam al-Askari Expects from His Shi'a - ; From the Umayyad Pulpit to the UN Podium: The Politics of Ju | Lectures, Majalis, Seminars, Q&amp;As, and more, focused on the Shi'a faith.
-
-YouTube Page: https://www.youtube.com/channel/UCjtEGNLvJ13iu0UlOHByQtQ
-After Maghrib 🌙 — After Maghrib [Islam/Podcasts/Religion & Spirituality] (185, 2026-11-19)
-  https://anchor.fm/s/a048efa4/podcast/rss
-  items=185 | ©<![CDATA[After Maghrib]]> | The Real Discussion on GTA VI - Guilty Pleasures & Addiction ; Die before you die - ft. Sayed Hussain Al-Modarresi ; Take Shias Off Social Media - ft. Ali Fadhil | The late night buzz - Shia Muslim podcast featuring co-hosts Ahmed Abbas and Sayed Ali Radhawi. We delve into some of the most contentious and pertinent issues 
-A Lesson Per Page — Shaykh Amin Rastani [Islam/Podcasts/Religion & Spirituality/Education] (30, 2022-04-01)
-  https://feeds.transistor.fm/a-lesson-per-page
-  items=30 | ©Mizan Institute 2021 | Episode 30 ; Episode 29 ; Episode 28 | Want to get closer to the Quran? Join Mizan Institute for a unique Quranic experience! In this series we plan to go through every page of the first ten juz’s (~
-Reviving the Sacred In Our Lives — Lighthouse Institute [Islam/Podcasts/Religion & Spirituality] (9, 2020-04-22)
-  https://lighthouseinstitute.podomatic.com/rss2.xml
-  items=9 | © | Sacred Space: Najah Bazzy on Hope, Healing and Faith ; Salvific Nature of the Qur'an w/ Shaykh Abdulrahman Cherri ; Part II: Paradox of Religious Life w/  Br Azhar Sheraze | At Man&#257;ra Collective, our mission is to revive the sacred ethos of the Islamic tradition in the lives of Muslims as they navigate the challenges of moderni
-Dawah Institute (DIN) Podcast — Da'wah Institute (DIN) [Islam/Podcasts/Religion & Spirituality] (206, 2026-10-31)
-  https://anchor.fm/s/1ee72c8c/podcast/rss
-  items=206 | ©<![CDATA[Da'wah Institute (DIN)]]> | EP. 10 | Islam 101 for New Muslims by Da'wah Institute (DIN) ; EP. 9 | Islam 101 for New Muslims by Da'wah Institute (DIN) ; EP. 8 | Islam 101 for New Muslims by Da'wah Institute (DIN) | The Dawah Institute (DIN) is the research and Islamic propagation department of the Islamic Education Trust(IET). We have trained religious leaders (men and wom
-New Books in Islamic Studies — Marshall Poe [Islam/Podcasts/Religion & Spirituality] (605, 2026-11-23)
-  https://feeds.simplecast.com/uCC8sCI3
-  items=600 | ©New Books Network | Political Theology and Islam with Paul L. Heck (U Notre Dame ; Islamic Poetry and Ethics in an Age of Hindu Nationalism wit ; Radio ReOrient 15:6: Northern Ireland, Sectarian Legacies an | This podcast is a channel on the New Books Network. The New Books Network is an academic audio library dedicated to public education. In each episode you will h
-SICM Qur'an Tafsir by Shaykh Bahmanpour — SHIA ITHNA’ASHARI COMMUNITY OF MIDDLESEX (SICM) [Islam/Podcasts/Religion & Spirituality/Education] (94, 2026-03-13)
-  https://media.rss.com/sicm-quran-tafsir/feed.xml
-  items=94 | ©<![CDATA[SICM 2025]]> | Tafsir of Surah Nas (114) Part 2 ; Tafsir of Surah Falaq (113) & Nas (114) ; Tafsir of Surah Ikhlas (112) Part 2 | SICM Qur'an Tafsir by Shaykh Bahmanpour
-New Books in Religion — New Books Network [Religion & Spirituality/Podcasts] (601, 2026-11-23)
-  https://feeds.simplecast.com/EmW8YM55
-  items=600 | ©New Books Network | The Megachurch-Industrial Complex: Searching for Transcenden ; Unmaking Eden: Genesis and the Domestication of the World wi ; Political Theology and Islam with Paul L. Heck (U Notre Dame | This podcast is a channel on the New Books Network. The New Books Network is an academic audio library dedicated to public education. In each episode you will h
-Mumbarin Sunnah — Mumbarin Sunnah [Islam/Podcasts/Religion & Spirituality] (2, 2021-04-17)
-  https://anchor.fm/s/56767f40/podcast/rss
-  items=2 | ©<![CDATA[Mumbarin Sunnah ]]> | Rayuwar Mu'awaiyya Dan Abi Safiyanu (R.A). Daga Dr Muhammad  ; Sunnah Da Masu Inkira Da Ita, Na Dr Abubakar Muhammad Sani B | Kasidoji masu kayatarwa daga Malaman Sunnah a cikin yaren Hausa
-Al-Maqasid Khutbas — Al-Maqasid [Islam/Podcasts/Religion & Spirituality] (86, 2022-12-09)
-  https://www.almaqasid.org/podcasts/khutbas?format=rss
-  items=88 | ©All rights reserved. | Intend to be a Lifelong Learner ; Take Your Needs to Allah ; Only Seek Allah’s Approval | The weekly Jumua, or Friday, Congregational prayer is livestreamed from Al-Maqasid from 1:15pm-2:00pm. 
- 
-Connect with us online at https://www.almaqasid.org/co
-The Middlepath Podcast (TMP) — Rashid & Co [Self-Improvement/Podcasts/Education/Religion & Spirituality/Islam] (17, 2022-05-18)
-  https://media.rss.com/themiddlepathpodcast/feed.xml
-  items=17 | ©<![CDATA[TMP 2022]]> | The Final Word on LGBT with Imam Zaid Shakir ; Muslim TikTokers and the Mufti Menk Controversy with Abdurra ; Growing up in Islamic Private Schools | TMP Side Talk #1 | #1 Podcast for American Muslims
-The Deeper Roots Podcast — Dr. Abdullah Hakim Quick [Islam/Podcasts/Religion & Spirituality] (2, 2026-09-06)
-  https://rss.buzzsprout.com/1966921.rss
-  items=2 | ©© 2026 The Deeper Roots Podcast | The Grand Distraction ; When the Most Oppressed Become the Leaders | A podcast to bring the voice and wisdom of Dr. Quick to the world. History, Islamic history, and revolutionary revival of the Muslim mind. This podcast is for t
-Islamic History Podcast — Islamic History Podcast [Islam/Podcasts/Religion & Spirituality] (210, 2026-11-23)
-  https://feed.podbean.com/islamichistorypodcast/feed.xml
-  items=205 | ©Copyright 2023 All rights reserved. | Bonus: Ibn al-Haytham ; The Last Umayyad Caliph | IHP 11-3 ; The Caliphate in Chaos | IHP 11-2 | We often overlook Islamic history as a learning tool. The history of Islam is not only important for Muslims, but important for everyone. Islam and the people w
-With Love, Iman. — Iman Sanusi [Islam/Podcasts/Religion & Spirituality] (44, 2026-09-05)
-  https://anchor.fm/s/ea5a89f4/podcast/rss
-  items=44 | ©<![CDATA[Iman Sanusi]]> | Rooted: Episode 5 - Who are you becoming + 3 whole years?🥹 ; Rooted: Episode 4 - Du’a As Your Reset ; Rooted: Episode 3- She Opened It Again | The Prophet(ﷺ)said, "Convey (my teachings) to the people even if it were a single sentence" (Sahih al-Bukhari 3461).
-
-As-Salaam-Alaikum wa-raḥmatu llāhi wa-bara
-Crescent Project — Crescent Project [Christianity/Podcasts/Religion & Spirituality/Islam] (189, 2025-11-26)
-  https://www.crescentproject.org/cpradio?format=rss
-  items=189 | © | Powerful Lessons from the Iranian Church - Part 2 ; Powerful Lessons from the Iranian Church - Part 1 ; Bringing Bible Training to the Global South - Part 2 | Crescent Project Radio is a podcast about God's miraculous movement in the Muslim world. Through testimonies from former Muslims and interviews with ministry le
-AWR Hausa - هَوْسَ — Adventist World Radio [Christianity/Podcasts/Religion & Spirituality] (189, 2025-09-27)
-  http://feeds.feedburner.com/HAULG_AWR
-  items=170 | ©℗ &amp; © 2025 Adventist World Radio | MU KOMA GIDA ; HAULG_AWRx_20250926_6 ; BI NA DA | Daily Hausa radio programs produced by Adventist World Radio
-einfach Islam — einfach Islam [Islam/Podcasts/Religion & Spirituality] (176, 2026-11-19)
-  https://anchor.fm/s/10fae4074/podcast/rss
-  items=176 | ©<![CDATA[einfach Islam]]> | Schulden - Eine Gefahr für dein Diesseits und Jenseits ; 72 Die Geschichte der Leute des Sabbats ; Qarun - Erkennst du seine Eigenschaften in dir? | Islamische Unterrichte und Freitagspredigten
-Authentisches Wissen aus Qur’an und Sunnah
-Möge Allah Nutzen daraus entstehen lassen
-Asma ul Husna (99 Namen Allahs) — Im Auftrag des Islam [Islam/Podcasts/Religion & Spirituality/Education] (7, 2023-03-31)
-  https://imauftragdesislam.podcaster.de/asma-ul-husna.rss
-  items=7 | ©Azad El Kurdi | Asma&amp;#039;ul Husna 07 | Ar-Rahman &amp;amp; Ar-Rahim | D ; Asma&amp;#039;ul Husna 06 | Ar-Rahman &amp;amp; Ar-Rahim | W ; Asma&amp;#039;ul Husna 05 | Ar-Rahman &amp;amp; Ar-Rahim | A | Wir als "Im Auftrag des Islam" sind eine Medien- und Bildungsplattform die es sich zur Aufgabe gemacht hat, durch Videos, Vorträgen, Interviews und ähnlichen Ve
-GUESS rss.qurancentral.com/aminu-ibrahim-daurawa -> 404 items=0
-GUESS rss.muslimcentral.com/aminu-ibrahim-daurawa -> 404 items=0
-GUESS rss.qurancentral.com/isa-ali-pantami -> 404 items=0
-GUESS rss.muslimcentral.com/isa-ali-pantami -> 404 items=0
-GUESS rss.qurancentral.com/muhammad-auwal-albani-zaria -> 404 items=0
-GUESS rss.muslimcentral.com/muhammad-auwal-albani-zaria -> 404 items=0
-GUESS rss.qurancentral.com/abubakar-mahmud-gumi -> 404 items=0
-GUESS rss.muslimcentral.com/abubakar-mahmud-gumi -> 404 items=0
-GUESS rss.qurancentral.com/kabiru-gombe -> 404 items=0
-GUESS rss.muslimcentral.com/kabiru-gombe -> 404 items=0
-GUESS rss.qurancentral.com/sani-rijiyar-lemo -> 404 items=0
-GUESS rss.muslimcentral.com/sani-rijiyar-lemo -> 404 items=0
-GUESS rss.qurancentral.com/ahmad-gumi -> 404 items=0
-GUESS rss.muslimcentral.com/ahmad-gumi -> 404 items=0
-GUESS rss.qurancentral.com/bashir-aliyu-umar -> 404 items=0
-GUESS rss.muslimcentral.com/bashir-aliyu-umar -> 404 items=0
+=== subject:(hausa) AND mediatype:audio : 784
+0025SheikhJaafarTafseer	186558	9377Mo	The Light Of Islam		Sheikh Jaafar Complete Tafseer
+internet2sheikhalbanizaria	73474	1760Mo	Lightofislam.com.ng		Sheikh Albani Zaria Archive
+ramadan-tafseer-by-sheikh-jaafar-2005	43640	334Mo	Lightofislam.com.ng		2005 Complete Ramadan Tafseer By Sheikh Ja'afar
+001RamadanTafseerByDr.IsaAliPantami2019	29961	737Mo	The Light Of Islam		2019 Ramadan Tafseer By Dr. Isa Ali Pantami
+RamadanTafseerByDr.SaniUmar2019	29860	795Mo	The Light Of Islam		2019 Ramadan Tafseer By Dr. Sani Umar
+002AlBaqaraSheikhJaafar_20190131	27714	1079Mo	The Light Of Islam		Karatun Qur'ani - Sheikh Ja'afar Mahmud Adam
+iliyah-dan-mai-karfi	24409	23Mo			ILiyah Dan Mai Karfi
+ruwan-bagaja-complete	23517	24Mo			Ruwan Bagaja Complete
+HausaSongs33	23120	106Mo			Hausa Songs 33
+blackfolktales_2401_librivox	22527	159Mo	Erick Berry		Black Folk Tales
+RamadanTafseerBySheikhAhmadTijjaniGuruntum2019	20449	332Mo	The Light Of Islam		2019 Ramadan Tafseer By Sheikh Ahmad Tijjani Yusuf Guruntum
+002-tafseer-by-sheikh-albani-zaria-2008	17114	364Mo	Lightofislam.com.ng		Tafseer By Sheikh Albani Zaria 2008
+RamadanTafseerBySheikhAbdurrazaqYahyaHaifan2019	15503	772Mo	The Light Of Islam		Ramadan Tafseer By Sheikh Abdurrazaq Yahya Haifan 2019
+MamanShata-HausaMusic	14724	190Mo	traditional		MamanShata-HausaMusic
+duniyarjinnudashaidanusheikhalbanizaria	12765	301Mo	Lightofislam.com.ng		Duniyar Jinnu Da Shaidanu Sheikh Albani Zaria
+KadaKuyiBarnaABayanKasaDr.SaniUmar	12242	504Mo	The Light Of Islam		Hudubobin Dr. Sani Umar
+ramadan-tafseer-by-sheikh-ahmad-tijjani-guruntum-2020	11797	333Mo	Lightofislam.com.ng		Ramadan Tafseer By Sheikh Ahmad Tijjani Guruntum 2020
+015MukhtasaruSiratirRasoulSheikhJaafar	10208	1105Mo	The Light Of Islam		Mukhtasaru Siratir Rasoul Sheikh Ja'afar
+001-ramadan-tafseer-by-sheikh-abdurrazaq-yahya-haifan-2020	9734	549Mo	Lightofislam.com.ng		Ramadan Tafseer By Sheikh Abdurrazaq Yahya Haifan 2020
+ramadan-tafseer-by-dr.-sani-umar-2008	9510	322Mo	Lightofislam.com.ng		Ramadan Tafseer By Dr. Sani Umar 2008
+sheikhahmadtijjaniguruntum	8696	287Mo	Lightofislam.com.ng		Sheikh Ahmad Tijjani Yusuf Guruntum
+166WeeklyTafseerDr.SaniUmar	7738	1335Mo	The Light Of Islam		Weekly Tafseer By Dr. Muhammad Sani Umar
+004abaunahadithsbysheikhabdurrazakyahyahaifan	7627	1579Mo	Lightofislam.com.ng		Aba'una Hadiths By Sheikh Abdurrazak Yahya Haifan
+hausatrapprodbycreamzviainstrumentals.com.ng	7482	8Mo			Hausa Trap Prod By CREa Mz Via Instrumentals.com.ng
+narambada	7273	108Mo	Wakokin Dauri	http://creativecommons.org/licenses/by-nc-nd/3.0/	Narambada
+NightRamadanTafseerBySheikhMusaAsadussunnah2019	7172	472Mo	The Light Of Islam		2019 Night Ramadan Tafseer By Sheikh Musa Asadussunnah
+036SunanuDdarimiDr.AhmadBuk	6853	1829Mo	The Light Of Islam		Sharhin Sunanu-ddarimi By Dr. Ahmad Buk
+FatawowinRahamaByDr.Sani15022019	6565	2279Mo	The Light Of Islam		Fatawowin Rahama By Dr. Sani Umar Rijiyar Lemu
+ramadan-tafseer-by-sheikh-isa-ali-pantami-2020	6322	421Mo	Lightofislam.com.ng		Ramadan Tafseer By Sheikh Isa Ali Pantami 2020
+003maidugurisheikhalbanizaria	6280	178Mo	Lightofislam.com.ng		Maiduguri by Sheikh Albani Zaria
+tafiya-mabudin-ilimi-05	6269	38Mo			Tafiya Mabuɗin Ilimi 05
+wakokin-shata-mamman	6203	10Mo			Wakokin Shata Mamman
+001-ramadan-tafseer-by-sheikh-kabiru-gombe	6162	560Mo	Lightofislam.com.ng		Ramadan Tafseer By Sheikh Kabiru Gombe 2020
+Khudubobindrabubakarsanibirninkudu	6060	223Mo	The Light Of Islam		Dr. Abubakar Sani Birnin Kudu Archive
+01RamadanTafseer2018ByDr.SaniUmar	5811	30Mo	Nibras's Blog		01 Ramadan Tafseer 2018 By Dr. Sani Umar
+18-gwani-isa	5748	1457Mo	Gwani Isa		18 Gwani Isa
+Hausa	5725	924Mo	Foreign Service Institute	http://creativecommons.org/publicdomain/mark/1.0/	Hausa course
+026AlWasiyyatulKuburaByDr.SaniUmar	5604	1295Mo	The Light Of Islam		Al Wasiyyatul Kubura By Dr. Sani Umar
+adabulmufradsheikhabdurrazaqyahyahaifan	5512	254Mo	Lightofislam.com.ng		Adabul Mufrad by Sheikh Abdurrazaq Yahya Haifan
+02RamadanTafseer2018ByDr.SaniUmar	5174	31Mo	Nibras's Blog		02 Ramadan Tafseer 2018 By Dr. Sani Umar
+esther-osaji-taimake-ni	5147	5Mo			Esther Osaji Taimake Ni
+TafsirSheikhJaafar	5104	2061Mo	AbdulQadir Muhammad Bello (ambgombe@gmai		COMPLETE TAFSIR SHEIKH JA'AFAR MAHMUD ADAM
+rabiubaba	5045	124Mo	Ranar Mawakan Hausa	http://creativecommons.org/licenses/by-nc-nd/3.0/	Rabiu Usman Baba
+001SunanDarimiByDrAhmadBuk	4993	368Mo			Sunan Darimi By Dr Ahmad Buk
+lalacewartarbiyyahsheikhalbanizaria	4942	65Mo	Lightofislam.com.ng		Lalacewar Tarbiyyah by Sheikh Albani Zaria
+sheikh-jaafar-mahmud-adam_202006	4830	125Mo	lightofislam.com.ng		Muhadarorin Sheikh Ja'afar Mahmud Adam
+sacrificed-myself-for-the-caliphate_20250217_1716	4795	1117Mo			Rare Nasheeds [Remake]
+karshenwahala1	4791	323Mo			Karshen Wahala 1
+rana-daya-episode-02-hausa-novels-128k	4767	37Mo			RANA DAYA Episode 02 || Hausa Novels( 128k)
+Muslim1_201403	4669	146Mo	Almadina		Sahih Muslim 1(Hausa)
+sheikhmusaasadussunnah	4566	762Mo	Lightofislam.com.ng		Sheikh Musa Yusuf Asadussunnah
+sharhusulilimanbysheikhjaafarmahmudadam	4513	147Mo	Lightofislam.com.ng		Sharh Usulil Iman By Sheikh Ja'afar Mahmud Adam
+amadanTafseerBySheikhMusaAsadussunnah2019	4435	347Mo	The Light Of Islam		2019 Evening Ramadan Tafseer By Sheikh Musa Asadussunnah
+001-ramadan-tafseer-by-dr.-sani-umar-2020	4422	232Mo	Lightofislam.com.ng		Ramadan Tafseer By Dr. Sani Umar 2020
+ramadan-tafseer-by-dr.-abdallah-usman-gadon-kaya-2020	4272	242Mo	Lightofislam.com.ng		Ramadan Tafseer By Dr. Abdallah Usman Gadon Kaya 2020
+03RamadanTafseer2018ByDr.SaniUmar	4267	32Mo	Nibras's Blog		03 Ramadan Tafseer 2018 By Dr. Sani Umar
+RadioNaija1989	4233	203Mo	It was not me-oh!	http://creativecommons.org/licenses/publicdomain/	Radio Naija 1989
+01Sh.AbdurrazaqYahyaHaifan2018RamadanTafseer	4087	34Mo	Nibras's Blog		01 Sh. Abdurrazaq Yahya Haifan 2018 Ramadan Tafseer
+rayuwarauredr.saniumar	4001	475Mo	The Light Of Islam		Dr. Sani Umar Archive
+04RamadanTafseer2018ByDr.SaniUmar	3927	30Mo	Nibras's Blog		04 Ramadan Tafseer 2018 By Dr. Sani Umar
+118BAddauWaddawaDr.SaniUmar	3892	512Mo	https://lightofislam.com.ng/		Sharhin littafin Adda'u Waddawa Dr. Sani Umar
+RamadanTafsserByDr.BashirAliyu2019	3886	1080Mo	The Light Of Islam		2019 Ramadan Tafsser By Dr. Bashir Aliyu
+shamailmuhammadiyyash.isaaliyupantami	3838	863Mo	Lightofislam.com.ng		Shama'ilul Muhammadiyya by Sheikh Isa Aliyu Pantami
+RamadanTafseerByBinUthmanKano2019	3770	129Mo	The Light Of Islam		Ramadan Tafseer By Bin Uthman Kano 2019
+05RamadanTafseer2018ByDr.SaniUmar	3739	30Mo	Nibras's Blog		05 Ramadan Tafseer 2018 By Dr. Sani Umar
+15.Sarimwww.shamsuddeen.com	3718	25Mo			15. Sarim(www.shamsuddeen.com)
+07RamadanTafseer2018ByDr.SaniUmar	3591	31Mo	Nibras's Blog		07 Ramadan Tafseer 2018 By Dr. Sani Umar
+06RamadanTafseer2018ByDr.SaniUmar	3555	30Mo	Nibras's Blog		06 Ramadan Tafseer 2018 By Dr. Sani Umar
+08RamadanTafseer2018ByDr.SaniUmar	3530	31Mo	Nibras's Blog		08 Ramadan Tafseer 2018 By Dr. Sani Umar
+001-ramadan-tafseer-by-sheikh-bin-uthman-kano-hausa-2020	3509	235Mo	Lightofislam.com.ng		Ramadan Tafseer By Sheikh Bin Uthman Kano Hausa 2020
+02Sh.AbdurrazaqYahyaHaifan2018RamadanTafseer	3487	34Mo	Nibras's Blog		02 Sh. Abdurrazaq Yahya Haifan 2018 Ramadan Tafseer
+001wasiyoyigomasheikhahmadtijjaniguruntum	3427	289Mo	Lightofislam.com.ng		Sheikh Ahmad Tijjani Guruntum Archive
+001-ramadan-tafseer-by-dr.-mansur-isa-yelwa-2020	3416	419Mo	Lightofislam.com.ng		Ramadan Tafseer By Dr. Mansur Isa Yelwa 2020
+RamadanTafseerByDr.MansurSokoto2019	3408	386Mo	The Light Of Islam		2019 Ramadan Tafseer By Dr. Mansur Sokoto
+interview-with-dr-alhaji-mamman-shata-katsina-1960s	3368	11Mo			Interview With Dr Alhaji Mamman Shata Katsina 1960s
+RamadanTafseerByDr.AbubakarMhdSaniBKudu2019	3346	619Mo	The Light Of Islam		Ramadan Tafseer By Dr. Abubakar Mhd Sani B Kudu 2019
+115AlwabilussayyibDr.SaniUmar	3277	752Mo	The Light Of Islam		Sharhin Alwabilussayyib By Dr. Sani Umar
+matsalolinauredamaauratasheikhaminuibrahimdaurawa	3235	353Mo	Lightofislam.com.ng		Sheikh Aminu Ibrahim Daurawa Archive
+baban-zara-rabil-jos	3207	4Mo			Baban Zara Rabil Jos
+jankidi	3166	70Mo		http://creativecommons.org/licenses/by-nc-nd/3.0/	Salihu Jankidi
