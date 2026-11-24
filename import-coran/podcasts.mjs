@@ -16,6 +16,14 @@ const PODCASTS = [
   { slug: "fr-majalis", langue: "fr", ordre: "date", auteur: "Librairie Majalis", source: "Podcast Librairie Majalis", rss: "https://anchor.fm/s/8fa2b914/podcast/rss" },
   { slug: "fr-tafsir", langue: "fr", ordre: "date", auteur: "À lumière du Coran", source: "Podcast « Coran et Tafsir »", rss: "https://anchor.fm/s/f1613b94/podcast/rss" },
   { slug: "fr-mirail", langue: "fr", ordre: "date", auteur: "Mosquée du Mirail (Toulouse)", source: "Podcast de la mosquée", rss: "https://anchor.fm/s/98c16b80/podcast/rss" },
+  /* Haoussa : tafsir, fatawa et cours de savants de la Sounna (Nigeria) */
+  { slug: "ha-ilmqs-tafsir", langue: "ha", ordre: "date", auteur: "Rijiyar-Lemo, Bashir Aliyu Umar…", source: "Podcast « Hausa Tafseer » (IlmQS)", rss: "https://anchor.fm/s/10f3f513c/podcast/rss" },
+  { slug: "ha-ilmqs-fatwa", langue: "ha", ordre: "date", auteur: "Fatawowin Rahama", source: "Podcast « Hausa Fatwa » (IlmQS)", rss: "https://anchor.fm/s/10f430868/podcast/rss" },
+  { slug: "ha-mukhtasar", langue: "ha", ordre: "date", auteur: "Takaitaccen Tafsirin Alƙur'ani", source: "Dar Al-Mukhtasar", rss: "https://anchor.fm/s/119a439d0/podcast/rss" },
+  { slug: "ha-pantami-hisn", langue: "ha", ordre: "date", auteur: "Isa Ali Ibrahim Pantami", source: "Podcast « Hisnul Muslim »", rss: "https://anchor.fm/s/f148c258/podcast/rss" },
+  { slug: "ha-pantami-silat", langue: "ha", ordre: "date", auteur: "Isa Ali Ibrahim Pantami", source: "Podcast « Silatul Arham »", rss: "https://anchor.fm/s/10099a72c/podcast/rss" },
+  { slug: "ha-pantami-birr", langue: "ha", ordre: "date", auteur: "Isa Ali Ibrahim Pantami", source: "Podcast « Birrul Walidain »", rss: "https://anchor.fm/s/fd31bd68/podcast/rss" },
+  { slug: "ha-arewa", langue: "ha", ordre: "date", auteur: "Arewaworld Waazi", source: "Podcast « Arewaworld Waazi & Quran »", rss: "https://anchor.fm/s/1cdc1e98/podcast/rss" },
   { slug: "fr-sira", langue: "fr", ordre: "date", auteur: "Islamkheir", source: "Podcast « Récits de la Vie du Prophète ﷺ »", rss: "https://anchor.fm/s/10d1ec6e4/podcast/rss" }];
 /* Identifiant stable tiré de l'adresse du fichier (pour les podcasts sans numérotation fiable) */
 const hacher = s => { let h = 2166136261; for (const c of s) { h ^= c.charCodeAt(0); h = Math.imul(h, 16777619); } return (h >>> 0).toString(36); };
