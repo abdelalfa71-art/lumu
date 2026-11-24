@@ -8,6 +8,54 @@ const PODCASTS = [
   /* Français : cours, tafsir et rappels de savants et d'étudiants de la Sounna (ordre : le plus récent d'abord) */
   { slug: "ha-pantami-r1446", langue: "ha", ordre: "num2", auteur: "Isa Ali Ibrahim Pantami", source: "Podcast « Ramadan Tafsir 1446/2025 »", rss: "https://anchor.fm/s/101e1b3a4/podcast/rss" },
   { slug: "ha-pantami-r1447", langue: "ha", ordre: "num2", auteur: "Isa Ali Ibrahim Pantami", source: "Podcast « Ramadan Tafsir 1447/2026 »", rss: "https://anchor.fm/s/10f214c78/podcast/rss" },
+  /* Haoussa : collections publiques d'archive.org (lues depuis archive.org) */
+  { slug: "ha-ia-0", langue: "ha", archive: "internet2sheikhalbanizaria", auteur: "Muhammad Auwal Albani Zaria", source: "archive.org « Archive »" },
+  { slug: "ha-ia-1", langue: "ha", archive: "002-tafseer-by-sheikh-albani-zaria-2008", auteur: "Muhammad Auwal Albani Zaria", source: "archive.org « Tafseer 2008 »" },
+  { slug: "ha-ia-2", langue: "ha", archive: "duniyarjinnudashaidanusheikhalbanizaria", auteur: "Muhammad Auwal Albani Zaria", source: "archive.org « Duniyar Jinnu da Shaidanu »" },
+  { slug: "ha-ia-3", langue: "ha", archive: "talkhissifatusalatsheikhalbanizaria", auteur: "Muhammad Auwal Albani Zaria", source: "archive.org « Talkhis Sifatu Salatin Nabiy »" },
+  { slug: "ha-ia-4", langue: "ha", archive: "albani_zaria_risaalah", auteur: "Muhammad Auwal Albani Zaria", source: "archive.org « Karatun Ar-Risaalah »" },
+  { slug: "ha-ia-5", langue: "ha", archive: "ramadan-tafseer-by-sheikh-jaafar-2005", auteur: "Ja'afar Mahmud Adam", source: "archive.org « Ramadan Tafseer 2005 »" },
+  { slug: "ha-ia-6", langue: "ha", archive: "sharhusulilimanbysheikhjaafarmahmudadam", auteur: "Ja'afar Mahmud Adam", source: "archive.org « Sharh Usulil Iman »" },
+  { slug: "ha-ia-7", langue: "ha", archive: "lamiyyatuibntaimiyyahsheikhjaafar", auteur: "Ja'afar Mahmud Adam", source: "archive.org « Lamiyyatu Ibn Taimiyyah »" },
+  { slug: "ha-ia-8", langue: "ha", archive: "muhadarori", auteur: "Ja'afar Mahmud Adam", source: "archive.org « Muhadarori »" },
+  { slug: "ha-ia-9", langue: "ha", archive: "001RamadanTafseerByDr.IsaAliPantami2019", auteur: "Isa Ali Ibrahim Pantami", source: "archive.org « Ramadan Tafseer 2019 »" },
+  { slug: "ha-ia-10", langue: "ha", archive: "ramadan-tafseer-by-sheikh-isa-ali-pantami-2020", auteur: "Isa Ali Ibrahim Pantami", source: "archive.org « Ramadan Tafseer 2020 »" },
+  { slug: "ha-ia-11", langue: "ha", archive: "shamailmuhammadiyyash.isaaliyupantami", auteur: "Isa Ali Ibrahim Pantami", source: "archive.org « Shama'ilul Muhammadiyya »" },
+  { slug: "ha-ia-12", langue: "ha", archive: "RamadanTafseerByDr.SaniUmar2019", auteur: "Muhammad Sani Umar Rijiyar-Lemo", source: "archive.org « Ramadan Tafseer 2019 »" },
+  { slug: "ha-ia-13", langue: "ha", archive: "001-ramadan-tafseer-by-dr.-sani-umar-2020", auteur: "Muhammad Sani Umar Rijiyar-Lemo", source: "archive.org « Ramadan Tafseer 2020 »" },
+  { slug: "ha-ia-14", langue: "ha", archive: "166WeeklyTafseerDr.SaniUmar", auteur: "Muhammad Sani Umar Rijiyar-Lemo", source: "archive.org « Weekly Tafseer »" },
+  { slug: "ha-ia-15", langue: "ha", archive: "rayuwarauredr.saniumar", auteur: "Muhammad Sani Umar Rijiyar-Lemo", source: "archive.org « Archive »" },
+  { slug: "ha-ia-16", langue: "ha", archive: "fatawoyin-rahama", auteur: "Muhammad Sani Umar Rijiyar-Lemo", source: "archive.org « Fatawowin Rahama 2012-… »" },
+  { slug: "ha-ia-17", langue: "ha", archive: "RamadanTafseerBySheikhAhmadTijjaniGuruntum2019", auteur: "Ahmad Tijjani Yusuf Guruntum", source: "archive.org « Ramadan Tafseer 2019 »" },
+  { slug: "ha-ia-18", langue: "ha", archive: "ramadan-tafseer-by-sheikh-ahmad-tijjani-guruntum-2020", auteur: "Ahmad Tijjani Yusuf Guruntum", source: "archive.org « Ramadan Tafseer 2020 »" },
+  { slug: "ha-ia-19", langue: "ha", archive: "001wasiyoyigomasheikhahmadtijjaniguruntum", auteur: "Ahmad Tijjani Yusuf Guruntum", source: "archive.org « Archive »" },
+  { slug: "ha-ia-20", langue: "ha", archive: "RamadanTafseerBySheikhAbdurrazaqYahyaHaifan2019", auteur: "Abdurrazaq Yahya Haifan", source: "archive.org « Ramadan Tafseer 2019 »" },
+  { slug: "ha-ia-21", langue: "ha", archive: "001-ramadan-tafseer-by-sheikh-abdurrazaq-yahya-haifan-2020", auteur: "Abdurrazaq Yahya Haifan", source: "archive.org « Ramadan Tafseer 2020 »" },
+  { slug: "ha-ia-22", langue: "ha", archive: "adabulmufradsheikhabdurrazaqyahyahaifan", auteur: "Abdurrazaq Yahya Haifan", source: "archive.org « Adabul Mufrad »" },
+  { slug: "ha-ia-23", langue: "ha", archive: "004abaunahadithsbysheikhabdurrazakyahyahaifan", auteur: "Abdurrazaq Yahya Haifan", source: "archive.org « Aba'una Hadiths »" },
+  { slug: "ha-ia-24", langue: "ha", archive: "001-ramadan-tafseer-by-sheikh-kabiru-gombe", auteur: "Kabiru Haruna Gombe", source: "archive.org « Ramadan Tafseer 2020 »" },
+  { slug: "ha-ia-25", langue: "ha", archive: "Khudubobindrabubakarsanibirninkudu", auteur: "Abubakar Sani Birnin Kudu", source: "archive.org « Archive »" },
+  { slug: "ha-ia-26", langue: "ha", archive: "sheikhmusaasadussunnah", auteur: "Musa Yusuf Asadussunnah", source: "archive.org « Archive »" },
+  { slug: "ha-ia-27", langue: "ha", archive: "NightRamadanTafseerBySheikhMusaAsadussunnah2019", auteur: "Musa Yusuf Asadussunnah", source: "archive.org « Ramadan Tafseer 2019 »" },
+  { slug: "ha-ia-28", langue: "ha", archive: "ramadan-tafseer-by-dr.-abdallah-usman-gadon-kaya-2020", auteur: "Abdallah Usman Gadon Kaya", source: "archive.org « Ramadan Tafseer 2020 »" },
+  { slug: "ha-ia-29", langue: "ha", archive: "dr.abdallahusmangadonkayaarchive", auteur: "Abdallah Usman Gadon Kaya", source: "archive.org « Archive »" },
+  { slug: "ha-ia-30", langue: "ha", archive: "hausa-ramadan-tafseer-2024-sheikh-muhammad-bin-uthman-kano", auteur: "Muhammad Bin Uthman Kano", source: "archive.org « Ramadan Tafseer 2024 »" },
+  { slug: "ha-ia-31", langue: "ha", archive: "Hudubahbybinuthman", auteur: "Muhammad Bin Uthman Kano", source: "archive.org « Archive »" },
+  { slug: "ha-ia-32", langue: "ha", archive: "ramadan-tafseer-by-dr.-mansur-isa-yelwa-2020", auteur: "Mansur Isa Yelwa", source: "archive.org « Ramadan Tafseer 2020 »" },
+  { slug: "ha-ia-33", langue: "ha", archive: "RamadanTafseerByDr.MansurSokoto2019", auteur: "Mansur Ibrahim Sokoto", source: "archive.org « Ramadan Tafseer 2019 »" },
+  { slug: "ha-ia-34", langue: "ha", archive: "hanyoyintsiradr.mansursokoto", auteur: "Mansur Ibrahim Sokoto", source: "archive.org « Archive »" },
+  { slug: "ha-ia-35", langue: "ha", archive: "weeklytafseerbydr.idrisbauchi01november2019", auteur: "Idris Abdul-Azeez Bauchi", source: "archive.org « Weekly Tafseer »" },
+  { slug: "ha-ia-36", langue: "ha", archive: "khudubarjumaadr.idrisabdulazeezbauchi01112019", auteur: "Idris Abdul-Azeez Bauchi", source: "archive.org « Hudubobin Juma'a »" },
+  { slug: "ha-ia-37", langue: "ha", archive: "ramadan-tafseer-by-dr.-bashir-aliyu-umar-2020", auteur: "Bashir Aliyu Umar", source: "archive.org « Ramadan Tafseer 2020 »" },
+  { slug: "ha-ia-38", langue: "ha", archive: "bashir-aliyu-umar", auteur: "Bashir Aliyu Umar", source: "archive.org « Hudubobin Juma'a »" },
+  { slug: "ha-ia-39", langue: "ha", archive: "tafseerussaadiy", auteur: "Muhammad Kabir Lawal Garba", source: "archive.org « Tafseerin As-Sa'adi »" },
+  { slug: "ha-ia-40", langue: "ha", archive: "sharhinbaikuniyyah", auteur: "Muhammad Kabir Lawal Garba", source: "archive.org « Sharhin Baiƙuniyyah »" },
+  { slug: "ha-ia-41", langue: "ha", archive: "riyadus_swalihin_sunna4u", auteur: "Bature Dauda Tsagero", source: "archive.org « Riyadus Salihin »" },
+  { slug: "ha-ia-42", langue: "ha", archive: "tafsirin_al_quran_sunna4u", auteur: "Abubakar Maikano", source: "archive.org « Tafsirin Al-Qur'ani »" },
+  { slug: "ha-ia-43", langue: "ha", archive: "Al.adabul.mufrad_sunna4u", auteur: "Abubakar Maikano", source: "archive.org « Al-Adabul Mufrad »" },
+  { slug: "ha-ia-44", langue: "ha", archive: "karatun_muwadda_malik", auteur: "Sunna4u", source: "archive.org « Karatun Muwadda Malik »" },
+  { slug: "ha-ia-45", langue: "ha", archive: "Muslim1_201403", auteur: "Almadina", source: "archive.org « Sahih Muslim (Hausa) »" },
+  { slug: "ha-ia-46", langue: "ha", archive: "kitabul_akhdari_shiakh_abubakar_gumi", auteur: "Abubakar Mahmud Gumi", source: "archive.org « Kitabul Akhdari »" },
   { slug: "fr-coran", langue: "fr", ordre: "num", auteur: "Le Saint Coran traduit en français", source: "Quran Central", rss: "https://rss.qurancentral.com/le-saint-coran-traduit-en-francais.rss" },
   { slug: "fr-minhaj", langue: "fr", ordre: "date", auteur: "Le minhaj as-Salafiyah", source: "Podcast « Conférences et cours islamiques »", rss: "https://anchor.fm/s/e5afb884/podcast/rss" },
   { slug: "fr-abousirine", langue: "fr", ordre: "date", auteur: "Dourous Abou Sirine", source: "dourous-abousirine.fr", rss: "https://www.dourous-abousirine.fr/podcast.xml" },
@@ -35,6 +83,19 @@ fs.mkdirSync("maj/podcasts", { recursive: true });
 const parLangue = {};
 const ANCIEN = {}; for (const lg of new Set(PODCASTS.map(p => p.langue))) { const F = `maj/podcasts/${lg}.json`; if (fs.existsSync(F)) JSON.parse(fs.readFileSync(F, "utf8")).podcasts.forEach(q => { ANCIEN[q.slug] = q; }); }
 for (const p of PODCASTS) {
+  if (p.archive) {
+    try {
+      const j = await (await fetch("https://archive.org/metadata/" + encodeURIComponent(p.archive), { signal: AbortSignal.timeout(60000) })).json();
+      const fichiers = (j.files || []).filter(f => /\.mp3$/i.test(f.name) && !/_64kb\.mp3$/i.test(f.name) && f.source === "original");
+      const tri = new Intl.Collator("fr", { numeric: true });
+      const items = fichiers.map(f => ({ t: dec(f.title || f.name.replace(/\.mp3$/i, "").replace(/[_]+/g, " ")).slice(0, 140), url: "https://archive.org/download/" + encodeURIComponent(p.archive) + "/" + f.name.split("/").map(encodeURIComponent).join("/"), dur: Math.round(+f.length || (String(f.length || "").includes(":") ? sec(f.length) : 0)), date: 0, mes: 1 }))
+        .filter(e => !/umdat/i.test(e.t)).sort((a, b) => tri.compare(a.url, b.url));
+      items.forEach(e => { e.id = `qc-${p.slug}-${hacher(e.url)}`; });
+      (parLangue[p.langue] = parLangue[p.langue] || []).push({ ...p, items });
+      console.log(p.slug, p.archive, items.length, "fichiers");
+    } catch (e) { console.log(p.slug, "archive illisible", e.message); if (ANCIEN[p.slug]) (parLangue[p.langue] = parLangue[p.langue] || []).push(ANCIEN[p.slug]); }
+    continue;
+  }
   let x = "";
   try { const r = await fetch(p.rss, { headers: { "user-agent": "Mozilla/5.0" }, signal: AbortSignal.timeout(30000) }); if (!r.ok) throw new Error("http " + r.status); x = await r.text(); }
   catch (e) { console.log(p.slug, "flux illisible", e.message); if (ANCIEN[p.slug]) (parLangue[p.langue] = parLangue[p.langue] || []).push(ANCIEN[p.slug]); continue; }
