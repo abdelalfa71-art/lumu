@@ -9,7 +9,6 @@ const PODCASTS = [
   { slug: "fr-coran", langue: "fr", ordre: "num", auteur: "Le Saint Coran traduit en français", source: "Quran Central", rss: "https://rss.qurancentral.com/le-saint-coran-traduit-en-francais.rss" },
   { slug: "fr-minhaj", langue: "fr", ordre: "date", auteur: "Le minhaj as-Salafiyah", source: "Podcast « Conférences et cours islamiques »", rss: "https://anchor.fm/s/e5afb884/podcast/rss" },
   { slug: "fr-abousirine", langue: "fr", ordre: "date", auteur: "Dourous Abou Sirine", source: "dourous-abousirine.fr", rss: "https://www.dourous-abousirine.fr/podcast.xml" },
-  { slug: "fr-noubouwah", langue: "fr", ordre: "date", auteur: "Manhadj An-Noubouwah", source: "Podcast « Conférences »", rss: "https://www.spreaker.com/show/2938997/episodes/feed" },
   { slug: "fr-tawhid", langue: "fr", ordre: "date", auteur: "Manhadj An-Noubouwah", source: "Podcast « Kitâbu At-Tawhid »", rss: "https://www.spreaker.com/show/3391003/episodes/feed" },
   { slug: "fr-siyam", langue: "fr", ordre: "date", auteur: "Manhadj An-Noubouwah", source: "Podcast « Kitab As-Siyam »", rss: "https://www.spreaker.com/show/5485322/episodes/feed" },
   { slug: "fr-fiqh", langue: "fr", ordre: "date", auteur: "Tasfiyah", source: "Podcast « Al-Fiqh Al-Muyassar »", rss: "https://anchor.fm/s/1030ec4b0/podcast/rss" },
