@@ -6,6 +6,8 @@ const PODCASTS = [
   { slug: "jaafar", langue: "ha", auteur: "Ja'afar Mahmud Adam", source: "Quran Central", rss: "https://rss.qurancentral.com/jaafar-mahmud-adam.rss" },
   { slug: "jaafar-tafsir", langue: "ha", auteur: "Ja'afar Mahmud Adam", source: "Podcast « Tafsirin al-Qurani »", rss: "https://anchor.fm/s/10dcf4d84/podcast/rss" },
   /* Français : cours, tafsir et rappels de savants et d'étudiants de la Sounna (ordre : le plus récent d'abord) */
+  { slug: "ha-pantami-r1446", langue: "ha", ordre: "num2", auteur: "Isa Ali Ibrahim Pantami", source: "Podcast « Ramadan Tafsir 1446/2025 »", rss: "https://anchor.fm/s/101e1b3a4/podcast/rss" },
+  { slug: "ha-pantami-r1447", langue: "ha", ordre: "num2", auteur: "Isa Ali Ibrahim Pantami", source: "Podcast « Ramadan Tafsir 1447/2026 »", rss: "https://anchor.fm/s/10f214c78/podcast/rss" },
   { slug: "fr-coran", langue: "fr", ordre: "num", auteur: "Le Saint Coran traduit en français", source: "Quran Central", rss: "https://rss.qurancentral.com/le-saint-coran-traduit-en-francais.rss" },
   { slug: "fr-minhaj", langue: "fr", ordre: "date", auteur: "Le minhaj as-Salafiyah", source: "Podcast « Conférences et cours islamiques »", rss: "https://anchor.fm/s/e5afb884/podcast/rss" },
   { slug: "fr-abousirine", langue: "fr", ordre: "date", auteur: "Dourous Abou Sirine", source: "dourous-abousirine.fr", rss: "https://www.dourous-abousirine.fr/podcast.xml" },
@@ -40,7 +42,8 @@ for (const p of PODCASTS) {
     .filter(e => /^https:\/\//.test(e.url));
   /* Numéro stable : celui du titre (ex. « 002 Al-Baqara »), sinon l'ordre de parution */
   const num = e => +((e.t.match(/^(\d{1,4})\b/) || [])[1] || 0);
-  if (p.ordre === "date") { items.sort((a, b) => b.date - a.date); items.forEach(e => { e.id = `qc-${p.slug}-${hacher(e.url)}`; }); }
+  if (p.ordre === "num2") { const n2 = e => +((e.t.match(/(\d{1,4})\s*$/) || [])[1] || 0); items.sort((a, b) => n2(a) - n2(b) || a.date - b.date); items.forEach(e => { e.id = `qc-${p.slug}-${hacher(e.url)}`; }); }
+  else if (p.ordre === "date") { items.sort((a, b) => b.date - a.date); items.forEach(e => { e.id = `qc-${p.slug}-${hacher(e.url)}`; }); }
   else { items.sort((a, b) => (num(a) || 1e6 + a.date) - (num(b) || 1e6 + b.date)); items.forEach((e, i) => { e.id = `qc-${p.slug}-${num(e) || 10000 + i}`; }); }
   const F = `maj/podcasts/${p.langue}.json`, connu = new Map();
   if (fs.existsSync(F)) JSON.parse(fs.readFileSync(F, "utf8")).podcasts.forEach(q => q.items.forEach(e => { if (e.mes) connu.set(e.url, e.dur); }));
