@@ -6466,7 +6466,7 @@ async function vueAujourdhui() {
   let hj = ""; try { hj = dateHijri(); } catch (e) {}
   const nbFait = HABITUDES.filter(([k]) => faites[k]).length;
   const w = ecran("", null, `
-    <div style="margin:4px 0 14px"><div style="font-size:15px;opacity:.75;text-transform:capitalize">${esc(dateG)} · ${esc(hj)}</div><h1 style="margin:2px 0 0;font-size:28px;line-height:1.5"><span lang="ar" dir="rtl" data-notrad translate="no" style="font-family:'Amiri Quran','Amiri','Noto Naskh Arabic',serif;font-size:32px;font-weight:700">السَّلَامُ عَلَيْكُمْ</span>${prenom ? " " + esc(prenom) : ""}</h1></div>
+    <div style="margin:4px 0 14px"><h1 style="margin:2px 0 0;font-size:28px;line-height:1.5"><span lang="ar" dir="rtl" data-notrad translate="no" style="font-family:'Amiri Quran','Amiri','Noto Naskh Arabic',serif;font-size:32px;font-weight:700">السَّلَامُ عَلَيْكُمْ</span>${prenom ? " " + esc(prenom) : ""}</h1></div>
     <button class="carte" id="aj-pr" style="display:block;width:100%;text-align:start;padding:18px;border:0;color:#fff;background:linear-gradient(135deg,#0f3d36,#1b6b5c)">
       <div style="font-size:14px;opacity:.85">🕌 Prochaine prière</div><div id="aj-prn" style="font-size:30px;font-weight:900;margin:2px 0">—</div><div id="aj-prr" style="font-size:15px;opacity:.9">Ajoutez votre ville pour les horaires</div>
       <div id="aj-prl" style="display:flex;justify-content:space-between;margin-top:12px;font-size:12px;opacity:.85"></div></button>
