@@ -131,10 +131,38 @@ class AdhanService : Service() {
 object Azkar {
     private const val PREFS = "lumu_azkar"
     const val CANAL = "lumu_azkar"
+    private val TEXTES = mapOf(
+        "matin" to arrayOf("🌅 Adhkâr du matin", "Protégez votre journée · touchez pour les lire (≈ 5 min)"),
+        "soir" to arrayOf("🌇 Adhkâr du soir", "Avant le Maghrib · touchez pour les lire (≈ 5 min)"),
+        "coucher" to arrayOf("🌙 Avant de dormir", "Les invocations du coucher selon la Sounna"))
 
     fun programmer(ctx: Context, json: String) {
         ctx.getSharedPreferences(PREFS, Context.MODE_PRIVATE).edit().putString("liste", json).apply()
         replanifier(ctx)
+    }
+
+    /** Position mémorisée : le téléphone calcule ensuite lui-même les heures, sans ouvrir l'application */
+    fun lieu(ctx: Context, lat: Double, lng: Double) {
+        ctx.getSharedPreferences(PREFS, Context.MODE_PRIVATE).edit().putString("lat", lat.toString()).putString("lng", lng.toString()).apply()
+        replanifier(ctx)
+    }
+
+    /** Heures (ms) des adhkâr pour les jours à venir, calculées sur place (méthode Ligue islamique mondiale) */
+    private fun calculer(lat: Double, lng: Double, jours: Int): List<Pair<Long, String>> {
+        val out = ArrayList<Pair<Long, String>>()
+        val cal = java.util.Calendar.getInstance()
+        for (j in 0 until jours) {
+            val c = cal.clone() as java.util.Calendar; c.add(java.util.Calendar.DAY_OF_MONTH, j)
+            val y = c.get(java.util.Calendar.YEAR); val m = c.get(java.util.Calendar.MONTH) + 1; val d = c.get(java.util.Calendar.DAY_OF_MONTH)
+            val h = HeuresPriere.calculer(y, m, d, lat, lng)
+            val u = java.util.Calendar.getInstance(java.util.TimeZone.getTimeZone("UTC")); u.clear(); u.set(y, m - 1, d, 0, 0, 0)
+            val base = u.timeInMillis
+            fun ms(hh: Double) = base + (hh * 3600000.0).toLong()
+            if (!h[0].isNaN()) out.add(ms(h[0]) + 20 * 60000L to "matin")
+            if (!h[1].isNaN()) out.add(ms(h[1]) + 20 * 60000L to "soir")
+            if (!h[2].isNaN()) out.add(ms(h[2]) + 75 * 60000L to "coucher")
+        }
+        return out
     }
 
     fun replanifier(ctx: Context) {
@@ -143,20 +171,67 @@ object Azkar {
             val pi = PendingIntent.getBroadcast(ctx, 8000 + i, Intent(ctx, AzkarAlarme::class.java), PendingIntent.FLAG_NO_CREATE or PendingIntent.FLAG_IMMUTABLE)
             if (pi != null) { am.cancel(pi); pi.cancel() }
         }
-        val json = ctx.getSharedPreferences(PREFS, Context.MODE_PRIVATE).getString("liste", "[]") ?: "[]"
-        val l = try { JSONArray(json) } catch (e: Exception) { JSONArray() }
+        val sp = ctx.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
         val now = System.currentTimeMillis()
+        val liste = ArrayList<Pair<Long, String>>()
+        val lat = sp.getString("lat", null)?.toDoubleOrNull(); val lng = sp.getString("lng", null)?.toDoubleOrNull()
+        if (lat != null && lng != null) liste.addAll(calculer(lat, lng, 10))
+        else {
+            val l = try { JSONArray(sp.getString("liste", "[]") ?: "[]") } catch (e: Exception) { JSONArray() }
+            for (i in 0 until l.length()) { val o = l.optJSONObject(i) ?: continue; liste.add(o.optLong("t") to o.optString("l", "matin")) }
+        }
         var k = 0
-        for (i in 0 until l.length()) {
-            if (k >= 40) break
-            val o = l.optJSONObject(i) ?: continue
-            val t = o.optLong("t"); if (t <= now) continue
-            val it = Intent(ctx, AzkarAlarme::class.java)
-                .putExtra("l", o.optString("l", "matin")).putExtra("titre", o.optString("titre", "Adhkâr")).putExtra("texte", o.optString("texte", "Touchez pour les lire"))
+        for ((t, l) in liste.sortedBy { it.first }) {
+            if (k >= 30) break
+            if (t <= now + 5000) continue
+            val tx = TEXTES[l] ?: TEXTES["matin"]!!
+            val it = Intent(ctx, AzkarAlarme::class.java).putExtra("l", l).putExtra("titre", tx[0]).putExtra("texte", tx[1])
             val pi = PendingIntent.getBroadcast(ctx, 8000 + k, it, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
-            try { am.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, t, pi) } catch (e: Exception) {}
+            try {
+                if (Build.VERSION.SDK_INT >= 31 && !am.canScheduleExactAlarms()) am.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, t, pi)
+                else if (Build.VERSION.SDK_INT >= 23) am.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, t, pi)
+                else am.setExact(AlarmManager.RTC_WAKEUP, t, pi)
+            } catch (e: Exception) { try { am.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, t, pi) } catch (e2: Exception) {} }
             k++
         }
+    }
+}
+
+/** Calcul astronomique des heures de prière (Fajr 18°, Asr chaféite, Isha 17°), en heures UTC */
+object HeuresPriere {
+    private fun rad(x: Double) = Math.toRadians(x); private fun deg(x: Double) = Math.toDegrees(x)
+    private fun fixA(a: Double) = ((a % 360.0) + 360.0) % 360.0
+    private fun fixH(a: Double) = ((a % 24.0) + 24.0) % 24.0
+    private fun soleil(jd: Double): DoubleArray {
+        val D = jd - 2451545.0
+        val g = fixA(357.529 + 0.98560028 * D); val q = fixA(280.459 + 0.98564736 * D)
+        val L = fixA(q + 1.915 * Math.sin(rad(g)) + 0.020 * Math.sin(rad(2 * g)))
+        val e = 23.439 - 0.00000036 * D
+        val ra = deg(Math.atan2(Math.cos(rad(e)) * Math.sin(rad(L)), Math.cos(rad(L)))) / 15.0
+        return doubleArrayOf(deg(Math.asin(Math.sin(rad(e)) * Math.sin(rad(L)))), q / 15.0 - fixH(ra))
+    }
+    /** [fajr, asr, isha] en heures UTC du jour donné (NaN si impossible) */
+    fun calculer(y0: Int, m0: Int, d: Int, lat: Double, lng: Double): DoubleArray {
+        var y = y0; var m = m0; if (m <= 2) { y -= 1; m += 12 }
+        val A = Math.floor(y / 100.0); val B = 2 - A + Math.floor(A / 4.0)
+        val jd = Math.floor(365.25 * (y + 4716)) + Math.floor(30.6001 * (m + 1)) + d + B - 1524.5 - lng / (15.0 * 24.0)
+        fun midi(t: Double) = fixH(12 - soleil(jd + t)[1])
+        fun angle(a: Double, t: Double, avant: Boolean): Double {
+            val dec = soleil(jd + t)[0]
+            val c = (-Math.sin(rad(a)) - Math.sin(rad(dec)) * Math.sin(rad(lat))) / (Math.cos(rad(dec)) * Math.cos(rad(lat)))
+            if (c < -1 || c > 1) return Double.NaN
+            val T = deg(Math.acos(c)) / 15.0
+            return midi(t) + if (avant) -T else T
+        }
+        fun asr(t: Double): Double {
+            val dec = soleil(jd + t)[0]
+            val a = -deg(Math.atan(1.0 / (1.0 + Math.tan(rad(Math.abs(lat - dec))))))
+            return angle(a, t, false)
+        }
+        // deux passes pour affiner
+        var f = angle(18.0, 5 / 24.0, true); var s = asr(13 / 24.0); var i = angle(17.0, 18 / 24.0, false)
+        if (!f.isNaN()) f = angle(18.0, f / 24.0, true); if (!s.isNaN()) s = asr(s / 24.0); if (!i.isNaN()) i = angle(17.0, i / 24.0, false)
+        return doubleArrayOf(f - lng / 15.0, s - lng / 15.0, i - lng / 15.0)
     }
 }
 
@@ -177,5 +252,6 @@ class AzkarAlarme : BroadcastReceiver() {
             .setContentIntent(ouvrir).setAutoCancel(true)
             .addAction(Notification.Action.Builder(null, "Lire maintenant", ouvrir).build())
         try { nm.notify(8200 + code, b.build()) } catch (e: SecurityException) {}
+        try { Azkar.replanifier(ctx) } catch (e: Exception) {} // enchaîne les rappels suivants, sans ouvrir l'application
     }
 }

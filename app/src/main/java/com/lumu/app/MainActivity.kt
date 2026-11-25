@@ -82,6 +82,7 @@ class MainActivity : AppCompatActivity() {
             runOnUiThread { try { if (oui) window.addFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON) else window.clearFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON) } catch (e: Exception) {} }
         }
         @JavascriptInterface fun programmerAzkar(json: String?) { try { Azkar.programmer(applicationContext, json ?: "[]") } catch (e: Exception) {} }
+        @JavascriptInterface fun lieuAzkar(lat: Double, lng: Double) { try { Azkar.lieu(applicationContext, lat, lng) } catch (e: Exception) {} }
         // Voix de l'adhan : fichier audio (https) téléchargé une fois sur le téléphone ; vide = son du téléphone
         @JavascriptInterface fun adhanVoix(url: String?) {
             val f = Adhan.fichier(applicationContext)

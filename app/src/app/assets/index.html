@@ -6400,6 +6400,8 @@ const AZKAR_RAPPEL = {
     if (!l || l.lat == null) return;
     const cle = auj + "|" + PRIERE.cle(l) + "|" + JSON.stringify(r);
     if (!force && chargerLocal("azkar_plan", "") === cle) return;
+    /* Nouvelle application : le téléphone calcule lui-même les heures et enchaîne les rappels, sans ouverture */
+    if (LumuNative.lieuAzkar) { try { LumuNative.lieuAzkar(+l.lat, +l.lng); sauverLocal("azkar_plan", cle); } catch (e) {} return; }
     const liste = [], now = Date.now();
     try {
       const d0 = new Date(), mois = [[d0.getFullYear(), d0.getMonth() + 1]]; const d1 = new Date(now + 8 * 864e5); if (d1.getMonth() !== d0.getMonth()) mois.push([d1.getFullYear(), d1.getMonth() + 1]);
