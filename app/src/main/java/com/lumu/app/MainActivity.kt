@@ -67,6 +67,16 @@ class MainActivity : AppCompatActivity() {
         @JavascriptInterface fun site(): String = BuildConfig.SITE_URL
         // Adhan : la page envoie les prochaines heures de prière ; l'application sonne même fermée
         @JavascriptInterface fun programmerAdhan(json: String?) { try { Adhan.programmer(applicationContext, json ?: "[]") } catch (e: Exception) {} }
+        /** Plein écran sans changer l'orientation (lecture du Coran) : barres du téléphone cachées, un glissement les fait réapparaître */
+        @JavascriptInterface fun immersif(actif: Boolean) {
+            runOnUiThread {
+                try {
+                    val c = WindowCompat.getInsetsController(window, window.decorView)
+                    if (actif) { c.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE; c.hide(WindowInsetsCompat.Type.systemBars()) }
+                    else c.show(WindowInsetsCompat.Type.systemBars())
+                } catch (e: Exception) {}
+            }
+        }
         /** Garde l'écran allumé pendant la lecture du Coran ou d'un livre */
         @JavascriptInterface fun garderEcran(oui: Boolean) {
             runOnUiThread { try { if (oui) window.addFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON) else window.clearFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON) } catch (e: Exception) {} }

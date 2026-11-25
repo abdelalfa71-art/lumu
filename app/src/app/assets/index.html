@@ -7898,6 +7898,8 @@ async function vueCoran() {
     </div>`;
   app.appendChild(w);
   garderEcran(w);
+  /* Plein écran : barre d'état et boutons du téléphone cachés tant que le Coran est ouvert */
+  try { if (window.LumuNative && LumuNative.immersif) { LumuNative.immersif(true); const sv = setInterval(() => { if (!w.isConnected) { try { LumuNative.immersif(false); } catch (e) {} clearInterval(sv); } }, 700); } } catch (e) {}
   /* Barre audio : visible dès qu'un audio joue pendant la lecture */
   {
     const ba = w.querySelector("#co-audio"), q = x => w.querySelector(x);
@@ -7951,7 +7953,15 @@ async function vueCoran() {
     const zw = zone.clientWidth, zh = zone.clientHeight, ar = img.naturalHeight / img.naturalWidth;
     zone.style.padding = "0"; zone.style.paddingTop = "0px";
     /* Plein écran : la page remplit la largeur et la hauteur de l'écran (étirée en hauteur, texte entier) */
-    if (zoom === 1) { img.style.objectFit = "fill"; img.style.width = zw + "px"; img.style.height = zh + "px"; zone.style.paddingTop = "0px"; return; }
+    /* Sans le cadre vert : seule la zone du texte (à l'intérieur du cadre) remplit l'écran ; l'image elle-même n'est pas modifiée */
+    if (zoom === 1) {
+      const c = p <= 2 ? [0.022, 0.016, 0.978, 0.984] : [0.0705, 0.085, 0.931, 0.9255];
+      const W = zw / (c[2] - c[0]), H = zh / (c[3] - c[1]);
+      img.style.objectFit = "fill"; img.style.width = W + "px"; img.style.height = H + "px"; img.style.maxWidth = "none";
+      img.style.marginLeft = (-c[0] * W) + "px"; img.style.marginTop = (-c[1] * H) + "px";
+      zone.style.overflow = "hidden"; zone.style.paddingTop = "0px"; return;
+    }
+    img.style.marginLeft = img.style.marginTop = "0px"; zone.style.overflow = "auto";
     /* Agrandi : pleine largeur × zoom, on fait défiler */
     const W = zw * zoom; img.style.width = W + "px"; img.style.height = (W * ar) + "px";
   };
