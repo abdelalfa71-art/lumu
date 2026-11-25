@@ -1374,6 +1374,18 @@ body.defile #micro-fab { transform: translateY(140%) scale(.6); opacity: 0; poin
 .ec-sc-c i { display: block; height: 5px; border-radius: 3px; background: var(--bordure, #e1e7e2); } .ec-sc-c i u { display: block; height: 5px; border-radius: 3px; background: #0F7B6C; }
 .ec-sc-c em { font-style: normal; font-size: 13px; font-weight: 700; color: #0F7B6C; }
 .ec-cherche .ec-ser, .ec-cherche .ec-ser-t { display: none !important; }
+
+/* Voir allégé (v228) : moins de texte sur les vidéos, et l'habillage s'efface pendant la lecture */
+.flux .d-desc { display: none !important; }
+.flux .d-chaine { background: none !important; padding: 0 !important; font-size: 14px !important; font-weight: 700 !important; opacity: .92; border-radius: 0 !important; box-shadow: none !important; }
+.flux .d-titre { font-size: 14.5px !important; font-weight: 600 !important; -webkit-line-clamp: 2; }
+.flux .d-long { padding: 4px 10px !important; font-size: 12.5px !important; margin-top: 2px !important; }
+.flux .d-bas { padding: 60px 14px 14px !important; gap: 4px !important; }
+.flux .flux-titre { display: none !important; }
+.flux .flux-direct { padding: 5px 11px !important; font-size: 13px !important; margin-left: 6px !important; }
+.flux .flux-src button { padding: 5px 2px !important; font-size: 12.5px !important; min-height: 30px !important; }
+.flux .flux-haut, .flux .flux-src, .flux .d-bas, .flux .d-actions { transition: opacity .45s ease; }
+.flux.fx-calme .flux-haut, .flux.fx-calme .flux-src, .flux.fx-calme .d-bas, .flux.fx-calme .d-actions { opacity: 0; pointer-events: none; }
 </style>
 </head>
 <body>
@@ -1780,6 +1792,11 @@ function vueFlux() {
   const reelsSeuls = etat.route === "reels" || etat.route === "videos";
   const wrap = document.createElement("div");
   wrap.className = "flux";
+  /* Après 4 s sans toucher l'écran, titres et boutons s'effacent : seule la vidéo reste. Un toucher les fait revenir (sans déclencher d'action). */
+  { let tmCalme = null; const reveil = () => { clearTimeout(tmCalme); tmCalme = setTimeout(() => { if (wrap.isConnected && !document.querySelector(".feuille, .modal")) wrap.classList.add("fx-calme"); }, 4000); };
+    const toucher = ev => { if (wrap.classList.contains("fx-calme")) { wrap.classList.remove("fx-calme"); if (ev.type === "click") { ev.stopPropagation(); ev.preventDefault(); } } reveil(); };
+    wrap.addEventListener("click", toucher, true); wrap.addEventListener("touchstart", () => { if (!wrap.classList.contains("fx-calme")) reveil(); }, { capture: true, passive: true });
+    wrap.addEventListener("scroll", () => { wrap.classList.remove("fx-calme"); reveil(); }, { capture: true, passive: true }); reveil(); }
   wrap.innerHTML = `<div class="flux-haut">${reelsSeuls ? `<button class="flux-ic" id="retour" aria-label="Retour">${ico("back", 26)}</button><span class="flux-titre">${etat.route === "videos" ? "Vidéos" : "Reels"}</span>${etat.route === "videos" ? `<button class="flux-direct" id="direct-saint-b" aria-label="La Mecque et Médine en direct">🕋 Direct</button><button class="flux-direct" id="reels-b" aria-label="Vidéos courtes">🎬 Réels</button>` : ""}` : `<div class="flux-modes" id="modes" role="tablist"></div>`}<span class="flux-droite"><button class="flux-ic" id="micro-haut" aria-label="Recherche vocale">${ico("mic", 26)}</button><button class="flux-ic" id="son-haut" aria-label="Son">${ico("mute", 26)}</button><button class="flux-ic" id="chercher" aria-label="Rechercher">${ico("search", 26)}</button><button class="flux-ic" id="h-profil" aria-label="Mon profil">${ico("user", 26)}</button></span></div><div class="flux-defil" id="defil" tabindex="-1"></div>`;
   app.appendChild(wrap);
   const defil = wrap.querySelector("#defil");
