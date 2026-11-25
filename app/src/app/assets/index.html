@@ -1386,6 +1386,12 @@ body.defile #micro-fab { transform: translateY(140%) scale(.6); opacity: 0; poin
 .flux .flux-src button { padding: 5px 2px !important; font-size: 12.5px !important; min-height: 30px !important; }
 .flux .flux-haut, .flux .flux-src, .flux .d-bas, .flux .d-actions { transition: opacity .45s ease; }
 .flux.fx-calme .flux-haut, .flux.fx-calme .flux-src, .flux.fx-calme .d-bas, .flux.fx-calme .d-actions { opacity: 0; pointer-events: none; }
+
+/* Logo Lumu sur chaque page (v231) */
+.entete .logo-page { margin-inline-start: auto; width: 34px; height: 34px; border-radius: 9px; flex: none; box-shadow: 0 1px 4px rgba(0,0,0,.15); }
+.flux-logo { position: absolute; z-index: 7; left: 12px; top: calc(112px + env(safe-area-inset-top, 0px)); width: 36px; height: 36px; border-radius: 10px; opacity: .85; pointer-events: none; box-shadow: 0 2px 8px rgba(0,0,0,.4); }
+.flux.fx-calme .flux-logo { top: calc(14px + env(safe-area-inset-top, 0px)); }
+.flux-logo { transition: top .45s ease; }
 </style>
 </head>
 <body>
@@ -1792,6 +1798,7 @@ function vueFlux() {
   const reelsSeuls = etat.route === "reels" || etat.route === "videos";
   const wrap = document.createElement("div");
   wrap.className = "flux";
+  { const lg = document.createElement("img"); lg.className = "flux-logo"; lg.src = "icon-192.png"; lg.alt = "Lumu"; setTimeout(() => wrap.appendChild(lg), 0); }
   /* Après 4 s sans toucher l'écran, titres et boutons s'effacent : seule la vidéo reste. Un toucher les fait revenir (sans déclencher d'action). */
   { let tmCalme = null; const reveil = () => { clearTimeout(tmCalme); tmCalme = setTimeout(() => { if (wrap.isConnected && !document.querySelector(".feuille, .modal")) wrap.classList.add("fx-calme"); }, 4000); };
     const toucher = ev => { if (wrap.classList.contains("fx-calme")) { wrap.classList.remove("fx-calme"); if (ev.type === "click") { ev.stopPropagation(); ev.preventDefault(); } } reveil(); };
@@ -1880,10 +1887,10 @@ function vueFlux() {
     const ch = c.yt_channels || {}, nom = ch.name || APP_NOM;
     const estVid = (c.type === "video" || c.type === "reel") && !c.embed_id;
     const media = c.embed_id
-      ? (() => { const mini = ytMini(c), grand = couvGrande(c) || cover; return `${mini ? `<img class="d-fond" alt="" aria-hidden="true" src="${esc(mini)}" loading="lazy" decoding="async">` : ""}<img class="d-media d-yt" alt="${esc(c.title)}" src="${esc(grand)}" ${mini && grand !== mini ? `data-repli="${esc(mini)}"` : ""} loading="lazy" decoding="async"><button class="d-lire" data-a="ouvrir" aria-label="Lire">${ico("play", 40, true)}</button>`; })()
+      ? (() => { const mini = ytMini(c), grand = couvGrande(c) || cover; return `${mini ? `<img class="d-fond" alt="" aria-hidden="true" src="${esc(mini)}" loading="lazy" decoding="async">` : ""}<img class="d-media d-yt" alt="" aria-hidden="true" src="${esc(grand)}" ${mini && grand !== mini ? `data-repli="${esc(mini)}"` : ""} loading="lazy" decoding="async"><button class="d-lire" data-a="ouvrir" aria-label="Lire">${ico("play", 40, true)}</button>`; })()
       : estVid
       ? `<video class="d-media" playsinline loop muted preload="none" ${cover ? `poster="${esc(cover)}"` : ""} data-src="${esc(urlMedia(c.fichier_path))}"></video>`
-      : `<img class="d-media image" alt="${esc(c.title)}" src="${esc(urlMedia(c.fichier_path))}" loading="lazy">`;
+      : `<img class="d-media image" alt="" aria-hidden="true" src="${esc(urlMedia(c.fichier_path))}" loading="lazy">`;
     const moi = ch.id && etat.chaine && ch.id === etat.chaine.id;
     el.innerHTML = `${media}<div class="d-pause" aria-hidden="true">${ico("play", 60, true)}</div><div class="d-coeur" aria-hidden="true">${ico("heart", 110, true)}</div>
       <div class="d-bas"><button class="d-chaine" data-a="chaine" dir="auto">@${esc(nom)}</button><p class="d-titre" dir="auto">${esc(c.title)}</p>${c.description ? `<p class="d-desc" dir="auto">${esc(c.description.slice(0, 120))}</p>` : ""}${(c.duration_seconds || 0) > 600 ? `<button class="d-long" data-a="ouvrir">▶ ${fmtDuree(c.duration_seconds)}</button>` : ""}</div>
@@ -10117,7 +10124,7 @@ function vueImport() {
 function ecran(titre, retour, corps) {
   const w = document.createElement("div");
   w.className = "ecran";
-  w.innerHTML = `<div class="entete" style="padding:0">${retour ? `<button class="btn-text" id="retour" style="padding:4px" aria-label="Retour">←</button>` : ""}<h1 dir="auto">${esc(titre)}</h1></div>${corps || ""}`;
+  w.innerHTML = `<div class="entete" style="padding:0">${retour ? `<button class="btn-text" id="retour" style="padding:4px" aria-label="Retour">←</button>` : ""}<h1 dir="auto">${esc(titre)}</h1><img class="logo-page" src="icon-192.png" alt="Lumu" width="34" height="34"></div>${corps || ""}`;
   app.appendChild(w);
   if (retour) w.querySelector("#retour").onclick = () => router(retour[0], retour[1] || {});
   return w;
