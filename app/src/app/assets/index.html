@@ -3492,6 +3492,7 @@ function mimeCoherent(m, type) {
 }
 let verrouEcran = null;
 async function garderEveille(oui) {
+  try { if (window.LumuNative && LumuNative.garderEcran) { LumuNative.garderEcran(!!oui); if (oui) verrouEcran = verrouEcran || { release: async () => {} }; else verrouEcran = null; return; } } catch (e) {}
   try {
     if (oui && navigator.wakeLock) verrouEcran = await navigator.wakeLock.request("screen");
     else if (!oui && verrouEcran) { await verrouEcran.release(); verrouEcran = null; }
@@ -7845,7 +7846,16 @@ async function vueCoran() {
   const bo = 'class="btn-outline" style="flex:1;margin:0"';
   const coIt = (ic, t) => `<span class="co-ic">${ic}</span><span>${t}</span>`;
   w.innerHTML = `<style>.co-fl{width:40px;height:40px;flex:none;margin:0;padding:0;border:0;border-radius:50%;background:rgba(255,255,255,.12);color:#fff;font-size:22px;line-height:1}.co-fl:disabled{opacity:.3}
-#co-menu{position:absolute;inset:0;z-index:6;background:rgba(10,20,16,.9);color:#fff;overflow:auto;padding:14px 16px 24px;display:grid;gap:9px;align-content:start;transition:opacity .2s}
+#co-menu{position:absolute;inset:0;z-index:6;background:transparent;color:#fff;display:flex;flex-direction:column;justify-content:space-between;transition:opacity .2s}
+.co-bh{display:flex;align-items:center;gap:8px;padding:calc(8px + env(safe-area-inset-top,0px)) 8px 8px;background:rgba(14,14,14,.9)}
+.co-bh-s{flex:1;min-width:0;color:#d4af37;font-size:18px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.co-bh-n{font-size:20px;color:#fff}.co-bh-j{font-size:15px;color:#fff;opacity:.9;padding:0 4px}
+.co-bb{background:rgba(14,14,14,.92);padding-bottom:env(safe-area-inset-bottom,0px);max-height:78%;overflow:auto}
+.co-rg{display:grid;border-top:1px solid rgba(255,255,255,.14)}.co-r4{grid-template-columns:repeat(4,minmax(0,1fr))}.co-r3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.co-b{display:flex;align-items:center;justify-content:center;gap:8px;min-height:56px;margin:0;padding:8px 4px;border:0;border-radius:0;border-inline-end:1px solid rgba(255,255,255,.14);background:none;color:#fff;font:inherit;font-size:15px}
+.co-b:last-child{border-inline-end:0}.co-b:active{background:rgba(255,255,255,.08)}
+.co-bv{flex-direction:column;gap:3px;font-size:12.5px;line-height:1.15;text-align:center}
+.co-b .co-ic{width:auto;height:auto;background:none;color:#fff;font-size:20px;border-radius:0}
+#co-plus{display:grid;gap:9px;padding:12px 12px 14px}#co-plus[hidden]{display:none}
 .co-cache .co-chrome{opacity:0;pointer-events:none}
 .co-it{display:flex;align-items:center;gap:12px;width:100%;margin:0;padding:10px 12px;border:0;border-radius:14px;background:rgba(255,255,255,.1);color:#fff;font:inherit;font-size:15px;text-align:start}.co-it:disabled{opacity:.6}
 .co-ic{width:34px;height:34px;flex:none;border-radius:50%;background:#d4af37;color:#1f2a24;display:flex;align-items:center;justify-content:center;font-size:16px}
@@ -7853,21 +7863,38 @@ async function vueCoran() {
     <div id="co-zone" translate="no" class="notranslate" style="position:absolute;inset:0;background:#f4ead2;overflow:auto;touch-action:pan-y;padding:0 0.25cm"><svg id="co-hl" viewBox="0 0 1 1" preserveAspectRatio="none" aria-hidden="true" style="position:absolute;left:0;top:0;width:0;height:0;pointer-events:none;display:none;z-index:2"><polygon id="co-hl-p" points="" style="fill:rgba(212,175,55,.28);stroke:#c9a227;stroke-width:.004;stroke-linejoin:round"/></svg><img id="co-img" alt="" draggable="false" style="display:block;margin:0 auto;mix-blend-mode:multiply;box-shadow:0 0 0 2px #8a6d3b"><div id="co-txt" style="display:none;padding:14px 16px 24px;direction:rtl;font-family:'Amiri Quran','Amiri',serif;font-size:28px;line-height:2.3;text-align:justify;color:#3b2a1a;background:#f4ead2"></div><div id="co-etat" style="position:absolute;inset:0;display:flex;flex-direction:column;gap:10px;align-items:center;justify-content:center;padding:20px;text-align:center;background:#f4ead2;color:#3b2a1a"></div></div>
     <div id="co-audio" style="display:none;position:absolute;top:0;left:0;right:0;z-index:5;align-items:center;gap:2px;padding:6px 8px;background:rgba(10,20,16,.9);color:#fff;font-size:13px"><span style="flex:1;min-width:0"><b id="co-au-t" style="display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"></b><small id="co-au-d" style="opacity:.85"></small></span><button class="co-fl" id="co-au-r" aria-label="Reculer de 10 secondes" style="background:none;font-size:20px">⟲</button><button class="co-fl" id="co-au-pp" aria-label="Lecture ou pause" style="background:#d4af37;color:#1f2a24;font-size:18px">▶</button><button class="co-fl" id="co-au-a" aria-label="Avancer de 10 secondes" style="background:none;font-size:20px">⟳</button><button class="co-fl" id="co-au-x" aria-label="Arrêter l'audio" style="background:none;font-size:18px">✕</button></div>
     <div id="co-menu" class="co-chrome">
-      <div style="display:flex;align-items:center;gap:8px"><button class="co-fl" id="co-retour" aria-label="Retour">←</button><b id="co-sur" style="flex:1;min-width:0;text-align:center;color:#d4af37;font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"></b><button class="co-fl" id="co-fermer" aria-label="Fermer le menu">✕</button></div>
-      <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:4px"><button class="co-fl" id="co-suiv" aria-label="Page suivante">‹</button><span style="min-width:150px;text-align:center">Page <b id="co-num" style="font-size:18px"></b> · <span id="co-jz"></span></span><button class="co-fl" id="co-prec" aria-label="Page précédente">›</button></div>
-      <button class="co-it" id="co-som">${coIt("☰", "Sourates")}</button>
-      <button class="co-it" id="co-juz">${coIt("◔", "Juz")}</button>
-      <button class="co-it" id="co-aller">${coIt("⌕", "Aller à une page")}</button>
-      <button class="co-it" id="co-trad">${coIt("🌍", "Traduction de la page")}</button>
-      <button class="co-it" id="co-hifz">${coIt("🧠", "Mémoriser (répéter des versets)")}</button>
-      <button class="co-it" id="co-mq"></button>
-      <button class="co-it" id="co-mqs">${coIt("📑", "Mes marque-pages")}</button>
-      <button class="co-it" id="co-mode"></button>
-      <button class="co-it" id="co-zoom">${coIt("🔍", "Agrandir")}</button>
-      <button class="co-it" id="co-nuit"></button>
-      <div id="co-kh" style="padding:14px"></div>
-      <button class="co-it" id="co-dl"></button>
-      <p style="font-size:12px;text-align:center;margin:4px 0 0;opacity:.8">Mushaf de Médine, lecture Hafs. Pages affichées sans modification du texte.</p>
+      <div class="co-bh">
+        <button class="co-fl" id="co-retour" aria-label="Retour">←</button>
+        <b id="co-sur" class="co-bh-s"></b>
+        <b id="co-num" class="co-bh-n"></b>
+        <span id="co-jz" class="co-bh-j"></span>
+        <button class="co-fl" id="co-fermer" aria-label="Fermer le menu">✕</button>
+        <span style="display:none"><button id="co-suiv" aria-label="Page suivante">‹</button><button id="co-prec" aria-label="Page précédente">›</button></span>
+      </div>
+      <div class="co-bb">
+        <div id="co-plus" hidden>
+          <button class="co-it" id="co-mode"></button>
+          <button class="co-it" id="co-dl"></button>
+          <div id="co-kh" style="padding:14px"></div>
+          <p style="font-size:12px;text-align:center;margin:4px 0 0;opacity:.8">Mushaf de Médine, lecture Hafs. Pages affichées sans modification du texte.</p>
+        </div>
+        <div class="co-rg co-r4">
+          <button class="co-b co-bv" id="co-mq"></button>
+          <button class="co-b co-bv" id="co-mqs"><span class="co-ic">📑</span><span>Marque-pages</span></button>
+          <button class="co-b co-bv" id="co-nuit"></button>
+          <button class="co-b co-bv" id="co-zoom"><span class="co-ic">🔍</span><span>Agrandir</span></button>
+        </div>
+        <div class="co-rg co-r3">
+          <button class="co-b" id="co-som"><span class="co-ic">☰</span><span>Sourates</span></button>
+          <button class="co-b" id="co-juz"><span class="co-ic" style="font-size:26px">◔</span><span>Juz</span></button>
+          <button class="co-b" id="co-aller"><span class="co-ic">📄</span><span>Pages</span></button>
+        </div>
+        <div class="co-rg co-r3">
+          <button class="co-b" id="co-trad"><span class="co-ic">🌍</span><span>Traduction</span></button>
+          <button class="co-b" id="co-hifz"><span class="co-ic">🧠</span><span>Mémoriser</span></button>
+          <button class="co-b" id="co-pl-b" aria-expanded="false"><span class="co-ic">•••</span><span>Plus</span></button>
+        </div>
+      </div>
     </div>`;
   app.appendChild(w);
   garderEcran(w);
@@ -7930,7 +7957,7 @@ async function vueCoran() {
   };
   window.addEventListener("resize", () => { if (w.isConnected) fit(); });
   const majNuit = () => { img.style.filter = E.nuit ? "invert(1) hue-rotate(180deg)" : ""; img.style.mixBlendMode = E.nuit ? "" : "multiply"; zone.style.background = E.nuit ? "#000" : "#f4ead2"; zEtat.style.background = E.nuit ? "#000" : "#f4ead2"; zEtat.style.color = E.nuit ? "#eee" : "#3b2a1a"; $("#co-nuit").innerHTML = E.nuit ? coIt("☀️", "Mode jour") : coIt("🌙", "Mode nuit"); };
-  const majMq = () => { const on = E.marques.some(x => x.p === p); $("#co-mq").innerHTML = coIt(on ? "✔" : "🔖", on ? "Page marquée" : "Marquer cette page"); };
+  const majMq = () => { const on = E.marques.some(x => x.p === p); $("#co-mq").innerHTML = coIt(on ? "✔" : "🔖", on ? "Marquée" : "Marquer"); };
   const majMode = () => { $("#co-mode").innerHTML = texteMode() ? coIt("🖼", "Voir la page en image") : coIt("📖", "Voir le texte"); $("#co-txt").style.color = E.nuit ? "#eee" : "#3b2a1a"; $("#co-txt").style.background = E.nuit ? "#000" : "#f4ead2"; $("#co-txt").style.setProperty("--num", E.nuit ? "#d4af37" : "#8a5a2b"); };
   $("#co-mode").onclick = () => { try { localStorage.setItem("coran_texte", texteMode() ? "0" : "1"); } catch (e) {} majMode(); aff(p); };
   const majKh = () => {
@@ -8033,6 +8060,7 @@ async function vueCoran() {
   $("#co-prec").onclick = () => aff(p - 1);
   $("#co-retour").onclick = () => router("home");
   $("#co-fermer").onclick = () => w.classList.add("co-cache");
+  $("#co-pl-b").onclick = () => { const z = $("#co-plus"), o = z.hidden; z.hidden = !o; $("#co-pl-b").setAttribute("aria-expanded", String(o)); };
   $("#co-menu").onclick = ev => { if (ev.target === ev.currentTarget) w.classList.add("co-cache"); };
   $("#co-zoom").onclick = () => { regleZoom(zoom > 1 ? 1 : 2); w.classList.add("co-cache"); };
   $("#co-nuit").onclick = () => { E.nuit = !E.nuit; CORAN_ETAT.ecrire(E); majNuit(); majMode(); };

@@ -67,6 +67,10 @@ class MainActivity : AppCompatActivity() {
         @JavascriptInterface fun site(): String = BuildConfig.SITE_URL
         // Adhan : la page envoie les prochaines heures de prière ; l'application sonne même fermée
         @JavascriptInterface fun programmerAdhan(json: String?) { try { Adhan.programmer(applicationContext, json ?: "[]") } catch (e: Exception) {} }
+        /** Garde l'écran allumé pendant la lecture du Coran ou d'un livre */
+        @JavascriptInterface fun garderEcran(oui: Boolean) {
+            runOnUiThread { try { if (oui) window.addFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON) else window.clearFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON) } catch (e: Exception) {} }
+        }
         @JavascriptInterface fun programmerAzkar(json: String?) { try { Azkar.programmer(applicationContext, json ?: "[]") } catch (e: Exception) {} }
         // Voix de l'adhan : fichier audio (https) téléchargé une fois sur le téléphone ; vide = son du téléphone
         @JavascriptInterface fun adhanVoix(url: String?) {
