@@ -2,7 +2,7 @@
 // Lu par l'application ; garde l'ancien identifiant si la chaîne n'est pas en direct au moment de la vérification.
 import { chromium } from "playwright";
 import fs from "node:fs";
-const CH = { mecque: "UCos52azQNBgW63_9uDJoPDA", medine: "UCROKYPep-UuODNwyipe6JMw" };
+const CH = { mecque: "UCos52azQNBgW63_9uDJoPDA", medine: "UCROKYPep-UuODNwyipe6JMw", zad: "UCOll3M-P7oKs5cSrQ9ytt6g", iqraa: "UCiC_h4iC9s7Ddr3CT82_EpA", huda: "UCIVSdtXb4pR57BDqKKNqsTg" };
 const F = "maj/directs.json";
 const ancien = fs.existsSync(F) ? JSON.parse(fs.readFileSync(F, "utf8")) : {};
 const neuf = { maj: new Date().toISOString() };
