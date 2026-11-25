@@ -1,7 +1,7 @@
 name: Directs La Mecque / Médine
 on:
   schedule:
-    - cron: "17 */3 * * *"
+    - cron: "7,37 * * * *"
   workflow_dispatch:
   push:
     paths:

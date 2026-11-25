@@ -4965,7 +4965,7 @@ async function ouvrirDirectSaint(i) {
   if (!o.isConnected) return;
   const vid = info.id || d.id, enDirect = info.direct !== false && !!vid;
   const bouton = (x, k) => `<button data-k="${k}" style="padding:9px 16px;border-radius:22px;border:1px solid rgba(255,255,255,.4);background:${k === i ? "#F2C43D" : "rgba(0,0,0,.45)"};color:${k === i ? "#0E1A33" : "#fff"};font:inherit;font-weight:700;font-size:14px">${x.ic} ${esc(x.nom)}</button>`;
-  o.innerHTML = `${enDirect ? `<iframe src="https://www.youtube.com/embed/live_stream?channel=${esc(d.ch)}&autoplay=1&playsinline=1&rel=0&modestbranding=1&fs=0&controls=1" title="${esc(d.nom)} en direct"
+  o.innerHTML = `${enDirect ? `<iframe src="https://www.youtube.com/embed/${esc(vid)}?autoplay=1&playsinline=1&rel=0&modestbranding=1&fs=0&controls=1" title="${esc(d.nom)} en direct"
         sandbox="allow-scripts allow-same-origin allow-presentation" referrerpolicy="strict-origin-when-cross-origin"
         allow="autoplay; encrypted-media; picture-in-picture" style="position:absolute;left:0;top:0;width:100%;height:100%;border:0;transform-origin:top left"></iframe>`
       : `<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;padding:16px"><div style="font-size:44px">${d.ic}</div><b style="font-size:18px">${esc(d.nom)} n'est pas en direct en ce moment.</b><span style="opacity:.7;font-size:14px">La chaîne officielle ne diffuse pas sur Internet actuellement. Réessayez plus tard.</span></div>`}
