@@ -2684,6 +2684,91 @@ function carteContenu(c, surClic) {
   return el;
 }
 
+/* ---------- Recherche multilingue : un mot cherché en français, haoussa, foulfouldé ou anglais trouve aussi les titres en arabe (et inversement) ---------- */
+const RECH_GROUPES = [
+  ["ablution", "wudu", "wudhu", "woudou", "alwala", "alwalla", "wuzu", "وضوء", "الوضوء", "توضأ"],
+  ["priere", "salat", "salah", "sallah", "sallar", "salla", "juulde", "nafaare", "صلاة", "الصلاة", "صلوات"],
+  ["jeune du ramadan", "siyam", "sawm", "azumi", "koorka", "صيام", "الصيام", "صوم"],
+  ["ramadan", "ramadhan", "ramalan", "رمضان"],
+  ["zakat", "zakah", "zakkat", "zakka", "زكاة", "الزكاة"],
+  ["hajj", "pelerinage", "hadj", "hajji", "aikin hajji", "حج", "الحج", "مناسك"],
+  ["omra", "umra", "umrah", "oumra", "عمرة", "العمرة"],
+  ["coran", "quran", "qur'an", "alkur'ani", "alqur'ani", "kur'ani", "alkurani", "قرآن", "القرآن", "القران"],
+  ["tafsir", "tafseer", "tapsir", "exegese", "تفسير"],
+  ["hadith", "hadis", "hadisi", "hadiths", "حديث", "أحاديث", "الحديث"],
+  ["sunna", "sounna", "sunnah", "sounnah", "السنة النبوية", "السنة"],
+  ["tawhid", "tauhidi", "tawheed", "tauhid", "unicite", "monotheisme", "توحيد", "التوحيد"],
+  ["aqida", "aqeeda", "aqidah", "akida", "aqeedah", "croyance", "عقيدة", "العقيدة"],
+  ["fiqh", "jurisprudence", "fikihu", "fiqhu", "فقه", "الفقه"],
+  ["mariage", "nikah", "aure", "tegal", "marriage", "زواج", "الزواج", "نكاح"],
+  ["divorce", "talaq", "saki", "طلاق", "الطلاق"],
+  ["heritage", "succession", "mirath", "gado", "ميراث", "المواريث", "الفرائض"],
+  ["prophete", "annabi", "rasul", "rasulullah", "messager d'allah", "النبي", "الرسول"],
+  ["sira", "seerah", "sirah", "biographie du prophete", "السيرة", "سيرة"],
+  ["paradis", "jannah", "aljanna", "al-janna", "aljannah", "الجنة", "جنة"],
+  ["enfer", "jahannam", "wuta", "jahannama", "جهنم", "النار"],
+  ["mort", "deces", "mutuwa", "maayde", "الموت", "موت"],
+  ["tombe", "qabr", "kabari", "azabar kabari", "القبر", "عذاب القبر"],
+  ["jour dernier", "qiyama", "qiyamah", "alkiyama", "kiyama", "resurrection", "القيامة", "يوم القيامة"],
+  ["invocation", "doua", "douaa", "dua'a", "addu'a", "addua", "du'a", "duaa", "دعاء", "الدعاء", "أدعية"],
+  ["dhikr", "zikr", "zikiri", "azkar", "adhkar", "ذكر", "أذكار", "الأذكار"],
+  ["repentir", "tawba", "tuba", "istighfar", "pardon", "استغفار", "توبة", "التوبة"],
+  ["patience", "sabr", "hakuri", "صبر", "الصبر"],
+  ["parents", "birrul walidain", "bir al walidayn", "iyaye", "بر الوالدين", "الوالدين"],
+  ["femme", "femmes", "rewbe", "mata", "المرأة", "النساء"],
+  ["education des enfants", "tarbiya", "tarbiyya", "tarbiyyah", "التربية", "تربية الأولاد"],
+  ["vendredi", "jumua", "juma'a", "joumoua", "jummah", "khutba", "khoutba", "hudubah", "huduba", "الجمعة", "خطبة"],
+  ["mosquee", "masjid", "masallaci", "misiide", "مسجد", "المساجد"],
+  ["aumone", "sadaqa", "sadaka", "sadaqah", "charite", "صدقة", "الصدقة"],
+  ["vente", "commerce", "ciniki", "kasuwanci", "buyu", "البيوع", "البيع", "التجارة"],
+  ["riba", "usure", "interet bancaire", "ruba", "الربا", "ربا"],
+  ["musique", "chant", "kida", "wakoki", "الموسيقى", "الغناء", "المعازف"],
+  ["tabac", "cigarette", "taba", "الدخان", "التدخين"],
+  ["magie", "sorcellerie", "sihr", "sihiri", "tsafi", "سحر", "السحر"],
+  ["djinn", "djinns", "jinn", "aljanu", "jinni", "الجن"],
+  ["roqya", "ruqya", "ruqyah", "rukiya", "الرقية", "رقية"],
+  ["ange", "anges", "malaika", "mala'ika", "الملائكة", "ملائكة"],
+  ["nuit du destin", "laylatul qadr", "lailatul qadr", "lailatul kadri", "ليلة القدر"],
+  ["sacrifice", "tabaski", "layya", "udhiya", "odhiya", "uduhiyya", "أضحية", "الأضحية", "عيد الأضحى"],
+  ["savoir", "science religieuse", "ilm", "ilimi", "anndal", "طلب العلم", "العلم"],
+  ["comportement", "akhlaq", "adab", "ladabi", "bon caractere", "الأخلاق", "أخلاق", "آداب"],
+  ["purification", "tahara", "ghusl", "janaba", "wankan janaba", "الطهارة", "طهارة", "غسل", "الجنابة"],
+  ["tayammum", "taimama", "tayamoum", "التيمم", "تيمم"],
+  ["adhan", "azan", "appel a la priere", "kiran salla", "الأذان", "أذان"],
+  ["voyage", "safar", "tafiya", "السفر", "سفر"],
+  ["hijab", "voile", "jilbab", "niqab", "الحجاب", "حجاب"],
+  ["shirk", "associationnisme", "shirka", "الشرك", "شرك"],
+  ["bid'a", "bida", "bidia", "bidi'a", "innovation religieuse", "البدعة", "بدعة", "البدع"],
+  ["maladie", "guerison", "ciwo", "rashin lafiya", "مرض", "المرض", "شفاء"],
+  ["riyad salihin", "riyadus salihin", "riyadus swalihin", "riyad as-salihin", "رياض الصالحين"],
+  ["quarante hadiths", "40 hadiths", "nawawi", "arbain", "arba'in", "الأربعين النووية", "النووية"],
+  ["bukhari", "boukhari", "bouhari", "bukari", "البخاري", "صحيح البخاري"],
+  ["sahih muslim", "صحيح مسلم"],
+  ["fatwa", "fatawa", "fatawowi", "fatawowin", "فتوى", "فتاوى"],
+  ["noms d'allah", "asma ul husna", "asma'ul husna", "أسماء الله الحسنى"],
+  ["foi", "iman", "imani", "الإيمان", "إيمان"],
+  ["haram", "illicite", "حرام"], ["halal", "licite", "حلال"],
+  ["fatiha", "fatihah", "fatiya", "الفاتحة"], ["baqara", "baqarah", "bagara", "abgara", "البقرة"], ["al kahf", "kahf", "khaf", "الكهف"],
+  ["yasin", "yaseen", "ya-sin", "سورة يس"], ["al mulk", "tabaraka", "tabara", "الملك"], ["al imran", "aal imran", "ali imran", "آل عمران"]
+];
+const normRech = x => String(x || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[ɓɗŋñ]/g, m => ({ "ɓ": "b", "ɗ": "d", "ŋ": "n", "ñ": "n" })[m])
+  .replace(/[ً-ْٰـ]/g, "").replace(/[أإآٱ]/g, "ا").replace(/ة/g, "ه").replace(/ى/g, "ي").replace(/[’`]/g, "'").replace(/\s+/g, " ").trim();
+const RECH_IDX = RECH_GROUPES.map(g => g.map(normRech));
+/* Termes équivalents d'une recherche (le texte saisi d'abord, puis l'arabe, puis les autres langues) */
+function rechVariantes(q, max = 8) {
+  const n = normRech(q); if (n.length < 2) return [String(q || "").trim()].filter(Boolean);
+  const mots = n.split(" ").filter(m => m.length > 2), out = [String(q).trim()], vu = new Set([n]), ar = [], autres = [];
+  RECH_IDX.forEach((g, i) => {
+    const ok = g.some(t => t.length > 3 ? (n.includes(t) || mots.some(m => m.length > 3 && t.startsWith(m))) : (mots.includes(t) || n === t));
+    if (!ok) return;
+    /* De chaque thème reconnu : d'abord ses deux formes arabes principales, puis le reste */
+    const a = RECH_GROUPES[i].filter(t => /[؀-ۿ]/.test(t)); ar.push(...a.slice(0, 2)); autres.push(...a.slice(2), ...RECH_GROUPES[i].filter(t => !/[؀-ۿ]/.test(t)));
+  });
+  [...ar, ...autres].forEach(t => { const k = normRech(t); if (!vu.has(k)) { vu.add(k); out.push(t); } });
+  return out.slice(0, max);
+}
+/* Vrai si le texte contient le mot cherché ou l'un de ses équivalents */
+function rechTrouve(texte, variantes) { const t = normRech(texte); return variantes.some(v => { const k = normRech(v); return k && t.includes(k); }); }
 async function chargerContenus({ type, categorie, q, depuis, nb, langue: lg }) {
   if (chargerLocal("mode_enfants", false)) categorie = "Enfants";
   let req = sb.from("yt_contenus").select(CHAMPS_CONTENU).eq("status", "published")
@@ -2695,7 +2780,8 @@ async function chargerContenus({ type, categorie, q, depuis, nb, langue: lg }) {
   if (mot) {
     let ids = [];
     try { const r = await sb.from("yt_channels").select("id").ilike("name", `%${mot}%`).limit(20); ids = (r.data || []).map(x => x.id).filter(Boolean); } catch (e) {}
-    req = req.or(`title.ilike.%${mot}%,description.ilike.%${mot}%,auteur.ilike.%${mot}%,source_nom.ilike.%${mot}%` + (ids.length ? `,channel_id.in.(${ids.join(",")})` : ""));
+    const V = rechVariantes(mot, 6).map(v => v.replace(/[%,()*\\"]/g, " ").trim()).filter(Boolean);
+    req = req.or([`title.ilike.%${mot}%`, `description.ilike.%${mot}%`, `auteur.ilike.%${mot}%`, `source_nom.ilike.%${mot}%`, ...V.slice(1).flatMap(v => [`title.ilike.%${v}%`, `description.ilike.%${v}%`])].join(",") + (ids.length ? `,channel_id.in.(${ids.join(",")})` : ""));
   }
   const { data, error } = await req;
   if (error) throw error;
@@ -8120,8 +8206,9 @@ async function vueEcouter() {
     w.classList.toggle("ec-cherche", !!rech);
     let l;
     if (rech) {
-      const m = rech.toLowerCase(), nomDe = c => ((c.yt_channels && c.yt_channels.name) || c.source_nom || c.auteur || "");
-      const loc = tous.filter(c => (c.title || "").toLowerCase().includes(m) || (c.description || "").toLowerCase().includes(m) || nomDe(c).toLowerCase().includes(m));
+      const V = rechVariantes(rech), nomDe = c => ((c.yt_channels && c.yt_channels.name) || c.source_nom || c.auteur || "");
+      const ext = ["ff", "fr", "ha"].flatMap(lg => { try { return IH.contenus(lg) || []; } catch (e) { return []; } });
+      const vusE = new Set(), loc = [...tous, ...ext].filter(c => { if (vusE.has(c.id)) return false; vusE.add(c.id); return rechTrouve((c.title || "") + " " + (c.description || "") + " " + nomDe(c), V); });
       const vus = new Set(loc.map(c => c.id)); l = [...loc, ...serveur.filter(c => !vus.has(c.id))];
     } else {
       /* Nouveautés (moins de 48 h) en tête, puis tout le reste dans un ordre aléatoire */
@@ -9427,7 +9514,9 @@ async function rechercherServeur({ q, type, langue, duree, depuis, nb }) {
   const dMin = duree === "m" ? 600 : duree === "l" ? 1800 : null, dMax = duree === "c" ? 600 : duree === "m" ? 1800 : null;
   const r = await sb.rpc("yt_rechercher", { p_q: q, p_type: type || null, p_langue: langue || null, p_categorie: null, p_min: dMin, p_max: dMax, p_limit: nb, p_offset: depuis });
   if (r.error) throw r.error;
-  const L = r.data || [], chap = new Map(); L.forEach(x => { if (x.chapitre_titre) chap.set(x.id, x); });
+  const L = r.data || [], chap = new Map();
+  if (!depuis) { const V = rechVariantes(q, 4).slice(1); if (V.length) { const sup = await Promise.all(V.map(v => sb.rpc("yt_rechercher", { p_q: v, p_type: type || null, p_langue: langue || null, p_categorie: null, p_min: dMin, p_max: dMax, p_limit: nb, p_offset: 0 }).then(x => x.data || [], () => []))); const vus = new Set(L.map(x => x.id)); sup.flat().forEach(x => { if (!vus.has(x.id)) { vus.add(x.id); L.push(x); } }); } }
+  L.forEach(x => { if (x.chapitre_titre) chap.set(x.id, x); });
   if (!L.length) return { lot: [], chap, n: 0 };
   const d = await sb.from("yt_contenus").select(CHAMPS_CONTENU).in("id", L.map(x => x.id));
   if (d.error) throw d.error;
