@@ -1347,7 +1347,7 @@ body:not(.branche-tobi) .nav-btn svg { width: 30px; height: 30px; }
 body.defile #micro-fab { transform: translateY(140%) scale(.6); opacity: 0; pointer-events: none; }
 
 /* Barre de notification des adhkâr (v223) */
-.ec-notif { display: flex; align-items: center; gap: 10px; margin: 8px 16px 4px; padding: 10px 10px 10px 14px; border-radius: 16px; background: #123C2B; color: #fff; box-shadow: 0 4px 14px rgba(18,60,43,.25); animation: ec-notif-in .35s ease-out; }
+.ec-notif { width: calc(100% - 32px); border: 0; font: inherit; text-align: start; display: flex; align-items: center; gap: 10px; margin: 8px 16px 4px; padding: 10px 10px 10px 14px; border-radius: 16px; background: #123C2B; color: #fff; box-shadow: 0 4px 14px rgba(18,60,43,.25); animation: ec-notif-in .35s ease-out; }
 @keyframes ec-notif-in { from { transform: translateY(-12px); opacity: 0; } to { transform: none; opacity: 1; } }
 .ec-notif-ic { font-size: 24px; flex: none; }
 .ec-notif-tx { flex: 1; min-width: 0; background: none; border: 0; color: inherit; text-align: start; font: inherit; padding: 0; display: flex; flex-direction: column; }
@@ -1355,6 +1355,25 @@ body.defile #micro-fab { transform: translateY(140%) scale(.6); opacity: 0; poin
 .ec-notif-go { flex: none; border: 0; border-radius: 14px; background: #F2C43D; color: #123C2B; font: inherit; font-weight: 800; font-size: 14px; padding: 8px 14px; min-height: 36px; }
 .ec-notif-x { flex: none; width: 36px; height: 36px; border: 0; border-radius: 18px; background: rgba(255,255,255,.1); color: #fff; font-size: 14px; }
 .ec-cherche #ec-notif { display: none; }
+
+/* Apprendre (v224) */
+.ap-g { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 0 0 16px; }
+.ap-t { display: flex; flex-direction: column; gap: 6px; align-items: flex-start; text-align: start; padding: 14px; border-radius: 16px; border: 1px solid var(--bordure, #dfe7e2); background: var(--surface, #fff); color: var(--texte, #2C2A26); font: inherit; box-shadow: 0 2px 8px rgba(0,0,0,.05); }
+.ap-i { font-size: 26px; } .ap-t b { font-size: 16px; } .ap-t small { font-size: 12.5px; color: var(--texte-doux, #6b6557); }
+/* Séries (v224) */
+.ec-ser-t { display: flex; justify-content: space-between; align-items: baseline; margin: 4px 16px 6px; }
+.ec-ser-t b { font-size: 17px; } .ec-ser-t small { color: var(--texte-doux, #6b6557); font-size: 13px; }
+.ec-ser { display: flex; gap: 12px; overflow-x: auto; padding: 2px 16px 14px; scroll-snap-type: x mandatory; scrollbar-width: none; }
+.ec-ser::-webkit-scrollbar { display: none; }
+.ec-sc { flex: 0 0 232px; scroll-snap-align: start; border-radius: 18px; overflow: hidden; border: 1px solid var(--bordure, #dfe7e2); background: var(--surface, #fff); color: var(--texte, #2C2A26); font: inherit; text-align: start; padding: 0; display: flex; flex-direction: column; }
+.ec-sc-h { height: 84px; padding: 10px 12px; box-sizing: border-box; color: #fff; display: flex; align-items: flex-end; justify-content: space-between; gap: 8px; }
+.ec-sc-h b { font-size: 17px; line-height: 1.15; color: #F2C43D; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.ec-sc-h span { flex: none; background: rgba(255,255,255,.15); border-radius: 10px; padding: 3px 8px; font-size: 12px; font-weight: 700; }
+.ec-sc-c { padding: 10px 12px 12px; display: flex; flex-direction: column; gap: 7px; }
+.ec-sc-c small { color: var(--texte-doux, #6b6557); font-size: 12.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ec-sc-c i { display: block; height: 5px; border-radius: 3px; background: var(--bordure, #e1e7e2); } .ec-sc-c i u { display: block; height: 5px; border-radius: 3px; background: #0F7B6C; }
+.ec-sc-c em { font-style: normal; font-size: 13px; font-weight: 700; color: #0F7B6C; }
+.ec-cherche .ec-ser, .ec-cherche .ec-ser-t { display: none !important; }
 </style>
 </head>
 <body>
@@ -1761,7 +1780,7 @@ function vueFlux() {
   const reelsSeuls = etat.route === "reels" || etat.route === "videos";
   const wrap = document.createElement("div");
   wrap.className = "flux";
-  wrap.innerHTML = `<div class="flux-haut">${reelsSeuls ? `<button class="flux-ic" id="retour" aria-label="Retour">${ico("back", 26)}</button><span class="flux-titre">${etat.route === "videos" ? "Vidéos" : "Reels"}</span>${etat.route === "videos" ? `<button class="flux-direct" id="direct-saint-b" aria-label="La Mecque et Médine en direct">🕋 Direct</button>` : ""}` : `<div class="flux-modes" id="modes" role="tablist"></div>`}<span class="flux-droite"><button class="flux-ic" id="micro-haut" aria-label="Recherche vocale">${ico("mic", 26)}</button><button class="flux-ic" id="son-haut" aria-label="Son">${ico("mute", 26)}</button><button class="flux-ic" id="chercher" aria-label="Rechercher">${ico("search", 26)}</button><button class="flux-ic" id="h-profil" aria-label="Mon profil">${ico("user", 26)}</button></span></div><div class="flux-defil" id="defil" tabindex="-1"></div>`;
+  wrap.innerHTML = `<div class="flux-haut">${reelsSeuls ? `<button class="flux-ic" id="retour" aria-label="Retour">${ico("back", 26)}</button><span class="flux-titre">${etat.route === "videos" ? "Vidéos" : "Reels"}</span>${etat.route === "videos" ? `<button class="flux-direct" id="direct-saint-b" aria-label="La Mecque et Médine en direct">🕋 Direct</button><button class="flux-direct" id="reels-b" aria-label="Vidéos courtes">🎬 Réels</button>` : ""}` : `<div class="flux-modes" id="modes" role="tablist"></div>`}<span class="flux-droite"><button class="flux-ic" id="micro-haut" aria-label="Recherche vocale">${ico("mic", 26)}</button><button class="flux-ic" id="son-haut" aria-label="Son">${ico("mute", 26)}</button><button class="flux-ic" id="chercher" aria-label="Rechercher">${ico("search", 26)}</button><button class="flux-ic" id="h-profil" aria-label="Mon profil">${ico("user", 26)}</button></span></div><div class="flux-defil" id="defil" tabindex="-1"></div>`;
   app.appendChild(wrap);
   const defil = wrap.querySelector("#defil");
   /* « Voir » : 4 sources — Foulfouldé (vidéos de Lumu), puis les vidéos IslamHouse en pular, français et haoussa */
@@ -1782,7 +1801,7 @@ function vueFlux() {
   wrap.querySelector("#h-profil").onclick = () => router("profil");
   if (!reelsSeuls) { wrap.appendChild(creerPastillePriere()); wrap.appendChild(creerFlamme()); }
   wrap.querySelector("#micro-haut").onclick = () => MICRO.ouvrir();
-  { const bd = wrap.querySelector("#direct-saint-b"); if (bd) bd.onclick = () => ouvrirDirectSaint(0); }
+  { const bd = wrap.querySelector("#direct-saint-b"); if (bd) bd.onclick = () => ouvrirDirectSaint(0); const br = wrap.querySelector("#reels-b"); if (br) br.onclick = () => router("reels"); }
   const bson = wrap.querySelector("#son-haut");
   bson.onclick = () => { etat.son = !etat.son; majSons(); bson.innerHTML = ico(etat.son ? "sound" : "mute", 26); };
   if (etat.parentId) sb.from("yt_abonnements").select("channel_id").then(r => { (r.data || []).forEach(x => mesAbos.add(x.channel_id)); defil.querySelectorAll(".d-plus").forEach(b => { if (mesAbos.has(b.dataset.ch)) b.remove(); }); }, () => {});
@@ -2076,7 +2095,7 @@ function creerReconnaisseur() {
 }
 
 const PROTEGEES = ["questions-imam", "mes-parcours", "parcours-edit", "passage-edit", "chaine-edit", "notifications", "je-publie", "importer", "espace", "groupe-nouveau", "mes-livres", "livre-edition", "live-nouveau", "publier", "devenir-createur", "admin", "push-admin", "mes-contenus", "choix-enfant", "inscription", "accueil", "lecons", "dialogue", "parametres", "changer-mot-de-passe", "pin-creation", "favoris", "historique", "lien", "playlists", "stats", "abonnements"];
-const ROOTS = ["flux", "reels", "videos", "je-publie", "discussions", "home", "espace", "abos", "profil", "preches", "biblio", "direct"];
+const ROOTS = ["aujourdhui", "livres", "flux", "reels", "videos", "je-publie", "discussions", "home", "espace", "abos", "profil", "preches", "biblio", "direct"];
 function router(route, params = {}, opts = {}) {
   if (!etat.parentId && PROTEGEES.includes(route)) { route = "connexion"; params = { message: "Connectez-vous pour continuer." }; }
   if ((route === "flux" || route === "home") && etat.lienChaine) {
@@ -2099,6 +2118,7 @@ function router(route, params = {}, opts = {}) {
     try { history.replaceState(null, "", location.pathname + location.search); } catch(e) {}
     route = "contenu"; params = { id }; if (etat.lienT && etat.lienT > 10) { sauverLocal("pos_" + id, etat.lienT); } etat.lienT = null;
   }
+  if (!etat.accueilFait && !["connexion", "pin-verrou", "langues-choix", "langue", "inscription", "presentation"].includes(route)) { etat.accueilFait = true; if (route === "flux" && !opts.depuisPile) route = "aujourdhui"; }
   etat.route = route; etat.params = params;
   if (!opts.depuisPile) {
     if (ROOTS.includes(route) || route === "connexion" || route === "pin-verrou") etat.pile = [{ route, params }];
@@ -2563,16 +2583,17 @@ const IC = {
   video: '<rect x="3" y="6" width="13" height="12" rx="2.500"/><path d="m16 10.500 5-3v9l-5-3z"/>',
   publier: '<rect x="3" y="3" width="18" height="18" rx="5"/><path d="M12 8v8M8 12h8"/>',
   coran: '<path d="M12 6.500c-2-1.500-5-2-8-1.500v13c3-.500 6 0 8 1.500 2-1.500 5-2 8-1.500V5c-3-.500-6 0-8 1.500zM12 6.500v13"/>',
-  verif: '<path d="m5 12 5 5 9-10"/>'
+  verif: '<path d="m5 12 5 5 9-10"/>',
+  apprendre: '<path d="M22 9 12 4 2 9l10 5z"/><path d="M6 11v5c3 2 9 2 12 0v-5"/>'
 };
 function ico(n, taille, plein) {
   const z = taille || 24;
   return `<svg class="ico" width="${z}" height="${z}" viewBox="0 0 24 24" fill="${plein ? "currentColor" : "none"}" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${IC[n]}</svg>`;
 }
 /* 4 onglets simples : Écouter, Voir, Apprendre, Moi (Publier se trouve dans Moi pour les créateurs) */
-const NAV_BASE = [{ r: "flux", i: "ecouter", t: "Écouter" }, { r: "videos", i: "video", t: "Voir" }, { r: "reels", i: "reel", t: "Réel" }, { r: "coran-accueil", i: "coran", t: "Coran" }, { r: "livres", i: "book", t: "Livre" }];
+const NAV_BASE = [{ r: "aujourdhui", i: "home", t: "Accueil" }, { r: "flux", i: "ecouter", t: "Écouter" }, { r: "videos", i: "video", t: "Voir" }, { r: "coran-accueil", i: "coran", t: "Coran" }, { r: "livres", i: "apprendre", t: "Apprendre" }];
 function navActuelle() { return NAV_BASE; }
-const ONGLET_DE = { "coran": "coran-accueil", "coran-accueil": "coran-accueil", "questions": "", "questions-imam": "", "priere": "flux", "parcours": "livres", "parcours-voir": "livres", "passage": "livres", "parcours-revoir": "livres", "mes-parcours": "", "parcours-edit": "", "passage-edit": "", "savants": "flux", "chaine-edit": "", "notifications": "", "tarifs": "", "flux": "flux", "fil": "flux", "reels": "reels", "recherche": "flux", "home": "flux", "contenu": "*", "chaine": "*", "playlist": "*", "groupes": "flux", "discussions": "discussions", "livres": "livres", "biblio-lire": "livres", "regroupements": "flux", "livre": "flux", "lives": "flux", "live": "flux", "arabe": "flux", "espace": "", "publier": "", "je-publie": "je-publie", "groupe-nouveau": "", "mes-livres": "", "livre-edition": "", "live-nouveau": "", "importer": "", "lien": "", "mes-contenus": "", "devenir-createur": "", "playlists": "", "stats": "", "abos": "flux", "profil": "profil", "videos": "videos", "admin": "", "push-admin": "", "langue": "", "abonnements": "", "legal": "", "favoris": "", "historique": "", "hors": "", "preches": "flux", "biblio": "flux", "dossier": "flux", "direct": "flux" , "radio": "flux" };
+const ONGLET_DE = { "aujourdhui": "aujourdhui", "reels": "videos", "arabe": "livres", "hadiths": "livres", "essentiel": "livres", "enfants": "livres", "azkar": "livres", "bases": "livres", "coran": "coran-accueil", "coran-accueil": "coran-accueil", "questions": "", "questions-imam": "", "priere": "flux", "parcours": "livres", "parcours-voir": "livres", "passage": "livres", "parcours-revoir": "livres", "mes-parcours": "", "parcours-edit": "", "passage-edit": "", "savants": "flux", "chaine-edit": "", "notifications": "", "tarifs": "", "flux": "flux", "fil": "flux", "reels": "reels", "recherche": "flux", "home": "flux", "contenu": "*", "chaine": "*", "playlist": "*", "groupes": "flux", "discussions": "discussions", "livres": "livres", "biblio-lire": "livres", "regroupements": "flux", "livre": "flux", "lives": "flux", "live": "flux", "arabe": "flux", "espace": "", "publier": "", "je-publie": "je-publie", "groupe-nouveau": "", "mes-livres": "", "livre-edition": "", "live-nouveau": "", "importer": "", "lien": "", "mes-contenus": "", "devenir-createur": "", "playlists": "", "stats": "", "abos": "flux", "profil": "profil", "videos": "videos", "admin": "", "push-admin": "", "langue": "", "abonnements": "", "legal": "", "favoris": "", "historique": "", "hors": "", "preches": "flux", "biblio": "flux", "dossier": "flux", "direct": "flux" , "radio": "flux" };
 function creerNav() {
   const nav = document.createElement("nav");
   nav.className = "nav-bas" + (etat.route === "radio" || etat.route === "reels" || etat.route === "videos" || etat.route === "fil" ? " nav-sombre" : "");
@@ -6303,7 +6324,7 @@ const ADHAN = {
 /* ---------- Rappels des adhkâr dans la barre de notification (application installée, même fermée) ---------- */
 const AZKAR_RAPPEL = {
   dispo() { return !!(window.LumuNative && LumuNative.programmerAzkar); },
-  reglages() { return chargerLocal("azkar_rappel", { on: true, matin: true, soir: true, coucher: true }); },
+  reglages() { return { on: true, matin: true, soir: true, coucher: true }; },
   TEXTES: { matin: ["🌅 Adhkâr du matin", "Protégez votre journée · touchez pour les lire (≈ 5 min)"], soir: ["🌇 Adhkâr du soir", "Avant le Maghrib · touchez pour les lire (≈ 5 min)"], coucher: ["🌙 Avant de dormir", "Les invocations du coucher selon la Sounna"] },
   async planifier(force) {
     if (!this.dispo()) return;
@@ -6432,6 +6453,7 @@ async function vueAujourdhui() {
     <b style="display:block;font-size:18px;margin:18px 0 8px">▶ Continuer</b><div id="aj-cont"></div>
     <b style="display:block;font-size:18px;margin:18px 0 8px">💡 Rappel du jour</b><div id="aj-rap"><div class="centre"><div class="spin"></div></div></div>
     <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:18px 0 8px">${[["🕋", "Direct", "direct"], ["📻", "Radios", "radios"], ["🧠", "Mémoriser", "coran-accueil"], ["👥", "Khatma", "khatma"]].map(([i, t, r]) => `<button type="button" data-r="${r}" style="padding:12px 4px;border-radius:16px;border:1px solid var(--bordure,#e3dccb);background:var(--surface,#fff);color:var(--texte,#14201b);font:inherit;font-size:13px"><div style="font-size:26px">${i}</div>${t}</button>`).join("")}</div>`);
+  try { const m = momentIslamique(); if (m && m.azkar) { const h1 = w.querySelector("#aj-pr"); barreAzkar(m, h1); const zb = w.querySelector("#ec-notif"); if (zb) { zb.style.margin = "0 0 12px"; zb.firstChild.style.width = "100%"; zb.firstChild.style.margin = "0"; } } } catch (e) {}
   /* Prière */
   try {
     const pr = await PRIERE.charger() || chargerLocal("priere_n", null);
@@ -6944,8 +6966,9 @@ async function vueCoranAccueil() {
   montrer(["lire", "ecouter", "tafsir"].includes(onglet) ? onglet : "lire");
 }
 async function vueBibliotheque() {
-  const w = ecran("Bibliothèque", null, `<style>.bib-photo .bib-in{padding:0 !important;background:#fff !important;box-shadow:0 6px 14px rgba(0,0,0,.25) !important;border-radius:6px !important;overflow:hidden}</style><button class="carte" id="bib-az" style="width:100%;text-align:start;margin:0 0 14px;display:flex;gap:10px;align-items:center"><span style="font-size:28px">🌅🌙</span><b style="flex:1">Azkar du matin et du soir</b></button><button class="carte" id="bib-ba" style="width:100%;text-align:start;margin:0 0 14px;display:flex;gap:10px;align-items:center"><span style="font-size:28px">🕌</span><span style="flex:1"><b style="display:block">Les bases</b><small>Piliers, ablutions, prière</small></span></button><div class="bib-g" id="bib-g">${BIBLIO.couverturePhoto({ id: "coran", titreFr: "Le Coran", couleur: "#0b3d2e" })}</div><p id="bib-n" style="font-size:13px;text-align:center">Veuillez patienter…</p>`);
+  const w = ecran("Apprendre", null, `<div class="ap-g">${[["📚", "Livres", "Lire et écouter", "#bib-g"], ["📜", "Hadiths", "Authentiques, avec leur degré", "hadiths"], ["🤲", "Invocations", "Matin, soir, marché…", "arabe"], ["💡", "L'essentiel", "Bases de l'islam + quiz", "essentiel"], ["🧒", "Enfants", "Sourates courtes, histoires", "enfants"], ["🧭", "Parcours", "Cours étape par étape", "parcours"]].map(([i, t, st, r]) => `<button type="button" class="ap-t" data-ap="${r}"><span class="ap-i" aria-hidden="true">${i}</span><b>${t}</b><small>${st}</small></button>`).join("")}</div><style>.bib-photo .bib-in{padding:0 !important;background:#fff !important;box-shadow:0 6px 14px rgba(0,0,0,.25) !important;border-radius:6px !important;overflow:hidden}</style><button class="carte" id="bib-az" style="width:100%;text-align:start;margin:0 0 14px;display:flex;gap:10px;align-items:center"><span style="font-size:28px">🌅🌙</span><b style="flex:1">Azkar du matin et du soir</b></button><button class="carte" id="bib-ba" style="width:100%;text-align:start;margin:0 0 14px;display:flex;gap:10px;align-items:center"><span style="font-size:28px">🕌</span><span style="flex:1"><b style="display:block">Les bases</b><small>Piliers, ablutions, prière</small></span></button><div class="bib-g" id="bib-g">${BIBLIO.couverturePhoto({ id: "coran", titreFr: "Le Coran", couleur: "#0b3d2e" })}</div><p id="bib-n" style="font-size:13px;text-align:center">Veuillez patienter…</p>`);
   w.querySelector("#bib-az").onclick = () => router("azkar");
+  w.querySelectorAll("[data-ap]").forEach(b => b.onclick = () => { const r = b.dataset.ap; if (r[0] === "#") { const g = w.querySelector(r); if (g) g.scrollIntoView({ behavior: "smooth", block: "start" }); } else router(r); });
   w.querySelector("#bib-ba").onclick = () => router("bases");
   const tc = w.querySelector(".bib-g .bib-photo");
   tc.onclick = () => router("coran-accueil");
@@ -7360,9 +7383,7 @@ async function vueAzkar() {
     const rang = w.querySelector("#az-m").parentNode; if (rang && rang.parentNode) rang.parentNode.insertBefore(z, rang);
     const peint = () => {
       if (!AZKAR_RAPPEL.dispo()) { z.innerHTML = `<span style="font-size:24px">🔔</span><span style="flex:1;font-size:14px">Mettez à jour l'application Lumu (Android) pour recevoir le rappel des adhkâr dans la barre de notification.</span>`; return; }
-      const r = AZKAR_RAPPEL.reglages();
-      z.innerHTML = `<span style="font-size:24px">🔔</span><span style="flex:1;min-width:0"><b style="display:block;font-size:15px">Rappel dans la barre de notification</b><small style="opacity:.75">Matin après le Fajr · soir après l'Asr · coucher après l'Icha</small></span><button type="button" id="az-rp" role="switch" aria-checked="${r.on}" style="flex:none;width:54px;height:32px;border-radius:16px;border:0;background:${r.on ? "#0F7B6C" : "#c9d3cd"};position:relative"><span style="position:absolute;top:3px;${r.on ? "right:3px" : "left:3px"};width:26px;height:26px;border-radius:50%;background:#fff"></span></button>`;
-      z.querySelector("#az-rp").onclick = () => { const x = AZKAR_RAPPEL.reglages(); x.on = !x.on; sauverLocal("azkar_rappel", x); peint(); AZKAR_RAPPEL.planifier(true); toast(x.on ? "Rappel des adhkâr activé" : "Rappel des adhkâr désactivé"); };
+      z.innerHTML = `<span style="font-size:24px">🔔</span><span style="flex:1;min-width:0"><b style="display:block;font-size:15px">Rappel dans la barre de notification</b><small style="opacity:.75">Chaque jour : matin après le Fajr · soir après l'Asr · coucher après l'Icha</small></span>`;
     };
     peint();
   } catch (e) {}
@@ -8112,22 +8133,21 @@ function momentIslamique(maintenant) {
   if (now >= ish + 30 || now < faj) return { cle: "nuit", ic: "🌙", titre: "Avant de dormir", texte: "Touchez pour lire les invocations du coucher", fond: "linear-gradient(135deg,#0d1b3a,#27406e)", azkar: "coucher" };
   return null;
 }
+/* Barre de notification « C'est l'heure des adhkâr » (toujours visible au bon moment) */
+function barreAzkar(m, avant) {
+  if (!m || !m.azkar || !avant || !avant.parentNode) return;
+  const zn = document.createElement("div"); zn.id = "ec-notif";
+  const titre = m.azkar === "matin" ? "Adhkâr du matin" : m.azkar === "soir" ? "Adhkâr du soir" : "Invocations du coucher";
+  zn.innerHTML = `<button type="button" class="ec-notif"><span class="ec-notif-ic" aria-hidden="true">${m.ic}</span><span class="ec-notif-tx"><b>${esc(titre)}</b><small>${esc(m.azkar === "coucher" ? "Avant de dormir, selon la Sounna" : "C'est le moment · ≈ 5 min")}</small></span><span class="ec-notif-go">Lire</span></button>`;
+  zn.firstChild.onclick = () => router("azkar", { liste: m.azkar });
+  avant.parentNode.insertBefore(zn, avant);
+}
 function carteMoment(w) {
   const zone = w.querySelector("#ec-moment"); if (!zone) return;
   let m = null; try { m = momentIslamique(); } catch (e) {}
   let html = "";
-  /* Rappel des adhkâr : barre de notification en haut d'Écouter (fermable pour la journée) */
-  if (m && m.azkar) {
-    const cleN = "notif_az_" + new Date().toISOString().slice(0, 10) + "_" + m.azkar;
-    let zn = w.querySelector("#ec-notif"); if (!zn) { zn = document.createElement("div"); zn.id = "ec-notif"; const t = w.querySelector(".ec-bande-t"); if (t) t.parentNode.insertBefore(zn, t); }
-    if (!chargerLocal(cleN, false)) {
-      zn.innerHTML = `<div class="ec-notif" role="status"><span class="ec-notif-ic" aria-hidden="true">${m.ic}</span><button type="button" class="ec-notif-tx" id="ec-notif-l"><b>${esc(m.azkar === "matin" ? "Adhkâr du matin" : m.azkar === "soir" ? "Adhkâr du soir" : "Invocations du coucher")}</b><small>${esc(m.azkar === "coucher" ? "Avant de dormir, selon la Sounna" : "C'est le moment · ≈ 5 min")}</small></button><button type="button" class="ec-notif-go" id="ec-notif-go">Lire</button><button type="button" class="ec-notif-x" id="ec-notif-x" aria-label="Masquer pour aujourd'hui">✕</button></div>`;
-      const lire = () => router("azkar", { liste: m.azkar });
-      zn.querySelector("#ec-notif-l").onclick = lire; zn.querySelector("#ec-notif-go").onclick = lire;
-      zn.querySelector("#ec-notif-x").onclick = () => { sauverLocal(cleN, true); zn.innerHTML = ""; };
-    }
-    m = null;
-  }
+  /* Rappel des adhkâr : barre de notification en haut d'Écouter */
+  if (m && m.azkar) { barreAzkar(m, w.querySelector(".ec-bande-t")); m = null; }
   if (m) html += `<button type="button" id="ec-mo" style="display:flex;align-items:center;gap:12px;width:calc(100% - 32px);margin:6px 16px 10px;padding:14px 16px;border:0;border-radius:18px;color:#fff;text-align:start;background:${m.fond};box-shadow:0 4px 14px rgba(0,0,0,.18)"><span style="font-size:30px" aria-hidden="true">${m.ic}</span><span style="flex:1;min-width:0"><b style="display:block;font-size:17px;color:#fff">${esc(m.titre)}</b><span style="display:block;font-size:13px;opacity:.95;color:#fff">${esc(m.texte)}</span></span><span aria-hidden="true" style="font-size:22px">›</span></button>`;
   let ce = null, nl = 0; try { ce = CORAN_ETAT.lire(); nl = CORAN_ETAT.nbLues(ce); } catch (e) {}
   if (ce && (nl > 0 || ce.page > 1)) html += `<button type="button" id="ec-co" style="display:flex;align-items:center;gap:12px;width:calc(100% - 32px);margin:0 16px 10px;padding:12px 16px;border:1px solid #cfdcd4;border-radius:16px;background:var(--surface,#fff);color:inherit;text-align:start"><span style="font-size:26px" aria-hidden="true">📖</span><span style="flex:1;min-width:0"><b style="display:block;font-size:15px">Reprendre ma lecture du Coran</b><span style="display:block;font-size:13px;opacity:.8">Page ${ce.page} · ${nl} pages lues sur 604</span></span><span aria-hidden="true" style="font-size:22px">›</span></button>`;
@@ -8156,6 +8176,7 @@ async function vueEcouter() {
       <div id="ec-rep"></div>
       <div class="ec-ligne"><button class="ec-radio" id="ec-radio"><span class="ec-rp">${ico("play", 30, true)}</span><span><b>Lumu Radio</b><small>Rappels, Coran, invocations</small></span></button></div></div>
       <div id="ec-src" style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:0 16px 12px"></div>
+      <div id="ec-series"></div>
       <div hidden>
       <div class="ec-tit" id="ec-tit">Mes imams</div>
       <div class="ec-imams" id="ec-imams"></div>
@@ -8267,6 +8288,7 @@ async function vueEcouter() {
     }
     const re = (CH.find(x => x[0] === filtre) || [])[2];
     w.classList.toggle("ec-cherche", !!rech);
+    try { dessinerSeries(); } catch (e) {}
     let l;
     if (rech) {
       const V = rechVariantes(rech), nomDe = c => ((c.yt_channels && c.yt_channels.name) || c.source_nom || c.auteur || "");
@@ -8376,11 +8398,46 @@ async function vueEcouter() {
       abos = imams.length > 0;
     }
   } catch (e) {}
+  /* Séries : les épisodes d'un même cours (même imam, même début de titre) regroupés en une carte */
+  let serMemo = null;
+  function seriesDe(l) {
+    const g = new Map(), coll = new Intl.Collator("fr", { numeric: true, sensitivity: "base" });
+    l.forEach(c => {
+      const a = String(c.auteur || (c.yt_channels && c.yt_channels.name) || "").trim();
+      const t = String(c.title || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/\(\d+\)/g, " ").replace(/\d+/g, " ").replace(/[_\-.,:;|/()]+/g, " ").replace(/\s+/g, " ").trim();
+      const cle = t.split(" ").slice(0, 4).join(" "); if (cle.length < 4) return;
+      const k = a + "|" + cle; if (!g.has(k)) g.set(k, { cle: k, auteur: a, items: [] }); g.get(k).items.push(c);
+    });
+    return [...g.values()].filter(x => x.items.length >= 4).map(x => {
+      x.items.sort((p, q) => coll.compare(p.title || "", q.title || ""));
+      const t0 = String(x.items[0].title || "").replace(/\(\d+\)/g, " ").replace(/\d+/g, " ").replace(/[_]+/g, " ").replace(/\s+/g, " ").replace(/[\s\-.,:;|/]+$/, "").trim();
+      x.nom = t0 ? t0.charAt(0).toUpperCase() + t0.slice(1) : "Série";
+      return x;
+    }).sort((p, q) => q.items.length - p.items.length).slice(0, 12);
+  }
+  const ecoute = c => { const q = chargerLocal("pos_" + c.id, 0), d = c.duration_seconds || 0; return d ? q >= d * 0.9 : q > 60; };
+  function dessinerSeries() {
+    const z = w.querySelector("#ec-series"); if (!z) return;
+    if (SOURCE !== "lumu" || rech || !tous.length) { z.innerHTML = ""; return; }
+    if (!serMemo || serMemo.n !== tous.length) serMemo = { n: tous.length, l: seriesDe(tous) };
+    const L = serMemo.l; if (!L.length) { z.innerHTML = ""; return; }
+    const fonds = ["#123C2B", "#0F7B6C", "#2F4B7C", "#7A4E12", "#5B3A6B"];
+    z.innerHTML = `<div class="ec-ser-t"><b>Séries</b><small>${L.length} cours complets</small></div><div class="ec-ser">${L.map((x, i) => { const n = x.items.filter(ecoute).length, pc = Math.round(100 * n / x.items.length); return `<button type="button" class="ec-sc" data-s="${i}"><span class="ec-sc-h" style="background:${fonds[i % fonds.length]}"><b dir="auto" data-notrad>${esc(x.nom)}</b><span>${x.items.length} cours</span></span><span class="ec-sc-c"><small dir="auto">${esc(x.auteur || "Lumu")}</small><i><u style="width:${pc}%"></u></i><em>${n ? "▶ Continuer · " + n + "/" + x.items.length : "▶ Commencer"}</em></span></button>`; }).join("")}</div>`;
+    z.querySelectorAll("[data-s]").forEach(b => b.onclick = () => ouvrirSerie(L[+b.dataset.s]));
+  }
+  function ouvrirSerie(x) {
+    const suivant = x.items.findIndex(c => !ecoute(c)), depart = suivant < 0 ? 0 : suivant;
+    ouvrirFeuille(x.nom, `<p style="margin:0 0 10px;opacity:.75">${esc(x.auteur || "")} · ${x.items.length} cours</p><button class="btn" id="se-go" style="margin:0 0 12px">▶ ${suivant > 0 ? "Continuer : cours " + (depart + 1) : "Commencer au cours 1"}</button><div id="se-l">${x.items.map((c, i) => `<button type="button" data-i="${i}" style="display:flex;align-items:center;gap:10px;width:100%;padding:10px 4px;border:0;border-bottom:1px solid var(--bordure,#eee);background:none;color:inherit;font:inherit;text-align:start"><span style="flex:none;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-size:13px;font-weight:800;${ecoute(c) ? "background:#0F7B6C;color:#fff" : "background:var(--bordure,#e1e7e2)"}">${ecoute(c) ? "✓" : i + 1}</span><span style="flex:1;min-width:0"><b dir="auto" data-notrad style="display:block;font-size:14.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(c.title)}</b><small style="opacity:.7">${c.duration_seconds ? fmtDuree(c.duration_seconds) : ""}</small></span></button>`).join("")}</div>`, (corps, fermer) => {
+      const jouer = i => { fermer(); AUD.file = x.items.slice(i + 1, i + 30); lireDirect(x.items[i]); };
+      corps.querySelector("#se-go").onclick = () => jouer(depart);
+      corps.querySelectorAll("[data-i]").forEach(b => b.onclick = () => jouer(+b.dataset.i));
+    });
+  }
   /* Liste gardée en mémoire : au retour sur Écouter, affichage immédiat sans rien recharger */
   const appliquer = brut => {
     tous = brut.filter(c => c.fichier_path && !c.embed_id && langOk(c)); ecCharge = true;
     if (!abos) { const vus = new Map(); tous.forEach(c => { const ch = c.yt_channels; if (ch && ch.id && !vus.has(ch.id)) vus.set(ch.id, ch); }); imams = [...vus.values()]; }
-    if (w.isConnected) { dessinerImams(); lignes(); }
+    if (w.isConnected) { dessinerImams(); lignes(); dessinerSeries(); }
   };
   if (EC_MEM.brut.length) { appliquer(EC_MEM.brut); if (Date.now() - EC_MEM.t < 15 * 60e3 || EC_MEM.enCours) return; }
   try {
