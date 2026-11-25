@@ -1400,17 +1400,20 @@ body.defile #micro-fab { transform: translateY(140%) scale(.6); opacity: 0; poin
 .acc-b .carte:not(#aj-pr) { box-shadow: none !important; border: 0 !important; background: rgba(15,123,108,.07) !important; border-radius: 16px !important; }
 .acc-b [data-h] { width: 28px !important; height: 28px !important; }
 
-/* Accueil style A « Ciel du jour » en vert (v235) */
+/* Accueil style A « Ciel du jour » en vert, version compacte (v236) */
 .acc-a > .entete { display: none; }
-.acc-ciel { margin: -20px -20px 4px; padding: calc(14px + env(safe-area-inset-top, 0px)) 20px 24px; border-radius: 0 0 32px 32px; color: #fff; background: linear-gradient(180deg, #1B6B5C 0%, #123C2B 100%); display: flex; flex-direction: column; gap: 12px; }
-.acc-ciel-h { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-.acc-ciel-d { font-size: 13px; font-weight: 600; background: rgba(255,255,255,.16); padding: 6px 12px; border-radius: 16px; }
-.acc-ciel-r { width: 44px; height: 44px; border: 0; border-radius: 22px; background: rgba(255,255,255,.16); color: #fff; display: grid; place-items: center; }
-.acc-ciel-s { margin: 2px 0 0; color: #fff !important; text-align: center; font-family: 'Amiri Quran', 'Amiri', 'Noto Naskh Arabic', serif; font-size: 34px; font-weight: 700; line-height: 1.5; }
-.acc-ciel-p { border: 0; background: none; color: #fff; font: inherit; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 0; }
-.acc-ciel-n { font-size: 44px; font-weight: 800; letter-spacing: -1px; line-height: 1.1; }
-.acc-ciel-t { font-size: 15px; font-weight: 700; background: rgba(0,0,0,.25); padding: 6px 14px; border-radius: 18px; }
-.acc-ciel-l { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 4px; width: 100%; margin-top: 10px; font-size: 11.5px; }
+.acc-ciel { margin: -20px -20px 4px; padding: calc(10px + env(safe-area-inset-top, 0px)) 16px 14px; border-radius: 0 0 28px 28px; color: #fff; background: linear-gradient(180deg, #1B6B5C 0%, #123C2B 100%); display: flex; flex-direction: column; gap: 6px; }
+.acc-ciel-h { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.acc-ciel-r { width: 40px; height: 40px; flex: none; border: 0; border-radius: 20px; background: rgba(255,255,255,.16); color: #fff; display: grid; place-items: center; }
+.acc-ciel-s { flex: 1; min-width: 0; margin: 0; color: #fff !important; text-align: center; display: flex; flex-direction: column; align-items: center; line-height: 1.25; }
+.acc-ciel-s [lang="ar"] { font-family: 'Amiri Quran', 'Amiri', 'Noto Naskh Arabic', serif; font-size: 27px; font-weight: 700; }
+.acc-ciel-pn { font-family: Inter, system-ui, sans-serif; font-size: 13px; font-weight: 600; opacity: .85; }
+.acc-ciel-p { border: 0; background: none; color: #fff; font: inherit; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 0; }
+.acc-ciel-lb { font-size: 11.5px; text-transform: uppercase; letter-spacing: 1px; opacity: .8; }
+.acc-ciel-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.acc-ciel-n { font-size: 32px; font-weight: 800; letter-spacing: -.5px; line-height: 1.1; }
+.acc-ciel-t { font-size: 14px; font-weight: 700; background: rgba(0,0,0,.25); padding: 5px 12px; border-radius: 16px; }
+.acc-ciel-l { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 4px; width: 100%; margin-top: 6px; font-size: 11px; }
 .acc-rc { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin: 8px 0 0; }
 .acc-rc button { border: 0; background: none; font: inherit; font-size: 12.5px; font-weight: 600; color: var(--texte, #17221D); display: flex; flex-direction: column; align-items: center; gap: 6px; }
 .acc-rc button span { width: 58px; height: 58px; border-radius: 18px; display: grid; place-items: center; font-size: 26px; }
@@ -6242,7 +6245,7 @@ function dateHijri(court) {
 function majBandeauIslam() {
   let b = document.getElementById("bandeau-islam");
   const cache = !["flux", "radio", "fil", "reels", "videos", "langues-choix", "connexion", "pin-verrou", "presentation", "priere"].includes(etat.route);
-  if (!b) { b = document.createElement("button"); b.id = "bandeau-islam"; b.onclick = () => router("priere"); document.body.appendChild(b); }
+  if (!b) { b = document.createElement("button"); b.id = "bandeau-islam"; b.onclick = e => router("priere", e.target.closest && e.target.closest(".bi-q") ? { qibla: true } : {}); document.body.appendChild(b); }
   b.hidden = !cache; document.body.classList.toggle("bandeau-on", cache);
   if (!cache) return;
   const d = chargerLocal("priere_n", null); let q = "";
@@ -6337,13 +6340,17 @@ function vuePriere() {
     reglagesAdhan(z.querySelector("#adhan-z"));
     z.querySelector("#chg").onclick = () => { sauverLocal("priere_v", null); sauverLocal("priere_n", null); afficher(); };
     const bs = z.querySelector("#bs");
-    if (bs) bs.onclick = async () => {
+    const modeQibla = !!(etat.params && etat.params.qibla);
+    const demarrerBoussole = async () => {
       try { if (window.DeviceOrientationEvent && DeviceOrientationEvent.requestPermission) { const r = await DeviceOrientationEvent.requestPermission(); if (r !== "granted") return; } } catch (e) {}
       bs.hidden = true; if (ecoute) window.removeEventListener(ecoute[0], ecoute[1]);
       const f = z.querySelector("#qf"), st = z.querySelector("#qs");
       const h = ev => { const cap0 = ev.webkitCompassHeading != null ? ev.webkitCompassHeading : (ev.alpha != null ? 360 - ev.alpha : null); if (cap0 == null) return; cap = cap0; const ang = ((q - cap + 540) % 360) - 180; f.style.transform = `rotate(${q - cap}deg)`; z.querySelector(".qibla").classList.toggle("ok", Math.abs(ang) < 6); st.textContent = Math.abs(ang) < 6 ? "✓ Vous faites face à la Qibla" : "Tournez-vous dans la direction de la flèche"; };
       const evn = "ondeviceorientationabsolute" in window ? "deviceorientationabsolute" : "deviceorientation"; ecoute = [evn, h]; window.addEventListener(evn, h);
     };
+    if (bs) bs.onclick = demarrerBoussole;
+    /* Ouvert depuis « Qibla » : la boussole passe en haut de la page et démarre toute seule */
+    if (modeQibla && bs) { const qb = z.querySelector(".qibla"); z.insertBefore(qb, z.firstChild); qb.style.marginTop = "0"; try { w.querySelector(".entete h1").textContent = "Qibla"; } catch (e) {} demarrerBoussole(); }
   }
   afficher();
   const obs = new MutationObserver(() => { if (!w.isConnected) { if (ecoute) window.removeEventListener(ecoute[0], ecoute[1]); obs.disconnect(); } }); obs.observe(document.getElementById("app") || document.body, { childList: true });
@@ -6493,11 +6500,10 @@ async function vueAujourdhui() {
   const nbFait = HABITUDES.filter(([k]) => faites[k]).length;
   const w = ecran("", null, `
     <div class="acc-ciel">
-      <div class="acc-ciel-h"><img src="icon-192.png" alt="Lumu" width="36" height="36" style="border-radius:10px"><button type="button" class="acc-ciel-r" data-r="recherche" aria-label="Rechercher">${ico("search", 20)}</button></div>
-      <p lang="ar" dir="rtl" data-notrad translate="no" class="acc-ciel-s">السَّلَامُ عَلَيْكُمْ${prenom ? `<span lang="fr" dir="ltr" style="display:block;font-family:inherit;font-size:16px;font-weight:600;opacity:.9">${esc(prenom)}</span>` : ""}</p>
-      <button type="button" id="aj-pr" class="acc-ciel-p"><span style="font-size:13px;text-transform:uppercase;letter-spacing:1px;opacity:.85">Prochaine prière</span><span id="aj-prn" class="acc-ciel-n">—</span><span id="aj-prr" class="acc-ciel-t">Ajoutez votre ville pour les horaires</span><span id="aj-prl" class="acc-ciel-l"></span></button>
+      <div class="acc-ciel-h"><img src="icon-192.png" alt="Lumu" width="34" height="34" style="border-radius:10px;flex:none"><p class="acc-ciel-s"><span lang="ar" dir="rtl" data-notrad translate="no">السَّلَامُ عَلَيْكُمْ</span>${prenom ? `<span class="acc-ciel-pn">${esc(prenom)}</span>` : ""}</p><button type="button" class="acc-ciel-r" data-r="recherche" aria-label="Rechercher">${ico("search", 20)}</button></div>
+      <button type="button" id="aj-pr" class="acc-ciel-p"><span class="acc-ciel-lb">Prochaine prière</span><span class="acc-ciel-row"><span id="aj-prn" class="acc-ciel-n">—</span><span id="aj-prr" class="acc-ciel-t">Ajoutez votre ville</span></span><span id="aj-prl" class="acc-ciel-l"></span></button>
     </div>
-    <div class="acc-rc" id="aj-rc">${[["coran", "Coran", "#E2F1EC", "#0F7B6C", "📖"], ["priere", "Qibla", "#FFF4DB", "#9A6B00", "🧭"], ["arabe", "Invocations", "#E8EEF8", "#2F4B7C", "🤲"], ["direct", "Direct", "#FBE9E6", "#A23B2C", "🕋"]].map(([r, t, bg, c, ic]) => `<button type="button" data-r="${r}"><span style="background:${bg};color:${c}">${ic}</span>${t}</button>`).join("")}</div>
+    <div class="acc-rc" id="aj-rc">${[["coran", "Coran", "#E2F1EC", "#0F7B6C", "📖"], ["qibla", "Qibla", "#FFF4DB", "#9A6B00", "🧭"], ["arabe", "Invocations", "#E8EEF8", "#2F4B7C", "🤲"], ["direct", "Direct", "#FBE9E6", "#A23B2C", "🕋"]].map(([r, t, bg, c, ic]) => `<button type="button" data-r="${r}"><span style="background:${bg};color:${c}">${ic}</span>${t}</button>`).join("")}</div>
     <div class="acc-t" style="display:flex;align-items:center;justify-content:space-between;margin:20px 0 4px"><b>Aujourd'hui</b><span style="font-weight:800;color:#e8590c">🔥 ${h.serie || 0} jour${(h.serie || 0) > 1 ? "s" : ""}</span></div>
     <div class="carte" style="padding:6px 14px;background:var(--surface,#fff);color:var(--texte,#14201b)">
       <i style="display:block;height:8px;border-radius:4px;background:var(--bordure,#e3dccb);overflow:hidden;margin:8px 0"><u style="display:block;height:100%;width:${nbFait * 100 / HABITUDES.length}%;background:#1b6b5c"></u></i>
@@ -6527,7 +6533,7 @@ async function vueAujourdhui() {
   });
   const ouvrir = { coran: () => router("coran"), matin: () => router("azkar", { liste: "matin" }), soir: () => router("azkar", { liste: "soir" }), prieres: () => router("priere"), coucher: () => router("azkar", { liste: "coucher" }) };
   w.querySelectorAll("[data-o]").forEach(b => b.onclick = () => ouvrir[b.dataset.o]());
-  w.querySelectorAll("[data-r]").forEach(b => b.onclick = () => b.dataset.r === "direct" ? ouvrirDirectSaint(0) : router(b.dataset.r));
+  w.querySelectorAll("[data-r]").forEach(b => b.onclick = () => b.dataset.r === "direct" ? ouvrirDirectSaint(0) : b.dataset.r === "qibla" ? router("priere", { qibla: true }) : router(b.dataset.r));
   /* Continuer */
   const zc = w.querySelector("#aj-cont"), items = [];
   try { const ce = CORAN_ETAT.lire(); if (ce && ce.page > 1) items.push(["📖", "Coran · page " + ce.page, CORAN_ETAT.nbLues(ce) + " pages lues sur 604", () => router("coran")]); } catch (e) {}
