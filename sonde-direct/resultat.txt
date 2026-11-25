@@ -1,432 +1,119 @@
-TT 200 https://www.tiktok.com/search/video?q=ali%20dewa : 0 liens, 0 ids, 191082 octets 
-TT 200 https://www.tiktok.com/tag/alidewa : 0 liens, 0 ids, 182764 octets 
-DM ali dewa : 1000
-  x8m8jj0	90	true	Patrika	dewas
-  x8mewb0	109	true	Patrika	dewas
-  x8jwuka	57	true	Patrika	dewas
-  x8mfo6k	115	true	Patrika	dewas
-  x8lq40e	132	true	Patrika	dewas
-  x8ne8pi	121	true	Patrika	dewas
-  x8mnlym	75	true	Patrika	dewas
-  x8kverq	164	true	Patrika	dewas
-  x8knetz	170	true	Patrika	dewas
-  x8nmjai	140	true	Patrika	dewas
-  x8m0dic	55	true	Patrika	dewas
-  x8m0jpg	74	true	Patrika	dewas
-  x8m8yxk	60	true	Patrika	dewas
-  x8mpcn3	81	true	Patrika	dewas
-  x8jyrfs	62	true	Patrika	dewas
-  x8mediv	64	true	Patrika	dewas
-  x8l6vfc	157	true	Patrika	dewas
-  x8mjbu7	174	true	Patrika	dewas
-  x8kc7ty	112	true	Patrika	dewas
-  x8km4bx	111	true	Patrika	dewas
-  x8m3rgc	156	true	Patrika	dewas
-  x8mkl57	74	true	Patrika	dewas
-  x8md1aa	151	true	Patrika	dewas
-  x8n1zzj	66	true	Patrika	dewas
-  x8mpdfh	52	true	Patrika	dewas
-  x8kgkxr	63	true	Patrika	dewas
-  x8m1ust	65	true	Patrika	dewas
-  x8jxrka	60	true	Patrika	dewas
-  x8kwdhv	56	true	Patrika	dewas
-  x8lbzxg	73	true	Patrika	dewas
-  x8lo9if	68	true	Patrika	dewas
-  x8kgm6a	71	true	Patrika	dewas
-  x8l4k6v	81	true	Patrika	dewas
-  x8kpvqz	63	true	Patrika	dewas
-  x8k1x3t	87	true	Patrika	dewas
-  x8l4pql	155	true	Patrika	dewas
-  x8lq92d	97	true	Patrika	dewas
-  x8k04ky	47	true	Patrika	dewas
-  x8m1322	90	true	Patrika	dewas
-  x8kra9j	95	true	Patrika	dewas
-  x8kjerd	53	true	Patrika	dewas
-  x8l1j2j	178	true	Patrika	dewas
-  x8mizxi	49	true	Patrika	dewas
-  x8m209w	87	true	Patrika	dewas
-  x8mkko3	99	true	Patrika	dewas
-  x8l0but	66	true	Patrika	dewas
-  x8l9gvl	81	true	Patrika	dewas
-  x8meft2	90	true	Patrika	dewas
-  x8m8xux	88	true	Patrika	dewas
-  x8kog4a	125	true	Patrika	dewas
-VM ali dewa : 0 
-TT 200 https://www.tiktok.com/search/video?q=mohamed%20ali%20dewa : 0 liens, 0 ids, 193193 octets 
-TT 200 https://www.tiktok.com/tag/mohamedalidewa : 0 liens, 0 ids, 182729 octets 
-DM mohamed ali dewa : 1000
-  x55bo5c	62	true	Sudinfo.be	Mohamed Ali
-  x5il1a	57	true	edibsidibouparis	MOHAMED ALI
-  xkob2	214	true	hamid-production abdallah hamid	ALI . MOHAMED
-  x5hjgwo	70	true	Cultura Colectiva	Mohamed Ali
-  xrx9p	353	true	dreamer13	mohamed ali
-  x5ikz3	79	true	edibsidibouparis	MOHAMED ALI
-  x839b3	349	true	Medonx Funk	mohamed ali
-  x5cubf7	70	true	Cultura Colectiva	MOHAMED ALI
-  x23ryo	14	true	ecomoins	mohamed ali"
-  x26gaap	7	true	BuzzInside	Mohamed Ali l'intouchable !
-  x23md7	10	true	ecomoins	Mohamed Ali-ko
-  x4xte8	296	true	Eric FONTAINE	Mohamed Ali (Mhamid)
-  x4efb6i	329	true	Tuxboard	Mohamed Ali DANCE
-  x189x39	11	true	Mister Buzz	Mohamed Ali - Intouchable!!!
-  x8nrkd	266	true	Abdel Hamadan	Mohamed Ali mowachah
-  x3g1po	19	true	foul $$$$	MOHAMED-ALI IND
-  xskww	30	true	Ali_La_Pointe	Mohamed Ali Zinedine Zidane
-  x1y5rwf	299	true	Sltanmolook	Azhari Mohamed Ali _ Fatoon
-  x4xety	247	true	Ralphlaurino Salim	Rencontre avec Mohamed Ali
-  x9xtgu8	66	true	Alssann	Qui est Mohamed Ali
-  xnzd0	10	true	oeoe78	Boxing - Mohamed Ali - Video
-  x5cpza	68	true	Manille	Mohamed ali   joe frazier
-  x9pnexg	109	true	languedebut	01/26 - Mohamed Ali
-  x121m3	61	true	lorzan M	Adidas mohamed ali  zidane
-  xatosi2	146	true	Liik	Mohamed Ali le sauveur !
-  x6lg3nd	52	true	euronews (en français)	Trump veut gracier Mohamed  Ali
-  x4ejygs	164	true	franceinfo	Mohamed Ali, la légende sportive
-  xfegjx	81	true	INA	Boxe : défaite de Mohamed Ali
-  x2b7t8u	155	true	euronews (en français)	Nouveau documentaire sur Mohamed Ali
-  x8nn7o5	56	true	Planet.fr	Dernier round pour Mohamed Ali
-  x2i22r	728	true	Abdel Hamadan	sharee3 mohamed ali oihid sayf
-  xbpnay2	73	true	JEREMwav	Ne jamais provoquer Mohamed Ali.
-  x4efa02	282	true	Tuxboard	Mohamed Ali une vitesse incroyable
-  x23mbx	157	true	ecomoins	gorilla monsoon vs mohamed ali
-  x8b4qvj	48	true	Le Phocéen	Qui est Mohamed-Ali Cho ?
-  x4fsyze	46	true	LADEPECHE.FR	Gong final pour Mohamed Ali
-  x86hmvt	180	true	Dreamoove	Mohamed Ali  "le temps"  motivation
-  x7vfh7a	46	true	Espace Tv Guinée	BA DDY MOHAMED ALI BATCHILY
-  x28uw0c	27	true	PoemHunter.com	Mohamed Ali Elhani - The Lion
-  x2xgud	254	true	Ali sallemohamedali	Pub video salle mohamed ali
-  x4g3sgj	56	true	Planet - Buzz	Dernier round pour Mohamed Ali
-  x9skq3s	41	true	beIN SPORTS Hong Kong	Goal by Mohamed-Ali Cho
-  x17hzk	248	true	big_boss	Pub video salle mohamed ali
-  x9lkkfq	93	true	Tengu Musashi	Mohamed Ali sur UFC 5 !
-  x6tgnv	115	true	daniel donn	Mohamed Ali Ben Jemaa 2
-  xeart	28	true	cmomo111	amine ,mohamed & ali à tawrirt
-  x4ehnyy	167	true	franceinfo	Mohamed Ali : décès d'une légende
-  x7lc9ub	295	true	Tunivisions	Découvrez la nouvelle marque " ALI " by Mohamed Ali Guesmi
-  x8crq38	95	true	Le Point Abonnés	Mohamed Ali, l’abeille ne pique plus
-  xfdznk	60	true	INA	Mohamed Ali à Cannes - Archive INA
-VM mohamed ali dewa : 0 
-TT 200 https://www.tiktok.com/search/video?q=mouhamed%20ali%20dewa : 0 liens, 0 ids, 191187 octets 
-TT 200 https://www.tiktok.com/tag/mouhamedalidewa : 0 liens, 0 ids, 180892 octets 
-DM mouhamed ali dewa : 1000
-  x216ft	781	true	youssef f	mouhamed
-  x3a1ou	69	true	jarod.mca	MOUHAMED
-  x5jehm6	616	true	TFM	Yeewu Leen - 24 Mars 2015 - Parmi nous avec Mouhamed Ali Ndiaye, Boxeur
-  x1857c	81	true	musti taekwondo fout	mouhamed rincon
-  x5rqy9	360	true	mouslim_janvier	Mouhamed SAWS
-  xaarjg	521	true	SOUTIEN A ABDELAZIZ BOUTEFLIKA 2019	Mouhamed Elmitiri
-  x7r12fz	24	true	Sunubuzz Tv	Mouhamed americain
-  x3dm8o	260	true	jessika didi	Mouhamed hamghi
-  x5o33xa	80	true	Téranga Sénégal	mouhamed diallo
-  x2896wc	776	true	Akrem Hakimi	MOUHAMED RAHMANI
-  x3ajg5	149	true	Oum 'Issa	Sourate mouhamed
-  x4mgs2	248	true	wahab benawad	Mouhamed Alloua -Tamghar
-  x57q0r	241	true	zohir	mouhamed nabeiena nacheeduc
-  xttvf2	237	true	RFI	Mahomet ou Mouhamed ?
-  x57dj7	141	true	Sandzak_boy	Ahmed Mouhamed Anachid
-  x2rd13	669	true	chebabmr	mouhamed ouled talbe
-  x48dt3	341	true	K - G@NO	Mouhamed staifi  سطايفي
-  x61wseu	70	true	ORLEANS-LOIRET-BASKET	Portrait Mouhamed DIAGNE
-  x5hjjpa	33	true	TFM	Mouhamed BANGOURRA  coach Guinée
-  x1w1ch	555	true	Muslim-Makkah	Mouhamed 1995 shuraim & sudais
-  x4a6ti	365	true	K.G@NO	mouhamed staifi gutelni edemar
-  x5evt3f	48	true	Ouest-France.fr	L'adieu à Mouhamed Kamara
-  x3zix2	358	true	K - G@NO	Staifi سطايفي  cheikh mouhamed
-  x1qy9x	240	true	wahab benawad	Mouhamed Lamine-Ma Andi
-  x8m8jj0	90	true	Patrika	dewas
-  x8ne8pi	121	true	Patrika	dewas
-  x8lq40e	132	true	Patrika	dewas
-  x8mfo6k	115	true	Patrika	dewas
-  x8mewb0	109	true	Patrika	dewas
-  x8jwuka	57	true	Patrika	dewas
-  xr9ci5	293	true	BoxingClubMartines_video	Mouhamed SDER vs Boukachkack
-  x8knetz	170	true	Patrika	dewas
-  x8kverq	164	true	Patrika	dewas
-  x8nmjai	140	true	Patrika	dewas
-  x8mnlym	75	true	Patrika	dewas
-  x8m0dic	55	true	Patrika	dewas
-  x8m0jpg	74	true	Patrika	dewas
-  x8jyrfs	62	true	Patrika	dewas
-  x8m8yxk	60	true	Patrika	dewas
-  x8mpcn3	81	true	Patrika	dewas
-  x8n1zzj	66	true	Patrika	dewas
-  x8mpdfh	52	true	Patrika	dewas
-  x8m1ust	65	true	Patrika	dewas
-  x8kgkxr	63	true	Patrika	dewas
-  x7vyw08	0	true	AFRICA7	Ar Rouchdou - Oustaz Mouhamed Mbengue
-  x8m3rgc	156	true	Patrika	dewas
-  x8mkl57	74	true	Patrika	dewas
-  x8md1aa	151	true	Patrika	dewas
-  x1l6oz	554	true	abderahim82	Sourate Ar-Rahman Mouhamed lahidane
-  x63i6f	259	true	Sadr al-Din Shirazi	Opération Prophète Mouhamed(saw)_iran
-VM mouhamed ali dewa : 0 
-TT 200 https://www.tiktok.com/search/video?q=mahmoud%20goni : 0 liens, 0 ids, 191015 octets 
-TT 200 https://www.tiktok.com/tag/mahmoudgoni : 0 liens, 0 ids, 180840 octets 
-DM mahmoud goni : 1000
-  x6wmgpv	19	true	Balóchi Chaynal	Góni
-  x2jg8x	22	true	FC_channel_	n'goni
-  x5nvaf	134	true	papynounours	Mahmoud.
-  x4pk2h	296	true	drmoody2	mahmoud
-  x43o8q	112	true	zakaria hattanioui	mahmoud
-  x149md	81	true	jelly91	MAHMOUD
-  x6hjyht	60	true	Songs Lyrics Mint	Aly Goni Shirtless Actor of Aly Goni
-  xc648y	1034	true	Nionry Traore	dosso goni
-  x5dwn2	40	true	ludo-the-killer	olllioules goni
-  xc3a1p	196	true	Nionry Traore	dosso goni
-  xziv71	393	true	Sami Lo Gos	Adel Mahmoud Ben Cheikh Mohamed Mahmoud
-  xgvzno	286	true	Rue89	Mahmoud Hussein2
-  x4rfgx	101	true	mterki	mahmoud belgique12
-  x5fv4n	83	true	mahmoudmerre	Mahmoud merre
-  x736n3	203	true	mahmoudmerre	Mahmoud Merre
-  x6b9a81	93	true	Kapitalis	Mahmoud Abbas
-  x23xei	160	true	MAHMOUD BEN RABAH	EDAC MAHMOUD
-  x4rfdr	17	true	mterki	mahmoud belgique11
-  x4qcg8	47	true	mterki	mahmoud belgique3
-  x4qcnm	85	true	mterki	mahmoud belgique4
-  xgvzlz	293	true	Rue89	Mahmoud Hussein1
-  x4rfv7	7	true	mterki	mahmoud belgique14
-  x4rfp4	127	true	mterki	mahmoud belgique13
-  xsfpw	240	true	3imad abdalla mohd	MAHMOUD ABDAL3AZIZI
-  x4rfaj	43	true	mterki	mahmoud belgique10
-  x4qcvd	52	true	mterki	mahmoud belgique5
-  x2h6yy	15	true	biloff	mahmoud gage
-  x4reox	6	true	mterki	mahmoud belgique7
-  xgvzpa	50	true	Rue89	Mahmoud Hussein3
-  x4reuw	36	true	mterki	mahmoud belgique8
-  x8k7cj	187	true	Mediapart	Aswany Mahmoud
-  x5f3mj	151	true	mahmoudmerre	Mahmoud Merre
-  x4vmea	154	true	rdvabagdad	Mahmoud Club
-  x5lgnu	287	true	mahmoudone	mahmoud NY
-  xscoy	716	true	3imad abdalla mohd	MAHMOUD ABDAL3AZIZ
-  x11qu5	464	true	RUN Productions	Mahmoud Ahmed
-  xbuut8m	24	true	Hocine Yahiaoui	Mahmoud l'argentin
-  xgvzse	50	true	Rue89	Mahmoud Hussein3
-  x4yt1a	21	true	lyess01	Mahmoud Jackson
-  x1g57q	529	true	mekkireggani	Mahmoud almassry
-  x8ryr1	319	true	akatipbm	mahmoud amazigh
-  x2k4ul	108	true	misterjulius	mahmoud ahmed
-  x6fe0q	91	true	mkand87	Mahmoud darwish
-  xd8hkw	119	true	Georges Ibrahim Abdallah	Mahmoud Darwish
-  x4refr	74	true	mterki	mahmoud belgique6
-  x9i8bsu	4736	true	iMovies	DIEUDONNÉ  -  Mahmoud
-  x28po9	272	true	Mohamed aomya	mahmoud  guinia
-  x4rf4l	51	true	mterki	mahmoud belgique9
-  x82ay1	463	true	LaPierreEtLaPlume	Mahmoud Darwich
-  x36ks7	428	true	johssine	MAHMOUD ARCHANE
-VM mahmoud goni : 0 
-TT 200 https://www.tiktok.com/search/video?q=mahmud%20goni : 0 liens, 0 ids, 191123 octets 
-TT 200 https://www.tiktok.com/tag/mahmudgoni : 0 liens, 0 ids, 180837 octets 
-DM mahmud goni : 1000
-  x9auydg	66	true	Birthday Song With Names	MAHMUD – Ad Günün Mübarək Mahmud
-  x6wmgpv	19	true	Balóchi Chaynal	Góni
-  x2jg8x	22	true	FC_channel_	n'goni
-  x5dwn2	40	true	ludo-the-killer	olllioules goni
-  xc648y	1034	true	Nionry Traore	dosso goni
-  x86rv8r	47	true	Mariya aktar	Mahmud Huzaifa
-  x6hjyht	60	true	Songs Lyrics Mint	Aly Goni Shirtless Actor of Aly Goni
-  xc3a1p	196	true	Nionry Traore	dosso goni
-  x9kk4su	1294	true	İhvanlar.net	Mahmud Efendi Tasarrufu
-  x1zp3uy	10	true	PoemHunter.com	Z.I. Mahmud - Tulips
-  x184u60	94	true	A9 TV	Seyyid Mahmud Birifkani
-  xni9af	2880	true	maharaz moumouni	Jaafar Mahmud adam
-  x30c4k2	185	false	ArkivaShqip	Goni Kercova - Party
-  x3tm801	214	true	Ne Nedir?	30 - II. Mahmud
-  x6m7t6	330	true	jfal3	Sheikh Mahmud Tablaw
-  x8t1pd2	79	true	Free Malaysia Today	Taib Mahmud dies
-  x5dirz	40	true	ludo-the-killer	ollioules pissine goni
-  xx8f97	151	true	Michel Dunand	N'GONI (Instrument Malien)
-  x3pezy	138	true	-Ranma-	Mahmud Ahmadineyad Cantando
-  x3u9fs4	71	true	Haberler.com	Somali Cumhurbaşkanı Mahmud
-  x3tm81x	214	true	Ne Nedir?	24 - I. Mahmud
-  x29u28b	112	true	PoemHunter.com	Al Mahmud - Nature
-  x1842ef	63	true	A9 TV	Muhammed Mahmud - Moritanya
-  x3rx8n	307	true	-Ranma-	Celebrities - Mahmud Ahmadineyad
-  x18448e	63	true	A9 TV	Muhammed Mahmud, Moritanya
-  x1z67ep	10	true	PoemHunter.com	Al Mahmud - Kapuni
-  x29u2b7	70	true	PoemHunter.com	Al Mahmud - Fugitive
-  x1z694u	70	true	PoemHunter.com	MAHMUD HASSAN - MORALITY
-  x2980tz	389	true	Christiane Garnier	LE KAMALE N'GONI
-  x32pag4	71	false	AFP Português	Mahmud Abbas renuncia
-  x2870al	245	true	MUZIK SHQIP POPULLORE 2025	GONI ZEKES -  ROMINA
-  x8w4n0s	259	true	Aziz Mahmud Hüdayi Aşkın Yolculuğu	Mahmud, Mehmed ile Yusuf’u tanıştırdı! - Aziz Mahmud Hüdayi 16. Bölüm
-  x6bk8f3	24	true	24 TV	Mahmud Abbas Türkiye'de
-  x8ug6mg	244	true	Aziz Mahmud Hüdayi Aşkın Yolculuğu	Mahmud, Kadı Burhaneddin'in ruznamesini arıyor. - Aziz Mahmud Hüdayi 4. Bölüm
-  x1z7q4y	10	true	PoemHunter.com	Al Mahmud - Matrichhaya
-  x38jzz	279	true	FARIS-USA	MAHMUD NAMOZOV- QISHLOG'IM
-  x8uanlk	338	true	Aziz Mahmud Hüdayi Aşkın Yolculuğu	Mahmud, Kadı Burhaneddin'in doktorunu sorguluyor. - Aziz Mahmud Hüdayi 2. Bölüm
-  x8vya92	234	true	Aziz Mahmud Hüdayi Aşkın Yolculuğu	"Fani dünya yalan, aldanma Mahmud!" - Aziz Mahmud Hüdayi 14. Bölüm
-  xdetk1	320	true	casus0909	kasgarli mahmud 1000 yaşında
-  x21r5h6	160	true	Haberler.com	Mahmud Abbas, Türkiye'den Ayrıldı
-  x8vrr16	231	true	Aziz Mahmud Hüdayi Aşkın Yolculuğu	"Gayrı Bursa'nın yeni kadısı Mahmud Efendi'dir!" - Aziz Mahmud Hüdayi 12. Bölüm
-  x29eiku	53	true	PoemHunter.com	Z.I. Mahmud - PC Games
-  x2qdfef	69	true	Haberler.com	Mahmud Abbas İtalya?da
-  xm1y9y	305	true	Abdul_hay	Ahmed Mahmud Muhammed s.a.v.
-  x8070ki	299	true	Nihat Hatipoğlu	Nureddin Mahmud Zengi'nin Rüyası
-  x8vya94	205	true	Aziz Mahmud Hüdayi Aşkın Yolculuğu	"Şeytanın vesveselerine mi kulak asarsın Mahmud?" - Aziz Mahmud Hüdayi 14. Bölüm
-  x87wn0v	42	false	AWANI	Taufan Goni melanda Kyushu
-  x8ma7oh	134	true	ISLAMIC PREACHING TV	Goni Ahmad Goni-Oh Allah Increase our love for the Quran
-  x931944	256	true	Cübbeli Ahmet Hoca	Mahmûd Efendi Hazretleri’mizin Kendisine “Teyyareci” Lakabını Takdığı Mahmud Yılmaz Amcamızın Rüyası
-  xlx729	2038	true	imctv	Salar Mahmud Özel Röportajı
-VM mahmud goni : 0 
-TT 200 https://www.tiktok.com/search/video?q=modibbo%20dewa : 0 liens, 0 ids, 193100 octets 
-TT 200 https://www.tiktok.com/tag/modibbodewa : 0 liens, 0 ids, 182770 octets 
-DM modibbo dewa : 1000
-  x8m8jj0	90	true	Patrika	dewas
-  x8ne8pi	121	true	Patrika	dewas
-  x8lq40e	132	true	Patrika	dewas
-  x8mfo6k	115	true	Patrika	dewas
-  x8mewb0	109	true	Patrika	dewas
-  x8jwuka	57	true	Patrika	dewas
-  x8mnlym	75	true	Patrika	dewas
-  x8kverq	164	true	Patrika	dewas
-  x8knetz	170	true	Patrika	dewas
-  x8nmjai	140	true	Patrika	dewas
-  x8m0dic	55	true	Patrika	dewas
-  x8m0jpg	74	true	Patrika	dewas
-  x8m8yxk	60	true	Patrika	dewas
-  x8mpcn3	81	true	Patrika	dewas
-  x8jyrfs	62	true	Patrika	dewas
-  x8n1zzj	66	true	Patrika	dewas
-  x8mpdfh	52	true	Patrika	dewas
-  x8m1ust	65	true	Patrika	dewas
-  x8kgkxr	63	true	Patrika	dewas
-  x8mediv	64	true	Patrika	dewas
-  x8l6vfc	157	true	Patrika	dewas
-  x8mjbu7	174	true	Patrika	dewas
-  x8kc7ty	112	true	Patrika	dewas
-  x8km4bx	111	true	Patrika	dewas
-  x8md1aa	151	true	Patrika	dewas
-  x8m3rgc	156	true	Patrika	dewas
-  x8mkl57	74	true	Patrika	dewas
-  x8kog2v	125	true	Patrika	dewas
-  x8l27m5	50	true	Patrika	dewas
-  x8kog4a	125	true	Patrika	dewas
-  x8lunp9	97	true	Patrika	dewas
-  x8k1x3t	87	true	Patrika	dewas
-  x8l4pql	155	true	Patrika	dewas
-  x8lq92d	97	true	Patrika	dewas
-  x8k04ky	47	true	Patrika	dewas
-  x8m1322	90	true	Patrika	dewas
-  x8kra9j	95	true	Patrika	dewas
-  x8kjerd	53	true	Patrika	dewas
-  x8l1j2j	178	true	Patrika	dewas
-  x8mizxi	49	true	Patrika	dewas
-  x8m209w	87	true	Patrika	dewas
-  x8mkko3	99	true	Patrika	dewas
-  x8l0but	66	true	Patrika	dewas
-  x8l9gvl	81	true	Patrika	dewas
-  x8meft2	90	true	Patrika	dewas
-  x8m8xux	88	true	Patrika	dewas
-  x8k4q8l	91	true	Patrika	dewas
-  x8n1f2i	119	true	Patrika	dewas
-  x8mcc74	69	true	Patrika	dewas
-  x8lc0z2	66	true	Patrika	dewas
-VM modibbo dewa : 0 
-TT 200 https://www.tiktok.com/search/video?q=dewa%20fulfulde : 0 liens, 0 ids, 191079 octets 
-TT 200 https://www.tiktok.com/tag/dewafulfulde : 0 liens, 0 ids, 180842 octets 
-DM dewa fulfulde : 1000
-  xbsk64	464	true	World Language Movies	Good News FULFULDE, BENIN-TOGO Movie Trailer
-  x8m8jj0	90	true	Patrika	dewas
-  x8mewb0	109	true	Patrika	dewas
-  x8jwuka	57	true	Patrika	dewas
-  x8mfo6k	115	true	Patrika	dewas
-  x8lq40e	132	true	Patrika	dewas
-  x8ne8pi	121	true	Patrika	dewas
-  x8knetz	170	true	Patrika	dewas
-  x8kverq	164	true	Patrika	dewas
-  x8nmjai	140	true	Patrika	dewas
-  x8mnlym	75	true	Patrika	dewas
-  x8m0dic	55	true	Patrika	dewas
-  x8m0jpg	74	true	Patrika	dewas
-  x8jyrfs	62	true	Patrika	dewas
-  x8m8yxk	60	true	Patrika	dewas
-  x8mpcn3	81	true	Patrika	dewas
-  x8m1ust	65	true	Patrika	dewas
-  x8kgkxr	63	true	Patrika	dewas
-  x8mediv	64	true	Patrika	dewas
-  x8l6vfc	157	true	Patrika	dewas
-  x8mjbu7	174	true	Patrika	dewas
-  x8kc7ty	112	true	Patrika	dewas
-  x8km4bx	111	true	Patrika	dewas
-  x8n1zzj	66	true	Patrika	dewas
-  x8mpdfh	52	true	Patrika	dewas
-  x8md1aa	151	true	Patrika	dewas
-  x8m3rgc	156	true	Patrika	dewas
-  x8mkl57	74	true	Patrika	dewas
-  x8kog2v	125	true	Patrika	dewas
-  x8l27m5	50	true	Patrika	dewas
-  x8kog4a	125	true	Patrika	dewas
-  x8lunp9	97	true	Patrika	dewas
-  x8mizxi	49	true	Patrika	dewas
-  x8l0but	66	true	Patrika	dewas
-  x8m209w	87	true	Patrika	dewas
-  x8l9gvl	81	true	Patrika	dewas
-  x8mkko3	99	true	Patrika	dewas
-  x8m8xux	88	true	Patrika	dewas
-  x8meft2	90	true	Patrika	dewas
-  x8k1x3t	87	true	Patrika	dewas
-  x8l4pql	155	true	Patrika	dewas
-  x8lq92d	97	true	Patrika	dewas
-  x8k04ky	47	true	Patrika	dewas
-  x8m1322	90	true	Patrika	dewas
-  x8kra9j	95	true	Patrika	dewas
-  x8kjerd	53	true	Patrika	dewas
-  x8l1j2j	178	true	Patrika	dewas
-  x8k4q8l	91	true	Patrika	dewas
-  x8n1f2i	119	true	Patrika	dewas
-  x8mcc74	69	true	Patrika	dewas
-VM dewa fulfulde : 0 
-TT 200 https://www.tiktok.com/search/video?q=goni%20fulfulde : 0 liens, 0 ids, 192430 octets 
-TT 200 https://www.tiktok.com/tag/gonifulfulde : 0 liens, 0 ids, 182818 octets 
-DM goni fulfulde : 1000
-  xbsk64	464	true	World Language Movies	Good News FULFULDE, BENIN-TOGO Movie Trailer
-  x6wmgpv	19	true	Balóchi Chaynal	Góni
-  x2jg8x	22	true	FC_channel_	n'goni
-  x89yk1d	890	true	OLYVIZION TV	Gallé Abou Thiam Saison 02 - Episode 04 - fulfuldé
-  x89wlvl	484	true	OLYVIZION TV	Gallé Abou Thiam Saison 02 - Episode 01 - fulfuldé
-  x6hjyht	60	true	Songs Lyrics Mint	Aly Goni Shirtless Actor of Aly Goni
-  xc648y	1034	true	Nionry Traore	dosso goni
-  x5dwn2	40	true	ludo-the-killer	olllioules goni
-  xc3a1p	196	true	Nionry Traore	dosso goni
-  x2980tz	389	true	Christiane Garnier	LE KAMALE N'GONI
-  x30c4k2	185	false	ArkivaShqip	Goni Kercova - Party
-  xx8f97	151	true	Michel Dunand	N'GONI (Instrument Malien)
-  x5dirz	40	true	ludo-the-killer	ollioules pissine goni
-  x2870al	245	true	MUZIK SHQIP POPULLORE 2025	GONI ZEKES -  ROMINA
-  x8ma7oh	134	true	ISLAMIC PREACHING TV	Goni Ahmad Goni-Oh Allah Increase our love for the Quran
-  x30c4jz	238	false	ArkivaShqip	Goni Kercova - 1000 Zemra
-  x87wn0v	42	false	AWANI	Taufan Goni melanda Kyushu
-  x2mnuv6	42	true	TomoNews PL	Głodny hipopotam goni łódź
-  x4lw9gw	724	true	PiccolaGrandeItalia.Tv	Goni - Piccola Grande Italia
-  x8od7mr	7	true	Viral	Mayra Goñi en EE.UU.
-  x4y9n2p	99	true	PAUC Handball	[Interview] Iosu Goni Leoz
-  x87wn0u	42	false	AWANI	Taufan Goni melanda Kyushu
-  x6b9lpk	132	true	PAUC Handball	Réaction Iosu Goni Leoz
-  xgxcu	99	true	africa dia	ali n'goni bobo burkina
-  x7x7z16	42	true	Jukin Media	Typhoon Goni Damages Mall
-  xcpd6t	495	true	EiTB	Orain: Pernan Goñi komikilaria
-  x30c4nj	252	false	ArkivaShqip	Goni Kercova - Vajzat Shqiptare
-  x30c4lg	238	false	ArkivaShqip	Goni Kercova - Pse Pse
-  x8g5q8k	188	true	Tellymasala	Aly Goni, Jasmin Bhasin Meet Natasa Stankovic With Arsalan Goni & Suzzane Khan
-  xargkae	98	true	Lefaso TV	WatAI Bangré, bientôt une intelligence artificielle qui parle mooré, dioula et fulfuldé
-  x6rsuen	57	true	VIVA.co.id	Topan Goni Hantam Okinawa Jepang
-  x30c4l4	195	false	ArkivaShqip	Goni Kercova - Dashni e Vjeter
-  x7x6ovv	71	true	euronews (em português)	Tufão Goni chega às Filipinas
-  x952oom	89	true	Starlight Studio	Jasmin bhasin and Aly goni
-  x9qku6k	135	true	Página12	Uki Goñi - Buenos Aires Herald
-  x8o035c	38	true	Viral	Mayra Goñi sobre Ricardo Mendoza.
-  x8oakhl	15	true	Viral	Mayra Goñi muestra dólare rotos.
-  x8oakme	15	true	Viral	Pollada bailable de Mayra Goñi.
-  x8odi41	72	true	Viral	Magaly critica a Mayra Goñi
-  x7vr2mj	246	true	KompasTV	Pelajar SMP Tewas Dalam Goni
-  x30c4kp	235	false	ArkivaShqip	Goni Kercova - Ne zemren tande
-  x30c4kw	250	false	ArkivaShqip	Goni Kercova - Dasma me defa
-  x7zjevt	111	true	Filmibeat	Aly Goni Birthday: Jasmin Bhasin के लिए Aly Goni ने लिखी शानदार बात | FilmiBeat
-  xxaf5s	257	true	Cinekasero	Adama et son Kamel N'goni
-  x7zncfv	91	true	Filmibeat	Aly Goni की बहन Illham Goni ने बनाई Jasmin Bhasin की ये वीडियो | FilmiBeat
-  x7zfmcs	117	true	Filmibeat	Bigg Boss 14; Aly Goni की बहन illham Goni Support करने पहुंची Mumbai | FilmiBeat
-  x7z03n5	73	true	Lehren Small Screen	Jasmin Bhasin And Ilham Goni Praises Aly Goni For His Web Series Jeet Ki Zid
-  x807aer	77	true	Filmibeat	Aly Goni के भाई Arslan Goni के संग फिल्म देखने पहुंची Sussanne Khan? | FilmiBeat
-  x80846i	80	true	Filmibeat	Aly Goni ने दिया अपने Haters को करारा जवाब, देखिए क्या बोले Aly Goni | FilmiBeat
-  xrzewe	50	true	EiTB	Pernan Goñi, caricaturas a lo loco
-VM goni fulfulde : 0 
+=== 117 chaînes en direct ===
+UCos52azQNBgW63_9uDJoPDA	✔	11 833 utilisateurs regardent la vidéo	قناة القران الكريم	IsJTAdC3-Jw	بث مباشر || قناة القرآن الكريم Makkah Live
+UCqDUJp6Z4wyFkDJGqd0EP4Q	✔	12 329 utilisateurs regardent la vidéo	القرآن الکریم	CDYVrH8D7Sc	🕋 Makkah Live | مكة مباشر | الحرم المكي مباشر | قناة القران الكريم السعودية مبا
+UCWainKMJPyXikjekccFf3NA	✔	978 utilisateurs regardent la vidéo	Ar Rahman	z-lVvl0x_Sc	🔴 Makkah Live | بث مباشر مكة المكرمة الآن | Live Kaaba HD 24/7
+UCE0xp8NLzN5H1mS66wNdmzA	✔	204 utilisateurs regardent la vidéo	راديو القران Quran radio Cairo	FSCTq49WAuA	بث مباشر 🤎 إذاعة القران الكريم من القاهرة راديو القران - Radio Quran Karim
+UCRvK_gXx5rC3lu8de1QuGDw	✔	1 634 utilisateurs regardent la vidéo	Kaaba TV	z4xM8YOefyE	🔴 Makkah Live | مكة مباشر | الحرم المكي مباشر | قناة القران الكريم السعودية مبا
+UCkY2tZYoh8UOKr5JdCG7nDA	 	3 701 utilisateurs regardent la vidéo	Noor & Peace	nuhaCa5ZEl4	🔴 Makkah Live | مكة مباشر | الحرم المكي مباشر | قناة القران الكريم السعودية مبا
+UCqtGJe9AnRfq5wwjk27VsoQ	 	383 utilisateurs regardent la vidéo	Al Taqwa TV	juE9TUq9iiw	🔴 Makkah Live | مكة مباشر | الحرم المكي مباشر | قناة القران الكريم السعودية مبا
+UCfBw_uwZb_oFLyVsjWk6owQ	✔	67 utilisateurs regardent la vidéo	القرآن الكريم AlQuran4K	u0r_8rrquK4	🔴Live Makkah Today | بث مباشر | قناة القرآن الكريم Makkah Live TV
+UCllTh8Qy9Z6cFF4VNtuwdcQ	 	9 417 utilisateurs regardent la vidéo	The Spiritual Quran	Vmnj5x8H744	🔴 Makkah Live | مكة مباشر | الحرم المكي مباشر | قناة القران الكريم السعودية مبا
+UCraPI8sg-eiNzUrurxhKeEQ	✔	2 134 utilisateurs regardent la vidéo	القرآن_الكريم@	llMgudrqlmA	🔴 Makkah Live | مكة مباشر | الحرم المكي مباشر | قناة القران الكريم السعودية مبا
+UCpVWTzjzRxBtbjSpt1UvUuQ	 	12 503 utilisateurs regardent la vidéo	Peaceful - Holy Quran	0_NhTJXFGnM	🔴 Makkah Live | مكة مباشر | الحرم المكي مباشر | قناة القران الكريم السعودية مبا
+UCKzk5AQMZUJyXc-1uNI4tfQ	 	140 utilisateurs regardent la vidéo	 تلاوة القرآن	67uTYGpFRgU	🔴 Makkah Live HD | بث مباشر مكة المكرمة | الحرم المكي مباشر | قناة القرآن الكري
+UCmaUH1Oq6NIyvylrqqf9WAg	 	365 utilisateurs regardent la vidéo	القناة الرسمية لإمام الحرم المكي ا.د ياسر الدوسري	-FCvyx274rs	🔴 بث مباشر | سورة البقرة كاملة 🌿 تلاوة خاشعة بصوت ياسر الدوسري | راحة وطمأنينة
+UCDxiOXbSqgkAxS0a1elYdCA	✔	1 306 utilisateurs regardent la vidéo	Deeni Islamic Baatein	xV2W-3c_Z5Q	🔴Live Masjid Al-Nabawi Today | بث مباشر | قناة السنة النبوية | Madina Live HD |
+UCvVrEPcRhPjpGFMltWAQbXQ	 	31 utilisateurs regardent la vidéo	SUBHANALLAH	R0Kc9QyKSYs	🔴Medina TV Live Online 24/7 | بث مباشر || قناة السنة النبوية Madinah Live Today
+UCFrVnrQF6kTrkDdFZoT9CTQ	✔	95 utilisateurs regardent la vidéo	Naimat	xEcAsNDISeE	🔴Madina Live Tv | Masjid Nabawi قناة السنة النبوية | المدينة المنورة بث مباشر |
+UCI5CykrVQznqWHaLvjSCZgw	 	668 utilisateurs regardent la vidéo	Saut Al-Haqq – صوت الحق	SBU1mVK8fPA	🔴Madinah Live Today | المدينة المنورة بث مباشر﻿ | Masjid an‑Nabawi 24/7
+UC621I7zuw1-oYj_KmFkWX8w	 	119 utilisateurs regardent la vidéo	Noor Al-Haram – نور الحرم	pHQLWBQPBCE	🔴Madinah Live Today | المدينة المنورة بث مباشر﻿ | Masjid an‑Nabawi 24/7
+UCjtaJ0D97O8g3P3UzEiLVvQ	 	49 utilisateurs regardent la vidéo	Al Qalam Recitation	hPkm8hQr5n0	🔴 Madina Live Tv Online 24/7 | بث مباشر || قناة السنة النبوية Madinah Live Toda
+UCIVSdtXb4pR57BDqKKNqsTg	✔		Huda TV	y6juRwuKLB8	Huda tv live Streaming on youtube
+UCEXGDNclvmg6RW0vipJYsTQ	✔	459 utilisateurs regardent la vidéo	Channels Television	d4zDorDl5UE	Channels Television -- Live Stream
+UCKVsdeoHExltrWMuK0hOWmg	✔	2 238 utilisateurs regardent la vidéo	KTN News Kenya	8ptxgAEhUFM	KTN Kenya Live – Breaking News, Politics and Current Affairs, 24/7
+UCw3Yrh0wE-0aEA1dQEduZmQ	 	618 utilisateurs regardent la vidéo	AL HUDA RECITE	Kt_gko4PxXU	🔴 Makkah Live | مكة مباشر | الحرم المكي مباشر | قناة القران الكريم السعودية مبا
+UCW4QTka08QOHRNxKcJLEuUA	 	53 utilisateurs regardent la vidéo	mtaOnline1	3Tr_6CxQhwQ	MTA TV Live - Urdu
+UCE2oY4S4wOu6WofU2YbfWsw	✔	147 utilisateurs regardent la vidéo	ARY Qtv	k0unDXRANyc	🔴 ARY Qtv | Watch Live Transmission 2026
+UCMm0YNfHOCA-bvHmOBSx-ZA	✔	51 utilisateurs regardent la vidéo	WatchMojoUK	tENaKSL0r5Q	🔴 LIVE - WatchMojo UK 24/7 Streaming Channel
+UCRd-Xsl3B9tbY2hG4jkZvhg	 		Al-Huda Recitation	I5PzXdaQvU0	🔴 Makkah Live | مكة مباشر | الحرم المكي مباشر | قناة القران الكريم السعودية مبا
+UCocH4lBk49J4ZUP2dnCPzSw	✔	20 utilisateurs regardent la vidéo	Rayshaka Entertainment	LQ_5TQ-vd6I	SHOLAWAT PENARIK REZEKI PALING DAHSYAT, Sholawat Nabi Muhammad SAW, SALAWAT JIBR
+UCkEiJMkX7n3rZpZ2PDVc3Ow	 		Kominfo Gunungkidul	ZahB3-q_V9A	LIVE PEMANTAUAN CCTV KALURAHAN JETIS FIX
+UCiC_h4iC9s7Ddr3CT82_EpA	✔	38 utilisateurs regardent la vidéo	اقرأ | Iqraa	7yIMyi3AR1w	بث مباشر | قناة اقرأ
+UCs0x6beqyHEAlsDlCISjJfg	 	330 utilisateurs regardent la vidéo	Daim Quran Recitation	IRvOLSvFI6Y	🔴 Makkah Live | مكة مباشر | الحرم المكي مباشر | قناة القران الكريم السعودية مبا
+UCHLe15WPvLnXnoLXkNAoWqw	 	37 utilisateurs regardent la vidéo	Zikr Zone	foEcVaEOOQM	ROQYA PUISSANTE ET IMMÉDIATE POUR TOUS LES PROBLÈMES DANS LA VIE - INCHALLAH
+UCmw4wZ3FRso2TsS36FQ6heA	✔	57 utilisateurs regardent la vidéo	Peace of Mind TV	R9mHbhqnGRg	LIVE: नुमाशाम योग – Evening Meditation | 25 November | 6:30 PM | Peace of Mind T
+UCUcvsN9Jqc4RzVvMlJ1y_FA	✔	637 utilisateurs regardent la vidéo	Om Shanti Channel GWS	pN7i0hSeA-A	LIVE 🔴 : "मधुबन - नुमाशाम योग"- 25-11-2026 (बुधवार) | Numasham Yog | Madhuban |
+UC7hyoc-WXYfxHRZQAMWRyYQ	 	9 utilisateurs regardent la vidéo	Paigham TV Live	aAXMjsK1i-c	🔴Paigham TV Live | Watch 24/7 Live Streaming | Paigahm TV
+UCtb33Ciysb6TEkXaORcVmpg	✔	22 254 utilisateurs regardent la vidéo	Sant Rampal Ji Maharaj	Bhs5_IuvQJ4	Sadhna TV Satsang | 25-11-2026 | Episode: 3801 | Sant Rampal Ji Maharaj Live Sat
+UCBuBZLtlx1QBdNXjuyc_Wuw	 	58 utilisateurs regardent la vidéo	SMSpirit Live	xzYXbjJxqOo	LIVE 24/7: 🌿 SupermeMasterTV Max Infinity.
+UCpk-H9G8HPq6DAJiwuhCugw	✔	458 utilisateurs regardent la vidéo	The Waters of Heaven	0xmaG9TxV-g	Instant Peace of Mind 🌿 Water Sounds & Relaxing Music, Anxiety Relief
+UC3lzI5dOJIWQ5dl-1cHgylA	✔	78 utilisateurs regardent la vidéo	Holy Land TV	xj8W_VfI3ik	DAY 3, KUPPATHURAI AG CHURCH CONVENTION 2026 BRO. DMD. BENJAMIN REV. T. SATHYANE
+UCMlGqW0thjuApIp7DsYw3Ow	✔	289 utilisateurs regardent la vidéo	Brahmakumaris Music Godlywood	t6ny0DRRlHw	LIVE 🔴 नुमाशाम योग || Madhuban Numasham Yog || BK Live Meditation Song || Music
+UCO2TPdnAp4HBSoVm9SOyG7g	 	547 utilisateurs regardent la vidéo	Pineveil Meditation	ikMAorKvsx4	Cleanse Toxic Energy & Emotional Stress | Zen Healing Oasis for Deep Relaxation 
+UCQ8kxAu_on_YzVPMjB03rqA	✔	54 utilisateurs regardent la vidéo	Awakening TV	_Tp17iQBeMs	LIVE: AwakeningTV | Brahma Kumaris
+UCHPJTU2lq20S3kQoDONYHgQ	 	23 utilisateurs regardent la vidéo	Capuchin Tv	1SkcM9hUzqU	25-11-2026 |CAPUCHIN TV LIVE| MEMORIAL MASS FOR THE FORMER SHEPHERDS & CHOIR MEM
+UC-50YWHeZFJTOgMeWANJDCQ	 	300 utilisateurs regardent la vidéo	Tim and Elizabeth	FAZ72YEhZI0	"Peace in an Autumn Sky" with Soothing Music by Tim Janis
+UC_nG0qNQTzEtfQia_BM8WgA	✔	8 utilisateurs regardent la vidéo	Atmadarshan Tv	TdpKA_PxiSs	LIVE Wednesday 25th November 2026 || Atmadarshan TV Daily Schedule
+UC_QthgwON0s645KcksKOnsg	 	99 utilisateurs regardent la vidéo	Calm Spirit Awakening	uDgzWqNstjI	Jesus Protects You, Eliminates Evil & Brings Healing, Peace & Miracles Into Your
+UCdi8yQBdBfn1ECu3ayH_TnA	✔	133 utilisateurs regardent la vidéo	Tim Janis	zAxlZx58KLo	Beautiful Relaxing Hymns, Peaceful Instrumental Music, Spring Montana Wilderness
+UCwobzUc3z-0PrFpoRxNszXQ	✔	247 utilisateurs regardent la vidéo	Yellow Brick Cinema - Relaxing Music	5_1OOKcawd8	🔴 Relaxing Zen Music 24/7, Healing Music, Meditation Music, Spa Music, Sleep, Z
+UC1_E8NeF5QHY2dtdLRBCCLA	✔	52 utilisateurs regardent la vidéo	africanews	NQjabLGdP5g	Africanews english Live
+UCOll3M-P7oKs5cSrQ9ytt6g	✔	4 utilisateurs regardent la vidéo	قناة زاد الفضائية	w4fQHISicN8	البث المباشر لقناة زاد الفضائية | ZAD TV Channel Live
+UCXrmf_-0xJ4ujKiQSiV-PcQ	 	584 utilisateurs regardent la vidéo	Noctivelle Blues	95CJLV5MH00	Blue Suit Blues – Midnight Chicago Blues & Smooth Jazz for Late Night Relaxation
+UCoTzprcejZpuvVl2aPUYimA	 	7 utilisateurs regardent la vidéo	إذاعة المنشاوي Al-Minshawi	HnMNGOyFLtI	🔴 إذاعة المنشاوي للقرآن الكريم | بث مباشر 24 ساعة | 24/7 Al Minshawi Quran Radi
+UCyZF3I-xHyvp2oTGd8X-Cug	 	2 262 utilisateurs regardent la vidéo	نصيحة - للقرآن الكريم	KRfHM4-NHqY	انسى همومك وأحزانك واستمع لهذه التلاوة الرائعة 🧡🎧 تلاوة هادئة لقلبك المتعب ❤️‍
+UCRPQQ5Vw6QXk5syVgbk6zfA	 	1 371 utilisateurs regardent la vidéo	Quran Classes Letter by Latter	9Bmair0q8Ss	🔴 Makkah Live | مكة مباشر | الحرم المكي مباشر | قناة القران الكريم السعودية مبا
+UCpcnYtEyYOvOevyWJek54EA	 	426 utilisateurs regardent la vidéo	Quran Healing	V-IjkM4bGbc	🔴 Makkah Live | مكة مباشر | الحرم المكي مباشر | قناة القران الكريم السعودية مبا
+UC08gAjPjlhFycw0vO2yokRw	 	50 utilisateurs regardent la vidéo	Perfect Recite	9-PDS2rADds	🔴 Makkah Live | مكة مباشر | الحرم المكي مباشر | قناة القران الكريم السعودية مبا
+UCoS8slasY7V82ds95niUplg	 	53 utilisateurs regardent la vidéo	سحابة القرآن	ONIQ659tXr4	أرح سمعك وقلبك بالقرآن - تلاوة تقشعر لها الأبدان بصوت محمد هشام | Mohamed Hesham
+UCDVD2HOj4s6V_Buc8msrepQ	 		سكون	749JZHtq0ZI	ليس مجرد تلاوة، بل إعجاز في الأداء! استمع كيف ينتقل الشيخ بين المقامات بسلاسة عج
+UCV01ajGl6nt09h40iDoHDNg	✔	338 utilisateurs regardent la vidéo	قناة الإخبارية	iw0YDBYgaUU	قناة الإخبارية | البث المباشر
+UC78qLP9KlAR5cuKHrqcFeew	 	51 utilisateurs regardent la vidéo	ترتيل ـ للقرآن الكريم	WII_IK1vmB0	قرآن كريم للمساعدة على نوم هادئ وعميق 💙🎧 ستنام بعد سماعها | راحة نفسة لا توصف 
+UCEKdPvxiyna0SOzcaOMVkPQ	 		الفرقان | AL Furqan	EKekVCFRdGg	بث مباشر من قِبل الفرقان | AL Furqan
+UCnHNM8wy9SH4YjWsbwXPwyQ	 	36 utilisateurs regardent la vidéo	جنات | JANAT	VHsEzWxqZfE	أرح سمعك وقلبك بالقرآن - تلاوة تقشعر لها الأبدان بصوت محمد هشام | Mohamed Hesham
+UCSTokvqy0DIT_ktKPzgZQ7A	 	25 utilisateurs regardent la vidéo	آيات مباركة	tHokyzZckrg	أرح سمعك وقلبك بالقرآن - تلاوة تقشعر لها الأبدان بصوت محمد هشام | Mohamed Hesham
+UCNye-wNBqNL5ZzHSJj3l8Bg	✔	6 897 utilisateurs regardent la vidéo	Al Jazeera English	gCNeDWCI0vo	🔴 Al Jazeera English | Live
+UC0GsKHAmIrti7zKWkm-6Jsw	 	9 utilisateurs regardent la vidéo	Quran Recitation TV	ngrhJgnv7Hw	🔴 Madina Live Today | بث مباشر المدينة المنورة | Masjid An Nabawi Live HD
+UC35DFBfGRqIGWYYgs_KiPQQ	✔	5 utilisateurs regardent la vidéo	Al Ehsaan TV	l_cYStYuj0E	Al Ehsaan Tv Live Broadcast From Sattilite Tv | Quran Tilawat, Quran Tasfseer
+UCZHbJvhX8ON917iaQGbQmNw	 	1 360 utilisateurs regardent la vidéo	Shayan Quran Recitation	Xe4sCWpF3vE	🔴 Makkah Live | مكة مباشر | الحرم المكي مباشر | قناة القران الكريم السعودية مبا
+UCG5Z426qvQ2P_4Pe1GBxBEw	 	393 utilisateurs regardent la vidéo	Noor e Hidayat
+	-N6UZ288RaY	🔴 Makkah Live | مكة مباشر | الحرم المكي مباشر | قناة القران الكريم السعودية مبا
+UC_vt34wimdCzdkrzVejwX9g	✔	136 utilisateurs regardent la vidéo	Geo News	lj_cNBPFDvE	🔴𝐋𝐈𝐕𝐄: 𝐆𝐄𝐎 𝐍𝐄𝐖𝐒 𝐈𝐍𝐓𝐄𝐑𝐍𝐀𝐓𝐈𝐎𝐍𝐀𝐋 | UK - USA - Middle East 
+UCw0zgXgBT81prKkU9YwwD8g	 	78 utilisateurs regardent la vidéo	Shalom TV Live	w30Aa72ud1E	ശാലോം ടിവി  | SHALOM TV  LIVE  | PRAYER | ADORATION | WORD OF GOD | MUSIC  |  SP
+UCnMBV5Iw4WqKILKue1nP6Hg	✔	2 287 utilisateurs regardent la vidéo	Dunya News	e2XVSUYh4S0	🔴 𝗟𝗶𝘃𝗲 𝗗𝘂𝗻𝘆𝗮 𝗡𝗲𝘄𝘀: 24/7 Non-Stop Coverage | Headlines, Breaking Ne
+UCokCeST0W5XL__kl392zu7w	 	1 utilisateur regarde la vidéo	Kite365	XZYPjD8_vyc	🔴 LIVE | Clock 🇦🇪 Current Time in Dubai, UAE / Real Time Clock / What Time Is
+UCup3etEdjyF1L3sRbU-rKLw	✔	9 410 utilisateurs regardent la vidéo	24 News	1wECsnGZcfc	24 News Live TV | Live News Updates | Malayalam News Live | HD Live Streaming | 
+UC0Um3pnZ2WGBEeoA3BX2sKw	✔	1 387 utilisateurs regardent la vidéo	HUM News	AHEhtZUMML8	🛑HUM NEWS LIVE | Pakistan News 24/7 Live | News Headlines | Breaking News | Tod
+UC9XVtcq-uyP6HX__-WH_LjA	 	41 utilisateurs regardent la vidéo	Keru team	M--Bvc7x3UM	25 नवंबर 2026 गुरु गोरखनाथ के पावरफुल साबर मंत्रो के साथ में आज शाम 8:00 घर बैठ 
+UCegzBUd6-PYoO_v7gjJgufg	 	65 utilisateurs regardent la vidéo	Teleport.camera	MW3fisTCXRQ	🔴 Beach Live Stream · House of Sanskara · Koh Phangan, Thailand (live stereo so
+UCcKiQmDJDN_JnHvAacQYqmA	 	1 utilisateur regarde la vidéo	Desert Oud	i1-wTjiGwSU	Desert Oud Music 2024 🐪 Best Instrumental Music & Arabic Lounge Mix 🌞Oud Instr
+UCfvJjZ2JAX1-Repdj4W5LyQ	 	123 utilisateurs regardent la vidéo	logo blocks asmr	lz-F-QgE1hY	🔴 LIVE | Clock - CET (Current time)
+UCO7NjVuFz196hBiTSdZNPzA	 	1 utilisateur regarde la vidéo	قناة عليسة | Elyssa TV	PFsLyiEOUgk	قناة عليسة الإخبارية | أخبار تونس 🇹🇳 البث المباشر
+UCOTNWuKddhCmza5dHSKB9Pg	✔	52 utilisateurs regardent la vidéo	من صلب الواقع	ENRowQ75tf8	🔥 ساعة الصفر: هل تُشعل صواريخ إيران حرباً عابرة للقارات تطرق أبواب أوروبا؟
+UCvcbLW5y-96X8MWWH45wRrQ	✔	2 utilisateurs regardent la vidéo	ذاكرة ماسبيرو	DfJY8gs32wU	بث مباشر | الحلقات الكاملة لـ مسلسل الذكريات .. ذئاب الجبل FULL HD
+UC1gTSYWKdTP-DdOVPhWkkgw	 	300 utilisateurs regardent la vidéo	إمام Emam	681LhIz0UtE	سورة البقرة __ قران الصباح و المساء بصوت فضيلة الشيخ عبد الرحمن السديس  Al Baqar
+UCqlLddxiZ8eSpeY4sbCRs4w	 	13 utilisateurs regardent la vidéo	اللهم صل على محمد وآل محمد	hYFO-LxZkWw	بث جسر الحب 2
+UCCkOlUJDMmxxMlfWr8NTQFw	✔	30 utilisateurs regardent la vidéo	بن 10 | Ben 10	gyqOOJCL4gA	🟢 بث مباشر: جميع مواسم مسلسل بن 10 الكلاسيكي |  كرتون نتورك
+UCbeVQX2ieQz6OO3rMGL35SA	✔	9 utilisateurs regardent la vidéo	عزوز و جود	0NCEPjBqT_E	🔴 Live Stream 24/7 | مجموعة من الأغاني لتعليم أساسيات رياض الأطفال عزوز و جود
+UCobD2WFdJ861HVaDf2OqU7A	 	2 utilisateurs regardent la vidéo	MTA Africa	RAWAJiDpWew	MTA4 Africa LIVE
+UC5O114-PQNYkurlTg6hekZw	✔	15 utilisateurs regardent la vidéo	United Nations	vYRfQo6JMxc	United Nations - LIVE
+UCuUocUAnPTUkwGtC8GuNKow	✔	1 110 utilisateurs regardent la vidéo	Madani Channel Urdu Live	lL6yImijkg4	Madani Channel Urdu Live
+UCTX8ZbNDi_HBoyjTWRw9fAg	✔		One Islam Productions	Xqycaqp0yWU	24/7 Stories Of Dead People Episodes | Scary True Stories
+UCRSQxSh7DdjLL6H9rls7FEg	 	371 utilisateurs regardent la vidéo	Al Hafeez Recitation	C9dwTGXmOw8	🔴 Makkah Live | مكة مباشر | الحرم المكي مباشر | قناة القران الكريم السعودية مبا
+UC1q9xRWJvkTdtkmduTbyu6A	 	83 utilisateurs regardent la vidéo	Usman Quran Official 	yxhlrJKpHGs	🔴 Makkah Live | مكة مباشر | الحرم المكي مباشر | قناة القران الكريم السعودية مبا
+UCI4gZRGRdfnfPajdxs8QtPQ	✔	1 486 utilisateurs regardent la vidéo	Karbala TV Group 	JuZTvNg04sw	Karbala TV Live Stream | البث المباشر لقناة كربلاء الفضائية
+UCCPQyITTyHwVvm4Wj0oKvOg	 	321 utilisateurs regardent la vidéo	Ayat Al-Quran Live - آيات القرآن مباشر	hBRkEE96geE	Ayat Kursi 7x,Surah Yasin,Ar Rahman,Al Waqiah,Al Mulk,Fatihah,Ikhlas,Falaq,An Na
+UCPdJOhs2qQc8yHROjs6yZ9w	 	292 utilisateurs regardent la vidéo	 قُرَّ عيني - Qura Aeni	0fBsitNBq94	سورة البقرة (كاملة) الشيخ  عبد الرحمن السديس القران الكريم مباشر 💚 Surat Al-Baq
+UCIYh8Ae-scTs4jRrCm5WuhQ	 	133 utilisateurs regardent la vidéo	PRIÈRES QUOTIDIENNES	QVBJJWVz_QA	🔴 PRIÈRE DE MINUIT EN DIRECT 24/7 | Dors sous la Protection de Dieu | Louange, 
+UCwLCkbtHJ5K1CIKIGKS0J1A	 	118 utilisateurs regardent la vidéo	Prière Exaucée	bDrwmZMow3c	Ruqyah Spirituelle Puissante pour Éliminer les Djinns Internes
+UCrtdAWf9y1D2by4ruhWbllA	✔	14 utilisateurs regardent la vidéo	Bichri TV International - HD	Q6rrh6RSNhQ	LIVE  Khassaides en continu 24h/24 et 7j/7 | Profitez-en à tout moment, n'import
+UCty9p4p9v9fWhmphVGlzHLA	 	6 utilisateurs regardent la vidéo	Al-Fattah | الفتاح - HOLY QURAN	CwRiOaN51zI	Adhkar du matin أذكار الصباح – Le secret pour la paix, les bénédictions et le ri
+UCCab9t43yIzIgdAM9FWpdRw	✔	3 utilisateurs regardent la vidéo	TBN FR	KlQGf0CwFaQ	La Pensée du Jour - Vie Chrétienne - 2024 LIVE Stream sur TBN FR
+UCfiwzLy-8yKzIbsmZTzxDgw	✔	6 704 utilisateurs regardent la vidéo	AlJazeera Arabic  قناة الجزيرة	FelGGahCbS8	قناة الجزيرة - البث الحي
+UCD-JQ8LwbexXkk1N_gqKavg	 	5 utilisateurs regardent la vidéo	Qurani Voice	DMuMLPHgUTo	La ruqyah la plus puissante élimine les djinns dans le corps humain et dans la c
+UCRHknao109v0uSvJiQde8mw	✔	36 utilisateurs regardent la vidéo	Harmony of Qalb	r5925v7F0iw	Votre cœur attendait ça… | Belle Laa Ilaha Illallah Dhikr
+UCCLs0AvzIiwee1fuJhsa7NQ	 	889 utilisateurs regardent la vidéo	Quran Daily	5L7_b3LSSeM	Powerful Quran Recitation for Night | Fatihah, Yasin, Alkahfi, AlWaqiah, AlMulk 
+UC9N1uk4d9iGdKgSFvERPc4g	 	474 utilisateurs regardent la vidéo	Syifa Qurani	_TFSg50tSrc	Quran recitation in a peaceful voice I Alfatiha, ayat alkursi, yasin, alwaqiah, 
+UC80pWF7d3xjKYcLHv_GgKVg	✔	397 utilisateurs regardent la vidéo	Tadabbur FHD	zr17uVevY6E	Surah Al-Baqarah البقرة - Ahmad Al-Shalabi I 002 I Quran Tajweed
+UCL0VQLoFebjwvmRc4YaeTUw	 	370 utilisateurs regardent la vidéo	Dzikir Relaxation	oljMCOLQaDA	7X FATIHA 7X AYATUL KURSI 7X KAFIRUN 7X IKHLAS 7X FALAQ 7X NAS
+UCpYtdml6zrxIvjeTIk6AIdQ	 	66 utilisateurs regardent la vidéo	QURAN SPHERE	Gwi5HJaPI0k	🔴 Makkah Live | مكة مباشر | الحرم المكي مباشر | قناة القران الكريم السعودية مبا
+UChr9D7oPhFAzLbyPGAiQJKw	 	99 utilisateurs regardent la vidéo	قواعد الأثرياء	BZAe-d6HKeE	🔴 Makkah Live مكة مباشر | الحرم المكي |مباشر | قناة القرآن الكريم السعودية مباش
+UCgzBAk8TUqGuAoPk9WWVFhg	 	32 utilisateurs regardent la vidéo	Sinan Quran Network	abrIBrG_yXc	🔴 Makkah Live | مكة مباشر | الحرم المكي مباشر | قناة القران الكريم السعودية مبا
+UC5dcnu2pZGHS7B1Sn44NXTA	 	2 556 utilisateurs regardent la vidéo	Islamic Legends	Tpnvo7DDaXw	🔴 Makkah Live | مكة مباشر | الحرم المكي مباشر | قناة القران الكريم السعودية مبا
+UCMfRnw0AsKq0dC8fAtvFn9w	 	4 054 utilisateurs regardent la vidéo	How To Learn Quran Online	RE-61Y_o0SM	🔴 Makkah Live | مكة مباشر | الحرم المكي مباشر | قناة القران الكريم السعودية مبا
+UCjqFeWbUz5MPU7nvYsLHGTw	 	132 utilisateurs regardent la vidéo	Holy Quran Recitation	Hr7uPQSmHzM	🔴 Makkah Live | مكة مباشر | الحرم المكي مباشر | قناة القران الكريم السعودية مبا
+UCSs5mehC-g9qDmIZWFe0a6Q	✔	1 249 utilisateurs regardent la vidéo	Muhammad Ali	UvPjkj-ubtE	🔴 Makkah Live HD | Mecca Live | Makkah Live Today Now 🕋
+UC6K-id2ati1cboAKm_Vq8mw	 	182 utilisateurs regardent la vidéo	Sacred Makkah Live	xjIaLToOtaE	🔴 Makkah Live | مكة مباشر | الحرم المكي مباشر | قناة القران الكريم السعودية مبا
+UCFRj7FPKTthzA_gfE2PsGJQ	✔	133 utilisateurs regardent la vidéo	MCGI Channel	TssxvnTLEvg	Ang Dating Daan 24/7 Stream
+UCzWdc0aUo0IDk5ysLrt04hw	✔	2 utilisateurs regardent la vidéo	القاهرة والناس	ENOR_-SUZkA	القاهرة والناس بث مباشر - alkaherawalnas live
+UC6fGevycF3WZZbs0W-21mzg	 	94 utilisateurs regardent la vidéo	Peace of Mind - Positive Vibration	EKCQ38UvR3Q	Remove All Bad Energy From Your House & Yourself: Return To Sender - Spells, Cur
