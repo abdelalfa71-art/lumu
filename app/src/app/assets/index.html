@@ -1392,6 +1392,13 @@ body.defile #micro-fab { transform: translateY(140%) scale(.6); opacity: 0; poin
 .flux-logo { position: absolute; z-index: 7; left: 12px; top: calc(112px + env(safe-area-inset-top, 0px)); width: 36px; height: 36px; border-radius: 10px; opacity: .85; pointer-events: none; box-shadow: 0 2px 8px rgba(0,0,0,.4); }
 .flux.fx-calme .flux-logo { top: calc(14px + env(safe-area-inset-top, 0px)); }
 .flux-logo { transition: top .45s ease; }
+
+/* Accueil style « Épuré » (v234) */
+.acc-b { background: var(--surface, #fff); }
+.acc-b .acc-t { display: block; margin: 20px 0 6px; font-size: 13px !important; font-weight: 700; letter-spacing: .8px; text-transform: uppercase; color: var(--texte-doux, #6b6557); }
+.acc-b .acc-t b { font-size: 13px; font-weight: 700; }
+.acc-b .carte:not(#aj-pr) { box-shadow: none !important; border: 0 !important; background: rgba(15,123,108,.07) !important; border-radius: 16px !important; }
+.acc-b [data-h] { width: 28px !important; height: 28px !important; }
 </style>
 </head>
 <body>
@@ -6470,25 +6477,26 @@ async function vueAujourdhui() {
   const nbFait = HABITUDES.filter(([k]) => faites[k]).length;
   const w = ecran("", null, `
     <div style="margin:4px 0 14px"><h1 style="margin:2px 0 0;font-size:28px;line-height:1.5"><span lang="ar" dir="rtl" data-notrad translate="no" style="font-family:'Amiri Quran','Amiri','Noto Naskh Arabic',serif;font-size:32px;font-weight:700">السَّلَامُ عَلَيْكُمْ</span>${prenom ? " " + esc(prenom) : ""}</h1></div>
-    <button class="carte" id="aj-pr" style="display:block;width:100%;text-align:start;padding:18px;border:0;color:#fff;background:linear-gradient(135deg,#0f3d36,#1b6b5c)">
-      <div style="font-size:14px;opacity:.85">🕌 Prochaine prière</div><div id="aj-prn" style="font-size:30px;font-weight:900;margin:2px 0">—</div><div id="aj-prr" style="font-size:15px;opacity:.9">Ajoutez votre ville pour les horaires</div>
-      <div id="aj-prl" style="display:flex;justify-content:space-between;margin-top:12px;font-size:12px;opacity:.85"></div></button>
-    <div style="display:flex;align-items:center;justify-content:space-between;margin:18px 0 8px"><b style="font-size:18px">✅ Mes habitudes du jour</b><span style="font-weight:800;color:#e8590c">🔥 ${h.serie || 0} jour${(h.serie || 0) > 1 ? "s" : ""}</span></div>
+    <button class="carte" id="aj-pr" style="display:block;width:100%;text-align:start;padding:16px 18px;border:0;border-radius:22px;color:#fff;background:linear-gradient(160deg,#1B6B5C,#123C2B);box-shadow:none">
+      <div style="font-size:13px;color:#CFE3DA">Prochaine prière</div><div id="aj-prn" style="font-size:36px;font-weight:800;letter-spacing:-1px;margin:2px 0">—</div><div id="aj-prr" style="font-size:15px;opacity:.9">Ajoutez votre ville pour les horaires</div>
+      <div id="aj-prl" style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px;margin-top:12px;font-size:11.5px"></div></button>
+    <div class="acc-t" style="display:flex;align-items:center;justify-content:space-between;margin:20px 0 4px"><b>Aujourd'hui</b><span style="font-weight:800;color:#e8590c">🔥 ${h.serie || 0} jour${(h.serie || 0) > 1 ? "s" : ""}</span></div>
     <div class="carte" style="padding:6px 14px;background:var(--surface,#fff);color:var(--texte,#14201b)">
       <i style="display:block;height:8px;border-radius:4px;background:var(--bordure,#e3dccb);overflow:hidden;margin:8px 0"><u style="display:block;height:100%;width:${nbFait * 100 / HABITUDES.length}%;background:#1b6b5c"></u></i>
       ${HABITUDES.map(([k, ic, t]) => `<div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--bordure,#eee)"><button type="button" data-h="${k}" aria-label="Cocher" style="width:32px;height:32px;flex:none;border-radius:50%;border:2px solid #1b6b5c;background:${faites[k] ? "#1b6b5c" : "transparent"};color:#fff;font-size:16px">${faites[k] ? "✓" : ""}</button><span style="font-size:20px">${ic}</span><span style="flex:1;${faites[k] ? "text-decoration:line-through;opacity:.6" : ""}">${t}</span><button type="button" data-o="${k}" class="btn-text" style="margin:0">Ouvrir ›</button></div>`).join("")}</div>
-    <b style="display:block;font-size:18px;margin:18px 0 8px">📜 Verset du jour</b>
+    <b class="acc-t">Verset du jour</b>
     <div class="carte" style="padding:16px;background:var(--surface,#fff);color:var(--texte,#14201b)"><p dir="rtl" data-notrad style="font-family:'Amiri',serif;font-size:26px;line-height:2;margin:0;text-align:center">${esc(v[0])}</p><p style="margin:8px 0 4px">« ${esc(v[1])} »</p><small style="opacity:.7">${esc(v[2])}</small></div>
-    <b style="display:block;font-size:18px;margin:18px 0 8px">▶ Continuer</b><div id="aj-cont"></div>
-    <b style="display:block;font-size:18px;margin:18px 0 8px">💡 Rappel du jour</b><div id="aj-rap"><div class="centre"><div class="spin"></div></div></div>
+    <b class="acc-t">Continuer</b><div id="aj-cont"></div>
+    <b class="acc-t">Rappel du jour</b><div id="aj-rap"><div class="centre"><div class="spin"></div></div></div>
     <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:18px 0 8px">${[["🕋", "Direct", "direct"], ["📻", "Radios", "radios"], ["🧠", "Mémoriser", "coran-accueil"], ["👥", "Khatma", "khatma"]].map(([i, t, r]) => `<button type="button" data-r="${r}" style="padding:12px 4px;border-radius:16px;border:1px solid var(--bordure,#e3dccb);background:var(--surface,#fff);color:var(--texte,#14201b);font:inherit;font-size:13px"><div style="font-size:26px">${i}</div>${t}</button>`).join("")}</div>`);
+  w.classList.add("acc-b");
   try { const m = momentIslamique(); if (m && m.azkar) { const h1 = w.querySelector("#aj-pr"); barreAzkar(m, h1); const zb = w.querySelector("#ec-notif"); if (zb) { zb.style.margin = "0 0 12px"; zb.firstChild.style.width = "100%"; zb.firstChild.style.margin = "0"; } } } catch (e) {}
   /* Prière */
   try {
     const pr = await PRIERE.charger() || chargerLocal("priere_n", null);
     if (pr && pr.t && w.isConnected) {
       const n = PRIERE.prochaine(pr); w.querySelector("#aj-prn").textContent = n.nom + " · " + n.heure; w.querySelector("#aj-prr").textContent = "dans " + PRIERE.reste(n.reste) + " · " + (pr.nom || "");
-      w.querySelector("#aj-prl").innerHTML = PRIERE.NOMS.map(([k, nom]) => `<span style="text-align:center;${k === n.k ? "font-weight:900;opacity:1" : ""}">${esc(nom)}<br>${esc(PRIERE.hm(pr.t[k]))}</span>`).join("");
+      w.querySelector("#aj-prl").innerHTML = PRIERE.NOMS.map(([k, nom]) => `<span style="text-align:center;padding:4px 0;border-radius:10px;${k === n.k ? "background:#F2C43D;color:#123C2B;font-weight:800" : "opacity:.75"}"><b style="font-size:12px">${esc(nom)}</b><br>${esc(PRIERE.hm(pr.t[k]))}</span>`).join("");
     }
   } catch (e) {}
   w.querySelector("#aj-pr").onclick = () => router("priere");
