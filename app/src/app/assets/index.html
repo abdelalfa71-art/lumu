@@ -1418,6 +1418,13 @@ body.defile #micro-fab { transform: translateY(140%) scale(.6); opacity: 0; poin
 .acc-rc button { border: 0; background: none; font: inherit; font-size: 12.5px; font-weight: 600; color: var(--texte, #17221D); display: flex; flex-direction: column; align-items: center; gap: 6px; }
 .acc-rc button span { width: 58px; height: 58px; border-radius: 18px; display: grid; place-items: center; font-size: 26px; }
 .acc-a #ec-notif .ec-notif { width: 100% !important; margin: 0 !important; }
+.aj-hab { margin-top: 18px; padding: 0 14px !important; background: var(--surface,#fff); color: var(--texte,#14201b); }
+.aj-hab > summary { list-style: none; display: flex; align-items: center; gap: 10px; padding: 14px 0; cursor: pointer; font-size: 16px; }
+.aj-hab > summary::-webkit-details-marker { display: none; }
+.aj-hab-n { font-size: 13px; font-weight: 800; color: #0F7B6C; background: #E2F1EC; border-radius: 10px; padding: 2px 8px; }
+.aj-hab-chev { font-size: 20px; line-height: 1; color: var(--texte-doux,#5D6B63); transition: transform .2s; margin-top: -6px; }
+.aj-hab[open] .aj-hab-chev { transform: rotate(180deg); margin-top: 4px; }
+.aj-hab[open] > div { padding-bottom: 6px; }
 </style>
 </head>
 <body>
@@ -6153,7 +6160,7 @@ function microChamp(champ, apres) {
 }
 function monterMicroFlottant() {
   if (document.getElementById("micro-fab")) return;
-  const b = document.createElement("button"); b.id = "micro-fab"; b.setAttribute("aria-label", "Envoyer une question vocale"); b.innerHTML = ico("mic", 28); b.onclick = () => QVOC.ouvrir(); b.hidden = true; { const nb = chargerLocal("mic_hint", 0); if (nb < 6) { sauverLocal("mic_hint", nb + 1); b.classList.add("indice"); setTimeout(() => b.classList.remove("indice"), 9000); } }
+  const b = document.createElement("button"); b.id = "micro-fab"; b.setAttribute("aria-label", "Discussions"); b.innerHTML = ico("chat", 28); b.onclick = () => router("discussions"); b.hidden = true;
   document.body.appendChild(b);
   setInterval(() => { try { document.body.classList.toggle("audio-on", !!(AUD.mini && !AUD.mini.hidden)); } catch (e) {} }, 800);
 }
@@ -6504,10 +6511,10 @@ async function vueAujourdhui() {
       <button type="button" id="aj-pr" class="acc-ciel-p"><span class="acc-ciel-lb">Prochaine prière</span><span class="acc-ciel-row"><span id="aj-prn" class="acc-ciel-n">—</span><span id="aj-prr" class="acc-ciel-t">Ajoutez votre ville</span></span><span id="aj-prl" class="acc-ciel-l"></span></button>
     </div>
     <div class="acc-rc" id="aj-rc">${[["coran", "Coran", "#E2F1EC", "#0F7B6C", "📖"], ["qibla", "Qibla", "#FFF4DB", "#9A6B00", "🧭"], ["arabe", "Invocations", "#E8EEF8", "#2F4B7C", "🤲"], ["direct", "Direct", "#FBE9E6", "#A23B2C", "🕋"]].map(([r, t, bg, c, ic]) => `<button type="button" data-r="${r}"><span style="background:${bg};color:${c}">${ic}</span>${t}</button>`).join("")}</div>
-    <div class="acc-t" style="display:flex;align-items:center;justify-content:space-between;margin:20px 0 4px"><b>Aujourd'hui</b><span style="font-weight:800;color:#e8590c">🔥 ${h.serie || 0} jour${(h.serie || 0) > 1 ? "s" : ""}</span></div>
-    <div class="carte" style="padding:6px 14px;background:var(--surface,#fff);color:var(--texte,#14201b)">
+    <details id="aj-hab" class="aj-hab carte"${chargerLocal("aj_hab_ouvert", false) ? " open" : ""}><summary><b>Aujourd'hui</b><span class="aj-hab-n">${nbFait}/${HABITUDES.length}</span><span style="flex:1"></span><span style="font-weight:800;color:#e8590c">🔥 ${h.serie || 0}</span><span class="aj-hab-chev" aria-hidden="true">⌄</span></summary>
+    <div>
       <i style="display:block;height:8px;border-radius:4px;background:var(--bordure,#e3dccb);overflow:hidden;margin:8px 0"><u style="display:block;height:100%;width:${nbFait * 100 / HABITUDES.length}%;background:#1b6b5c"></u></i>
-      ${HABITUDES.map(([k, ic, t]) => `<div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--bordure,#eee)"><button type="button" data-h="${k}" aria-label="Cocher" style="width:32px;height:32px;flex:none;border-radius:50%;border:2px solid #1b6b5c;background:${faites[k] ? "#1b6b5c" : "transparent"};color:#fff;font-size:16px">${faites[k] ? "✓" : ""}</button><span style="font-size:20px">${ic}</span><span style="flex:1;${faites[k] ? "text-decoration:line-through;opacity:.6" : ""}">${t}</span><button type="button" data-o="${k}" class="btn-text" style="margin:0">Ouvrir ›</button></div>`).join("")}</div>
+      ${HABITUDES.map(([k, ic, t]) => `<div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--bordure,#eee)"><button type="button" data-h="${k}" aria-label="Cocher" style="width:32px;height:32px;flex:none;border-radius:50%;border:2px solid #1b6b5c;background:${faites[k] ? "#1b6b5c" : "transparent"};color:#fff;font-size:16px">${faites[k] ? "✓" : ""}</button><span style="font-size:20px">${ic}</span><span style="flex:1;${faites[k] ? "text-decoration:line-through;opacity:.6" : ""}">${t}</span><button type="button" data-o="${k}" class="btn-text" style="margin:0">Ouvrir ›</button></div>`).join("")}</div></details>
     <b class="acc-t">Verset du jour</b>
     <div class="carte" style="padding:16px;background:var(--surface,#fff);color:var(--texte,#14201b)"><p dir="rtl" data-notrad style="font-family:'Amiri',serif;font-size:26px;line-height:2;margin:0;text-align:center">${esc(v[0])}</p><p style="margin:8px 0 4px">« ${esc(v[1])} »</p><small style="opacity:.7">${esc(v[2])}</small></div>
     <b class="acc-t">Continuer</b><div id="aj-cont"></div>
@@ -6525,6 +6532,7 @@ async function vueAujourdhui() {
   } catch (e) {}
   w.querySelector("#aj-pr").onclick = () => router("priere");
   /* Habitudes */
+  { const d = w.querySelector("#aj-hab"); if (d) d.addEventListener("toggle", () => sauverLocal("aj_hab_ouvert", d.open)); }
   w.querySelectorAll("[data-h]").forEach(b => b.onclick = () => {
     const x = habitudesDuJour(); x.faites[b.dataset.h] = !x.faites[b.dataset.h]; x.h.jours = { [x.auj]: x.faites }; // on ne garde que le jour en cours
     const toutes = HABITUDES.every(([k]) => x.faites[k]);
