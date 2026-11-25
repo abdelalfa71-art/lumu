@@ -84,6 +84,7 @@
             android:exported="false"
             android:foregroundServiceType="mediaPlayback" />
         <receiver android:name=".AdhanAlarme" android:exported="false" />
+        <receiver android:name=".AzkarAlarme" android:exported="false" />
         <receiver android:name=".AdhanDemarrage" android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />

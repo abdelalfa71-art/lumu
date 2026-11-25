@@ -1345,6 +1345,16 @@ body:not(.branche-tobi) .nav-btn svg { width: 30px; height: 30px; }
 #micro-fab, .ec-simple ~ #micro-fab { width: 52px !important; height: 52px !important; box-shadow: 0 4px 12px rgba(0,0,0,.22); transition: transform .25s, opacity .25s; }
 #micro-fab svg { width: 24px !important; height: 24px !important; }
 body.defile #micro-fab { transform: translateY(140%) scale(.6); opacity: 0; pointer-events: none; }
+
+/* Barre de notification des adhkâr (v223) */
+.ec-notif { display: flex; align-items: center; gap: 10px; margin: 8px 16px 4px; padding: 10px 10px 10px 14px; border-radius: 16px; background: #123C2B; color: #fff; box-shadow: 0 4px 14px rgba(18,60,43,.25); animation: ec-notif-in .35s ease-out; }
+@keyframes ec-notif-in { from { transform: translateY(-12px); opacity: 0; } to { transform: none; opacity: 1; } }
+.ec-notif-ic { font-size: 24px; flex: none; }
+.ec-notif-tx { flex: 1; min-width: 0; background: none; border: 0; color: inherit; text-align: start; font: inherit; padding: 0; display: flex; flex-direction: column; }
+.ec-notif-tx b { font-size: 15px; color: #fff; } .ec-notif-tx small { font-size: 12.5px; color: #CFE3DA; }
+.ec-notif-go { flex: none; border: 0; border-radius: 14px; background: #F2C43D; color: #123C2B; font: inherit; font-weight: 800; font-size: 14px; padding: 8px 14px; min-height: 36px; }
+.ec-notif-x { flex: none; width: 36px; height: 36px; border: 0; border-radius: 18px; background: rgba(255,255,255,.1); color: #fff; font-size: 14px; }
+.ec-cherche #ec-notif { display: none; }
 </style>
 </head>
 <body>
@@ -1502,7 +1512,7 @@ const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, { globa
 const app = document.getElementById("app");
 let etat = { route: "connexion", parentId: null, enfant: null, niveaux: [], matieres: [], params: {}, compteNom: false, profil: null, chaine: null, envoiEnCours: false, lienEnAttente: null, lienChaine: null, pile: [], racine: "flux", son: true };
 const LONG_CODE = 6;
-try { const m = /[#&]c=([0-9a-f-]{36})/i.exec(location.hash); if (m) etat.lienEnAttente = m[1]; const m2 = /[#&]ch=([0-9a-f-]{36})/i.exec(location.hash); if (m2) etat.lienChaine = m2[1]; const m3 = /[#&]r=(reels|recherche|azkar|coran)/.exec(location.hash); if (m3) etat.lienRoute = m3[1]; const m6 = /[#&]l=(matin|soir)/.exec(location.hash); if (m6) etat.lienParams = { liste: m6[1] }; const m7 = /[#&]p=(\d{1,3})/.exec(location.hash); if (m7) etat.lienParams = { page: +m7[1] }; const m4 = /[#&]t=(\d{1,6})/.exec(location.hash); if (m4) etat.lienT = +m4[1]; const m5 = /[#&]g=([0-9a-f-]{36})/i.exec(location.hash); if (m5) etat.lienGroupe = m5[1]; } catch(e) {}
+try { const m = /[#&]c=([0-9a-f-]{36})/i.exec(location.hash); if (m) etat.lienEnAttente = m[1]; const m2 = /[#&]ch=([0-9a-f-]{36})/i.exec(location.hash); if (m2) etat.lienChaine = m2[1]; const m3 = /[#&]r=(reels|recherche|azkar|coran)/.exec(location.hash); if (m3) etat.lienRoute = m3[1]; const m6 = /[#&]l=(matin|soir|coucher)/.exec(location.hash); if (m6) etat.lienParams = { liste: m6[1] }; const m7 = /[#&]p=(\d{1,3})/.exec(location.hash); if (m7) etat.lienParams = { page: +m7[1] }; const m4 = /[#&]t=(\d{1,6})/.exec(location.hash); if (m4) etat.lienT = +m4[1]; const m5 = /[#&]g=([0-9a-f-]{36})/i.exec(location.hash); if (m5) etat.lienGroupe = m5[1]; } catch(e) {}
 
 function lumuSVG(largeur) {
   const l = largeur || 96;
@@ -6290,6 +6300,36 @@ const ADHAN = {
     try { LumuNative.programmerAdhan(JSON.stringify(liste.slice(0, 50))); sauverLocal("adhan_plan", cle); } catch (e) {}
   }
 };
+/* ---------- Rappels des adhkâr dans la barre de notification (application installée, même fermée) ---------- */
+const AZKAR_RAPPEL = {
+  dispo() { return !!(window.LumuNative && LumuNative.programmerAzkar); },
+  reglages() { return chargerLocal("azkar_rappel", { on: true, matin: true, soir: true, coucher: true }); },
+  TEXTES: { matin: ["🌅 Adhkâr du matin", "Protégez votre journée · touchez pour les lire (≈ 5 min)"], soir: ["🌇 Adhkâr du soir", "Avant le Maghrib · touchez pour les lire (≈ 5 min)"], coucher: ["🌙 Avant de dormir", "Les invocations du coucher selon la Sounna"] },
+  async planifier(force) {
+    if (!this.dispo()) return;
+    const r = this.reglages();
+    if (!r.on) { try { LumuNative.programmerAzkar("[]"); } catch (e) {} return; }
+    const auj = new Date().toISOString().slice(0, 10), l = PRIERE.loc();
+    if (!l || l.lat == null) return;
+    const cle = auj + "|" + PRIERE.cle(l) + "|" + JSON.stringify(r);
+    if (!force && chargerLocal("azkar_plan", "") === cle) return;
+    const liste = [], now = Date.now();
+    try {
+      const d0 = new Date(), mois = [[d0.getFullYear(), d0.getMonth() + 1]]; const d1 = new Date(now + 8 * 864e5); if (d1.getMonth() !== d0.getMonth()) mois.push([d1.getFullYear(), d1.getMonth() + 1]);
+      for (const [y, m] of mois) {
+        const j = await (await fetch(`https://api.aladhan.com/v1/calendar/${y}/${m}?latitude=${l.lat}&longitude=${l.lng}&method=3&iso8601=true`)).json();
+        (j.data || []).forEach(day => [["matin", "Fajr", 20], ["soir", "Asr", 20], ["coucher", "Isha", 75]].forEach(([k, pr, dec]) => {
+          if (!r[k]) return; const t = Date.parse(day.timings[pr]) + dec * 60e3;
+          if (t > now && t < now + 8 * 864e5) liste.push({ t, l: k, titre: this.TEXTES[k][0], texte: this.TEXTES[k][1] });
+        }));
+      }
+    } catch (e) { return; }
+    liste.sort((a, b) => a.t - b.t);
+    try { LumuNative.programmerAzkar(JSON.stringify(liste.slice(0, 30))); sauverLocal("azkar_plan", cle); } catch (e) {}
+  }
+};
+setTimeout(() => { try { AZKAR_RAPPEL.planifier(); } catch (e) {} }, 11000);
+document.addEventListener("visibilitychange", () => { if (!document.hidden) try { AZKAR_RAPPEL.planifier(); } catch (e) {} });
 /* Renouvelle les alarmes une fois par jour, à l'ouverture de l'application */
 setTimeout(() => { try { ADHAN.planifier(); } catch (e) {} }, 9000);
 document.addEventListener("visibilitychange", () => { if (!document.hidden) try { ADHAN.planifier(); } catch (e) {} });
@@ -7315,6 +7355,17 @@ async function vueAzkar() {
   const w = ecran("Azkar", ["livres"], `<div style="display:flex;gap:8px;margin:0 0 12px"><button class="btn" id="az-m" style="flex:1;margin:0">🌅 Matin</button><button class="btn-outline" id="az-s" style="flex:1;margin:0">🌇 Soir</button><button class="btn-outline" id="az-c" style="flex:1;margin:0">😴 Coucher</button></div><div id="az-l" style="display:grid;gap:12px"></div><p id="az-note" style="font-size:12px;text-align:center" dir="auto"></p>`);
   let liste = etat.params && ["soir", "coucher"].includes(etat.params.liste) ? etat.params.liste : "matin";
   const compte = {};
+  try { /* Rappel quotidien dans la barre de notification */
+    const z = document.createElement("div"); z.className = "carte"; z.style.cssText = "padding:12px 14px;margin:0 0 12px;display:flex;align-items:center;gap:12px;background:var(--surface,#fff);color:var(--texte,#14201b)";
+    const rang = w.querySelector("#az-m").parentNode; if (rang && rang.parentNode) rang.parentNode.insertBefore(z, rang);
+    const peint = () => {
+      if (!AZKAR_RAPPEL.dispo()) { z.innerHTML = `<span style="font-size:24px">🔔</span><span style="flex:1;font-size:14px">Mettez à jour l'application Lumu (Android) pour recevoir le rappel des adhkâr dans la barre de notification.</span>`; return; }
+      const r = AZKAR_RAPPEL.reglages();
+      z.innerHTML = `<span style="font-size:24px">🔔</span><span style="flex:1;min-width:0"><b style="display:block;font-size:15px">Rappel dans la barre de notification</b><small style="opacity:.75">Matin après le Fajr · soir après l'Asr · coucher après l'Icha</small></span><button type="button" id="az-rp" role="switch" aria-checked="${r.on}" style="flex:none;width:54px;height:32px;border-radius:16px;border:0;background:${r.on ? "#0F7B6C" : "#c9d3cd"};position:relative"><span style="position:absolute;top:3px;${r.on ? "right:3px" : "left:3px"};width:26px;height:26px;border-radius:50%;background:#fff"></span></button>`;
+      z.querySelector("#az-rp").onclick = () => { const x = AZKAR_RAPPEL.reglages(); x.on = !x.on; sauverLocal("azkar_rappel", x); peint(); AZKAR_RAPPEL.planifier(true); toast(x.on ? "Rappel des adhkâr activé" : "Rappel des adhkâr désactivé"); };
+    };
+    peint();
+  } catch (e) {}
   const dessiner = () => {
     const L = w.querySelector("#az-l");
     L.innerHTML = AZKAR[liste].map((z, i) => {
@@ -8065,6 +8116,18 @@ function carteMoment(w) {
   const zone = w.querySelector("#ec-moment"); if (!zone) return;
   let m = null; try { m = momentIslamique(); } catch (e) {}
   let html = "";
+  /* Rappel des adhkâr : barre de notification en haut d'Écouter (fermable pour la journée) */
+  if (m && m.azkar) {
+    const cleN = "notif_az_" + new Date().toISOString().slice(0, 10) + "_" + m.azkar;
+    let zn = w.querySelector("#ec-notif"); if (!zn) { zn = document.createElement("div"); zn.id = "ec-notif"; const t = w.querySelector(".ec-bande-t"); if (t) t.parentNode.insertBefore(zn, t); }
+    if (!chargerLocal(cleN, false)) {
+      zn.innerHTML = `<div class="ec-notif" role="status"><span class="ec-notif-ic" aria-hidden="true">${m.ic}</span><button type="button" class="ec-notif-tx" id="ec-notif-l"><b>${esc(m.azkar === "matin" ? "Adhkâr du matin" : m.azkar === "soir" ? "Adhkâr du soir" : "Invocations du coucher")}</b><small>${esc(m.azkar === "coucher" ? "Avant de dormir, selon la Sounna" : "C'est le moment · ≈ 5 min")}</small></button><button type="button" class="ec-notif-go" id="ec-notif-go">Lire</button><button type="button" class="ec-notif-x" id="ec-notif-x" aria-label="Masquer pour aujourd'hui">✕</button></div>`;
+      const lire = () => router("azkar", { liste: m.azkar });
+      zn.querySelector("#ec-notif-l").onclick = lire; zn.querySelector("#ec-notif-go").onclick = lire;
+      zn.querySelector("#ec-notif-x").onclick = () => { sauverLocal(cleN, true); zn.innerHTML = ""; };
+    }
+    m = null;
+  }
   if (m) html += `<button type="button" id="ec-mo" style="display:flex;align-items:center;gap:12px;width:calc(100% - 32px);margin:6px 16px 10px;padding:14px 16px;border:0;border-radius:18px;color:#fff;text-align:start;background:${m.fond};box-shadow:0 4px 14px rgba(0,0,0,.18)"><span style="font-size:30px" aria-hidden="true">${m.ic}</span><span style="flex:1;min-width:0"><b style="display:block;font-size:17px;color:#fff">${esc(m.titre)}</b><span style="display:block;font-size:13px;opacity:.95;color:#fff">${esc(m.texte)}</span></span><span aria-hidden="true" style="font-size:22px">›</span></button>`;
   let ce = null, nl = 0; try { ce = CORAN_ETAT.lire(); nl = CORAN_ETAT.nbLues(ce); } catch (e) {}
   if (ce && (nl > 0 || ce.page > 1)) html += `<button type="button" id="ec-co" style="display:flex;align-items:center;gap:12px;width:calc(100% - 32px);margin:0 16px 10px;padding:12px 16px;border:1px solid #cfdcd4;border-radius:16px;background:var(--surface,#fff);color:inherit;text-align:start"><span style="font-size:26px" aria-hidden="true">📖</span><span style="flex:1;min-width:0"><b style="display:block;font-size:15px">Reprendre ma lecture du Coran</b><span style="display:block;font-size:13px;opacity:.8">Page ${ce.page} · ${nl} pages lues sur 604</span></span><span aria-hidden="true" style="font-size:22px">›</span></button>`;

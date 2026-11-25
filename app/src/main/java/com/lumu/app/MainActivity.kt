@@ -67,6 +67,7 @@ class MainActivity : AppCompatActivity() {
         @JavascriptInterface fun site(): String = BuildConfig.SITE_URL
         // Adhan : la page envoie les prochaines heures de prière ; l'application sonne même fermée
         @JavascriptInterface fun programmerAdhan(json: String?) { try { Adhan.programmer(applicationContext, json ?: "[]") } catch (e: Exception) {} }
+        @JavascriptInterface fun programmerAzkar(json: String?) { try { Azkar.programmer(applicationContext, json ?: "[]") } catch (e: Exception) {} }
         // Voix de l'adhan : fichier audio (https) téléchargé une fois sur le téléphone ; vide = son du téléphone
         @JavascriptInterface fun adhanVoix(url: String?) {
             val f = Adhan.fichier(applicationContext)
@@ -341,7 +342,13 @@ class MainActivity : AppCompatActivity() {
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         setIntent(intent)
+        ouvrirAzkar(intent)
         recevoirPartage(intent)
+    }
+    private fun ouvrirAzkar(intent: Intent?) {
+        val az = intent?.getStringExtra("azkar")?.takeIf { it == "matin" || it == "soir" || it == "coucher" } ?: return
+        intent.removeExtra("azkar")
+        try { webView.evaluateJavascript("window.router&&router('azkar',{liste:'$az'})", null) } catch (e: Exception) {}
     }
     private val demandeStockage =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { }
@@ -539,7 +546,11 @@ class MainActivity : AppCompatActivity() {
         })
 
         if (savedInstanceState != null) webView.restoreState(savedInstanceState)
-        else webView.loadUrl(DEPART)
+        else {
+            // Ouvert depuis une notification des adhkâr : la page s'ouvre directement sur la bonne liste
+            val az = intent?.getStringExtra("azkar")?.takeIf { it == "matin" || it == "soir" || it == "coucher" }
+            webView.loadUrl(if (az != null) "$DEPART#r=azkar&l=$az" else DEPART)
+        }
         // Mise à jour de l'interface sans réinstaller : la page est prévenue quand elle est prête
         MajWeb.verifier(applicationContext) { v ->
             runOnUiThread { try { webView.evaluateJavascript("window.__lumuMajWeb&&window.__lumuMajWeb($v)", null) } catch (e: Exception) {} }

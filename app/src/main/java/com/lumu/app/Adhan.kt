@@ -71,7 +71,7 @@ class AdhanAlarme : BroadcastReceiver() {
 }
 
 class AdhanDemarrage : BroadcastReceiver() {
-    override fun onReceive(ctx: Context, intent: Intent) { Adhan.replanifier(ctx) }
+    override fun onReceive(ctx: Context, intent: Intent) { Adhan.replanifier(ctx); Azkar.replanifier(ctx) }
 }
 
 class AdhanService : Service() {
@@ -121,4 +121,61 @@ class AdhanService : Service() {
     override fun onDestroy() { try { mp?.release() } catch (e: Exception) {}; super.onDestroy() }
 
     companion object { const val CANAL = "lumu_adhan" }
+}
+
+/**
+ * Rappels des adhkâr (matin, soir, coucher) dans la barre de notification, même application fermée.
+ * La page envoie [{t: millisecondes, l: "matin"|"soir"|"coucher", titre, texte}] ; chaque heure devient
+ * une alarme ; à l'alarme, une notification s'affiche et, touchée, ouvre la bonne liste d'invocations.
+ */
+object Azkar {
+    private const val PREFS = "lumu_azkar"
+    const val CANAL = "lumu_azkar"
+
+    fun programmer(ctx: Context, json: String) {
+        ctx.getSharedPreferences(PREFS, Context.MODE_PRIVATE).edit().putString("liste", json).apply()
+        replanifier(ctx)
+    }
+
+    fun replanifier(ctx: Context) {
+        val am = ctx.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        for (i in 0 until 40) {
+            val pi = PendingIntent.getBroadcast(ctx, 8000 + i, Intent(ctx, AzkarAlarme::class.java), PendingIntent.FLAG_NO_CREATE or PendingIntent.FLAG_IMMUTABLE)
+            if (pi != null) { am.cancel(pi); pi.cancel() }
+        }
+        val json = ctx.getSharedPreferences(PREFS, Context.MODE_PRIVATE).getString("liste", "[]") ?: "[]"
+        val l = try { JSONArray(json) } catch (e: Exception) { JSONArray() }
+        val now = System.currentTimeMillis()
+        var k = 0
+        for (i in 0 until l.length()) {
+            if (k >= 40) break
+            val o = l.optJSONObject(i) ?: continue
+            val t = o.optLong("t"); if (t <= now) continue
+            val it = Intent(ctx, AzkarAlarme::class.java)
+                .putExtra("l", o.optString("l", "matin")).putExtra("titre", o.optString("titre", "Adhkâr")).putExtra("texte", o.optString("texte", "Touchez pour les lire"))
+            val pi = PendingIntent.getBroadcast(ctx, 8000 + k, it, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
+            try { am.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, t, pi) } catch (e: Exception) {}
+            k++
+        }
+    }
+}
+
+class AzkarAlarme : BroadcastReceiver() {
+    override fun onReceive(ctx: Context, intent: Intent) {
+        val l = intent.getStringExtra("l") ?: "matin"
+        val nm = ctx.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        if (Build.VERSION.SDK_INT >= 26 && nm.getNotificationChannel(Azkar.CANAL) == null)
+            nm.createNotificationChannel(NotificationChannel(Azkar.CANAL, "Rappels des adhkâr", NotificationManager.IMPORTANCE_DEFAULT).apply { description = "Adhkâr du matin, du soir et du coucher" })
+        val code = when (l) { "soir" -> 2; "coucher" -> 3; else -> 1 }
+        val ouvrir = PendingIntent.getActivity(ctx, 8100 + code,
+            Intent(ctx, MainActivity::class.java).putExtra("azkar", l).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP),
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
+        val b = if (Build.VERSION.SDK_INT >= 26) Notification.Builder(ctx, Azkar.CANAL) else Notification.Builder(ctx)
+        b.setSmallIcon(R.drawable.ic_notif)
+            .setContentTitle(intent.getStringExtra("titre") ?: "Adhkâr")
+            .setContentText(intent.getStringExtra("texte") ?: "Touchez pour les lire")
+            .setContentIntent(ouvrir).setAutoCancel(true)
+            .addAction(Notification.Action.Builder(null, "Lire maintenant", ouvrir).build())
+        try { nm.notify(8200 + code, b.build()) } catch (e: SecurityException) {}
+    }
 }
