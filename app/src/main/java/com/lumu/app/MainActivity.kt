@@ -81,6 +81,20 @@ class MainActivity : AppCompatActivity() {
         @JavascriptInterface fun garderEcran(oui: Boolean) {
             runOnUiThread { try { if (oui) window.addFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON) else window.clearFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON) } catch (e: Exception) {} }
         }
+        /** Luminosité de l'écran pour Lumu seulement (0.01 à 1 ; -1 = réglage du téléphone) */
+        @JavascriptInterface fun luminosite(v: Float) {
+            runOnUiThread { try { val lp = window.attributes; lp.screenBrightness = if (v < 0f) -1f else v.coerceIn(0.01f, 1f); window.attributes = lp } catch (e: Exception) {} }
+        }
+        @JavascriptInterface fun luminositeActuelle(): Float {
+            return try { val b = window.attributes.screenBrightness; if (b >= 0f) b else android.provider.Settings.System.getInt(contentResolver, android.provider.Settings.System.SCREEN_BRIGHTNESS) / 255f } catch (e: Exception) { 0.5f }
+        }
+        /** Volume média du téléphone en pourcentage */
+        @JavascriptInterface fun volume(): Int {
+            return try { val am = getSystemService(Context.AUDIO_SERVICE) as android.media.AudioManager; val m = am.getStreamMaxVolume(android.media.AudioManager.STREAM_MUSIC); am.getStreamVolume(android.media.AudioManager.STREAM_MUSIC) * 100 / m } catch (e: Exception) { 50 }
+        }
+        @JavascriptInterface fun regleVolume(pct: Int) {
+            try { val am = getSystemService(Context.AUDIO_SERVICE) as android.media.AudioManager; val m = am.getStreamMaxVolume(android.media.AudioManager.STREAM_MUSIC); am.setStreamVolume(android.media.AudioManager.STREAM_MUSIC, Math.round(pct.coerceIn(0, 100) * m / 100f), 0) } catch (e: Exception) {}
+        }
         @JavascriptInterface fun programmerAzkar(json: String?) { try { Azkar.programmer(applicationContext, json ?: "[]") } catch (e: Exception) {} }
         @JavascriptInterface fun lieuAzkar(lat: Double, lng: Double) { try { Azkar.lieu(applicationContext, lat, lng) } catch (e: Exception) {} }
         // Voix de l'adhan : fichier audio (https) téléchargé une fois sur le téléphone ; vide = son du téléphone
