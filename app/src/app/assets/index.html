@@ -5154,7 +5154,7 @@ async function banniereDirect(b) {
   b.classList.add("vivant"); b.title = titre; b.setAttribute("aria-label", titre);
 }
 /* Imams dont les prêches sont rassemblés dans Lumu (page dédiée, même si publiés par différentes personnes) */
-const IMAMS_CONNUS = ["Cheikh Mouhammad Ali Dewa", "Oustaz Mahmoud Goni", "Dr Moussa Souleymane", "Cheikh Moussa Aldjayi"];
+const IMAMS_CONNUS = ["Cheikh Mouhammad Ali Dewa", "Oustaz Mahmoud Goni", "Dr Moussa Souleymane", "Cheikh Moussa Aldjayi", "Mal Hamadjam", "Cheikh Ahmed Deedat", "Dr Abdoul Madjid Kasogbia"];
 const IMAMS_DEFUNTS = /mouhammad ali dewa|mohammed ali dewa|mohamed ali dewa|ja'?afar mahmud adam/i;
 async function vueAuteur() {
   const nom = etat.params.nom; if (!nom) { router("flux"); return; }
