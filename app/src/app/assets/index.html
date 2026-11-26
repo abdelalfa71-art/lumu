@@ -1426,6 +1426,13 @@ body.defile #micro-fab { transform: translateY(140%) scale(.6); opacity: 0; poin
 .aj-hab[open] .aj-hab-chev { transform: rotate(180deg); margin-top: 4px; }
 .aj-hab[open] > div { padding-bottom: 6px; }
 .cv-st { padding: 2px 0 12px !important; } .cv-st-t { display: block; font-size: 13px; text-transform: uppercase; letter-spacing: .6px; color: var(--texte-doux,#5D6B63); margin: 0 0 2px; } .cv-st-t[hidden] { display: none; }
+.bl-ov { position: absolute; left: 0; right: 0; z-index: 5; transition: transform .25s ease, opacity .25s ease; }
+.bl-ov-h { top: 0; box-shadow: 0 2px 8px rgba(0,0,0,.12); }
+.bl-ov-b { bottom: 0; background: #e6d9b8; box-shadow: 0 -2px 8px rgba(0,0,0,.12); }
+.bl-cache .bl-ov-h { transform: translateY(-100%); opacity: 0; pointer-events: none; }
+.bl-cache .bl-ov-b { transform: translateY(100%); opacity: 0; pointer-events: none; }
+#bl-zone { padding-top: env(safe-area-inset-top, 0) !important; display: flex; flex-direction: column; }
+#bl-cadre { margin: auto !important; flex: none; box-shadow: none !important; }
 </style>
 </head>
 <body>
@@ -7510,6 +7517,21 @@ async function vueBiblioLire() {
       <p style="font-size:12px;text-align:center;margin:0" dir="auto">${esc(l.source || "")}</p>
     </div>`);
   const $ = q => w.querySelector(q), img = $("#bl-img"), zEtat = $("#bl-etat"), zone = $("#bl-zone");
+  /* Plein écran comme le Coran : les barres flottent au-dessus de la page et se cachent ; un toucher les fait réapparaître */
+  {
+    const haut = document.createElement("div"), bas = document.createElement("div");
+    haut.className = "bl-ov bl-ov-h"; bas.className = "bl-ov bl-ov-b";
+    haut.append($("#bl-audio"), $("#bl-retour").closest("div[style*='grid']"));
+    bas.append($("#bl-aller").parentElement, $("#bl-plus"));
+    w.append(haut, bas);
+    w.style.position = "fixed";
+    let minu = null;
+    const cacher = v => { w.classList.toggle("bl-cache", v); clearTimeout(minu); if (!v) minu = setTimeout(() => { if ($("#bl-plus").style.display === "none") w.classList.add("bl-cache"); }, 4000); };
+    cacher(false);
+    zone.addEventListener("click", ev => { if (ev.target.closest("button")) return; cacher(!w.classList.contains("bl-cache")); });
+    [haut, bas].forEach(b => b.addEventListener("click", () => cacher(false)));
+    try { if (window.LumuNative && LumuNative.immersif) { LumuNative.immersif(true); const sv = setInterval(() => { if (!w.isConnected) { try { LumuNative.immersif(false); } catch (e) {} clearInterval(sv); } }, 700); } } catch (e) {}
+  }
   try { const pad = parseFloat(getComputedStyle(w).paddingLeft) || 0; if (pad) zone.style.marginLeft = zone.style.marginRight = -pad + "px"; } catch (e) {}
   let tour = 0, url = null, zoom = 1, rognes = null;
   const cadre = $("#bl-cadre");
