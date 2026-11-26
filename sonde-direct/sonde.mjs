@@ -1,23 +1,40 @@
-// Sonde : chaînes de télévision islamiques en direct sur YouTube (recherche filtrée « en direct »).
+// Sonde : vidéos YouTube d'Ahmed Deedat et d'Abdoul Madjid (recherche, avec pages suivantes).
 import fs from "node:fs";
 const out = [], vus = new Map();
 const UA = { "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/124 Safari/537.36", "accept-language": "fr-FR,fr;q=0.9" };
 const pause = ms => new Promise(r => setTimeout(r, ms));
 function marcher(o, f) { if (Array.isArray(o)) o.forEach(x => marcher(x, f)); else if (o && typeof o === "object") { f(o); for (const k in o) marcher(o[k], f); } }
 const txt = x => x ? (x.simpleText || (x.runs || []).map(r => r.text).join("") || "") : "";
-const Q = ["قناة القرآن الكريم بث مباشر", "قناة السنة النبوية بث مباشر", "huda tv live", "iqraa tv live", "peace tv live", "zad tv live", "قناة المجد القرآن الكريم بث مباشر", "dubai quran tv live", "sharjah quran live", "قناة الرسالة بث مباشر", "hausa islamic tv live", "manara tv live hausa", "sunnah tv kano live", "islam channel live", "chaine islamique en direct", "coran en direct tv", "fulfulde tv live", "al quran al kareem tv live", "makkah live", "madinah live", "kuwait quran tv live", "egypt quran radio tv live", "Al Azhar tv live"];
-for (const q of Q) {
+const Q = [
+ ["deedat", "Ahmed Deedat en français"], ["deedat", "Ahmed Deedat français débat"], ["deedat", "Ahmed Deedat vf"], ["deedat", "Ahmed Deedat conférence"],
+ ["deedat", "Ahmed Deedat debate"], ["deedat", "Ahmed Deedat lecture full"], ["deedat", "Ahmed Deedat hausa"], ["deedat", "Ahmed Deedat fulfulde"], ["deedat", "Ahmed Didat"], ["deedat", "أحمد ديدات مناظرة"],
+ ["madjid", "Abdoul Madjid"], ["madjid", "Cheikh Abdoul Madjid"], ["madjid", "Oustaz Abdoul Madjid"], ["madjid", "Abdoul Madjid fulfulde"], ["madjid", "Abdoul Madjid tafsir"],
+ ["madjid", "Abdoul Madjid Cameroun"], ["madjid", "Abdoul Madjid Garoua"], ["madjid", "Abdoul Madjid Maroua"], ["madjid", "Abdoul Madjid Ngaoundéré"], ["madjid", "Abdoul Madjid prêche"],
+ ["madjid", "Abdoul Majid wa'azi"], ["madjid", "Malam Abdoul Madjid"], ["madjid", "Abdul Madjid Niger"], ["madjid", "Abdoul Madjid Tchad"]
+];
+for (const [g, q] of Q) {
+  let url = "https://www.youtube.com/results?search_query=" + encodeURIComponent(q);
   try {
-    const t = await (await fetch("https://www.youtube.com/results?search_query=" + encodeURIComponent(q) + "&sp=EgJAAQ%253D%253D", { headers: UA })).text();
+    const t = await (await fetch(url, { headers: UA })).text();
     const m = t.match(/var ytInitialData = (\{.*?\});<\/script>/s); if (!m) { out.push("Q " + q + " pas de données"); continue; }
-    marcher(JSON.parse(m[1]), o => { const v = o.videoRenderer; if (!v || !v.videoId) return;
-      const ch = (v.ownerText?.runs || [])[0]; const chId = ch?.navigationEndpoint?.browseEndpoint?.browseId || "";
-      const badge = JSON.stringify(v.badges || "") + JSON.stringify(v.thumbnailOverlays || ""); const live = /LIVE|DIRECT|EN DIRECT/i.test(badge) || /regard|watching/i.test(txt(v.viewCountText));
-      const verif = JSON.stringify(v.ownerBadges || "").includes("VERIFIED");
-      if (live && !vus.has(chId)) vus.set(chId, { chaine: ch?.text || "", video: v.videoId, titre: txt(v.title), vues: txt(v.viewCountText), verif, q }); });
+    let data = JSON.parse(m[1]);
+    const key = (t.match(/"INNERTUBE_API_KEY":"([^"]+)"/) || [])[1], cv = (t.match(/"INNERTUBE_CLIENT_VERSION":"([^"]+)"/) || [])[1];
+    for (let pg = 0; pg < 4; pg++) {
+      let cont = null;
+      marcher(data, o => {
+        if (o.continuationCommand && o.continuationCommand.token) cont = o.continuationCommand.token;
+        const v = o.videoRenderer; if (!v || !v.videoId || vus.has(v.videoId)) return;
+        const ch = (v.ownerText?.runs || [])[0];
+        vus.set(v.videoId, { g, q, chaine: ch?.text || "", chId: ch?.navigationEndpoint?.browseEndpoint?.browseId || "", titre: txt(v.title), duree: txt(v.lengthText), vues: txt(v.viewCountText), desc: (v.detailedMetadataSnippets || []).map(d => txt(d.snippetText)).join(" ").slice(0, 160) });
+      });
+      if (!cont || !key) break;
+      await pause(1500);
+      const r = await fetch("https://www.youtube.com/youtubei/v1/search?key=" + key, { method: "POST", headers: { ...UA, "content-type": "application/json" }, body: JSON.stringify({ context: { client: { clientName: "WEB", clientVersion: cv, hl: "fr", gl: "CM" } }, continuation: cont }) });
+      data = await r.json();
+    }
   } catch (e) { out.push("Q " + q + " erreur " + e.message); }
-  await pause(2500);
+  await pause(2000);
 }
-out.push("=== " + vus.size + " chaînes en direct ===");
-for (const [id, v] of vus) out.push(`${id}\t${v.verif ? "✔" : " "}\t${v.vues}\t${v.chaine}\t${v.video}\t${v.titre.slice(0, 80)}`);
+out.push("=== " + vus.size + " vidéos ===");
+for (const [id, v] of vus) out.push([v.g, id, v.duree, v.vues, v.chaine, v.chId, v.titre.replace(/\t/g, " "), v.desc.replace(/\t/g, " ")].join("\t"));
 fs.writeFileSync("sonde-direct/resultat.txt", out.join("\n"));
