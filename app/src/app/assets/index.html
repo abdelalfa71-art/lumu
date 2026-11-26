@@ -1433,6 +1433,15 @@ body.defile #micro-fab { transform: translateY(140%) scale(.6); opacity: 0; poin
 .bl-cache .bl-ov-b { transform: translateY(100%); opacity: 0; pointer-events: none; }
 #bl-zone { padding-top: env(safe-area-inset-top, 0) !important; display: flex; flex-direction: column; }
 #bl-cadre { margin: auto !important; flex: none; box-shadow: none !important; }
+.ds-fen iframe { top: env(safe-area-inset-top, 0) !important; }
+.ds-fen #ds-off { bottom: auto !important; top: env(safe-area-inset-top, 0) !important; height: 56.25vw; }
+.ds-fen #ds-tap { display: none; }
+.ds-fen #ds-ui { top: calc(56.25vw + env(safe-area-inset-top, 0)) !important; flex-wrap: wrap; background: none !important; opacity: 1 !important; pointer-events: auto !important; padding: 14px !important; }
+.ds-fen #ds-ui > span[style*="overflow-x"] { order: 9; max-width: 100% !important; width: 100%; flex-wrap: wrap; overflow: visible !important; }
+.ds-fen #ds-ui > span[style*="flex:1"] { display: none; }
+.ds-nv { position: absolute; top: 50%; transform: translateY(-50%); z-index: 3; width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(255,255,255,.35); background: rgba(0,0,0,.5); color: #fff; font-size: 30px; line-height: 1; padding: 0 0 4px; transition: opacity .3s; }
+.ds-fen .ds-nv { top: calc(28.125vw + env(safe-area-inset-top, 0)); opacity: 1 !important; pointer-events: auto !important; }
+#direct-saint[data-mini] .ds-nv { display: none; }
 </style>
 </head>
 <body>
@@ -2212,7 +2221,9 @@ function retourPile() {
 window.addEventListener("popstate", () => {
   if (DS_HIST.ignorer) { DS_HIST.ignorer = false; return; }
   /* Bouton retour du téléphone pendant le direct : on ferme le direct (on ne quitte pas l'application) */
-  { const ds = document.getElementById("direct-saint"); if (ds && !ds.dataset.mini && DS_HIST.actif) { DS_HIST.actif = false; fermerDirectSaint(true); return; } }
+  { const ds = document.getElementById("direct-saint");
+    if (ds && !ds.dataset.mini && !ds.dataset.fen && DS_HIST.actif) { const bf = ds.querySelector("#ds-fs"); if (bf) { try { history.pushState({ direct: 1 }, ""); } catch (e) {} bf.click(); return; } }
+    if (ds && !ds.dataset.mini && DS_HIST.actif) { DS_HIST.actif = false; fermerDirectSaint(true); return; } }
   if (PE.ignorerPop) { PE.ignorerPop = false; return; }
   if (PE.ouvert) { fermerPE(true); return; }
   retourPile();
@@ -4980,7 +4991,7 @@ function arreterMedias() { document.querySelectorAll("video, audio").forEach(v =
 function reduireDirect(on) {
   const o = document.getElementById("direct-saint"); if (!o) return;
   if (on) { o.dataset.mini = "1"; if (o.dataset.natif) pleinEcranDirect(false); dsConsommerHist(); }
-  else { delete o.dataset.mini; if (pleinEcranDirect(true)) o.dataset.natif = "1"; if (!DS_HIST.actif) { try { history.pushState({ direct: 1 }, ""); DS_HIST.actif = true; } catch (e) {} } }
+  else { delete o.dataset.mini; o.dataset.fen = "1"; if (!DS_HIST.actif) { try { history.pushState({ direct: 1 }, ""); DS_HIST.actif = true; } catch (e) {} } }
   tournerDirect();
   const ui = o.querySelector("#ds-ui"), tap = o.querySelector("#ds-tap"), mx = o.querySelector("#ds-mx");
   if (ui) ui.style.display = on ? "none" : "flex";
@@ -4991,7 +5002,7 @@ function reduireDirect(on) {
    puis on le réduit à la taille de l'écran : YouTube envoie alors la HD (720p/1080p) si la connexion le permet. */
 function ajusterQualiteDirect() {
   const o = document.getElementById("direct-saint"), f = o && o.querySelector("iframe"); if (!f) return;
-  const L = o.offsetWidth || innerWidth, H = o.offsetHeight || innerHeight;
+  const L = o.dataset.fen ? innerWidth : (o.offsetWidth || innerWidth), H = o.dataset.fen ? innerWidth * 9 / 16 : (o.offsetHeight || innerHeight);
   const k = Math.min(2, Math.max(1, 1600 / Math.max(L, 1)));
   f.style.width = L * k + "px"; f.style.height = H * k + "px"; f.style.transform = k > 1 ? `scale(${1 / k})` : "";
 }
@@ -4999,6 +5010,8 @@ function tournerDirect() {
   const o = document.getElementById("direct-saint"); if (!o) return;
   /* Téléphone tenu en portrait sans rotation possible : on tourne l'image de 90° pour remplir l'écran */
   const portrait = innerHeight > innerWidth && !o.dataset.natif;
+  o.classList.toggle("ds-fen", !!o.dataset.fen && !o.dataset.mini);
+  if (o.dataset.fen && !o.dataset.mini) { o.style.cssText = "position:fixed;inset:0;z-index:2147483000;background:#0b0b0b;color:#fff;overflow:auto"; ajusterQualiteDirect(); return; }
   if (o.dataset.mini) { const L = Math.min(260, innerWidth * .62); o.style.cssText = `position:fixed;right:12px;bottom:calc(178px + env(safe-area-inset-bottom));width:${L}px;height:${L * 9 / 16}px;z-index:2147483000;background:#000;border-radius:12px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.45)`; ajusterQualiteDirect(); return; }
   o.style.cssText = portrait
     ? `position:fixed;top:0;left:0;width:${innerHeight}px;height:${innerWidth}px;transform:translateX(${innerWidth}px) rotate(90deg);transform-origin:top left;z-index:2147483000;background:#000;color:#fff;overflow:hidden`
@@ -5012,7 +5025,7 @@ async function ouvrirDirectSaint(i) {
   if (!o) {
     o = document.createElement("div"); o.id = "direct-saint"; document.body.appendChild(o);
     try { history.pushState({ direct: 1 }, ""); DS_HIST.actif = true; } catch (e) {}
-    if (pleinEcranDirect(true)) o.dataset.natif = "1";
+    o.dataset.fen = "1"; /* s'ouvre dans une fenêtre ; plein écran seulement sur demande (⛶) */
     window.addEventListener("resize", tournerDirect);
   }
   tournerDirect();
@@ -5025,7 +5038,7 @@ async function ouvrirDirectSaint(i) {
   o.innerHTML = `${enDirect ? `<iframe src="https://www.youtube.com/embed/${esc(vid)}?autoplay=1&playsinline=1&rel=0&modestbranding=1&fs=0&controls=1" title="${esc(d.nom)} en direct"
         sandbox="allow-scripts allow-same-origin allow-presentation" referrerpolicy="strict-origin-when-cross-origin"
         allow="autoplay; encrypted-media; picture-in-picture" style="position:absolute;left:0;top:0;width:100%;height:100%;border:0;transform-origin:top left"></iframe>`
-      : `<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;padding:16px"><div style="font-size:44px">${d.ic}</div><b style="font-size:18px">${esc(d.nom)} n'est pas en direct en ce moment.</b><span style="opacity:.7;font-size:14px">La chaîne officielle ne diffuse pas sur Internet actuellement. Réessayez plus tard.</span></div>`}
+      : `<div id="ds-off" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;padding:16px"><div style="font-size:44px">${d.ic}</div><b style="font-size:18px">${esc(d.nom)} n'est pas en direct en ce moment.</b><span style="opacity:.7;font-size:14px">La chaîne officielle ne diffuse pas sur Internet actuellement. Réessayez plus tard.</span></div>`}
     <div id="ds-tap" style="position:absolute;left:0;right:0;top:0;height:56px"></div>
     <div id="ds-ui" style="position:absolute;left:0;right:0;top:0;display:flex;align-items:center;gap:10px;padding:10px 14px;background:linear-gradient(rgba(0,0,0,.75),transparent);transition:opacity .3s">
       <button id="ds-x" aria-label="Fermer" style="width:40px;height:40px;border-radius:50%;border:0;background:rgba(255,255,255,.18);color:#fff;font-size:20px;flex:none">✕</button>
@@ -5033,17 +5046,28 @@ async function ouvrirDirectSaint(i) {
       ${enDirect ? `<span style="background:#d93025;color:#fff;font-size:11px;font-weight:700;padding:3px 7px;border-radius:6px;flex:none">● DIRECT</span>` : ""}
       <span style="flex:1;min-width:8px"></span><span style="display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;max-width:72%;flex:none">${DIRECTS_SAINTS.map(bouton).join("")}</span>
       <button id="ds-audio" title="Écouter seulement (écran éteint possible)" style="padding:9px 12px;border-radius:22px;border:1px solid rgba(255,255,255,.4);background:rgba(0,0,0,.45);color:#fff;font:inherit;font-weight:700;font-size:14px">🎧</button>
+      ${enDirect ? `<button id="ds-fs" title="Plein écran" aria-label="Plein écran" style="padding:9px 12px;border-radius:22px;border:1px solid rgba(255,255,255,.4);background:rgba(0,0,0,.45);color:#fff;font:inherit;font-weight:700;font-size:14px">⛶</button>` : ""}
       ${enDirect ? `<button id="ds-mini" title="Petite fenêtre" style="padding:9px 12px;border-radius:22px;border:1px solid rgba(255,255,255,.4);background:rgba(0,0,0,.45);color:#fff;font:inherit;font-weight:700;font-size:14px">⧉</button>` : ""}
       ${window.LumuNative && LumuNative.diffuserEcran ? `<button id="ds-tv" title="Sur la télévision" style="padding:9px 12px;border-radius:22px;border:1px solid rgba(255,255,255,.4);background:rgba(0,0,0,.45);color:#fff;font:inherit;font-weight:700;font-size:14px">📺</button>` : ""}</div>
+    <button class="ds-nv" id="ds-prev" aria-label="Chaîne précédente" style="left:10px">‹</button><button class="ds-nv" id="ds-next" aria-label="Chaîne suivante" style="right:10px">›</button>
     <div id="ds-mx" style="display:none;position:absolute;top:4px;right:4px;gap:4px"><button id="ds-mx-x" aria-label="Fermer" style="width:30px;height:30px;border-radius:50%;border:0;background:rgba(0,0,0,.6);color:#fff;font-size:15px">✕</button></div>`;
   ajusterQualiteDirect();
   const ui = o.querySelector("#ds-ui"); let t = 0;
-  const montrer = () => { ui.style.opacity = "1"; ui.style.pointerEvents = "auto"; clearTimeout(t); if (enDirect) t = setTimeout(() => { ui.style.opacity = "0"; ui.style.pointerEvents = "none"; }, 4000); };
+  const navs = [...o.querySelectorAll(".ds-nv")];
+  const montrer = () => { [ui, ...navs].forEach(e => { e.style.opacity = "1"; e.style.pointerEvents = "auto"; }); clearTimeout(t); if (enDirect) t = setTimeout(() => { if (o.dataset.fen) return; [ui, ...navs].forEach(e => { e.style.opacity = "0"; e.style.pointerEvents = "none"; }); }, 4000); };
+  const nbc = DIRECTS_SAINTS.length;
+  o.querySelector("#ds-prev").onclick = ev => { ev.stopPropagation(); ouvrirDirectSaint((i - 1 + nbc) % nbc); };
+  o.querySelector("#ds-next").onclick = ev => { ev.stopPropagation(); ouvrirDirectSaint((i + 1) % nbc); };
   o.querySelector("#ds-tap").onclick = () => { if (o.dataset.mini) reduireDirect(false); else montrer(); }; montrer();
   o.querySelector("#ds-x").onclick = fermerDirectSaint;
   o.querySelector("#ds-mx-x").onclick = ev => { ev.stopPropagation(); fermerDirectSaint(); };
   o.querySelector("#ds-audio").onclick = () => { fermerDirectSaint(); ecouterRadio(RADIO_SAOUDIE); toast("🎧 Radio du Coran d'Arabie saoudite : elle continue écran éteint."); };
   { const bm = o.querySelector("#ds-mini"); if (bm) bm.onclick = () => reduireDirect(true); }
+  { const bf = o.querySelector("#ds-fs"); if (bf) bf.onclick = () => {
+    if (o.dataset.fen) { delete o.dataset.fen; if (pleinEcranDirect(true)) o.dataset.natif = "1"; bf.textContent = "🗗"; bf.title = "Quitter le plein écran"; }
+    else { o.dataset.fen = "1"; if (o.dataset.natif) { pleinEcranDirect(false); delete o.dataset.natif; } else pleinEcranDirect(false); bf.textContent = "⛶"; bf.title = "Plein écran"; }
+    tournerDirect(); montrer();
+  }; }
   { const bt = o.querySelector("#ds-tv"); if (bt) bt.onclick = () => { try { LumuNative.diffuserEcran(); } catch (e) {} }; }
   o.querySelectorAll("[data-k]").forEach(b => b.onclick = () => ouvrirDirectSaint(+b.dataset.k));
 }
