@@ -1,4 +1,4 @@
-// Sonde : vidéos YouTube d'Ahmed Deedat et d'Abdoul Madjid (recherche, avec pages suivantes).
+// Sonde : vidéos YouTube d'Mal Hamadjam (recherche, avec pages suivantes).
 import fs from "node:fs";
 const out = [], vus = new Map();
 const UA = { "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/124 Safari/537.36", "accept-language": "fr-FR,fr;q=0.9" };
@@ -6,11 +6,9 @@ const pause = ms => new Promise(r => setTimeout(r, ms));
 function marcher(o, f) { if (Array.isArray(o)) o.forEach(x => marcher(x, f)); else if (o && typeof o === "object") { f(o); for (const k in o) marcher(o[k], f); } }
 const txt = x => x ? (x.simpleText || (x.runs || []).map(r => r.text).join("") || "") : "";
 const Q = [
- ["deedat", "Ahmed Deedat en français"], ["deedat", "Ahmed Deedat français débat"], ["deedat", "Ahmed Deedat vf"], ["deedat", "Ahmed Deedat conférence"],
- ["deedat", "Ahmed Deedat debate"], ["deedat", "Ahmed Deedat lecture full"], ["deedat", "Ahmed Deedat hausa"], ["deedat", "Ahmed Deedat fulfulde"], ["deedat", "Ahmed Didat"], ["deedat", "أحمد ديدات مناظرة"],
- ["madjid", "Abdoul Madjid"], ["madjid", "Cheikh Abdoul Madjid"], ["madjid", "Oustaz Abdoul Madjid"], ["madjid", "Abdoul Madjid fulfulde"], ["madjid", "Abdoul Madjid tafsir"],
- ["madjid", "Abdoul Madjid Cameroun"], ["madjid", "Abdoul Madjid Garoua"], ["madjid", "Abdoul Madjid Maroua"], ["madjid", "Abdoul Madjid Ngaoundéré"], ["madjid", "Abdoul Madjid prêche"],
- ["madjid", "Abdoul Majid wa'azi"], ["madjid", "Malam Abdoul Madjid"], ["madjid", "Abdul Madjid Niger"], ["madjid", "Abdoul Madjid Tchad"]
+ ["hamadjam", "Mal Hamadjam"], ["hamadjam", "Malam Hamadjam"], ["hamadjam", "Mallam Hamadjam"], ["hamadjam", "Mal Hamadjam fulfulde"], ["hamadjam", "Hamadjam waazu"],
+ ["hamadjam", "Hamadjam tafsir"], ["hamadjam", "Oustaz Hamadjam"], ["hamadjam", "Hamadjam Garoua"], ["hamadjam", "Hamadjam Maroua"], ["hamadjam", "Hamadjam Ngaoundéré"],
+ ["hamadjam", "Hamadjam Cameroun"], ["hamadjam", "Mal Hamadjam waazou"], ["hamadjam", "Hamadjam Yaoundé"], ["hamadjam", "Malloum Hamadjam"], ["hamadjam", "Mal Amadjam"]
 ];
 for (const [g, q] of Q) {
   let url = "https://www.youtube.com/results?search_query=" + encodeURIComponent(q);
