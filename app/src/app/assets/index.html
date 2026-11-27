@@ -1685,12 +1685,15 @@ const TOBI_ROUTES = ["choix-enfant", "inscription", "accueil", "lecons", "dialog
 /* ---------- Hors ligne, économie de données, aperçus de partage ---------- */
 /* Miniatures YouTube : 16:9 sans bandes noires ; petite (≈12 Ko) en liste, plus nette seulement en grand */
 function ytMini(c) {
-  return c && c.cover_path && /i\.ytimg\.com\/vi\//.test(c.cover_path) ? c.cover_path.replace(/\/[a-z0-9]+\.jpg(\?.*)?$/i, "/mqdefault.jpg") : null;
+  if (c && c.cover_path && /i\.ytimg\.com\/vi\//.test(c.cover_path)) return c.cover_path.replace(/\/[a-z0-9]+\.jpg(\?.*)?$/i, "/mqdefault.jpg");
+  /* Vidéo YouTube sans image enregistrée : on prend l'affiche officielle de YouTube */
+  if (c && !c.cover_path && c.embed_source === "youtube" && /^[\w-]{11}$/.test(c.embed_id || "")) return "https://i.ytimg.com/vi/" + c.embed_id + "/mqdefault.jpg";
+  return null;
 }
 function couvGrande(c) {
   const m = ytMini(c);
   if (!m) return c && c.cover_path ? urlMedia(c.cover_path) : "";
-  return ECO.explicite() ? m : m.replace("/mqdefault.jpg", "/hq720.jpg");
+  return ECO.explicite() ? m : m.replace("/mqdefault.jpg", c && !c.cover_path ? "/hqdefault.jpg" : "/hq720.jpg");
 }
 const ECO = {
   explicite() { try { return localStorage.getItem("lumu_eco") === "1"; } catch (e) { return false; } },
@@ -6740,7 +6743,7 @@ async function vueAujourdhui() {
     const { data } = await sb.from("yt_contenus").select(CHAMPS_CONTENU).eq("status", "published").in("category", ["Rappel", "Rappels"]).order("published_at", { ascending: false }).limit(1);
     const c = data && data[0], zr = w.querySelector("#aj-rap"); if (!zr) return;
     if (!c) { zr.innerHTML = `<p style="opacity:.7;margin:0">Bientôt un nouveau rappel.</p>`; return; }
-    { const img = (() => { try { return ytMini(c) || (c.cover_path ? urlMedia(c.cover_path) : ""); } catch (e) { return ""; } })(), nom = (c.yt_channels && c.yt_channels.name) || APP_NOM;
+    { const img = (() => { try { return (c.embed_source === "youtube" && /^[\w-]{11}$/.test(c.embed_id || "") && !c.cover_path) ? "https://i.ytimg.com/vi/" + c.embed_id + "/hqdefault.jpg" : (ytMini(c) || (c.cover_path ? urlMedia(c.cover_path) : "")); } catch (e) { return ""; } })(), nom = (c.yt_channels && c.yt_channels.name) || APP_NOM;
       zr.innerHTML = `<button type="button" class="acc-rap"><span class="acc-rap-img">${img ? `<img src="${esc(img)}" alt="" loading="lazy">` : ""}<span class="acc-rap-play">▶</span>${c.duration_seconds ? `<span class="acc-rap-d">${esc(fmtDuree(c.duration_seconds))}</span>` : ""}</span><span class="acc-rap-tx"><b dir="auto">${esc(c.title || "")}</b><small>${esc([c.auteur, nom].filter(Boolean).join(" · "))}</small></span></button>`; }
     zr.firstChild.onclick = () => lireDirect(c);
   } catch (e) {}
