@@ -1,6 +1,6 @@
 {
- "v": 256,
- "commit": "8d6c7c05d2aa959397955a5a78efacc0ccc5f8fd",
+ "v": 257,
+ "commit": "27a94d933f233cff6d925a921f952f4e21aeefa7",
  "natif_min": 2,
  "fichiers": {
   "LICENSE-fluentui-emoji.txt": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383",
@@ -35,9 +35,9 @@
   "icon-192.png": "05dc5e28b346f7116ac3be1c14f1482db1e0691a435cb83260796d63979ddca4",
   "icon-512.png": "1169f5b829d113d53b21f0f706914a939d48c53cc3bc9979fa9bd3ebd464b85b",
   "icon-maskable-512.png": "6a85dbf74b4549c32b06fe5b4c4e22b695c6f59d3556edd4b44bbe0dd4b92dee",
-  "index.html": "53f352e87beabcb44c78eaf4fa10d9a61140ee3ddc1945d429b12ba9308441fd",
+  "index.html": "9b46e110ca3ff053d9e89643de715bc4be90dc7c5d4c1425971069e98ea5d2f4",
   "lumu-logo.svg": "09e40731ac5e248f02281dd765649c646c3c605e244ad816ecb5a899694e8551",
   "manifest.json": "9e11979e5fbf401883b7c18df49cc8cfd265e6fea2555885567d6c445dab6863",
-  "sw.js": "44d5d74caa893e3df0ba86660ba866c9ec3c96dea2c6c29ad76a3825146d954d"
+  "sw.js": "9547ddc8acb32a5ef45a9f2ef9b0e603fea2961f30aa8c0248bc45ac731ce31e"
  }
 }
