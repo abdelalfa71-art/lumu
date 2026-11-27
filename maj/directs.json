@@ -1,28 +1,28 @@
 {
- "maj": "2026-11-26T20:31:46.729Z",
+ "maj": "2026-11-27T03:16:07.859Z",
  "mecque": {
   "id": "IsJTAdC3-Jw",
   "direct": true,
-  "vu": "2026-11-26T20:31:46.729Z"
+  "vu": "2026-11-27T03:16:07.859Z"
  },
  "medine": {
   "id": "10aUPlTW8wQ",
   "direct": true,
-  "vu": "2026-11-26T20:31:46.729Z"
+  "vu": "2026-11-27T03:16:07.859Z"
  },
  "zad": {
   "id": "w4fQHISicN8",
   "direct": true,
-  "vu": "2026-11-26T20:31:46.729Z"
+  "vu": "2026-11-27T03:16:07.859Z"
  },
  "iqraa": {
   "id": "7yIMyi3AR1w",
   "direct": true,
-  "vu": "2026-11-26T20:31:46.729Z"
+  "vu": "2026-11-27T03:16:07.859Z"
  },
  "huda": {
   "id": "y6juRwuKLB8",
-  "direct": true,
+  "direct": false,
   "vu": "2026-11-26T20:31:46.729Z"
  }
 }
