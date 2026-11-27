@@ -6646,8 +6646,20 @@ const MOIS_HIJRI = {
   fr: ["Mouharram", "Safar", "Rabi' al-awwal", "Rabi' ath-thani", "Joumada al-oula", "Joumada ath-thania", "Rajab", "Cha'bane", "Ramadan", "Chawwal", "Dhou al-qi'da", "Dhou al-hijja"],
   en: ["Muharram", "Safar", "Rabi al-Awwal", "Rabi al-Thani", "Jumada al-Ula", "Jumada al-Akhirah", "Rajab", "Sha'ban", "Ramadan", "Shawwal", "Dhu al-Qadah", "Dhu al-Hijjah"],
   ar: ["محرم", "صفر", "ربيع الأول", "ربيع الآخر", "جمادى الأولى", "جمادى الآخرة", "رجب", "شعبان", "رمضان", "شوال", "ذو القعدة", "ذو الحجة"] };
+/* Date hégirienne de La Mecque (Umm al-Qura), au jour du lieu : le jour islamique commence au Maghrib local */
+function hijriLieu() {
+  const d = chargerLocal("priere_n", null); let jour = new Date(), hm = "", ymd = "";
+  try {
+    const tz = (d && d.tz) || Intl.DateTimeFormat().resolvedOptions().timeZone, o = {};
+    new Intl.DateTimeFormat("en-CA", { timeZone: tz, year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", hourCycle: "h23" }).formatToParts(jour).forEach(x => { o[x.type] = x.value; });
+    ymd = o.year + "-" + o.month + "-" + o.day; hm = o.hour + ":" + o.minute; jour = new Date(+o.year, +o.month - 1, +o.day, 12);
+  } catch (e) {}
+  const mg = d && d.t && d.t.Maghrib ? String(d.t.Maghrib).slice(0, 5) : "";
+  if (mg && hm && hm >= mg) jour.setDate(jour.getDate() + 1);
+  return hijri(jour);
+}
 function dateHijri(court) {
-  const l = ["en", "ar"].includes(langue) ? langue : "fr", h = hijri(), mois = MOIS_HIJRI[l][h.m - 1];
+  const l = ["en", "ar"].includes(langue) ? langue : "fr", h = hijriLieu(), mois = MOIS_HIJRI[l][h.m - 1];
   if (l === "ar") { const a = n => String(n).replace(/\d/g, c => "٠١٢٣٤٥٦٧٨٩"[c]); return a(h.d) + " " + mois + (court ? "" : " " + a(h.y) + " هـ"); }
   return h.d + " " + mois + (court ? "" : " " + h.y + (l === "en" ? " AH" : " H"));
 }
