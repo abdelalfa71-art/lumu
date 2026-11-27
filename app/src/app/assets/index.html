@@ -1700,6 +1700,13 @@ html .acc-pbox, html .pg-rep, html .ec-radio, html .ec .ec-sc-h span { border-co
 .dq-res .dq-a { font-size: 19px; line-height: 1.9; margin-top: 4px; }
 .dq-note { font-size: 12.5px; color: #6A766F; text-align: center; margin: 6px 0 20px; }
 :root[data-theme="dark"] .dq-t, :root[data-theme="dark"] .dq-c { background: var(--surface); border-color: var(--bordure); color: var(--texte); } :root[data-theme="dark"] .dq-a { color: #F2D27A; } :root[data-theme="dark"] .dq-f { color: var(--texte); }
+.rap-car { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin: 0 -20px; padding: 0 20px 2px; scroll-padding: 0 20px; -webkit-overflow-scrolling: touch; }
+.rap-car::-webkit-scrollbar { display: none; }
+.rap-car .acc-rap { flex: 0 0 88%; scroll-snap-align: start; }
+.rap-car .acc-rap:only-child { flex-basis: 100%; }
+.rap-pts { display: flex; justify-content: center; gap: 6px; margin-top: 10px; }
+.rap-pts i { width: 7px; height: 7px; border-radius: 4px; background: #D8D0BC; transition: width .2s, background .2s; }
+.rap-pts i.on { width: 20px; background: #0F3D2E; }
 </style>
 </head>
 <body>
@@ -7124,14 +7131,20 @@ async function vueAujourdhui() {
   try { const m = (HORS.recents() || [])[0]; if (m) { const q = chargerLocal("pos_" + m.id, 0); items.push(["🎧", m.title, q ? "Reprendre à " + fmtDuree(q) : "Réécouter", () => lireDirect(m), m.duration_seconds ? q / m.duration_seconds : 0, "#E3A91E", "#FFF4D6"]); } } catch (e) {}
   zc.innerHTML = items.length ? items.map(([i, t, st, f, pr, coul, fond], k) => `<button type="button" class="acc-cont" data-c="${k}"><span class="acc-cont-ic" style="background:${fond}">${i}</span><span class="acc-cont-tx"><b dir="auto">${esc(t)}</b><i class="acc-cont-bar"><u style="width:${Math.round(Math.max(0.03, Math.min(1, pr || 0)) * 100)}%;background:${coul}"></u></i><small>${esc(st)}</small></span><span class="acc-cont-go" aria-hidden="true">›</span></button>`).join("") : `<p style="opacity:.7;margin:0">Ce que vous écoutez ou lisez apparaîtra ici.</p>`;
   zc.querySelectorAll("[data-c]").forEach(b => b.onclick = () => items[+b.dataset.c][3]());
-  /* Rappel du jour : le plus récent publié */
+  /* Rappels : carrousel des plus récents, glisser de gauche à droite pour passer d'une vidéo à l'autre */
   try {
-    const { data } = await sb.from("yt_contenus").select(CHAMPS_CONTENU).eq("status", "published").in("category", ["Rappel", "Rappels"]).order("published_at", { ascending: false }).limit(1);
-    const c = data && data[0], zr = w.querySelector("#aj-rap"); if (!zr) return;
-    if (!c) { zr.innerHTML = `<p style="opacity:.7;margin:0">Bientôt un nouveau rappel.</p>`; return; }
-    { const img = (() => { try { return (c.embed_source === "youtube" && /^[\w-]{11}$/.test(c.embed_id || "") && !c.cover_path) ? "https://i.ytimg.com/vi/" + c.embed_id + "/hqdefault.jpg" : (ytMini(c) || (c.cover_path ? urlMedia(c.cover_path) : "")); } catch (e) { return ""; } })(), nom = (c.yt_channels && c.yt_channels.name) || APP_NOM;
-      zr.innerHTML = `<button type="button" class="acc-rap"><span class="acc-rap-img">${img ? `<img src="${esc(img)}" alt="" loading="lazy">` : ""}<span class="acc-rap-play">▶</span>${c.duration_seconds ? `<span class="acc-rap-d">${esc(fmtDuree(c.duration_seconds))}</span>` : ""}</span><span class="acc-rap-tx"><b dir="auto">${esc(c.title || "")}</b><small>${esc([c.auteur, nom].filter(Boolean).join(" · "))}</small></span></button>`; }
-    zr.firstChild.onclick = () => lireDirect(c);
+    let { data } = await sb.from("yt_contenus").select(CHAMPS_CONTENU).eq("status", "published").in("category", ["Rappel", "Rappels"]).order("published_at", { ascending: false }).limit(10);
+    data = data || [];
+    if (data.length < 4) { try { const r2 = await sb.from("yt_contenus").select(CHAMPS_CONTENU).eq("status", "published").eq("type", "video").order("published_at", { ascending: false }).limit(10); const vus = new Set(data.map(x => x.id)); data = data.concat((r2.data || []).filter(x => !vus.has(x.id))).slice(0, 10); } catch (e) {} }
+    const zr = w.querySelector("#aj-rap"); if (!zr) return;
+    if (!data.length) { zr.innerHTML = `<p style="opacity:.7;margin:0">Bientôt un nouveau rappel.</p>`; return; }
+    const mini = c => { try { return (c.embed_source === "youtube" && /^[\w-]{11}$/.test(c.embed_id || "") && !c.cover_path) ? "https://i.ytimg.com/vi/" + c.embed_id + "/hqdefault.jpg" : (ytMini(c) || (c.cover_path ? urlMedia(c.cover_path) : "")); } catch (e) { return ""; } };
+    zr.innerHTML = `<div class="rap-car" id="rap-car">${data.map((c, k) => { const img = mini(c), nom = (c.yt_channels && c.yt_channels.name) || APP_NOM;
+      return `<button type="button" class="acc-rap" data-k="${k}"><span class="acc-rap-img">${img ? `<img src="${esc(img)}" alt="" loading="${k ? "lazy" : "eager"}">` : ""}<span class="acc-rap-play">▶</span>${c.duration_seconds ? `<span class="acc-rap-d">${esc(fmtDuree(c.duration_seconds))}</span>` : ""}</span><span class="acc-rap-tx"><b dir="auto">${esc(c.title || "")}</b><small>${esc([c.auteur, nom].filter(Boolean).join(" · "))}</small></span></button>`; }).join("")}</div>
+      ${data.length > 1 ? `<div class="rap-pts" aria-hidden="true">${data.map((_, k) => `<i${k ? "" : ' class="on"'}></i>`).join("")}</div>` : ""}`;
+    const car = zr.querySelector("#rap-car"), pts = zr.querySelectorAll(".rap-pts i");
+    car.querySelectorAll("[data-k]").forEach(b => b.onclick = () => lireDirect(data[+b.dataset.k]));
+    let t = 0; car.addEventListener("scroll", () => { clearTimeout(t); t = setTimeout(() => { const c0 = car.firstElementChild; if (!c0) return; const pas = c0.getBoundingClientRect().width + 12, k = Math.round(Math.abs(car.scrollLeft) / pas); pts.forEach((p, n) => p.classList.toggle("on", n === k)); }, 60); }, { passive: true });
   } catch (e) {}
 }
 /* ---------- Khatma en groupe : 30 juz partagés ---------- */
