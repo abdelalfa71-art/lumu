@@ -1463,6 +1463,60 @@ body.defile #micro-fab { transform: translateY(140%) scale(.6); opacity: 0; poin
 .avr-sep span { font-size: 18px; line-height: 1; }
 .avr-tr { margin: 0 4px 12px; font-size: 16px; line-height: 1.55; font-style: italic; font-weight: 600; color: #123C2B; }
 .avr-ref { display: inline-block; background: rgba(18,60,43,.12); border: 1px solid rgba(18,60,43,.35); color: #123C2B; font-weight: 800; font-size: 13px; padding: 4px 12px; border-radius: 999px; letter-spacing: .3px; }
+/* ---- Accueil embelli : vert et or ---- */
+.acc-a { background: #FBF8F1 !important; }
+:root[data-theme="dark"] .acc-a { background: var(--fond) !important; }
+.acc-ciel { border-bottom: 3px solid #F2C43D; background-color: #0F3D2E !important; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 56 56'%3E%3Cg fill='none' stroke='%23F2C43D' stroke-opacity='.13' stroke-width='1.2'%3E%3Cpath d='M28 4l7 17 17 7-17 7-7 17-7-17-17-7 17-7z'/%3E%3Crect x='17' y='17' width='22' height='22' transform='rotate(45 28 28)'/%3E%3C/g%3E%3C/svg%3E") !important; padding-bottom: 18px !important; gap: 12px !important; }
+.acc-ciel-s { align-items: flex-start !important; text-align: start !important; }
+.acc-ciel-s [lang="ar"] { font-size: 25px !important; }
+.acc-ciel-pn { font-size: 12px !important; color: #CFE3DA; opacity: 1 !important; }
+.acc-ciel-p { width: 100%; align-items: stretch !important; gap: 10px !important; }
+.acc-pbox { display: flex; align-items: center; gap: 14px; background: rgba(0,0,0,.18); border: 1px solid rgba(242,196,61,.45); border-radius: 20px; padding: 12px 14px; text-align: start; }
+.acc-anneau { width: 62px; height: 62px; flex: none; border-radius: 50%; background: conic-gradient(#F2C43D 0 30%, rgba(255,255,255,.16) 30% 100%); display: grid; place-items: center; }
+.acc-anneau > span { width: 50px; height: 50px; border-radius: 50%; background: #0F3D2E; display: grid; place-items: center; font-size: 22px; }
+.acc-ptx { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.acc-ptx .acc-ciel-lb { color: #F2C43D; font-weight: 700; opacity: 1 !important; text-align: start; }
+.acc-ptx .acc-ciel-n { font-size: 26px !important; }
+.acc-ptx .acc-ciel-t { background: none !important; padding: 0 !important; color: #CFE3DA; font-weight: 600 !important; font-size: 13px !important; }
+.acc-rc { margin-top: 16px !important; }
+.acc-rc button span { width: 58px !important; height: 58px !important; border-radius: 50% !important; background: #FFFFFF !important; border: 2px solid #F2C43D; }
+:root[data-theme="dark"] .acc-rc button span { background: var(--surface) !important; }
+.acc-a #ec-notif .ec-notif { background: #123C2B !important; color: #FFFFFF !important; border: 0 !important; border-left: 5px solid #F2C43D !important; border-radius: 18px !important; }
+.acc-a #ec-notif .ec-notif small { color: #CFE3DA !important; opacity: 1 !important; }
+.acc-a #aj-hab.aj-hab { background: #FFFFFF !important; border: 1px solid #ECE4CF !important; border-radius: 18px !important; }
+:root[data-theme="dark"] .acc-a #aj-hab.aj-hab { background: var(--surface) !important; border-color: var(--bordure) !important; }
+.aj-hab > summary { flex-wrap: wrap; row-gap: 8px; }
+.aj-hab-bar { flex-basis: 100%; display: block; height: 6px; border-radius: 3px; background: #F1EADA; overflow: hidden; }
+.aj-hab-bar u { display: block; height: 100%; border-radius: 3px; background: linear-gradient(90deg, #0F7B6C, #F2C43D); }
+.acc-b .acc-t { display: flex !important; align-items: center; gap: 8px; color: #123C2B !important; }
+.acc-b .acc-t::before { content: "۞"; color: #C99A12; font-size: 15px; letter-spacing: 0; }
+.acc-b .acc-t::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, #E3C66A, transparent); }
+:root[data-theme="dark"] .acc-b .acc-t { color: var(--texte) !important; }
+.acc-cont { display: flex; align-items: center; gap: 12px; width: 100%; text-align: start; margin-bottom: 10px; font: inherit; background: #FFFFFF; color: var(--texte, #17221D); border: 1px solid #ECE4CF; border-radius: 18px; padding: 12px 14px; }
+:root[data-theme="dark"] .acc-cont { background: var(--surface); border-color: var(--bordure); }
+.acc-cont-ic { width: 48px; height: 48px; flex: none; border-radius: 14px; display: grid; place-items: center; font-size: 24px; }
+.acc-cont-tx { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 5px; }
+.acc-cont-tx b { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 15px; }
+.acc-cont-tx small { color: var(--texte-doux, #5D6B63); font-size: 12px; }
+.acc-cont-bar { display: block; height: 5px; border-radius: 3px; background: #F1EADA; overflow: hidden; }
+.acc-cont-bar u { display: block; height: 100%; border-radius: 3px; }
+.acc-cont-go { color: #C99A12; font-size: 22px; }
+.acc-rap { display: block; width: 100%; padding: 0; border: 1px solid #0B2A1E; border-radius: 20px; overflow: hidden; background: #123C2B; color: #FFFFFF; font: inherit; text-align: start; }
+.acc-rap-img { position: relative; display: grid; place-items: center; aspect-ratio: 16 / 9; background-color: #1B5A45; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 56 56'%3E%3Cg fill='none' stroke='%23F2C43D' stroke-opacity='.13' stroke-width='1.2'%3E%3Cpath d='M28 4l7 17 17 7-17 7-7 17-7-17-17-7 17-7z'/%3E%3C/g%3E%3C/svg%3E"); }
+.acc-rap-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.acc-rap-play { position: relative; width: 58px; height: 58px; border-radius: 50%; background: #F2C43D; color: #123C2B; display: grid; place-items: center; font-size: 22px; padding-left: 4px; box-sizing: border-box; }
+.acc-rap-d { position: absolute; right: 10px; bottom: 10px; background: rgba(0,0,0,.65); font-size: 12px; font-weight: 700; padding: 2px 8px; border-radius: 8px; }
+.acc-rap-tx { display: flex; flex-direction: column; gap: 3px; padding: 12px 14px; }
+.acc-rap-tx b { font-size: 15px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.acc-rap-tx small { color: #CFE3DA; font-size: 12px; }
+.acc-a .acc-tuile { background: #FFFFFF !important; border-color: #ECE4CF !important; }
+:root[data-theme="dark"] .acc-a .acc-tuile { background: var(--surface) !important; border-color: var(--bordure) !important; }
+/* Barre du bas et bouton discussion aux couleurs vert et or */
+body:not(.branche-tobi) .nav-bas { border-top: 2px solid #F2C43D !important; box-shadow: none !important; }
+body:not(.branche-tobi) .nav-bas:not(.nav-sombre) .nav-btn.actif .ic { background: #F2C43D !important; color: #123C2B !important; }
+body:not(.branche-tobi) .nav-bas:not(.nav-sombre) .nav-btn.actif { color: #123C2B !important; font-weight: 800; }
+:root[data-theme="dark"] body:not(.branche-tobi) .nav-bas:not(.nav-sombre) .nav-btn.actif { color: var(--texte) !important; }
+#micro-fab { background: #123C2B !important; color: #F2C43D !important; border: 2px solid #F2C43D !important; }
 </style>
 </head>
 <body>
@@ -6639,27 +6693,28 @@ async function vueAujourdhui() {
   const nbFait = HABITUDES.filter(([k]) => faites[k]).length;
   const w = ecran("", null, `
     <div class="acc-ciel">
-      <div class="acc-ciel-h"><img src="icon-192.png" alt="Lumu" width="34" height="34" style="border-radius:10px;flex:none"><p class="acc-ciel-s"><span lang="ar" dir="rtl" data-notrad translate="no">السَّلَامُ عَلَيْكُمْ</span>${prenom ? `<span class="acc-ciel-pn">${esc(prenom)}</span>` : ""}</p><button type="button" class="acc-ciel-r" data-r="recherche" aria-label="Rechercher">${ico("search", 20)}</button></div>
-      <button type="button" id="aj-pr" class="acc-ciel-p"><span class="acc-ciel-lb">Prochaine prière</span><span class="acc-ciel-row"><span id="aj-prn" class="acc-ciel-n">—</span><span id="aj-prr" class="acc-ciel-t">Ajoutez votre ville</span></span><span id="aj-prl" class="acc-ciel-l"></span></button>
+      <div class="acc-ciel-h"><img src="icon-192.png" alt="Lumu" width="34" height="34" style="border-radius:10px;flex:none"><p class="acc-ciel-s"><span lang="ar" dir="rtl" data-notrad translate="no">السَّلَامُ عَلَيْكُمْ</span><span class="acc-ciel-pn">${prenom ? esc(prenom) + " · " : ""}${esc(hj || "")}</span></p><button type="button" class="acc-ciel-r" data-r="recherche" aria-label="Rechercher">${ico("search", 20)}</button></div>
+      <button type="button" id="aj-pr" class="acc-ciel-p"><span class="acc-pbox"><span class="acc-anneau" id="aj-ring"><span id="aj-pic">🕌</span></span><span class="acc-ptx"><span class="acc-ciel-lb">Prochaine prière</span><span id="aj-prn" class="acc-ciel-n">—</span><span id="aj-prr" class="acc-ciel-t">Ajoutez votre ville</span></span></span><span id="aj-prl" class="acc-ciel-l"></span></button>
     </div>
-    <div class="acc-rc" id="aj-rc">${[["coran", "Coran", "#E2F1EC", "#0F7B6C", "📖"], ["qibla", "Qibla", "#FFF4DB", "#9A6B00", "🧭"], ["arabe", "Invocations", "#E8EEF8", "#2F4B7C", "🤲"], ["direct", "Direct", "#FBE9E6", "#A23B2C", "🕋"]].map(([r, t, bg, c, ic]) => `<button type="button" data-r="${r}"><span style="background:${bg};color:${c}">${ic}</span>${t}</button>`).join("")}</div>
-    <details id="aj-hab" class="aj-hab carte"${chargerLocal("aj_hab_ouvert", false) ? " open" : ""}><summary><b>Aujourd'hui</b><span class="aj-hab-n">${nbFait}/${HABITUDES.length}</span><span style="flex:1"></span><span style="font-weight:800;color:#e8590c">🔥 ${h.serie || 0}</span><span class="aj-hab-chev" aria-hidden="true">⌄</span></summary>
+    <div class="acc-rc" id="aj-rc">${[["coran", "Coran", "#E2F1EC", "#0F7B6C", "📖"], ["qibla", "Qibla", "#FFF4DB", "#9A6B00", "🧭"], ["arabe", "Invocations", "#E8EEF8", "#2F4B7C", "🤲"], ["direct", "Direct", "#FBE9E6", "#A23B2C", "🕋"]].map(([r, t, bg, c, ic]) => `<button type="button" data-r="${r}"><span>${ic}</span>${t}</button>`).join("")}</div>
+    <details id="aj-hab" class="aj-hab carte"${chargerLocal("aj_hab_ouvert", false) ? " open" : ""}><summary><b>Aujourd'hui</b><span class="aj-hab-n">${nbFait}/${HABITUDES.length}</span><span style="flex:1"></span><span style="font-weight:800;color:#e8590c">🔥 ${h.serie || 0} ${trad((h.serie || 0) > 1 ? "jours" : "jour")}</span><span class="aj-hab-chev" aria-hidden="true">⌄</span><i class="aj-hab-bar"><u style="width:${nbFait * 100 / HABITUDES.length}%"></u></i></summary>
     <div>
-      <i style="display:block;height:8px;border-radius:4px;background:var(--bordure,#e3dccb);overflow:hidden;margin:8px 0"><u style="display:block;height:100%;width:${nbFait * 100 / HABITUDES.length}%;background:#1b6b5c"></u></i>
       ${HABITUDES.map(([k, ic, t]) => `<div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--bordure,#eee)"><button type="button" data-h="${k}" aria-label="Cocher" style="width:32px;height:32px;flex:none;border-radius:50%;border:2px solid #1b6b5c;background:${faites[k] ? "#1b6b5c" : "transparent"};color:#fff;font-size:16px">${faites[k] ? "✓" : ""}</button><span style="font-size:20px">${ic}</span><span style="flex:1;${faites[k] ? "text-decoration:line-through;opacity:.6" : ""}">${t}</span><button type="button" data-o="${k}" class="btn-text" style="margin:0">Ouvrir ›</button></div>`).join("")}</div></details>
     <b class="acc-t">Verset du jour</b>
     <div class="aj-verset"><span class="avr-badge" lang="ar" data-notrad>آيَةُ الْيَوْمِ</span><span class="avr-c avr-c1">✦</span><span class="avr-c avr-c2">✦</span><span class="avr-c avr-c3">✦</span><span class="avr-c avr-c4">✦</span><p class="avr-ar" dir="rtl" data-notrad>﴿ ${esc(v[0])} ﴾</p><div class="avr-sep"><span>۞</span></div>${langue === "ar" ? "" : `<p class="avr-tr">« ${esc(v[1])} »</p>`}<span class="avr-ref">${esc(v[2])}</span></div>
     <b class="acc-t">Continuer</b><div id="aj-cont"></div>
     <b class="acc-t">Rappel du jour</b><div id="aj-rap"><div class="centre"><div class="spin"></div></div></div>
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:18px 0 8px">${[["🕋", "Direct", "direct"], ["📻", "Radios", "radios"], ["🧠", "Mémoriser", "coran-accueil"], ["👥", "Khatma", "khatma"]].map(([i, t, r]) => `<button type="button" data-r="${r}" style="padding:12px 4px;border-radius:16px;border:1px solid var(--bordure,#e3dccb);background:var(--surface,#fff);color:var(--texte,#14201b);font:inherit;font-size:13px"><div style="font-size:26px">${i}</div>${t}</button>`).join("")}</div>`);
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:18px 0 8px">${[["🕋", "Direct", "direct"], ["📻", "Radios", "radios"], ["🧠", "Mémoriser", "coran-accueil"], ["👥", "Khatma", "khatma"]].map(([i, t, r]) => `<button type="button" data-r="${r}" class="acc-tuile" style="padding:12px 4px;border-radius:16px;border:1px solid var(--bordure,#e3dccb);background:var(--surface,#fff);color:var(--texte,#14201b);font:inherit;font-size:13px"><div style="font-size:26px">${i}</div>${t}</button>`).join("")}</div>`);
   w.classList.add("acc-b", "acc-a");
-  try { const m = momentIslamique(); if (m && m.azkar) { const h1 = w.querySelector("#aj-rc"); barreAzkar(m, h1); const zb = w.querySelector("#ec-notif"); if (zb) { zb.style.margin = "0 0 12px"; zb.firstChild.style.width = "100%"; zb.firstChild.style.margin = "0"; } } } catch (e) {}
+  try { const m = momentIslamique(); if (m && m.azkar) { const h1 = w.querySelector("#aj-hab"); barreAzkar(m, h1); const zb = w.querySelector("#ec-notif"); if (zb) { zb.style.margin = "0 0 12px"; zb.firstChild.style.width = "100%"; zb.firstChild.style.margin = "0"; } } } catch (e) {}
   /* Prière */
   try {
     const pr = await PRIERE.charger() || chargerLocal("priere_n", null);
     if (pr && pr.t && w.isConnected) {
-      const n = PRIERE.prochaine(pr); w.querySelector("#aj-prn").textContent = n.nom; w.querySelector("#aj-prr").textContent = n.heure + " · dans " + PRIERE.reste(n.reste);
-      w.querySelector("#aj-prl").innerHTML = PRIERE.NOMS.map(([k, nom]) => `<span style="text-align:center;padding:4px 0;border-radius:10px;${k === n.k ? "background:#FFFFFF;color:#123C2B;font-weight:800" : "opacity:.75"}"><b style="font-size:12px">${esc(nom)}</b><br>${esc(PRIERE.hm(pr.t[k]))}</span>`).join("");
+      const n = PRIERE.prochaine(pr); w.querySelector("#aj-prn").textContent = n.nom + " · " + n.heure; w.querySelector("#aj-prr").textContent = "dans " + PRIERE.reste(n.reste) + (pr.nom && pr.nom !== "Ma position" ? " · " + pr.nom : "");
+      { const IC = { Fajr: "🌄", Sunrise: "🌅", Dhuhr: "☀️", Asr: "🌤️", Maghrib: "🌇", Isha: "🌙" }; w.querySelector("#aj-pic").textContent = IC[n.k] || "🕌";
+        const pct = Math.max(4, Math.min(100, 100 - (n.reste / 360) * 100)); w.querySelector("#aj-ring").style.background = `conic-gradient(#F2C43D 0 ${pct}%, rgba(255,255,255,.16) ${pct}% 100%)`; }
+      w.querySelector("#aj-prl").innerHTML = PRIERE.NOMS.map(([k, nom]) => `<span style="text-align:center;padding:4px 0;border-radius:10px;${k === n.k ? "background:#F2C43D;color:#123C2B;font-weight:800" : "opacity:.8"}"><b style="font-size:12px">${esc(nom)}</b><br>${esc(PRIERE.hm(pr.t[k]))}</span>`).join("");
     }
   } catch (e) {}
   w.querySelector("#aj-pr").onclick = () => router("priere");
@@ -6676,16 +6731,17 @@ async function vueAujourdhui() {
   w.querySelectorAll("[data-r]").forEach(b => b.onclick = () => b.dataset.r === "direct" ? ouvrirDirectSaint(0) : b.dataset.r === "qibla" ? router("priere", { qibla: true }) : router(b.dataset.r));
   /* Continuer */
   const zc = w.querySelector("#aj-cont"), items = [];
-  try { const ce = CORAN_ETAT.lire(); if (ce && ce.page > 1) items.push(["📖", "Coran · page " + ce.page, CORAN_ETAT.nbLues(ce) + " pages lues sur 604", () => router("coran")]); } catch (e) {}
-  try { const m = (HORS.recents() || [])[0]; if (m) { const q = chargerLocal("pos_" + m.id, 0); items.push(["🎧", m.title, q ? "Reprendre à " + fmtDuree(q) : "Réécouter", () => lireDirect(m)]); } } catch (e) {}
-  zc.innerHTML = items.length ? items.map(([i, t, st], k) => `<button type="button" class="carte" data-c="${k}" style="display:flex;align-items:center;gap:12px;width:100%;text-align:start;margin-bottom:8px;font:inherit;background:var(--surface,#fff);color:var(--texte,#14201b)"><span style="font-size:26px">${i}</span><span style="flex:1;min-width:0"><b dir="auto" style="display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(t)}</b><small style="opacity:.7">${esc(st)}</small></span><span>›</span></button>`).join("") : `<p style="opacity:.7;margin:0">Ce que vous écoutez ou lisez apparaîtra ici.</p>`;
+  try { const ce = CORAN_ETAT.lire(); if (ce && ce.page > 1) items.push(["📖", "Coran · page " + ce.page, CORAN_ETAT.nbLues(ce) + " pages lues sur 604", () => router("coran"), ce.page / 604, "#0F7B6C", "#E2F1EC"]); } catch (e) {}
+  try { const m = (HORS.recents() || [])[0]; if (m) { const q = chargerLocal("pos_" + m.id, 0); items.push(["🎧", m.title, q ? "Reprendre à " + fmtDuree(q) : "Réécouter", () => lireDirect(m), m.duration_seconds ? q / m.duration_seconds : 0, "#E3A91E", "#FFF4D6"]); } } catch (e) {}
+  zc.innerHTML = items.length ? items.map(([i, t, st, f, pr, coul, fond], k) => `<button type="button" class="acc-cont" data-c="${k}"><span class="acc-cont-ic" style="background:${fond}">${i}</span><span class="acc-cont-tx"><b dir="auto">${esc(t)}</b><i class="acc-cont-bar"><u style="width:${Math.round(Math.max(0.03, Math.min(1, pr || 0)) * 100)}%;background:${coul}"></u></i><small>${esc(st)}</small></span><span class="acc-cont-go" aria-hidden="true">›</span></button>`).join("") : `<p style="opacity:.7;margin:0">Ce que vous écoutez ou lisez apparaîtra ici.</p>`;
   zc.querySelectorAll("[data-c]").forEach(b => b.onclick = () => items[+b.dataset.c][3]());
   /* Rappel du jour : le plus récent publié */
   try {
     const { data } = await sb.from("yt_contenus").select(CHAMPS_CONTENU).eq("status", "published").in("category", ["Rappel", "Rappels"]).order("published_at", { ascending: false }).limit(1);
     const c = data && data[0], zr = w.querySelector("#aj-rap"); if (!zr) return;
     if (!c) { zr.innerHTML = `<p style="opacity:.7;margin:0">Bientôt un nouveau rappel.</p>`; return; }
-    zr.innerHTML = `<button type="button" class="carte" style="display:flex;align-items:center;gap:12px;width:100%;text-align:start;font:inherit;background:var(--surface,#fff);color:var(--texte,#14201b)"><span style="width:52px;height:52px;flex:none;border-radius:50%;background:#1b6b5c;color:#fff;display:flex;align-items:center;justify-content:center;font-size:22px">▶</span><span style="flex:1;min-width:0"><b dir="auto" style="display:block">${esc(c.title)}</b><small style="opacity:.7">${esc((c.yt_channels && c.yt_channels.name) || c.auteur || "")}${c.duration_seconds ? " · " + fmtDuree(c.duration_seconds) : ""}</small></span></button>`;
+    { const img = (() => { try { return ytMini(c) || (c.cover_path ? urlMedia(c.cover_path) : ""); } catch (e) { return ""; } })(), nom = (c.yt_channels && c.yt_channels.name) || APP_NOM;
+      zr.innerHTML = `<button type="button" class="acc-rap"><span class="acc-rap-img">${img ? `<img src="${esc(img)}" alt="" loading="lazy">` : ""}<span class="acc-rap-play">▶</span>${c.duration_seconds ? `<span class="acc-rap-d">${esc(fmtDuree(c.duration_seconds))}</span>` : ""}</span><span class="acc-rap-tx"><b dir="auto">${esc(c.title || "")}</b><small>${esc([c.auteur, nom].filter(Boolean).join(" · "))}</small></span></button>`; }
     zr.firstChild.onclick = () => lireDirect(c);
   } catch (e) {}
 }
