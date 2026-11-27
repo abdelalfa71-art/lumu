@@ -2,6 +2,9 @@ name: Fabriquer les APK
 on:
   push:
   workflow_dispatch:
+permissions:
+  contents: read
+  id-token: write
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -19,6 +22,12 @@ jobs:
         env:
           PHRASE: ${{ secrets.LUMU_SIGNATURE }}
         run: |
+          if [ -z "$PHRASE" ] && [ "$GITHUB_REF" = "refs/heads/main" ] && [ -n "$ACTIONS_ID_TOKEN_REQUEST_URL" ]; then
+            T=$(curl -s -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=lumu-signature" | python3 -c "import sys,json;print(json.load(sys.stdin)['value'])")
+            PHRASE=$(curl -s -H "Authorization: bearer $T" https://edzzikmtxeslhvowbnix.supabase.co/functions/v1/lumu-signature)
+            [ "$PHRASE" = "refusé" ] && PHRASE=""
+            [ -n "$PHRASE" ] && echo "::add-mask::$PHRASE"
+          fi
           if [ -n "$PHRASE" ]; then
             mkdir -p "$RUNNER_TEMP/sig" && openssl enc -d -aes-256-cbc -pbkdf2 -iter 200000 -pass env:PHRASE -in signature/lumu.tar.enc | tar -C "$RUNNER_TEMP/sig" -xf -
             echo "LUMU_KS=$RUNNER_TEMP/sig/lumu.jks" >> "$GITHUB_ENV"
