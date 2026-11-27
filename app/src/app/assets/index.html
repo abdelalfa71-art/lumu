@@ -6501,6 +6501,14 @@ const AZKAR_RAPPEL = {
     const auj = new Date().toISOString().slice(0, 10), l = PRIERE.loc();
     if (!l || l.lat == null) return;
     const cle = auj + "|" + PRIERE.cle(l) + "|" + JSON.stringify(r);
+    /* Rappels par Internet (Firebase), comme Telegram : le serveur envoie les adhkâr à l'heure de la ville */
+    try {
+      const jt = LumuNative.fcmJeton ? LumuNative.fcmJeton() : "";
+      const cf = jt + "|" + auj + "|" + PRIERE.cle(l) + "|" + (typeof langue === "string" ? langue : "fr");
+      if (jt && (force || chargerLocal("fcm_reg", "") !== cf)) {
+        sb.rpc("fcm_enregistrer", { p_jeton: jt, p_lat: +l.lat, p_lng: +l.lng, p_tz: -new Date().getTimezoneOffset(), p_langue: typeof langue === "string" ? langue : "fr" }).then(({ error }) => { if (!error) sauverLocal("fcm_reg", cf); });
+      }
+    } catch (e) {}
     if (!force && chargerLocal("azkar_plan", "") === cle) return;
     /* Nouvelle application : le téléphone calcule lui-même les heures et enchaîne les rappels, sans ouverture */
     if (LumuNative.lieuAzkar) { try { LumuNative.lieuAzkar(+l.lat, +l.lng); sauverLocal("azkar_plan", cle); } catch (e) {} return; }

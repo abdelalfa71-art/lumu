@@ -96,6 +96,8 @@ class MainActivity : AppCompatActivity() {
             try { val am = getSystemService(Context.AUDIO_SERVICE) as android.media.AudioManager; val m = am.getStreamMaxVolume(android.media.AudioManager.STREAM_MUSIC); am.setStreamVolume(android.media.AudioManager.STREAM_MUSIC, Math.round(pct.coerceIn(0, 100) * m / 100f), 0) } catch (e: Exception) {}
         }
         @JavascriptInterface fun programmerAzkar(json: String?) { try { Azkar.programmer(applicationContext, json ?: "[]") } catch (e: Exception) {} }
+        /** Jeton Firebase de ce téléphone (vide tant que Firebase n'est pas configuré) */
+        @JavascriptInterface fun fcmJeton(): String = getSharedPreferences("lumu_azkar", Context.MODE_PRIVATE).getString("fcm", "") ?: ""
         @JavascriptInterface fun azkarEtat(): String = try { azkarEtat(applicationContext) } catch (e: Exception) { "{}" }
         /** Envoie tout de suite une notification d'essai */
         @JavascriptInterface fun azkarTest() {
@@ -519,6 +521,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         instance = this
+        LumuFcm.recupererJeton(applicationContext)
         if (android.os.Build.VERSION.SDK_INT >= 33 &&
             ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED
         ) demandeNotif.launch(Manifest.permission.POST_NOTIFICATIONS)

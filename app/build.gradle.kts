@@ -2,6 +2,8 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
 }
+// Notifications par Internet (Firebase) : actif dès que le fichier google-services.json est présent
+if (file("google-services.json").exists()) apply(plugin = "com.google.gms.google-services")
 android {
     namespace = "com.lumu.app"
     compileSdk = 34
@@ -38,4 +40,6 @@ dependencies {
     implementation("androidx.core:core-ktx:1.13.1")
     implementation("androidx.webkit:webkit:1.11.0")
     implementation("androidx.media3:media3-exoplayer:1.4.1")
+    implementation(platform("com.google.firebase:firebase-bom:33.5.1"))
+    implementation("com.google.firebase:firebase-messaging")
 }

@@ -86,6 +86,11 @@
             android:foregroundServiceType="mediaPlayback" />
         <receiver android:name=".AdhanAlarme" android:exported="false" />
         <receiver android:name=".AzkarAlarme" android:exported="false" />
+        <service android:name=".LumuFcm" android:exported="false">
+            <intent-filter><action android:name="com.google.firebase.MESSAGING_EVENT" /></intent-filter>
+        </service>
+        <meta-data android:name="com.google.firebase.messaging.default_notification_icon" android:resource="@drawable/ic_notif" />
+        <meta-data android:name="com.google.firebase.messaging.default_notification_channel_id" android:value="lumu_azkar" />
         <receiver android:name=".AdhanDemarrage" android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />

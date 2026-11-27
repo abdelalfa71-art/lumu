@@ -259,7 +259,8 @@ class AzkarAlarme : BroadcastReceiver() {
             .setContentText(intent.getStringExtra("texte") ?: "Touchez pour les lire")
             .setContentIntent(ouvrir).setAutoCancel(true)
             .addAction(Notification.Action.Builder(null, "Lire maintenant", ouvrir).build())
-        try { nm.notify(8200 + code, b.build()) } catch (e: SecurityException) {}
+        // Même étiquette que les rappels envoyés par Internet : pas de doublon si les deux arrivent
+        try { nm.notify("azkar-$l", 0, b.build()) } catch (e: SecurityException) {}
         try { Azkar.replanifier(ctx) } catch (e: Exception) {} // enchaîne les rappels suivants, sans ouvrir l'application
     }
 }
