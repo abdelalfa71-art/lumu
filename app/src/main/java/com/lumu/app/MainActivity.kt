@@ -290,6 +290,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         /** Appelé par la page pendant un envoi de fichiers : l'application reste active écran éteint. */
+        /** Barre de progression des téléchargements / envois (notification simple, pas un lecteur) */
+        @JavascriptInterface fun transfert(actif: Boolean, texte: String?, pct: Int) {
+            try {
+                if (actif) ContextCompat.startForegroundService(this@MainActivity, Intent(this@MainActivity, TransfertService::class.java).putExtra("texte", texte ?: "").putExtra("pct", pct))
+                else stopService(Intent(this@MainActivity, TransfertService::class.java))
+            } catch (e: Exception) { }
+        }
         @JavascriptInterface fun envoi(actif: Boolean, texte: String?) {
             envoiEnCours = actif
             try {

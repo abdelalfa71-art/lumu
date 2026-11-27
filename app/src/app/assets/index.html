@@ -4286,7 +4286,12 @@ const TR = {
   rendre() {
     const cours = this.liste.filter(j => j.etat === "cours");
     try {
-      if (cours.length) LumuNative.envoi(true, cours.length === 1 ? cours[0].sorte + " " + cours[0].pct + " % · " + cours[0].titre : cours.length + " transferts en cours");
+      if (LumuNative.transfert) {
+        /* Barre de progression simple dans les notifications (plus de faux lecteur) */
+        const moy = cours.length ? Math.round(cours.reduce((t, j) => t + (+j.pct || 0), 0) / cours.length) : 0;
+        if (cours.length) LumuNative.transfert(true, cours.length === 1 ? (cours[0].sorte + " · " + cours[0].titre) : cours.length + " transferts en cours", moy);
+        else LumuNative.transfert(false, "", 0);
+      } else if (cours.length) LumuNative.envoi(true, cours.length === 1 ? cours[0].sorte + " " + cours[0].pct + " % · " + cours[0].titre : cours.length + " transferts en cours");
       else LumuNative.envoi(false, "");
     } catch (e) {}
     window.onbeforeunload = cours.length ? () => true : null;
