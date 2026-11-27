@@ -6367,6 +6367,8 @@ function majBandeauIslam() {
 const PRIERE = {
   NOMS: [["Fajr", "Sobh"], ["Dhuhr", "Dhohr"], ["Asr", "Asr"], ["Maghrib", "Maghrib"], ["Isha", "Isha"]],
   loc() { return chargerLocal("priere_v", null); },
+  /* Coordonnées : celles choisies, sinon celles trouvées pour la ville tapée (heures déjà chargées) */
+  coord() { const l = this.loc(); if (l && l.lat != null) return l; const n = chargerLocal("priere_n", null); return n && n.lat != null ? { lat: +n.lat, lng: +n.lng, ville: l && l.ville } : null; },
   cle(l) { return l ? (l.lat != null ? l.lat.toFixed(2) + "," + l.lng.toFixed(2) : (l.ville || "") + "," + (l.pays || "")) : ""; },
   async charger() {
     const l = this.loc(); if (!l) return null;
@@ -6473,7 +6475,7 @@ const ADHAN = {
     if (!this.dispo()) return;
     const r = this.reglages();
     if (!r.on) { try { LumuNative.programmerAdhan("[]"); } catch (e) {} return; }
-    const auj = new Date().toISOString().slice(0, 10), l = PRIERE.loc();
+    const auj = new Date().toISOString().slice(0, 10), l = PRIERE.coord();
     if (!l || l.lat == null) return;
     const cle = auj + "|" + PRIERE.cle(l) + "|" + JSON.stringify(r.p);
     if (!force && chargerLocal("adhan_plan", "") === cle) return;
@@ -6498,7 +6500,7 @@ const AZKAR_RAPPEL = {
     if (!this.dispo()) return;
     const r = this.reglages();
     if (!r.on) { try { LumuNative.programmerAzkar("[]"); } catch (e) {} return; }
-    const auj = new Date().toISOString().slice(0, 10), l = PRIERE.loc();
+    const auj = new Date().toISOString().slice(0, 10), l = PRIERE.coord();
     if (!l || l.lat == null) return;
     const cle = auj + "|" + PRIERE.cle(l) + "|" + JSON.stringify(r);
     /* Rappels par Internet (Firebase), comme Telegram : le serveur envoie les adhkâr à l'heure de la ville */
@@ -6568,7 +6570,7 @@ async function vueMosquees() {
   const zl = w.querySelector("#mq-l");
   let pos = null;
   try { await PRIERE.position(); } catch (e) {}
-  const l = PRIERE.loc(); if (l && l.lat != null) pos = { lat: l.lat, lng: l.lng };
+  const l = PRIERE.coord(); if (l && l.lat != null) pos = { lat: l.lat, lng: l.lng };
   if (!w.isConnected) return;
   if (!pos) { zl.innerHTML = `<p class="centre">Activez la localisation du téléphone pour trouver les mosquées autour de vous.</p><button class="btn" id="mq-r" style="width:100%">Réessayer</button>`; zl.querySelector("#mq-r").onclick = () => router("mosquees"); return; }
   const dist = (a, b) => { const R = 6371e3, t = x => x * Math.PI / 180, dl = t(b.lat - a.lat), dg = t(b.lng - a.lng); const h = Math.sin(dl / 2) ** 2 + Math.cos(t(a.lat)) * Math.cos(t(b.lat)) * Math.sin(dg / 2) ** 2; return 2 * R * Math.asin(Math.sqrt(h)); };
@@ -7565,7 +7567,7 @@ async function vueAzkar() {
     const peint = () => {
       if (!AZKAR_RAPPEL.dispo()) { z.innerHTML = `<span style="font-size:24px">🔔</span><span style="flex:1;font-size:14px">Mettez à jour l'application Lumu (Android) pour recevoir le rappel des adhkâr dans la barre de notification.</span>`; return; }
       const N = LumuNative; let et = {}; try { et = JSON.parse(N.azkarEtat ? N.azkarEtat() : "{}"); } catch (e) {}
-      const notifOk = N.notifActives ? N.notifActives() : true, batOk = N.batterieLibre ? N.batterieLibre() : true, lieuOk = !!(PRIERE.loc() && PRIERE.loc().lat != null);
+      const notifOk = N.notifActives ? N.notifActives() : true, batOk = N.batterieLibre ? N.batterieLibre() : true, lieuOk = !!PRIERE.coord();
       const pro = et.prochain ? new Date(et.prochain) : null;
       const ligne = (ok, t) => `<div style="display:flex;gap:8px;align-items:center;font-size:14px"><span>${ok ? "✅" : "⚠️"}</span><span>${t}</span></div>`;
       z.style.flexDirection = "column"; z.style.alignItems = "stretch";
