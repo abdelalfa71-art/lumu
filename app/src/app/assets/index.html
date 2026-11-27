@@ -1598,7 +1598,7 @@ html:root:not(.nuit) .ec .ec-row { border: 1px solid #ECE4CF !important; box-sha
 .cv-belle .cv-ret { width: 32px; height: 32px; font-size: 17px; }
 .cv-belle .cv-cherche { padding: 0 12px; border-radius: 12px; gap: 8px; }
 .cv-belle .cv-cherche input { font-size: 14px; padding: 7px 0; }
-.cv-belle .cv-st { gap: 10px; }
+.cv-belle .cv-st { gap: 10px; margin-top: -4px !important; }
 .cv-belle .cv-st .st-av { width: 46px; height: 46px; border-width: 2px; margin-bottom: 2px; }
 .cv-belle .cv-st .st-av > span { font-size: 16px; }
 .cv-belle .cv-st small, .cv-belle .cv-st span:not(.st-av span) { font-size: 12px; }
@@ -11384,8 +11384,8 @@ async function vueDiscussions() {
   let filtre = (etat.params && etat.params.filtre) || chargerLocal("cv_filtre", "tous");
   if (etat.params && etat.params.onglet === "g") filtre = "groupes";
   const w = ecran("Discussions", ["flux"], `<div class="pg-tete cv-tete"><div class="pg-tete-h"><button type="button" class="cv-ret" id="cv-ret" aria-label="Retour">←</button><span class="pg-tete-t"><b>${esc(trad("Discussions"))}</b><span lang="ar" dir="rtl" data-notrad>المُحَادَثَات</span></span><img src="icon-192.png" alt="Lumu" width="40" height="40" class="pg-logo"></div>
-      <label class="cv-cherche">${ico("search", 18)}<input id="q" type="search" placeholder="Chercher un nom ou un numéro" aria-label="Chercher une personne, un groupe, un message"></label>
-      <div class="st-row cv-st" id="st-row" hidden></div></div>
+      <div class="st-row cv-st" id="st-row" hidden></div>
+      <label class="cv-cherche">${ico("search", 18)}<input id="q" type="search" placeholder="Chercher un nom ou un numéro" aria-label="Chercher une personne, un groupe, un message"></label></div>
     <div id="res"></div>
     <div class="cv-filtres" id="ong">${[["tous", "Tous"], ["nonlus", "Non lus"], ["prives", "Privés"], ["groupes", "Groupes"]].map(([k, t]) => `<button type="button" data-t="${k}">${t}<span class="cv-fn" data-n="${k}"></span></button>`).join("")}</div>
     <div id="liste"><div class="centre"><div class="spinner"></div></div></div>
