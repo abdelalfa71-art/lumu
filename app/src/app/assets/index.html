@@ -1716,10 +1716,21 @@ html .acc-pbox, html .pg-rep, html .ec-radio, html .ec .ec-sc-h span { border-co
 .dp-t { flex: 1; min-width: 0; display: flex; flex-direction: column; } .dp-t b { font-size: 18px; } .dp-t small { font-family: 'Amiri', serif; color: #F2C43D; font-size: 15px; align-self: flex-start; }
 .dp-live { flex: none; background: #D93025; color: #FFFFFF; font-size: 11px; font-weight: 800; padding: 4px 8px; border-radius: 8px; text-transform: uppercase; }
 .dp-x { width: 36px; height: 36px; flex: none; border-radius: 50%; border: 0; background: rgba(255,255,255,.14); color: #FFFFFF; font-size: 16px; }
-.dp-act { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; margin: 12px -16px 4px; padding: 0 16px; }
-.dp-act::-webkit-scrollbar { display: none; }
-.dp-act button { flex: 1 0 64px; white-space: nowrap; padding-left: 8px !important; padding-right: 8px !important; display: flex; flex-direction: column; align-items: center; gap: 5px; padding: 10px 4px; border-radius: 16px; border: 1px solid #ECE4CF; background: #FFFFFF; color: #123C2B; font: inherit; font-size: 12px; font-weight: 700; }
-.dp-act button span { font-size: 20px; line-height: 1; }
+.ds-fen #ds-pan { overflow-x: hidden; }
+.dp-tete { position: relative; gap: 8px !important; }
+.dp-t b, .dp-t small { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+.dp-live { font-size: 10px !important; padding: 3px 6px !important; }
+.dp-ic { width: 40px !important; height: 40px !important; font-size: 21px !important; }
+.dp-x.on { background: #F2C43D; color: #0F3D2E; }
+#dp-men { font-size: 22px; font-weight: 800; }
+.dp-act { position: absolute; right: 16px; top: 74px; z-index: 5; width: min(240px, 80vw); padding: 6px; border-radius: 18px; background: #FFFFFF; border: 1px solid #ECE4CF; box-shadow: 0 14px 34px rgba(8,30,20,.22); transform-origin: top right; animation: dpOuv .16s ease; }
+.dp-act[hidden] { display: none; }
+@keyframes dpOuv { from { opacity: 0; transform: scale(.92) translateY(-6px); } }
+.dp-act button { display: flex; align-items: center; gap: 12px; width: 100%; padding: 10px 10px; border: 0; border-radius: 12px; background: none; color: #123C2B; font: inherit; font-size: 15px; text-align: start; }
+.dp-act button:active { background: #F4EFE2; }
+.dp-act button span { width: 36px; height: 36px; flex: none; border-radius: 10px; display: grid; place-items: center; font-size: 18px; background: #E7F1EC; }
+.dp-act button b { font-weight: 700; }
+:root[data-theme="dark"] .dp-act { background: #17201C; border-color: #26322C; } :root[data-theme="dark"] .dp-act button { color: #EEE; }
 .dp-sec { margin: 16px 2px 8px; font-size: 13px; font-weight: 800; letter-spacing: .6px; text-transform: uppercase; color: #123C2B; }
 .dp-liste { background: #FFFFFF; border: 1px solid #ECE4CF; border-radius: 18px; padding: 2px 6px; }
 .dp-ch { display: flex; align-items: center; gap: 12px; width: 100%; padding: 10px 6px; border: 0; border-bottom: 1px solid #F1EADA; background: none; font: inherit; text-align: start; color: #17221D; }
@@ -5458,15 +5469,19 @@ async function ouvrirDirectSaint(i) {
     <button class="ds-nv" id="ds-prev" aria-label="Chaîne précédente" style="left:10px">‹</button><button class="ds-nv" id="ds-next" aria-label="Chaîne suivante" style="right:10px">›</button>
     <div id="ds-mx" style="display:none;position:absolute;top:4px;right:4px;gap:4px"><button id="ds-mx-x" aria-label="Fermer" style="width:30px;height:30px;border-radius:50%;border:0;background:rgba(0,0,0,.6);color:#fff;font-size:15px">✕</button></div>
     <div id="ds-pan">
-      <div class="dp-tete"><span class="dp-ic">${d.ic}</span><span class="dp-t"><b>${esc(d.nom)}</b><small lang="ar" dir="rtl" data-notrad>${esc(d.ar || "")}</small></span>${enDirect ? `<span class="dp-live">● ${esc(trad("Direct"))}</span>` : ""}<button type="button" class="dp-x" id="dp-x" aria-label="Fermer">✕</button></div>
-      <div class="dp-act">${[["fav", TV_FAV.a(i) ? "⭐" : "☆", "Favori", true], ["tard", "🕒", "Plus tard", enDirect], ["audio", "🎧", "Audio", true], ["fs", "⛶", "Plein écran", enDirect], ["mini", "⧉", "Réduire", enDirect], ["tv", "📺", "Sur la télé", !!(window.LumuNative && LumuNative.diffuserEcran)]].filter(x => x[3]).map(([k, ic, t]) => `<button type="button" data-pa="${k}"><span>${ic}</span>${esc(trad(t))}</button>`).join("")}</div>
+      <div class="dp-tete"><span class="dp-ic">${d.ic}</span><span class="dp-t"><b>${esc(d.nom)}</b><small lang="ar" dir="rtl" data-notrad>${esc(d.ar || "")}</small></span>${enDirect ? `<span class="dp-live">● ${esc(trad("Direct"))}</span>` : ""}<button type="button" class="dp-x" id="dp-men" aria-label="Menu" aria-expanded="false">⋮</button><button type="button" class="dp-x" id="dp-x" aria-label="Fermer">✕</button></div>
+      <div class="dp-act" id="dp-act" hidden>${[["fav", TV_FAV.a(i) ? "⭐" : "☆", "Favori", true], ["tard", "🕒", "Plus tard", enDirect], ["audio", "🎧", "Audio", true], ["fs", "⛶", "Plein écran", enDirect], ["mini", "⧉", "Réduire", enDirect], ["tv", "📺", "Sur la télé", !!(window.LumuNative && LumuNative.diffuserEcran)]].filter(x => x[3]).map(([k, ic, t]) => `<button type="button" data-pa="${k}"><span>${ic}</span><b>${esc(trad(t))}</b></button>`).join("")}</div>
       <div class="dp-sec">${esc(trad("Chaînes"))}</div>
       <div class="dp-liste">${DIRECTS_SAINTS.map((x, k) => [x, k]).sort((a, b) => TV_FAV.a(b[1]) - TV_FAV.a(a[1])).map(([x, k]) => `<button type="button" class="dp-ch${k === i ? " on" : ""}" data-pk="${k}"><span class="dp-ch-ic">${x.ic}</span><span class="dp-ch-t"><b>${esc(x.nom)}${TV_FAV.a(k) ? " ⭐" : ""}</b><small lang="ar" dir="rtl" data-notrad>${esc(x.ar || "")}</small></span>${k === i ? `<span class="dp-ch-en">${esc(trad("En cours"))}</span>` : `<span class="dp-ch-go">▶</span>`}</button>`).join("")}</div>
     </div>`;
   { const pan = o.querySelector("#ds-pan");
     pan.querySelector("#dp-x").onclick = () => fermerDirectSaint();
+    const men = pan.querySelector("#dp-men"), act = pan.querySelector("#dp-act");
+    const basc = v => { act.hidden = !v; men.setAttribute("aria-expanded", v ? "true" : "false"); men.classList.toggle("on", v); };
+    men.onclick = ev => { ev.stopPropagation(); basc(act.hidden); };
+    pan.addEventListener("click", ev => { if (!act.hidden && !ev.target.closest("#dp-act") && ev.target !== men) basc(false); });
     pan.querySelectorAll("[data-pk]").forEach(b => b.onclick = () => { const k = +b.dataset.pk; if (k !== i) ouvrirDirectSaint(k); });
-    pan.querySelectorAll("[data-pa]").forEach(b => b.onclick = ev => { const el = o.querySelector("#ds-" + b.dataset.pa); if (!el) return; el.click(); if (b.dataset.pa === "fav") b.querySelector("span").textContent = TV_FAV.a(i) ? "⭐" : "☆"; }); }
+    pan.querySelectorAll("[data-pa]").forEach(b => b.onclick = ev => { if (b.dataset.pa !== "fav") basc(false); const el = o.querySelector("#ds-" + b.dataset.pa); if (!el) return; el.click(); if (b.dataset.pa === "fav") b.querySelector("span").textContent = TV_FAV.a(i) ? "⭐" : "☆"; }); }
   ajusterQualiteDirect();
   const ui = o.querySelector("#ds-ui"); let t = 0;
   const navs = [...o.querySelectorAll(".ds-nv")];
