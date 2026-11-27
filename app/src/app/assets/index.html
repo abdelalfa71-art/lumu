@@ -1517,6 +1517,76 @@ body:not(.branche-tobi) .nav-bas:not(.nav-sombre) .nav-btn.actif .ic { backgroun
 body:not(.branche-tobi) .nav-bas:not(.nav-sombre) .nav-btn.actif { color: #123C2B !important; font-weight: 800; }
 :root[data-theme="dark"] body:not(.branche-tobi) .nav-bas:not(.nav-sombre) .nav-btn.actif { color: var(--texte) !important; }
 #micro-fab { background: #123C2B !important; color: #F2C43D !important; border: 2px solid #F2C43D !important; }
+.nav-btn .ic .ic3d { width: 28px; height: 28px; display: block; filter: none !important; opacity: 1 !important; }
+body:not(.branche-tobi) .nav-btn:not(.actif) .ic { filter: none !important; opacity: .85 !important; }
+body:not(.branche-tobi) .nav-bas:not(.nav-sombre) .nav-btn.actif .ic { background: #FFF4D6 !important; box-shadow: inset 0 0 0 1.5px #F2C43D; }
+/* ---- En-tête et éléments communs des pages embellies ---- */
+.pg-belle > .entete { display: none; }
+.pg-belle { background: #FBF8F1 !important; }
+:root[data-theme="dark"] .pg-belle { background: var(--fond) !important; }
+.pg-tete { margin: -20px -20px 16px; padding: calc(14px + env(safe-area-inset-top, 0px)) 18px 18px; border-radius: 0 0 28px 28px; border-bottom: 3px solid #F2C43D; color: #FFFFFF; display: flex; flex-direction: column; gap: 12px; background-color: #0F3D2E; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 56 56'%3E%3Cg fill='none' stroke='%23F2C43D' stroke-opacity='.13' stroke-width='1.2'%3E%3Cpath d='M28 4l7 17 17 7-17 7-7 17-7-17-17-7 17-7z'/%3E%3Crect x='17' y='17' width='22' height='22' transform='rotate(45 28 28)'/%3E%3C/g%3E%3C/svg%3E"); }
+.pg-tete-h { display: flex; align-items: center; gap: 12px; }
+.pg-tete-t { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.pg-tete-t b { font-size: 26px; font-weight: 800; letter-spacing: -.5px; color: #FFFFFF; }
+.pg-tete-t [lang="ar"] { font-family: 'Amiri', serif; font-size: 18px; color: #F2C43D; text-align: start; }
+.pg-logo { border-radius: 11px; flex: none; }
+.pg-rep { display: flex; align-items: center; gap: 12px; width: 100%; text-align: start; font: inherit; color: #FFFFFF; background: rgba(0,0,0,.18); border: 1px solid rgba(242,196,61,.45); border-radius: 18px; padding: 12px 14px; }
+.pg-rep-tx { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 5px; }
+.pg-rep-tx b { font-size: 15px; } .pg-rep-tx small { font-size: 12px; color: #CFE3DA; }
+.pg-bar { display: block; height: 5px; border-radius: 3px; background: rgba(255,255,255,.2); overflow: hidden; } .pg-bar u { display: block; height: 100%; background: #F2C43D; border-radius: 3px; }
+.pg-lire { background: #F2C43D; color: #123C2B; font-weight: 800; font-size: 14px; padding: 9px 14px; border-radius: 14px; flex: none; }
+.pg-sec { display: flex; align-items: center; gap: 8px; margin: 6px 2px 10px; color: #123C2B; font-size: 13px; font-weight: 800; letter-spacing: .8px; text-transform: uppercase; }
+.pg-sec::before { content: "۞"; color: #C99A12; font-size: 15px; letter-spacing: 0; } .pg-sec::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, #E3C66A, transparent); }
+:root[data-theme="dark"] .pg-sec { color: var(--texte); }
+.pg-belle .pg-cherche { background: #FFFFFF; border: 1px solid #ECE4CF; border-radius: 16px; }
+/* Coran : boutons ronds 3D et étoiles dorées */
+.ca-rond { display: grid !important; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px 6px !important; margin: 0 0 16px !important; }
+.ca-rond .ca-p { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 0 !important; border: 0 !important; background: none !important; color: var(--texte, #17221D) !important; font-size: 12px !important; font-weight: 700 !important; border-radius: 0 !important; }
+.ca-ri { width: 56px; height: 56px; border-radius: 50%; background: #FFFFFF; border: 2px solid #F2C43D; display: grid; place-items: center; }
+:root[data-theme="dark"] .ca-ri { background: var(--surface); }
+.ca-rond .ca-p.on .ca-ri { background: #FFF4D6; border-width: 3px; box-shadow: 0 0 0 3px rgba(242,196,61,.25); }
+.ca-rond .ca-p.on { color: #0F7B6C !important; }
+.pg-belle .ca-i { background: #FFFFFF; border: 1px solid #ECE4CF; box-shadow: none; border-radius: 18px; }
+:root[data-theme="dark"] .pg-belle .ca-i { background: var(--surface); border-color: var(--bordure); }
+.pg-belle .ca-av.ca-n { position: relative; background: none !important; color: #123C2B !important; border-radius: 0; z-index: 0; }
+.pg-belle .ca-av.ca-n::before, .pg-belle .ca-av.ca-n::after { content: ""; position: absolute; inset: 5px; background: #F2C43D; border-radius: 6px; z-index: -1; }
+.pg-belle .ca-av.ca-n::after { transform: rotate(45deg); }
+.pg-belle .ca-go { color: #C99A12; }
+/* Apprendre embelli */
+.pg-belle .ap-t { background: #FFFFFF; border: 1px solid #ECE4CF; border-top: 4px solid #F2C43D; border-radius: 18px; }
+:root[data-theme="dark"] .pg-belle .ap-t { background: var(--surface); border-color: var(--bordure); border-top-color: #F2C43D; }
+.pg-belle .ap-i { width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; }
+.ap-az { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin: 0 0 12px; }
+.ap-az button { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; text-align: start; font: inherit; border: 3px solid #111; border-radius: 18px; padding: 12px; }
+.ap-az b { font-size: 15px; } .ap-az small { font-size: 12px; font-weight: 600; }
+.ap-az-m { background: linear-gradient(160deg, #FBE08A, #F2C43D 60%, #E3A91E); color: #123C2B; }
+.ap-az-s { color: #FFFFFF; background-color: #123C2B; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 56 56'%3E%3Cg fill='none' stroke='%23F2C43D' stroke-opacity='.13' stroke-width='1.2'%3E%3Cpath d='M28 4l7 17 17 7-17 7-7 17-7-17-17-7 17-7z'/%3E%3C/g%3E%3C/svg%3E"); }
+.ap-az-s b { color: #F2C43D; } .ap-az-s small { color: #CFE3DA; }
+.ap-hifz { display: flex; align-items: center; gap: 12px; width: 100%; text-align: start; font: inherit; color: #FFFFFF; border: 1.5px solid #F2C43D; border-radius: 18px; padding: 14px 16px; margin: 0 0 12px; background-color: #0F3D2E; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 56 56'%3E%3Cg fill='none' stroke='%23F2C43D' stroke-opacity='.13' stroke-width='1.2'%3E%3Cpath d='M28 4l7 17 17 7-17 7-7 17-7-17-17-7 17-7z'/%3E%3C/g%3E%3C/svg%3E"); }
+.ap-hifz > span:first-child { flex: 1; display: flex; flex-direction: column; gap: 2px; } .ap-hifz b { font-size: 15px; } .ap-hifz small { font-size: 12px; color: #CFE3DA; }
+.pg-belle #bib-ba { background: #FFFFFF !important; border: 1px solid #ECE4CF !important; border-radius: 18px !important; box-shadow: none !important; }
+:root[data-theme="dark"] .pg-belle #bib-ba { background: var(--surface) !important; border-color: var(--bordure) !important; }
+/* Écouter embelli : vert et or */
+.ec .ec-haut { background-color: #0F3D2E !important; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 56 56'%3E%3Cg fill='none' stroke='%23F2C43D' stroke-opacity='.13' stroke-width='1.2'%3E%3Cpath d='M28 4l7 17 17 7-17 7-7 17-7-17-17-7 17-7z'/%3E%3Crect x='17' y='17' width='22' height='22' transform='rotate(45 28 28)'/%3E%3C/g%3E%3C/svg%3E") !important; border-bottom: 3px solid #F2C43D !important; box-shadow: none !important; }
+html:root:not(.nuit) .ecran.ec { background: #FBF8F1; }
+.ec .ec-bande-t, .ec .ec-ser-t b { display: flex; align-items: center; gap: 8px; color: #123C2B; font-size: 13px !important; font-weight: 800; letter-spacing: .8px; text-transform: uppercase; }
+.ec .ec-bande-t::before, .ec .ec-ser-t b::before { content: "۞"; color: #C99A12; font-size: 15px; letter-spacing: 0; }
+.ec .ec-bande-t::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, #E3C66A, transparent); }
+:root[data-theme="dark"] .ec .ec-bande-t, :root[data-theme="dark"] .ec .ec-ser-t b { color: var(--texte); }
+.ec #ec-notif .ec-notif { background: #123C2B !important; color: #FFFFFF !important; border: 0 !important; border-left: 5px solid #F2C43D !important; border-radius: 18px !important; }
+.ec #ec-notif .ec-notif small { color: #CFE3DA !important; opacity: 1 !important; }
+html:root:not(.nuit) .ec .ec-radio { background: #FFFFFF !important; color: #17221D !important; border: 1px solid #ECE4CF !important; box-shadow: none !important; }
+html:root:not(.nuit) .ec .ec-radio b { color: #17221D !important; } html:root:not(.nuit) .ec .ec-radio small { color: #5D6B63 !important; }
+.ec .ec-rp { background: #F2C43D !important; color: #123C2B !important; box-shadow: none !important; }
+.ec-lg { padding: 10px 2px; border-radius: 999px; border: 1px solid #ECE4CF; background: #FFFFFF; color: #123C2B; font: inherit; font-size: 13px; font-weight: 700; white-space: nowrap; }
+.ec-lg.on { background: #123C2B; color: #F2C43D; border: 2px solid #F2C43D; }
+:root[data-theme="dark"] .ec-lg { background: var(--surface); color: var(--texte); border-color: var(--bordure); } :root[data-theme="dark"] .ec-lg.on { background: #123C2B; color: #F2C43D; border-color: #F2C43D; }
+.ec .ec-sc { border: 1px solid #0B2A1E; }
+.ec .ec-sc-h { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 56 56'%3E%3Cg fill='none' stroke='%23F2C43D' stroke-opacity='.15' stroke-width='1.2'%3E%3Cpath d='M28 4l7 17 17 7-17 7-7 17-7-17-17-7 17-7z'/%3E%3C/g%3E%3C/svg%3E"); }
+.ec .ec-sc-h span { background: rgba(242,196,61,.18) !important; color: #F2C43D; border: 1px solid rgba(242,196,61,.5); border-radius: 999px !important; }
+.ec .ec-sc-c i u { background: #F2C43D !important; }
+html:root:not(.nuit) .ec .ec-row { border: 1px solid #ECE4CF !important; box-shadow: none !important; }
+.ec .ec-row .ec-pl { background: #F2C43D !important; color: #123C2B !important; border-radius: 50% !important; }
 </style>
 </head>
 <body>
@@ -2713,6 +2783,9 @@ async function chargerProfil() {
 async function apresConnexion() { await Promise.all([chargerReferentiel(), chargerProfil()]); }
 
 /* ---------- Navigation du bas ---------- */
+/* Icônes 3D réalistes (Fluent Emoji de Microsoft, licence MIT : LICENSE-fluentui-emoji.txt) */
+const NAV_3D = { home: "house", ecouter: "headphone", video: "television", coran: "open-book", apprendre: "graduation-cap" };
+const ic3d = (n, t = 28) => `<img class="ic3d" src="ic3d-${n}.png" alt="" width="${t}" height="${t}" loading="lazy" decoding="async">`;
 const IC = {
   pause: '<path d="M6 5h4v14H6zM14 5h4v14h-4z"/>',
   compass: '<circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/>',
@@ -2765,7 +2838,8 @@ function creerNav() {
   NAV.forEach(n => {
     const b = document.createElement("button");
     b.className = "nav-btn" + (n.centre ? " nav-centre" : "") + (n.r === actif ? " actif" : "");
-    b.innerHTML = n.centre ? `<span class="ic-plus">${ico(n.i, 24)}</span><span class="sr">${esc(t(n.t))}</span>` : `<span class="ic">${ico(n.i, 24)}</span><span>${esc(t(n.t))}</span>`;
+    const i3 = NAV_3D[n.i];
+    b.innerHTML = n.centre ? `<span class="ic-plus">${ico(n.i, 24)}</span><span class="sr">${esc(t(n.t))}</span>` : `<span class="ic">${i3 ? `<img class="ic3d" src="ic3d-${i3}.png" alt="" width="28" height="28">` : ico(n.i, 24)}</span><span>${esc(t(n.t))}</span>`;
     if (n.r === actif) b.setAttribute("aria-current", "page");
     b.onclick = () => router(n.r);
     nav.appendChild(b);
@@ -6699,7 +6773,7 @@ async function vueAujourdhui() {
       <div class="acc-ciel-h"><img src="icon-192.png" alt="Lumu" width="34" height="34" style="border-radius:10px;flex:none"><p class="acc-ciel-s"><span lang="ar" dir="rtl" data-notrad translate="no">السَّلَامُ عَلَيْكُمْ</span><span class="acc-ciel-pn">${prenom ? esc(prenom) + " · " : ""}${esc(hj || "")}</span></p><button type="button" class="acc-ciel-r" data-r="recherche" aria-label="Rechercher">${ico("search", 20)}</button></div>
       <button type="button" id="aj-pr" class="acc-ciel-p"><span class="acc-pbox"><span class="acc-anneau" id="aj-ring"><span id="aj-pic">🕌</span></span><span class="acc-ptx"><span class="acc-ciel-lb">Prochaine prière</span><span id="aj-prn" class="acc-ciel-n">—</span><span id="aj-prr" class="acc-ciel-t">Ajoutez votre ville</span></span></span><span id="aj-prl" class="acc-ciel-l"></span></button>
     </div>
-    <div class="acc-rc" id="aj-rc">${[["coran", "Coran", "#E2F1EC", "#0F7B6C", "📖"], ["qibla", "Qibla", "#FFF4DB", "#9A6B00", "🧭"], ["arabe", "Invocations", "#E8EEF8", "#2F4B7C", "🤲"], ["direct", "Direct", "#FBE9E6", "#A23B2C", "🕋"]].map(([r, t, bg, c, ic]) => `<button type="button" data-r="${r}"><span>${ic}</span>${t}</button>`).join("")}</div>
+    <div class="acc-rc" id="aj-rc">${[["coran", "Coran", "open-book"], ["qibla", "Qibla", "compass"], ["arabe", "Invocations", "palms-up-together"], ["direct", "Direct", "kaaba"]].map(([r, t, ic]) => `<button type="button" data-r="${r}"><span>${ic3d(ic, 34)}</span>${t}</button>`).join("")}</div>
     <details id="aj-hab" class="aj-hab carte"${chargerLocal("aj_hab_ouvert", false) ? " open" : ""}><summary><b>Aujourd'hui</b><span class="aj-hab-n">${nbFait}/${HABITUDES.length}</span><span style="flex:1"></span><span style="font-weight:800;color:#e8590c">🔥 ${h.serie || 0} ${trad((h.serie || 0) > 1 ? "jours" : "jour")}</span><span class="aj-hab-chev" aria-hidden="true">⌄</span><i class="aj-hab-bar"><u style="width:${nbFait * 100 / HABITUDES.length}%"></u></i></summary>
     <div>
       ${HABITUDES.map(([k, ic, t]) => `<div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--bordure,#eee)"><button type="button" data-h="${k}" aria-label="Cocher" style="width:32px;height:32px;flex:none;border-radius:50%;border:2px solid #1b6b5c;background:${faites[k] ? "#1b6b5c" : "transparent"};color:#fff;font-size:16px">${faites[k] ? "✓" : ""}</button><span style="font-size:20px">${ic}</span><span style="flex:1;${faites[k] ? "text-decoration:line-through;opacity:.6" : ""}">${t}</span><button type="button" data-o="${k}" class="btn-text" style="margin:0">Ouvrir ›</button></div>`).join("")}</div></details>
@@ -6707,7 +6781,7 @@ async function vueAujourdhui() {
     <div class="aj-verset"><span class="avr-badge" lang="ar" data-notrad>آيَةُ الْيَوْمِ</span><span class="avr-c avr-c1">✦</span><span class="avr-c avr-c2">✦</span><span class="avr-c avr-c3">✦</span><span class="avr-c avr-c4">✦</span><p class="avr-ar" dir="rtl" data-notrad>﴿ ${esc(v[0])} ﴾</p><div class="avr-sep"><span>۞</span></div>${langue === "ar" ? "" : `<p class="avr-tr">« ${esc(v[1])} »</p>`}<span class="avr-ref">${esc(v[2])}</span></div>
     <b class="acc-t">Continuer</b><div id="aj-cont"></div>
     <b class="acc-t">Rappel du jour</b><div id="aj-rap"><div class="centre"><div class="spin"></div></div></div>
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:18px 0 8px">${[["🕋", "Direct", "direct"], ["📻", "Radios", "radios"], ["🧠", "Mémoriser", "coran-accueil"], ["👥", "Khatma", "khatma"]].map(([i, t, r]) => `<button type="button" data-r="${r}" class="acc-tuile" style="padding:12px 4px;border-radius:16px;border:1px solid var(--bordure,#e3dccb);background:var(--surface,#fff);color:var(--texte,#14201b);font:inherit;font-size:13px"><div style="font-size:26px">${i}</div>${t}</button>`).join("")}</div>`);
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:18px 0 8px">${[["kaaba", "Direct", "direct"], ["radio", "Radios", "radios"], ["brain", "Mémoriser", "coran-accueil"], ["busts-in-silhouette", "Khatma", "khatma"]].map(([i, t, r]) => `<button type="button" data-r="${r}" class="acc-tuile" style="padding:12px 4px;border-radius:16px;border:1px solid var(--bordure,#e3dccb);background:var(--surface,#fff);color:var(--texte,#14201b);font:inherit;font-size:13px;font-weight:700"><div style="display:grid;place-items:center;margin-bottom:4px">${ic3d(i, 32)}</div>${t}</button>`).join("")}</div>`);
   w.classList.add("acc-b", "acc-a");
   try { const m = momentIslamique(); if (m && m.azkar) { const h1 = w.querySelector("#aj-hab"); barreAzkar(m, h1); const zb = w.querySelector("#ec-notif"); if (zb) { zb.style.margin = "0 0 12px"; zb.firstChild.style.width = "100%"; zb.firstChild.style.margin = "0"; } } } catch (e) {}
   /* Prière */
@@ -7116,13 +7190,22 @@ function jouerSerie(liste, i) {
   const c = liste[i]; if (!c) return;
   AUD.jouer(c, i + 1 < liste.length ? () => jouerSerie(liste, i + 1) : null, i > 0 ? () => jouerSerie(liste, i - 1) : null);
 }
+/* En-tête vert et or des pages principales (Coran, Écouter, Apprendre) */
+function pgTete(titre, ar, extra) {
+  return `<div class="pg-tete"><div class="pg-tete-h"><span class="pg-tete-t"><b>${esc(trad(titre))}</b><span lang="ar" dir="rtl" data-notrad>${ar}</span></span><img src="icon-192.png" alt="Lumu" width="40" height="40" class="pg-logo"></div>${extra || ""}</div>`;
+}
+const pgSec = t => `<div class="pg-sec">${esc(trad(t))}</div>`;
 async function vueCoranAccueil() {
   const w = ecran("Le Saint Coran", null, `<style>.ca-ps{display:flex;gap:8px;margin:2px 0 14px;overflow-x:auto}.ca-p{flex:none;margin:0;padding:9px 18px;border-radius:22px;border:1px solid var(--bordure,#e3dccb);background:var(--surface,#fff);color:inherit;font:inherit;font-size:15px;font-weight:600}.ca-p.on{background:var(--vert,#12805f);border-color:var(--vert,#12805f);color:#fff}
 .ca-l{display:grid;gap:10px}.ca-i{display:flex;align-items:center;gap:12px;width:100%;margin:0;padding:10px 12px;border:0;border-radius:14px;background:var(--surface,#fff);color:inherit;font:inherit;text-align:start;box-shadow:0 1px 3px rgba(0,0,0,.07)}.ca-i b{display:block;font-size:15px}.ca-i small{font-size:12px;opacity:.75}
 .ca-av{width:44px;height:44px;flex:none;border-radius:50%;background:var(--vert-clair,#e3f1e8);color:var(--vert,#12805f);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px}.ca-n{border-radius:12px}.ca-go{margin-inline-start:auto;color:var(--vert,#12805f);font-size:20px;flex:none}
 .ca-sec{margin:14px 2px 8px;font-size:12px;font-weight:800;color:var(--vert,#12805f);text-transform:uppercase;letter-spacing:.04em}
 .ca-hero{border-radius:20px;background:linear-gradient(135deg,#0b3d2e,#12805f);color:#fff;padding:18px;text-align:center;margin-bottom:10px}.ca-hero .ar{font-family:'Amiri Quran','Amiri',serif;font-size:30px;color:#d4af37;line-height:1.6}</style>
-    <div class="ca-ps" role="tablist" style="flex-wrap:wrap;overflow:visible"><button class="ca-p" data-o="lire" role="tab">📖 Lire</button><button class="ca-p" data-o="ecouter" role="tab">🎧 Écouter</button><button class="ca-p" data-o="tafsir" role="tab">📚 Tafsir</button><button class="ca-p" id="ca-direct">🕋 Direct</button><button class="ca-p" id="ca-radios">📻 Radios</button><button class="ca-p" id="ca-enfants">🧒 Enfants</button><button class="ca-p" id="ca-hifz">🧠 Mémoriser</button><button class="ca-p" id="ca-khatma">👥 Khatma</button></div><div id="ca-z"></div>`);
+    ${(() => { const E = CORAN_ETAT.lire(), p = E.page || 1, sur = CORAN.NOMS[CORAN.sourates(p).slice(-1)[0]] || "", lues = CORAN_ETAT.nbLues ? CORAN_ETAT.nbLues(E) : 0;
+      return pgTete("Le Saint Coran", "القُرْآنُ الكَرِيم", `<button type="button" class="pg-rep" id="ca-rep2"><span class="pg-rep-ic">${ic3d("open-book", 34)}</span><span class="pg-rep-tx"><b>${p > 1 ? esc(trad("Reprendre")) + " · " + esc(trad("page")) + " " + p : esc(trad("Commencer la lecture"))}</b><i class="pg-bar"><u style="width:${Math.max(3, Math.round(p * 100 / 604))}%"></u></i><small>${esc(sur)}${lues ? " · " + lues + " / 604" : ""}</small></span><span class="pg-lire">${esc(trad("Lire"))}</span></button>`); })()}
+    <div class="ca-ps ca-rond" role="tablist">${[["lire", "Lire", "open-book"], ["ecouter", "Écouter", "headphone"], ["tafsir", "Tafsir", "books"], ["#ca-direct", "Direct", "kaaba"], ["#ca-radios", "Radios", "radio"], ["#ca-enfants", "Enfants", "child"], ["#ca-hifz", "Mémoriser", "brain"], ["#ca-khatma", "Khatma", "busts-in-silhouette"]].map(([k, t, ic]) => `<button class="ca-p" ${k[0] === "#" ? `id="${k.slice(1)}"` : `data-o="${k}" role="tab"`}><span class="ca-ri">${ic3d(ic, 32)}</span>${t}</button>`).join("")}</div><div id="ca-z"></div>`);
+  w.classList.add("pg-belle");
+  { const r2 = w.querySelector("#ca-rep2"); if (r2) r2.onclick = () => router("coran"); }
   const z = w.querySelector("#ca-z");
   let onglet = etat.params.onglet || chargerLocal("coran_onglet", "lire");
   let donnees = null;
@@ -7148,10 +7231,7 @@ async function vueCoranAccueil() {
   };
   const vueLire = () => {
     const E = CORAN_ETAT.lire(), p = E.page || 1, sur = CORAN.NOMS[CORAN.sourates(p).slice(-1)[0]] || "", hl = chargerLocal("coran_complet", 0);
-    z.innerHTML = `<div class="ca-hero"><div class="ar" dir="rtl" data-notrad>الْقُرْآنُ الْكَرِيمُ</div><small style="opacity:.9">Mushaf de Médine · lecture Hafs · 604 pages${hl ? " · ✓ disponible sans connexion" : ""}</small></div>
-      <button class="btn" id="ca-rep" style="margin:0 0 6px">📖 ${p > 1 ? "Reprendre : sourate " + esc(sur) + " · page " + p : "Commencer la lecture"}</button>
-      <input class="champ" id="ca-q" type="search" placeholder="Chercher une sourate" style="margin:10px 0" aria-label="Chercher une sourate"><div class="ca-l" id="ca-sl"></div>`;
-    z.querySelector("#ca-rep").onclick = () => router("coran");
+    z.innerHTML = `<input class="champ pg-cherche" id="ca-q" type="search" placeholder="Chercher une sourate" style="margin:4px 0 14px" aria-label="Chercher une sourate">${pgSec("Les 114 sourates")}<small style="display:block;margin:-4px 2px 10px;opacity:.7">Mushaf de Médine · lecture Hafs · 604 pages${hl ? " · ✓ disponible sans connexion" : ""}</small><div class="ca-l" id="ca-sl"></div>`;
     const sl = z.querySelector("#ca-sl"), q = z.querySelector("#ca-q");
     const dessiner = () => { const k = nettoyerNom(q.value); const qa = q.value.trim().replace(/[\u064B-\u0652]/g, ""); const ids = CORAN.NOMS.map((n, i) => i).filter(i => !q.value.trim() || (k && nettoyerNom(CORAN.NOMS[i]).includes(k)) || (qa && CORAN.NOMS_AR[i].includes(qa)) || String(i + 1) === q.value.trim());
       sl.innerHTML = ids.map(i => item(String(i + 1), "سورة " + CORAN.NOMS_AR[i], CORAN.NOMS[i] + " · page " + CORAN.DEBUTS[i], "›", true)).join("");
@@ -7226,8 +7306,11 @@ async function vueCoranAccueil() {
   montrer(["lire", "ecouter", "tafsir"].includes(onglet) ? onglet : "lire");
 }
 async function vueBibliotheque() {
-  const w = ecran("Apprendre", null, `<div class="ap-g">${[["📚", "Livres", "Lire et écouter", "#bib-g"], ["📜", "Hadiths", "Authentiques, avec leur degré", "hadiths"], ["🤲", "Invocations", "Matin, soir, marché…", "arabe"], ["💡", "L'essentiel", "Bases de l'islam + quiz", "essentiel"], ["🧒", "Enfants", "Sourates courtes, histoires", "enfants"], ["🧭", "Parcours", "Cours étape par étape", "parcours"]].map(([i, t, st, r]) => `<button type="button" class="ap-t" data-ap="${r}"><span class="ap-i" aria-hidden="true">${i}</span><b>${t}</b><small>${st}</small></button>`).join("")}</div><style>.bib-photo .bib-in{padding:0 !important;background:#fff !important;box-shadow:0 6px 14px rgba(0,0,0,.25) !important;border-radius:6px !important;overflow:hidden}</style><button class="carte" id="bib-az" style="width:100%;text-align:start;margin:0 0 14px;display:flex;gap:10px;align-items:center"><span style="font-size:28px">🌅🌙</span><b style="flex:1">Azkar du matin et du soir</b></button><button class="carte" id="bib-ba" style="width:100%;text-align:start;margin:0 0 14px;display:flex;gap:10px;align-items:center"><span style="font-size:28px">🕌</span><span style="flex:1"><b style="display:block">Les bases</b><small>Piliers, ablutions, prière</small></span></button><div class="bib-g" id="bib-g">${BIBLIO.couverturePhoto({ id: "coran", titreFr: "Le Coran", couleur: "#0b3d2e" })}</div><p id="bib-n" style="font-size:13px;text-align:center">Veuillez patienter…</p>`);
-  w.querySelector("#bib-az").onclick = () => router("azkar");
+  let suite = null; try { const et = ESSENTIEL.etapes(), pr = ESSENTIEL.prog(), k = et.findIndex(e => !pr[e.i]); if (k > 0 && k < et.length) suite = { k, n: et.length, t: et[k].b.titre }; } catch (e) {}
+  const w = ecran("Apprendre", null, `${pgTete("Apprendre", "تَعَلَّمْ", suite ? `<button type="button" class="pg-rep" id="ap-suite"><span class="pg-rep-ic">${ic3d("light-bulb", 34)}</span><span class="pg-rep-tx"><b>${esc(trad("Continuer"))} · ${esc(suite.t)}</b><i class="pg-bar"><u style="width:${Math.round(suite.k * 100 / suite.n)}%"></u></i><small>${esc(trad("Leçon"))} ${suite.k + 1} / ${suite.n} · ${esc(trad("L'essentiel"))}</small></span><span class="pg-lire">›</span></button>` : "")}${pgSec("Choisir")}<div class="ap-g">${[["books", "Livres", "Lire et écouter", "#bib-g", "#E2F1EC"], ["scroll", "Hadiths", "Authentiques, avec leur degré", "hadiths", "#E8EEF8"], ["palms-up-together", "Invocations", "Matin, soir, marché…", "arabe", "#FFF4D6"], ["light-bulb", "L'essentiel", "Bases de l'islam + quiz", "essentiel", "#FBE9E6"], ["child", "Enfants", "Sourates courtes, histoires", "enfants", "#EFE8F7"], ["compass", "Parcours", "Cours étape par étape", "parcours", "#E2F1EC"]].map(([i, t, st, r, bg]) => `<button type="button" class="ap-t" data-ap="${r}"><span class="ap-i" aria-hidden="true" style="background:${bg}">${ic3d(i, 32)}</span><b>${t}</b><small>${st}</small></button>`).join("")}</div><style>.bib-photo .bib-in{padding:0 !important;background:#fff !important;box-shadow:0 6px 14px rgba(0,0,0,.25) !important;border-radius:6px !important;overflow:hidden}</style>${pgSec("Adhkâr")}<div class="ap-az"><button type="button" class="ap-az-m" data-az="matin">${ic3d("sunrise", 36)}<b>Adhkâr du matin</b><small>Après le Fajr · 5 min</small></button><button type="button" class="ap-az-s" data-az="soir">${ic3d("crescent-moon", 36)}<b>Adhkâr du soir</b><small>Après l'Asr · 5 min</small></button></div><button type="button" class="ap-hifz" id="ap-hifz"><span><b>Mémoriser le Coran</b><small>Répétition verset par verset</small></span><span class="pg-lire">Commencer</span></button><button class="carte" id="bib-ba" style="width:100%;text-align:start;margin:0 0 14px;display:flex;gap:10px;align-items:center"><span>${ic3d("mosque", 34)}</span><span style="flex:1"><b style="display:block">Les bases</b><small>Piliers, ablutions, prière</small></span></button>${pgSec("Livres")}<div class="bib-g" id="bib-g">${BIBLIO.couverturePhoto({ id: "coran", titreFr: "Le Coran", couleur: "#0b3d2e" })}</div><p id="bib-n" style="font-size:13px;text-align:center">Veuillez patienter…</p>`);
+  w.classList.add("pg-belle");
+  w.querySelectorAll("[data-az]").forEach(b => b.onclick = () => router("azkar", { liste: b.dataset.az }));
+  { const hz = w.querySelector("#ap-hifz"); if (hz) hz.onclick = () => feuilleHifz(1, o => router("coran", { page: CORAN.DEBUTS[o.s - 1], hifz: o })); const su = w.querySelector("#ap-suite"); if (su && suite) su.onclick = () => router("essentiel-etape", { k: suite.k }); }
   w.querySelectorAll("[data-ap]").forEach(b => b.onclick = () => { const r = b.dataset.ap; if (r[0] === "#") { const g = w.querySelector(r); if (g) g.scrollIntoView({ behavior: "smooth", block: "start" }); } else router(r); });
   w.querySelector("#bib-ba").onclick = () => router("bases");
   const tc = w.querySelector(".bib-g .bib-photo");
@@ -8586,7 +8669,7 @@ async function vueEcouter() {
   let SOURCE = chargerLocal("ec_source", "lumu");
   const dessinerSources = () => {
     const z = w.querySelector("#ec-src"); if (!z) return;
-    z.innerHTML = [["lumu", "Foulfouldé"], ["ff", "Pular"], ["fr", "Français"], ["ha", "Hausa"]].map(([k, t]) => `<button type="button" data-src="${k}" style="padding:10px 2px;border-radius:20px;border:1px solid #1b6b5c;font:inherit;font-size:13px;font-weight:700;white-space:nowrap;background:${k === SOURCE ? "#1b6b5c" : "transparent"};color:${k === SOURCE ? "#fff" : "inherit"}">${t}</button>`).join("");
+    z.innerHTML = [["lumu", "Foulfouldé"], ["ff", "Pular"], ["fr", "Français"], ["ha", "Hausa"]].map(([k, t]) => `<button type="button" data-src="${k}" class="ec-lg${k === SOURCE ? " on" : ""}">${t}</button>`).join("");
     z.querySelectorAll("[data-src]").forEach(b => b.onclick = () => { SOURCE = b.dataset.src; sauverLocal("ec_source", SOURCE); dessinerSources(); lignes(); });
   };
   dessinerSources();
