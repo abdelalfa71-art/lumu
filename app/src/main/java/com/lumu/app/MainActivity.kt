@@ -96,6 +96,23 @@ class MainActivity : AppCompatActivity() {
             try { val am = getSystemService(Context.AUDIO_SERVICE) as android.media.AudioManager; val m = am.getStreamMaxVolume(android.media.AudioManager.STREAM_MUSIC); am.setStreamVolume(android.media.AudioManager.STREAM_MUSIC, Math.round(pct.coerceIn(0, 100) * m / 100f), 0) } catch (e: Exception) {}
         }
         @JavascriptInterface fun programmerAzkar(json: String?) { try { Azkar.programmer(applicationContext, json ?: "[]") } catch (e: Exception) {} }
+        @JavascriptInterface fun azkarEtat(): String = try { azkarEtat(applicationContext) } catch (e: Exception) { "{}" }
+        /** Envoie tout de suite une notification d'essai */
+        @JavascriptInterface fun azkarTest() {
+            try { sendBroadcast(Intent(applicationContext, AzkarAlarme::class.java).putExtra("l", "matin").putExtra("titre", "🔔 Essai : rappel des adhkâr").putExtra("texte", "Les rappels arriveront ainsi chaque jour, même application fermée.")) } catch (e: Exception) {}
+        }
+        @JavascriptInterface fun notifActives(): Boolean = try { androidx.core.app.NotificationManagerCompat.from(applicationContext).areNotificationsEnabled() } catch (e: Exception) { true }
+        @JavascriptInterface fun ouvrirReglagesNotif() {
+            runOnUiThread { try { startActivity(Intent(android.provider.Settings.ACTION_APP_NOTIFICATION_SETTINGS).putExtra(android.provider.Settings.EXTRA_APP_PACKAGE, packageName).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)) } catch (e: Exception) { try { startActivity(Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:$packageName"))) } catch (e2: Exception) {} } }
+        }
+        /** Batterie : Lumu peut-il se réveiller librement (sinon certains téléphones bloquent les rappels) */
+        @JavascriptInterface fun batterieLibre(): Boolean = try { if (android.os.Build.VERSION.SDK_INT >= 23) (getSystemService(Context.POWER_SERVICE) as android.os.PowerManager).isIgnoringBatteryOptimizations(packageName) else true } catch (e: Exception) { true }
+        @JavascriptInterface fun demanderBatterie() {
+            runOnUiThread {
+                try { startActivity(Intent(android.provider.Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS, Uri.parse("package:$packageName"))) }
+                catch (e: Exception) { try { startActivity(Intent(android.provider.Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS)) } catch (e2: Exception) {} }
+            }
+        }
         @JavascriptInterface fun lieuAzkar(lat: Double, lng: Double) { try { Azkar.lieu(applicationContext, lat, lng) } catch (e: Exception) {} }
         // Voix de l'adhan : fichier audio (https) téléchargé une fois sur le téléphone ; vide = son du téléphone
         @JavascriptInterface fun adhanVoix(url: String?) {

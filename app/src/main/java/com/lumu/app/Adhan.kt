@@ -181,6 +181,7 @@ object Azkar {
             for (i in 0 until l.length()) { val o = l.optJSONObject(i) ?: continue; liste.add(o.optLong("t") to o.optString("l", "matin")) }
         }
         var k = 0
+        var prochain = 0L
         for ((t, l) in liste.sortedBy { it.first }) {
             if (k >= 30) break
             if (t <= now + 5000) continue
@@ -192,9 +193,16 @@ object Azkar {
                 else if (Build.VERSION.SDK_INT >= 23) am.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, t, pi)
                 else am.setExact(AlarmManager.RTC_WAKEUP, t, pi)
             } catch (e: Exception) { try { am.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, t, pi) } catch (e2: Exception) {} }
+            if (prochain == 0L) prochain = t
             k++
         }
+        sp.edit().putLong("prochain", prochain).putInt("nb", k).apply()
     }
+}
+
+fun azkarEtat(ctx: Context): String {
+    val sp = ctx.getSharedPreferences("lumu_azkar", Context.MODE_PRIVATE)
+    return org.json.JSONObject().put("prochain", sp.getLong("prochain", 0L)).put("nb", sp.getInt("nb", 0)).put("lieu", sp.getString("lat", null) != null).toString()
 }
 
 /** Calcul astronomique des heures de prière (Fajr 18°, Asr chaféite, Isha 17°), en heures UTC */
