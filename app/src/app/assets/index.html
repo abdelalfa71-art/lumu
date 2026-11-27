@@ -1587,6 +1587,37 @@ html:root:not(.nuit) .ec .ec-radio b { color: #17221D !important; } html:root:no
 .ec .ec-sc-c i u { background: #F2C43D !important; }
 html:root:not(.nuit) .ec .ec-row { border: 1px solid #ECE4CF !important; box-shadow: none !important; }
 .ec .ec-row .ec-pl { background: #F2C43D !important; color: #123C2B !important; border-radius: 50% !important; }
+/* Discussions embellies */
+.cv-belle .cv-tete { gap: 12px; }
+.cv-ret { width: 38px; height: 38px; flex: none; border: 0; border-radius: 50%; background: rgba(255,255,255,.14); color: #FFFFFF; font-size: 20px; display: grid; place-items: center; }
+.cv-cherche { display: flex; align-items: center; gap: 10px; background: #FFFFFF; border-radius: 16px; padding: 4px 14px; color: #C99A12; }
+.cv-cherche input { flex: 1; min-width: 0; border: 0; outline: 0; background: none; font: inherit; font-size: 15px; padding: 8px 0; color: #17221D; }
+.cv-belle .cv-st { padding: 0 !important; margin: 0 !important; justify-content: flex-start !important; }
+.cv-belle .cv-st, .cv-belle .cv-st * { color: #FFFFFF; }
+.cv-filtres { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; margin: 0 0 14px; }
+.cv-filtres::-webkit-scrollbar { display: none; }
+.cv-filtres button { flex: none; padding: 8px 14px; border-radius: 999px; font: inherit; font-size: 13px; font-weight: 700; background: #FFFFFF; color: #123C2B; border: 1px solid #ECE4CF; display: flex; align-items: center; gap: 6px; }
+.cv-filtres button.actif { background: #123C2B; color: #F2C43D; border: 2px solid #F2C43D; }
+.cv-fn:empty { display: none; } .cv-fn { background: #F2C43D; color: #123C2B; border-radius: 9px; padding: 0 6px; font-size: 11px; font-weight: 800; }
+.cv-bloc { background: #FFFFFF; border: 1px solid #ECE4CF; border-radius: 18px; padding: 2px 12px; margin-bottom: 14px; }
+:root[data-theme="dark"] .cv-bloc, :root[data-theme="dark"] .cv-filtres button { background: var(--surface); border-color: var(--bordure); color: var(--texte); }
+.cv-bloc .cv-ligne { background: none !important; border: 0 !important; box-shadow: none !important; border-radius: 0 !important; padding: 10px 2px !important; margin: 0 !important; border-bottom: 1px solid #F1EADA !important; position: relative; }
+.cv-bloc .cv-ligne:last-child { border-bottom: 0 !important; }
+.cv-bloc .cv-av { width: 50px !important; height: 50px !important; font-size: 18px !important; position: relative; flex: none; }
+.cv-grp .cv-av { border-radius: 16px !important; }
+.cv-grp-i { position: absolute; right: -4px; bottom: -4px; font-style: normal; font-size: 13px; background: #FFFFFF; border-radius: 8px; padding: 0 2px; line-height: 1.3; }
+.cv-nonlu .cv-lt b { font-weight: 800; } .cv-nonlu .cv-lt small { color: var(--texte, #17221D) !important; font-weight: 600; opacity: 1 !important; }
+.cv-nonlu .cv-lq small { color: #C99A12 !important; font-weight: 800; }
+.cv-belle .cv-nb { background: #F2C43D !important; color: #123C2B !important; font-weight: 800; }
+.cv-pin { font-size: 12px; margin-inline-end: 4px; }
+.cv-pin-b { display: none; }
+.cv-ligne:hover .cv-pin-b, .cv-ligne:focus-within .cv-pin-b { opacity: .7; }
+.cv-gb { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 14px; }
+.cv-invite { display: flex; align-items: center; gap: 12px; width: 100%; text-align: start; font: inherit; color: #123C2B; background: #FFF4D6; border: 1.5px dashed #E3C66A; border-radius: 18px; padding: 12px 14px; margin: 4px 0 80px; }
+.cv-invite > span:nth-child(2) { flex: 1; display: flex; flex-direction: column; gap: 2px; } .cv-invite b { font-size: 14px; } .cv-invite small { font-size: 12px; color: #5D6B63; }
+.cv-inv-go { color: #C99A12; font-size: 20px; }
+.cv-nouv { position: fixed; z-index: 30; inset-inline-end: 16px; bottom: calc(88px + env(safe-area-inset-bottom, 0px)); height: 50px; padding: 0 18px; border-radius: 25px; background: #F2C43D; color: #123C2B; font: inherit; font-weight: 800; font-size: 16px; display: flex; align-items: center; gap: 8px; border: 2px solid #123C2B; box-shadow: 0 6px 16px rgba(0,0,0,.18); }
+body.audio-on .cv-nouv { bottom: calc(160px + env(safe-area-inset-bottom, 0px)); }
 </style>
 </head>
 <body>
@@ -2834,7 +2865,7 @@ function creerNav() {
   let actif = ONGLET_DE[etat.route];
   if (actif === "*") actif = etat.racine;
   const NAV = navActuelle();
-  if (actif && !NAV.some(n => n.r === actif)) actif = "flux";
+  if (actif && !NAV.some(n => n.r === actif)) actif = ["discussions", "conv", "groupe", "groupes", "groupe-nouveau"].includes(etat.route) ? null : "flux";
   NAV.forEach(n => {
     const b = document.createElement("button");
     b.className = "nav-btn" + (n.centre ? " nav-centre" : "") + (n.r === actif ? " actif" : "");
@@ -11237,50 +11268,73 @@ const CHAT = {
 
 async function vueDiscussions() {
   if (!etat.parentId) return exigerConnexion();
-  let onglet = (etat.params && etat.params.onglet) || "p";
-  const w = ecran("Discussions", ["flux"], `<b class="cv-st-t">Statuts</b><div class="st-row cv-st" id="st-row" hidden></div><input class="champ" id="q" type="search" placeholder="Chercher une discussion ou une personne" style="margin:0" aria-label="Chercher une discussion ou une personne">
+  let filtre = (etat.params && etat.params.filtre) || chargerLocal("cv_filtre", "tous");
+  if (etat.params && etat.params.onglet === "g") filtre = "groupes";
+  const w = ecran("Discussions", ["flux"], `<div class="pg-tete cv-tete"><div class="pg-tete-h"><button type="button" class="cv-ret" id="cv-ret" aria-label="Retour">←</button><span class="pg-tete-t"><b>${esc(trad("Discussions"))}</b><span lang="ar" dir="rtl" data-notrad>المُحَادَثَات</span></span><img src="icon-192.png" alt="Lumu" width="40" height="40" class="pg-logo"></div>
+      <label class="cv-cherche">${ico("search", 18)}<input id="q" type="search" placeholder="Chercher une personne, un groupe, un message" aria-label="Chercher une personne, un groupe, un message"></label>
+      <div class="st-row cv-st" id="st-row" hidden></div></div>
     <div id="res"></div>
-    <div class="cv-onglets" id="ong"><button data-t="p">Privés</button><button data-t="g">Groupes</button></div>
-    <div id="liste" class="liste-contenus"><div class="centre"><div class="spinner"></div></div></div>`);
+    <div class="cv-filtres" id="ong">${[["tous", "Tous"], ["nonlus", "Non lus"], ["prives", "Privés"], ["groupes", "Groupes"]].map(([k, t]) => `<button type="button" data-t="${k}">${t}<span class="cv-fn" data-n="${k}"></span></button>`).join("")}</div>
+    <div id="liste"><div class="centre"><div class="spinner"></div></div></div>
+    <button type="button" class="cv-invite" id="cv-inv">${ic3d("speech-balloon", 40)}<span><b>Inviter un proche sur Lumu</b><small>Lien ou code QR, à partager sur WhatsApp</small></span><span class="cv-inv-go">›</span></button>
+    <button type="button" class="cv-nouv" id="cv-nouv">✏️ <span>Nouvelle</span></button>`);
+  w.classList.add("pg-belle", "cv-belle");
   const liste = w.querySelector("#liste"), res = w.querySelector("#res"), q = w.querySelector("#q");
-  let seq = 0, minuteur = null;
-  try { const sr = w.querySelector("#st-row"); STAT.monter(sr); const st = w.querySelector(".cv-st-t"); new MutationObserver(() => st.hidden = sr.hidden).observe(sr, { attributes: true }); st.hidden = sr.hidden; } catch (e) {}
-  function filtrerLocal() { const m = q.value.trim().toLowerCase(); liste.querySelectorAll(".cv-ligne").forEach(l => { l.style.display = !m || l.textContent.toLowerCase().includes(m) ? "" : "none"; }); }
+  w.querySelector("#cv-ret").onclick = () => history.length > 1 ? history.back() : router("flux");
+  let seq = 0, minuteur = null, tout = [];
+  try { STAT.monter(w.querySelector("#st-row")); } catch (e) {}
+  const EPI = () => new Set(chargerLocal("cv_epingles", []));
+  const basculerEpingle = k => { const e = EPI(); e.has(k) ? e.delete(k) : e.add(k); sauverLocal("cv_epingles", [...e]); toast(e.has(k) ? "📌 Discussion épinglée" : "Discussion désépinglée"); dessiner(); };
   const vide = t => `<p class="cv-vide">${esc(t)}</p>`;
-  async function privees() {
+  function filtrerLocal() { const m = q.value.trim().toLowerCase(); liste.querySelectorAll(".cv-ligne").forEach(l => { l.style.display = !m || l.textContent.toLowerCase().includes(m) ? "" : "none"; }); }
+  function ligneDe(x) {
+    const el = CHAT.ligne(x.nom, x.sous, x.quand, x.nb, x.ouvrir);
+    if (x.g) { el.classList.add("cv-grp"); const av = el.querySelector(".cv-av"); if (av) av.insertAdjacentHTML("beforeend", `<i class="cv-grp-i">👥</i>`); }
+    if (x.nb > 0) el.classList.add("cv-nonlu");
+    const lq = el.querySelector(".cv-lq");
+    if (EPI().has(x.k) && lq) lq.insertAdjacentHTML("afterbegin", `<span class="cv-pin" aria-label="Épinglée">📌</span>`);
+    const pin = document.createElement("button"); pin.type = "button"; pin.className = "cv-pin-b"; pin.setAttribute("aria-label", "Épingler"); pin.textContent = EPI().has(x.k) ? "📌" : "📍";
+    pin.onclick = ev => { ev.stopPropagation(); basculerEpingle(x.k); };
+    el.appendChild(pin);
+    try { appuiLong(el, () => basculerEpingle(x.k)); } catch (e) {}
+    return el;
+  }
+  function dessiner() {
+    w.querySelectorAll("#ong button").forEach(b => b.classList.toggle("actif", b.dataset.t === filtre));
+    const nl = tout.filter(x => x.nb > 0).length, fn = w.querySelector('[data-n="nonlus"]'); if (fn) fn.textContent = nl ? nl : "";
+    let l = tout.filter(x => filtre === "prives" ? !x.g : filtre === "groupes" ? x.g : filtre === "nonlus" ? x.nb > 0 : true);
+    l.sort((a, b) => (b.t || 0) - (a.t || 0));
+    const epi = EPI(), hautes = l.filter(x => epi.has(x.k)), autres = l.filter(x => !epi.has(x.k));
+    liste.innerHTML = "";
+    if (filtre === "groupes") liste.insertAdjacentHTML("beforeend", `<div class="cv-gb"><button class="btn" id="ng" style="margin:0">＋ Nouveau groupe</button><button class="btn-outline" id="tg" style="margin:0">🔎 Trouver un groupe</button></div>`);
+    if (!l.length) liste.insertAdjacentHTML("beforeend", vide(filtre === "nonlus" ? "Aucun message non lu." : filtre === "groupes" ? "Vous n'êtes dans aucun groupe." : "Aucune discussion. Cherchez une personne par son nom."));
+    const bloc = (titre, xs) => { if (!xs.length) return; liste.insertAdjacentHTML("beforeend", pgSec(titre)); const c = document.createElement("div"); c.className = "cv-bloc"; xs.forEach(x => c.appendChild(ligneDe(x))); liste.appendChild(c); };
+    bloc("Épinglées", hautes); bloc(hautes.length ? "Récentes" : "Discussions", autres);
+    const ng = liste.querySelector("#ng"), tg = liste.querySelector("#tg"); if (ng) ng.onclick = () => router("groupe-nouveau"); if (tg) tg.onclick = () => router("groupes");
+    filtrerLocal();
+  }
+  async function charger() {
     const mon = ++seq;
     try {
-      const r = await sb.rpc("yt_mes_conversations");
-      if (r.error) throw r.error;
+      const [rp, rg] = await Promise.all([sb.rpc("yt_mes_conversations"), sb.from("yt_groupe_membres").select("groupe_id,yt_groupes(id,nom)").eq("user_id", etat.parentId)]);
+      if (rp.error) throw rp.error;
+      const gs = ((rg && rg.data) || []).filter(x => x.yt_groupes).map(x => x.yt_groupes);
+      let der = {};
+      if (gs.length) { try { const { data } = await sb.from("yt_groupe_posts").select("groupe_id,auteur_nom,body,audio_path,contenu_id,sondage_id,created_at").in("groupe_id", gs.map(g => g.id)).order("created_at", { ascending: false }).limit(200); (data || []).forEach(p => { if (!der[p.groupe_id]) der[p.groupe_id] = p; }); } catch (e) {} }
       if (mon !== seq || !w.isConnected) return;
-      liste.innerHTML = (r.data || []).length ? "" : vide("Aucune discussion. Cherchez une personne par son nom.");
-      (r.data || []).forEach(c => {
-        const auj = new Date(c.dernier_le).toDateString() === new Date().toDateString();
-        liste.appendChild(CHAT.ligne(c.nom, c.a_audio && !c.dernier ? "🎤 Message vocal" : (c.dernier || "🎤"), auj ? CHAT.heure(c.dernier_le) : CHAT.jour(c.dernier_le), Number(c.non_lus) || 0, () => router("conv", { id: c.pair, nom: c.nom })));
-      });
-      filtrerLocal();
+      const quand = d => !d ? "" : new Date(d).toDateString() === new Date().toDateString() ? CHAT.heure(d) : CHAT.jour(d);
+      tout = (rp.data || []).map(c => ({ k: "p:" + c.pair, g: false, nom: c.nom, sous: c.a_audio && !c.dernier ? "🎤 Message vocal" : (c.dernier || "🎤"), quand: quand(c.dernier_le), t: +new Date(c.dernier_le || 0), nb: Number(c.non_lus) || 0, ouvrir: () => router("conv", { id: c.pair, nom: c.nom }) }))
+        .concat(gs.map(g => { const p = der[g.id]; const apercu = !p ? "" : (p.auteur_nom ? p.auteur_nom.split(" ")[0] + " : " : "") + (p.audio_path ? "🎤 Message vocal" : p.sondage_id ? "📊 Sondage" : p.contenu_id ? "📎 Publication" : (p.body || "")); return { k: "g:" + g.id, g: true, nom: g.nom, sous: apercu, quand: quand(p && p.created_at), t: +new Date((p && p.created_at) || 0), nb: 0, ouvrir: () => router("groupe", { id: g.id }) }; }));
+      dessiner();
     } catch (e) { if (mon === seq && w.isConnected) liste.innerHTML = `<p class="erreur">${esc(txtErr(e, "Chargement impossible."))}</p>`; }
   }
-  async function groupes() {
-    const mon = ++seq;
-    liste.innerHTML = `<button class="btn" id="ng">＋ Nouveau groupe</button><button class="btn-outline" id="tg">🔎 Trouver un groupe</button><div id="mg"></div>`;
-    liste.querySelector("#ng").onclick = () => router("groupe-nouveau");
-    liste.querySelector("#tg").onclick = () => router("groupes");
-    try {
-      const r = await sb.from("yt_groupe_membres").select("groupe_id,yt_groupes(id,nom)").eq("user_id", etat.parentId);
-      if (r.error) throw r.error;
-      if (mon !== seq || !w.isConnected) return;
-      const mg = liste.querySelector("#mg"), l = (r.data || []).filter(x => x.yt_groupes);
-      mg.innerHTML = l.length ? "" : vide("Vous n'êtes dans aucun groupe.");
-      l.forEach(x => mg.appendChild(CHAT.ligne(x.yt_groupes.nom, "", "", 0, () => router("groupe", { id: x.yt_groupes.id }))));
-      filtrerLocal();
-    } catch (e) { if (mon === seq && w.isConnected) liste.querySelector("#mg").innerHTML = `<p class="erreur">${esc(txtErr(e, "Chargement impossible."))}</p>`; }
-  }
-  function afficher() {
-    w.querySelectorAll("#ong button").forEach(b => b.classList.toggle("actif", b.dataset.t === onglet));
-    onglet === "g" ? groupes() : privees();
-  }
-  w.querySelectorAll("#ong button").forEach(b => b.onclick = () => { onglet = b.dataset.t; afficher(); });
+  w.querySelectorAll("#ong button").forEach(b => b.onclick = () => { filtre = b.dataset.t; sauverLocal("cv_filtre", filtre); dessiner(); });
+  w.querySelector("#cv-inv").onclick = () => partagerLien("Lumu", "🕌 Rejoins-moi sur Lumu : cours, rappels, Coran et discussions.", SITE);
+  w.querySelector("#cv-nouv").onclick = () => ouvrirFeuille("Nouvelle", `<button class="btn" id="nv-p" style="width:100%;margin-bottom:8px">💬 Nouvelle discussion</button><button class="btn-outline" id="nv-g" style="width:100%;margin-bottom:8px">👥 Nouveau groupe</button><button class="btn-text" id="nv-t" style="width:100%">🔎 Trouver un groupe</button>`, (c, fermer) => {
+    c.querySelector("#nv-p").onclick = () => { fermer(); q.focus(); toast("Tapez le nom de la personne"); };
+    c.querySelector("#nv-g").onclick = () => { fermer(); router("groupe-nouveau"); };
+    c.querySelector("#nv-t").onclick = () => { fermer(); router("groupes"); };
+  });
   async function chercher() {
     const mot = q.value.trim();
     filtrerLocal();
@@ -11290,12 +11344,14 @@ async function vueDiscussions() {
       const r = await sb.rpc("yt_chercher_personnes", { q: mot });
       if (r.error) throw r.error;
       if (mon !== seq || !w.isConnected) return;
-      res.innerHTML = (r.data || []).length ? `<p class="cv-sec">Autres personnes</p>` : "";
-      (r.data || []).forEach(p => res.appendChild(CHAT.ligne(p.nom, "", "", 0, () => router("conv", { id: p.id, nom: p.nom }))));
+      res.innerHTML = (r.data || []).length ? pgSec("Autres personnes") : "";
+      const c = document.createElement("div"); c.className = "cv-bloc";
+      (r.data || []).forEach(p => c.appendChild(CHAT.ligne(p.nom, "", "", 0, () => router("conv", { id: p.id, nom: p.nom }))));
+      if ((r.data || []).length) res.appendChild(c);
     } catch (e) { if (mon === seq && w.isConnected) res.innerHTML = `<p class="erreur">${esc(txtErr(e, "Chargement impossible."))}</p>`; }
   }
   q.oninput = () => { filtrerLocal(); clearTimeout(minuteur); minuteur = setTimeout(chercher, 350); };
-  afficher();
+  charger();
 }
 
 async function vueConv() {
