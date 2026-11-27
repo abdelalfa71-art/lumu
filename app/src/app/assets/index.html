@@ -1644,6 +1644,20 @@ body.audio-on .cv-nouv { bottom: calc(160px + env(safe-area-inset-bottom, 0px));
 .num-pf { display: flex; align-items: center; gap: 10px; margin: 0 0 14px; padding: 12px 14px; border-radius: 18px; color: #FFFFFF; border: 1.5px solid #F2C43D; background-color: #0F3D2E; }
 .num-pf-t { flex: 1; display: flex; flex-direction: column; } .num-pf-t small { color: #F2C43D; font-size: 12px; font-weight: 700; } .num-pf-t b { font-size: 22px; letter-spacing: .5px; }
 .num-pf-b { width: 40px; height: 40px; flex: none; border-radius: 50%; border: 0; background: rgba(255,255,255,.14); color: #FFFFFF; font-size: 18px; }
+/* Sans surbrillance jaune (contours dorés retirés partout) */
+html .pg-tete, html .acc-ciel, html .ec .ec-haut, html .cv-tete { border-bottom: 0 !important; }
+html body:not(.branche-tobi) .nav-bas { border-top: 1px solid var(--bordure, #ECE4CF) !important; }
+html #micro-fab, html .num-carte, html .num-pf, html .acc-rc button span { border-color: transparent !important; }
+html .cv-filtres button.actif, html .ec-lg.on, html.nuit .ec-chip.actif { border-color: #123C2B !important; }
+html .ca-ri { border-color: #ECE4CF !important; box-shadow: none !important; }
+html .pg-belle .ap-t { border-top-color: #ECE4CF !important; border-top-width: 1px !important; }
+html .ap-hifz { border-color: #ECE4CF !important; }
+html .acc-a #ec-notif .ec-notif, html .ec #ec-notif .ec-notif { border-left: 0 !important; }
+html .ec-row .ec-cv, html .lecteur-audio .au-art { box-shadow: 0 4px 10px rgba(0,0,0,.2) !important; }
+html.nuit .lecteur-audio .au-art { border-color: transparent !important; }
+html body:not(.branche-tobi) .nav-bas:not(.nav-sombre) .nav-btn.actif .ic { box-shadow: none !important; }
+.ec-lent { border-color: transparent !important; }
+html .acc-pbox, html .pg-rep, html .ec-radio, html .ec .ec-sc-h span { border-color: rgba(255,255,255,.12) !important; }
 </style>
 </head>
 <body>
