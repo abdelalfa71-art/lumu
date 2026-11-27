@@ -6689,8 +6689,8 @@ const MOIS_HIJRI = {
   en: ["Muharram", "Safar", "Rabi al-Awwal", "Rabi al-Thani", "Jumada al-Ula", "Jumada al-Akhirah", "Rajab", "Sha'ban", "Ramadan", "Shawwal", "Dhu al-Qadah", "Dhu al-Hijjah"],
   ar: ["محرم", "صفر", "ربيع الأول", "ربيع الآخر", "جمادى الأولى", "جمادى الآخرة", "رجب", "شعبان", "رمضان", "شوال", "ذو القعدة", "ذو الحجة"] };
 /* Date hégirienne de La Mecque (Umm al-Qura), au jour du lieu : le jour islamique commence au Maghrib local */
-function hijriLieu() {
-  const d = chargerLocal("priere_n", null); let jour = new Date(), hm = "", ymd = "";
+function hijriLieu(quand) {
+  const d = chargerLocal("priere_n", null); let jour = quand ? new Date(quand) : new Date(), hm = "", ymd = "";
   try {
     const tz = (d && d.tz) || Intl.DateTimeFormat().resolvedOptions().timeZone, o = {};
     new Intl.DateTimeFormat("en-CA", { timeZone: tz, year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", hourCycle: "h23" }).formatToParts(jour).forEach(x => { o[x.type] = x.value; });
@@ -6961,6 +6961,73 @@ const VERSETS_JOUR = [
   ["إِنَّ اللَّهَ مَعَ الصَّابِرِينَ", "Allah est avec ceux qui sont patients.", "Al-Baqara · 153"],
   ["وَمَنْ يَتَّقِ اللَّهَ يَجْعَلْ لَهُ مَخْرَجًا", "Quiconque craint Allah, Il lui donnera une issue.", "At-Talaq · 2"],
   ["ادْعُونِي أَسْتَجِبْ لَكُمْ", "Invoquez-Moi, Je vous répondrai.", "Ghafir · 60"]];
+/* Verset adapté au moment : fêtes et mois sacrés, vendredi, puis moment de la journée (d'après les heures de prière du lieu) */
+const VERSETS_MOMENT = {
+  sahar: ["آيَةُ السَّحَرِ", [
+    ["كَانُوا قَلِيلًا مِنَ اللَّيْلِ مَا يَهْجَعُونَ ۝ وَبِالْأَسْحَارِ هُمْ يَسْتَغْفِرُونَ", "Ils dormaient peu la nuit, et aux dernières heures de la nuit ils imploraient le pardon.", "Adh-Dhariyat · 17-18"],
+    ["وَمِنَ اللَّيْلِ فَتَهَجَّدْ بِهِ نَافِلَةً لَكَ عَسَىٰ أَنْ يَبْعَثَكَ رَبُّكَ مَقَامًا مَحْمُودًا", "Et de la nuit, consacre une partie à la prière surérogatoire ; peut-être ton Seigneur t'élèvera-t-Il à une station digne de louange.", "Al-Isra · 79"],
+    ["قُلْ يَا عِبَادِيَ الَّذِينَ أَسْرَفُوا عَلَىٰ أَنْفُسِهِمْ لَا تَقْنَطُوا مِنْ رَحْمَةِ اللَّهِ", "Dis : « Ô Mes serviteurs qui avez commis des excès à votre propre détriment, ne désespérez pas de la miséricorde d'Allah. »", "Az-Zumar · 53"]]],
+  fajr: ["آيَةُ الْفَجْرِ", [
+    ["وَقُرْآنَ الْفَجْرِ ۖ إِنَّ قُرْآنَ الْفَجْرِ كَانَ مَشْهُودًا", "Et la lecture du Coran à l'aube, car la lecture à l'aube a des témoins.", "Al-Isra · 78"],
+    ["فَسُبْحَانَ اللَّهِ حِينَ تُمْسُونَ وَحِينَ تُصْبِحُونَ", "Gloire à Allah quand vous êtes au soir et quand vous êtes au matin.", "Ar-Rum · 17"]]],
+  matin: ["آيَةُ الصَّبَاحِ", [
+    ["هُوَ الَّذِي جَعَلَ لَكُمُ الْأَرْضَ ذَلُولًا فَامْشُوا فِي مَنَاكِبِهَا وَكُلُوا مِنْ رِزْقِهِ ۖ وَإِلَيْهِ النُّشُورُ", "C'est Lui qui vous a soumis la terre : parcourez ses étendues et mangez de ce qu'Il vous accorde. Vers Lui est la résurrection.", "Al-Mulk · 15"],
+    ["وَمَنْ يَتَوَكَّلْ عَلَى اللَّهِ فَهُوَ حَسْبُهُ", "Et quiconque place sa confiance en Allah, Il lui suffit.", "At-Talaq · 3"],
+    ["وَقُلْ رَبِّ زِدْنِي عِلْمًا", "Et dis : « Mon Seigneur, accrois mes connaissances. »", "Ta-Ha · 114"]]],
+  midi: ["آيَةُ الظُّهْرِ", [
+    ["حَافِظُوا عَلَى الصَّلَوَاتِ وَالصَّلَاةِ الْوُسْطَىٰ وَقُومُوا لِلَّهِ قَانِتِينَ", "Soyez assidus aux prières, et surtout à la prière médiane, et tenez-vous debout devant Allah avec dévotion.", "Al-Baqara · 238"],
+    ["فَاذْكُرُونِي أَذْكُرْكُمْ وَاشْكُرُوا لِي وَلَا تَكْفُرُونِ", "Souvenez-vous de Moi, Je Me souviendrai de vous ; soyez-Moi reconnaissants et ne soyez pas ingrats.", "Al-Baqara · 152"]]],
+  asr: ["آيَةُ الْعَصْرِ", [
+    ["وَالْعَصْرِ ۝ إِنَّ الْإِنْسَانَ لَفِي خُسْرٍ ۝ إِلَّا الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ وَتَوَاصَوْا بِالْحَقِّ وَتَوَاصَوْا بِالصَّبْرِ", "Par le temps ! L'homme est certes en perdition, sauf ceux qui croient, accomplissent les bonnes œuvres, s'enjoignent mutuellement la vérité et s'enjoignent mutuellement la patience.", "Al-Asr · 1-3"],
+    ["فَإِنَّ مَعَ الْعُسْرِ يُسْرًا ۝ إِنَّ مَعَ الْعُسْرِ يُسْرًا", "Avec la difficulté vient la facilité. Oui, avec la difficulté vient la facilité.", "Ash-Sharh · 5-6"]]],
+  soir: ["آيَةُ الْمَسَاءِ", [
+    ["وَسَبِّحْ بِحَمْدِ رَبِّكَ قَبْلَ طُلُوعِ الشَّمْسِ وَقَبْلَ الْغُرُوبِ", "Et célèbre la louange de ton Seigneur avant le lever du soleil et avant son coucher.", "Qaf · 39"],
+    ["إِنَّ فِي خَلْقِ السَّمَاوَاتِ وَالْأَرْضِ وَاخْتِلَافِ اللَّيْلِ وَالنَّهَارِ لَآيَاتٍ لِأُولِي الْأَلْبَابِ", "Dans la création des cieux et de la terre et dans l'alternance de la nuit et du jour, il y a certes des signes pour les doués d'intelligence.", "Al Imran · 190"],
+    ["أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ", "C'est par le rappel d'Allah que les cœurs s'apaisent.", "Ar-Ra'd · 28"]]],
+  nuit: ["آيَةُ اللَّيْلِ", [
+    ["وَهُوَ الَّذِي جَعَلَ لَكُمُ اللَّيْلَ لِبَاسًا وَالنَّوْمَ سُبَاتًا وَجَعَلَ النَّهَارَ نُشُورًا", "C'est Lui qui a fait pour vous de la nuit un vêtement, du sommeil un repos, et qui a fait du jour un moment pour se disperser.", "Al-Furqan · 47"],
+    ["اللَّهُ يَتَوَفَّى الْأَنْفُسَ حِينَ مَوْتِهَا وَالَّتِي لَمْ تَمُتْ فِي مَنَامِهَا", "Allah reprend les âmes au moment de leur mort, ainsi que celles qui ne meurent pas, durant leur sommeil.", "Az-Zumar · 42"],
+    ["ادْعُونِي أَسْتَجِبْ لَكُمْ", "Invoquez-Moi, Je vous répondrai.", "Ghafir · 60"]]],
+  vendredi: ["آيَةُ الْجُمُعَةِ", [
+    ["يَا أَيُّهَا الَّذِينَ آمَنُوا إِذَا نُودِيَ لِلصَّلَاةِ مِنْ يَوْمِ الْجُمُعَةِ فَاسْعَوْا إِلَىٰ ذِكْرِ اللَّهِ وَذَرُوا الْبَيْعَ", "Ô vous qui croyez ! Quand on appelle à la prière du vendredi, accourez à l'évocation d'Allah et laissez tout commerce.", "Al-Jumu'a · 9"],
+    ["فَإِذَا قُضِيَتِ الصَّلَاةُ فَانْتَشِرُوا فِي الْأَرْضِ وَابْتَغُوا مِنْ فَضْلِ اللَّهِ وَاذْكُرُوا اللَّهَ كَثِيرًا لَعَلَّكُمْ تُفْلِحُونَ", "Puis, quand la prière est achevée, dispersez-vous sur terre, recherchez la grâce d'Allah et invoquez Allah beaucoup, afin de réussir.", "Al-Jumu'a · 10"]]],
+  ramadan: ["آيَةُ رَمَضَانَ", [
+    ["يَا أَيُّهَا الَّذِينَ آمَنُوا كُتِبَ عَلَيْكُمُ الصِّيَامُ كَمَا كُتِبَ عَلَى الَّذِينَ مِنْ قَبْلِكُمْ لَعَلَّكُمْ تَتَّقُونَ", "Ô vous qui croyez ! Le jeûne vous a été prescrit comme il a été prescrit à ceux d'avant vous, afin que vous atteigniez la piété.", "Al-Baqara · 183"],
+    ["شَهْرُ رَمَضَانَ الَّذِي أُنْزِلَ فِيهِ الْقُرْآنُ هُدًى لِلنَّاسِ وَبَيِّنَاتٍ مِنَ الْهُدَىٰ وَالْفُرْقَانِ", "Le mois de Ramadan, au cours duquel le Coran a été descendu comme guide pour les gens et preuves claires de la bonne direction et du discernement.", "Al-Baqara · 185"],
+    ["وَإِذَا سَأَلَكَ عِبَادِي عَنِّي فَإِنِّي قَرِيبٌ ۖ أُجِيبُ دَعْوَةَ الدَّاعِ إِذَا دَعَانِ", "Quand Mes serviteurs t'interrogent sur Moi, Je suis tout proche : Je réponds à l'appel de celui qui M'invoque.", "Al-Baqara · 186"]]],
+  qadr: ["لَيَالِي الْعَشْرِ", [["لَيْلَةُ الْقَدْرِ خَيْرٌ مِنْ أَلْفِ شَهْرٍ", "La nuit du Destin est meilleure que mille mois.", "Al-Qadr · 3"]]],
+  hijja: ["الْعَشْرُ مِنْ ذِي الْحِجَّةِ", [
+    ["وَالْفَجْرِ ۝ وَلَيَالٍ عَشْرٍ", "Par l'aube ! Et par les dix nuits !", "Al-Fajr · 1-2"],
+    ["وَيَذْكُرُوا اسْمَ اللَّهِ فِي أَيَّامٍ مَعْلُومَاتٍ", "Et qu'ils invoquent le nom d'Allah aux jours déterminés.", "Al-Hajj · 28"]]],
+  arafa: ["يَوْمُ عَرَفَةَ", [["الْيَوْمَ أَكْمَلْتُ لَكُمْ دِينَكُمْ وَأَتْمَمْتُ عَلَيْكُمْ نِعْمَتِي وَرَضِيتُ لَكُمُ الْإِسْلَامَ دِينًا", "Aujourd'hui, J'ai parachevé pour vous votre religion, accompli sur vous Mon bienfait et agréé l'islam comme religion pour vous.", "Al-Ma'ida · 3"]]],
+  adha: ["عِيدُ الْأَضْحَى", [
+    ["إِنَّا أَعْطَيْنَاكَ الْكَوْثَرَ ۝ فَصَلِّ لِرَبِّكَ وَانْحَرْ", "Nous t'avons certes accordé l'Abondance. Prie donc ton Seigneur et sacrifie.", "Al-Kawthar · 1-2"],
+    ["لَنْ يَنَالَ اللَّهَ لُحُومُهَا وَلَا دِمَاؤُهَا وَلَٰكِنْ يَنَالُهُ التَّقْوَىٰ مِنْكُمْ", "Ni leur chair ni leur sang n'atteindront Allah, mais ce qui L'atteint de votre part, c'est la piété.", "Al-Hajj · 37"]]],
+  fitr: ["عِيدُ الْفِطْرِ", [["وَلِتُكْمِلُوا الْعِدَّةَ وَلِتُكَبِّرُوا اللَّهَ عَلَىٰ مَا هَدَاكُمْ وَلَعَلَّكُمْ تَشْكُرُونَ", "Afin que vous complétiez le nombre de jours et proclamiez la grandeur d'Allah pour vous avoir guidés, et afin que vous soyez reconnaissants.", "Al-Baqara · 185"]]],
+  achoura: ["عَاشُورَاءُ", [["وَأَنْجَيْنَا مُوسَىٰ وَمَنْ مَعَهُ أَجْمَعِينَ", "Et Nous sauvâmes Moïse et tous ceux qui étaient avec lui.", "Ash-Shu'ara · 65"]]],
+  sacre: ["الْأَشْهُرُ الْحُرُمُ", [["إِنَّ عِدَّةَ الشُّهُورِ عِنْدَ اللَّهِ اثْنَا عَشَرَ شَهْرًا فِي كِتَابِ اللَّهِ يَوْمَ خَلَقَ السَّمَاوَاتِ وَالْأَرْضَ مِنْهَا أَرْبَعَةٌ حُرُمٌ", "Le nombre des mois, auprès d'Allah, est de douze, dans le Livre d'Allah, le jour où Il créa les cieux et la terre ; quatre d'entre eux sont sacrés.", "At-Tawba · 36"]]]
+};
+function versetDuMoment(d) {
+  d = d || new Date();
+  const mn = d.getHours() * 60 + d.getMinutes(), pn = chargerLocal("priere_n", null), t = (pn && pn.t) || {};
+  const m = k => { const v = String(t[k] || "").slice(0, 5).split(":"); return v.length === 2 && !isNaN(+v[0]) ? +v[0] * 60 + +v[1] : null; };
+  const F = m("Fajr") ?? 300, L = m("Sunrise") ?? 360, D = m("Dhuhr") ?? 720, A = m("Asr") ?? 930, M = m("Maghrib") ?? 1080, I = m("Isha") ?? 1170;
+  const moment = mn < F ? (mn >= F - 120 ? "sahar" : "nuit") : mn < L + 45 ? "fajr" : mn < D ? "matin" : mn < A ? "midi" : mn < M ? "asr" : mn < I ? "soir" : "nuit";
+  let h = { m: 0, d: 0 }; try { h = hijriLieu(d); } catch (e) {}
+  const nuit = moment === "nuit" || moment === "sahar" || moment === "soir";
+  let k = moment;
+  if (h.m === 9) k = h.d >= 20 && nuit ? "qadr" : "ramadan";
+  else if (h.m === 10 && h.d === 1) k = "fitr";
+  else if (h.m === 12 && h.d === 9) k = "arafa";
+  else if (h.m === 12 && h.d >= 10 && h.d <= 13) k = "adha";
+  else if (h.m === 12 && h.d < 9) k = "hijja";
+  else if (h.m === 1 && (h.d === 9 || h.d === 10)) k = "achoura";
+  else if ((h.m === 1 || h.m === 7 || h.m === 11) && h.d === 1) k = "sacre";
+  else if (d.getDay() === 5 && mn < A) k = "vendredi";
+  const [titre, liste] = VERSETS_MOMENT[k], jour = Math.floor(d.getTime() / 864e5);
+  return { titre, v: liste[jour % liste.length] };
+}
+setInterval(() => { try { if (document.hidden || etat.route !== "aujourdhui") return; const b = document.querySelector(".aj-verset .avr-badge"); if (b && b.textContent !== versetDuMoment().titre) router("aujourdhui"); } catch (e) {} }, 60000);
 const HABITUDES = [["coran", "📖", "Lire 1 page du Coran"], ["matin", "🌅", "Adhkâr du matin"], ["soir", "🌇", "Adhkâr du soir"], ["prieres", "🕌", "Mes 5 prières"], ["coucher", "😴", "Invocations du coucher"]];
 function habitudesDuJour() {
   const auj = new Date().toISOString().slice(0, 10), h = chargerLocal("habitudes", { jours: {}, serie: 0, dernier: "" });
@@ -6969,7 +7036,8 @@ function habitudesDuJour() {
 async function vueAujourdhui() {
   const { auj, h, faites } = habitudesDuJour();
   const prenom = ((etat.profil && etat.profil.full_name) || "").split(" ")[0];
-  const v = VERSETS_JOUR[Math.floor(Date.now() / 864e5) % VERSETS_JOUR.length];
+  let vm = null; try { vm = versetDuMoment(); } catch (e) {}
+  const v = vm ? vm.v : VERSETS_JOUR[Math.floor(Date.now() / 864e5) % VERSETS_JOUR.length], vTitre = vm ? vm.titre : "آيَةُ الْيَوْمِ";
   const dateG = new Date().toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long" });
   let hj = ""; try { hj = dateHijri(); } catch (e) {}
   const nbFait = HABITUDES.filter(([k]) => faites[k]).length;
@@ -6983,7 +7051,7 @@ async function vueAujourdhui() {
     <div>
       ${HABITUDES.map(([k, ic, t]) => `<div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--bordure,#eee)"><button type="button" data-h="${k}" aria-label="Cocher" style="width:32px;height:32px;flex:none;border-radius:50%;border:2px solid #1b6b5c;background:${faites[k] ? "#1b6b5c" : "transparent"};color:#fff;font-size:16px">${faites[k] ? "✓" : ""}</button><span style="font-size:20px">${ic}</span><span style="flex:1;${faites[k] ? "text-decoration:line-through;opacity:.6" : ""}">${t}</span><button type="button" data-o="${k}" class="btn-text" style="margin:0">Ouvrir ›</button></div>`).join("")}</div></details>
     <b class="acc-t">Verset du jour</b>
-    <div class="aj-verset"><span class="avr-badge" lang="ar" data-notrad>آيَةُ الْيَوْمِ</span><span class="avr-c avr-c1">✦</span><span class="avr-c avr-c2">✦</span><span class="avr-c avr-c3">✦</span><span class="avr-c avr-c4">✦</span><p class="avr-ar" dir="rtl" data-notrad>﴿ ${esc(v[0])} ﴾</p><div class="avr-sep"><span>۞</span></div>${langue === "ar" ? "" : `<p class="avr-tr">« ${esc(v[1])} »</p>`}<span class="avr-ref">${esc(v[2])}</span></div>
+    <div class="aj-verset"><span class="avr-badge" lang="ar" data-notrad>${vTitre}</span><span class="avr-c avr-c1">✦</span><span class="avr-c avr-c2">✦</span><span class="avr-c avr-c3">✦</span><span class="avr-c avr-c4">✦</span><p class="avr-ar" dir="rtl" data-notrad>﴿ ${esc(v[0])} ﴾</p><div class="avr-sep"><span>۞</span></div>${langue === "ar" ? "" : `<p class="avr-tr">« ${esc(v[1])} »</p>`}<span class="avr-ref">${esc(v[2])}</span></div>
     <b class="acc-t">Continuer</b><div id="aj-cont"></div>
     <b class="acc-t">Rappel du jour</b><div id="aj-rap"><div class="centre"><div class="spin"></div></div></div>
     <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:18px 0 8px">${[["kaaba", "Direct", "direct"], ["radio", "Radios", "radios"], ["brain", "Mémoriser", "coran-accueil"], ["busts-in-silhouette", "Khatma", "khatma"]].map(([i, t, r]) => `<button type="button" data-r="${r}" class="acc-tuile" style="padding:12px 4px;border-radius:16px;border:1px solid var(--bordure,#e3dccb);background:var(--surface,#fff);color:var(--texte,#14201b);font:inherit;font-size:13px;font-weight:700"><div style="display:grid;place-items:center;margin-bottom:4px">${ic3d(i, 32)}</div>${t}</button>`).join("")}</div>`);
